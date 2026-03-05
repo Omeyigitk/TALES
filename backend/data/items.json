@@ -1,0 +1,894 @@
+[
+    {
+        "name": "Club",
+        "category": "Weapon",
+        "subcategory": "Simple Melee Weapons",
+        "cost": {
+            "quantity": 1,
+            "unit": "sp"
+        },
+        "weight": 2,
+        "damage": {
+            "dice": "1d4",
+            "type": "Bludgeoning"
+        },
+        "properties": [
+            "Light"
+        ],
+        "source": "SRD"
+    },
+    {
+        "name": "Dagger",
+        "category": "Weapon",
+        "subcategory": "Simple Melee Weapons",
+        "cost": {
+            "quantity": 2,
+            "unit": "gp"
+        },
+        "weight": 1,
+        "damage": {
+            "dice": "1d4",
+            "type": "Piercing"
+        },
+        "properties": [
+            "Finesse",
+            "Light",
+            "Thrown"
+        ],
+        "range": {
+            "normal": 20,
+            "long": 60
+        },
+        "source": "SRD"
+    },
+    {
+        "name": "Greatclub",
+        "category": "Weapon",
+        "subcategory": "Simple Melee Weapons",
+        "cost": {
+            "quantity": 2,
+            "unit": "sp"
+        },
+        "weight": 10,
+        "damage": {
+            "dice": "1d8",
+            "type": "Bludgeoning"
+        },
+        "properties": [
+            "Two-handed"
+        ],
+        "source": "SRD"
+    },
+    {
+        "name": "Handaxe",
+        "category": "Weapon",
+        "subcategory": "Simple Melee Weapons",
+        "cost": {
+            "quantity": 5,
+            "unit": "gp"
+        },
+        "weight": 2,
+        "damage": {
+            "dice": "1d6",
+            "type": "Slashing"
+        },
+        "properties": [
+            "Light",
+            "Thrown"
+        ],
+        "range": {
+            "normal": 20,
+            "long": 60
+        },
+        "source": "SRD"
+    },
+    {
+        "name": "Javelin",
+        "category": "Weapon",
+        "subcategory": "Simple Melee Weapons",
+        "cost": {
+            "quantity": 5,
+            "unit": "sp"
+        },
+        "weight": 2,
+        "damage": {
+            "dice": "1d6",
+            "type": "Piercing"
+        },
+        "properties": [
+            "Thrown"
+        ],
+        "range": {
+            "normal": 30,
+            "long": 120
+        },
+        "source": "SRD"
+    },
+    {
+        "name": "Light Hammer",
+        "category": "Weapon",
+        "subcategory": "Simple Melee Weapons",
+        "cost": {
+            "quantity": 2,
+            "unit": "gp"
+        },
+        "weight": 2,
+        "damage": {
+            "dice": "1d4",
+            "type": "Bludgeoning"
+        },
+        "properties": [
+            "Light",
+            "Thrown"
+        ],
+        "range": {
+            "normal": 20,
+            "long": 60
+        },
+        "source": "SRD"
+    },
+    {
+        "name": "Mace",
+        "category": "Weapon",
+        "subcategory": "Simple Melee Weapons",
+        "cost": {
+            "quantity": 5,
+            "unit": "gp"
+        },
+        "weight": 4,
+        "damage": {
+            "dice": "1d6",
+            "type": "Bludgeoning"
+        },
+        "source": "SRD"
+    },
+    {
+        "name": "Quarterstaff",
+        "category": "Weapon",
+        "subcategory": "Simple Melee Weapons",
+        "cost": {
+            "quantity": 2,
+            "unit": "sp"
+        },
+        "weight": 4,
+        "damage": {
+            "dice": "1d6",
+            "type": "Bludgeoning"
+        },
+        "properties": [
+            "Versatile (1d8)"
+        ],
+        "source": "SRD"
+    },
+    {
+        "name": "Sickle",
+        "category": "Weapon",
+        "subcategory": "Simple Melee Weapons",
+        "cost": {
+            "quantity": 1,
+            "unit": "gp"
+        },
+        "weight": 2,
+        "damage": {
+            "dice": "1d4",
+            "type": "Slashing"
+        },
+        "properties": [
+            "Light"
+        ],
+        "source": "SRD"
+    },
+    {
+        "name": "Spear",
+        "category": "Weapon",
+        "subcategory": "Simple Melee Weapons",
+        "cost": {
+            "quantity": 1,
+            "unit": "gp"
+        },
+        "weight": 3,
+        "damage": {
+            "dice": "1d6",
+            "type": "Piercing"
+        },
+        "properties": [
+            "Thrown",
+            "Versatile (1d8)"
+        ],
+        "range": {
+            "normal": 20,
+            "long": 60
+        },
+        "source": "SRD"
+    },
+    {
+        "name": "Crossbow, Light",
+        "category": "Weapon",
+        "subcategory": "Simple Ranged Weapons",
+        "cost": {
+            "quantity": 25,
+            "unit": "gp"
+        },
+        "weight": 5,
+        "damage": {
+            "dice": "1d8",
+            "type": "Piercing"
+        },
+        "properties": [
+            "Ammunition",
+            "Loading",
+            "Range",
+            "Two-handed"
+        ],
+        "range": {
+            "normal": 80,
+            "long": 320
+        },
+        "source": "SRD"
+    },
+    {
+        "name": "Shortbow",
+        "category": "Weapon",
+        "subcategory": "Simple Ranged Weapons",
+        "cost": {
+            "quantity": 25,
+            "unit": "gp"
+        },
+        "weight": 2,
+        "damage": {
+            "dice": "1d6",
+            "type": "Piercing"
+        },
+        "properties": [
+            "Ammunition",
+            "Range",
+            "Two-handed"
+        ],
+        "range": {
+            "normal": 80,
+            "long": 320
+        },
+        "source": "SRD"
+    },
+    {
+        "name": "Battleaxe",
+        "category": "Weapon",
+        "subcategory": "Martial Melee Weapons",
+        "cost": {
+            "quantity": 10,
+            "unit": "gp"
+        },
+        "weight": 4,
+        "damage": {
+            "dice": "1d8",
+            "type": "Slashing"
+        },
+        "properties": [
+            "Versatile (1d10)"
+        ],
+        "source": "SRD"
+    },
+    {
+        "name": "Flail",
+        "category": "Weapon",
+        "subcategory": "Martial Melee Weapons",
+        "cost": {
+            "quantity": 10,
+            "unit": "gp"
+        },
+        "weight": 2,
+        "damage": {
+            "dice": "1d8",
+            "type": "Bludgeoning"
+        },
+        "source": "SRD"
+    },
+    {
+        "name": "Glaive",
+        "category": "Weapon",
+        "subcategory": "Martial Melee Weapons",
+        "cost": {
+            "quantity": 20,
+            "unit": "gp"
+        },
+        "weight": 6,
+        "damage": {
+            "dice": "1d10",
+            "type": "Slashing"
+        },
+        "properties": [
+            "Heavy",
+            "Reach",
+            "Two-handed"
+        ],
+        "source": "SRD"
+    },
+    {
+        "name": "Greataxe",
+        "category": "Weapon",
+        "subcategory": "Martial Melee Weapons",
+        "cost": {
+            "quantity": 30,
+            "unit": "gp"
+        },
+        "weight": 7,
+        "damage": {
+            "dice": "1d12",
+            "type": "Slashing"
+        },
+        "properties": [
+            "Heavy",
+            "Two-handed"
+        ],
+        "source": "SRD"
+    },
+    {
+        "name": "Greatsword",
+        "category": "Weapon",
+        "subcategory": "Martial Melee Weapons",
+        "cost": {
+            "quantity": 50,
+            "unit": "gp"
+        },
+        "weight": 6,
+        "damage": {
+            "dice": "2d6",
+            "type": "Slashing"
+        },
+        "properties": [
+            "Heavy",
+            "Two-handed"
+        ],
+        "source": "SRD"
+    },
+    {
+        "name": "Halberd",
+        "category": "Weapon",
+        "subcategory": "Martial Melee Weapons",
+        "cost": {
+            "quantity": 20,
+            "unit": "gp"
+        },
+        "weight": 6,
+        "damage": {
+            "dice": "1d10",
+            "type": "Slashing"
+        },
+        "properties": [
+            "Heavy",
+            "Reach",
+            "Two-handed"
+        ],
+        "source": "SRD"
+    },
+    {
+        "name": "Longsword",
+        "category": "Weapon",
+        "subcategory": "Martial Melee Weapons",
+        "cost": {
+            "quantity": 15,
+            "unit": "gp"
+        },
+        "weight": 3,
+        "damage": {
+            "dice": "1d8",
+            "type": "Slashing"
+        },
+        "properties": [
+            "Versatile (1d10)"
+        ],
+        "source": "SRD"
+    },
+    {
+        "name": "Maul",
+        "category": "Weapon",
+        "subcategory": "Martial Melee Weapons",
+        "cost": {
+            "quantity": 10,
+            "unit": "gp"
+        },
+        "weight": 10,
+        "damage": {
+            "dice": "2d6",
+            "type": "Bludgeoning"
+        },
+        "properties": [
+            "Heavy",
+            "Two-handed"
+        ],
+        "source": "SRD"
+    },
+    {
+        "name": "Morningstar",
+        "category": "Weapon",
+        "subcategory": "Martial Melee Weapons",
+        "cost": {
+            "quantity": 15,
+            "unit": "gp"
+        },
+        "weight": 4,
+        "damage": {
+            "dice": "1d8",
+            "type": "Piercing"
+        },
+        "source": "SRD"
+    },
+    {
+        "name": "Rapier",
+        "category": "Weapon",
+        "subcategory": "Martial Melee Weapons",
+        "cost": {
+            "quantity": 25,
+            "unit": "gp"
+        },
+        "weight": 2,
+        "damage": {
+            "dice": "1d8",
+            "type": "Piercing"
+        },
+        "properties": [
+            "Finesse"
+        ],
+        "source": "SRD"
+    },
+    {
+        "name": "Shortsword",
+        "category": "Weapon",
+        "subcategory": "Martial Melee Weapons",
+        "cost": {
+            "quantity": 10,
+            "unit": "gp"
+        },
+        "weight": 2,
+        "damage": {
+            "dice": "1d6",
+            "type": "Piercing"
+        },
+        "properties": [
+            "Finesse",
+            "Light"
+        ],
+        "source": "SRD"
+    },
+    {
+        "name": "Warhammer",
+        "category": "Weapon",
+        "subcategory": "Martial Melee Weapons",
+        "cost": {
+            "quantity": 15,
+            "unit": "gp"
+        },
+        "weight": 2,
+        "damage": {
+            "dice": "1d8",
+            "type": "Bludgeoning"
+        },
+        "properties": [
+            "Versatile (1d10)"
+        ],
+        "source": "SRD"
+    },
+    {
+        "name": "Crossbow, Heavy",
+        "category": "Weapon",
+        "subcategory": "Martial Ranged Weapons",
+        "cost": {
+            "quantity": 50,
+            "unit": "gp"
+        },
+        "weight": 18,
+        "damage": {
+            "dice": "1d10",
+            "type": "Piercing"
+        },
+        "properties": [
+            "Ammunition",
+            "Heavy",
+            "Loading",
+            "Range",
+            "Two-handed"
+        ],
+        "range": {
+            "normal": 100,
+            "long": 400
+        },
+        "source": "SRD"
+    },
+    {
+        "name": "Longbow",
+        "category": "Weapon",
+        "subcategory": "Martial Ranged Weapons",
+        "cost": {
+            "quantity": 50,
+            "unit": "gp"
+        },
+        "weight": 2,
+        "damage": {
+            "dice": "1d8",
+            "type": "Piercing"
+        },
+        "properties": [
+            "Ammunition",
+            "Heavy",
+            "Range",
+            "Two-handed"
+        ],
+        "range": {
+            "normal": 150,
+            "long": 600
+        },
+        "source": "SRD"
+    },
+    {
+        "name": "Padded",
+        "category": "Armor",
+        "subcategory": "Light Armor",
+        "cost": {
+            "quantity": 5,
+            "unit": "gp"
+        },
+        "weight": 8,
+        "armor_class": {
+            "base": 11,
+            "dex_bonus": true,
+            "max_bonus": null
+        },
+        "stealth_disadvantage": true,
+        "source": "SRD"
+    },
+    {
+        "name": "Leather",
+        "category": "Armor",
+        "subcategory": "Light Armor",
+        "cost": {
+            "quantity": 10,
+            "unit": "gp"
+        },
+        "weight": 10,
+        "armor_class": {
+            "base": 11,
+            "dex_bonus": true,
+            "max_bonus": null
+        },
+        "source": "SRD"
+    },
+    {
+        "name": "Studded Leather",
+        "category": "Armor",
+        "subcategory": "Light Armor",
+        "cost": {
+            "quantity": 45,
+            "unit": "gp"
+        },
+        "weight": 13,
+        "armor_class": {
+            "base": 12,
+            "dex_bonus": true,
+            "max_bonus": null
+        },
+        "source": "SRD"
+    },
+    {
+        "name": "Hide",
+        "category": "Armor",
+        "subcategory": "Medium Armor",
+        "cost": {
+            "quantity": 10,
+            "unit": "gp"
+        },
+        "weight": 12,
+        "armor_class": {
+            "base": 12,
+            "dex_bonus": true,
+            "max_bonus": 2
+        },
+        "source": "SRD"
+    },
+    {
+        "name": "Chain Shirt",
+        "category": "Armor",
+        "subcategory": "Medium Armor",
+        "cost": {
+            "quantity": 50,
+            "unit": "gp"
+        },
+        "weight": 20,
+        "armor_class": {
+            "base": 13,
+            "dex_bonus": true,
+            "max_bonus": 2
+        },
+        "source": "SRD"
+    },
+    {
+        "name": "Scale Mail",
+        "category": "Armor",
+        "subcategory": "Medium Armor",
+        "cost": {
+            "quantity": 50,
+            "unit": "gp"
+        },
+        "weight": 45,
+        "armor_class": {
+            "base": 14,
+            "dex_bonus": true,
+            "max_bonus": 2
+        },
+        "stealth_disadvantage": true,
+        "source": "SRD"
+    },
+    {
+        "name": "Breastplate",
+        "category": "Armor",
+        "subcategory": "Medium Armor",
+        "cost": {
+            "quantity": 400,
+            "unit": "gp"
+        },
+        "weight": 20,
+        "armor_class": {
+            "base": 14,
+            "dex_bonus": true,
+            "max_bonus": 2
+        },
+        "source": "SRD"
+    },
+    {
+        "name": "Half Plate",
+        "category": "Armor",
+        "subcategory": "Medium Armor",
+        "cost": {
+            "quantity": 750,
+            "unit": "gp"
+        },
+        "weight": 40,
+        "armor_class": {
+            "base": 15,
+            "dex_bonus": true,
+            "max_bonus": 2
+        },
+        "stealth_disadvantage": true,
+        "source": "SRD"
+    },
+    {
+        "name": "Ring Mail",
+        "category": "Armor",
+        "subcategory": "Heavy Armor",
+        "cost": {
+            "quantity": 30,
+            "unit": "gp"
+        },
+        "weight": 40,
+        "armor_class": {
+            "base": 14,
+            "dex_bonus": false,
+            "max_bonus": null
+        },
+        "stealth_disadvantage": true,
+        "source": "SRD"
+    },
+    {
+        "name": "Chain Mail",
+        "category": "Armor",
+        "subcategory": "Heavy Armor",
+        "cost": {
+            "quantity": 75,
+            "unit": "gp"
+        },
+        "weight": 55,
+        "armor_class": {
+            "base": 16,
+            "dex_bonus": false,
+            "max_bonus": null
+        },
+        "str_minimum": 13,
+        "stealth_disadvantage": true,
+        "source": "SRD"
+    },
+    {
+        "name": "Splint",
+        "category": "Armor",
+        "subcategory": "Heavy Armor",
+        "cost": {
+            "quantity": 200,
+            "unit": "gp"
+        },
+        "weight": 60,
+        "armor_class": {
+            "base": 17,
+            "dex_bonus": false,
+            "max_bonus": null
+        },
+        "str_minimum": 15,
+        "stealth_disadvantage": true,
+        "source": "SRD"
+    },
+    {
+        "name": "Plate",
+        "category": "Armor",
+        "subcategory": "Heavy Armor",
+        "cost": {
+            "quantity": 1500,
+            "unit": "gp"
+        },
+        "weight": 65,
+        "armor_class": {
+            "base": 18,
+            "dex_bonus": false,
+            "max_bonus": null
+        },
+        "str_minimum": 15,
+        "stealth_disadvantage": true,
+        "source": "SRD"
+    },
+    {
+        "name": "Shield",
+        "category": "Armor",
+        "subcategory": "Shield",
+        "cost": {
+            "quantity": 10,
+            "unit": "gp"
+        },
+        "weight": 6,
+        "armor_class": {
+            "base": 2,
+            "dex_bonus": false,
+            "max_bonus": null
+        },
+        "source": "SRD"
+    },
+    {
+        "name": "Backpack",
+        "category": "Adventuring Gear",
+        "subcategory": "Standard Gear",
+        "cost": {
+            "quantity": 2,
+            "unit": "gp"
+        },
+        "weight": 5,
+        "description": "A pack used to carry equipment on your back.",
+        "source": "SRD"
+    },
+    {
+        "name": "Bedroll",
+        "category": "Adventuring Gear",
+        "subcategory": "Standard Gear",
+        "cost": {
+            "quantity": 1,
+            "unit": "gp"
+        },
+        "weight": 7,
+        "source": "SRD"
+    },
+    {
+        "name": "Crowbar",
+        "category": "Adventuring Gear",
+        "subcategory": "Standard Gear",
+        "cost": {
+            "quantity": 2,
+            "unit": "gp"
+        },
+        "weight": 5,
+        "description": "Using a crowbar grants advantage on Strength checks where the crowbar's leverage can be applied.",
+        "source": "SRD"
+    },
+    {
+        "name": "Lantern, Bullseye",
+        "category": "Adventuring Gear",
+        "subcategory": "Standard Gear",
+        "cost": {
+            "quantity": 10,
+            "unit": "gp"
+        },
+        "weight": 2,
+        "description": "A bullseye lantern casts bright light in a 60-foot cone and dim light for an additional 60 feet.",
+        "source": "SRD"
+    },
+    {
+        "name": "Rope, Hempen (50 feet)",
+        "category": "Adventuring Gear",
+        "subcategory": "Standard Gear",
+        "cost": {
+            "quantity": 1,
+            "unit": "gp"
+        },
+        "weight": 10,
+        "description": "Rope has 2 hit points and can be burst with a DC 17 Strength check.",
+        "source": "SRD"
+    },
+    {
+        "name": "Rope, Silk (50 feet)",
+        "category": "Adventuring Gear",
+        "subcategory": "Standard Gear",
+        "cost": {
+            "quantity": 10,
+            "unit": "gp"
+        },
+        "weight": 5,
+        "description": "Silk rope has 2 hit points and can be burst with a DC 17 Strength check.",
+        "source": "SRD"
+    },
+    {
+        "name": "Tinderbox",
+        "category": "Adventuring Gear",
+        "subcategory": "Standard Gear",
+        "cost": {
+            "quantity": 5,
+            "unit": "sp"
+        },
+        "weight": 1,
+        "description": "This small container holds flint, fire steel, and tinder used to kindle a fire.",
+        "source": "SRD"
+    },
+    {
+        "name": "Torch",
+        "category": "Adventuring Gear",
+        "subcategory": "Standard Gear",
+        "cost": {
+            "quantity": 1,
+            "unit": "cp"
+        },
+        "weight": 1,
+        "description": "A torch burns for 1 hour, providing bright light in a 20-foot radius and dim light for an additional 20 feet.",
+        "source": "SRD"
+    },
+    {
+        "name": "Healer's Kit",
+        "category": "Adventuring Gear",
+        "subcategory": "Kits",
+        "cost": {
+            "quantity": 5,
+            "unit": "gp"
+        },
+        "weight": 3,
+        "description": "This kit is a leather pouch containing bandages, salves, and splints. The kit has ten uses.",
+        "source": "SRD"
+    },
+    {
+        "name": "Thieves' Tools",
+        "category": "Tools",
+        "subcategory": "Tool Kits",
+        "cost": {
+            "quantity": 25,
+            "unit": "gp"
+        },
+        "weight": 1,
+        "description": "Tools used for picking locks and disarming traps.",
+        "source": "SRD"
+    },
+    {
+        "name": "Potion of Healing",
+        "category": "Magic Item",
+        "rarity": "Common",
+        "description": "You regain 2d4 + 2 hit points when you drink this potion.",
+        "source": "SRD"
+    },
+    {
+        "name": "Bag of Holding",
+        "category": "Magic Item",
+        "rarity": "Uncommon",
+        "description": "This bag has an interior space considerably larger than its outside dimensions.",
+        "source": "SRD"
+    },
+    {
+        "name": "+1 Weapon",
+        "category": "Magic Item",
+        "rarity": "Uncommon",
+        "description": "You have a +1 bonus to attack and damage rolls made with this magic weapon.",
+        "source": "SRD"
+    },
+    {
+        "name": "+1 Armor",
+        "category": "Magic Item",
+        "rarity": "Rare",
+        "description": "You have a +1 bonus to Armor Class while wearing this armor.",
+        "source": "SRD"
+    },
+    {
+        "name": "Immovable Rod",
+        "category": "Magic Item",
+        "rarity": "Uncommon",
+        "description": "This flat iron rod has a button on one end. You can use an action to press the button, which causes the rod to become magically fixed in place.",
+        "source": "SRD"
+    }
+]

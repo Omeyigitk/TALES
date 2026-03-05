@@ -1,0 +1,37 @@
+Toplam spell: 1124
+
+Class bazli sayim:
+  Wizard: 776
+  Warlock: 450
+  Sorcerer: 429
+  Cleric: 428
+  Druid: 373
+  Bard: 321
+  Ranger: 170
+  Paladin: 134
+  Sorceror: 115
+  : 85
+  Ritual Caster: 28
+  Artificer: 14
+  Herald: 10
+  Anti-Paladin: 7
+
+Wizard cantrips: 49
+Wizard Lv1: 117
+
+Wizard Lv1 ornek (ilk 15):
+  - Adjust Position
+  - Agonizing Mark
+  - Alarm
+  - Alter Arrow’s Fortune
+  - Ambush
+  - Analyze Device
+  - Angelic Guardian
+  - Animate Construct
+  - Anticipate Weakness
+  - Arcane Riposte
+  - Armored Heart
+  - Armored Shell
+  - Auspicious Warning
+  - Avert Evil Eye
+  - Avoid Grievous Injury

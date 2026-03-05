@@ -1,0 +1,4 @@
+﻿Connected to DB
+Deleted old items
+Successfully imported 17 items!
+DB connection closed

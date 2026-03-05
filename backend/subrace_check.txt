@@ -1,0 +1,45 @@
+=== ELF ===
+Name: Drow (Dark Elf)
+Subraces count: 0
+
+=== GENASI ===
+Name: Air Genasi
+Subraces count: 0
+
+=== ALL RACES ===
+  Dwarf => subraces: 2
+  Elf => subraces: 3
+  Halfling => subraces: 2
+  Human => subraces: 2
+  Dragonborn => subraces: 10
+  Gnome => subraces: 3
+  Half-Elf => subraces: 1
+  Half-Orc => subraces: 1
+  Tiefling => subraces: 4
+  High Elf => subraces: 0
+  Wood Elf => subraces: 0
+  Drow (Dark Elf) => subraces: 0
+  Human (Variant) => subraces: 0
+  Tabaxi => subraces: 0
+  Aasimar => subraces: 0
+  Kenku => subraces: 0
+  Goliath => subraces: 0
+  Warforged => subraces: 0
+  Changeling => subraces: 0
+  Tortle => subraces: 0
+  Air Genasi => subraces: 0
+  Earth Genasi => subraces: 0
+  Fire Genasi => subraces: 0
+  Water Genasi => subraces: 0
+  Lizardfolk => subraces: 0
+  Loxodon => subraces: 0
+  Satyr => subraces: 0
+  Triton => subraces: 0
+  Sea Elf => subraces: 0
+  Vedalken => subraces: 0
+  Dhampir => subraces: 0
+  Reborn => subraces: 0
+  Hexblood => subraces: 0
+  Firbolg => subraces: 0
+  Githyanki => subraces: 0
+  Plasmoid => subraces: 0

@@ -1,0 +1,976 @@
+[
+    {
+        "name": "Dwarf",
+        "speed": 25,
+        "size": "Medium",
+        "ability_bonuses": [
+            {
+                "ability": "Constitution",
+                "bonus": 2
+            }
+        ],
+        "description_tr": "Yerin derinliklerinden gelen, dayanıklı ve usta zanaatkarlar. Cüceler (Dwarves) hem inatçı hem de gururlu bir ırktır.",
+        "traits": [
+            {
+                "name": "Darkvision",
+                "desc_tr": "Karanlıkta 60 feet mesafeye kadar loş ışığı parlak, karanlığı loş ışık gibi görebilirsin."
+            },
+            {
+                "name": "Dwarven Resilience",
+                "desc_tr": "Zehir (poison) hasarına karşı direncin vardır ve zehirlenmeye karşı avantaj kazanırsın."
+            },
+            {
+                "name": "Stonecunning",
+                "desc_tr": "Taş yapıların kökeni hakkında yapılan History (Tarih) zarlarında uzmanlık eklersin."
+            }
+        ],
+        "subraces": [
+            {
+                "name": "Hill Dwarf",
+                "description_tr": "Daha bilge ve sağlıklı, tepelerde yaşayan cüceler.",
+                "ability_bonuses": [
+                    {
+                        "ability": "Wisdom",
+                        "bonus": 1
+                    }
+                ],
+                "traits": [
+                    {
+                        "name": "Dwarven Toughness",
+                        "desc_tr": "Maksimum canın (HP) seviye başına kalıcı olarak +1 artar."
+                    }
+                ]
+            },
+            {
+                "name": "Mountain Dwarf",
+                "description_tr": "Güçlü ve zırh eğitimi almış, dağların kalbinde yaşayan savaşçı cüceler.",
+                "ability_bonuses": [
+                    {
+                        "ability": "Strength",
+                        "bonus": 2
+                    }
+                ],
+                "traits": [
+                    {
+                        "name": "Dwarven Armor Training",
+                        "desc_tr": "Light ve medium armor (hafif ve orta zırh) kullanımında uzmansındır."
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Elf",
+        "speed": 30,
+        "size": "Medium",
+        "ability_bonuses": [
+            {
+                "ability": "Dexterity",
+                "bonus": 2
+            }
+        ],
+        "description_tr": "Uzun ömürlü, zarif ve büyüye doğuştan yatkın varlıklar. Doğayla veya sihirle olan bağları onları eşsiz kılar.",
+        "traits": [
+            {
+                "name": "Darkvision",
+                "desc_tr": "Karanlıkta 60 feet'e kadar görebilirsin."
+            },
+            {
+                "name": "Fey Ancestry",
+                "desc_tr": "Büyülenmeye (charmed) karşı avantajın vardır ve sihir seni uyutamaz."
+            },
+            {
+                "name": "Keen Senses",
+                "desc_tr": "Perception (Algı) yeteneğinde ustasındır."
+            },
+            {
+                "name": "Trance",
+                "desc_tr": "Elfler uyumaz, bunun yerine 4 saat boyunca derin bir meditasyon halinde dinlenirler (Long Rest sayılır)."
+            }
+        ],
+        "subraces": [
+            {
+                "name": "High Elf",
+                "description_tr": "Büyü ve sivil medeniyete odaklanmış zeki elfler.",
+                "ability_bonuses": [
+                    {
+                        "ability": "Intelligence",
+                        "bonus": 1
+                    }
+                ],
+                "traits": [
+                    {
+                        "name": "Elf Weapon Training",
+                        "desc_tr": "Longsword, shortsword, shortbow ve longbow kullanımında uzmansındır."
+                    },
+                    {
+                        "name": "Cantrip",
+                        "desc_tr": "Wizard büyü listesinden 1 adet cantrip bilirsin (Zeka ile atılır)."
+                    }
+                ]
+            },
+            {
+                "name": "Wood Elf",
+                "description_tr": "Ormanların koruyucusu, atletik ve bilge elfler.",
+                "ability_bonuses": [
+                    {
+                        "ability": "Wisdom",
+                        "bonus": 1
+                    }
+                ],
+                "traits": [
+                    {
+                        "name": "Elf Weapon Training",
+                        "desc_tr": "Longsword, shortsword, shortbow ve longbow kullanımında uzmansındır."
+                    },
+                    {
+                        "name": "Fleet of Foot",
+                        "desc_tr": "Temel hızın (speed) 35 feet'tir."
+                    },
+                    {
+                        "name": "Mask of the Wild",
+                        "desc_tr": "Doğal ortamda (yağmur, kar, sis, yapraklar) hafifçe gizli olsan bile saklanmayı deneyebilirsin."
+                    }
+                ]
+            },
+            {
+                "name": "Drow (Dark Elf)",
+                "description_tr": "Yeraltı dünyasından (Underdark) gelen tehlikeli ve karanlık elfler.",
+                "ability_bonuses": [
+                    {
+                        "ability": "Charisma",
+                        "bonus": 1
+                    }
+                ],
+                "traits": [
+                    {
+                        "name": "Superior Darkvision",
+                        "desc_tr": "Karanlık görüşün (Darkvision) 120 feet'tir."
+                    },
+                    {
+                        "name": "Sunlight Sensitivity",
+                        "desc_tr": "Sen veya hedefin direkt güneş ışığındayken saldırı ve perception zarlarına dezavantaj alırsın."
+                    },
+                    {
+                        "name": "Drow Magic",
+                        "desc_tr": "Dancing Lights (cantrip), 3. seviyede Faerie Fire (günde 1), 5. seviyede Darkness (günde 1) büyülerini yapabilirsin (Charisma ile)."
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Halfling",
+        "speed": 25,
+        "size": "Small",
+        "ability_bonuses": [
+            {
+                "ability": "Dexterity",
+                "bonus": 2
+            }
+        ],
+        "description_tr": "Neşeli, şanslı ve cesur küçük insanlar.",
+        "traits": [
+            {
+                "name": "Lucky",
+                "desc_tr": "Saldırı, yetenek veya kurtarma zarı atarken 1 (d20) atarsan zarı yeniden atabilirsin, ancak yeni sonucu kullanmak zorundasın."
+            },
+            {
+                "name": "Brave",
+                "desc_tr": "Korkutulmaya (frightened) karşı yapılan kurtarma zarlarına avantaj kazanırsın."
+            },
+            {
+                "name": "Halfling Nimbleness",
+                "desc_tr": "Senden en az bir boyut büyük herhangi bir yaratığın alanından geçebilirsin."
+            }
+        ],
+        "subraces": [
+            {
+                "name": "Lightfoot Halfling",
+                "description_tr": "Gizlenmekte usta ve daha sosyal buçukluklar.",
+                "ability_bonuses": [
+                    {
+                        "ability": "Charisma",
+                        "bonus": 1
+                    }
+                ],
+                "traits": [
+                    {
+                        "name": "Naturally Stealthy",
+                        "desc_tr": "Senden bir boyut büyük bir yaratığın arkasındayken saklanabilirsin."
+                    }
+                ]
+            },
+            {
+                "name": "Stout Halfling",
+                "description_tr": "Dayanıklı ve zehirlere karşı dirençli buçukluklar.",
+                "ability_bonuses": [
+                    {
+                        "ability": "Constitution",
+                        "bonus": 1
+                    }
+                ],
+                "traits": [
+                    {
+                        "name": "Stout Resilience",
+                        "desc_tr": "Zehir hasarına (poison) direncin vardır ve zehirlenmeye karşı avantajlısın."
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Human",
+        "speed": 30,
+        "size": "Medium",
+        "ability_bonuses": [
+            {
+                "ability": "Strength",
+                "bonus": 1
+            },
+            {
+                "ability": "Dexterity",
+                "bonus": 1
+            },
+            {
+                "ability": "Constitution",
+                "bonus": 1
+            },
+            {
+                "ability": "Intelligence",
+                "bonus": 1
+            },
+            {
+                "ability": "Wisdom",
+                "bonus": 1
+            },
+            {
+                "ability": "Charisma",
+                "bonus": 1
+            }
+        ],
+        "description_tr": "En uyumlu ve azimli ırk. Standart İnsan modeli tüm istatistiklerine +1 alır.",
+        "traits": [
+            {
+                "name": "Extra Language",
+                "desc_tr": "Ortak (Common) dil dışında seçtiğin herhangi 1 dili konuşabilir, okuyabilir ve yazabilirsin."
+            }
+        ]
+    },
+    {
+        "name": "Variant Human",
+        "speed": 30,
+        "size": "Medium",
+        "ability_bonuses": [
+            {
+                "ability": "Any",
+                "bonus": 1
+            },
+            {
+                "ability": "Any",
+                "bonus": 1
+            }
+        ],
+        "description_tr": "Her işe yatkın, yetenekli ve özelleştirilebilir insanoğlu. Tüm özelliklere +1 yerine, 1 Feat ve +1/+1 istatistik alırsın.",
+        "traits": [
+            {
+                "name": "Free Skill",
+                "desc_tr": "İstediğin herhangi 1 beceride (skill) uzmanlık (proficiency) kazanırsın."
+            },
+            {
+                "name": "Bonus Feat",
+                "desc_tr": "Karakter yaratma ekranından 1 adet Bonus Feat (Özel Yetenek) seçmende özgürsün."
+            }
+        ]
+    },
+    {
+        "name": "Dragonborn",
+        "speed": 30,
+        "size": "Medium",
+        "ability_bonuses": [
+            {
+                "ability": "Strength",
+                "bonus": 2
+            },
+            {
+                "ability": "Charisma",
+                "bonus": 1
+            }
+        ],
+        "description_tr": "Ejderha kanı taşıyan, pullu ve gururlu savaşçılar.",
+        "traits": [
+            {
+                "name": "Draconic Ancestry",
+                "desc_tr": "Bir ejderha türü (ör: Altın/Ateş, Gümüş/Soğuk vb.) seçersin. Nefes silahın ve direncin buna göre belirlenir."
+            },
+            {
+                "name": "Breath Weapon",
+                "desc_tr": "Aksiyona bedel nefes silahını kullanabilirsin. Hasar türü ve şekli (koni/çizgi) soyuna bağlıdır. DC = 8 + CON + Prof. (Günde 1 veya Short/Long rest sonrası yenilenir)."
+            },
+            {
+                "name": "Damage Resistance",
+                "desc_tr": "Soyundan gelen ejderhanın elementine karşı hasar direncin vardır (hasarı yarı yarıya alırsın)."
+            }
+        ]
+    },
+    {
+        "name": "Gnome",
+        "speed": 25,
+        "size": "Small",
+        "ability_bonuses": [
+            {
+                "ability": "Intelligence",
+                "bonus": 2
+            }
+        ],
+        "description_tr": "Zeki, enerjik ve mekanik cihazlara ya da sihire aşırı meraklı minik canlılar.",
+        "traits": [
+            {
+                "name": "Darkvision",
+                "desc_tr": "Karanlıkta 60 feet'e kadar görebilirsin."
+            },
+            {
+                "name": "Gnome Cunning",
+                "desc_tr": "Büyüsel etkilere karşı atılan tüm INT, WIS ve CHA kurtarma zarlarına avantaj alırsın."
+            }
+        ],
+        "subraces": [
+            {
+                "name": "Forest Gnome",
+                "ability_bonuses": [
+                    {
+                        "ability": "Dexterity",
+                        "bonus": 1
+                    }
+                ],
+                "traits": [
+                    {
+                        "name": "Natural Illusionist",
+                        "desc_tr": "Minor Illusion cantrip'ini zekanı kullanarak atabilirsin."
+                    },
+                    {
+                        "name": "Speak with Small Beasts",
+                        "desc_tr": "Küçük boyutlu hayvanlarla basit sesler ve jestlerle iletişim kurabilirsin."
+                    }
+                ]
+            },
+            {
+                "name": "Rock Gnome",
+                "ability_bonuses": [
+                    {
+                        "ability": "Constitution",
+                        "bonus": 1
+                    }
+                ],
+                "traits": [
+                    {
+                        "name": "Artificer's Lore",
+                        "desc_tr": "Büyülü eşyalar veya mekanik icatlar hakkında atılan History zarlarına ustalık zarının (prof) iki katını eklersin."
+                    },
+                    {
+                        "name": "Tinker",
+                        "desc_tr": "Minik, çalışan bir saat mekanizması (müzik kutusu, ufak oyuncak vb.) üretebilirsin."
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Half-Elf",
+        "speed": 30,
+        "size": "Medium",
+        "ability_bonuses": [
+            {
+                "ability": "Charisma",
+                "bonus": 2
+            },
+            {
+                "ability": "Any",
+                "bonus": 1
+            },
+            {
+                "ability": "Any",
+                "bonus": 1
+            }
+        ],
+        "description_tr": "İnsan ve elf kanının karşımı, iki dünyanın da avantajlarını barındıran karizmatik elçiler.",
+        "traits": [
+            {
+                "name": "Darkvision",
+                "desc_tr": "Karanlıkta 60 feet görebilirsin."
+            },
+            {
+                "name": "Fey Ancestry",
+                "desc_tr": "Büyülenmeye (charmed) karşı avantajın vardır ve sihir seni uyutamaz."
+            },
+            {
+                "name": "Skill Versatility",
+                "desc_tr": "İstediğin herhangi 2 beceride uzmanlık (proficiency) kazanırsın."
+            }
+        ]
+    },
+    {
+        "name": "Half-Orc",
+        "speed": 30,
+        "size": "Medium",
+        "ability_bonuses": [
+            {
+                "ability": "Strength",
+                "bonus": 2
+            },
+            {
+                "ability": "Constitution",
+                "bonus": 1
+            }
+        ],
+        "description_tr": "Vahşi ve güçlü savaşçılar. İçgüdüleri savaşa dayalıdır.",
+        "traits": [
+            {
+                "name": "Darkvision",
+                "desc_tr": "Karanlıkta 60 feet görebilirsin."
+            },
+            {
+                "name": "Menacing",
+                "desc_tr": "İntimidation (Korkutma) yeteneğinde otomatik uzmansın."
+            },
+            {
+                "name": "Relentless Endurance",
+                "desc_tr": "Canın 0'a düştüğünde (eğer anında ölmediysen), bunun yerine canın 1'de kalabilir. Bu özelliği günde bir kez (Long Rest sonrası) kullanabilirsin."
+            },
+            {
+                "name": "Savage Attacks",
+                "desc_tr": "Yakın dövüş silahıyla kritik hasar verdiğinde, silahın hasar zarlarından birini tekrar atıp ekstra kritik hasarına eklersin."
+            }
+        ]
+    },
+    {
+        "name": "Tiefling",
+        "speed": 30,
+        "size": "Medium",
+        "ability_bonuses": [
+            {
+                "ability": "Charisma",
+                "bonus": 2
+            },
+            {
+                "ability": "Intelligence",
+                "bonus": 1
+            }
+        ],
+        "description_tr": "Kanlarında iblis soyu taşıyan, boynuzlu ve kuyruklu varlıklar.",
+        "traits": [
+            {
+                "name": "Darkvision",
+                "desc_tr": "Karanlıkta 60 feet görebilirsin."
+            },
+            {
+                "name": "Hellish Resistance",
+                "desc_tr": "Ateş (Fire) hasarına karşı direncin vardır (yarı hasar alırsın)."
+            },
+            {
+                "name": "Infernal Legacy",
+                "desc_tr": "Thaumaturgy cantrip'ini bilirsin. 3. seviyede Hellish Rebuke, 5. seviyede Darkness büyüsünü Cha ile günde bir kez atabilirsin."
+            }
+        ]
+    },
+    {
+        "name": "Aasimar",
+        "speed": 30,
+        "size": "Medium",
+        "ability_bonuses": [
+            {
+                "ability": "Charisma",
+                "bonus": 2
+            }
+        ],
+        "description_tr": "Damarlarında melek/gök kökenli kan taşıyan, kutsal bireyler.",
+        "traits": [
+            {
+                "name": "Darkvision",
+                "desc_tr": "Karanlıkta 60 feet görebilirsin."
+            },
+            {
+                "name": "Celestial Resistance",
+                "desc_tr": "Radiant (ışık) ve Necrotic (nekrotik) hasarına karşı direncin vardır."
+            },
+            {
+                "name": "Healing Hands",
+                "desc_tr": "Günde bir kez, birine dokunarak karakter seviyene eşit HP iyileştirebilirsin."
+            },
+            {
+                "name": "Light Bearer",
+                "desc_tr": "Light cantrip'ini bilirsin."
+            }
+        ],
+        "subraces": [
+            {
+                "name": "Protector Aasimar",
+                "ability_bonuses": [
+                    {
+                        "ability": "Wisdom",
+                        "bonus": 1
+                    }
+                ],
+                "traits": [
+                    {
+                        "name": "Radiant Soul",
+                        "desc_tr": "3. seviyede 1 dakikalığına uçuş (30 ft) ve her tur 1 hedefe seviyen kadar ekstra Radiant hasarı veren kanatlar çıkarabilirsin (Long rest başı)."
+                    }
+                ]
+            },
+            {
+                "name": "Scourge Aasimar",
+                "ability_bonuses": [
+                    {
+                        "ability": "Constitution",
+                        "bonus": 1
+                    }
+                ],
+                "traits": [
+                    {
+                        "name": "Radiant Consumption",
+                        "desc_tr": "3. seviyede tıpkı bir fener gibi yanarsın. Her tur etrafındakilere (kendin dahil) Radiant hasarı verir, saldırdığın 1 hedefe büyük ekstra Radiant vurursun."
+                    }
+                ]
+            },
+            {
+                "name": "Fallen Aasimar",
+                "ability_bonuses": [
+                    {
+                        "ability": "Strength",
+                        "bonus": 1
+                    }
+                ],
+                "traits": [
+                    {
+                        "name": "Necrotic Shroud",
+                        "desc_tr": "3. seviyede karanlık kanatlar çıkarıp etrafındakileri korkutabilir ve her tur saldırdığın 1 kişiye seviyen kadar ekstra Necrotic hasarı vurabilirsin."
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Tabaxi",
+        "speed": 30,
+        "size": "Medium",
+        "ability_bonuses": [
+            {
+                "ability": "Dexterity",
+                "bonus": 2
+            },
+            {
+                "ability": "Charisma",
+                "bonus": 1
+            }
+        ],
+        "description_tr": "Doymak bilmez bir merakla dünyayı gezen insansı kedi ırkı.",
+        "traits": [
+            {
+                "name": "Darkvision",
+                "desc_tr": "Karanlıkta 60 feet görüş."
+            },
+            {
+                "name": "Feline Agility",
+                "desc_tr": "Savaşta bir tur boyunca hızını geçici olarak 2 katına çıkarabilirsin. (Hareket etmediğin ilk turda tekrar yenilenir)."
+            },
+            {
+                "name": "Cat's Claws",
+                "desc_tr": "Tırmanma hızın 20 feet'tir. Silahsız saldırıların 1d4 + STR kesici (slashing) hasar vurur."
+            },
+            {
+                "name": "Cat's Talent",
+                "desc_tr": "Perception ve Stealth yeteneklerinde otomatik uzmansındır."
+            }
+        ]
+    },
+    {
+        "name": "Genasi",
+        "speed": 30,
+        "size": "Medium",
+        "ability_bonuses": [
+            {
+                "ability": "Constitution",
+                "bonus": 2
+            }
+        ],
+        "description_tr": "Element düzlemlerinin enerjisiyle iç içe geçmiş yari-ölümlü ruhlar.",
+        "traits": [],
+        "subraces": [
+            {
+                "name": "Air Genasi",
+                "ability_bonuses": [
+                    {
+                        "ability": "Dexterity",
+                        "bonus": 1
+                    }
+                ],
+                "traits": [
+                    {
+                        "name": "Unending Breath",
+                        "desc_tr": "Zehirli gazlara/sulara aldırmaksızın nefes almanı sonsuza kadar tutabilirsin."
+                    },
+                    {
+                        "name": "Mingle with the Wind",
+                        "desc_tr": "Levitate büyüsünü komponent gerektirmeden atabilirsin. Sadece CON bazlıdır."
+                    }
+                ]
+            },
+            {
+                "name": "Earth Genasi",
+                "ability_bonuses": [
+                    {
+                        "ability": "Strength",
+                        "bonus": 1
+                    }
+                ],
+                "traits": [
+                    {
+                        "name": "Earth Walk",
+                        "desc_tr": "Taş/kaya gibi zorlu zeminlerde hareket ederken yavaşlamazsın."
+                    },
+                    {
+                        "name": "Merge with Stone",
+                        "desc_tr": "Pass without Trace büyüsünü günde 1 kere atabilirsin."
+                    }
+                ]
+            },
+            {
+                "name": "Fire Genasi",
+                "ability_bonuses": [
+                    {
+                        "ability": "Intelligence",
+                        "bonus": 1
+                    }
+                ],
+                "traits": [
+                    {
+                        "name": "Darkvision",
+                        "desc_tr": "Görüş alanın kırmızı tonlardadır (60 ft)."
+                    },
+                    {
+                        "name": "Fire Resistance",
+                        "desc_tr": "Ateş hasarına karşı direnç (Fire Resistance)."
+                    },
+                    {
+                        "name": "Reach to the Blaze",
+                        "desc_tr": "Produce Flame cantrip'ini bilirsin. 3. seviyede Burning Hands büyüsünü günde 1 kez (CON bazlı) atabilirsin."
+                    }
+                ]
+            },
+            {
+                "name": "Water Genasi",
+                "ability_bonuses": [
+                    {
+                        "ability": "Wisdom",
+                        "bonus": 1
+                    }
+                ],
+                "traits": [
+                    {
+                        "name": "Amphibious",
+                        "desc_tr": "Hem suda hem havada nefes alabilirsin."
+                    },
+                    {
+                        "name": "Swim",
+                        "desc_tr": "Yüzme hızın (30 feet) vardır."
+                    },
+                    {
+                        "name": "Call to the Wave",
+                        "desc_tr": "Shape Water cantrip'ini bilirsin. 3. seviyede Destroy Water (Create or Destroy Water) büyüsünü günde 1 kez atarsın."
+                    },
+                    {
+                        "name": "Acid Resistance",
+                        "desc_tr": "Asit hasarına karşı dirence sahipsindir."
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Goliath",
+        "speed": 30,
+        "size": "Medium",
+        "ability_bonuses": [
+            {
+                "ability": "Strength",
+                "bonus": 2
+            },
+            {
+                "ability": "Constitution",
+                "bonus": 1
+            }
+        ],
+        "description_tr": "Dağların zirvesinde yaşayan, rekabetçi ve heybetli dev yarı-insanlar.",
+        "traits": [
+            {
+                "name": "Natural Athlete",
+                "desc_tr": "Athletics yeteneğinde uzmansındır."
+            },
+            {
+                "name": "Stone's Endurance",
+                "desc_tr": "Günde 1 kez hasar aldığında reaksiyon kullanarak hasarı 1d12 + CON mod kadar azaltabilirsin."
+            },
+            {
+                "name": "Powerful Build",
+                "desc_tr": "Ağırlık kaldırma, itme kapasiten bir boyut daha büyükmüş (Large) gibi hesaplanır."
+            },
+            {
+                "name": "Mountain Born",
+                "desc_tr": "Sıfır derecenin çok altındaki aşırı soğuk iklimlere direnişlidir."
+            }
+        ]
+    },
+    {
+        "name": "Satyr",
+        "speed": 35,
+        "size": "Medium",
+        "ability_bonuses": [
+            {
+                "ability": "Any",
+                "bonus": 2
+            },
+            {
+                "ability": "Any",
+                "bonus": 1
+            }
+        ],
+        "description_tr": "Müziği, eğlenceyi ve özgürlüğü seven, keçi ayaklı Fey (peri) varlıkları.",
+        "traits": [
+            {
+                "name": "Fey",
+                "desc_tr": "Yaratık tipin Humanoid yerine Fey kabul edilir (böylece humanoidleri hedefleyen büyülerden: Hold Person gibi, etkilenmezsin)."
+            },
+            {
+                "name": "Ram",
+                "desc_tr": "Boynuzlarınla 1d6 + STR küt (bludgeoning) hasar vurabilirsin."
+            },
+            {
+                "name": "Magic Resistance",
+                "desc_tr": "Büyülere ve büyüsel etkilere karşı yapılan tüm kurtarma zarlarına avantaj (Advantage) alırsın."
+            },
+            {
+                "name": "Mirthful Leaps",
+                "desc_tr": "Zıplama (jump) atışlarına fazladan 1d8 foot mesafe (veya yükseklik) eklersin."
+            },
+            {
+                "name": "Reveler",
+                "desc_tr": "Performance ve Persuasion yeteneklerinde uzmansın."
+            }
+        ]
+    },
+    {
+        "name": "Kenku",
+        "speed": 30,
+        "size": "Medium",
+        "ability_bonuses": [
+            {
+                "ability": "Any",
+                "bonus": 2
+            },
+            {
+                "ability": "Any",
+                "bonus": 1
+            }
+        ],
+        "description_tr": "Lanetlenip kanatları ve sesi elinden alınmış karga-insanlar, duydukları tüm sesleri kusursuz taklit edebilirler.",
+        "traits": [
+            {
+                "name": "Expert Forgery",
+                "desc_tr": "Başkalarının el yazısını veya işçiliğini kusursuz kopyalayabilirsin. Bunu fark etmek isteyenlerin zarlarına avantaj kazanırsın."
+            },
+            {
+                "name": "Kenku Recall",
+                "desc_tr": "İki yetenek seçersin ve bunlarda uzmansın. Ayrıca, bu ikisiyle ilgli zar attığında Advantage alırsın."
+            },
+            {
+                "name": "Mimicry",
+                "desc_tr": "Duyduğun herhangi bir sesi veya diyaloğu birebir kopyalayıp çıkarabilirsin."
+            }
+        ]
+    },
+    {
+        "name": "Changeling",
+        "speed": 30,
+        "size": "Medium",
+        "ability_bonuses": [
+            {
+                "ability": "Any",
+                "bonus": 2
+            },
+            {
+                "ability": "Any",
+                "bonus": 1
+            }
+        ],
+        "description_tr": "Şekil değiştirme (shapeshifter) gücüne sahip, istedikleri kişinin yüzüne ve sesine bürünebilen varlıklar.",
+        "traits": [
+            {
+                "name": "Shapechanger",
+                "desc_tr": "Aksiyon kullanarak formunu farklı bir forma/yüze dönüştürebilirsin. Ekipmanların değişmez, ancak tamamen başkası gibi görünür ve ses çıkarırsın."
+            },
+            {
+                "name": "Changeling Instincts",
+                "desc_tr": "Deception, Insight, Intimidation veya Persuasion'dan ikisini seç ve uzmanlık kazan."
+            }
+        ]
+    },
+    {
+        "name": "Plasmoid",
+        "speed": 30,
+        "size": "Medium",
+        "ability_bonuses": [
+            {
+                "ability": "Any",
+                "bonus": 2
+            },
+            {
+                "ability": "Any",
+                "bonus": 1
+            }
+        ],
+        "description_tr": "Kemiksiz, amorflu slime/jelimsi organizmalar.",
+        "traits": [
+            {
+                "name": "Darkvision",
+                "desc_tr": "60 ft karanlık görüş."
+            },
+            {
+                "name": "Amorphous",
+                "desc_tr": "1 inçlik dar deliklerden sıkışarak geçebilirsin."
+            },
+            {
+                "name": "Shape Self",
+                "desc_tr": "Aksiyonla bedenini insansı bir forma sokabilirsin veya sıvı halde olabilirsin. Sahte organ/uzantı çıkarıp uzak yerlere uzanabilirsin (pseudopod)."
+            },
+            {
+                "name": "Natural Resilience",
+                "desc_tr": "Zehir ve aside (Acid / Poison) karşı dirence, ayrıca zehirlenmeye avantajlısın."
+            }
+        ]
+    },
+    {
+        "name": "Goblin",
+        "speed": 30,
+        "size": "Small",
+        "ability_bonuses": [
+            {
+                "ability": "Dexterity",
+                "bonus": 2
+            },
+            {
+                "ability": "Constitution",
+                "bonus": 1
+            }
+        ],
+        "description_tr": "Karanlık oyuklarda yaşayan, kurnaz, sinsi ve hırslı küçük varlıklar.",
+        "traits": [
+            {
+                "name": "Darkvision",
+                "desc_tr": "Karanlıkta 60 feet görebilirsin."
+            },
+            {
+                "name": "Fury of the Small",
+                "desc_tr": "Senden büyük bir yaratığa hasar verdiğinde (büyü veya 1v1), seviyene eşit ekstra hasar ekleyebilirsin (Long/Short restte şarj olur)."
+            },
+            {
+                "name": "Nimble Escape",
+                "desc_tr": "Her tur, Bonus Action kullanarak Disengage (Geri Çekilme) veya Hide (Saklanma) aksiyonu yapabilirsin."
+            }
+        ]
+    },
+    {
+        "name": "Dhampir",
+        "speed": 35,
+        "size": "Medium",
+        "ability_bonuses": [
+            {
+                "ability": "Any",
+                "bonus": 2
+            },
+            {
+                "ability": "Any",
+                "bonus": 1
+            }
+        ],
+        "description_tr": "Vampirik bir açlık çeken, ölümsüzlükle yaşam arasında kalmış soylar.",
+        "traits": [
+            {
+                "name": "Darkvision",
+                "desc_tr": "60 ft karanlık görüş."
+            },
+            {
+                "name": "Deathless Nature",
+                "desc_tr": "Nefes almaya ihtiyacın yoktur."
+            },
+            {
+                "name": "Spider Climb",
+                "desc_tr": "Duvarda veya tavanda serbestçe yürüyerek/tırmanarak tam hız hareket edebilirsin (ellerin boş olmak zorunda değil)."
+            },
+            {
+                "name": "Vampiric Bite",
+                "desc_tr": "Dişlerinle 1d4 Piercing vurursun. Bu saldırı avantajlıysa, sana verdiğin hasar kadar can kazandırır veya bir sonraki zarına bu rakamı bonus eklersin (günde Prof bonus kadar)."
+            }
+        ]
+    },
+    {
+        "name": "Reborn",
+        "speed": 30,
+        "size": "Medium",
+        "ability_bonuses": [
+            {
+                "ability": "Any",
+                "bonus": 2
+            },
+            {
+                "ability": "Any",
+                "bonus": 1
+            }
+        ],
+        "description_tr": "Hayata bir şekilde dikilmiş, parçaları eksik ya da büyüyle canlanmış geçmişi silik varlıklar.",
+        "traits": [
+            {
+                "name": "Deathless Nature",
+                "desc_tr": "Nefes alma, yeme-içme ve uyku ihtiyacın yoktur. Zehre avantajlı ve dirençlisindir."
+            },
+            {
+                "name": "Knowledge from a Past Life",
+                "desc_tr": "Günde beceri zarlarına 1d6 ekstra bilgi zarı (ölen ruhların hatırası) ekleyebilirsin."
+            }
+        ]
+    },
+    {
+        "name": "Hexblood",
+        "speed": 30,
+        "size": "Medium",
+        "ability_bonuses": [
+            {
+                "ability": "Any",
+                "bonus": 2
+            },
+            {
+                "ability": "Any",
+                "bonus": 1
+            }
+        ],
+        "description_tr": "Fey (Cadı/Hag) sihrine maruz kalıp dönüştürülmüş varlıklar.",
+        "traits": [
+            {
+                "name": "Fey",
+                "desc_tr": "Type: Fey."
+            },
+            {
+                "name": "Darkvision",
+                "desc_tr": "Görüş 60 ft."
+            },
+            {
+                "name": "Eerie Token",
+                "desc_tr": "Vücudundan bir diş, saç vb. koparıp başka birine vererek bunun üzerinden telepati kurabilir veya izlenebilirsin."
+            },
+            {
+                "name": "Hex Magic",
+                "desc_tr": "Disguise Self ve Hex büyüsünü Long Rest başına 1 kez (veya normal spell slotlarınla) bedava atabilirsin."
+            }
+        ]
+    }
+]
