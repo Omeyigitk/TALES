@@ -1188,7 +1188,7 @@ export default function DMDashboard() {
                                                 Sistem NPC'leri (Seviyeli)
                                             </h3>
                                             <div className="grid grid-cols-1 gap-4">
-                                                {leveledNpcs.map(lnpc => {
+                                                {leveledNpcs?.map?.(lnpc => {
                                                     const rel = lnpc.relationship || 'Nötr';
                                                     const relColor = rel === 'Dost' ? 'bg-emerald-900/30 border-emerald-700' : rel === 'Düşman' ? 'bg-red-900/30 border-red-700' : 'bg-yellow-900/20 border-yellow-800/50';
                                                     const relBadge = rel === 'Dost' ? 'bg-emerald-700 text-emerald-100' : rel === 'Düşman' ? 'bg-red-700 text-red-100' : 'bg-yellow-700 text-yellow-100';
@@ -1280,7 +1280,7 @@ export default function DMDashboard() {
                                     {npcs.length === 0 && leveledNpcs.length === 0 ? (
                                         <div className="text-center text-gray-500 italic mt-10">Henüz hiçbir NPC kaydedilmedi. Dünyan çok boş!</div>
                                     ) : (
-                                        npcs.map(npc => (
+                                        npcs?.map?.(npc => (
                                             <div key={npc._id} className="bg-gray-800 border-l-4 p-4 rounded-lg shadow flex flex-col transition-all relative mb-4"
                                                 style={{ borderLeftColor: npc.relationship === 'Dost' ? '#10b981' : npc.relationship === 'Düşman' ? '#ef4444' : '#f59e0b' }}
                                             >
