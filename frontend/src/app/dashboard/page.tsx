@@ -18,6 +18,11 @@ export default function Dashboard() {
     const [campaignName, setCampaignName] = useState("");
     const [error, setError] = useState("");
 
+    // User Management States
+    const [isUserManagementOpen, setIsUserManagementOpen] = useState(false);
+    const [allUsers, setAllUsers] = useState<any[]>([]);
+    const [successMsg, setSuccessMsg] = useState("");
+
     useEffect(() => {
         if (!authLoading && !user) router.push('/');
         if (user && token) fetchCampaigns();
@@ -88,6 +93,44 @@ export default function Dashboard() {
         }
     };
 
+    const fetchAllUsers = async () => {
+        try {
+            const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+            const res = await fetch(`${apiUrl}/api/admin/users`, {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+            const data = await res.json();
+            if (res.ok) {
+                setAllUsers(data);
+                setIsUserManagementOpen(true);
+            }
+        } catch (err) {
+            console.error(err);
+        }
+    };
+
+    const handleResetPassword = async (targetUserId: string, username: string) => {
+        const newPass = prompt(`${username} için yeni şifreyi girin:`, "123456");
+        if (!newPass) return;
+
+        try {
+            const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+            const res = await fetch(`${apiUrl}/api/admin/reset-password`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({ targetUserId, newPassword: newPass })
+            });
+            if (res.ok) {
+                alert("Şifre başarıyla güncellendi!");
+            }
+        } catch (err) {
+            alert("Hata oluştu");
+        }
+    };
+
     if (authLoading || !user) return <div className="min-h-screen bg-gray-950 flex items-center justify-center text-white">Yükleniyor...</div>;
 
     return (
@@ -100,9 +143,19 @@ export default function Dashboard() {
                         </h1>
                         <p className="text-gray-400">Hoş geldin, <span className="text-yellow-500 font-bold">{user.username}</span> ({user.role})</p>
                     </div>
-                    <button onClick={logout} className="px-6 py-2 bg-gray-900 border border-gray-700 rounded-lg hover:bg-gray-800 transition-all text-sm font-bold">
-                        ÇIKIŞ YAP
-                    </button>
+                    <div className="flex items-center gap-4">
+                        {user.role === 'DM' && (
+                            <button
+                                onClick={fetchAllUsers}
+                                className="px-4 py-2 bg-blue-900/30 border border-blue-500/50 text-blue-100 rounded-lg hover:bg-blue-800 transition-all text-sm font-bold"
+                            >
+                                👥 KULLANICILAR
+                            </button>
+                        )}
+                        <button onClick={logout} className="px-6 py-2 bg-gray-900 border border-gray-700 rounded-lg hover:bg-gray-800 transition-all text-sm font-bold">
+                            ÇIKIŞ YAP
+                        </button>
+                    </div>
                 </header>
 
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
@@ -163,6 +216,32 @@ export default function Dashboard() {
                     </section>
                 </div>
             </div>
+            {/* User Management Modal */}
+            {isUserManagementOpen && (
+                <div className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center p-8 backdrop-blur-sm">
+                    <div className="bg-gray-900 border-4 border-blue-900 rounded-lg p-6 w-full max-w-2xl h-[70vh] flex flex-col relative shadow-[10px_10px_0px_#1e3a8a]">
+                        <button onClick={() => setIsUserManagementOpen(false)} className="absolute top-4 right-4 text-gray-400 hover:text-red-500 font-bold text-2xl">✕</button>
+                        <h2 className="text-3xl font-black text-blue-500 mb-6 border-b-2 border-blue-900 pb-2 uppercase tracking-tighter">👥 Kullanıcı Yönetimi</h2>
+
+                        <div className="flex-1 overflow-y-auto space-y-2 pr-2">
+                            {allUsers.map(u => (
+                                <div key={u._id} className="bg-gray-800 p-4 rounded-lg flex items-center justify-between border border-gray-700 hover:border-blue-500 transition-colors">
+                                    <div>
+                                        <div className="text-white font-bold text-lg">{u.username}</div>
+                                        <div className="text-xs font-black uppercase tracking-widest text-gray-500">{u.role}</div>
+                                    </div>
+                                    <button
+                                        onClick={() => handleResetPassword(u._id, u.username)}
+                                        className="bg-blue-700 hover:bg-blue-600 text-white text-xs font-bold py-2 px-4 rounded-lg transition-all"
+                                    >
+                                        Şifreyi Sıfırla
+                                    </button>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+            )}
         </main>
     );
 }
