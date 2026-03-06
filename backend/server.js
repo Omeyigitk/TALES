@@ -9,7 +9,11 @@ const fs = require('fs');
 const multer = require('multer');
 const jwt = require('jsonwebtoken');
 
-console.log('Mevcut Çevresel Değişkenler (Anahtarlar):', Object.keys(process.env).filter(k => k.includes('MONGO') || k.includes('URI') || k.includes('PORT')));
+console.log('====================================');
+console.log('SURUM: 1.0.3 - LATEST DEBUG');
+console.log('MONGODB_URI AYARI:', process.env.MONGODB_URI ? 'VALIYOR' : 'BULUNAMADI (NULL)');
+console.log('MEVCUT ANAHTARLAR:', Object.keys(process.env).filter(k => k.includes('MON') || k.includes('URI')));
+console.log('====================================');
 
 const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/dnd_app';
 const JWT_SECRET = process.env.JWT_SECRET || 'gizli_anahtar';
