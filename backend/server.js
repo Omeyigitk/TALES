@@ -83,6 +83,78 @@ const authenticate = (req, res, next) => {
 
 // ---- AUTH ENDPOINT'LERI ----
 
+// ---- ADMIN & SYSTEM ENDPOINT'LERI ----
+
+// Bulut Veritabanını Doldurma (Seeding)
+app.post('/api/admin/seed', authenticate, async (req, res) => {
+  if (req.user.role !== 'DM') return res.status(403).json({ error: 'Yetkisiz erişim' });
+
+  try {
+    const dataPath = path.join(__dirname, 'data');
+
+    // Irklar
+    const races = JSON.parse(fs.readFileSync(path.join(dataPath, 'races.json'), 'utf8'));
+    await Race.deleteMany({});
+    await Race.insertMany(races);
+
+    // Sınıflar
+    const classes = JSON.parse(fs.readFileSync(path.join(dataPath, 'classes.json'), 'utf8'));
+    await Class.deleteMany({});
+    await Class.insertMany(classes);
+
+    // Büyüler
+    const spells = JSON.parse(fs.readFileSync(path.join(dataPath, 'spells_hybrid.json'), 'utf8'));
+    await Spell.deleteMany({});
+    await Spell.insertMany(spells);
+
+    // Canavarlar
+    const monsters = JSON.parse(fs.readFileSync(path.join(dataPath, 'monster_data_clean.json'), 'utf8'));
+    await Monster.deleteMany({});
+    await Monster.insertMany(monsters);
+
+    // Eşyalar
+    const items = JSON.parse(fs.readFileSync(path.join(dataPath, 'items.json'), 'utf8'));
+    await Item.deleteMany({});
+    await Item.insertMany(items);
+
+    res.json({ success: true, message: 'Tüm veriler başarıyla yüklendi!' });
+  } catch (error) {
+    console.error('Seeding error:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Harita Dosyası Yükleme
+app.post('/api/campaigns/:campaignId/map-upload', authenticate, upload.single('map'), async (req, res) => {
+  try {
+    if (!req.file) return res.status(400).json({ error: 'Dosya seçilmedi' });
+
+    const { campaignId } = req.params;
+    const protocol = req.headers['x-forwarded-proto'] || req.protocol;
+    const host = req.headers['host'];
+    const imageUrl = `${protocol}://${host}/uploads/${req.file.filename}`;
+
+    const campaign = await Campaign.findById(campaignId);
+    if (!campaign) return res.status(404).json({ error: 'Campaign bulunamadı' });
+
+    if (!campaign.mapData) {
+      campaign.mapData = { bgUrl: imageUrl, gridSize: 50, showGrid: true, tokens: [] };
+    } else {
+      campaign.mapData.bgUrl = imageUrl;
+    }
+
+    await campaign.save();
+
+    // Socket ile tüm odaya bildir
+    io.to(campaignId).emit('map_updated', campaign.mapData);
+
+    res.json({ success: true, url: imageUrl });
+  } catch (error) {
+    console.error('Map upload error:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
 app.post('/api/auth/register', async (req, res) => {
   try {
     const { username, password, role } = req.body;
