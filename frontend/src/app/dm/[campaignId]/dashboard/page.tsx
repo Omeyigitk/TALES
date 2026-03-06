@@ -1533,6 +1533,44 @@ export default function DMDashboard() {
                                         }}
                                         className="bg-gray-950 border border-gray-700 rounded-lg px-4 py-2 text-sm w-80 outline-none focus:border-red-500 transition-colors"
                                     />
+                                    <div className="relative group">
+                                        <input
+                                            type="file"
+                                            accept="image/*"
+                                            id="map-upload-input"
+                                            className="hidden"
+                                            onChange={async (e) => {
+                                                const file = e.target.files?.[0];
+                                                if (!file) return;
+
+                                                const formData = new FormData();
+                                                formData.append('map', file);
+
+                                                try {
+                                                    const res = await axios.post(`${API_URL}/api/campaigns/${campaignId}/map-upload`, formData, {
+                                                        headers: {
+                                                            'Authorization': `Bearer ${token}`,
+                                                            'Content-Type': 'multipart/form-data'
+                                                        }
+                                                    });
+                                                    if (res.data.success) {
+                                                        const newMap = { ...mapData, bgUrl: res.data.url };
+                                                        setMapData(newMap);
+                                                        showToast("Harita Yüklendi", "Yeni harita başarıyla yüklendi.", "bg-green-900 border-green-500 text-green-100");
+                                                    }
+                                                } catch (err) {
+                                                    console.error("Map upload failed:", err);
+                                                    showToast("Hata", "Harita yüklenemedi.", "bg-red-900 border-red-500 text-red-100");
+                                                }
+                                            }}
+                                        />
+                                        <label
+                                            htmlFor="map-upload-input"
+                                            className="bg-gray-800 hover:bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 text-sm font-bold cursor-pointer transition-all flex items-center gap-2 whitespace-nowrap"
+                                        >
+                                            📁 Dosya Yükle
+                                        </label>
+                                    </div>
                                     <label className="flex items-center gap-2 text-xs font-bold text-gray-400 cursor-pointer">
                                         <input
                                             type="checkbox"
