@@ -155,6 +155,33 @@ app.post('/api/campaigns/:campaignId/map-upload', authenticate, upload.single('m
   }
 });
 
+// Tüm kullanıcıları listele (Şifre hariç)
+app.get('/api/admin/users', authenticate, async (req, res) => {
+  if (req.user.role !== 'DM') return res.status(403).json({ error: 'Yetkisiz erişim' });
+  try {
+    const users = await User.find({}, 'username role'); // Sadece isim ve rol
+    res.json(users);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Şifre Sıfırlama
+app.post('/api/admin/reset-password', authenticate, async (req, res) => {
+  if (req.user.role !== 'DM') return res.status(403).json({ error: 'Yetkisiz erişim' });
+  try {
+    const { targetUserId, newPassword } = req.body;
+    const user = await User.findById(targetUserId);
+    if (!user) return res.status(404).json({ error: 'Kullanıcı bulunamadı' });
+
+    user.password = newPassword; // pre-save hooku şifreleyecek
+    await user.save();
+    res.json({ success: true, message: 'Şifre başarıyla güncellendi!' });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 app.post('/api/auth/register', async (req, res) => {
   try {
     const { username, password, role } = req.body;
