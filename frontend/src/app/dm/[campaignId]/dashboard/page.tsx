@@ -141,9 +141,14 @@ export default function DMDashboard() {
     useEffect(() => {
         setHasMounted(true);
         if (!campaignId) return; // campaignId henüz hazır değilse işlem yapma
+
+        // Context token'ı bazen geç yüklenebiliyor, localStorage'dan yedek alalım
+        const activeToken = token || (typeof window !== 'undefined' ? localStorage.getItem('token') : null);
+        if (!activeToken) return;
+
         const fetchMonsters = async () => {
             try {
-                const res = await axios.get(`${API_URL}/api/monsters`, { headers: { 'Authorization': `Bearer ${token}` } });
+                const res = await axios.get(`${API_URL}/api/monsters`, { headers: { 'Authorization': `Bearer ${activeToken}` } });
                 setMonsters(res.data);
             } catch (error) {
                 console.error("Canavarlar çekilemedi:", error instanceof Error ? error.message : String(error));
@@ -151,7 +156,7 @@ export default function DMDashboard() {
         };
         const fetchGallery = async () => {
             try {
-                const res = await axios.get(`${API_URL}/api/campaigns/${campaignId}/media`, { headers: { 'Authorization': `Bearer ${token}` } });
+                const res = await axios.get(`${API_URL}/api/campaigns/${campaignId}/media`, { headers: { 'Authorization': `Bearer ${activeToken}` } });
                 setGallery(res.data);
             } catch (error) {
                 console.error("Galeri çekilemedi:", error instanceof Error ? error.message : String(error));
@@ -159,11 +164,11 @@ export default function DMDashboard() {
         };
         const fetchLore = async () => {
             try {
-                const npcRes = await axios.get(`${API_URL}/api/campaigns/${campaignId}/npcs`, { headers: { 'Authorization': `Bearer ${token}` } });
+                const npcRes = await axios.get(`${API_URL}/api/campaigns/${campaignId}/npcs`, { headers: { 'Authorization': `Bearer ${activeToken}` } });
                 setNpcs(npcRes.data);
-                const leveledNpcRes = await axios.get(`${API_URL}/api/characters/npcs/${campaignId}`, { headers: { 'Authorization': `Bearer ${token}` } });
+                const leveledNpcRes = await axios.get(`${API_URL}/api/characters/npcs/${campaignId}`, { headers: { 'Authorization': `Bearer ${activeToken}` } });
                 setLeveledNpcs(leveledNpcRes.data);
-                const noteRes = await axios.get(`${API_URL}/api/campaigns/${campaignId}/notes`, { headers: { 'Authorization': `Bearer ${token}` } });
+                const noteRes = await axios.get(`${API_URL}/api/campaigns/${campaignId}/notes`, { headers: { 'Authorization': `Bearer ${activeToken}` } });
                 setNotes(noteRes.data);
             } catch (error) {
                 console.error("Lore API hatası:", error instanceof Error ? error.message : String(error));
@@ -173,7 +178,7 @@ export default function DMDashboard() {
         fetchMonsters();
         fetchGallery();
         fetchLore();
-    }, [campaignId]);
+    }, [campaignId, token]);
 
     // OYUNU KAYDET VE YÜKLE (BACKUP & RESTORE)
     const handleExportCampaign = async () => {
