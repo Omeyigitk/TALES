@@ -572,6 +572,15 @@ app.post('/api/campaigns/:id/import', async (req, res) => {
 
 
 
+app.get('/api/campaigns/:id/npcs', async (req, res) => {
+  try {
+    const npcs = await NPC.find({ campaignId: req.params.id }).sort({ createdAt: -1 });
+    res.json(npcs);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 app.get('/api/campaigns/:id/notes', async (req, res) => {
   try {
     const notes = await Note.find({ campaignId: req.params.id }).sort({ createdAt: -1 });

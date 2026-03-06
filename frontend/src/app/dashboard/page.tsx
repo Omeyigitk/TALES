@@ -34,8 +34,10 @@ export default function Dashboard() {
             const res = await fetch(`${apiUrl}/api/campaigns`, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
-            const data = await res.json();
-            if (res.ok) setCampaigns(data);
+            if (res.ok) {
+                const data = await res.json();
+                setCampaigns(data);
+            }
         } catch (err) {
             console.error(err);
         } finally {
@@ -99,10 +101,12 @@ export default function Dashboard() {
             const res = await fetch(`${apiUrl}/api/admin/users`, {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
-            const data = await res.json();
             if (res.ok) {
+                const data = await res.json();
                 setAllUsers(data);
                 setIsUserManagementOpen(true);
+            } else {
+                alert("Kullanıcılar alınamadı (Yetkisiz erişim olabilir)");
             }
         } catch (err) {
             console.error(err);

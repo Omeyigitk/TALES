@@ -105,10 +105,36 @@ export default function DMDashboard() {
     const [targetPetPlayerId, setTargetPetPlayerId] = useState("");
     const [newPet, setNewPet] = useState({ name: '', hp: 10, maxHp: 10, ac: 10, type: '', notes: '' });
 
+    // User Management States
+    const [isUserManagementOpen, setIsUserManagementOpen] = useState(false);
+    const [allUsers, setAllUsers] = useState<any[]>([]);
+
     const toggleLevelPermission = (grant: boolean) => {
         if (!socket) return;
         socket.emit('grant_level_permission', { campaignId, granted: grant });
         setLevelPermEnabled(grant);
+    };
+
+    const fetchAllUsers = async () => {
+        try {
+            const res = await axios.get(`${API_URL}/api/admin/users`, { headers: { 'Authorization': `Bearer ${token}` } });
+            setAllUsers(res.data);
+            setIsUserManagementOpen(true);
+        } catch (error) {
+            showToast("Hata", "Kullanıcılar çekilemedi", "bg-red-900 border-red-500 text-red-100");
+        }
+    };
+
+    const handleResetPassword = async (targetUserId: string, username: string) => {
+        const newPass = prompt(`${username} için yeni şifreyi girin:`, "123456");
+        if (!newPass) return;
+
+        try {
+            await axios.post(`${API_URL}/api/admin/reset-password`, { targetUserId, newPassword: newPass }, { headers: { 'Authorization': `Bearer ${token}` } });
+            showToast("Başarılı", "Şifre güncellendi", "bg-green-900 border-green-500 text-green-100");
+        } catch (error) {
+            showToast("Hata", "Şifre sıfırlanamadı", "bg-red-900 border-red-500 text-red-100");
+        }
     };
 
     // Veritabanından canavarları ve galeriyi çek
@@ -799,11 +825,11 @@ export default function DMDashboard() {
 
                             {/* DM Galeri Listesi */}
                             <div className="flex-1 overflow-y-auto z-10 space-y-2 border-t border-gray-800 pt-4">
-                                <h3 className="text-xs font-bold text-gray-500 uppercase mb-2">Aktif Galeri ({gallery.length})</h3>
-                                {gallery.length === 0 ? (
+                                <h3 className="text-xs font-bold text-gray-500 uppercase mb-2">Aktif Galeri ({gallery?.length || 0})</h3>
+                                {(!gallery || gallery.length === 0) ? (
                                     <div className="text-xs text-gray-600 italic">Galeride henüz medya yok.</div>
                                 ) : (
-                                    gallery.map((media) => (
+                                    gallery.map?.((media) => (
                                         <div key={media._id} className="bg-gray-800 border border-gray-700 p-2 rounded flex justify-between items-center group">
                                             <div className="flex flex-col overflow-hidden mr-2">
                                                 <span className="text-sm font-bold text-white truncate" title={media.name}>{media.name}</span>
@@ -876,7 +902,7 @@ export default function DMDashboard() {
                                 {diceLogs && diceLogs.length === 0 ? (
                                     <div className="text-gray-500 italic text-center mt-10">Gizemli bir sessizlik... Henüz zar atılmadı.</div>
                                 ) : (
-                                    diceLogs?.map((log: any, i: number) => (
+                                    diceLogs?.map?.((log: any, i: number) => (
                                         <div key={log.id || i} className={`p-3 flex justify-between items-center rounded-xl border ${log.playerName === "Dungeon Master" ? "bg-purple-900/20 text-purple-300 font-bold border-purple-500/30 shadow-[0_0_10px_rgba(168,85,247,0.1)]" : "bg-gray-800/40 text-gray-300 border-gray-700/50"}`}>
                                             <div>
                                                 <span className="opacity-80">{log.playerName} zarı attı ({log.type}): </span>
@@ -921,12 +947,12 @@ export default function DMDashboard() {
                                 </div>
 
                                 <div className="flex-1 overflow-y-auto space-y-3 pr-2">
-                                    {monsters.length === 0 ? (
+                                    {monsters?.length === 0 ? (
                                         <div className="text-center text-gray-500 mt-10">Veritabanı yükleniyor...</div>
-                                    ) : filteredMonsters.length === 0 ? (
+                                    ) : filteredMonsters?.length === 0 ? (
                                         <div className="text-center text-gray-500 mt-10">Aradığın yaratık Bestiary'de bulunamadı.</div>
                                     ) : (
-                                        filteredMonsters.map(monster => (
+                                        filteredMonsters?.map?.(monster => (
                                             <div key={monster._id} className="bg-gray-800 rounded-xl border border-gray-700 overflow-hidden shadow-md">
                                                 <div
                                                     className="p-4 hover:bg-gray-700 transition-all flex justify-between items-center cursor-pointer group"
@@ -1774,6 +1800,32 @@ export default function DMDashboard() {
                                 >
                                     Yoldaşı Ver
                                 </button>
+                            </div>
+                        </div>
+                    </div>
+                )}
+                {/* --- USER MANAGEMENT MODAL --- */}
+                {isUserManagementOpen && (
+                    <div className="fixed inset-0 bg-black/90 z-[100] flex items-center justify-center p-8 backdrop-blur-sm animate-fade-in">
+                        <div className="bg-gray-900 border-4 border-blue-900 rounded-lg p-6 w-full max-w-2xl h-[70vh] flex flex-col relative shadow-[10px_10px_0px_#1e3a8a]">
+                            <button onClick={() => setIsUserManagementOpen(false)} className="absolute top-4 right-4 text-gray-400 hover:text-red-500 font-bold text-2xl">✕</button>
+                            <h2 className="text-3xl font-black text-blue-500 mb-6 border-b-2 border-blue-900 pb-2 uppercase tracking-tighter">👥 Kullanıcı Yönetimi</h2>
+
+                            <div className="flex-1 overflow-y-auto space-y-2 pr-2">
+                                {allUsers.map(u => (
+                                    <div key={u._id} className="bg-gray-800 p-4 rounded-lg flex items-center justify-between border border-gray-700 hover:border-blue-500 transition-colors">
+                                        <div>
+                                            <div className="text-white font-bold text-lg">{u.username}</div>
+                                            <div className="text-xs font-black uppercase tracking-widest text-gray-500">{u.role}</div>
+                                        </div>
+                                        <button
+                                            onClick={() => handleResetPassword(u._id, u.username)}
+                                            className="bg-blue-700 hover:bg-blue-600 text-white text-xs font-bold py-2 px-4 rounded-lg transition-all"
+                                        >
+                                            Şifreyi Sıfırla
+                                        </button>
+                                    </div>
+                                ))}
                             </div>
                         </div>
                     </div>
