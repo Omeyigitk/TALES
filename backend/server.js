@@ -53,9 +53,15 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 // Veritabanı Bağlantısı
+const maskedUri = MONGODB_URI.replace(/\/\/.*@/, "//<user:password>@") || "NOT_SET";
+console.log(`Veritabanına bağlanılıyor: ${maskedUri}`);
+
 mongoose.connect(MONGODB_URI)
-  .then(() => console.log('MongoDB bağlandı.'))
-  .catch(err => console.error('MongoDB bağlantı hatası:', err));
+  .then(() => console.log('✅ MongoDB bağlandı.'))
+  .catch(err => {
+    console.error('❌ MongoDB bağlantı hatası:', err.message);
+    console.error('Lütfen MONGODB_URI değişkenini ve Atlas IP izinlerini kontrol edin.');
+  });
 
 // ---- AUTH MIDDLEWARE ----
 const authenticate = (req, res, next) => {
