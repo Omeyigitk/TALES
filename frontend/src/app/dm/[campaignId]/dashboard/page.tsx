@@ -150,7 +150,7 @@ export default function DMDashboard() {
         const fetchMonsters = async () => {
             try {
                 const res = await axios.get(`${API_URL}/api/monsters`, { headers: { 'Authorization': `Bearer ${activeToken}` } });
-                setMonsters(res.data);
+                setMonsters(Array.isArray(res.data) ? res.data : []);
             } catch (error) {
                 console.error("Canavarlar çekilemedi:", error instanceof Error ? error.message : String(error));
             }
@@ -158,7 +158,7 @@ export default function DMDashboard() {
         const fetchGallery = async () => {
             try {
                 const res = await axios.get(`${API_URL}/api/campaigns/${campaignId}/media`, { headers: { 'Authorization': `Bearer ${activeToken}` } });
-                setGallery(res.data);
+                setGallery(Array.isArray(res.data) ? res.data : []);
             } catch (error) {
                 console.error("Galeri çekilemedi:", error instanceof Error ? error.message : String(error));
             }
@@ -228,6 +228,7 @@ export default function DMDashboard() {
 
     // Savaş alanına yaratık ekle
     const addMonsterToEncounter = (e: React.MouseEvent, monster: any) => {
+        if (!monster) return;
         e.stopPropagation(); // Satırın açılıp kapanmasını engelle
         const hpValue = monster.hp ? parseInt(monster.hp.split?.(' ')?.[0]) || 10 : 10;
         const acValue = monster.ac ? monster.ac.split?.(' ')?.[0] || '10' : '10';
@@ -473,9 +474,11 @@ export default function DMDashboard() {
     };
 
     // Arama filtreleme
-    const filteredMonsters = monsters.filter(m =>
-        m.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        (m.challenge && m.challenge.toString().toLowerCase() === searchTerm.toLowerCase())
+    const filteredMonsters = (monsters || []).filter(m =>
+        m && (
+            (m.name || "").toLowerCase().includes((searchTerm || "").toLowerCase()) ||
+            (m.challenge && m.challenge.toString().toLowerCase() === (searchTerm || "").toLowerCase())
+        )
     ).slice(0, 30000);
 
     if (!hasMounted) return <div className="min-h-screen bg-gray-950 flex items-center justify-center text-white font-black uppercase tracking-widest animate-pulse">Yükleniyor...</div>;
@@ -682,115 +685,118 @@ export default function DMDashboard() {
                                 <span className="bg-yellow-900/40 px-2 py-1 rounded-lg border border-yellow-500/30">🛡️</span> Parti Durumu
                             </h2>
                             <div className="space-y-3 overflow-y-auto pr-2 flex-grow">
-                                {Object.keys(partyStats).length === 0 ? (
+                                {(!partyStats || Object.keys(partyStats).length === 0) ? (
                                     <div className="text-gray-500 italic text-sm">Masada oyuncu yok.</div>
                                 ) : (
-                                    Object.entries(partyStats).map(([charId, stats]: any) => (
-                                        <div key={charId} className="bg-gray-800 rounded p-3 border border-gray-700 text-sm space-y-2">
-                                            <div className="flex justify-between items-center">
-                                                <div>
-                                                    <div className="font-bold text-white text-base overflow-hidden text-ellipsis whitespace-nowrap max-w-[160px]">{charId}</div>
-                                                    {(stats.level || stats.subclass) && (
-                                                        <div className="text-xs text-gray-400 mt-0.5">
-                                                            <span className="text-yellow-400 font-bold">Svy {stats.level || 1}</span>
-                                                            {stats.subclass && (
-                                                                <span className="text-purple-400 font-bold ml-1">({stats.subclass})</span>
-                                                            )}
+                                    Object.entries(partyStats).map(([charId, stats]: any) => {
+                                        if (!stats) return null;
+                                        return (
+                                            <div key={charId} className="bg-gray-800 rounded p-3 border border-gray-700 text-sm space-y-2">
+                                                <div className="flex justify-between items-center">
+                                                    <div>
+                                                        <div className="font-bold text-white text-base overflow-hidden text-ellipsis whitespace-nowrap max-w-[160px]">{charId}</div>
+                                                        {(stats.level || stats.subclass) && (
+                                                            <div className="text-xs text-gray-400 mt-0.5">
+                                                                <span className="text-yellow-400 font-bold">Svy {stats.level || 1}</span>
+                                                                {stats.subclass && (
+                                                                    <span className="text-purple-400 font-bold ml-1">({stats.subclass})</span>
+                                                                )}
+                                                            </div>
+                                                        )}
+                                                    </div>
+                                                    <div className="flex space-x-2 items-center">
+                                                        <button
+                                                            onClick={() => openEditCharModal(stats.id)}
+                                                            className="bg-gray-700/50 hover:bg-gray-500 text-gray-200 p-1.5 rounded transition-colors text-lg"
+                                                            title="Karakteri Düzenle (Edit Stats)"
+                                                        >
+                                                            ⚙️
+                                                        </button>
+                                                        <button
+                                                            onClick={async () => {
+                                                                try {
+                                                                    const res = await axios.get(`${API_URL}/api/characters/${stats.id}`);
+                                                                    setSelectedPlayerLore(res.data);
+                                                                } catch (error) {
+                                                                    console.error("Lore alınamadı", error);
+                                                                    alert("Karakter hikayesi henüz oluşturulmamış veya API hatası.");
+                                                                }
+                                                            }}
+                                                            className="bg-blue-900/50 hover:bg-blue-600 text-blue-200 p-1.5 rounded transition-colors text-lg"
+                                                            title="Karakter Hikayesini (Backstory) Oku"
+                                                        >
+                                                            📖
+                                                        </button>
+                                                        <button
+                                                            onClick={() => {
+                                                                setTargetPetPlayerId(stats.id);
+                                                                setIsPetModalOpen(true);
+                                                            }}
+                                                            className="bg-yellow-900/50 hover:bg-yellow-600 text-yellow-200 p-1.5 rounded transition-colors text-lg"
+                                                            title="Pet/Yardımcı Ver"
+                                                        >
+                                                            🐾
+                                                        </button>
+                                                        <button
+                                                            onClick={() => setWhisperPlayerName(charId)}
+                                                            className="bg-purple-900/50 hover:bg-purple-600 text-purple-200 p-1.5 rounded transition-colors text-lg"
+                                                            title="Gizli Mesaj (Whisper) Gönder"
+                                                        >
+                                                            💬
+                                                        </button>
+                                                    </div>
+                                                </div>
+
+                                                <div className="flex items-center space-x-2">
+                                                    <div className="flex-1 bg-gray-900 rounded-full h-2 overflow-hidden">
+                                                        <div
+                                                            className={`h-2 rounded-full transition-all ${((stats.currentHp || 0) / (stats.maxHp || 1)) > 0.5 ? 'bg-green-500' : ((stats.currentHp || 0) / (stats.maxHp || 1)) > 0.25 ? 'bg-yellow-500' : 'bg-red-500 animate-pulse'}`}
+                                                            style={{ width: `${Math.max(0, Math.min(100, ((stats.currentHp || 0) / (stats.maxHp || 1)) * 100))}%` }}
+                                                        />
+                                                    </div>
+                                                    <span className={`font-mono text-xs font-bold ${(stats.currentHp || 0) <= 5 ? 'text-red-500 animate-pulse' : 'text-green-400'}`}>
+                                                        {stats.currentHp || 0}/{stats.maxHp || "?"}
+                                                    </span>
+                                                </div>
+
+                                                {/* Death Saves ve Conditions UI */}
+                                                <div className="pt-2 border-t border-gray-700/50 flex flex-col gap-2">
+                                                    {(stats.currentHp || 0) <= 0 && stats.deathSaves && (
+                                                        <div className="flex justify-between items-center text-[10px] bg-red-950/40 p-1.5 rounded border border-red-900/50">
+                                                            <span className="text-red-400 font-bold uppercase tracking-wider">☠️ Ölüm:</span>
+                                                            <div className="flex gap-3">
+                                                                <span className="text-green-400 font-bold leading-none">✓ {stats.deathSaves.successes || 0}</span>
+                                                                <span className="text-red-500 font-bold leading-none">✗ {stats.deathSaves.failures || 0}</span>
+                                                            </div>
                                                         </div>
                                                     )}
-                                                </div>
-                                                <div className="flex space-x-2 items-center">
-                                                    <button
-                                                        onClick={() => openEditCharModal(stats.id)}
-                                                        className="bg-gray-700/50 hover:bg-gray-500 text-gray-200 p-1.5 rounded transition-colors text-lg"
-                                                        title="Karakteri Düzenle (Edit Stats)"
-                                                    >
-                                                        ⚙️
-                                                    </button>
-                                                    <button
-                                                        onClick={async () => {
-                                                            try {
-                                                                const res = await axios.get(`${API_URL}/api/characters/${stats.id}`);
-                                                                setSelectedPlayerLore(res.data);
-                                                            } catch (error) {
-                                                                console.error("Lore alınamadı", error);
-                                                                alert("Karakter hikayesi henüz oluşturulmamış veya API hatası.");
-                                                            }
-                                                        }}
-                                                        className="bg-blue-900/50 hover:bg-blue-600 text-blue-200 p-1.5 rounded transition-colors text-lg"
-                                                        title="Karakter Hikayesini (Backstory) Oku"
-                                                    >
-                                                        📖
-                                                    </button>
-                                                    <button
-                                                        onClick={() => {
-                                                            setTargetPetPlayerId(stats.id);
-                                                            setIsPetModalOpen(true);
-                                                        }}
-                                                        className="bg-yellow-900/50 hover:bg-yellow-600 text-yellow-200 p-1.5 rounded transition-colors text-lg"
-                                                        title="Pet/Yardımcı Ver"
-                                                    >
-                                                        🐾
-                                                    </button>
-                                                    <button
-                                                        onClick={() => setWhisperPlayerName(charId)}
-                                                        className="bg-purple-900/50 hover:bg-purple-600 text-purple-200 p-1.5 rounded transition-colors text-lg"
-                                                        title="Gizli Mesaj (Whisper) Gönder"
-                                                    >
-                                                        💬
-                                                    </button>
-                                                </div>
-                                            </div>
 
-                                            <div className="flex items-center space-x-2">
-                                                <div className="flex-1 bg-gray-900 rounded-full h-2 overflow-hidden">
-                                                    <div
-                                                        className={`h-2 rounded-full transition-all ${(stats.currentHp / (stats.maxHp || 1)) > 0.5 ? 'bg-green-500' : (stats.currentHp / (stats.maxHp || 1)) > 0.25 ? 'bg-yellow-500' : 'bg-red-500 animate-pulse'}`}
-                                                        style={{ width: `${Math.max(0, Math.min(100, (stats.currentHp / (stats.maxHp || 1)) * 100))}%` }}
-                                                    />
-                                                </div>
-                                                <span className={`font-mono text-xs font-bold ${stats.currentHp <= 5 ? 'text-red-500 animate-pulse' : 'text-green-400'}`}>
-                                                    {stats.currentHp}/{stats.maxHp || "?"}
-                                                </span>
-                                            </div>
-
-                                            {/* Death Saves ve Conditions UI */}
-                                            <div className="pt-2 border-t border-gray-700/50 flex flex-col gap-2">
-                                                {stats.currentHp <= 0 && stats.deathSaves && (
-                                                    <div className="flex justify-between items-center text-[10px] bg-red-950/40 p-1.5 rounded border border-red-900/50">
-                                                        <span className="text-red-400 font-bold uppercase tracking-wider">☠️ Ölüm:</span>
-                                                        <div className="flex gap-3">
-                                                            <span className="text-green-400 font-bold leading-none">✓ {stats.deathSaves.successes}</span>
-                                                            <span className="text-red-500 font-bold leading-none">✗ {stats.deathSaves.failures}</span>
-                                                        </div>
-                                                    </div>
-                                                )}
-
-                                                <div className="flex flex-wrap items-center gap-1.5">
-                                                    <select
-                                                        onChange={(e) => assignCondition(stats.id, charId, e.target.value, stats.conditions || [])}
-                                                        value=""
-                                                        className="bg-gray-900 text-gray-400 border border-gray-600 rounded text-[10px] px-1 py-0.5 outline-none hover:border-gray-500 cursor-pointer"
-                                                        title="Durum Ekle/Çıkar"
-                                                    >
-                                                        <option value="" disabled>+ Durum (Condition)</option>
-                                                        {['Kör', 'Büyülenmiş', 'Sağır', 'Korkmuş', 'Görünmez', 'Yerde', 'Zehirli'].map(c => (
-                                                            <option key={c} value={c}>{c}</option>
-                                                        ))}
-                                                    </select>
-                                                    {stats.conditions && stats.conditions.map((c: string) => (
-                                                        <span key={c}
-                                                            onClick={() => assignCondition(stats.id, charId, c, stats.conditions)}
-                                                            className="text-[9px] bg-red-900/40 text-red-300 px-1.5 py-0.5 rounded border border-red-700/50 font-bold uppercase tracking-wider cursor-pointer hover:bg-red-800 transition"
-                                                            title="Kaldırmak için tıkla"
+                                                    <div className="flex flex-wrap items-center gap-1.5">
+                                                        <select
+                                                            onChange={(e) => assignCondition(stats.id, charId, e.target.value, stats.conditions || [])}
+                                                            value=""
+                                                            className="bg-gray-900 text-gray-400 border border-gray-600 rounded text-[10px] px-1 py-0.5 outline-none hover:border-gray-500 cursor-pointer"
+                                                            title="Durum Ekle/Çıkar"
                                                         >
-                                                            ⚠️ {c}
-                                                        </span>
-                                                    ))}
+                                                            <option value="" disabled>+ Durum (Condition)</option>
+                                                            {['Kör', 'Büyülenmiş', 'Sağır', 'Korkmuş', 'Görünmez', 'Yerde', 'Zehirli'].map(c => (
+                                                                <option key={c} value={c}>{c}</option>
+                                                            ))}
+                                                        </select>
+                                                        {stats.conditions && stats.conditions.map((c: string) => (
+                                                            <span key={c}
+                                                                onClick={() => assignCondition(stats.id, charId, c, stats.conditions)}
+                                                                className="text-[9px] bg-red-900/40 text-red-300 px-1.5 py-0.5 rounded border border-red-700/50 font-bold uppercase tracking-wider cursor-pointer hover:bg-red-800 transition"
+                                                                title="Kaldırmak için tıkla"
+                                                            >
+                                                                ⚠️ {c}
+                                                            </span>
+                                                        ))}
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    ))
+                                        );
+                                    })
                                 )}
                             </div>
                         </section>

@@ -2509,42 +2509,45 @@ export default function PlayerSheet() {
                         </div>
 
                         {/* Other Players */}
-                        {partyStats && Object.entries(partyStats).filter(([name]) => name !== character?.name).map(([name, stats]: any) => (
-                            <div key={name} className="bg-gray-800 rounded-2xl border border-gray-700 p-5 flex flex-col gap-4 hover:border-gray-500 transition-all">
-                                <div className="flex justify-between items-start">
-                                    <div className="overflow-hidden mr-2">
-                                        <h3 className="font-black text-white text-xl truncate" title={name}>{name}</h3>
-                                        {stats && stats.subclass ? (
-                                            <p className="text-xs text-yellow-500 font-bold truncate">{stats.subclass}</p>
-                                        ) : (
-                                            <p className="text-xs text-gray-500 font-bold uppercase tracking-tighter">Maceracı</p>
-                                        )}
-                                    </div>
-                                    <div className="flex flex-col items-end">
-                                        <span className="text-xs font-black text-gray-400">SVY {stats?.level || 1}</span>
-                                        <div className="flex gap-1 mt-1">
-                                            {stats?.conditions && stats.conditions.map((c: string) => (
-                                                <span key={c} className="w-2 h-2 rounded-full bg-red-500 shadow-[0_0_5px_rgba(239,68,68,0.5)]" title={c}></span>
-                                            ))}
+                        {partyStats && Object.entries(partyStats).map(([name, stats]: any) => {
+                            if (!stats || name === character?.name) return null;
+                            return (
+                                <div key={name} className="bg-gray-800 rounded-2xl border border-gray-700 p-5 flex flex-col gap-4 hover:border-gray-500 transition-all">
+                                    <div className="flex justify-between items-start">
+                                        <div className="overflow-hidden mr-2">
+                                            <h3 className="font-black text-white text-xl truncate" title={name}>{name}</h3>
+                                            {stats.subclass ? (
+                                                <p className="text-xs text-yellow-500 font-bold truncate">{stats.subclass}</p>
+                                            ) : (
+                                                <p className="text-xs text-gray-500 font-bold uppercase tracking-tighter">Maceracı</p>
+                                            )}
+                                        </div>
+                                        <div className="flex flex-col items-end">
+                                            <span className="text-xs font-black text-gray-400">SVY {stats.level || 1}</span>
+                                            <div className="flex gap-1 mt-1">
+                                                {stats.conditions && stats.conditions.map((c: string) => (
+                                                    <span key={c} className="w-2 h-2 rounded-full bg-red-500 shadow-[0_0_5px_rgba(239,68,68,0.5)]" title={c}></span>
+                                                ))}
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
 
-                                <div className="space-y-1.5">
-                                    <div className="flex justify-between text-[10px] font-bold uppercase tracking-widest text-gray-500">
-                                        <span>Can (HP)</span>
-                                        <span>{stats?.currentHp || 0} / {stats?.maxHp || 10}</span>
+                                    <div className="space-y-1.5">
+                                        <div className="flex justify-between text-[10px] font-bold uppercase tracking-widest text-gray-500">
+                                            <span>Can (HP)</span>
+                                            <span>{stats.currentHp || 0} / {stats.maxHp || 10}</span>
+                                        </div>
+                                        <div className="w-full bg-gray-950 h-2 rounded-full overflow-hidden border border-gray-700/50">
+                                            <div className={`h-full transition-all duration-500 ${((stats.currentHp || 0) / (stats.maxHp || 1)) > 0.5 ? 'bg-green-500' : 'bg-red-500'}`} style={{ width: `${Math.max(0, Math.min(100, ((stats.currentHp || 0) / (stats.maxHp || 1)) * 100))}%` }}></div>
+                                        </div>
                                     </div>
-                                    <div className="w-full bg-gray-950 h-2 rounded-full overflow-hidden border border-gray-700/50">
-                                        <div className={`h-full transition-all duration-500 ${(stats?.currentHp / (stats?.maxHp || 1)) > 0.5 ? 'bg-green-500' : 'bg-red-500'}`} style={{ width: `${(stats?.currentHp / (stats?.maxHp || 1)) * 100}%` }}></div>
-                                    </div>
-                                </div>
 
-                                <button onClick={() => { setWhisperTarget(name); setIsWhisperModalOpen(true); }} className="w-full py-2 bg-gray-700 hover:bg-gray-600 text-gray-200 font-bold rounded-xl transition text-sm">
-                                    🤫 Fısılda
-                                </button>
-                            </div>
-                        ))}
+                                    <button onClick={() => { setWhisperTarget(name); setIsWhisperModalOpen(true); }} className="w-full py-2 bg-gray-700 hover:bg-gray-600 text-gray-200 font-bold rounded-xl transition text-sm">
+                                        🤫 Fısılda
+                                    </button>
+                                </div>
+                            );
+                        })}
 
                         {(!partyStats || Object.keys(partyStats).filter(name => name !== character?.name).length === 0) && (
                             <div className="col-span-full py-12 text-center border-2 border-dashed border-gray-800 rounded-2xl">
@@ -2602,8 +2605,9 @@ export default function PlayerSheet() {
 
                             <div className="flex-1 overflow-y-auto pr-2 custom-scrollbar">
                                 {(() => {
-                                    const filtered = gallery.filter(m => {
-                                        const matchesSearch = m.name.toLowerCase().includes(gallerySearch.toLowerCase());
+                                    const filtered = (gallery || []).filter(m => {
+                                        if (!m) return false;
+                                        const matchesSearch = (m.name || "").toLowerCase().includes((gallerySearch || "").toLowerCase());
                                         const matchesFilter = galleryFilter === 'all' || m.type === galleryFilter;
                                         return matchesSearch && matchesFilter;
                                     });
