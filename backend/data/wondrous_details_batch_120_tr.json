@@ -1,0 +1,452 @@
+[
+    {
+        "name": "Boots of Striding and Springing",
+        "name_tr": "Atılma ve Sıçrama Çizmeleri",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:boots-of-striding-and-springing",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "While you wear these boots, your walking speed becomes 30 feet, unless your walking speed is higher, and your speed isn't reduced if you are encumbered or wearing heavy armor. In addition, you can jump three times the normal distance.",
+        "description_tr": "Bu çizmeleri giyerken, yürüme hızınız (eğer daha yüksek değilse) 30 fit olur ve ağır zırh giyseniz bile hızınız azalmaz. Ayrıca, normalden 3 kat daha uzağa zıplayabilirsiniz."
+    },
+    {
+        "name": "Boots of the Winterlands",
+        "name_tr": "Kış Diyarı Çizmeleri",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:boots-of-the-winterlands",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Resistance to cold damage. You can ignore difficult terrain created by ice or snow, and you can tolerate temperatures as low as -50 degrees Fahrenheit without any additional protection.",
+        "description_tr": "Soğuk hasarına karşı direnç sağlar. Kar ve buzun yarattığı zorlu arazileri (difficult terrain) normalmiş gibi geçebilirsiniz. -50 dereceye kadar soğuklarda hayatta kalabilirsiniz."
+    },
+    {
+        "name": "Bottled Breath",
+        "name_tr": "Şişelenmiş Nefes",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:bottled-breath",
+        "rarity": "Uncommon",
+        "type": "Potion",
+        "description": "Contains a breath of elemental air. Inhale it to either exhale it as a Gust of Wind spell or hold it to not need to breathe for 1 hour.",
+        "description_tr": "Elementel hava nefesi içerir. Soluduğunuzda ya Gust of Wind büyüsü olarak geri üflersiniz ya da 1 saat boyunca nefes almadan durabilirsiniz."
+    },
+    {
+        "name": "Bracers of Archery",
+        "name_tr": "Okçuluk Bileklikleri",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:bracers-of-archery",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "While wearing these bracers, you have proficiency with the longbow and shortbow, and you gain a +2 bonus to damage rolls on ranged attacks made with such weapons.",
+        "description_tr": "Bu bileklikleri taktığınızda uzun yay (longbow) ve kısa yay (shortbow) kullanımında ustalık kazanırsınız ve bu silahlarla yapılan menzilli saldırılara +2 hasar bonusu alırsınız."
+    },
+    {
+        "name": "Brooch of Living Essence",
+        "name_tr": "Yaşam Özü Broşu",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:brooch-of-living-essence",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Spells that detect creature type treat you as humanoid, and those that reveal alignment treat it as neutral.",
+        "description_tr": "Yaratık türünüzü tespit eden büyüler sizi insansı, hizalanmanızı (alignment) ise tarafsız (neutral) olarak görür."
+    },
+    {
+        "name": "Brooch of Shielding",
+        "name_tr": "Koruma Broşu",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:brooch-of-shielding",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "While wearing this brooch, you have resistance to force damage, and you have immunity to damage from the Magic Missile spell.",
+        "description_tr": "Bu broşu takarken kuvvet (force) hasarına karşı direnç kazanırsınız ve Magic Missile büyüsünden hasar almazsınız."
+    },
+    {
+        "name": "Broom of Flying",
+        "name_tr": "Uçan Süpürge",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:broom-of-flying",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Has a flying speed of 50 feet. Can carry up to 400 pounds. Can travel alone to a destination within 1 mile on command.",
+        "description_tr": "50 fit uçma hızına sahiptir. 400 libreye kadar yük taşıyabilir. Komutla 1 mil içindeki bir yere kendi başına gidebilir."
+    },
+    {
+        "name": "Cap of Water Breathing",
+        "name_tr": "Su Altında Nefes Alma Başlığı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:cap-of-water-breathing",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Speak command word underwater to create a bubble of air around your head, allowing you to breathe normally.",
+        "description_tr": "Su altında komut kelimesini söyleyerek başınızın etrafında bir hava kabarcığı oluşturabilir ve normal şekilde nefes alabilirsiniz."
+    },
+    {
+        "name": "Card Sharp's Deck",
+        "name_tr": "Kumarbaz Destesi",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:card-sharps-deck",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Make ranged spell attacks with spectral cards (1d8 force) or cast Spray of Cards once per day.",
+        "description_tr": "Hayalet kartlarla menzilli büyü saldırısı (1d8 kuvvet hasarı) yapabilir veya günde bir kez Spray of Cards büyüsü gerçekleştirebilirsiniz."
+    },
+    {
+        "name": "Circlet of Blasting",
+        "name_tr": "Patlama Çemberi",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:circlet-of-blasting",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Cast Scorching Ray once per day with a +5 attack bonus.",
+        "description_tr": "Günde bir kez Scorching Ray büyüsünü +5 saldırı bonusu ile yapmanıza izin verir."
+    },
+    {
+        "name": "Circlet of Human Perfection",
+        "name_tr": "İnsan Mükemmelliği Çemberi",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:circlet-of-human-perfection",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Transforms the wearer into an attractive human of average height and weight. Statistics and racial traits don't change.",
+        "description_tr": "Takan kişiyi ortalama boy ve kiloda çekici bir insana dönüştürür. İstatistikleriniz ve ırksal özellikleriniz değişmez."
+    },
+    {
+        "name": "Cloak of Elvenkind",
+        "name_tr": "Elvankind Pelerini",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:cloak-of-elvenkind",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Perception checks to see you have disadvantage, and you have advantage on Stealth checks to hide.",
+        "description_tr": "Sizi görmeye çalışanların algı kontrolleri dezavantajlı olur, gizlenme kontrolleriniz ise avantaj kazanır."
+    },
+    {
+        "name": "Cloak of Protection",
+        "name_tr": "Koruma Pelerini",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:cloak-of-protection",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "You gain a +1 bonus to AC and saving throws while you wear this cloak.",
+        "description_tr": "Bu pelerini takarken AC'nize ve kurtarma zarlarınıza +1 bonus kazanırsınız."
+    },
+    {
+        "name": "Cloak of the Manta Ray",
+        "name_tr": "Vatoz Pelerini",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:cloak-of-the-manta-ray",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Breathe underwater and gain a swimming speed of 60 feet while the hood is up.",
+        "description_tr": "Kapüşonu takılıyken su altında nefes alabilir ve 60 fit yüzme hızına sahip olursunuz."
+    },
+    {
+        "name": "Coiling Grasp Tattoo",
+        "name_tr": "Sarmal Kavrayış Dövmesi",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:coiling-grasp-tattoo",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Use an action to extrude inky tendrils to grapple and damage a creature within 15 feet.",
+        "description_tr": "15 fit içindeki bir yaratığı yakalamak (grapple) ve hasar vermek için mürekkep kollar çıkarmanızı sağlar."
+    },
+    {
+        "name": "Cracked Driftglobe",
+        "name_tr": "Çatlak Süzülen Küre",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:cracked-driftglobe",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Speak command word to cause it to emanate the Light spell.",
+        "description_tr": "Komut kelimesiyle Light büyüsü yaymasını sağlayabilirsiniz."
+    },
+    {
+        "name": "Cursed Luckstone",
+        "name_tr": "Lanetli Şans Taşı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:cursed-luckstone",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Gain advantage on one ability check. Curse: next two ability checks are made with disadvantage.",
+        "description_tr": "Bir yetenek kontrolünde avantaj kazanmanızı sağlar. Lanet: sonraki iki yetenek kontrolünüz dezavantajlı olur."
+    },
+    {
+        "name": "Decanter of Endless Water",
+        "name_tr": "Sonsuz Su Matarası",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:decanter-of-endless-water",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Produce fresh or salt water on command in varying amounts (Stream, Fountain, Geyser).",
+        "description_tr": "Komutla farklı şiddetlerde (dere, çeşme, fışkırtma) taze veya tuzlu su üretir."
+    },
+    {
+        "name": "Deck of Illusions",
+        "name_tr": "İllüzyon Destesi",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:deck-of-illusions",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Draw a random card to create an illusion of a creature that appears real but can do no harm.",
+        "description_tr": "Rastgele çekilen kartlarla gerçek görünen ama hasar veremeyen yaratık illüzyonları oluşturur."
+    },
+    {
+        "name": "Deck Of Miscellany",
+        "name_tr": "Çeşitlilik Destesi",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:deck-of-miscellany",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Cards transform permanently into the items depicted on their faces when thrown.",
+        "description_tr": "Kartlar yere atıldığında üzerlerinde resmedilen gerçek eşyalara dönüşür."
+    },
+    {
+        "name": "Deck Of Wonder",
+        "name_tr": "Mucize Destesi",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:deck-of-wonder",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Ivory or vellum cards that bestow minor benefits or penalties on those who draw from them.",
+        "description_tr": "Tutan kişiye küçük faydalar veya cezalar veren fildişi veya parşömen kartlar."
+    },
+    {
+        "name": "Dragon Vessel",
+        "name_tr": "Ejderha Kabı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:dragon-vessel",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Fill the vessel daily with common liquids, Potion of Healing, or Potion of Climbing.",
+        "description_tr": "Günde bir kez iyileştirme veya tırmanma iksiri gibi sıvılarla dolabilir."
+    },
+    {
+        "name": "Dragonhide Belt",
+        "name_tr": "Ejderha Derisi Kemer",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:dragonhide-belt",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Bonus to saving throw DCs of ki features; regain ki points once per day.",
+        "description_tr": "Ki özelliklerinin zorluk derecesini artırır ve günde bir kez ki puanı yeniler."
+    },
+    {
+        "name": "Dragon's Wrath Weapon",
+        "name_tr": "Ejderha Gazabı Silahı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:dragons-wrath-weapon",
+        "rarity": "Uncommon",
+        "type": "Weapon",
+        "description": "Deals extra damage based on dragon's breath weapon type on a roll of 20.",
+        "description_tr": "Saldırı zarında 20 geldiğinde etrafa ejderha nefesi hasarı yayar."
+    },
+    {
+        "name": "Dragon-Touched Focus",
+        "name_tr": "Ejderha Dokunuşlu Odak",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:dragon-touched-focus",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Advantage on initiative rolls; functions as a spellcasting focus for all your spells.",
+        "description_tr": "İnisiyatif zarlarında avantaj sağlar ve tüm büyüleriniz için odak (focus) görevi görür."
+    },
+    {
+        "name": "Dried Leech",
+        "name_tr": "Kurutulmuş Sülük",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:dried-leech",
+        "rarity": "Uncommon",
+        "type": "Weapon",
+        "description": "Ammunition that sinks teeth into target, dealing 1d4 piercing damage each turn until detached.",
+        "description_tr": "Hedefe çarptığında dişlerini geçiren ve her tur 1d4 hasar veren mühimmat."
+    },
+    {
+        "name": "Driftglobe",
+        "name_tr": "Süzülen Küre",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:driftglobe",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Emanates Light or Daylight and follows you in the air while hovering.",
+        "description_tr": "Light veya Daylight büyüsü yayar ve havada süzülerek sizi takip eder."
+    },
+    {
+        "name": "Dust of Corrosion",
+        "name_tr": "Korozyon Tozu",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:dust-of-corrosion",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Corrodes nonmagical ferrous metal in a 10-foot cube; deals necrotic damage to metal creatures.",
+        "description_tr": "10 fitlik küpteki sihirli olmayan demir metalleri anında çürütüp toza dönüştürür."
+    },
+    {
+        "name": "Dust of Deliciousness",
+        "name_tr": "Lezzet Tozu",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:dust-of-deliciousness",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Improves flavor of food but gives eater disadvantage on Wisdom ability checks and saves for 1 hour.",
+        "description_tr": "Yemeğin tadını harika yapar ancak yiyenin Hikmet kontrollerini 1 saat boyunca dezavantajlı kılar."
+    },
+    {
+        "name": "Dust of Disappearance",
+        "name_tr": "Kaybolma Tozu",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:dust-of-disappearance",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Throw into the air to turn yourself and nearby creatures invisible for 2d4 minutes.",
+        "description_tr": "Etrafındakileri 2d4 dakikalığına görünmez yapar."
+    },
+    {
+        "name": "Dust of Dryness",
+        "name_tr": "Kuruluk Tozu",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:dust-of-dryness",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Turns a 15-foot cube of water into a marble-sized pellet that can be smashed to release the water.",
+        "description_tr": "15 fitlik bir su bloğunu minik bir bilyeye dönüştürür. Bilye kırıldığında su serbest kalır."
+    },
+    {
+        "name": "Dust of Sneezing and Choking",
+        "name_tr": "Hapşırma ve Boğulma Tozu",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:dust-of-sneezing-and-choking",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Causes creatures within 30 feet to suffocate and sneeze uncontrollably on a failed DC 15 Con save.",
+        "description_tr": "30 fit içindekilerin boğulmasına ve kontrolsüzce hapşırmasına neden olur."
+    },
+    {
+        "name": "Earworm",
+        "name_tr": "Kulak Kurdu",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:earworm",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Grants ability to speak Deep Speech; allows casting Detect Thoughts and Dissonant Whispers.",
+        "description_tr": "Deep Speech konuşmanızı sağlar. Zihin Okuma ve Dissonant Whispers büyüleri yapabilir."
+    },
+    {
+        "name": "Eldritch Claw Tattoo",
+        "name_tr": "Eldritch Pençe Dövmesi",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:eldritch-claw-tattoo",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Unarmed strikes are magical and gain a +1 bonus. Can empower to increase reach and deal extra force damage.",
+        "description_tr": "Silahsız vuruşları sihirli yapar ve +1 bonus verir. Menzili artırılabilir."
+    },
+    {
+        "name": "Elemental Gem",
+        "name_tr": "Element Kristali",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:elemental-gem",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Break the gem to summon an elemental (Air, Earth, Fire, or Water).",
+        "description_tr": "Kristal kırıldığında ilgili bir elementi (Hava, Toprak, Ateş veya Su) çağırır."
+    },
+    {
+        "name": "Emerald Pen",
+        "name_tr": "Zümrüt Kalem",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:emerald-pen",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Requires no ink to write; allows casting Illusory Script at will.",
+        "description_tr": "Mürekkebe ihtiyaç duymaz ve sınırsız Illusory Script büyüsü yapmanıza izin verir."
+    },
+    {
+        "name": "Eversmoking Bottle",
+        "name_tr": "Hiç Sönmeyen Şişe",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:eversmoking-bottle",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Remove the stopper to create a thick cloud of smoke in a large radius.",
+        "description_tr": "Tıpasını açtığınızda yoğun bir duman bulutu yayar."
+    },
+    {
+        "name": "Eyes of Charming",
+        "name_tr": "Büyüleme Gözleri",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:eyes-of-charming",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Expend charges to cast Charm Person on humanoids you can see.",
+        "description_tr": "Gördüğünüz insansılar üzerinde Charm Person büyüsü yapmanızı sağlar."
+    },
+    {
+        "name": "Eyes of Minute Seeing",
+        "name_tr": "Hassas Görüş Gözleri",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:eyes-of-minute-seeing",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Advantage on Investigation checks relying on sight within 1 foot.",
+        "description_tr": "1 fit içindeki detayları çok iyi görmenizi sağlar; Investigation kontrollerinde avantaj verir."
+    },
+    {
+        "name": "Eyes of the Eagle",
+        "name_tr": "Kartal Gözleri",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:eyes-of-the-eagle",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Advantage on Perception checks relying on sight; see extremely distant details.",
+        "description_tr": "Görme tabanlı Algı (Perception) kontrollerinde avantaj kazandırır; çok uzaktaki detayları görebilirsiniz."
+    },
+    {
+        "name": "Fabulist Gem",
+        "name_tr": "Masalcı Kristali",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:fabulist-gem",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Create counterfeit coins or magically change the appearance of your clothing.",
+        "description_tr": "Sahte altın sikke yaratabilir veya kıyafetlerinizin görünümünü değiştirebilirsiniz."
+    },
+    {
+        "name": "Feywild Shard",
+        "name_tr": "Feywild Şard'ı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:feywild-shard",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "When using Metamagic, can roll on the Wild Magic Surge table.",
+        "description_tr": "Metamagic kullanırken Wild Magic Surge tablosunda zar atmanıza izin verir."
+    },
+    {
+        "name": "Figurine of Wondrous Power",
+        "name_tr": "Harika Güç Figürini",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:figurine-of-wondrous-power",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Animal statuettes that transform into living, friendly creatures on command.",
+        "description_tr": "Komutla canlı ve dost canlısı yaratıklara dönüşen hayvan heykelcikleri."
+    },
+    {
+        "name": "Finder's Goggles",
+        "name_tr": "Bulucu Gözlükleri",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:finders-goggles",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Gain benefits related to investigation and finding hidden objects or secret doors.",
+        "description_tr": "Gizli objeleri veya kapıları bulmada, inceleme (Investigation) kontrollerinde fayda sağlar."
+    },
+    {
+        "name": "Gauntlets of Ogre Power",
+        "name_tr": "Ogre Gücü Eldivenleri",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:gauntlets-of-ogre-power",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Your Strength score is 19 while you wear these gauntlets.",
+        "description_tr": "Bu eldivenleri takarken Güç skorunuz 19 olur."
+    },
+    {
+        "name": "Gem of Brightness",
+        "name_tr": "Parlaklık Kristali",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:gem-of-brightness",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Expend charges to shed light or blind creatures in a cone or line.",
+        "description_tr": "Işık yaymak veya rakipleri kör etmek için yükler harcayabilirsiniz."
+    },
+    {
+        "name": "Glamerweave",
+        "name_tr": "İllüzyonlu Kumaş",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:glamerweave",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Clothing with illusory patterns. Uncommon version grants bonus to Charisma checks.",
+        "description_tr": "Üzerinde illüzyonlu desenler olan giysi. Nadir versiyonu Karizma kontrollerine bonus verir."
+    },
+    {
+        "name": "Gloves of Missile Snaring",
+        "name_tr": "Ok Yakalama Eldivenleri",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:gloves-of-missile-snaring",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Use reaction to reduce damage from ranged weapon attacks and potentially catch the missile.",
+        "description_tr": "Reaksiyonunuzla menzilli saldırılardan gelen hasarı azaltabilir ve mermiyi yakalayabilirsiniz."
+    },
+    {
+        "name": "Gloves of Swimming and Climbing",
+        "name_tr": "Yüzme ve Tırmanma Eldivenleri",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:gloves-of-swimming-and-climbing",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Climbing and swimming don't cost extra movement; gain +5 bonus to Athletics checks for those activities.",
+        "description_tr": "Tırmanma ve yüzme ekstra hareket puanı harcatmaz ve bu aktivitelerde +5 Atletizm bonusu verir."
+    },
+    {
+        "name": "Gloves of Thievery",
+        "name_tr": "Hırsızlık Eldivenleri",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:gloves-of-thievery",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Invisible while worn; gain +5 bonus to Sleight of Hand and picking locks.",
+        "description_tr": "Takıldığında görünmezdir; El Çabukluğu (Sleight of Hand) ve kilit açma kontrollerine +5 bonus sağlar."
+    }
+]

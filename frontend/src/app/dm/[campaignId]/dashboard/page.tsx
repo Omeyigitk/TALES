@@ -1,7 +1,7 @@
 "use client";
 
 import { useParams } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { useCampaignSocket } from "../../../../../useCampaignSocket";
 import { useAuth } from "@/context/AuthContext";
@@ -13,6 +13,7 @@ export default function DMDashboard() {
     const { campaignId } = useParams();
     const { user, token, loading: authLoading } = useAuth();
     const router = useRouter();
+    const role = 'DM';
     const [hasMounted, setHasMounted] = useState(false);
 
     // Redirect if not DM or not logged in
@@ -23,7 +24,7 @@ export default function DMDashboard() {
     }, [user, authLoading]);
 
     // Odaya DM rolüyle katıl
-    const { partyStats, diceLogs, socket, dmLevelPermission, whisperData } = useCampaignSocket(campaignId, 'DM', user?.username || 'DM-User');
+    const { partyStats, diceLogs, socket, dmLevelPermission, whisperData, whisperHistory } = useCampaignSocket(campaignId, 'DM', 'DM', token);
 
     // Toast Notification System
     const [toast, setToast] = useState<{ show: boolean, title: string, message: string, color: string }>({ show: false, title: '', message: '', color: '' });
@@ -35,7 +36,7 @@ export default function DMDashboard() {
     // Watch for whispers
     useEffect(() => {
         const wd = whisperData as any;
-        if (wd && wd.targetPlayerName === 'DM') {
+        if (wd && wd.targetName === 'DM') {
             showToast(`🤫 Fısıltı: ${wd.senderName || 'Bir Oyuncu'}`, wd.message, 'bg-purple-900 border-purple-500 text-purple-100');
         }
     }, [whisperData]);
@@ -181,6 +182,14 @@ export default function DMDashboard() {
     }, [campaignId, token]);
 
     // OYUNU KAYDET VE YÜKLE (BACKUP & RESTORE)
+    // Whisper History Ref for auto-scroll
+    const chatEndRef = useRef<HTMLDivElement>(null);
+    useEffect(() => {
+        if (whisperPlayerName) {
+            chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
+        }
+    }, [whisperPlayerName, whisperHistory]);
+
     const handleExportCampaign = async () => {
         try {
             const res = await axios.get(`${API_URL}/api/campaigns/${campaignId}/export`, { headers: { 'Authorization': `Bearer ${token}` } });
@@ -220,14 +229,18 @@ export default function DMDashboard() {
     // Savaş alanına yaratık ekle
     const addMonsterToEncounter = (e: React.MouseEvent, monster: any) => {
         e.stopPropagation(); // Satırın açılıp kapanmasını engelle
+        const hpValue = monster.hp ? parseInt(monster.hp.split?.(' ')?.[0]) || 10 : 10;
+        const acValue = monster.ac ? monster.ac.split?.(' ')?.[0] || '10' : '10';
+        const dexValue = monster.stats ? (parseInt(monster.stats.split?.(',')?.[1]?.trim() || "10") || 10) : 10;
+
         const newCombatant = {
             ...monster,
             id: `${monster._id}-${Date.now()}`,
-            name: monster.name,
-            maxHp: parseInt(monster.hp.split(' ')[0]) || 10,
-            currentHp: parseInt(monster.hp.split(' ')[0]) || 10,
-            ac: monster.ac ? monster.ac.split(' ')[0] : '10',
-            initiative: Math.floor(Math.random() * 20) + 1 + Math.floor(((parseInt((monster.stats || "").split(",")[1]?.trim() || "10") - 10) / 2)) || 10
+            name: monster.name || 'Bilinmeyen Canavar',
+            maxHp: hpValue,
+            currentHp: hpValue,
+            ac: acValue,
+            initiative: Math.floor(Math.random() * 20) + 1 + Math.floor((dexValue - 10) / 2) || 10
         };
 
         const updatedCombatants = [...activeCombatants, newCombatant].sort((a, b) => b.initiative - a.initiative);
@@ -274,7 +287,7 @@ export default function DMDashboard() {
             campaignId,
             targetPlayerName: whisperPlayerName,
             message: whisperMessage,
-            senderName: 'Dungeon Master'
+            senderName: 'DM'
         });
         setWhisperMessage("");
         setWhisperPlayerName(null);
@@ -969,8 +982,8 @@ export default function DMDashboard() {
                                                     </div>
                                                     <div className="flex items-center space-x-6">
                                                         <div className="text-right">
-                                                            <div className="text-sm font-bold text-green-400">{monster.hp.split(' ')[0]} HP</div>
-                                                            <div className="text-sm font-bold text-blue-400">{monster.ac.split(' ')[0]} AC</div>
+                                                            <div className="text-sm font-bold text-green-400">{monster.hp?.split?.(' ')?.[0] || '10'} HP</div>
+                                                            <div className="text-sm font-bold text-blue-400">{monster.ac?.split?.(' ')?.[0] || '10'} AC</div>
                                                         </div>
                                                         <button
                                                             onClick={(e) => addMonsterToEncounter(e, monster)}
@@ -1038,15 +1051,42 @@ export default function DMDashboard() {
                 {/* Fısıltı (Whisper) Gönderme Modalı */}
                 {whisperPlayerName && (
                     <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 backdrop-blur-sm animate-fade-in">
-                        <div className="bg-gray-900 w-full max-w-md p-6 rounded-2xl border-2 border-purple-500 shadow-[0_0_30px_rgba(168,85,247,0.3)] flex flex-col relative text-white">
+                        <div className="bg-gray-900 w-full max-w-md p-6 rounded-2xl border-2 border-purple-500 shadow-[0_0_30px_rgba(168,85,247,0.3)] flex flex-col relative text-white max-h-[80vh]">
                             <h2 className="text-2xl font-bold text-purple-400 mb-4 flex items-center">
                                 <span className="text-3xl mr-2">💬</span> {whisperPlayerName}'e Fısılda
                             </h2>
+
+                            {/* Whisper History Log */}
+                            <div className="flex-1 overflow-y-auto mb-4 bg-gray-950/50 rounded-xl p-3 border border-gray-800 space-y-2 max-h-64 custom-scrollbar">
+                                {whisperHistory && whisperHistory.length > 0 ? (
+                                    whisperHistory.filter((w: any) =>
+                                        w && ((w.senderName === 'DM' && w.targetName === whisperPlayerName) ||
+                                            (w.senderName === whisperPlayerName && w.targetName === 'DM'))
+                                    ).map((w: any, idx: number) => (
+                                        <div key={idx} className={`text-sm p-2 rounded-lg ${w.senderName === 'DM' ? 'bg-purple-900/40 ml-6 border border-purple-500/20' : 'bg-gray-800/40 mr-6 border border-gray-700/20'}`}>
+                                            <div className="flex justify-between items-center mb-1">
+                                                <span className="font-black text-[9px] uppercase tracking-wider text-purple-400">
+                                                    {w.senderName === 'DM' ? 'SEN (DM)' : w.senderName}
+                                                </span>
+                                                <span className="text-[9px] text-gray-500 opacity-50">{w.createdAt ? new Date(w.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : '--:--'}</span>
+                                            </div>
+                                            <p className="text-gray-200 text-xs leading-relaxed">{w.message}</p>
+                                        </div>
+                                    ))
+                                ) : (
+                                    <div className="text-center py-8 opacity-20 flex flex-col items-center">
+                                        <div className="text-4xl mb-2">🤫</div>
+                                        <p className="text-xs font-bold uppercase tracking-widest">Henüz fısıltı yok</p>
+                                    </div>
+                                )}
+                                <div ref={chatEndRef} />
+                            </div>
+
                             <textarea
                                 value={whisperMessage}
                                 onChange={(e) => setWhisperMessage(e.target.value)}
                                 placeholder="Gizli mesajınızı yazın..."
-                                className="w-full bg-gray-950 border border-gray-700 text-sm text-gray-200 p-4 rounded-xl focus:ring-2 focus:ring-purple-500 mb-6 flex-1 min-h-[120px] outline-none resize-none"
+                                className="w-full bg-gray-950 border border-gray-700 text-sm text-gray-200 p-4 rounded-xl focus:ring-2 focus:ring-purple-500 mb-6 min-h-[100px] outline-none resize-none"
                             />
                             <div className="flex space-x-4">
                                 <button
@@ -1622,17 +1662,18 @@ export default function DMDashboard() {
                                     onClick={() => {
                                         const newTokens: any[] = [];
                                         partyStats && Object.entries(partyStats).forEach(([id, stats]: [any, any]) => {
+                                            if (!stats) return;
                                             newTokens.push({
-                                                id: `player-${id}`,
+                                                id: `player-${id}-${Date.now()}`,
                                                 name: stats.name || 'Oyuncu',
                                                 x: 100,
                                                 y: 100,
                                                 color: '#3b82f6',
                                                 type: 'player',
-                                                entityId: id
+                                                entityId: stats.characterId || id
                                             });
                                         });
-                                        const newMap = { ...mapData, tokens: [...mapData.tokens, ...newTokens.filter(nt => !mapData.tokens.find(t => t.id === nt.id))] };
+                                        const newMap = { ...mapData, tokens: [...(mapData.tokens || []), ...newTokens.filter(nt => !(mapData.tokens || []).find(t => t && t.id === nt.id))] };
                                         setMapData(newMap);
                                         socket?.emit('update_map', { campaignId, mapData: newMap });
                                     }}
@@ -1693,37 +1734,39 @@ export default function DMDashboard() {
 
                             {/* Tokens */}
                             {mapData.tokens.map((token) => (
-                                <div
-                                    key={token.id}
-                                    draggable
-                                    onDragStart={() => setIsDraggingToken(token.id)}
-                                    className="absolute w-12 h-12 rounded-full border-2 border-white shadow-lg flex items-center justify-center text-[10px] font-black cursor-move select-none group"
-                                    style={{
-                                        left: token.x - 24,
-                                        top: token.y - 24,
-                                        backgroundColor: token.color || '#ef4444',
-                                        zIndex: 10
-                                    }}
-                                >
-                                    <div className="absolute -top-6 left-1/2 -translate-x-1/2 bg-black/80 px-2 py-0.5 rounded text-white opacity-0 group-hover:opacity-100 whitespace-nowrap transition-opacity">
-                                        {token.name}
-                                    </div>
-                                    <div className="text-white text-center leading-tight uppercase">
-                                        {token.name.substring(0, 2)}
-                                    </div>
-                                    <button
-                                        onClick={(e) => {
-                                            e.stopPropagation();
-                                            const newTokens = mapData.tokens.filter(t => t.id !== token.id);
-                                            const newMap = { ...mapData, tokens: newTokens };
-                                            setMapData(newMap);
-                                            socket?.emit('update_map', { campaignId, mapData: newMap });
+                                token && (
+                                    <div
+                                        key={token.id}
+                                        draggable
+                                        onDragStart={() => setIsDraggingToken(token.id)}
+                                        className="absolute w-12 h-12 rounded-full border-2 border-white shadow-lg flex items-center justify-center text-[10px] font-black cursor-move select-none group"
+                                        style={{
+                                            left: (token.x || 0) - 24,
+                                            top: (token.y || 0) - 24,
+                                            backgroundColor: token.color || '#ef4444',
+                                            zIndex: 10
                                         }}
-                                        className="absolute -bottom-2 -right-2 bg-red-600 w-5 h-5 rounded-full flex items-center justify-center text-[8px] opacity-0 group-hover:opacity-100 hover:scale-110 transition-all border border-black"
                                     >
-                                        ✕
-                                    </button>
-                                </div>
+                                        <div className="absolute -top-6 left-1/2 -translate-x-1/2 bg-black/80 px-2 py-0.5 rounded text-white opacity-0 group-hover:opacity-100 whitespace-nowrap transition-opacity">
+                                            {token.name || '??'}
+                                        </div>
+                                        <div className="text-white text-center leading-tight uppercase">
+                                            {(token.name || '??').substring(0, 2)}
+                                        </div>
+                                        <button
+                                            onClick={(e) => {
+                                                e.stopPropagation();
+                                                const newTokens = mapData.tokens.filter(t => t && t.id !== token.id);
+                                                const newMap = { ...mapData, tokens: newTokens };
+                                                setMapData(newMap);
+                                                socket?.emit('update_map', { campaignId, mapData: newMap });
+                                            }}
+                                            className="absolute -bottom-2 -right-2 bg-red-600 w-5 h-5 rounded-full flex items-center justify-center text-[8px] opacity-0 group-hover:opacity-100 hover:scale-110 transition-all border border-black"
+                                        >
+                                            ✕
+                                        </button>
+                                    </div>
+                                )
                             ))}
 
                             {!mapData.bgUrl && (
@@ -1769,7 +1812,7 @@ export default function DMDashboard() {
                                     <div>
                                         <label className="block text-xs font-bold text-gray-400 uppercase mb-1">Target</label>
                                         <div className="w-full bg-gray-800 border border-gray-700 rounded-lg p-3 truncate text-xs font-bold">
-                                            {targetPetPlayerId ? (Object.values(partyStats).find((s: any) => s.id === targetPetPlayerId) as any)?.name || targetPetPlayerId : 'Seçilmedi'}
+                                            {targetPetPlayerId ? (Object.values(partyStats || {}).find((s: any) => s && (s.characterId === targetPetPlayerId || s.id === targetPetPlayerId)) as any)?.name || targetPetPlayerId : 'Seçilmedi'}
                                         </div>
                                     </div>
                                 </div>

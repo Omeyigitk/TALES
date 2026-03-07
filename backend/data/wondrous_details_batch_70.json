@@ -1,0 +1,352 @@
+[
+  {
+    "name": "Sekolahian Worshipping Statuette",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:sekolahian-worshipping-statuette",
+    "rarity": "Common",
+    "type": "Wondrous Item",
+    "description": "Skillfully carved from sandstone, this 1-foot-tall statuette depicts a shark twisting through the water with its mouth open. If any Tiny sea-dwelling animal is within 1 inch of the statuette's mouth, the shark flashes to life and deals 1 piercing damage to it. The shark can deal damage in this way no more than once per hour."
+  },
+  {
+    "name": "Shield of Expression",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:shield-of-expression",
+    "rarity": "Common",
+    "type": "Armor",
+    "description": "The front of this shield is shaped in the likeness of a face. While bearing the shield, you can use a bonus action to alter the face's expression."
+  },
+  {
+    "name": "Shiftweave",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:shiftweave",
+    "rarity": "Common",
+    "type": "Wondrous Item",
+    "description": "When a suit of shiftweave is created, up to five different outfits can be embedded into the cloth. While wearing the clothing, you can speak its command word as a bonus action to transform your outfit into your choice of one of the other designs contained within it. Regardless of its appearance, the outfit can't be anything but clothing. Although it can duplicate the look of other magical clothing, it doesn't gain their magical properties."
+  },
+  {
+    "name": "Smoldering Armor",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:smoldering-armor",
+    "rarity": "Common",
+    "type": "Armor",
+    "description": "Wisps of harmless, odorless smoke rise from this armor while it is worn."
+  },
+  {
+    "name": "Spell Scroll",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:spell-scroll",
+    "rarity": "Common",
+    "type": "Scroll",
+    "description": "A spell scroll bears the words of a single spell, written in a mystical cipher. If the spell is on your class’s spell list, you can read the scroll and cast its spell without providing any material components. Otherwise, the scroll is unintelligible. Casting the spell by reading the scroll requires the spell’s normal casting time. Once the spell is cast, the words on the scroll fade, and it crumbles to dust. If the casting is interrupted, the scroll is not lost.\n\nIf the spell is on your class's spell list but of a higher level than you can normally cast, you must make an ability check using your spellcasting ability to determine whether you cast it successfully. The DC equals 10 + the spell's level. On a failed check, the spell disappears from the scroll with no other effect.\n\nOnce the spell is cast, the words on the scroll fade, and the scroll itself crumbles to dust.\n\nThe level of the spell on the scroll determines the spell's saving throw DC and attack bonus, as well as the scroll's rarity, as shown in the Spell Scroll table.\n\nA wizard spell on a spell scroll can be copied just as spells in spellbooks can be copied. When a spell is copied from a spell scroll, the copier must succeed on an Intelligence (Arcana) check with a DC equal to 10 + the spell's level. If the check succeeds, the spell is successfully copied. Whether the check succeeds or fails, the spell scroll is destroyed."
+  },
+  {
+    "name": "Spellshard",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:spellshard",
+    "rarity": "Common",
+    "type": "Wondrous Item",
+    "description": "This polished Eberron dragonshard fits in the hand and stores information similar to a book. The shard can hold the equivalent of one book that's no more than 320 pages long. A shard can be created blank or already filled with information. When the shard is created, the creator can set a passphrase that must be spoken to access the information stored within.\n\nWhile holding the shard, you can use an action to open your mind to the shard, seeing its content in your mind. On subsequent rounds, reading the text or scribing new text on blank \"pages\" in the shard requires concentration (as if concentrating on a spell) and takes the same amount of time it takes you to read and write normally. Thinking of a particular phrase or topic draws you to the first section in the shard that addresses it.\n\nA wizard can use a spellshard as a spellbook, with the usual cost in gold and time to \"scribe\" a spell into the shard."
+  },
+  {
+    "name": "Spellwrought Tattoo",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:spellwrought-tattoo",
+    "rarity": "Common",
+    "type": "Wondrous Item",
+    "description": "Produced by a special needle, this magic tattoo contains a single spell of up to 5th level, wrought on your skin by a magic needle. To use the tattoo, you must hold the needle against your skin and speak the command word. The needle turns into ink that becomes the tattoo, which appears on the skin in whatever design you like. Once the tattoo is there, you can cast its spell, requiring no material components. The tattoo glows faintly while you cast the spell and for the spell's duration. Once the spell ends, the tattoo vanishes from your skin.\n\nThe level of the spell in the tattoo determines the spell's saving throw DC, attack bonus, spellcasting ability modifier, and the tattoo's rarity, as shown in the Spellwrought Tattoo table."
+  },
+  {
+    "name": "Staff of Adornment",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:staff-of-adornment",
+    "rarity": "Common",
+    "type": "Staff",
+    "description": "If you place an object weighing no more than 1 pound (such as a shard of crystal, an egg, or a stone) above the tip of the staff while holding it, the object floats an inch from the staff's tip and remains there until it is removed or until the staff is no longer in your possession. The staff can have up to three such objects floating over its tip at any given time. While holding the staff, you can make one or more of the objects slowly spin or turn in place."
+  },
+  {
+    "name": "Staff of Birdcalls",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:staff-of-birdcalls",
+    "rarity": "Common",
+    "type": "Staff",
+    "description": "This wooden staff is decorated with bird carvings. It has 10 charges. While holding it, you can use an action to expend 1 charge from the staff and cause it to create one of the following sounds out to a range of 60 feet: a finch's chirp, a raven's caw, a duck's quack, a chicken's cluck, a goose's honk, a loon's call, a turkey's gobble, a seagull's cry, an owl's hoot, or an eagle's shriek.\n\nThe staff regains 1d6 + 4 expended charges daily at dawn. If you expend the last charge, roll a d20. On a 1, the staff explodes in a harmless cloud of bird feathers and is lost forever."
+  },
+  {
+    "name": "Staff of Flowers",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:staff-of-flowers",
+    "rarity": "Common",
+    "type": "Staff",
+    "description": "This wooden staff has 10 charges. While holding it, you can use an action to expend 1 charge from the staff and cause a flower to sprout from a patch of earth or soil within 5 feet of you, or from the staff itself. Unless you choose a specific kind of flower, the staff creates a mild-scented daisy. The flower is harmless and nonmagical, and it grows or withers as a normal flower would.\n\nThe staff regains 1d6 + 4 expended charges daily at dawn. If you expend the last charge, roll a d20. On a 1, the staff turns into flower petals and is lost forever."
+  },
+  {
+    "name": "Strixhaven Pennant",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:strixhaven-pennant",
+    "rarity": "Common",
+    "type": "Wondrous Item",
+    "description": "This magic pennant bears the symbol of Strixhaven or one of its colleges: Lorehold, Prismari, Quandrix, Silverquill, or Witherbloom. While you wave the pennant, the symbol on it glitters, and the pennant sheds bright light in a 10-foot radius and dim light for an additional 10 feet."
+  },
+  {
+    "name": "Talking Doll",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:talking-doll",
+    "rarity": "Common",
+    "type": "Wondrous Item",
+    "description": "While this stuffed doll is within 5 feet of you, you can spend a short rest telling it to say up to six phrases, none of which can be more than six words long, and set a condition under which the doll speaks each phrase. You can also replace old phrases with new ones. Whatever the condition, it must occur within 5 feet of the doll to make it speak. For example, whenever someone picks up the doll, it might say, \"I want a piece of candy.\" The doll's phrases are lost when your attunement to the doll ends."
+  },
+  {
+    "name": "Tankard of Plenty",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:tankard-of-plenty",
+    "rarity": "Common",
+    "type": "Wondrous Item",
+    "description": "This golden stein is decorated with dancing dwarves and grain patterns. If you speak the command word (“Illefarn”) while grasping the handle, the tankard fills with three pints of rich dwarven ale. The tankard has 3 charges. Using the tankard’s property expends 1 charge, and the tankard regains all expended charges daily at dawn."
+  },
+  {
+    "name": "Tankard of Sobriety",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:tankard-of-sobriety",
+    "rarity": "Common",
+    "type": "Wondrous Item",
+    "description": "This tankard has a stern face sculpted into one side. You can drink ale, wine, or any other nonmagical alcoholic beverage poured into it without becoming inebriated. The tankard has no effect on magical liquids or harmful substances such as poison."
+  },
+  {
+    "name": "Thermal Cube",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:thermal-cube",
+    "rarity": "Common",
+    "type": "Wondrous Item",
+    "description": "This 3-inch cube of solid brimstone generates enough dry heat to keep the temperature within 15 feet of it at 95 degrees Fahrenheit (35 degrees Celsius)."
+  },
+  {
+    "name": "Unbreakable Arrow",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:unbreakable-arrow",
+    "rarity": "Common",
+    "type": "Weapon",
+    "description": "This arrow can't be broken, except when it is within an Antimagic Field."
+  },
+  {
+    "name": "Veteran's Cane",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:veterans-cane",
+    "rarity": "Common",
+    "type": "Wondrous Item",
+    "description": "When you grasp this walking cane and use a bonus action to speak the command word, it transforms into an ordinary longsword and ceases to be magical."
+  },
+  {
+    "name": "Vox Seeker",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:vox-seeker",
+    "rarity": "Common",
+    "type": "Wondrous Item",
+    "description": "This clockwork device resembles a metal crab the size of a dinner plate. Every action used to wind up the device allows it to operate for 1 minute, to a maximum of 10 minutes. While operational, the item uses the accompanying vox seeker stat block. This automaton is under the DM's control. A vox seeker reduced to 0 hit points is destroyed."
+  },
+  {
+    "name": "Walloping Ammunition",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:walloping-ammunition",
+    "rarity": "Common",
+    "type": "Weapon",
+    "description": "This ammunition packs a wallop. A creature hit by the ammunition must succeed on a DC 10 Strength saving throw or be knocked prone."
+  },
+  {
+    "name": "Wand of Conducting",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:wand-of-conducting",
+    "rarity": "Common",
+    "type": "Wand",
+    "description": "This wand has 3 charges. While holding it, you can use an action to expend 1 of its charges and create orchestral music by waving it around. The music can be heard out to a range of 60 feet and ends when you stop waving the wand.\n\nThe wand regains all expended charges daily at dawn. If you expend the wand's last charge, roll a d20. On a 1, a sad tuba sound plays as the wand crumbles to dust and is destroyed."
+  },
+  {
+    "name": "Wand of Pyrotechnics",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:wand-of-pyrotechnics",
+    "rarity": "Common",
+    "type": "Wand",
+    "description": "This wand has 7 charges. While holding it, you can use an action to expend 1 of its charges and create a harmless burst of multicolored light at a point you can see up to 60 feet away. The burst of light is accompanied by a crackling noise that can be heard up to 300 feet away. The light is as bright as a torch flame but lasts only a second.\n\nThe wand regains 1d6 + 1 expended charges daily at dawn. If you expend the wand's last charge, roll a d20. On a 1, the wand erupts in a harmless pyrotechnic display and is destroyed."
+  },
+  {
+    "name": "Wand of Scowls",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:wand-of-scowls",
+    "rarity": "Common",
+    "type": "Wand",
+    "description": "This wand has 3 charges. While holding it, you can use an action to expend 1 of its charges and target a humanoid you can see within 30 feet of you. The target must succeed on a DC 10 Charisma saving throw or be forced to scowl for 1 minute.\n\nThe wand regains all expended charges daily at dawn. If you expend the wand's last charge, roll a d20. On a 1, the wand transforms into a Wand of Smiles."
+  },
+  {
+    "name": "Wand of Smiles",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:wand-of-smiles",
+    "rarity": "Common",
+    "type": "Wand",
+    "description": "This wand has 3 charges. While holding it, you can use an action to expend 1 of its charges and target a humanoid you can see within 30 feet of you. The target must succeed on a DC 10 Charisma saving throw or be forced to smile for 1 minute.\n\nThe wand regains all expended charges daily at dawn. If you expend the wand's last charge, roll a d20. On a 1, the wand transforms into a Wand of Scowls."
+  },
+  {
+    "name": "Wand Sheath",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:wand-sheath",
+    "rarity": "Common",
+    "type": "Wondrous Item",
+    "description": "A wand sheath clamps onto your arm and imparts the following benefits:\n\nIf a sheathed wand requires attunement, you must attune to the wand before you can use it. However, the wand sheath and the attached wand count as a single magic item with regard to the number of magic items you can attune to. If you remove the wand from the sheath, your attunement to the wand ends."
+  },
+  {
+    "name": "Adamantine Armor",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:adamantine-armor",
+    "rarity": "Uncommon",
+    "type": "Armor",
+    "description": "This suit of armor is reinforced with adamantine, one of the hardest substances in existence. While you're wearing it, any critical hit against you becomes a normal hit."
+  },
+  {
+    "name": "Alchemy Jug",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:alchemy-jug",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "This ceramic jug appears to be able to hold a gallon of liquid and weighs 12 pounds whether full or empty. Sloshing sounds can be heard from within the jug when it is shaken, even if the jug is empty.\n\nYou can use an action and name one liquid from the table below to cause the jug to produce the chosen liquid. Afterward, you can uncork the jug as an action and pour that liquid out, up to 2 gallons per minute. The maximum amount of liquid the jug can produce depends on the liquid you named.\n\nOnce the jug starts producing a liquid, it can't produce a different one, or more of one that has reached its maximum, until the next dawn."
+  },
+  {
+    "name": "Alchemy Jug (Blue)",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:alchemy-jug-blue",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "(This jug functions as an Alchemy Jug, except that it neither produces acid or poison. It can produce 1 quart of boiling hot tea instead.)\n\nThis ceramic jug appears to be able to hold a gallon of liquid and weighs 12 pounds whether full or empty. Sloshing sounds can be heard from within the jug when it is shaken, even if the jug is empty.\n\nYou can use an action and name one liquid from the table below to cause the jug to produce the chosen liquid. Afterward, you can uncork the jug as an action and pour that liquid out, up to 2 gallons per minute. The maximum amount of liquid the jug can produce depends on the liquid you named.\n\nOnce the jug starts producing a liquid, it can't produce a different one, or more of one that has reached its maximum, until the next dawn."
+  },
+  {
+    "name": "Alchemy Jug (Orange)",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:alchemy-jug-orange",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "(This jug functions as an Alchemy Jug, except that it neither produces acid or poison. It can produce 1 gallon of soy sauce instead.)\n\nThis ceramic jug appears to be able to hold a gallon of liquid and weighs 12 pounds whether full or empty. Sloshing sounds can be heard from within the jug when it is shaken, even if the jug is empty.\n\nYou can use an action and name one liquid from the table below to cause the jug to produce the chosen liquid. Afterward, you can uncork the jug as an action and pour that liquid out, up to 2 gallons per minute. The maximum amount of liquid the jug can produce depends on the liquid you named.\n\nOnce the jug starts producing a liquid, it can't produce a different one, or more of one that has reached its maximum, until the next dawn."
+  },
+  {
+    "name": "All-Purpose Tool",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:all-purpose-tool",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "This simple screwdriver can transform into a variety of tools; as an action, you can touch the item and transform it into any type of artisan's tool of your choice (see the \"Equipment\" chapter in the Player's Handbook for a list of artisan's tools). Whatever form the tool takes, you are proficient with it. While holding this tool, you gain a bonus to the spell attack rolls and the saving throw DCs of your artificer spells. The bonus is determined by the tool's rarity.\n\nAs an action, you can focus on the tool to channel your creative forces. Choose a cantrip that you don't know from any class list. For 8 hours, you can cast that cantrip, and it counts as an artificer cantrip for you. Once this property is used, it can't be used again until the next dawn."
+  },
+  {
+    "name": "Ammunition, +1, +2, or +3",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:ammunition",
+    "rarity": "Uncommon",
+    "type": "Weapon",
+    "description": "You have a bonus to attack and damage rolls made with this piece of magic ammunition. The bonus is determined by the rarity of the ammunition. Once it hits a target, the ammunition is no longer magical."
+  },
+  {
+    "name": "Amulet of Proof Against Detection and Location",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:amulet-of-proof-against-detection-and-locatio",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "While wearing this amulet, you are hidden from divination magic. You can't be targeted by such magic or perceived through magical scrying sensors."
+  },
+  {
+    "name": "Amulet of the Devout",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:amulet-of-the-devout",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "This amulet bears the symbol of a deity inlaid with precious stones or metals. While you wear the holy symbol, you gain a bonus to spell attack rolls and the saving throw DCs of your spells. The bonus is determined by the amulet's rarity.\n\nWhile you wear this amulet, you can use your Channel Divinity feature without expending one of the feature's uses. Once this property is used, it can't be used again until the next dawn."
+  },
+  {
+    "name": "Amulet of the Drunkard",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:amulet-of-the-drunkard",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "This amulet smells of old, ale-stained wood. While wearing it, you can regain 4d4 + 4 hit points when you drink a pint of beer, ale, mead, or wine. Once the amulet has restored hit points, it can't do so again until the next dawn."
+  },
+  {
+    "name": "Arcane Grimoire",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:arcane-grimoire",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "While you are holding this leather-bound book, you can use it as a spellcasting focus for your wizard spells, and you gain a bonus to spell attack rolls and to the saving throw DCs of your wizard spells. The bonus is determined by the book's rarity.\n\nYou can use this book as a spellbook. In addition, when you use your Arcane Recovery feature, you can increase the number of spell slot levels you regain by 1."
+  },
+  {
+    "name": "Armor Of Fungal Spores",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:armor-of-fungal-spores",
+    "rarity": "Uncommon",
+    "type": "Armor",
+    "description": "While wearing this armor, you can take a bonus action to make the armor emit poisonous spores, which fill a 10-foot-radius sphere centered on yourself. Each creature in that area must succeed on a DC 15 Constitution saving throw or have the poisoned condition until the end of your next turn. Once this property is used, it can’t be used again until the next dawn."
+  },
+  {
+    "name": "Armor Of The Fallen",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:armor-of-the-fallen",
+    "rarity": "Uncommon",
+    "type": "Armor",
+    "description": "While wearing this armor, you can use it to cast either Speak With Dead or Animate Dead. Once the armor has cast a spell in this way, it can’t cast either spell until the next dawn.\n\nYour soul keeps this armor together. If you die while you are attuned to the armor, the armor is destroyed."
+  },
+  {
+    "name": "Armor Of Weightlessness",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:armor-of-weightlessness",
+    "rarity": "Uncommon",
+    "type": "Armor",
+    "description": "This armor has 5 charges. While you wear it, you can use a bonus action to expend 1 or more charges to cast one of the following spells from the armor, targeting yourself: Jump (1 charge) or Levitate (2 charges).\n\nThis armor regains 1d4 + 1 expended charges daily at dawn."
+  },
+  {
+    "name": "Bag Of Bounty",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:bag-of-bounty",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "This is a sturdy leather sack with tiny Siberys shards embedded into the lining. If you have the Mark of Hospitality you can use an action to cast Create Food and Water, drawing a feast from within the bag. You shape this meal with your thoughts. You can create the standard bland fare without requiring any sort of check, but you can attempt to create finer food by making a Charisma check; if you’re proficient with cook’s utensils, add your bonus to this check. A failed check results in a sour and squalid meal.\n\nA bag of bounty can be used up to three times over the course of a day. After that, the bag can’t be used again until the next dawn."
+  },
+  {
+    "name": "Bag of Holding",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:bag-of-holding",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "This bag has an interior space considerably larger than its outside dimensions, roughly 2 feet in diameter at the mouth and 4 feet deep. The bag can hold up to 500 pounds, not exceeding a volume of 64 cubic feet. The bag weighs 15 pounds, regardless of its contents. Retrieving an item from the bag requires an action.\n\nIf the bag is overloaded, pierced, or torn, it ruptures and is destroyed, and its contents are scattered in the Astral Plane. If the bag is turned inside out, its contents spill forth, unharmed, but the bag must be put right before it can be used again. Breathing creatures inside the bag can survive up to a number of minutes equal to 10 divided by the number of creatures (minimum 1 minute), after which time they begin to suffocate.\n\nPlacing a bag of holding inside an extradimensional space created by a Heward's Handy Haversack, Portable Hole, or similar item instantly destroys both items and opens a gate to the Astral Plane. The gate originates where the one item was placed inside the other. Any creature within 10 feet of the gate is sucked through it to a random location on the Astral Plane. The gate then closes. The gate is one-way only and can't be reopened."
+  },
+  {
+    "name": "Bag of Tricks",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:bag-of-tricks",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "This ordinary bag, made from gray, rust, or tan cloth, appears empty. Reaching inside the bag, however, reveals the presence of a small, fuzzy object. The bag weighs 1/2 pound.\n\nYou can use an action to pull the fuzzy object from the bag and throw it up to 20 feet. When the object lands, it transforms into a creature you determine by rolling a d8 and consulting the table that corresponds to the bag's color. See the Monster Manual for the creature's statistics. The creature vanishes at the next dawn or when it is reduced to 0 hit points.\n\nThe creature is friendly to you and your companions, and it acts on your turn. You can use a bonus action to command how the creature moves and what action it takes on its next turn, or to give it general orders, such as to attack your enemies. In the absence of such orders, the creature acts in a fashion appropriate to its nature.\n\nOnce three fuzzy objects have been pulled from the bag, the bag can't be used again until the next dawn."
+  },
+  {
+    "name": "Balance of Harmony",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:balance-of-harmony",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "This scale bears celestial symbols on one pan and fiendish symbols on the other. You can use the scale to cast Detect Evil and Good as a ritual. Doing so requires you to place the scale on a solid surface, then sprinkle the pans with holy water or place a transparent gem worth 100 gp in each pan. The scale remains motionless if it detects nothing, tips to one side or the other for good (consecrated) or evil (desecrated), and fluctuates slightly if it detects a creature appropriate to the spell but neither good nor evil. By touching the scales after casting the ritual, you instantly learn any information the spell can normally convey, and then the effect ends."
+  },
+  {
+    "name": "Balloon Pack",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:balloon-pack",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "This backpack contains the spirit of an air elemental and a compact leather balloon. While you’re wearing the backpack, you can deploy the balloon as an action and gain the effect of the Levitate spell for 10 minutes, targeting yourself and requiring no concentration. Alternatively, you can use a reaction to deploy the balloon when you’re falling and gain the effect of the Feather Fall spell for yourself.\n\nWhen either spell ends, the balloon slowly deflates as the elemental spirit escapes and returns to the Elemental Plane of Air. As the balloon deflates, you descend gently toward the ground for up to 60 feet. If you are still in the air at the end of this distance, you fall if you have no other means of staying aloft.\n\nAfter the spirit departs, the backpack’s property is unusable unless the backpack is recharged for 1 hour in an elemental air node, which binds another spirit to the backpack."
+  },
+  {
+    "name": "Barrier Tattoo",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:barrier-tattoo",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "Tattoo Attunement. To attune to this item, you hold the needle to your skin where you want the tattoo to appear, pressing the needle there throughout the attunement process. When the attunement is complete, the needle turns into the ink that becomes the tattoo, which appears on the skin.\n\nIf your attunement to the tattoo ends, the tattoo vanishes, and the needle reappears in your space.\n\nProtection. While you aren't wearing armor, the tattoo grants you an Armor Class depending on the tattoo's rarity, as shown below. You can use a shield and still gain this benefit."
+  },
+  {
+    "name": "Blasted Goggles",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:blasted-goggles",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "These tinker’s goggles have 3 charges. As an action, you can expend 1 charge to shoot a beam of fiery light from the goggles at a creature you can see within 120 feet of yourself. The target must succeed on a DC 15 Dexterity saving throw or take 3d6 fire damage. The goggles regain 1d3 expended charges daily at dawn.\n\nCursed. The goggles are cursed, and becoming attuned to them extends the curse to you. You can’t remove the goggles or end your attunement to them until you are targeted by a Remove Curse spell or similar magic.\n\nWhenever you use the goggles’ fiery beam and the target rolls a 20 on the d20 for the saving throw, the goggles expose you to a flash of violent bright light. As a result, you have the blinded condition for 24 hours."
+  },
+  {
+    "name": "Blood of the Lycanthrope Antidote",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:blood-of-the-lycanthrope-antidote",
+    "rarity": "Uncommon",
+    "type": "Potion",
+    "description": "This clear potion has dark red flecks within, resembling clotted blood. When you drink this potion, it removes the curse of lycanthropy from you if that curse was imposed by a lycanthrope’s bite or similar effect."
+  },
+  {
+    "name": "Blood Spear",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:blood-spear",
+    "rarity": "Uncommon",
+    "type": "Weapon",
+    "description": "Kavan was a ruthless chieftain whose tribe lived in the Balinok Mountains centuries before the arrival of Strahd von Zarovich. Although he was very much alive, Kavan had some traits in common with vampires: he slept during the day and hunted at night, he drank the blood of his prey, and be lived underground. in battle, he wielded a spear stained with blood. His was the first blood spear, a weapon that drains life from those it kills and transfers that life to its wielder, imbuing that individual with the stamina to keep fighting.\n\nWhen you hit with a melee attack using this magic spear and reduce the target to 0 hit points, you gain 2d6 temporary hit points."
+  },
+  {
+    "name": "Bloodrage Greataxe",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:bloodrage-greataxe",
+    "rarity": "Uncommon",
+    "type": "Weapon",
+    "description": "You gain a +2 bonus to attack and damage rolls made with this magic greataxe while you have half your hit points or fewer."
+  },
+  {
+    "name": "Bloodwell Vial",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:bloodwell-vial",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "To attune to this vial, you must place a few drops of your blood into it. The vial can't be opened while your attunement to it lasts. If your attunement to the vial ends, the contained blood turns to ash. You can use the vial as a spellcasting focus for your spells while wearing or holding it, and you gain a bonus to spell attack rolls and to the saving throw DCs of your sorcerer spells. The bonus is determined by the vial's rarity.\n\nIn addition, when you roll any Hit Dice to recover hit points while you are carrying the vial, you can regain 5 sorcery points. This property of the vial can't be used again until the next dawn."
+  },
+  {
+    "name": "Boomerang Shield",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:boomerang-shield",
+    "rarity": "Uncommon",
+    "type": "Armor",
+    "description": "You can make a ranged weapon attack with this magic shield. It has a normal range of 20 feet and a long range of 60 feet, and it uses your Strength or Dexterity for the attack roll (your choice). If you’re proficient with shields, you are proficient with attacks made using this shield. On a hit, it deals 1d6 slashing damage. If you throw the shield, it reappears in your hand the instant after it hits or misses a target.\n\nA shield is made from wood or metal and is carried in one hand. Wielding a shield increases your Armor Class by 2. You can benefit from only one shield at a time."
+  },
+  {
+    "name": "Boots of Elvenkind",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:boots-of-elvenkind",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "While you wear these boots, your steps make no sound, regardless of the surface you are moving across. You also have advantage on Dexterity (Stealth) checks that rely on moving silently."
+  }
+]

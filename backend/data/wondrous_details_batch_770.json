@@ -1,0 +1,352 @@
+[
+  {
+    "name": "Horn of Valhalla",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:horn-of-valhalla",
+    "rarity": "Legendary",
+    "type": "Wondrous Item",
+    "description": "You can use an action to blow this horn. In response, warrior spirits from the plane of Ysgard appear within 60 feet of you. These spirits use the berserker statistics from the Monster Manual. They return to Ysgard after 1 hour or when they drop to 0 hit points. Once you use the horn, it can't be used again until 7 days have passed.\n\nFour types of horn of Valhalla are known to exist, each made of a different metal. The horn's type determines how many berserkers answer its summons, as well as the requirement for its use. The DM chooses the horn's type or determines it randomly.\n\nIf you blow the horn without meeting its requirement, the summoned berserkers attack you. If you meet the requirement, they are friendly to you and your companions and follow your commands."
+  },
+  {
+    "name": "Icon of Ravenloft",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:icon-of-ravenloft",
+    "rarity": "Legendary",
+    "type": "Wondrous Item",
+    "description": "The Icon of Ravenloft is a 12-inch-tall statuette made of the purest silver, weighing 10 pounds. It depicts a cleric kneeling in supplication.\n\nThe icon was given to Strahd by the archpriest Ciril Romulich, an old family friend, to consecrate the castle and its chapel.\n\nWhile within 30 feet of the icon, a creature is under the effect of a Protection from Evil and Good spell against fiends and undead. Only a creature attuned to the icon can use its other properties.\n\nAugury. You can use an action to cast an Augury spell from the icon, with no material components required. Once used, this property can't be used again until the next dawn.\n\nBane of the Undead. You can use the icon as a holy symbol while using the Turn Undead or Turn the Unholy feature. If you do so, increase the save DC by 2.\n\nCure Wounds. While holding the icon, you can take an action to heal one creature that you can see within 30 feet of you. The target regains 3d8 + 3 hit points, unless it is an undead, a construct, or a fiend. Once used, this property can't be used again until the next dawn."
+  },
+  {
+    "name": "Infernal Tack",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:infernal-tack",
+    "rarity": "Legendary",
+    "type": "Wondrous Item",
+    "description": "A narzugon devil binds a nightmare (described in the Monster Manual) to its service with infernal tack, which consists of a bridle, bit, reins, saddle, stirrups, and spurs. A nightmare equipped with infernal tack must serve whoever wears the spurs until the wearer dies or the tack is removed.\n\nYou can use an action to call the nightmare equipped with infernal tack by clashing the spurs together or scraping them through blood. The nightmare appears at the start of your next turn, within 20 feet of you. It acts as your ally and takes its turn on your initiative count. It remains for 1 day, until you or it dies, or until you dismiss it as an action. If the nightmare dies, it reforms in the Nine Hells within 24 hours, after which you can summon it again.\n\nThe tack doesn't conjure a nightmare from thin air; one must first be subdued so the tack can be placed on it. No nightmare accepts this forced servitude willingly, but some eventually form strong loyalties to their masters and become partners in evil."
+  },
+  {
+    "name": "Infiltrator's Key",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:infiltrators-key",
+    "rarity": "Legendary",
+    "type": "Wondrous Item",
+    "description": "This mithral skeleton key was forged using the blood of twelve master thieves executed for trying to steal magic items during the Age of Arcanum.\n\nDormant. The Infiltrator's Key grants the following benefits in its dormant state:\n\nAwakened. When the Infiltrator's Key reaches an awakened state, it gains the following properties:\n\nExalted. When the Infiltrator's Key reaches an exalted state, it gains the following properties:"
+  },
+  {
+    "name": "Instrument of the Bards",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:instrument-of-the-bards",
+    "rarity": "Legendary",
+    "type": "Wondrous Item",
+    "description": "An instrument of the bards is an exquisite example of its kind, superior to an ordinary instrument in every way. Seven types of these instruments exist, each named after a legendary bard college. The following table lists the spells common to all instruments, as well as the spells specific to each one and its rarity. A creature that attempts to play the instrument without being attuned to it must succeed on a DC 15 Wisdom saving throw or take 2d4 psychic damage.\n\nYou can use an action to play the instrument and cast one of its spells. Once the instrument has been used to cast a spell, it can't be used to cast that spell again until the next dawn. The spells use your spellcasting ability and spell save DC.\n\nYou can play the instrument while casting a spell that causes any of its targets to be charmed on a failed saving throw, thereby imposing disadvantage on the save. This effect applies only if the spell has a somatic or a material component."
+  },
+  {
+    "name": "Ioun Stone",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:ioun-stone",
+    "rarity": "Legendary",
+    "type": "Wondrous Item",
+    "description": "An Ioun stone is named after Ioun, a god of knowledge and prophecy revered on some worlds. Many types of Ioun stone exist, each type a distant combination of shape and color.\n\nWhen you use an action to toss one of these stones into the air, the stone orbits your head at a distance of 1d3 feet and confers a benefit to you. Thereafter, another creature must use an action to grasp or net the stone to separate it from you, either by making a successful attack roll against AC 24 or a successful DC 24 Dexterity (Acrobatics) check. You can use an action to seize and stow the stone, ending its effect.\n\nA stone has AC 24, 10 hit points, and resistance to all damage. It is considered to be an object that is being worn while it orbits your head.\n\nAbsorption (Very Rare). While this pale lavender ellipsoid orbits your head, you can use your reaction to cancel a spell of 4th level or lower cast by a creature you can see and targeting only you\n\nOnce the stone has canceled 20 levels of spells, it burns out and turns dull gray, losing its magic. If you are targeted by a spell whose level is higher than the number of spell levels the stone has left, the stone can't cancel it.\n\nAgility (Very Rare). Your Dexterity score increases by 2, to a maximum of 20, while this deep red sphere orbits your head.\n\nAwareness (Rare). You can't be surprised while this dark blue rhomboid orbits your head.\n\nFortitude (Very Rare). Your Constitution score increases by 2, to a maximum of 20, while this pink rhomboid orbits your head.\n\nGreater Absorption (Legendary). While this marbled lavender and green ellipsoid orbits your head, you can use your reaction to cancel a spell of 8th level or lower cast by a creature you can see and targeting only you.\n\nOnce the stone has canceled 50 levels of spells, it burns out and turns dull gray, losing its magic. If you are targeted by a spell whose level is higher than the number of spell levels the stone has left, the stone can't cancel it.\n\nInsight (Very Rare). Your Wisdom score increases by 2, to a maximum of 20, while this incandescent blue sphere orbits your head.\n\nIntellect (Very Rare). Your Intelligence score increases by 2, to a maximum of 20, while this marbled scarlet and blue sphere orbits your head.\n\nLeadership (Very Rare). Your Charisma score increases by 2, to a maximum of 20, while this marbled pink and green sphere orbits your head.\n\nMastery (Legendary). Your proficiency bonus increases by 1 while this pale green prism orbits your head.\n\nProtection (Rare). You gain a +1 bonus to AC while this dusty rose prism orbits your head.\n\nRegeneration (Legendary). You regain 15 hit points at the end of each hour this pearly white spindle orbits your head, provided that you have at least 1 hit point.\n\nReserve (Rare). This vibrant purple prism stores spells cast into it, holding them until you use them. The stone can store up to 3 levels worth of spells at a time. When found, it contains 1d4-1 levels of stored spells chosen by the DM.\n\nAny creature can cast a spell of 1st through 3rd level into the stone by touching it as the spell is cast. The spell has no effect, other than to be stored in the stone. If the stone can't hold the spell, the spell is expended without effect. The level of the slot used to cast the spell determines how much space it uses.\n\nWhile this stone orbits your head, you can cast any spell stored in it. The spell uses the slot level, spell save DC, spell attack bonus, and spellcasting ability of the original caster, but is otherwise treated as if you cast the spell. The spell cast from the stone is no longer stored in it, freeing up space.\n\nStrength (Very Rare). Your Strength score increases by 2, to a maximum of 20, while this pale blue rhomboid orbits your head.\n\nSustenance (Rare). You don't need to eat or drink while this clear spindle orbits your head.\n\nIn addition, the following Ioun Stones were introduced in the adventure Lost Laboratory of Kwalish:\n\nHistorical Knowledge (Rare) You gain proficiency in the History skill, or a +1 bonus to checks with that skill if already proficient, while this polished, steely sphere orbits your head.\n\nLanguage Knowledge (Rare) You are fluent in one additional language while this pulsating bit of red jeweled crystal orbits your head. The DM chooses the language bestowed by the stone.\n\nNatural Knowledge (Rare) You gain proficiency in the Nature skill, or a +1 bonus to checks with that skill if already proficient, while this burnished, brassy stone orbits your head.\n\nReligious Knowledge (Rare) You gain proficiency in the Religion skill, or a +1 bonus to checks with that skill if already proficient, while this tiny golden gem orbits your head.\n\nSelf-Preservation (Rare) You gain a +1 bonus to Intelligence saving throws while this silvery gem orbits your head.\n\nSupreme Intellect (Rare) You gain a +1 bonus to Intelligence checks while this faceted sphere orbits your head."
+  },
+  {
+    "name": "Iron Flask",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:iron-flask",
+    "rarity": "Legendary",
+    "type": "Wondrous Item",
+    "description": "This iron bottle has a brass stopper. You can use an action to speak the flask's command word, targeting a creature that you can see within 60 feet of you. If the target is native to a plane of existence other than the one you're on, the target must succeed on a DC 17 Wisdom saving throw or be trapped in the flask. If the target has been trapped by the flask before, it has advantage on the saving throw. Once trapped, a creature remains in the flask until released. The flask can hold only one creature at a time. A creature trapped in the flask doesn't need to breathe, eat, or drink and doesn't age.\n\nYou can use an action to remove the flask's stopper and release the creature the flask contains. The creature is friendly to you and your companions for 1 hour and obeys your commands for that duration. If you give no commands or give it a command that is likely to result in its death, it defends itself but otherwise takes no actions. At the end of the duration, the creature acts in accordance with its normal disposition and alignment.\n\nAn Identify spell reveals that a creature is inside the flask, but the only way to determine the type of creature is to open the flask. A newly discovered bottle might already contain a creature chosen by the DM or determined randomly."
+  },
+  {
+    "name": "Ironfang",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:ironfang",
+    "rarity": "Legendary",
+    "type": "Weapon",
+    "description": "A war pick forged from a single piece of iron, Ironfang has a fang-like head inscribed with ancient runes. The pick is heavy in the hand, but when the wielder swings the pick in anger, the weapon seems almost weightless. This weapon is immune to any form of rust, acid, or corrosion — nothing seems to mark it. Ironfang contains a spark of Ogremoch, the Prince of Evil Earth.\n\nYou gain a +2 bonus to attack and damage rolls you make with this magic weapon. When you hit with it, the target takes an extra 1d8 thunder damage.\n\nEarth Mastery. You gain the following benefits while you hold Ironfang:\n\n• You can speak Terran fluently.\n• You have resistance to acid damage.\n• You have tremorsense out to a range of 60 feet.\n• You can sense the presence of precious metals and stones within 60 feet of you, but not their exact location.\n• You can cast Dominate Monster (save DC 17) on an earth elemental. Once you have done so, Ironfang can’t be used this way again until the next dawn.\n\nShatter. Ironfang has 3 charges. You can use your action to expend 1 charge and cast the 2nd-level version of Shatter (DC 17). Ironfang regains 1d3 expended charges daily at dawn.\n\nThe Rumbling. While inside an earth node, you can perform a ritual called the Rumbling, using Ironfang to create a devastation orb of earth (see the Devastation Orb description for the time and cost of the ritual). Once you perform the ritual, Ironfang can’t be used to perform the ritual again until the next dawn.\n\nFlaw. Ironfang heightens its wielder’s destructive nature. While attuned to the weapon, you gain the following flaw: “I like to break things and cause ruin.”"
+  },
+  {
+    "name": "Jester's Mask",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:jesters-mask",
+    "rarity": "Legendary",
+    "type": "Wondrous Item",
+    "description": "This colorful, harlequin domino mask is edged with pearls. While wearing this mask, you gain the following benefits:\n\nCharismatic Focus. You can use the mask as a spellcasting focus. You gain a +3 bonus to any spell attack rolls and spell saving throw DCs that use Charisma as the spellcasting ability.\n\nMarvelous Escape. When a creature hits you with an attack roll, you can use your reaction to disappear in a puff of smoke and colorful sparkles. You take no damage and instead teleport, along with anything you are wearing or carrying, to an unoccupied space you can see within 30 feet of yourself. Once this reaction is used, it can’t be used again until the next dawn.\n\nTopsy-Turvy. When you roll a 1 on a d20, you can treat the roll as if you rolled a 20 instead. Once this property is used, it can’t be used again until the next dawn."
+  },
+  {
+    "name": "Jewel of Three Prayers",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:jewel-of-three-prayers",
+    "rarity": "Legendary",
+    "type": "Wondrous Item",
+    "description": "The Jewel of Three Prayers is a Vestige of Divergence. In ancient times, Alyxian the Apotheon bore this amulet as a symbol of his covenant with three Prime Deities: Sehanine the Moon Weaver, Avandra the Change Bringer, and Corellon the Arch Heart. When the jewel is found, only Sehanine’s power thrums within its dormant heart. The power of the other two deities waits to be reawakened by a hero - or heroes - who can follow in Alyxian’s footsteps.\n\nDormant State. In this state, the Jewel of Three Prayers is a glittering golden disk attached to a fine golden chain. The chain magically resizes to function as a necklace for the creature that wears it.\n\nAwakened State. In this state, the jewel has received the blessing of Avandra the Change Bringer. Three delicate spires unfurl from the jewel’s center, like the buds of flowers opening in the spring. Three lapis lazuli stones rest like dewdrops on these spires.\n\nExalted State. In this state, the jewel has received the blessing of Corellon the Arch Heart. A gleaming emerald surrounded by a halo of gold appears on the jewel."
+  },
+  {
+    "name": "Korolnor Scepter",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:korolnor-scepter",
+    "rarity": "Legendary",
+    "type": "Wondrous Item",
+    "description": "The Korolnor Scepter is one of ten Ruling Scepters of Shanatar, forged by the dwarven gods and given to the ruling houses of the ancient dwarven empire. The Korolnor Scepter's location was unknown for the longest time until a storm giant queen, Neri, found it in a barnacle-covered shipwreck at the bottom of the Trackless Sea. The Ruling Scepters are all roughly the same size and shape, but their materials and properties vary.\n\nThe Korolnor Scepter is a tapered mithral rod as thick and long as a dwarf's forearm, with a small platinum knob at the bottom and a rounded disk adorned with a ring of seven tiny blue gems at the top.\n\nYou gain a +3 bonus to attack and damage rolls made with this scepter, which can be wielded as a magic club.\n\nYou can use the properties of the Wyrmskull Throne, as well as the properties of the scepter itself. The scepter has 10 charges, and it regains 1d6 + 4 expended charges at dawn. Its properties are as follows:"
+  },
+  {
+    "name": "Longbow of the Healing Hearth",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:longbow-of-the-healing-hearth",
+    "rarity": "Legendary",
+    "type": "Weapon",
+    "description": "This ivory longbow is inscribed with a prayer to the god Hiatea, the runes of which are entwined with gilded engravings of wheat stalks and deer antlers.\n\nYou gain a +3 bonus to attack and damage rolls made with this weapon. If you load no ammunition in the weapon, it produces its own, automatically creating one magic arrow when you pull back the string. The arrow created by the bow vanishes the instant after it hits or misses a target.\n\nThe bow has 8 charges for the following properties, which you can use while wielding the bow. The bow regains 1d4 + 1 charges daily at dawn.\n\nCurative Arrow. When you take the Attack action using the bow, you can expend 1 charge to replace one of your attacks with a blazing arrow of curative magic, which automatically hits one creature you can see within 150 feet of you. The target can then immediately spend and roll one of its unspent Hit Dice and regain a number of hit points equal to the roll plus your Wisdom modifier (minimum of +1). If the target has no unspent Hit Dice remaining, nothing happens. You can use a curative arrow only once per turn.\n\nSpellcasting. While holding the bow, you can use an action to expend 1 or more of its charges to cast one of the following spells from it (save DC 18): Create Food and Water (1 charge), Warding Bond (2 charges), Guardian of Faith (3 charges)."
+  },
+  {
+    "name": "Lost Crown of Besilmer",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:lost-crown-of-besilmer",
+    "rarity": "Legendary",
+    "type": "Wondrous Item",
+    "description": "This dwarven battle-helm consists of a sturdy open-faced steel helmet, decorated with a golden circlet above the brow from which seven small gold spikes project upward. You gain the following benefits while wearing the crown:"
+  },
+  {
+    "name": "Luck Blade",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:luck-blade",
+    "rarity": "Legendary",
+    "type": "Weapon",
+    "description": "You gain a +1 bonus to attack and damage rolls made with this magic weapon. While the sword is on your person, you also gain a +1 bonus to saving throws.\n\nLuck. If the sword is on your person, you can call on its luck (no action required) to reroll one attack roll, ability check, or saving throw you dislike. You must use the second roll. This property can't be used again until the next dawn.\n\nWish. The sword has 1d4- 1 charges. While holding it, you can use an action to expend 1 charge and cast the Wish spell from it. This property can't be used again until the next dawn. The sword loses this property if it has no charges."
+  },
+  {
+    "name": "Luxon Beacon",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:luxon-beacon",
+    "rarity": "Legendary",
+    "type": "Wondrous Item",
+    "description": "This dodecahedron of faintly glowing crystal is heavier than it appears. A set of handles are affixed to its sides, and it pulsates and thrums when touched.\n\nFragment of Possibility. A creature that touches the beacon and concentrates for 1 minute receives a Fragment of Possibility, which looks like a Tiny, grayish bead of energy that follows the creature around, staying within 1 foot of it at all times. The fragment lasts for 8 hours or until used. Once the beacon grants a Fragment of Possibility, it can't grant another until the next dawn. A creature with a Fragment of Possibility from a Luxon Beacon can't gain another Fragment of Possibility from any source.\n\nWhen a creature with a Fragment of Possibility makes an attack roll, an ability check, or a saving throw, it can expend its fragment to roll an additional d20 and choose which of the d20s to use. Alternatively, when an attack roll is made against the creature, it can expend its fragment to roll a d20 and choose which of the d20s to use, the one it rolled or the one the attacker rolled.\n\nIf the original d20 roll has advantage or disadvantage, the creature rolls its d20 after advantage or disadvantage has been applied to the original roll.\n\nSoul Snare. If a follower of the Luxon who has undergone a ritual of consecution dies within 100 miles of a Luxon Beacon, their soul is ensnared by it. This soul will be reincarnated within the body of a random humanoid baby developing within 100 miles of the beacon."
+  },
+  {
+    "name": "Matalotok",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:matalotok",
+    "rarity": "Legendary",
+    "type": "Weapon",
+    "description": "Matalotok, the Frost Father, is an ancient hammer fashioned by Thyrm, the god of frost giants. The favored weapon of the demon lord Kostchtchie, Matalotok is frigid to the touch and wreathed in mist.\n\nYou are immune to cold damage while holding Matalotok. Whenever it deals damage to a creature, the hammer radiates a burst of intense cold in a 30-foot-radius sphere. Each creature in that area takes 10 (3d6) cold damage."
+  },
+  {
+    "name": "Moonblade",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:moonblade",
+    "rarity": "Legendary",
+    "type": "Weapon",
+    "description": "Of all the magic items created by the elves, one of the most prized and jealously guarded is a moonblade. In ancient times, nearly all elven noble houses claimed one such blade. Over the centuries, some blades have faded from the world, their magic lost as family lines have become extinct. Other blades have vanished with their bearers during great quests. Thus, only a few of these weapons remain.\n\nA moonblade passes down from parent to child. The sword chooses its bearer and remains bonded to that person for life. If the bearer dies, another heir can claim the blade. If no worthy heir exists, the sword lies dormant. It functions like a normal longsword until a worthy soul finds it and lays claim to its power.\n\nA moonblade serves only one master at a time. The attunement process requires a special ritual in the throne room of an elven regent or in a temple dedicated to the elven gods.\n\nA moonblade won't serve anyone it regards as craven, erratic, corrupt, or at odds with preserving and protecting elvenkind. If the blade rejects you, you make ability checks, attack rolls, and saving throws with disadvantage for 24 hours. If the blade accepts you, you become attuned to it and a new rune appears on the blade. You remain attuned to the weapon until you die or the weapon is destroyed.\n\nA moonblade has one rune on its blade for each master it has served (typically 1d6 + 1). The first rune always grants a +1 bonus to attack and damage rolls made with this magic weapon. Each rune beyond the first grants the moonblade an additional property. The DM chooses each property or determines it randomly on the Moonblade Properties table.\n\nMoonblade Properties\n\nSentience. A moonblade is a sentient neutral good weapon with an Intelligence of 12, a Wisdom of 10, and a Charisma of 12. It has hearing and darkvision out to a range of 120 feet.\n\nThe weapon communicates by transmitting emotions, sending a tingling sensation through the wielder's hand when it wants to communicate something it has sensed. It can communicate more explicitly, through visions or dreams, when the wielder is either in a trance or asleep.\n\nPersonality. Every moonblade seeks the advancement of elvenkind and elven ideals. Courage, loyalty, beauty, music, and life are all part of this purpose.\n\nThe weapon is bonded to the family line it is meant to serve. Once it has bonded with an owner who shares its ideals, its loyalty is absolute.\n\nIf a moonblade has a flaw, it is overconfidence. Once it has decided on an owner, it believes that only that person should wield it, even if the owner falls short of elven ideals."
+  },
+  {
+    "name": "Murgaxor's Orb",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:murgaxor-s-orb",
+    "rarity": "Legendary",
+    "type": "Wondrous Item",
+    "description": "Roiling green mist fills this glass orb, which the exiled Strixhaven mage Murgaxor once used in foul magical experiments. Murgaxor's spirit has infused the orb, which he uses to spread a terrible curse among Strixhaven's students.\n\nSentience. Murgaxor's orb is a sentient, chaotic evil magic item with the following properties:\n\nCurse. Any Humanoid you touch while holding the orb must succeed on a DC 10 Wisdom saving throw or become cursed. Each creature cursed by the orb bears an echo of Murgaxor's hateful thoughts, and that creature suffers from headaches that are persistent but not debilitating until the curse ends. On your turn, the orb can use an action to produce one of the following effects, targeting one or more creatures it has cursed:\n\nAfter either of these effects ends, the affected creature is no longer cursed. The curse can also be removed from a creature with a Remove Curse spell or similar magic. All cases of the curse end if Murgaxor's orb is destroyed.\n\nMagical Signature. As a side effect of the orb's curse, the spell Detect Magic reveals an aura of enchantment surrounding creatures bearing the curse. This aura is distinctive, but in a way Detect Magic offers no further details about.\n\nDestroying the Orb. Murgaxor's orb has AC 18; 20 hit points; immunity to necrotic, poison, and psychic damage; and resistance to all other types of damage. If reduced to 0 hit points, the orb shatters."
+  },
+  {
+    "name": "Nepenthe",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:nepenthe",
+    "rarity": "Legendary",
+    "type": "Weapon",
+    "description": "You gain a +3 bonus to attack and damage rolls made with this magic weapon. When you hit a fiend or an undead with it, that creature takes an extra 2d10 radiant damage.\n\nWhile you hold the drawn sword, it creates an aura in a 10-foot radius around you. You and all creatures friendly to you in the aura have advantage on saving throws against spells and other magical effects. If you have 17 or more levels in the paladin class, the radius of the aura increases to 30 feet.\n\nSentience. Nepenthe is a sentient neutral evil weapon with an Intelligence of 10, a Wisdom of 8, and a Charisma of 18. It has hearing and darkvision out to a range of 60 feet. It can read and understand Elvish. It can also speak Elvish, but only through the voice of its wielder, with whom the sword can communicate telepathically.\n\nPersonality. In its lifetime, the sword has beheaded thousands of criminals, not all of whom were guilty of the crimes for which they were convicted. The sword cannot distinguish the guilty from the innocent. With each beheading, it hungers for more justice and blood. The sword is corrupt and irredeemable."
+  },
+  {
+    "name": "Nether Scroll of Azumar",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:nether-scroll-of-azumar",
+    "rarity": "Legendary",
+    "type": "Scroll",
+    "description": "Unlike most scrolls, a Nether Scroll of Azumar is not a consumable magic item. It takes 30 days of concentrated study—at least 8 hours per day—to attempt to understand this scroll. After completing this study, you must make a DC 25 Intelligence (Arcana) check. If this check fails, you take 16d10 psychic damage, and you can attempt the check again after another 30 days of concentrated study.\n\nWhen you succeed on the check, you gain the following benefits:\n\nWhen you gain the scroll's benefits, a stone golem magically appears in an unoccupied space within 60 feet of you and acts as your ally. If you die, the golem turns to dust."
+  },
+  {
+    "name": "Nightbringer",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:nightbringer",
+    "rarity": "Legendary",
+    "type": "Weapon",
+    "description": "This heavy mace has a dark oaken handle and a head of blackened steel trimmed with gold. In combat, the mace’s head is wreathed in inky black energy.\n\nYou gain a +3 bonus to attack and damage rolls made with this weapon. When you hit with an attack roll using it, the target takes an additional 4d4 radiant damage.\n\nIf you have an evil alignment, you also gain the following benefits when attuned to Nightbringer:\n\nBlessing of the Dragon Queen. You are immune to the charmed and frightened conditions, and you gain immunity to one of the following damage types (choose when you attune to the weapon): acid, cold, fire, lightning, or poison.\n\nEyes of Midnight. You have darkvision with a range of 60 feet. If you already have darkvision, its range increases by 60 feet.\n\nMidnight Shroud. The weapon has 6 charges. When you hit a creature with an attack using this weapon, you can expend one charge to force the creature to make a DC 20 Constitution saving throw. On a failed save, the creature is blinded until the start of your next turn. The weapon regains 1d6 expended charges daily at dawn."
+  },
+  {
+    "name": "Nightfall Pearl",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:nightfall-pearl",
+    "rarity": "Legendary",
+    "type": "Wondrous Item",
+    "description": "Used to summon night, this 6-inch-diameter, jet-black orb is cold to the touch. You can spend 10 minutes to activate it, causing the area within 10 miles of it at the moment of activation to become night even if it is daytime. This night lasts for 24 hours, until you cancel it as an action, or until your attunement to the pearl ends. Once used, the pearl can't be used again for 24 hours."
+  },
+  {
+    "name": "Obsidian Flint Dragon Plate",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:obsidian-flint-dragon-plate",
+    "rarity": "Legendary",
+    "type": "Armor",
+    "description": "You gain a +2 bonus to AC and resistance to poison damage while you wear this armor. ln addition, you gain advantage on ability checks and saving throws made to avoid or end the grappled condition on yourself."
+  },
+  {
+    "name": "Orb of Skoraeus",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:orb-of-skoraeus",
+    "rarity": "Legendary",
+    "type": "Wondrous Item",
+    "description": "Said to be infused with the wisdom and power of the god Skoraeus, this polished stone orb is veined with iridescent crystal that seems to glow from within. The orb is 8 inches in diameter and weighs 8 pounds, making it a palm-sized trinket for a stone giant but a more unwieldy item for a Medium creature to use.\n\nWhile holding this orb, you can use it as a spellcasting focus for your spells. You also gain the following benefits:\n\nAbundant Components. The orb has 3 charges and regains all expended charges at dawn. When you cast a spell while holding this orb, you can expend up to 3 charges to ignore the spell’s material components with a gold piece cost, up to 300 gp per charge expended.\n\nAstute Mind. You gain a +2 bonus to any Constitution saving throw you make to maintain your concentration on a spell.\n\nDivine Sight. You can see normally in darkness, both magical and nonmagical, to a distance of 120 feet."
+  },
+  {
+    "name": "Orcsplitter",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:orcsplitter",
+    "rarity": "Legendary",
+    "type": "Weapon",
+    "description": "A mighty axe wielded long ago by the dwarf king Torhild Flametongue, Orcsplitter is a battered weapon that appears unremarkable at first glance. Its head is graven with the Dwarvish runes for “orc,” but the runes are depicted with a gap or slash through the markings; the word “orc” is literally split in two.\n\nYou gain the following benefits while holding this magic weapon:\n\nSentience. Orcsplitter is a sentient, lawful good weapon with an Intelligence of 6, a Wisdom of 15, and a Charisma of 10. It can see and hear out to 120 feet and has darkvision. It communicates by transmitting emotions to its wielder, although on rare occasions it uses a limited form of telepathy to bring to the wielder’s mind a couplet or stanza of ancient Dwarvish verse.\n\nPersonality. Orcsplitter is grim, taciturn, and inflexible. It knows little more than the desire to face orcs in battle and serve a courageous, just wielder. It disdains cowards and any form of duplicity, deception, or disloyalty. The weapon’s purpose is to defend dwarves and to serve as a symbol of dwarven resolve. It hates the traditional foes of dwarves — giants, goblins, and, most of all, orcs — and silently urges its possessor to meet such creatures in battle."
+  },
+  {
+    "name": "Plate Armor of Etherealness",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:plate-armor-of-etherealness",
+    "rarity": "Legendary",
+    "type": "Armor",
+    "description": "While you're wearing this armor, you can speak its command word as an action to gain the effect of the Etherealness spell, which last for 10 minutes or until you remove the armor or use an action to speak the command word again. This property of the armor can't be used again until the next dawn."
+  },
+  {
+    "name": "Platinum Scarf",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:platinum-scarf",
+    "rarity": "Legendary",
+    "type": "Wondrous Item",
+    "description": "This scarf is made of sturdy cloth and covered in platinum-colored scales.\nAs an action, you can pull a scale from the scarf and speak a command word. When you do so, choose one of the following effects:\n\nBreath of Life. The scale disappears, and you or a creature you touch regains 10d4 hit points.\n\nPlatinum Shield. For 1 hour or until you dismiss it (no action required), the scale becomes a +1 shield, which you or another creature can use. A creature wielding the shield has immunity to radiant damage.\n\nRadiant Hammer. For 1 hour or until you dismiss it (no action required), the scale becomes a magic light hammer, which you or another creature can use. The weapon deals 2d4 radiant damage, instead of the bludgeoning damage normal for a light hammer. It deals an extra 2d4 radiant damage to chromatic dragons.\n\nOnce three scales have been pulled from the scarf, no more scales can be removed until the next dawn, when all the missing scales grow back. If you pull off a scale but don’t speak a command word, it disappears after 1 minute."
+  },
+  {
+    "name": "Potion of Dragon's Majesty",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:potion-of-dragons-majesty",
+    "rarity": "Legendary",
+    "type": "Potion",
+    "description": "This potion looks like liquid gold, with a single scale from a chromatic, gem, or metallic dragon suspended in it. When you drink this potion, you transform into an adult dragon of the same kind as the dragon the scale came from. The transformation lasts for 1 hour. Any equipment you are wearing or carrying melds into your new form or falls to the ground (your choice). For the duration, you use the game statistics of the adult dragon instead of your own, but you retain your languages, personality, and memories. You can’t use a dragon’s Change Shape or its legendary or lair actions."
+  },
+  {
+    "name": "Potion of Giant Size",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:potion-of-giant-size",
+    "rarity": "Legendary",
+    "type": "Potion",
+    "description": "When you drink this potion, you become Huge for 24 hours if you are Medium or smaller, otherwise the potion does nothing. For that duration, your Strength becomes 25, if it isn't already higher, and your hit point maximum is doubled (your current hit points are doubled when you drink the potion). In addition, the reach of your melee attacks increases by 5 feet.\n\nEverything you are carrying and wearing also increases in size for the duration. When rolling damage for weapons enlarged in this manner, roll three times the normal number of dice; for example, an enlarged longsword would deal 3d8 slashing damage (instead of 1d8), or 3d10 slashing damage (instead of 1d10) when used with two hands.\n\nWhen the effect ends, any hit points you have above your hit point maximum become temporary hit points.\n\nThis potion is a pale white liquid made from the tongue of a giant clam, with a pungent aroma akin to that of rotting algae. It tastes sweet, however, when consumed."
+  },
+  {
+    "name": "Potion of Giant Strength",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:potion-of-giant-strength",
+    "rarity": "Legendary",
+    "type": "Potion",
+    "description": "When you drink this potion, your Strength score changes for 1 hour. The type of giant determines the score (see the table below). This potion has no effect on you if your Strength is equal to or greater than that score.\n\nThis potion's transparent liquid has floating in it a sliver of fingernail from a giant of the appropriate type. The potion of frost giant strength and the potion of stone giant strength have the same effect."
+  },
+  {
+    "name": "Powered Armor",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:powered-armor",
+    "rarity": "Legendary",
+    "type": "Armor",
+    "description": "Powered Armor resembles a suit of unusual plate armor, with finely articulated joints connected by an oily, black, leather-like material. The armor has been worked to create the appearance of a heavily muscled warrior, and its great helm is unusual in that it has no openings —- only a broad glass plate in the front with a second piece of glass above it. Strange plates, tubing, and large metal bosses adorn the armor in seemingly random fashion. On the back of the armor’s left gauntlet is a rectangular metal box, from which projects a short rod tipped with a cone-shaped red crystal.\n\nWhile wearing this armor, you gain the following benefits:\n\nThe armor has further capabilities that can be powered either by energy cells or by your own life energy. You can use a bonus action to draw power from an energy cell or sacrifice hit points to gain one of the following benefits:\n\nThe armor can accept only one energy cell at a time. It is found with one energy cell attached, containing 2d10 charges.\n\nPowered Armor Options\n\nDepending on where and how it appears in the adventure, you might wish to modify the features of Kwalish’s legendary Powered Armor.\n\nAutomatic Defenses. Unless Kwalish deactivates the suit’s automatic defenses, no one can approach the armor without setting those defenses off. Treat the armor as a shield guardian that has stored a Magic Missile spell cast using a 4th-level spell slot. When the armor is reduced to 0 hit points, its defenses are rendered inert and it can be safely approached.\n\nBattle of Wills. When donned by a new user, the armor deems itself superior and attempts to take possession of that user. The user must succeed on a DC 13 Charisma saving throw or be possessed by the armor. While possessed, the user is incapacitated and loses control of its body but retains its awareness. The armor uses the possessed user’s statistics (as adjusted by the armor), but doesn’t gain access to the user’s knowledge, features, or proficiencies.\n\nFreeing a creature trapped inside the armor first requires defeating the armor’s automatic defenses (as above). The trapped creature can also attempt a DC 20 Charisma saving throw each day at dawn. On a successful save, the armor no longer controls the creature and can be safely donned by that creature at any time.\n\nStasis. Whenever a creature wearing the armor drops to 0 hit points, the armor places that creature into a state of stasis. While in this state, the creature is stable and does not make death saving throws, but the armor takes control of the creature (as above). Additionally, the armor attempts to assume the identity of the user, assuring their allies that nothing is amiss. Freeing the user first requires defeating the armor’s automatic defenses (as above). A creature in stasis does not make Charisma saving throws to break the armor’s control.\n\nAlternative Power. Powered Armor originally required energy cells to fuel it, but was adapted by Kwalish to be fueled by the life energy of the creature wearing it. You might decide that the armor can also draw power from additional sources, or that energy cells can be recharged with the aid of a tinker, inventor, or artificer. It might also be possible for allies to connect to the armor through the use of magic that generates a conduit something like an astral silver cord. While so connected, a willing ally can give up hit points as a reaction to fuel the armor’s abilities."
+  },
+  {
+    "name": "Prehistoric Figurines of Wondrous Power",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:prehistoric-figurines-of-wondrous-power",
+    "rarity": "Legendary",
+    "type": "Wondrous Item",
+    "description": "Larger and more roughly hewn than typical figurines of wondrous power, these statuettes depict dinosaurs and related creatures from the earliest days of the world.\n\nAs an action, you can throw a prehistoric figurine of wondrous power to a point on the ground within 60 feet of yourself while speaking a command word, whereupon the figurine magically transforms into a living creature. If the space where the creature would appear is occupied by other creatures or objects, or if there isn’t enough space for the creature, the figurine doesn’t become a creature.\n\nThe creature is friendly to you and your companions. It understands your languages and obeys your spoken commands. If you issue no commands, the creature defends itself but takes no other actions. See the Monster Manual for the creature’s statistics.\n\nThe creature exists for a duration specific to each figurine. At the end of the duration, the creature reverts to its statuette form. It reverts to a figurine early if it drops to 0 hit points or if you use an action to speak the command word again while touching it. When the creature becomes a figurine again, its property can’t be used again until a certain amount of time has passed, as specified in the figurine’s description.\n\nCarnelian Triceratops (Very Rare). This figurine becomes a triceratops for up to 6 hours and can be ridden as a mount. Once it has been used, it can’t be used again until 10 days have passed.\n\nJasper Tyrannosaurus Rex (Legendary). This figurine, crafted from rare green jasper, becomes a tyrannosaurus rex for up to 1 hour. Once it has been used, it can’t be used again until 14 days have passed.\n\nWhenever you command the figurine while it’s in tyrannosaurus rex form (including commanding it to revert to figurine form), you must roll a d20. On a 1, you lose control of the figurine, and it becomes hostile to you and your companions until it is reduced to 0 hit points, at which point it reverts to figurine form.\n\nKyanite Pteranodon (Rare). This figurine becomes a pteranodon for up to 8 hours. If your size is Medium or smaller, you can ride the pteranodon as a mount. Once it has been used, it can’t be used again until 7 days have passed.\n\nPyrite Plesiosaurus (Uncommon). This figurine becomes a plesiosaurus for up to 12 hours and can be ridden as a mount. Once it has been used, it can’t be used again until 4 days have passed.\n\nWhile you are riding the plesiosaurus, you can use it to cast Water Breathing at will."
+  },
+  {
+    "name": "Pyxis of Pandemonium",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:pyxis-of-pandemonium",
+    "rarity": "Legendary",
+    "type": "Wondrous Item",
+    "description": "A creature that touches this ornate wooden vessel for 1 minute gains the benefits of a short rest. That creature also gains the effects of the bless spell until the creature finishes a short or long rest. The creature can't gain these benefits again until it finishes a long rest.\n\nIf the vessel is opened, roll on the Pyxis of Pandemonium table to determine what happens. Any spells cast by the vessel have a spell save DC of 17. One minute after the vessel is opened, it disappears. It reappears, sealed, in a random location on the same plane of existence 24 hours later.\n\nCurse. Any creature that gains the benefit of a short rest from the vessel hears cloying telepathic whispers emanating it. That creature must make a DC 17 Wisdom saving throw. On a failed save, the creature is charmed by the vessel for 1 hour. The charmed creature does everything it can to open the vessel as soon as possible. On a successful save, the creature is immune to the vessel's whispers for 24 hours."
+  },
+  {
+    "name": "Rakdos Riteknife",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:rakdos-riteknife",
+    "rarity": "Legendary",
+    "type": "Weapon",
+    "description": "You gain a +1 bonus to attack and damage rolls made with this magic weapon. Its blade is cruelly serrated, and its hilt resembles a demonic head and wings. Whenever you slay a creature with an attack using the dagger, the creature's soul is imprisoned inside the dagger, and that creature can be restored to life only by a Wish spell. The dagger can hold a maximum of five souls.\n\nFor each soul imprisoned in the dagger, your attacks with it deal an extra 1d4 necrotic damage on a hit. While the dagger is within 5 feet of you, your dreams are haunted by whispers from the trapped souls.\n\nThe dagger has the following additional properties.\n\nSiphon Vitality. As a bonus action, you can release any number of stored souls from the dagger to regain 1d10 hit points per soul released.\n\nAnnihilation. If the dagger holds five souls, you can use this property: As a reaction immediately after you hit a creature with the dagger and deal damage to that target, you can release all five souls. If the target now has fewer than 75 hit points, it must succeed on a DC 15 Constitution saving throw or die. If the target dies, you can't use this property again until you finish a long rest."
+  },
+  {
+    "name": "Reaper's Scream",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:reapers-scream",
+    "rarity": "Legendary",
+    "type": "Weapon",
+    "description": "The spikes of this iron morningstar glow with sickly, pale light. The death rune is inscribed on its shaft and inlaid with pearl.\n\nYou gain a +2 bonus to attack and damage rolls made with this weapon, and attacks with this weapon deal necrotic damage instead of piercing damage.\n\nWhen you attack a creature with this weapon and roll a 20 on the attack roll, you gain 10 temporary hit points. Any creature that hits you with a melee attack while you have 1 or more of these temporary hit points takes 10 necrotic damage.\n\nInvoking the Rune. As a bonus action, you can invoke the weapon’s rune, unleashing the screams of every creature slain by the weapon in one cacophonous burst. Each creature of your choice within 60 feet of you must succeed on a DC 15 Wisdom saving throw or have the stunned condition until the start of your next turn.\n\nOnce the rune has been invoked, it can’t be invoked again until the next dawn."
+  },
+  {
+    "name": "Red Wizard Blade",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:red-wizard-blade",
+    "rarity": "Legendary",
+    "type": "Weapon",
+    "description": "Forged by Red Wizards using a secret process known only to them, this grim steel dagger draws its power from the Negative Plane. When you hit a creature with a melee attack using this magic dagger, the target takes an extra 3d12 necrotic damage.\n\nA creature reduced to 0 hit points by this weapon dies and can’t be raised from the dead except by a deity or by a creature using a tablet of reawakening to cast the True Resurrection spell."
+  },
+  {
+    "name": "Ring of Djinni Summoning",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:ring-of-djinni-summoning",
+    "rarity": "Legendary",
+    "type": "Ring",
+    "description": "While wearing this ring, you can speak its command word as an action to summon a particular djinni from the Elemental Plane of Air. The djinni appears in an unoccupied space you choose within 120 feet of you. It remains as long as you concentrate (as if concentrating on a spell), to a maximum of 1 hour, or until it drops to 0 hit points. It then returns to its home plane.\n\nWhile summoned, the djinni is friendly to you and your companions. It obeys any commands you give it, no matter what language you use. If you fail to command it, the djinni defends itself against attackers but takes no other actions.\n\nAfter the djinni departs, it can't be summoned again for 24 hours, and the ring becomes nonmagical if the djinni dies."
+  },
+  {
+    "name": "Ring of Elemental Command",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:ring-of-elemental-command",
+    "rarity": "Legendary",
+    "type": "Ring",
+    "description": "This ring is linked to one of the four Elemental Planes. The DM chooses or randomly determines the linked plane.\n\nWhile wearing this ring, you have advantage on attack rolls against elementals from the linked plane, and they have disadvantage on attack rolls against you. In addition, you have access to properties based on the linked plane.\n\nThe ring has 5 charges. It regains 1d4 + 1 expended charges daily at dawn. Spells cast from the ring have a save DC of 17.\n\nRing of Air Elemental Command. You can expend 2 of the ring's charges to cast Dominate Monster on an air elemental. In addition, when you fall, you descend 60 feet per round and take no damage from falling. You can also speak and understand Auran.\n\nIf you help slay an air elemental while attuned to the ring, you gain access to the following additional properties:\n\nRing of Earth Elemental Command. You can expend a 2 of the ring's charges to cast Dominate Monster on an earth elemental. In addition, you can move in difficult terrain that is composed of rubble, rocks, or dirt as if it were normal terrain. You can also speak and understand Terran.\n\nIf you help slay an earth elemental while attuned to the ring, you gain access to the following additional properties:\n\nRing of Fire Elemental Command. You can expend 2 of the ring's charges to cast Dominate Monster on a fire elemental. In addition, you have resistance to fire damage. You can also speak and understand Ignan.\n\nIf you help slay a fire elemental while attuned to the ring, you gain access to the following additional properties:\n\nRing of Water Elemental Command. You can expend 2 of the ring's charges to cast Dominate Monster on a water elemental. In addition, you can stand on and walk across liquid surfaces as if they were solid ground. You can also speak and understand Aquan.\n\nIf you help slay a water elemental while attuned to the ring, you gain access to the following additional properties:"
+  },
+  {
+    "name": "Ring of Invisibility",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:ring-of-invisibility",
+    "rarity": "Legendary",
+    "type": "Ring",
+    "description": "While wearing this ring, you can turn invisible as an action. Anything you are wearing or carrying is invisible with you. You remain invisible until the ring is removed, until you attack or cast a spell, or until you use a bonus action to become visible again."
+  },
+  {
+    "name": "Ring of Spell Turning",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:ring-of-spell-turning",
+    "rarity": "Legendary",
+    "type": "Ring",
+    "description": "While wearing this ring, you have advantage on saving throws against any spell that targets only you (not in an area of effect). In addition, if you roll a 20 for the save and the spell is 7th level or lower, the spell has no effect on you and instead targets the caster, using the slot level, spell save DC, attack bonus, and spellcasting ability of the caster."
+  },
+  {
+    "name": "Ring of Three Wishes",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:ring-of-three-wishes",
+    "rarity": "Legendary",
+    "type": "Ring",
+    "description": "While wearing this ring, you can use an action to expend 1 of its 3 charges to cast the Wish spell from it. The ring becomes nonmagical when you use the last charge."
+  },
+  {
+    "name": "Robe of the Archmagi",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:robe-of-the-archmagi",
+    "rarity": "Legendary",
+    "type": "Wondrous Item",
+    "description": "This elegant garment is made from exquisite cloth of white, gray, or black and adorned with silvery runes. The robe's color corresponds to the alignment for which the item was created. A white robe was made for good. gray for neutral, and black for evil. You can't attune to a robe of the archmagi that doesn't correspond to your alignment.\n\nYou gain these benefits while wearing the robe:"
+  },
+  {
+    "name": "Rod of Lordly Might",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:rod-of-lordly-might",
+    "rarity": "Legendary",
+    "type": "Rod",
+    "description": "This rod has a flanged head, and it functions as a magic mace that grants a +3 bonus to attack and damage rolls made with it. The rod has properties associated with six different buttons that are set in a row along the haft. It has three other properties as well, detailed below.\n\nSix Buttons. You can press one of the rod's six buttons as a bonus action. A button's effect lasts until you push a different button or until you push the same button again, which causes the rod to revert to its normal form.\n\nIf you press button 1, the rod becomes a Flame Tongue as a fiery blade sprouts from the end opposite the rod's flanged head (you choose the type of sword).\n\nIf you press button 2, the rod's flanged head folds down and two crescent-shaped blades spring out, transforming the rod into a magic battleaxe that grants a +3 bonus to attack and damage rolls made with it.\n\nIf you press button 3, the rod's flanged head folds down, a spear point springs from the rod's tip, and the rod's handle lengthens into a 6-foot haft, transforming the rod into a magic spear that grants a +3 bonus to attack and damage rolls made with it.\n\nIf you press button 4, the rod transforms into a climbing pole up to 50 feet long, as you specify. In surfaces as hard as granite, a spike at the bottom and three hooks at the top anchor the pole. Horizontal bars 3 inches long fold out from the sides, 1 foot apart, forming a ladder. The pole can bear up to 4,000 pounds. More weight or lack of solid anchoring causes the rod to revert to its normal form.\n\nIf you press button 5, the rod transforms into a handheld battering ram and grants you a +10 bonus to Strength checks made to break through doors, barricades, and other barriers.\n\nIf you press button 6, the rod assumes or remains in its normal form and indicates magnetic north. (Nothing happens if this function of the rod is used in a location that has no magnetic north.) The rod also gives you knowledge of your approximate depth beneath the ground or your height above it.\n\nDrain Life. When you hit a creature with a melee attack using the rod, you can force the target to make a DC 17 Constitution saving throw. On a failure, the target rakes an extra 4d6 necrotic damage, and you regain a number of hit points equal to half that necrotic damage. This property can't be used again until the next dawn.\n\nParalyze. When you hit a creature with a melee attack using the rod, you can force the target to make a DC 17 Strength saving throw. On a failure , the target is paralyzed for 1 minute. The target can repeat the saving throw at the end of each of its turns, ending the effect on a success. This property can't be used again until the next dawn.\n\nTerrify. While holding the rod, you can use an action to force each creature you can see with in 30 feet of you to make a DC 17 Wisdom saving throw. On a failure, a target is frightened of you for 1 minute. A frightened target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success. This property can't be used again until the next dawn."
+  },
+  {
+    "name": "Rod of Resurrection",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:rod-of-resurrection",
+    "rarity": "Legendary",
+    "type": "Rod",
+    "description": "This rod has 5 charges. While you hold it, you can use an action to cast one of the following spells from it: Heal (expends 1 charge) or Resurrection (expends 5 charges.\n\nThe rod regains 1 expended charge daily at dawn. If the rod is reduced to 0 charges, roll a d20. On a 1, the rod disappears in a burst of radiance."
+  },
+  {
+    "name": "Ruby Weave Gem",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:ruby-weave-gem",
+    "rarity": "Legendary",
+    "type": "Wondrous Item",
+    "description": "While you are holding this gem, you can use it as a spellcasting focus for your spells.\n\nThe gem has 3 charges and regains all expended charges daily at dawn. When you cast a spell while holding this gem, you can expend up to 3 charges to ignore the spell’s material components with a gold piece cost, up to 500 gp per charge expended.\n\nWhen you finish a long rest, choose a spell from any class list. The spell you choose must be of a level you can cast. You know the chosen spell and can cast it with your spell slots of the appropriate level until the end of your next long rest."
+  },
+  {
+    "name": "Ruinblade",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:ruinblade",
+    "rarity": "Legendary",
+    "type": "Weapon",
+    "description": "Ruinblade is a unique weapon possessed by Moghadam, the architect of the Tomb of Horrors. A symbol of his authority, Moghadam carries the weapon during the time frame of the adventure to intimidate the tomb’s workers. (In later years, after Acererak trapped Moghadam in the completed tomb as an undead archwraith, Moghadam was able to use the weapon as his own phylactery.)\n\nA small jade version of the green devil face of the Tomb of Horrors is fashioned into the hilt of the weapon, with the blade extending from its open mouth. The blade always appears ruined and rusting, and causes its surroundings to appear reflected in the blade as if in a state of decay.\n\nYou gain a +2 bonus to attack and damage rolls made with this magic weapon. When you hit an undead creature with it, the attack deals an extra 1d8 force damage.\n\nIn addition, the weapon has the following properties:\n\nBlighted Ruin. You can cast the Blight spell from the weapon (DC 15). Once used, this property of the weapon can’t be used until the next dawn.\n\nDestructive Ruin. You can cast the Disintegrate spell from the weapon, but can target only a nonmagical object or a creation of magical force. Once used, this property of the weapon can’t be used until dawn seven days later.\n\nCurse. This weapon is cursed, and becoming attuned to it extends the curse to you. Until the curse is broken with a Remove Curse spell or similar magic, you are unwilling to part with the weapon.\n\nThe weapon must take direct part in the destruction of 1,000 gp worth of materials and objects every seven days, or a conflict arises between you and the weapon at the end of the seventh day.\n\nSentience. Ruinblade is a sentient lawful evil weapon with an Intelligence of 15, a Wisdom of 8, and a Charisma of 16. It has hearing and darkvision out to a range of 120 feet.\n\nThe weapon can speak, read, and understand Common, and can communicate with its wielder telepathically. Its voice is a rough, ruined echo. While you are attuned to it, Ruinblade also understands every language you know.\n\nPersonality. Ruinblade speaks either with a dolorous or frenetic tone, depending on its mood. That mood improves when the sword is actively engaged in acts of destruction, but worsens if the blade is left inactive too long.\n\nThe weapon’s purpose is to ruin and unmake existing objects, so that its owner can rebuild the world from a blank slate. It thus encourages its wielder to engage in constant destruction, claiming that this will allow the creation of a more superior vision from the ruin of what came before."
+  },
+  {
+    "name": "Scaled Ornament",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:scaled-ornament",
+    "rarity": "Legendary",
+    "type": "Wondrous Item",
+    "description": "This ornament can be jewelry, a cloak, or another wearable accessory. It appears to be fashioned from a dragon’s scale, tooth, or claw, or it incorporates images in those shapes.\n\nSlumbering (Uncommon). You have advantage on saving throws you make to avoid being charmed or frightened or to end those conditions on you.\n\nStirring (Rare). You gain a +1 bonus to AC, and you can’t be charmed or frightened. Moreover, each creature of your choice within 30 feet of you has advantage on saving throws it makes to avoid being charmed or frightened or to end those conditions on itself.\n\nWakened (Very Rare). The Wakened ornament has the Stirring property. In addition, when you would take damage of the type dealt by the breath of the dragon in whose hoard the ornament became Wakened, you can use your reaction to take no damage instead, and you regain hit points equal to the damage you would have taken. Once this property is used, it can’t be used again until the next dawn.\n\nAscendant (Legendary). The Ascendant ornament has the Stirring and Wakened properties. In addition, while you are wearing the ornament, you gain a flying speed equal to your walking speed and can hover. While you are flying using this speed, spectral dragon wings appear on your back."
+  },
+  {
+    "name": "Scarab of Protection",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:scarab-of-protection",
+    "rarity": "Legendary",
+    "type": "Wondrous Item",
+    "description": "If you hold this beetle-shaped medallion in your hand for 1 round, an inscription appears on its surface revealing its magical nature. It provides two benefits while it is on your person:"
+  },
+  {
+    "name": "Scroll of Tarrasque Summoning",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:scroll-of-tarrasque-summoning",
+    "rarity": "Legendary",
+    "type": "Scroll",
+    "description": "Using an action to read the scroll causes the tarrasque (see the creature's entry in the Monster Manual) to appear in an unoccupied space you can see within 1 mile of you. The tarrasque disappears when it drops to 0 hit points and is hostile toward all creatures other than itself."
+  },
+  {
+    "name": "Scroll of the Comet",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:scroll-of-the-comet",
+    "rarity": "Legendary",
+    "type": "Scroll",
+    "description": "By using an action to read the scroll, you cause a comet to fall from the sky and crash to the ground at a point you can see up to 1 mile away from you. You must be outdoors when you use the scroll, or nothing happens and the scroll is wasted.\n\nThe comet creates a 50-foot-deep, 500-foot-radius crater on impact. Any creature in that radius must make a DC 20 Dexterity saving throw, taking 30d10 force damage on a failed saving throw, or half as much damage on a successful one. All structures in the crater are destroyed, as are all nonmagical objects that aren't being worn or held."
+  }
+]

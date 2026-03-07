@@ -1,0 +1,352 @@
+[
+  {
+    "name": "Potion of Giant Strength",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:potion-of-giant-strength",
+    "rarity": "Uncommon",
+    "type": "Potion",
+    "description": "When you drink this potion, your Strength score changes for 1 hour. The type of giant determines the score (see the table below). This potion has no effect on you if your Strength is equal to or greater than that score.\n\nThis potion's transparent liquid has floating in it a sliver of fingernail from a giant of the appropriate type. The potion of frost giant strength and the potion of stone giant strength have the same effect."
+  },
+  {
+    "name": "Potion of Growth",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:potion-of-growth",
+    "rarity": "Uncommon",
+    "type": "Potion",
+    "description": "When you drink this potion, you gain the \"enlarge\" effect of the Enlarge/Reduce spell for 1d4 hours (no concentration required). The red in the potion's liquid continuously expands from a tiny beat to color the clear liquid around it and then contracts. Shaking the bottle fails to interrupt this process."
+  },
+  {
+    "name": "Potion of Healing",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:potion-of-healing",
+    "rarity": "Uncommon",
+    "type": "Potion",
+    "description": "You regain hit points when you drink this potion. The number of hit points depends on the potion's rarity, as shown in the Potions of Healing table. Whatever its potency, the potion's red liquid glimmers when agitated."
+  },
+  {
+    "name": "Potion of Poison",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:potion-of-poison",
+    "rarity": "Uncommon",
+    "type": "Potion",
+    "description": "This concoction looks, smells, and tastes like a Potion of Healing or other beneficial potion. However, it is actually poison masked by illusion magic. An Identify spell reveals its true nature.\n\nIf you drink it, you take 3d6 poison damage, and you must succeed on a DC 13 Constitution saving throw or be poisoned. At the start of each of your turns while you are poisoned in this way, you take 3d6 poison damage. At the end of each of your turns, you can repeat the saving throw. On a successful save, the poison damage you take on your subsequent turns decreases by 1d6. The poison ends when the damage decreases to 0."
+  },
+  {
+    "name": "Potion Of Polychromy",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:potion-of-polychromy",
+    "rarity": "Uncommon",
+    "type": "Potion",
+    "description": "When you drink this potion, you and everything you are wearing or carrying take on a rainbow-hued appearance for 1 hour. During that time, you can use a bonus action to turn any color or combination of colors you choose. If you mimic the colors of your surroundings, your hues continually shift to match your surroundings, and you have advantage on Dexterity (Stealth) checks until you change your colors again or the potion wears off.\n\nThe potion is separated into seven brightly colored bands of immiscible liquids and has a syrupy taste."
+  },
+  {
+    "name": "Potion of Psionic Fortitude",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:potion-of-psionic-fortitude",
+    "rarity": "Uncommon",
+    "type": "Potion",
+    "description": "When you drink this potion, you have advantage for 1 hour on saving throws you make to avoid or end the charmed or stunned condition on yourself.\n\nThis black potion swirls with shimmering flecks of pink and purple."
+  },
+  {
+    "name": "Potion of Resistance",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:potion-of-resistance",
+    "rarity": "Uncommon",
+    "type": "Potion",
+    "description": "When you drink this potion, you gain resistance to one type of damage for 1 hour. The DM chooses the type or determines it randomly from the options below."
+  },
+  {
+    "name": "Potion of Water Breathing",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:potion-of-water-breathing",
+    "rarity": "Uncommon",
+    "type": "Potion",
+    "description": "You can breathe underwater for 1 hour after drinking this potion. Its cloudy green fluid smells of the sea and has a jellyfish-like bubble floating in it."
+  },
+  {
+    "name": "Prehistoric Figurines of Wondrous Power",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:prehistoric-figurines-of-wondrous-power",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "Larger and more roughly hewn than typical figurines of wondrous power, these statuettes depict dinosaurs and related creatures from the earliest days of the world.\n\nAs an action, you can throw a prehistoric figurine of wondrous power to a point on the ground within 60 feet of yourself while speaking a command word, whereupon the figurine magically transforms into a living creature. If the space where the creature would appear is occupied by other creatures or objects, or if there isn’t enough space for the creature, the figurine doesn’t become a creature.\n\nThe creature is friendly to you and your companions. It understands your languages and obeys your spoken commands. If you issue no commands, the creature defends itself but takes no other actions. See the Monster Manual for the creature’s statistics.\n\nThe creature exists for a duration specific to each figurine. At the end of the duration, the creature reverts to its statuette form. It reverts to a figurine early if it drops to 0 hit points or if you use an action to speak the command word again while touching it. When the creature becomes a figurine again, its property can’t be used again until a certain amount of time has passed, as specified in the figurine’s description.\n\nCarnelian Triceratops (Very Rare). This figurine becomes a triceratops for up to 6 hours and can be ridden as a mount. Once it has been used, it can’t be used again until 10 days have passed.\n\nJasper Tyrannosaurus Rex (Legendary). This figurine, crafted from rare green jasper, becomes a tyrannosaurus rex for up to 1 hour. Once it has been used, it can’t be used again until 14 days have passed.\n\nWhenever you command the figurine while it’s in tyrannosaurus rex form (including commanding it to revert to figurine form), you must roll a d20. On a 1, you lose control of the figurine, and it becomes hostile to you and your companions until it is reduced to 0 hit points, at which point it reverts to figurine form.\n\nKyanite Pteranodon (Rare). This figurine becomes a pteranodon for up to 8 hours. If your size is Medium or smaller, you can ride the pteranodon as a mount. Once it has been used, it can’t be used again until 7 days have passed.\n\nPyrite Plesiosaurus (Uncommon). This figurine becomes a plesiosaurus for up to 12 hours and can be ridden as a mount. Once it has been used, it can’t be used again until 4 days have passed.\n\nWhile you are riding the plesiosaurus, you can use it to cast Water Breathing at will."
+  },
+  {
+    "name": "Prismari Primer",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:prismari-primer",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "The Prismari Primer is a magic textbook created at Strixhaven's Prismari College. The primer has 3 charges, and it regains 1d3 expended charges daily at dawn. If you make a Dexterity (Acrobatics) or a Charisma (Performance) check while holding the primer, you can expend 1 charge to give yourself a 1d4 bonus to the check, immediately after you roll the d20.\n\nIn addition, if you study the primer at the end of a long rest, you can choose one 1st-level spell from the Bard or Sorcerer spell list. Before you finish your next long rest, you can cast the chosen spell once without a spell slot if you are holding the primer. Your spellcasting ability for this spell is your choice of Intelligence, Wisdom, or Charisma."
+  },
+  {
+    "name": "Propeller Helm",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:propeller-helm",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "While worn, the helm allows its wearer to cast the levitate spell, requiring no components. The helm's propeller spins and whirs loudly until the spell ends. Each time the spell ends, there is a 50 percent chance that the helm loses its magic and becomes nonmagical."
+  },
+  {
+    "name": "Psi Crystal",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:psi-crystal",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "This crystal grants you telepathy for as long as you remain attuned to it. See the introduction of the Monster Manual for rules on how this telepathy works. The crystal also glows with a purplish inner light while you are attuned to it. The higher your intelligence, the greater the light's intensity and the greater the range of the telepathy (see the Psi Crystal Properties table)."
+  },
+  {
+    "name": "Pyroconverger",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:pyroconverger",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "A pyroconverger is an Izzet-made flamethrower. It carries a risk of malfunction each time you use it.\n\nAs an action, you can cause the pyroconverger to project fire in a 10-foot cone. Each creature in that area must make a DC 13 Dexterity saving throw, taking 4d6 fire damage on a failed save, or half as much damage on a successful one.\n\nEach time you use the pyroconverger, roll a d10 and add the number of times you have used it since your last long rest. If the total is 11 or higher, the pyroconverger malfunctions: you take 4d6 fire damage, and you can't use the pyroconverger again until you finish a long rest."
+  },
+  {
+    "name": "Quandrix Primer",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:quandrix-primer",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "The Quandrix Primer is a magic textbook created at Strixhaven's Quandrix College. The primer has 3 charges, and it regains 1d3 expended charges daily at dawn. If you make an Intelligence (Arcana) or an Intelligence (Nature) check while holding the primer, you can expend 1 charge to give yourself a 1d4 bonus to the check, immediately after you roll the d20.\n\nIn addition, if you study the primer at the end of a long rest, you can choose one 1st-level spell from the Druid or Wizard spell list. Before you finish your next long rest, you can cast the chosen spell once without a spell slot if you are holding the primer. Your spellcasting ability for this spell is your choice of Intelligence, Wisdom, or Charisma."
+  },
+  {
+    "name": "Quiver of Ehlonna",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:quiver-of-ehlonna",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "Each of the quiver's three compartments connects to an extradimensional space that allows the quiver to hold numerous items while never weighing more than 2 pounds. The shortest compartment can hold up to sixty arrows, bolts, or similar objects. The midsize compartment holds up to eighteen javelins or similar objects. The longest compartment holds up to six long objects, such as bows, quarterstaffs, or spears.\n\nYou can draw any item the quiver contains as if doing so from a regular quiver or scabbard."
+  },
+  {
+    "name": "Rhythm Maker's Drum",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:rhythm-makers-drum",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "While holding this drum, you gain a bonus to spell attack rolls and to the saving throw DCs of your bard spells. The bonus is determined by the drum's rarity.\n\nAs an action, you can play the drum to regain one use of your Bardic Inspiration feature. This property of the drum can't be used again until the next dawn."
+  },
+  {
+    "name": "Ring of Jumping",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:ring-of-jumping",
+    "rarity": "Uncommon",
+    "type": "Ring",
+    "description": "While wearing this ring, you can cast the Jump spell from it as a bonus action at will, but can target only yourself when you do so."
+  },
+  {
+    "name": "Ring of Mind Shielding",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:ring-of-mind-shielding",
+    "rarity": "Uncommon",
+    "type": "Ring",
+    "description": "While wearing this ring, you are immune to magic that allows other creatures to read your thoughts, determine whether you are lying, know your alignment, or know your creature type. Creatures can telepathically communicate with you only if you allow it.\n\nYou can use an action to cause the ring to become invisible until you use another action to make it visible, until you remove the ring, or until you die.\n\nIf you die while wearing the ring, your soul enters it, unless it already houses a soul. You can remain in the ring or depart for the afterlife. As long as your soul is in the ring, you can telepathically communicate with any creature wearing it. A wearer can't prevent this telepathic communication."
+  },
+  {
+    "name": "Ring of Obscuring",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:ring-of-obscuring",
+    "rarity": "Uncommon",
+    "type": "Ring",
+    "description": "This band of iron resembles a skull and is cold to the touch. It has 3 charges and regains 1d3 expended charges daily at dawn. As an action while wearing the ring, you can expend 1 of its charges to cast the Fog Cloud spell from it, with the following changes: the cloud is centered on you when it first appears, and the spell lasts for 1 minute (no concentration required)."
+  },
+  {
+    "name": "Ring Of Puzzler's Wit",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:ring-of-puzzlers-wit",
+    "rarity": "Uncommon",
+    "type": "Ring",
+    "description": "This gold ring bears a fluorite stone and is enchanted to sharpen the wearer’s mind.\n\nThe ring has 3 charges and regains 1d4 − 1 expended charges daily at dawn. When you make an Intelligence check, you can expend 1 charge to grant yourself advantage on the check."
+  },
+  {
+    "name": "Ring of Swimming",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:ring-of-swimming",
+    "rarity": "Uncommon",
+    "type": "Ring",
+    "description": "You have a swimming speed of 40 feet while wearing this ring."
+  },
+  {
+    "name": "Ring of the Orator",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:ring-of-the-orator",
+    "rarity": "Uncommon",
+    "type": "Ring",
+    "description": "This ring has 6 charges. While you wear it, you can expend 1 of its charges to project your voice to be heard clearly by all creatures within 1 mile of yourself, regardless of intervening noise, for 1 minute. Magical silence, 1 foot of stone, 1 inch of common metal, a thin sheet of lead, or 3 feet of wood blocks this projection. If you project your voice while speaking a language the listening creatures don’t understand, you can make the creatures understand what you’re saying. You must be able to see the creatures to make them understand. The ring regains 1d6 expended charges daily at dawn."
+  },
+  {
+    "name": "Ring of Truth Telling",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:ring-of-truth-telling",
+    "rarity": "Uncommon",
+    "type": "Ring",
+    "description": "While wearing this ring, you have advantage on Wisdom (Insight) checks to determine whether someone is lying to you."
+  },
+  {
+    "name": "Ring of Warmth",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:ring-of-warmth",
+    "rarity": "Uncommon",
+    "type": "Ring",
+    "description": "While wearing this ring, you have resistance to cold damage. In addition, you and everything you wear and carry are unharmed by temperatures as low as -50 degrees Fahrenheit."
+  },
+  {
+    "name": "Ring of Water Walking",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:ring-of-water-walking",
+    "rarity": "Uncommon",
+    "type": "Ring",
+    "description": "While wearing this ring, you can stand on and move across any liquid surface as if it were solid ground."
+  },
+  {
+    "name": "Rings of Shared Suffering",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:rings-of-shared-suffering",
+    "rarity": "Uncommon",
+    "type": "Ring",
+    "description": "These rings come in linked pairs. If you possess the Mark of Sentinel, you can use a bonus action to form a link to the creature attuned to the other ring; from then on, whenever that creature suffers damage, they only suffer half of that damage and you take the rest. This effect continues until you end it as a bonus action or until you or the other creature removes their ring. This effect isn't limited by range. A creature cannot be attuned to more than one ring of shared suffering."
+  },
+  {
+    "name": "Robe of Serpents",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:robe-of-serpents",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "A Robe of Serpents is a stylish silk garment that is popular among wealthy nobles and retired assassins. The robe is emblazoned with 1d4 + 3 stylized serpents, all brightly colored.\n\nAs a bonus action on your turn, you can transform one of the robe's serpents into a giant poisonous snake. The snake instantly falls from the robe, slithers into an unoccupied space next to you, and acts on your initiative count. The snake can tell friendly creatures from hostile ones and attacks the latter. The snake disappears in a harmless puff of smoke after 1 hour, when it drops to 0 hit points, or when you dismiss it (no action required). Once detached, a snake can't return to the robe. When all of the robe's snakes have detached, the robe becomes a nonmagical garment."
+  },
+  {
+    "name": "Robe of Useful Items",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:robe-of-useful-items",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "This robe has cloth patches of various shapes and colors covering it. While wearing the robe. you can use an action to detach one of the patches, causing it to become the object or creature it represents. Once the last patch is removed, the robe becomes an ordinary garment.\n\nThe robe has two of each of the following patches:\n\nIn addition, the robe has 4d4 other patches. The DM chooses the patches or determines them randomly."
+  },
+  {
+    "name": "Rod of Retribution",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:rod-of-retribution",
+    "rarity": "Uncommon",
+    "type": "Rod",
+    "description": "This adamantine rod is tipped with a glowing crystalline eye. The rod has 3 charges and regains all its expended charges daily at dawn.\n\nWhen a creature you can see within 60 feet of you damages you while you are holding this rod, you can use your reaction to expend 1 of the rod's charges to force the creature to make a DC 13 Dexterity saving throw. The creature takes 2d10 lightning damage on a failed save, or half as much damage on a successful one."
+  },
+  {
+    "name": "Rod of the Pact Keeper, +1, +2, +3",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:rod-of-the-pact-keeper",
+    "rarity": "Uncommon",
+    "type": "Rod",
+    "description": "While holding this rod, you gain a bonus to spell attack rolls and to the saving throw DCs of your warlock spells. This bonus is determined by the rod's rarity.\n\nIn addition, you can regain one warlock spell slot as an action while holding the rod. You can't use this property again until you finish a long rest."
+  },
+  {
+    "name": "Rope of Climbing",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:rope-of-climbing",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "This 60-foot length of silk rope weighs 3 pounds and can hold up to 3,000 pounds. If you hold one end of the rope and use an action to speak the command word, the rope animates. As a bonus action, you can command the other end to move toward a destination you choose. That end moves 10 feet on your turn when you first command it and 10 feet on each of your turns until reaching its destination, up to its maximum length away, or until you tell it to stop. You can also tell the rope to fasten itself securely to an object or to unfasten itself, to knot or unknot itself, or to coil itself for carrying.\n\nIf you tell the rope to knot, large knots appear at 1-foot intervals along the rope. While knotted, the rope shortens to a 50-foot length and grants advantage on checks made to climb it.\n\nThe rope has AC 20 and 20 hit points. It regains 1 hit point every 5 minutes as long as it has at least 1 hit point. If the rope drops to 0 hit points, it is destroyed."
+  },
+  {
+    "name": "Saddle of the Cavalier",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:saddle-of-the-cavalier",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "While in this saddle on a mount, you can't be dismounted against your will if you're conscious, and attack rolls against the mount have disadvantage."
+  },
+  {
+    "name": "Scaled Ornament",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:scaled-ornament",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "This ornament can be jewelry, a cloak, or another wearable accessory. It appears to be fashioned from a dragon’s scale, tooth, or claw, or it incorporates images in those shapes.\n\nSlumbering (Uncommon). You have advantage on saving throws you make to avoid being charmed or frightened or to end those conditions on you.\n\nStirring (Rare). You gain a +1 bonus to AC, and you can’t be charmed or frightened. Moreover, each creature of your choice within 30 feet of you has advantage on saving throws it makes to avoid being charmed or frightened or to end those conditions on itself.\n\nWakened (Very Rare). The Wakened ornament has the Stirring property. In addition, when you would take damage of the type dealt by the breath of the dragon in whose hoard the ornament became Wakened, you can use your reaction to take no damage instead, and you regain hit points equal to the damage you would have taken. Once this property is used, it can’t be used again until the next dawn.\n\nAscendant (Legendary). The Ascendant ornament has the Stirring and Wakened properties. In addition, while you are wearing the ornament, you gain a flying speed equal to your walking speed and can hover. While you are flying using this speed, spectral dragon wings appear on your back."
+  },
+  {
+    "name": "Seeker Dart",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:seeker-dart",
+    "rarity": "Uncommon",
+    "type": "Weapon",
+    "description": "This small dart is decorated with designs like windy spirals that span the length of its shaft.\n\nWhen you whisper the word “seek” and hurl this dart, it seeks out a target of your choice within 120 feet of you. You must have seen the target before, but you don’t need to see it now. If the target isn’t within range or if there is no clear path to it, the dart falls to the ground, its magic spent and wasted. Otherwise, elemental winds guide the dart instantly through the air to the target. The dart can pass though openings as narrow as 1 inch wide and can change direction to fly around corners.\n\nWhen the dart reaches its target, the target must succeed on a DC 16 Dexterity saving throw or take 1d4 piercing damage and 3d4 lightning damage. The dart’s magic is then spent, and it becomes an ordinary dart."
+  },
+  {
+    "name": "Sending Stones",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:sending-stones",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "Sending stones come in pairs, with each smooth stone carved to match the other so the pairing is easily recognized. While you touch one stone, you can use an action to cast the sending spell from it. The target is the bearer of the other stone. If no creature bears the other stone, you know that fact as soon as you use the stone and don't cast the spell.\n\nOnce sending is cast through the stones, they can't be used again until the next dawn. If one of the stones in a pair is destroyed, the other one becomes nonmagical."
+  },
+  {
+    "name": "Sensory Stone",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:sending-stones",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "Sending stones come in pairs, with each smooth stone carved to match the other so the pairing is easily recognized. While you touch one stone, you can use an action to cast the sending spell from it. The target is the bearer of the other stone. If no creature bears the other stone, you know that fact as soon as you use the stone and don't cast the spell.\n\nOnce sending is cast through the stones, they can't be used again until the next dawn. If one of the stones in a pair is destroyed, the other one becomes nonmagical."
+  },
+  {
+    "name": "Sentinel Shield",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:sentinel-shield",
+    "rarity": "Uncommon",
+    "type": "Armor",
+    "description": "While holding this shield, you have advantage on initiative rolls and Wisdom (Perception) checks. The shield is emblazoned with the symbol of an eye."
+  },
+  {
+    "name": "Serpent Scale Armor",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:serpent-scale-armor",
+    "rarity": "Uncommon",
+    "type": "Armor",
+    "description": "This suit of magic armor is made from shimmering scales. While wearing it, you can apply your full Dexterity modifier (instead of a maximum of +2) when determining your Armor Class. In addition, this armor does not impose disadvantage on your Dexterity (Stealth) checks."
+  },
+  {
+    "name": "Shatterspike",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:shatterspike",
+    "rarity": "Uncommon",
+    "type": "Weapon",
+    "description": "You have a +1 bonus to attack and damage rolls you make with this magic weapon. If it hits an object, the hit is automatically a critical hit, and it can deal bludgeoning or slashing damage to the object (your choice). Further, damage from nonmagical sources can't harm the weapon."
+  },
+  {
+    "name": "Shield, +1, +2, +3",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:shield-1-2-3",
+    "rarity": "Uncommon",
+    "type": "Armor",
+    "description": "While holding this shield, you have a bonus to AC determined by the shield's rarity. This bonus is in addition to the shield's normal bonus to AC."
+  },
+  {
+    "name": "Shield Of The Tortoise",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:shield-of-the-tortoise",
+    "rarity": "Uncommon",
+    "type": "Armor",
+    "description": "While you are wielding this shield, you gain a +1 bonus to AC. This bonus is in addition to the shield’s normal bonus to AC.\n\nCurse. This item is cursed. Attuning to it extends the curse to you until you are targeted by a Remove Curse spell or similar magic. You cannot discard the shield, and remain attuned to it, as long as you are cursed. As long as you are cursed, you are sluggish. Your speed is halved. When you roll initiative, treat the roll on your d20 as a 1. You can’t change your initiative by any means."
+  },
+  {
+    "name": "Silverquill Primer",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:silverquill-primer",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "The Silverquill Primer is a magic textbook created at Strixhaven's Silverquill College. The primer has 3 charges, and it regains 1d3 expended charges daily at dawn. If you make a Charisma (Intimidation) or a Charisma (Persuasion) check while holding the primer, you can expend 1 charge to give yourself a 1d4 bonus to the check, immediately after you roll the d20.\n\nIn addition, if you study the primer at the end of a long rest, you can choose one 1st-level spell from the Bard or Cleric spell list. Before you finish your next long rest, you can cast the chosen spell once without a spell slot if you are holding the primer. Your spellcasting ability for this spell is your choice of Intelligence, Wisdom, or Charisma."
+  },
+  {
+    "name": "Skyblinder Staff",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:skyblinder-staff",
+    "rarity": "Uncommon",
+    "type": "Staff",
+    "description": "You gain a +1 bonus to attack and damage rolls made with this magic quarterstaff. While holding it, you gain a +1 bonus to spell attack rolls.\n\nIf a flying creature you can see within 30 feet of you makes an attack roll against you, you can use your reaction to hold the staff aloft and cause it to flare with light. The attacker has disadvantage on the attack roll, and it must succeed on a DC 15 Constitution saving throw or be blinded until the start of its next turn."
+  },
+  {
+    "name": "Sling Of Giant Felling",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:sling-of-giant-felling",
+    "rarity": "Uncommon",
+    "type": "Weapon",
+    "description": "When you hit a Giant creature with a ranged attack roll using this magic sling, the creature must succeed on a DC 18 Constitution saving throw or have the prone condition."
+  },
+  {
+    "name": "Slippers of Spider Climbing",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:slippers-of-spider-climbing",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "While you wear these light shoes, you can move up, down , and across vertical surfaces and upside down along ceilings, while leaving your hands free. You have a climbing speed equal to your walking speed. However, the slippers don't allow you to move this way on a slippery surface, such as one covered by ice or oil."
+  },
+  {
+    "name": "Smokepowder",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:smokepowder",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "Smokepowder is a magical explosive chiefly used to propel a bullet out of the barrel of a firearm. It is stored in airtight wooden kegs or tiny, waterproof leather packets. A packet contains enough Smokepowder for five shots, and a keg holds enough Smokepowder for five hundred shots.\n\nIf Smokepowder is set on fire, dropped, or otherwise handled roughly, it explodes and deals fire damage to each creature or object within 20 feet of it: 1d6 for a packet, 9d6 for a keg. A successful DC 12 Dexterity saving throw halves the damage.\n\nCasting Dispel Magic on Smokepowder renders it permanently inert."
+  },
+  {
+    "name": "Soul Coin",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:soul-coin",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "Soul coins are about 5 inches across and about an inch thick, minted from infernal iron. Each coin weighs one-third of a pound, and is inscribed with Infernal writing and a spell that magically binds a single soul to the coin. Because each soul coin has a unique soul trapped within it, each has a story. A creature might have been imprisoned as a result of defaulting on a deal, while another might be the victim of a night hag's curse.\n\nCarrying Soul Coins. To hold a soul coin is to feel the soul bound within it — overcome with rage or fraught with despair.\n\nAn evil creature can carry as many soul coins as it wishes (up to its maximum weight allowance). A nonevil creature can carry a number of soul coins equal to or less than its Constitution modifier without penalty. A non-evil creature carrying a number of soul coins greater than its Constitution modifier has disadvantage on its attack rolls, ability checks, and saving throws.\n\nUsing a Soul Coin. A soul coin has 3 charges. A creature carrying the coin can use its action to expend 1 charge from a soul coin and use it to do one of the following:\n\nFreeing a Soul. Casting a spell that removes a curse on a soul coin frees the soul trapped within it, as does expending all of the coin's charges. The coin itself rusts from within and is destroyed once the soul is released. A freed soul travels to the realm of the god it served or the outer plane most closely tied to its alignment (DM's choice). The souls of lawful evil creatures released from soul coins typically emerge from the River Styx as lemure devils.\n\nA soul can also be freed by destroying the coin that contains it. A soul coin has AC 19, 1 hit point for each charge it has remaining, and immunity to all damage except that which is dealt by a hellfire weapon (BG:DA, page 223) or an infernal war machine's furnace (BG:DA, page 217).\n\nFreeing a soul from a soul coin is considered a good act, even if the soul belongs to an evil creature.\n\nHellish Currency. Soul coins are a currency of the Nine Hells and are highly valued by devils. The coins are used among the infernal hierarchy to barter for favors, bribe the unwilling. and reward the faithful for services rendered.\n\nSoul coins are created by Mammon and his greater devils on Minauros, the third layer of the Nine Hells, in a vast chamber where the captured souls of evil mortals are bound into the coins. These coins are then distributed throughout the Nine Hells to be used for goods and services, infernal deals, dark bargains, and bribes."
+  },
+  {
+    "name": "Spell Gem",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:spell-gem",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "A spell gem can contain one spell from any class's spell list. You become aware of the spell when you learn the gems properties. While holding the gem. you can cast the spell from it as an action if you know the spell or if the spell is on your class spell list. Doing so doesn‘t require any components and doesn't require attunement. The spell then disappears from the gem.\n\nIf the spell is of a higher level than you can normally cast. you must make an ability check using your spellcasting ability to determine whether you cast it successfully. The DC equals 10 + the spell's level. On a failed check. the spell disappears from the gem with no other effect.\n\nEach spell gem has a maximum level for the spell it can store. The spell level determines the gems rarity and the stored spell's saving throw DC and attack bonus. as shown in the Spell Gem table.\n\nYou can imbue the gem with a spell if you're attuned to it and it's empty. To do so, you cast the spell while holding the gem. The spell is stored in the gem instead of having any effect. Casting the spell must require either 1 action or 1 minute or longer, and the spell's level must be no higher than the gem's maximum. If the spell belongs to the school of abjuration and requires material components that are consumed. you must provide them. but they can be worth half as much as normal.\n\nOnce imbued with a spell. the gem can't be imbued again until the next dawn.\n\nDeep gnomes created these magic gemstones and keep the creation process a secret."
+  },
+  {
+    "name": "Spell Scroll",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:spell-scroll",
+    "rarity": "Uncommon",
+    "type": "Scroll",
+    "description": "A spell scroll bears the words of a single spell, written in a mystical cipher. If the spell is on your class’s spell list, you can read the scroll and cast its spell without providing any material components. Otherwise, the scroll is unintelligible. Casting the spell by reading the scroll requires the spell’s normal casting time. Once the spell is cast, the words on the scroll fade, and it crumbles to dust. If the casting is interrupted, the scroll is not lost.\n\nIf the spell is on your class's spell list but of a higher level than you can normally cast, you must make an ability check using your spellcasting ability to determine whether you cast it successfully. The DC equals 10 + the spell's level. On a failed check, the spell disappears from the scroll with no other effect.\n\nOnce the spell is cast, the words on the scroll fade, and the scroll itself crumbles to dust.\n\nThe level of the spell on the scroll determines the spell's saving throw DC and attack bonus, as well as the scroll's rarity, as shown in the Spell Scroll table.\n\nA wizard spell on a spell scroll can be copied just as spells in spellbooks can be copied. When a spell is copied from a spell scroll, the copier must succeed on an Intelligence (Arcana) check with a DC equal to 10 + the spell's level. If the check succeeds, the spell is successfully copied. Whether the check succeeds or fails, the spell scroll is destroyed."
+  },
+  {
+    "name": "Spellwrought Tattoo",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:spellwrought-tattoo",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "Produced by a special needle, this magic tattoo contains a single spell of up to 5th level, wrought on your skin by a magic needle. To use the tattoo, you must hold the needle against your skin and speak the command word. The needle turns into ink that becomes the tattoo, which appears on the skin in whatever design you like. Once the tattoo is there, you can cast its spell, requiring no material components. The tattoo glows faintly while you cast the spell and for the spell's duration. Once the spell ends, the tattoo vanishes from your skin.\n\nThe level of the spell in the tattoo determines the spell's saving throw DC, attack bonus, spellcasting ability modifier, and the tattoo's rarity, as shown in the Spellwrought Tattoo table."
+  }
+]

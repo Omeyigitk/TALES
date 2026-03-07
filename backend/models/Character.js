@@ -21,6 +21,7 @@ const characterSchema = new mongoose.Schema({
     ac: Number,
     spells: [String],
     feats: [String],
+    featSelections: { type: mongoose.Schema.Types.Mixed, default: {} }, // { "Fey Touched": { stat: "INT", spell: "Hex" } }
     inventory: [mongoose.Schema.Types.Mixed],
     backstory: { type: String, default: "" },
     deathSaves: {

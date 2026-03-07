@@ -1,0 +1,352 @@
+[
+  {
+    "name": "Wand of Binding",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:wand-of-binding",
+    "rarity": "Rare",
+    "type": "Wand",
+    "description": "This wand has 7 charges for the following properties. It regains 1d6 + 1 expended charges daily at dawn. If you expend the wand's last charge, roll a d20. On a 1, the wand crumbles into ashes and is destroyed.\n\nSpells. While holding the wand, you can use an action to expend some of its charges to cast one of the following spells (save DC 17): Hold Monster (5 charges) or Hold Person (2 charges).\n\nAssisted Escape. While holding the wand, you can use your reaction to expend 1 charge and gain advantage on a saving throw you make to avoid being paralyzed or restrained, or you can expend 1 charge and gain advantage on any check you make to escape a grapple."
+  },
+  {
+    "name": "Wand of Enemy Detection",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:wand-of-enemy-detection",
+    "rarity": "Rare",
+    "type": "Wand",
+    "description": "This wand has 7 charges. While holding it, you can use an action and expend 1 charge to speak its command word. For the next minute, you know the direction of the nearest creature hostile to you within 60 feet, but not its distance from you. The wand can sense the presence of hostile creatures that are ethereal, invisible, disguised, or hidden, as well as those in plain sight. The effect ends if you stop holding the wand.\n\nThe wand regains 1d6 + 1 expended charges daily at dawn. If you expend the wand's last charge, roll a d20. On a 1, the wand crumbles into ashes and is destroyed."
+  },
+  {
+    "name": "Wand of Fear",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:wand-of-fear",
+    "rarity": "Rare",
+    "type": "Wand",
+    "description": "This wand has 7 charges for the following properties. It regains 1d6 + 1 expended charges daily at dawn. If you expend the wand's last charge, roll a d20. On a 1, the wand crumbles into ashes and is destroyed.\n\nCommand. While holding the wand, you can use an action to expend 1 charge and command another creature to flee or grovel, as with the Command spell (save DC 15).\n\nCone of Fear. While holding the wand, you can use an action to expend 2 charges, causing the wand's tip to emit a 60-foot cone of amber light. Each creature in the cone must succeed on a DC 15 Wisdom saving throw or become frightened of you for 1 minute. While it is frightened in this way, a creature must spend its turns trying to move as far away from you as it can, and it can't willingly move to a space within 30 feet of you. It also can't take reactions. For its action, it can use only the Dash action or try to escape from an effect that prevents it from moving. If it has nowhere it can move, the creature can use the Dodge action. At the end of each of its turns, a creature can repeat the saving throw, ending the effect on itself on a success."
+  },
+  {
+    "name": "Wand of Fireballs",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:wand-of-fireballs",
+    "rarity": "Rare",
+    "type": "Wand",
+    "description": "This wand has 7 charges. While holding it, you can use an action to expend 1 or more of its charges to cast the Fireball spell (save DC 15) from it. For 1 charge, you cast the 3rd-level version of the spell. You can increase the spell slot level by one for each additional charge you expend.\n\nThe wand regains 1d6 + 1 expended charges daily at dawn. If you expend the wand's last charge, roll a d20. On a 1, the wand crumbles into ashes and is destroyed."
+  },
+  {
+    "name": "Wand of Lightning Bolts",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:wand-of-lightning-bolts",
+    "rarity": "Rare",
+    "type": "Wand",
+    "description": "This wand has 7 charges. While holding it, you can use an action to expend 1 or more of its charges to cast the Lightning Bolt (save DC 15) from it. For 1 charge, you cast the 3rd-level version of the spell. You can increase the spell slot level by one for each additional charge you expend.\n\nThe wand regains 1d6 + 1 expended charges daily at dawn. If you expend the wand's last charge, roll a d20. On a 1, the wand crumbles into ashes and is destroyed."
+  },
+  {
+    "name": "Wand of Paralysis",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:wand-of-paralysis",
+    "rarity": "Rare",
+    "type": "Wand",
+    "description": "This wand has 7 charges. While holding it, you can use an action to expend 1 of its charges to cause a thin blue ray to streak from the tip toward a creature you can see within 60 feet of you. The target must succeed on a DC 15 Constitution saving throw or be paralyzed for 1 minute. At the end of each of the target's turns, it can repeat the saving throw, ending the effect on itself on a success.\n\nThe wand regains 1d6 + 1 expended charges daily at dawn. If you expend the wand's last charge, roll a d20. On a 1, the wand crumbles into ashes and is destroyed."
+  },
+  {
+    "name": "Wand of the War Mage",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:wand-of-the-war-mage",
+    "rarity": "Rare",
+    "type": "Wand",
+    "description": "While holding this wand, you gain a bonus to spell attack rolls determined by the wand's rarity. In addition, you ignore half cover when making a spell attack."
+  },
+  {
+    "name": "Wand of Viscid Globs",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:wand-of-viscid-globs",
+    "rarity": "Rare",
+    "type": "Wand",
+    "description": "Crafted by the drow, this slim black wand has 7 charges. While holding it, you can use an action to expend 1 of its charges to cause a small glob of viscous material to launch from the tip at one creature within 60 feet of you. Make a ranged attack roll against the target, with a bonus equal to your spellcasting modifier (or your Intelligence modifier, if you don't have a spellcasting ability) plus your proficiency bonus. On a hit, the glob expands and dries on the target, which is restrained for 1 hour. After that time, the viscous material cracks and falls away.\n\nApplying a pint or more of alcohol to the restrained creature dissolves the glob instantly, as does the application of Oil of Etherealness or Universal Solvent. The glob also dissolves instantly if exposed to sunlight. No other nonmagical processes can remove the viscous material until it deteriorates on its own.\n\nThe wand regains 1d6 + 1 expended charges daily at midnight. If you expend the wand's last charge, roll a d20. On a 1, the wand melts into harmless slime and is destroyed.\n\nA Wand of Viscid Globs is destroyed if exposed to sunlight for 1 hour without interruption."
+  },
+  {
+    "name": "Wand of Winter",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:wand-of-winter",
+    "rarity": "Rare",
+    "type": "Wand",
+    "description": "This wand looks and feels like an icicle.\n\nThe wand has 7 charges, which are used to fuel the spells within it. With the wand in hand, you can use your action to cast one of the following spells from the wand, even if you are incapable of casting spells: Ray of Frost (no charges, or 1 charge to cast at 5th level; +5 to hit with ranged spell attack), Sleet Storm (3 charges; spell save DC 15), or Ice Storm (4 charges; spell save DC 15). No other components are required.\n\nThe wand regains 1d6 + 1 expended charges each day at dawn. If you expend the wand's last charge, roll a d20. On a 20, the wand melts away, forever destroyed."
+  },
+  {
+    "name": "Wand of Wonder",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:wand-of-wonder",
+    "rarity": "Rare",
+    "type": "Wand",
+    "description": "This wand has 7 charges. While holding it, you can use an action to expend 1 of its charges and choose a target within 120 feet of you. The target can be a creature, an object, or a point in space. Roll d100 and consult the following table to discover what happens.\n\nIf the effect causes you to cast a spell from the wand, the spell's save DC is 15. If the spell normally has a range expressed in feet, its range becomes 120 feet if it isn't already.\n\nIf an effect covers an area, you must center the spell on and include the target. If an effect has multiple possible subjects, the DM randomly determines which ones are affected.\n\nThe wand regains 1d6 + 1 expended charges daily at dawn. If you expend the wand's last charge, roll a d20. On a 1, the wand crumbles into dust and is destroyed."
+  },
+  {
+    "name": "War Horn of Valor",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:war-horn-of-valor",
+    "rarity": "Rare",
+    "type": "Wondrous Item",
+    "description": "This brass war horn is engraved with the war rune, which glows purple when the horn is blown.\n\nYou can blow the horn as a bonus action. When you do, if you have the frightened condition, you immediately end that condition on yourself. You also have advantage on saving throws against being frightened until the start of your next turn.\n\nInvoking the Rune. When you blow the horn, you can also invoke the rune, imbuing the horn’s deep call with protective magic that affects creatures of your choice within 30 feet of yourself. You and all affected creatures gain a +1 bonus to AC until the start of your next turn.\n\nOnce the rune has been invoked, it can’t be invoked again until the next dawn."
+  },
+  {
+    "name": "Warrior's Passkey",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:warriors-passkey",
+    "rarity": "Rare",
+    "type": "Wondrous Item",
+    "description": "This silver skeleton key is warm to the touch. While holding the key in its key form, you can use an action to cast the Knock spell from the key.\n\nTransforming the Key. While holding the key, you can use a bonus action to transform it into a magic longsword. You are considered proficient with the sword, and you have a +1 bonus to attack and damage rolls made with it. On a hit, the sword deals 1d10 force damage. The item remains in its sword form until it leaves your grasp or you use another bonus action to revert it to its key form.\n\nIf you end your attunement to the item while it’s in its sword form, it automatically reverts to its key form."
+  },
+  {
+    "name": "Wayfarer's Boots",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:wayfarers-boots",
+    "rarity": "Rare",
+    "type": "Wondrous Item",
+    "description": "This pair of boots is made of durable cloth, with the journey rune stitched in golden thread above each heel. While you are wearing this item, your walking speed increases by 10 feet, and you have advantage on Wisdom (Survival) checks.\n\nInvoking the Runes. As a bonus action, you can invoke the boots’ runes to cast the Expeditious Retreat spell with them. Once the runes have been invoked, they can’t be invoked again until the next dawn."
+  },
+  {
+    "name": "Weapon, +1, +2, or +3",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:weapon-1-2-3",
+    "rarity": "Rare",
+    "type": "Weapon",
+    "description": "You have a bonus to attack and damage rolls made with this magic weapon. The bonus is determined by the weapon's rarity."
+  },
+  {
+    "name": "Weapon of Certain Death",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:weapon-of-certain-death",
+    "rarity": "Rare",
+    "type": "Weapon",
+    "description": "When you damage a creature with an attack using this magic weapon, the target can't regain hit points until the start of your next turn."
+  },
+  {
+    "name": "Weird Tank",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:weird-tank",
+    "rarity": "Rare",
+    "type": "Wondrous Item",
+    "description": "A Weird Tank is a ten-gallon tank of blown glass and sculpted bronze with a backpack-like carrying harness fashioned from tough leather. A water weird (see the Monster Manual for statistics) is contained within the tank. While wearing the tank, you can use an action to open it, allowing the water weird to emerge. The water weird acts immediately after you in the initiative order, and it is bound to the tank.\n\nYou can command the water weird telepathically (no action required) while you wear the tank. You can close the tank as an action only if you have first commanded the water weird to retract into it or if the water weird is dead.\n\nIf the water weird is killed, the tank loses its magical containment property until it spends at least 24 hours inside an elemental water node. When the tank is recharged, a new water weird forms inside it.\n\nThe tank has AC 15, 50 hit points, vulnerability to bludgeoning damage, and immunity to poison and psychic damage. Reducing the tank to 0 hit points destroys it and the water weird contained within it."
+  },
+  {
+    "name": "Wings of Flying",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:wings-of-flying",
+    "rarity": "Rare",
+    "type": "Wondrous Item",
+    "description": "While wearing this cloak, you can use an action to speak its command word. This turns the cloak into a pair of bat wings or bird wings on your back for 1 hour or until you repeat the command word as an action. The wings give you a flying speed of 60 feet. When they disappear, you can't use them again for 1d12 hours."
+  },
+  {
+    "name": "Woodcutter's Axe",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:woodcutter-s-axe",
+    "rarity": "Rare",
+    "type": "Weapon",
+    "description": "You have a +1 bonus to attack and damage rolls made with this magic weapon.\n\nWhen you use this axe to make an attack against a plant (an ordinary plant or a creature with the Plant type) or a wooden object that isn't being worn or carried, the attack deals an extra 2d6 slashing damage on a hit."
+  },
+  {
+    "name": "Wraps Of Unarmed Prowess",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:wraps-of-unarmed-prowess",
+    "rarity": "Rare",
+    "type": "Wondrous Item",
+    "description": "While you’re wearing these cloth wraps, your unarmed strikes are considered magical for the purpose of overcoming immunity and resistance to nonmagical attacks and damage, and you gain a bonus to the attack and damage rolls of your unarmed strikes, determined by the wraps’ rarity."
+  },
+  {
+    "name": "Zephyr Armor",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:zephyr-armor",
+    "rarity": "Rare",
+    "type": "Armor",
+    "description": "This fine set of white-and-silver armor bears the wind rune upon its chest.\n\nWhile wearing this armor, you have advantage on Dexterity (Acrobatics) checks and Dexterity saving throws as your movements are bolstered by gentle currents of wind.\n\nInvoking the Rune. As an action, you can invoke the armor’s rune to cast the Wind Wall spell (save DC 15) with it. Once the rune has been invoked, it can’t be invoked again until the next dawn."
+  },
+  {
+    "name": "Abracadabrus",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:abracadabrus",
+    "rarity": "Very Rare",
+    "type": "Wondrous Item",
+    "description": "An abracadabrus is an ornate, gemstone-studded wooden chest that weighs 25 pounds while empty. Its interior compartment is a cube measuring 1 1/2 feet on a side.\n\nThe chest has 20 charges. A creature can use an action to touch the closed lid of the chest and expend 1 of the chest's charges while naming one or more nonmagical objects (including raw materials, foodstuffs, and liquids) worth a total of 1 gp or less. The named objects magically appear in the chest, provided they can all fit inside it and the chest doesn't contain anything else. For example, the chest can conjure a plate of strawberries, a bowl of hot soup, a flagon of water, a stuffed animal, or a bag of twenty caltrops. Food and drink conjured by the chest are delicious, and they spoil if not consumed after 24 hours. Gems and precious metals created by the chest disappear after 1 minute.\n\nThe chest regains 1d20 expended charges daily at dawn. If the item's last charge is expended, roll a d20. On a 1, the chest loses its magic (becoming an ordinary chest), and its gemstones turn to dust."
+  },
+  {
+    "name": "Absorbing Tattoo",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:absorbing-tattoo",
+    "rarity": "Very Rare",
+    "type": "Wondrous Item",
+    "description": "Produced by a special needle, this magic tattoo features designs that emphasize one color.\n\nTattoo Attunement. To attune to this item, you hold the needle to your skin where you want the tattoo to appear, pressing the needle there throughout the attunement process. When the attunement is complete, the needle turns into the ink that becomes the tattoo, which appears on the skin.\n\nIf your attunement to the tattoo ends, the tattoo vanishes, and the needle reappears in your space.\n\nDamage Resistance. While the tattoo is on your skin, you have resistance to a type of damage associated with that color, as shown on the table below. The DM chooses the color or determines it randomly.\n\nDamage Absorption. When you take damage of the chosen type, you can use your reaction to gain immunity against that instance of the damage, and you regain a number of hit points equal to half the damage you would have taken. Once this reaction is used, it can't be used again until the next dawn."
+  },
+  {
+    "name": "All-Purpose Tool",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:all-purpose-tool",
+    "rarity": "Very Rare",
+    "type": "Wondrous Item",
+    "description": "This simple screwdriver can transform into a variety of tools; as an action, you can touch the item and transform it into any type of artisan's tool of your choice (see the \"Equipment\" chapter in the Player's Handbook for a list of artisan's tools). Whatever form the tool takes, you are proficient with it. While holding this tool, you gain a bonus to the spell attack rolls and the saving throw DCs of your artificer spells. The bonus is determined by the tool's rarity.\n\nAs an action, you can focus on the tool to channel your creative forces. Choose a cantrip that you don't know from any class list. For 8 hours, you can cast that cantrip, and it counts as an artificer cantrip for you. Once this property is used, it can't be used again until the next dawn."
+  },
+  {
+    "name": "Amethyst Lodestone",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:amethyst-lodestone",
+    "rarity": "Very Rare",
+    "type": "Wondrous Item",
+    "description": "This fist-sized chunk of amethyst is infused with an amethyst dragon’s ability to bend gravitational forces. While you are carrying the lodestone, you have advantage on Strength saving throws.\n\nThe lodestone has 6 charges for the following properties, which you can use while you are holding the stone. The stone regains 1d6 expended charges daily at dawn.\n\nFlight. As a bonus action, you can expend 1 charge to gain the power of flight for 10 minutes. For the duration, you gain a flying speed equal to your walking speed, and you can hover.\n\nGravitational Thrust. As an action, you can expend 1 charge to focus gravity around a creature you can see within 60 feet of you. The target must succeed on a DC 18 Strength saving throw or be pushed up to 20 feet in a direction of your choice.\n\nReverse Gravity. As an action, you can expend 3 charges to cast Reverse Gravity from the stone (save DC 18)."
+  },
+  {
+    "name": "Ammunition, +1, +2, or +3",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:ammunition",
+    "rarity": "Very Rare",
+    "type": "Weapon",
+    "description": "You have a bonus to attack and damage rolls made with this piece of magic ammunition. The bonus is determined by the rarity of the ammunition. Once it hits a target, the ammunition is no longer magical."
+  },
+  {
+    "name": "Amulet of the Black Skull",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:amulet-of-the-black-skull",
+    "rarity": "Very Rare",
+    "type": "Wondrous Item",
+    "description": "This amulet is carved from obsidian and shaped like a screaming humanoid skull, with ruby eyes and emeralds for teeth. It hangs from an iron chain necklace.\n\nThe amulet has 6 charges and regains 1d6 charges daily at dawn. While wearing the amulet, you can use an action to expend 1 of its charges to transport yourself and anything you are wearing or carrying to a location within 100 feet of you. The destination you choose doesn't need to be in your line of sight, but it must be familiar to you (in other words, a place you have seen or visited), and it must be on the same plane of existence as you. This effect isn't subject to the magic restrictions placed on the Tomb of the Nine Gods; thus, the amulet can be used to enter and exit the tomb.\n\nIf you aren't undead, you must make a DC 16 Constitution saving throw each time you use the amulet to teleport. On a failed saving throw, the black skull cackles as you are transformed in transit. The transformation takes effect as soon as you arrive at the destination, and is determined randomly by rolling percentile dice and consulting the Black Skull Transformation table."
+  },
+  {
+    "name": "Amulet of the Devout",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:amulet-of-the-devout",
+    "rarity": "Very Rare",
+    "type": "Wondrous Item",
+    "description": "This amulet bears the symbol of a deity inlaid with precious stones or metals. While you wear the holy symbol, you gain a bonus to spell attack rolls and the saving throw DCs of your spells. The bonus is determined by the amulet's rarity.\n\nWhile you wear this amulet, you can use your Channel Divinity feature without expending one of the feature's uses. Once this property is used, it can't be used again until the next dawn."
+  },
+  {
+    "name": "Amulet of the Planes",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:amulet-of-the-planes",
+    "rarity": "Very Rare",
+    "type": "Wondrous Item",
+    "description": "While wearing this amulet, you can use an action to name a location that you are familiar with on another plane of existence. Then make a DC 15 Intelligence check. On a successful check, you cast the Plane Shift spell. On a failure, you and each creature and object within 15 feet of you travel to a random destination. Roll a d100. On a 1-60, you travel to a random location on the plane you named. On a 61-100, you travel to a randomly determined plane of existence."
+  },
+  {
+    "name": "Animated Shield",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:animated-shield",
+    "rarity": "Very Rare",
+    "type": "Armor",
+    "description": "While holding this shield, you can speak its command word as a bonus action to cause it to animate. The shield leaps into the air and hovers in your space to protect you as if you were wielding it, leaving your hands free. The shield remains animated for 1 minute, until you use a bonus action to end this effect, or until you are incapacitated or die, at which point the shield falls to the ground or into your hand if you have one free."
+  },
+  {
+    "name": "Antimagic Armor",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:antimagic-armor",
+    "rarity": "Very Rare",
+    "type": "Armor",
+    "description": "While wearing this armor, you can use your reaction to give yourself advantage on a saving throw you make against a spell. Once this property is used, it can’t be used again until the next dawn.\n\nIn addition, while you wear this armor, you can use it to cast Antimagic Field, requiring no spell components. Once this property is used, it can’t be used again until the next dawn."
+  },
+  {
+    "name": "Arcane Cannon",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:arcane-cannon",
+    "rarity": "Very Rare",
+    "type": "Wondrous Item",
+    "description": "This Large cannon is imbued with magic. It requires no ammunition and doesn't need to be loaded. It takes one action to aim the cannon and one action to fire it. After the cannon has fired, it must recharge for 5 minutes before it can be fired again.\n\nThe creature firing the cannon chooses the effect from the following options:\n\nAcid Jet. The cannon discharges acid in a line 300 feet long and 5 feet wide. Each creature in that line must make a DC 15 Dexterity saving throw, taking 22 (4d10) acid damage on a failed save, or half as much damage on a successful one. In addition, a creature that fails its saving throw takes 11 (2d10) acid damage at the start of each of its turns; a creature can end this damage by using its action to wash off the acid with a pint or more of water.\n\nFire Jet. The cannon discharges fire in a line 300 feet long and 5 feet wide. Each creature in the area must make a DC 15 Dexterity saving throw, taking 33 (6d10) fire damage on a failed save, or half as much damage on a successful one. The fire ignites any flammable objects in the area that aren't being worn or carried.\n\nFrost Shot. The cannon shoots a ball of frost to a point you can see within 1,200 feet of the cannon. The ball then expands to form a 30-foot-radius sphere centered on that point. Each creature in that area must make a DC 15 Constitution saving throw. On a failed save, a creature takes 22 (4d10) cold damage, and its speed is reduced by 10 feet for 1 minute. On a successful save, the creature takes half as much damage, and its speed isn't reduced. A creature whose speed is reduced by this effect can repeat the save at the end of each of its turns, ending the effect on itself on a success.\n\nLightning Shot. The cannon shoots a ball of lightning to a point you can see within 1,200 feet of the cannon. The lightning then expands to form a 20-foot-radius sphere centered on that point. Each creature in that area must make a DC 15 Dexterity saving throw, taking 33 (6dl0) lightning damage on a failed save, or half as much damage on a successful one. Creatures wearing metal armor have disadvantage on the save.\n\nPoison Spray. The cannon expels poison gas in a 60-foot cone. Each creature in that area must make a DC 15 Constitution saving throw. On a failed save, the creature takes 22 (4d10) poison damage and is poisoned for 1 minute. On a successful save, the creature takes half as much damage and isn't poisoned. A creature poisoned in this way can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success."
+  },
+  {
+    "name": "Arcane Grimoire",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:arcane-grimoire",
+    "rarity": "Very Rare",
+    "type": "Wondrous Item",
+    "description": "While you are holding this leather-bound book, you can use it as a spellcasting focus for your wizard spells, and you gain a bonus to spell attack rolls and to the saving throw DCs of your wizard spells. The bonus is determined by the book's rarity.\n\nYou can use this book as a spellbook. In addition, when you use your Arcane Recovery feature, you can increase the number of spell slot levels you regain by 1."
+  },
+  {
+    "name": "Arcane Propulsion Arm",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:arcane-propulsion-arm",
+    "rarity": "Very Rare",
+    "type": "Wondrous Item",
+    "description": "This prosthetic appendage was developed by artificers of House Cannith. To attune to this item, you must attach it to your arm at the wrist, elbow, or shoulder, at which point the prosthetic magically forms a copy of the appendage it's replacing.\n\nWhile attached, the prosthetic provides these benefits:"
+  },
+  {
+    "name": "Armor, +1, +2, or +3",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:armor-1-2-3",
+    "rarity": "Very Rare",
+    "type": "Armor",
+    "description": "You have a bonus to AC while wearing this armor. The bonus is determined by its rarity."
+  },
+  {
+    "name": "Armor of Safeguarding",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:armor-of-safeguarding",
+    "rarity": "Very Rare",
+    "type": "Armor",
+    "description": "Set in the center of this armor’s chest is a citrine engraved with the shield rune.\n\nWhile wearing this armor, your hit point maximum increases by an amount equal to 10 + your level.\n\nInvoking the Rune. As an action, you can invoke the armor’s rune to cast the Beacon of Hope spell with it; the spell has a duration of 1 minute and doesn’t require concentration. Once the rune has been invoked, it can’t be invoked again until the next dawn."
+  },
+  {
+    "name": "Arrow of Slaying",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:arrow-of-slaying",
+    "rarity": "Very Rare",
+    "type": "Weapon",
+    "description": "An arrow of slaying is a magic weapon meant to slay a particular kind of creature. Some are more focused than others; for example, there are both arrows of dragon slaying and arrows of blue dragon slaying. If a creature belonging to the type, race, or group associated with an arrow of slaying takes damage from the arrow, the creature must make a DC 17 Constitution saving throw, taking an extra 6d10 piercing damage on a failed save, or half as much extra damage on a successful one.\n\nOnce an arrow of slaying deals its extra damage to a creature, it becomes a nonmagical arrow.\n\nOther types of magic ammunition of this kind exist, such as bolts of slaying meant for a crossbow, though arrows are most common."
+  },
+  {
+    "name": "Bag of Devouring",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:bag-of-devouring",
+    "rarity": "Very Rare",
+    "type": "Wondrous Item",
+    "description": "This bag superficially resembles a bag of holding but is a feeding orifice for a gigantic extradimensional creature. Turning the bag inside out closes the orifice.\n\nThe extradimensional creature attached to the bag can sense whatever is placed inside the bag. Animal or vegetable matter placed wholly in the bag is devoured and lost forever. When part of a living creature is placed in the bag, as happens when someone reaches inside it, there is a 50 percent chance that the creature is pulled inside the bag. A creature inside the bag can use its action to try to escape with a successful DC 15 Strength check. Another creature can use its action to reach into the bag to pull a creature out, doing so with a successful DC 20 Strength check (provided it isn't pulled inside the bag first). Any creature that starts its turn inside the bag is devoured, its body destroyed.\n\nInanimate objects can be stored in the bag, which can hold a cubic foot of such material. However, once each day, the bag swallows any objects inside it and spits them out into another plane of existence. The DM determines the time and plane.\n\nIf the bag is pierced or torn, it is destroyed, and anything contained within it is transported to a random location on the Astral Plane."
+  },
+  {
+    "name": "Baleful Talon",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:baleful-talon",
+    "rarity": "Very Rare",
+    "type": "Weapon",
+    "description": "You gain a +1 bonus to attack and damage rolls made with this hooked, obsidian dagger.\n\nWhen you hit a creature with this magic weapon and roll a 19 or 20 on the attack roll, the creature must make a DC 15 Constitution saving throw as the dagger flares with sickly light. The creature takes 6d6 necrotic damage on a failed save, or half as much on a successful one. If this damage reduces the creature to 0 hit points, the creature disintegrates into dust."
+  },
+  {
+    "name": "Barrier Tattoo",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:barrier-tattoo",
+    "rarity": "Very Rare",
+    "type": "Wondrous Item",
+    "description": "Tattoo Attunement. To attune to this item, you hold the needle to your skin where you want the tattoo to appear, pressing the needle there throughout the attunement process. When the attunement is complete, the needle turns into the ink that becomes the tattoo, which appears on the skin.\n\nIf your attunement to the tattoo ends, the tattoo vanishes, and the needle reappears in your space.\n\nProtection. While you aren't wearing armor, the tattoo grants you an Armor Class depending on the tattoo's rarity, as shown below. You can use a shield and still gain this benefit."
+  },
+  {
+    "name": "Battle Standard of Infernal Power",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:battle-standard-of-infernal-power",
+    "rarity": "Very Rare",
+    "type": "Wondrous Item",
+    "description": "This hell-forged battle standard is made of infernal iron and fitted with a small, unopenable cage containing a quasit. The trapped quasit is incapacitated, and its cage has AC 19, 10 hit points, and immunity to all types of damage except force damage. If killed or somehow released, the quasit disappears in a cloud of smoke, and a new one appears in the cage, provided the cage is intact.\n\nWhile you hold the banner, your weapon attacks and those of all allied creatures within 300 feet of you count as magical for the purposes of overcoming damage immunities and resistances."
+  },
+  {
+    "name": "Belt of Giant Strength",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:belt-of-giant-strength",
+    "rarity": "Very Rare",
+    "type": "Wondrous Item",
+    "description": "While wearing this belt, your Strength score changes to a score granted by the belt. If your Strength is already equal to or greater than the belt's score, the item has no effect on you.\n\nSix varieties of this belt exist, corresponding with and having rarity according to the six kinds of true giants. The Belt of Stone Giant Strength and the Belt of Frost Giant Strength look different, but they have the same effect."
+  },
+  {
+    "name": "Blade of the Medusa",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:blade-of-the-medusa",
+    "rarity": "Very Rare",
+    "type": "Weapon",
+    "description": "When you attack a creature with this magic weapon and roll a 20 on the attack roll, the creature must make a DC 15 Constitution saving throw in addition to suffering the attack’s normal effects. On a failed save, the creature is restrained and must make another Constitution saving throw at the end of each of its turns. If it successfully saves against this effect three times, the effect ends. If it fails its saves three times, it is turned to stone and subjected to the petrified condition for 1 hour.\n\nA creature is immune to this effect if it is immune to damage of the weapon’s type, does not have a body made of flesh, or has legendary actions.\n\nCurse. This weapon is cursed, and becoming attuned to it extends the curse to you. Until the curse is broken with a Remove Curse spell or similar magic, you are unwilling to part with the weapon. Whenever you attack a creature with this weapon and roll a 1 on the attack roll, you must succeed on a DC 15 Constitution saving throw or be restrained and forced to make additional saves against being petrified, as above."
+  },
+  {
+    "name": "Blast Scepter",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:blast-scepter",
+    "rarity": "Very Rare",
+    "type": "Rod",
+    "description": "The Blast Scepter can be used as an arcane focus.\n\nWhoever is attuned to the Blast Scepter gains resistance to fire and lightning damage and can, as an action, use it to cast Thunderwave as a 4th level spell (save DC 16) without expending a spell slot."
+  },
+  {
+    "name": "Bloodaxe",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:bloodaxe",
+    "rarity": "Very Rare",
+    "type": "Weapon",
+    "description": "You gain a +2 bonus to attack and damage rolls made with this magic axe. The axe deals an extra 1d6 necrotic damage to creatures that aren't constructs or undead. If you reduce such a creature to 0 hit points with an attack using this axe, you gain 10 temporary hit points.\n\nThis axe is forged from a dark, rust-colored metal and once belonged to the goliath barbarian Grog Strongjaw of Vox Machina."
+  },
+  {
+    "name": "Bloodseeker Ammunition",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:bloodseeker-ammunition",
+    "rarity": "Very Rare",
+    "type": "Weapon",
+    "description": "Ranged attack rolls made with this ammunition have advantage against any creature doesn’t have all its hit points."
+  },
+  {
+    "name": "Bloodshed Blade",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:bloodshed-blade",
+    "rarity": "Very Rare",
+    "type": "Weapon",
+    "description": "The hilt of this sword bears a carnelian engraved with the blood rune.\n\nYou can add your Constitution modifier (minimum of +1) to the damage rolls of attacks made with this weapon.\n\nInvoking the Rune. When you target a creature with an attack using this weapon, you can invoke the sword’s rune, causing it to flare with crimson light and infusing your attack with bloodthirsty precision. You then spend and roll one of your unspent Hit Dice and add the number rolled to the attack roll. You can choose to invoke the rune after rolling the d20.\n\nIf this attack hits, you can also spend and roll any number of your unspent Hit Dice and add the total rolled to the weapon’s damage.\n\nOnce the rune has been invoked, it can’t be invoked again until the next dawn."
+  },
+  {
+    "name": "Bloodwell Vial",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:bloodwell-vial",
+    "rarity": "Very Rare",
+    "type": "Wondrous Item",
+    "description": "To attune to this vial, you must place a few drops of your blood into it. The vial can't be opened while your attunement to it lasts. If your attunement to the vial ends, the contained blood turns to ash. You can use the vial as a spellcasting focus for your spells while wearing or holding it, and you gain a bonus to spell attack rolls and to the saving throw DCs of your sorcerer spells. The bonus is determined by the vial's rarity.\n\nIn addition, when you roll any Hit Dice to recover hit points while you are carrying the vial, you can regain 5 sorcery points. This property of the vial can't be used again until the next dawn."
+  },
+  {
+    "name": "Bobbing Lily Pad",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:bobbing-lily-pad",
+    "rarity": "Very Rare",
+    "type": "Wondrous Item",
+    "description": "This magic vehicle is a 10-foot-diameter leaf that floats on water. It has tendrils that propel it across land and across the water's surface (but not underwater), as well as through the air. It has a walking, flying, and swimming speed of 20 feet, and it can hover. It moves according to your spoken directions while you are riding it.\n\nThe lily pad can transport up to 300 pounds without hindrance. It can carry up to twice this weight, but it moves at half speed if it carries more than its normal capacity."
+  },
+  {
+    "name": "Bow Of Melodies",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:bow-of-melodies",
+    "rarity": "Very Rare",
+    "type": "Weapon",
+    "description": "This bow has multiple strings and resembles a lyre or small harp. By strumming the strings while setting an arrow to the bow, you imbue the arrow with magic.\n\nYou can play one of the following melodies when you use the bow to make a ranged weapon attack. You must choose to do so before you make the attack roll, and you can play only one melody per attack.\n\nMelody of Precision. If you’re proficient in Performance, you gain a +1 bonus to the attack roll. If you have expertise in Performance, you gain a +2 bonus instead.\n\nMelody of Reverberation. The melody you strum echoes loudly. On a hit, the target takes extra thunder damage equal to your Charisma modifier."
+  },
+  {
+    "name": "Bracelet of Rock Magic",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:bracelet-of-rock-magic",
+    "rarity": "Very Rare",
+    "type": "Wondrous Item",
+    "description": "While you wear this gold bracelet, it grants you immunity to being petrified, and it allows you to cast Flesh to Stone (save DC 15) as an action. Once the spell has been cast three times, the bracelet can no longer cast it. Thereafter, you can cast Stone Shape as an action. After you have done this thirteen times, the bracelet loses its magic and turns from gold to lead.\n\nCurse. The bracelet's affinity with earth manifests as an unusual curse. Creatures of flesh that are strongly related to earth and stone, such as stone giants and dwarves, have advantage on the saving throw against Flesh to Stone cast from the bracelet. If such a creature's save is successful, the bracelet breaks your attunement to it and casts the spell on you. You make your saving throw with disadvantage, and on a failed save you are petrified instantly."
+  }
+]

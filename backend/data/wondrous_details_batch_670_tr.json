@@ -1,0 +1,452 @@
+[
+    {
+        "name": "Robe of Stars",
+        "name_tr": "Yıldızlar Bornozu",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:robe-of-stars",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item",
+        "description": "Star-embroidered robe providing saving throw bonuses and the ability to cast magic missile or enter the Astral Plane.",
+        "description_tr": "Üzerindeki yıldızları koparıp büyü oku (Magic Missile) olarak atmanızı ve Astral Boyuta geçmenizi sağlayan bornoz."
+    },
+    {
+        "name": "Rod of Absorption",
+        "name_tr": "Emme Asası",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:rod-of-absorption",
+        "rarity": "Very Rare",
+        "type": "Rod",
+        "description": "Powerful rod that can absorb spells targeting the wielder and convert that energy into spell slots.",
+        "description_tr": "Size atılan büyüleri içine çekip hapseden ve bu enerjiyi kendi büyülerinizi yapmak için kullanan asa."
+    },
+    {
+        "name": "Rod of Alertness",
+        "name_tr": "Tetiktelik Asası",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:rod-of-alertness",
+        "rarity": "Very Rare",
+        "type": "Rod",
+        "description": "Rod providing vision and initiative bonuses, and can create a protective aura for allies.",
+        "description_tr": "Sizi her zaman tetikte (inisiyatif bonusu) tutan ve yere dikildiğinde dostları koruyan ışıklı bir aura yayan asa."
+    },
+    {
+        "name": "Rod Of Hellish Flames",
+        "name_tr": "Cehennem Alevi Asası",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:rod-of-hellish-flames",
+        "rarity": "Very Rare",
+        "type": "Rod",
+        "description": "Arcane focus providing fire/necrotic resistance and the ability to maximize fire or necrotic damage.",
+        "description_tr": "Ateş ve ölüm büyülerini en üst seviyeye çıkaran, sahibini bu elementlerden koruyan cehennem asası."
+    },
+    {
+        "name": "Rod of Security",
+        "name_tr": "Güvenlik Asası",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:rod-of-security",
+        "rarity": "Very Rare",
+        "type": "Rod",
+        "description": "Transports up to 200 creatures to a customizable extraplanar paradise for healing and rest.",
+        "description_tr": "Sizi ve 200 kişiye kadar dostunuzu, içinde her türlü yiyeceğin olduğu boyutsal bir cennete ışınlayan asa."
+    },
+    {
+        "name": "Rod of the Pact Keeper, +1, +2, +3",
+        "name_tr": "Pakt Gardiyanı Asası",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:rod-of-the-pact-keeper",
+        "rarity": "Very Rare",
+        "type": "Rod",
+        "description": "Warlock-specific rod that increases spell attack and save DCs and allows regaining a spell slot.",
+        "description_tr": "Warlockların büyü gücünü artıran ve onlara bittiklerinde ekstra bir büyü hakkı tanıyan pakt asası."
+    },
+    {
+        "name": "Rotor of Return",
+        "name_tr": "Dönüş Rotoru",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:rotor-of-return",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item",
+        "description": "Grants perfect memory, the ability to summon mundane objects, and teleportation to a set point.",
+        "description_tr": "Sıradan eşyaları bir anda yanınıza çağırmanızı ve önceden belirlediğiniz bir noktaya ışınlanmanızı sağlayan cihaz."
+    },
+    {
+        "name": "Ruidium Armor",
+        "name_tr": "Ruidium Zırhı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:ruidium-armor",
+        "rarity": "Very Rare",
+        "type": "Armor",
+        "description": "Magical armor infused with ruidium that provides benefits but risks corrupting the wearer on failed saves.",
+        "description_tr": "Güçlü bir koruma sağlayan ancak içindeki ruidium sebebiyle sahibini yozlaştırma riskine sahip olan zırh."
+    },
+    {
+        "name": "Ruidium Shield",
+        "name_tr": "Ruidium Kalkanı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:ruidium-shield",
+        "rarity": "Very Rare",
+        "type": "Armor",
+        "description": "Infused with ruidium, this shield can reflect psychic damage back to nearby creatures.",
+        "description_tr": "Aldığınız zihinsel (psychic) hasarı rakiplerinize aynen yansıtan ruidium damarlı sihirli kalkan."
+    },
+    {
+        "name": "Ruidium Weapon",
+        "name_tr": "Ruidium Silahı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:ruidium-weapon",
+        "rarity": "Very Rare",
+        "type": "Weapon",
+        "description": "Magical weapon that deals extra psychic damage but risks ruidium corruption on specific rolls.",
+        "description_tr": "Vurduğu hedefe extra psişik hasar veren ancak sahibini zamanla yozlaştırabilen tehlikeli silah."
+    },
+    {
+        "name": "Sage's Signet",
+        "name_tr": "Bilgenin Mührü",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:sages-signet",
+        "rarity": "Very Rare",
+        "type": "Ring",
+        "description": "Gilded ring allowing the casting of Augury and other additional spells based on its signet type.",
+        "description_tr": "Sahibine gelecekten haberler (Augury) veren ve üzerindeki mühre göre çeşitli büyüler bahşeden yüzük."
+    },
+    {
+        "name": "Sanctum Amulet",
+        "name_tr": "Kutsal Sığınak Muskası",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:sanctum-amulet",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item",
+        "description": "Amulet with a sacred rune that provides necrotic resistance and can save a creature from dropping to 0 HP.",
+        "description_tr": "Ölüm büyülerini engelleyen ve ölmek üzere olan (0 HP) birini anında hayata döndüren rünlü muska."
+    },
+    {
+        "name": "Sapphire Buckler",
+        "name_tr": "Safir Kalkan",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:sapphire-buckler",
+        "rarity": "Very Rare",
+        "type": "Armor",
+        "description": "Crystalline shield providing psychic/thunder resistance and the ability to locate nearby aberrations.",
+        "description_tr": "Psişik direnç veren ve etraftaki canavarların (Aberrations) yerini tespit edebilen mavi kristal kalkan."
+    },
+    {
+        "name": "Scaled Ornament",
+        "name_tr": "Pullu Süs",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:scaled-ornament",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item",
+        "description": "Grants immunity to charm/fear, provides AC bonuses, and can absorb/heal base on dragon breath damage.",
+        "description_tr": "Korkuya ve büyüye karşı bağışıklık veren, ejderha nefesinden gelen hasarı emip cana çeviren ziynet eşyası."
+    },
+    {
+        "name": "Scimitar of Speed",
+        "name_tr": "Hız Palası",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:scimitar-of-speed",
+        "rarity": "Very Rare",
+        "type": "Weapon",
+        "description": "Magical scimitar that grants a +2 bonus and allows an extra attack as a bonus action.",
+        "description_tr": "Sahibine ekstra bir hız kazandırarak her tur fazladan bir saldırı yapmasını sağlayan +2 pala."
+    },
+    {
+        "name": "Shard of the Ise Rune",
+        "name_tr": "Ise Rünü Kıymığı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:shard-of-the-ise-rune",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item",
+        "description": "Slender ice shard providing fire resistance and the ability to freeze water or summon sleet storms.",
+        "description_tr": "Dokunduğu suyu donduran, kış fırtınaları (Sleet Storm) çıkaran ve sahibini ateşten koruyan buz kıymığı."
+    },
+    {
+        "name": "Shield, +1, +2, +3",
+        "name_tr": "Efsanevi Kalkan +1, +2, +3",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:shield-1-2-3",
+        "rarity": "Very Rare",
+        "type": "Armor",
+        "description": "Magical shield providing a significant bonus to AC beyond its normal protective value.",
+        "description_tr": "Sıradan kalkanlardan çok daha hafif ve çok daha koruyucu (yüksek AC) olan efsanevi kalkan."
+    },
+    {
+        "name": "Shield of the Uven Rune",
+        "name_tr": "Uven Rünü Kalkanı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:shield-of-the-uven-rune",
+        "rarity": "Very Rare",
+        "type": "Armor",
+        "description": "White dragon scale shield providing cold immunity, deadly necrotic rebukes, and bane effects.",
+        "description_tr": "Buz ejderhası pulundan yapılma; soğuğa bağışıklık veren ve ona vurana ölüm hasarı fırlatan kalkan."
+    },
+    {
+        "name": "Skull Helm",
+        "name_tr": "Kafatası Miğferi",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:skull-helm",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item",
+        "description": "Skull-shaped helmet providing multiple resistances and the ability to summon a Spirit of Death.",
+        "description_tr": "Korkunç bir kafatası formunda olan, sahibi için bir ölüm ruhu çağıran ve çokça direnç veren miğfer."
+    },
+    {
+        "name": "Sling Bullets of Althemone",
+        "name_tr": "Althemone Sapan Mermileri",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:sling-bullets-of-althemone",
+        "rarity": "Very Rare",
+        "type": "Weapon",
+        "description": "Enchanted sling bullets with various magical properties that teleport back to the user on a miss.",
+        "description_tr": "Hedefini kaçırdığında sapan çantasına geri ışınlanan ve vurduğunda çeşitli büyülü etkiler bırakan mermiler."
+    },
+    {
+        "name": "Speaking Stone",
+        "name_tr": "Konuşan Taş",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:speaking-stone",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item",
+        "description": "Siberys dragonshard stone used for instantaneous long-distance communication via the Sending spell.",
+        "description_tr": "Uzak diyarlar arasında anlık mesajlaşmayı (Sending) sağlayan kadim haberleşme taşı."
+    },
+    {
+        "name": "Spear of Backbiting",
+        "name_tr": "Arkadan Vuran Mızrak",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:spear-of-backbiting",
+        "rarity": "Very Rare",
+        "type": "Weapon",
+        "description": "Cursed spear that increases throwing range and returns to the hand, but may backfire and strike the user.",
+        "description_tr": "Fırlatıldıktan sonra geri gelen ancak hata yapıldığında (zar 1 gelirse) sahibini sırtından vuran lanetli mızrak."
+    },
+    {
+        "name": "Spell Gem",
+        "name_tr": "Büyü Taşı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:spell-gem",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item",
+        "description": "Magical gemstone that can store a single spell for later casting by any eligible creature.",
+        "description_tr": "İçine herhangi bir büyüyü hapsedip daha sonra ihtiyacınız olduğunda kullanmanızı sağlayan sihirli mücevher."
+    },
+    {
+        "name": "Spell Scroll",
+        "name_tr": "Efsanevi Büyü Parşömeni",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:spell-scroll",
+        "rarity": "Very Rare",
+        "type": "Scroll",
+        "description": "Contains powerful class-specific spells in ciphered form for one-time casting.",
+        "description_tr": "Normalde yapamayacağınız kadar güçlü büyüleri tek seferlik yapmanıza izin veren parşömen."
+    },
+    {
+        "name": "Spellguard Shield",
+        "name_tr": "Büyü-Kalkanı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:spellguard-shield",
+        "rarity": "Very Rare",
+        "type": "Armor",
+        "description": "Shield that provides advantage on saves against magical effects and imposes disadvantage on spell attacks.",
+        "description_tr": "Büyülere karşı sahibine inanılmaz bir koruma (Saves Advantage) sağlayan büyü-savar kalkan."
+    },
+    {
+        "name": "Staff of Dunamancy",
+        "name_tr": "Dunamancy Asası",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:staff-of-dunamancy",
+        "rarity": "Very Rare",
+        "type": "Staff",
+        "description": "Gray wooden staff that casts powerful dunamancy spells and can turn failed saves into successes.",
+        "description_tr": "Zamanı ve yerçekimini bükerek (Gravity Sinkhole vb.) rakiplerini alt eden rünlü gri asa."
+    },
+    {
+        "name": "Staff of Fate",
+        "name_tr": "Kader Asası",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:staff-of-fate",
+        "rarity": "Very Rare",
+        "type": "Staff",
+        "description": "+3 quarterstaff that allows adding d4 bonuses to the d20 rolls of nearby creatures.",
+        "description_tr": "Vuruşları çok güçlü olan (+3) ve etrafındakilerin kaderini (zarlarını) küçük yardımlarla değiştiren asa."
+    },
+    {
+        "name": "Staff of Fire",
+        "name_tr": "Ateş Asası",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:staff-of-fire",
+        "rarity": "Very Rare",
+        "type": "Staff",
+        "description": "Grants fire resistance and allows casting spells like Fireball and Wall of Fire.",
+        "description_tr": "Sahibini yakmayan, buna karşın etrafa devasa ateş topları ve alev duvarları saçan kızıl asa."
+    },
+    {
+        "name": "Staff of Frost",
+        "name_tr": "Buz Asası",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:staff-of-frost",
+        "rarity": "Very Rare",
+        "type": "Staff",
+        "description": "Grants cold resistance and allows casting spells like Cone of Cold and Ice Storm.",
+        "description_tr": "Dondurucu fırtınalar yaratan, buz duvarları ören ve sahibini soğuktan koruyan beyaz asa."
+    },
+    {
+        "name": "Staff of Power",
+        "name_tr": "Kudret Asası",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:staff-of-power",
+        "rarity": "Very Rare",
+        "type": "Staff",
+        "description": "Incredibly versatile staff granting defensive/offensive bonuses and multiple high-level area-of-effect spells.",
+        "description_tr": "Bir büyücünün sahip olabileceği en güçlü asadır; hem korur hem de her türlü yıkıcı büyüyü yapabilir."
+    },
+    {
+        "name": "Staff of Striking",
+        "name_tr": "Vuruş Asası",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:staff-of-striking",
+        "rarity": "Very Rare",
+        "type": "Staff",
+        "description": "+3 quarterstaff that can expend charges to deal massive extra force damage on hits.",
+        "description_tr": "+3 isabetli ve her vuruşunda içinde biriktirdiği saf enerjiyi (force) rakibe boşaltan savaş asası."
+    },
+    {
+        "name": "Staff of Thunder and Lightning",
+        "name_tr": "Yıldırım ve Gök Gürültüsü Asası",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:staff-of-thunder-and-lightning",
+        "rarity": "Very Rare",
+        "type": "Staff",
+        "description": "+2 staff with multiple lightning and thunder-based offensive and stunning properties.",
+        "description_tr": "Sersemletici gök gürültüleri ve yakıcı yıldırımlar fırlatan, dövüşte çok etkili olan sihirli asa."
+    },
+    {
+        "name": "Steel",
+        "name_tr": "Çelik (Canlı Kılıç)",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:steel",
+        "rarity": "Very Rare",
+        "type": "Weapon",
+        "description": "Sentient +2 lawful good longsword that can cast Revivify to save the wearer.",
+        "description_tr": "Olan biteni gören ve duyan, gerektiğinde sahibini diriltebilen (Revivify) canlı ve sadık kılıç."
+    },
+    {
+        "name": "Stonemaker War Pick",
+        "name_tr": "Taşyapan Savaş Kazması",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:stonemaker-war-pick",
+        "rarity": "Very Rare",
+        "type": "Weapon",
+        "description": "War pick allowing the user to meld into stone or potentially petrify creatures on critical hits.",
+        "description_tr": "Taşların içinden geçmenizi sağlayan ve kritik vurduğunda rakibi taşa çevirebilen savaş kazması."
+    },
+    {
+        "name": "Sword of Sharpness",
+        "name_tr": "Keskinlik Kılıcı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:sword-of-sharpness",
+        "rarity": "Very Rare",
+        "type": "Weapon",
+        "description": "Sword that maximizes damage against objects and can sever the limbs of creatures on exceptional hits.",
+        "description_tr": "Eşyaları tek hamlede biçen ve rakiplerin kollarını veya bacaklarını koparabilen aşırı keskin kılıç."
+    },
+    {
+        "name": "Sword of the Paruns",
+        "name_tr": "Parunların Kılıcı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:sword-of-the-paruns",
+        "rarity": "Very Rare",
+        "type": "Weapon",
+        "description": "Commander's sword that allows directing allies to take actions or Move as reactions.",
+        "description_tr": "Savaş alanında dostlarınızı yönetmenizi ve onlara ekstra hamleler yaptırmanızı sağlayan liderlik kılıcı."
+    },
+    {
+        "name": "Tasha's Creeping Keepboat",
+        "name_tr": "Tasha'nın Yürüyen Hisarı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:tashas-creeping-keepboat",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item",
+        "description": "Magic boat with legs that can travel across land and water, providing protection to those on board.",
+        "description_tr": "Hem karada hem suda yürüyen, içindekileri koruyan ve komutla hareket eden bacaklı tekne."
+    },
+    {
+        "name": "Thunderbuss",
+        "name_tr": "Gök Gürültüsü Tüfeği",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:thunderbuss",
+        "rarity": "Very Rare",
+        "type": "Weapon",
+        "description": "Storm-rune engraved pistol that fires thunder energy and can create area-of-effect sonic blasts.",
+        "description_tr": "Gök gürültüsü rünüyle güçlendirilmiş; mermi yerine ses patlamaları fırlatan antik piştov/tüfek."
+    },
+    {
+        "name": "Tidecaller Trident",
+        "name_tr": "Gelgit Çağıran Üçlü Çatal",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:tidecaller-trident",
+        "rarity": "Very Rare",
+        "type": "Weapon",
+        "description": "+2 trident specialized for underwater combat that can summon tsunamis and control water.",
+        "description_tr": "Denizlerin hakimi olmanızı sağlayan; dalgaları yöneten ve tsunami yaratan devasa üçlü çatal."
+    },
+    {
+        "name": "Timepiece of Travel",
+        "name_tr": "Seyahat Saati",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:timepiece-of-travel",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item",
+        "description": "Navigation device providing pathfinding directions and the ability to cast Teleport once daily.",
+        "description_tr": "Gidilecek en kısa ve güvenli yolu sesli olarak tarif eden ve günde bir kez ışınlayan (Teleport) saat."
+    },
+    {
+        "name": "Tome of Clear Thought",
+        "name_tr": "Berrak Düşünce Kitabı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:tome-of-clear-thought",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item",
+        "description": "Magic book that permanently increases the reader's Intelligence score and maximum.",
+        "description_tr": "Zeka (Intelligence) kapasitenizi ve sınırlarınızı kalıcı olarak artıran, içine sihir işlenmiş kitap."
+    },
+    {
+        "name": "Tome of Leadership and Influence",
+        "name_tr": "Liderlik ve Etki Kitabı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:tome-of-leadership-and-influence",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item",
+        "description": "Magic book that permanently increases the reader's Charisma score and maximum.",
+        "description_tr": "Karizmanızı (Charisma) ve başkalarını etkileme gücünüzü kalıcı olarak artıran sihirli kitap."
+    },
+    {
+        "name": "Tome of Understanding",
+        "name_tr": "Anlayış Kitabı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:tome-of-understanding",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item",
+        "description": "Magic book that permanently increases the reader's Wisdom score and maximum.",
+        "description_tr": "Sezgilerinizi ve iradenizi (Wisdom) kalıcı olarak geliştiren, kadim bilgiler içeren kitap."
+    },
+    {
+        "name": "Voyager Staff",
+        "name_tr": "Yolcu Asası",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:voyager-staff",
+        "rarity": "Very Rare",
+        "type": "Staff",
+        "description": "Staff focused on planar travel and teleportation spells like Blink, Misty Step, and Banishment.",
+        "description_tr": "Boyutlar arası geçişler (Blink, Misty Step vb.) ve ışınlanmalar için kullanılan sihirli yolculuk asası."
+    },
+    {
+        "name": "Wand of Polymorph",
+        "name_tr": "Dönüşüm Asası",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:wand-of-polymorph",
+        "rarity": "Very Rare",
+        "type": "Wand",
+        "description": "Enables repeated casting of the Polymorph spell to transform targets into different creatures.",
+        "description_tr": "Rakipleri veya dostları tek bir vuruşla bambaşka canlılara dönüştüren sihirli değnek."
+    },
+    {
+        "name": "Wand of the War Mage",
+        "name_tr": "Savaş Büyücüsü Asası +3",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:wand-of-the-war-mage",
+        "rarity": "Very Rare",
+        "type": "Wand",
+        "description": "Highly powerful focus that grants a +3 bonus to spell attacks and allows ignoring environmental cover.",
+        "description_tr": "Büyü atışlarını çok daha isabetli kılan ve düşmanın saklanmasını engelleyen efsanevi savaş asası."
+    },
+    {
+        "name": "Watchful Helm",
+        "name_tr": "Tetiktekal Miğferi",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:watchful-helm",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item",
+        "description": "Grants vision-based advantage and allows the wearer to remain aware of surroundings while sleeping.",
+        "description_tr": "Uykuda bile çevreye hakim kalmanızı sağlayan ve görünmezleri tespit eden koruyucu miğfer."
+    },
+    {
+        "name": "Weapon, +1, +2, or +3",
+        "name_tr": "Efsanevi Silah +3",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:weapon-1-2-3",
+        "rarity": "Very Rare",
+        "type": "Weapon",
+        "description": "Magical weapon with a powerful permanent bonus to attack and damage rolls.",
+        "description_tr": "Vuruş ve hasar gücü en üst seviyeye (+3) çıkarılmış, dünyada çok az bulunan efsanevi silah."
+    },
+    {
+        "name": "Weapon of Throne's Command",
+        "name_tr": "Taht-Komutası Silahı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:weapon-of-thrones-command",
+        "rarity": "Very Rare",
+        "type": "Weapon",
+        "description": "Gilded weapon that grants social skills and allows casting command and domination spells.",
+        "description_tr": "Sahibine bir kralın otoritesini bahşeden, rakiplere emirler (Command) yağdıran altın işlemeli silah."
+    },
+    {
+        "name": "Wheel of Stars",
+        "name_tr": "Yıldız Çarkı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:wheel-of-stars",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item",
+        "description": "Astro-based device that can manipulate gravity and alter the results of nearby die rolls.",
+        "description_tr": "Yıldızların konumuna göre yerçekimini değiştiren ve zarları lehine çeviren sihirli çark."
+    }
+]

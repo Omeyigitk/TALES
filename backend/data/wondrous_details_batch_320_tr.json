@@ -1,0 +1,452 @@
+[
+    {
+        "name": "Blod Stone",
+        "name_tr": "Kan Taşı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:blod-stone",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Diamond containing a blood rune used to divine the location of a specific creature or its blood relatives.",
+        "description_tr": "Bir canlının kanını ve rününü içeren bu elmas, o canlının veya akrabalarının yerini tespit etmek (kehanet) için kullanılır."
+    },
+    {
+        "name": "Bloodwell Vial",
+        "name_tr": "Kan Kuyusu Şişesi",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:bloodwell-vial",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Spellcasting focus for sorcerers that grants bonuses to spell attacks and DCs, and allows regaining sorcery points.",
+        "description_tr": "Sorcerer büyüleri için bonus sağlar ve can tazelemek için Hit Dice harcandığında sorcery puanlarını yeniler."
+    },
+    {
+        "name": "Bonecounter",
+        "name_tr": "Kemik Sayan",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:bonecounter",
+        "rarity": "Rare",
+        "type": "Weapon",
+        "description": "A +2 magic mace that creates a silver piece in the wielder’s pocket whenever an undead creature is destroyed.",
+        "description_tr": "Hortlakları yok ettiğinde sahibinin cebinde gümüş para beliren +2 sihirli topuz."
+    },
+    {
+        "name": "Boots of Levitation",
+        "name_tr": "Havada Durma Çizmeleri",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:boots-of-levitation",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Allows casting the Levitate spell on yourself at will.",
+        "description_tr": "Kendi üzerinizde sınırsız olarak Levitate (havada asılı kalma) büyüsü yapmanızı sağlar."
+    },
+    {
+        "name": "Boots of Speed",
+        "name_tr": "Hız Çizmeleri",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:boots-of-speed",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Clicking heels together doubles walking speed and imposes disadvantage on opportunity attacks against you.",
+        "description_tr": "Topuklar birbirine vurulduğunda yürüme hızını ikiye katlar ve rakiplerin fırsat saldırılarına (opportunity attacks) dezavantaj verir."
+    },
+    {
+        "name": "Bow Of Conflagration",
+        "name_tr": "Yangın Yayı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:bow-of-conflagration",
+        "rarity": "Rare",
+        "type": "Weapon",
+        "description": "Fires flaming ammunition that deals extra fire damage and ignites flammable objects.",
+        "description_tr": "Ateşli oklar fırlatarak fazladan alev hasarı verir ve yanıcı nesneleri tutuşturur."
+    },
+    {
+        "name": "Bowl of Commanding Water Elementals",
+        "name_tr": "Su Elementali Komuta Kabı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:bowl-of-commanding-water-elementals",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Summons a water elemental when filled with water and the command word is spoken.",
+        "description_tr": "Suyla doldurulup komut verildiğinde bir su elementali çağırmanızı sağlar."
+    },
+    {
+        "name": "Bracer of Flying Daggers",
+        "name_tr": "Uçan Hançerlik",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:bracer-of-flying-daggers",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Allows pulling and hurling two magic daggers as an action; the daggers vanish after the attack. Never runs out.",
+        "description_tr": "İçinden sonsuz sayıda sihirli hançer çekip fırlatmanıza izin veren bileklik."
+    },
+    {
+        "name": "Bracers of Celerity",
+        "name_tr": "Sürat Kolçakları",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:bracers-of-celerity",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Increases all speeds by 10 feet and gives advantage on saves against paralysis or being restrained.",
+        "description_tr": "Tüm hızlarınızı 10 fit artırır ve felç (paralyzed) veya engellenme (restrained) durumlarına karşı avantaj sağlar."
+    },
+    {
+        "name": "Bracers of Defense",
+        "name_tr": "Savunma Kolçakları",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:bracers-of-defense",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Grants a +2 bonus to AC if wearing no armor and using no shield.",
+        "description_tr": "Zırh giymiyorken ve kalkan kullanmıyorken +2 AC bonusu sağlar."
+    },
+    {
+        "name": "Brazier of Commanding Fire Elementals",
+        "name_tr": "Ateş Elementali Komuta Mangalı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:brazier-of-commanding-fire-elementals",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Summons a fire elemental when fire is burning inside and the command word is spoken.",
+        "description_tr": "İçinde ateş yanarken komut verildiğinde bir ateş elementali çağırmanızı sağlar."
+    },
+    {
+        "name": "Breastplate Of Balance",
+        "name_tr": "Denge Zırhı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:breastplate-of-balance",
+        "rarity": "Rare",
+        "type": "Armor",
+        "description": "Uses charges to prevent rolls from having advantage/disadvantage or to cast Lesser Restoration.",
+        "description_tr": "Zarlardaki avantaj veya dezavantajı yok saymanızı veya Lesser Restoration büyüsü yapmanızı sağlayan çarklı zırh."
+    },
+    {
+        "name": "Bridle of Capturing",
+        "name_tr": "Yakalama Yuları",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:bridle-of-capturing",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Lashes out at a beast within 20 feet to bind and control it as if using Dominate Beast.",
+        "description_tr": "20 fit içindeki bir hayvana fırlatılarak onu kontrolünüz altına almanızı sağlar."
+    },
+    {
+        "name": "Butcher's Bib",
+        "name_tr": "Kasap Önlüğü",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:butchers-bib",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Black leather apron that grants combat benefits, often related to critical hits with slashing weapons.",
+        "description_tr": "Kesici silahlarla yapılan vuruşlarda kritik şansını artıran ve hasar veren kanlı deri önlük."
+    },
+    {
+        "name": "Cape of the Mountebank",
+        "name_tr": "Şarlatan Pelerini",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:cape-of-the-mountebank",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Allows casting the Dimension Door spell once per day, leaving a cloud of smoke behind.",
+        "description_tr": "Günde bir kez duman bulutu içinde ışınlanmanızı (Dimension Door) sağlar."
+    },
+    {
+        "name": "Cauldron of Plenty",
+        "name_tr": "Bereket Kazanı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:cauldron-of-plenty",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Transforms water into hot, nourishing stew three times per day.",
+        "description_tr": "İçine konan suyu günde üç kez besleyici ve sıcak bir yahniye dönüştüren kazan."
+    },
+    {
+        "name": "Censer of Controlling Air Elementals",
+        "name_tr": "Hava Elementali Komuta Buhurdanlığı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:censer-of-controlling-air-elementals",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Summons an air elemental when incense is burning inside and the command word is spoken.",
+        "description_tr": "İçinde tütsü yanarken komut verildiğinde bir hava elementali çağırmanızı sağlar."
+    },
+    {
+        "name": "Charm of Plant Command",
+        "name_tr": "Bitki Komuta Tılsımı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:charm-of-plant-command",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Allows casting Speak with Plants and gives advantage on checks to influence plants.",
+        "description_tr": "Bitkilerle konuşmanızı ve onları etkilemenizi sağlayan bitki saplarından yapılmış tılsım."
+    },
+    {
+        "name": "Chime of Opening",
+        "name_tr": "Açma Çanı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:chime-of-opening",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Can be struck to open a lock or latch on an object within 120 feet. Has 10 uses.",
+        "description_tr": "Sesiyle 120 fit içindeki kilitleri veya kapıları açan, 10 kullanımlık metal tüp."
+    },
+    {
+        "name": "Chromatic Rose",
+        "name_tr": "Renkli Gül",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:chromatic-rose",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Grants resistance to a specific damage type and can be used to exhale a cone of that damage.",
+        "description_tr": "Rengine göre element direnci sağlar ve yaprakları savurularak o elementle saldırı yapılabilir."
+    },
+    {
+        "name": "Claw of the Wyrm Rune",
+        "name_tr": "Ejder Rünü Pençesi",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:claw-of-the-wyrm-rune",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Provides resistance to dragon breath and can make a dragon vulnerable to damage.",
+        "description_tr": "Ejderhaların nefes saldırılarına karşı direnç sağlar ve ejderhaları zayıflatabilir."
+    },
+    {
+        "name": "Claws of the Umber Hulk",
+        "name_tr": "Umber Hulk Pençeleri",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:claws-of-the-umber-hulk",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Heavy gauntlets that grant a burrowing speed and can be used as melee weapons.",
+        "description_tr": "Takan kişiye kazarak ilerleme hızı veren ve silah olarak kullanılabilen ağır kolçaklar."
+    },
+    {
+        "name": "Cloak of Displacement",
+        "name_tr": "Yer Değiştirme Pelerini",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:cloak-of-displacement",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Projects an illusion making you appear to be nearby, imposing disadvantage on attack rolls against you.",
+        "description_tr": "Takan kişinin görüntüsünü kaydırarak rakiplerin saldırı zarlarına dezavantaj verir."
+    },
+    {
+        "name": "Cloak of the Bat",
+        "name_tr": "Yarasa Pelerini",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:cloak-of-the-bat",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Grants advantage on Stealth checks and allows flying in dim light/darkness or transforming into a bat.",
+        "description_tr": "Karanlıkta uçmanızı veya bir yarasaya dönüşmenizi sağlayan siyah pelerin."
+    },
+    {
+        "name": "Corpse Slayer",
+        "name_tr": "Ceset Katili",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:corpse-slayer",
+        "rarity": "Rare",
+        "type": "Weapon",
+        "description": "+1 bonus weapon that deals extra damage to undead and makes them easier to turn.",
+        "description_tr": "Hortlaklara karşı fazladan hasar veren ve onları kovmayı kolaylaştıran +1 silah."
+    },
+    {
+        "name": "Crown of the Wrath Bringer",
+        "name_tr": "Gazap Getiren Tacı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:crown-of-the-wrath-bringer",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Allows dealing extra psychic damage by spending Hit Dice and can cast the Fear spell.",
+        "description_tr": "Saldırı yaptığınızda can harcayarak ekstra psişik hasar vermenizi sağlayan tac."
+    },
+    {
+        "name": "Crystal Blade",
+        "name_tr": "Kristal Kılıç",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:crystal-blade",
+        "rarity": "Rare",
+        "type": "Weapon",
+        "description": "Sword fashioned from a dragon horn that deals radiant damage and can heal its wielder.",
+        "description_tr": "Işık hasarı veren ve verdiği hasar kadar kullanıcısını iyileştirebilen kristal kılıç."
+    },
+    {
+        "name": "Cube of Force",
+        "name_tr": "Kuvvet Küpü",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:cube-of-force",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Creates various barriers of invisible force around you by pressing different faces.",
+        "description_tr": "Farklı yüzlerine basılarak etrafınızda geçilmez kuvvet alanları oluşturan küp."
+    },
+    {
+        "name": "Daern's Instant Fortress",
+        "name_tr": "Daern'in Anlık Kalesi",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:daerns-instant-fortress",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Small metal cube that transforms into a large adamantine fortress on command.",
+        "description_tr": "Yere bırakılıp komut verildiğinde devasa bir kaleye dönüşen metal küp."
+    },
+    {
+        "name": "Dagger of Blindsight",
+        "name_tr": "Kör Görüş Hançeri",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:dagger-of-blindsight",
+        "rarity": "Rare",
+        "type": "Weapon",
+        "description": "Grants the wielder blindsight to a range of 30 feet while attuned.",
+        "description_tr": "Takan kişiye 30 fitlik kör görüş (blindsight) yeteneği kazandıran hançer."
+    },
+    {
+        "name": "Dagger of Venom",
+        "name_tr": "Zehir Hançeri",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:dagger-of-venom",
+        "rarity": "Rare",
+        "type": "Weapon",
+        "description": "+1 bonus weapon that can be coated in black poison once per day, dealing extra damage and poisoning targets.",
+        "description_tr": "Günde bir kez bıçağını yoğun bir zehirle kaplayıp rakiplerini zehirleyebilen +1 hançer."
+    },
+    {
+        "name": "Deck Of Oracles",
+        "name_tr": "Kahin Destesi",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:deck-of-oracles",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Deck of cards that allows predicting omens and influencing d20 rolls, or casting Divination.",
+        "description_tr": "Gelecekten haber almanızı veya başkalarının attığı zarları değiştirmenizi sağlayan kart destesi."
+    },
+    {
+        "name": "Delver's Claws",
+        "name_tr": "Kazıcı Pençeleri",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:delvers-claws",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Grants burrowing speed and blindsight, and can be used to regain hit points via the mountain rune.",
+        "description_tr": "Yerin altında kazarak ilerleme, kör görüş ve dağ rünüyle iyileşme gücü veren eldivenler."
+    },
+    {
+        "name": "Demon Skin",
+        "name_tr": "İblis Derisi",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:demon-skin",
+        "rarity": "Rare",
+        "type": "Armor",
+        "description": "Black ichor that adheres to skin providing resistance to poison and no Stealth disadvantage.",
+        "description_tr": "Vücuda yapışarak zehir direnci sağlayan ve gizliliği bozmayan sihirli 'deri' zırh."
+    },
+    {
+        "name": "Devotee's Censer",
+        "name_tr": "Dindar Buhurdanlığı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:devotees-censer",
+        "rarity": "Rare",
+        "type": "Weapon",
+        "description": "Flail that acts as a holy symbol, deals extra radiant damage, and can emit healing incense.",
+        "description_tr": "Işık hasarı veren ve etrafına iyileştirici tütsü dumanı yayan kutsal topuz."
+    },
+    {
+        "name": "Dimensional Shackles",
+        "name_tr": "Boyutsal Prangalar",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:dimensional-shackles",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Shackles that prevent the bound creature from using any form of teleportation or planar travel.",
+        "description_tr": "Hapsedilen yaratığın ışınlanmasını veya başka düzlemlere kaçmasını engelleyen sihirli kelepçeler."
+    },
+    {
+        "name": "Docent",
+        "name_tr": "Docent",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:docent",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Sentient metal sphere that assists Warforged with life support, translation, and advice.",
+        "description_tr": "Warforged karakterlere yardımcı olan, çeviri yapabilen ve tavsiyeler veren bilinçli metal küre."
+    },
+    {
+        "name": "Dodecahedron of Doom",
+        "name_tr": "Kader Onikiyüzlüsü",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:dodecahedron-of-doom",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Throwable 12-sided die that produces a random magical effect upon rolling.",
+        "description_tr": "Fırlatıldığında rastgele ve genellikle kaotik sihirli etkiler yaratan 12 yüzlü zar."
+    },
+    {
+        "name": "Donjon's Sundering Sphere",
+        "name_tr": "Donjon'un Parçalayıcı Küresi",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:donjons-sundering-sphere",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Crystal sphere attached to a weapon to make it magical, granting planar resistance and banishing smites.",
+        "description_tr": "Silaha takılarak onu sihirli yapan ve rakipleri kısa süreliğine başka düzleme sürgün eden küre."
+    },
+    {
+        "name": "Dragon Slayer",
+        "name_tr": "Ejderha Katili",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:dragon-slayer",
+        "rarity": "Rare",
+        "type": "Weapon",
+        "description": "+1 bonus weapon that deals an extra 3d6 damage to dragons.",
+        "description_tr": "Ejderhalara karşı muazzam (+3d6) hasar veren +1 sihirli silah."
+    },
+    {
+        "name": "Dragon Vessel",
+        "name_tr": "Ejderha Kabı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:dragon-vessel",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Container that can magically fill itself with various liquids or potions once per day.",
+        "description_tr": "Günde bir kez içini bira, yağ veya iyileştirme iksiriyle doldurabilen sihirli kap."
+    },
+    {
+        "name": "Dragon Wing Bow",
+        "name_tr": "Ejder Kanadı Yayı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:dragon-wing-bow",
+        "rarity": "Rare",
+        "type": "Weapon",
+        "description": "Bow infused with elemental energy that can produce its own magical ammunition.",
+        "description_tr": "Ejderha nefesi enerjisiyle yüklü ve kendi oklarını yaratabilen sihirli yay."
+    },
+    {
+        "name": "Dragonhide Belt",
+        "name_tr": "Ejderha Derisi Kemer",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:dragonhide-belt",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Belt for monks that increases ki saving throw DCs and allows regaining ki points.",
+        "description_tr": "Monk karakterlerin Ki güçlerini artıran ve Ki puanlarını yenileyen ejderha derisi kemer."
+    },
+    {
+        "name": "Dragon's Wrath Weapon",
+        "name_tr": "Ejderha Gazabı Silahı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:dragons-wrath-weapon",
+        "rarity": "Rare",
+        "type": "Weapon",
+        "description": "Weapon that grows in power alongside its owner, dealing dragon breath damage types.",
+        "description_tr": "Sahibiyle birlikte güçlenen ve ejderha nefesi hasarı veren kademeli sihirli silah."
+    },
+    {
+        "name": "Dragontooth Dagger",
+        "name_tr": "Ejder Dişi Hançeri",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:dragontooth-dagger",
+        "rarity": "Rare",
+        "type": "Weapon",
+        "description": "+1 dagger made from a dragon's tooth that deals extra acid damage.",
+        "description_tr": "Ejderha dişinden yapılmış, asit hasarı veren +1 sihirli hançer."
+    },
+    {
+        "name": "Dragon-Touched Focus",
+        "name_tr": "Ejderha Dokunuşlu Odak",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:dragon-touched-focus",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Spellcasting focus that grants initiative advantage and draconic-themed spellcasting benefits.",
+        "description_tr": "İnisiyatif avantajı veren ve büyücüye ejderha temalı güçler kazandıran odak eşyası."
+    },
+    {
+        "name": "Duplicitous Manuscript",
+        "name_tr": "Aldatıcı El Yazması",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:duplicitous-manuscript",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Spellbook that appears as a romance novel to others, containing various illusion spells.",
+        "description_tr": "Başkalarına sıradan bir aşk romanı gibi görünen ama aslında illüzyon büyüleri içeren büyü kitabı."
+    },
+    {
+        "name": "Eagle Whistle",
+        "name_tr": "Kartal Düdüğü",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:eagle-whistle",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Allow continuous flight at double speed as long as you blow it continuously.",
+        "description_tr": "Kesintisiz çalındığı sürece yüksek hızda uçmanızı sağlayan sihirli düdük."
+    },
+    {
+        "name": "Elemental Essence Shard",
+        "name_tr": "Elementel Öz Kristali",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:elemental-essence-shard",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Crystal that grants elemental effects when using Metamagic.",
+        "description_tr": "Sorcerer karakterleri için Metamagic etkisine elementel güçler ekleyen kristal."
+    },
+    {
+        "name": "Elixir of Health",
+        "name_tr": "Sağlık Eliksiri",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:elixir-of-health",
+        "rarity": "Rare",
+        "type": "Potion",
+        "description": "Cures any disease and removes the blinded, deafened, paralyzed, and poisoned conditions.",
+        "description_tr": "Tüm hastalıkları iyileştiren; körlük, sağırlık, felç ve zehirlenmeyi gideren güçlü iksir."
+    }
+]

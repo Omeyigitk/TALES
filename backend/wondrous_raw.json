@@ -1,0 +1,5462 @@
+[
+    {
+        "name": "Armblade",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:armblade",
+        "rarity": "Common",
+        "type": "Weapon"
+    },
+    {
+        "name": "Armor of Gleaming",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:armor-of-gleaming",
+        "rarity": "Common",
+        "type": "Armor"
+    },
+    {
+        "name": "Band of Loyalty",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:band-of-loyalty",
+        "rarity": "Common",
+        "type": "Ring"
+    },
+    {
+        "name": "Bead of Nourishment",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:bead-of-nourishment",
+        "rarity": "Common",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Bead of Refreshment",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:bead-of-refreshment",
+        "rarity": "Common",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Boots of False Tracks",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:boots-of-false-tracks",
+        "rarity": "Common",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Bottle of Boundless Coffee",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:bottle-of-boundless-coffee",
+        "rarity": "Common",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Breathing Bubble",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:breathing-bubble",
+        "rarity": "Common",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Candle of the Deep",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:candle-of-the-deep",
+        "rarity": "Common",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Cast-Off Armor",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:cast-off-armor",
+        "rarity": "Common",
+        "type": "Armor"
+    },
+    {
+        "name": "Charlatan's Die",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:charlatans-die",
+        "rarity": "Common",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Chest of Preserving",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:chest-of-preserving",
+        "rarity": "Common",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Cleansing Stone",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:cleansing-stone",
+        "rarity": "Common",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Cloak of Billowing",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:cloak-of-billowing",
+        "rarity": "Common",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Cloak of Many Fashions",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:cloak-of-many-fashions",
+        "rarity": "Common",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Clockwork Amulet",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:clockwork-amulet",
+        "rarity": "Common",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Clothes of Mending",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:clothes-of-mending",
+        "rarity": "Common",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Coin of Delving",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:coin-of-delving",
+        "rarity": "Common",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Cuddly Strixhaven Mascot",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:cuddly-strixhaven-mascot",
+        "rarity": "Common",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Dark Shard Amulet",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:dark-shard-amulet",
+        "rarity": "Common",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Dread Helm",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:dread-helm",
+        "rarity": "Common",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Ear Horn of Hearing",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:ear-horn-of-hearing",
+        "rarity": "Common",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Earring of Message",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:earring-of-message",
+        "rarity": "Common",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Enduring Spellbook",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:enduring-spellbook",
+        "rarity": "Common",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Ersatz Eye",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:ersatz-eye",
+        "rarity": "Common",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Everbright Lantern",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:everbright-lantern",
+        "rarity": "Common",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Feather Token",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:feather-token",
+        "rarity": "Common",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Glamerweave",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:glamerweave",
+        "rarity": "Common",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Hat of Vermin",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:hat-of-vermin",
+        "rarity": "Common",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Hat of Wizardry",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:hat-of-wizardry",
+        "rarity": "Common",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Heward's Handy Spice Pouch",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:hewards-handy-spice-pouch",
+        "rarity": "Common",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Horn of Silent Alarm",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:horn-of-silent-alarm",
+        "rarity": "Common",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Illuminator's Tattoo",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:illuminators-tattoo",
+        "rarity": "Common",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Imbued Wood Focus",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:imbued-wood-focus",
+        "rarity": "Common",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Instrument of Illusions",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:instrument-of-illusions",
+        "rarity": "Common",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Instrument of Scribing",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:instrument-of-scribing",
+        "rarity": "Common",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Keycharm",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:keycharm",
+        "rarity": "Common",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Lantern of Tracking",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:lantern-of-tracking",
+        "rarity": "Common",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Lock of Trickery",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:lock-of-trickery",
+        "rarity": "Common",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Masque Charm",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:masque-charm",
+        "rarity": "Common",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Masquerade Tattoo",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:masquerade-tattoo",
+        "rarity": "Common",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Medal of Muscle",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:medal-of-muscle",
+        "rarity": "Common",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Medal of the Conch",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:medal-of-the-conch",
+        "rarity": "Common",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Medal of the Horizonback",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:medal-of-the-horizonback",
+        "rarity": "Common",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Medal of the Maze",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:medal-of-the-maze",
+        "rarity": "Common",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Medal of the Meat Pie",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:medal-of-the-meat-pie",
+        "rarity": "Common",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Medal of the Wetlands",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:medal-of-the-wetlands",
+        "rarity": "Common",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Medal of Wit",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:medal-of-wit",
+        "rarity": "Common",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Mind Crystal",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:mind-crystal",
+        "rarity": "Common",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Moodmark Paint",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:moodmark-paint",
+        "rarity": "Common",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Moon-Touched Sword",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:moon-touched-sword",
+        "rarity": "Common",
+        "type": "Weapon"
+    },
+    {
+        "name": "Mystery Key",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:mystery-key",
+        "rarity": "Common",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Orb of Direction",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:orb-of-direction",
+        "rarity": "Common",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Orb of Gonging",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:orb-of-gonging",
+        "rarity": "Common",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Orb of Shielding",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:orb-of-shielding",
+        "rarity": "Common",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Orb of Time",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:orb-of-time",
+        "rarity": "Common",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Perfume of Bewitching",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:perfume-of-bewitching",
+        "rarity": "Common",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Pipe of Remembrance",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:pipe-of-remembrance",
+        "rarity": "Common",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Pipe of Smoke Monsters",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:pipe-of-smoke-monsters",
+        "rarity": "Common",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Pole of Angling",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:pole-of-angling",
+        "rarity": "Common",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Pole of Collapsing",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:pole-of-collapsing",
+        "rarity": "Common",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Pot of Awakening",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:pot-of-awakening",
+        "rarity": "Common",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Potion of Climbing",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:potion-of-climbing",
+        "rarity": "Common",
+        "type": "Potion"
+    },
+    {
+        "name": "Potion of Healing",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:potion-of-healing",
+        "rarity": "Common",
+        "type": "Potion"
+    },
+    {
+        "name": "Potion of Watchful Rest",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:potion-of-watchful-rest",
+        "rarity": "Common",
+        "type": "Potion"
+    },
+    {
+        "name": "Pressure Capsule",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:pressure-capsule",
+        "rarity": "Common",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Prosthetic Limb",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:prosthetic-limb",
+        "rarity": "Common",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Rope of Mending",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:rope-of-mending",
+        "rarity": "Common",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Ruby of the War Mage",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:ruby-of-the-war-mage",
+        "rarity": "Common",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Scribe's Pen",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:scribes-pen",
+        "rarity": "Common",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Sekolahian Worshipping Statuette",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:sekolahian-worshipping-statuette",
+        "rarity": "Common",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Shield of Expression",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:shield-of-expression",
+        "rarity": "Common",
+        "type": "Armor"
+    },
+    {
+        "name": "Shiftweave",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:shiftweave",
+        "rarity": "Common",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Smoldering Armor",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:smoldering-armor",
+        "rarity": "Common",
+        "type": "Armor"
+    },
+    {
+        "name": "Spell Scroll",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:spell-scroll",
+        "rarity": "Common",
+        "type": "Scroll"
+    },
+    {
+        "name": "Spellshard",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:spellshard",
+        "rarity": "Common",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Spellwrought Tattoo",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:spellwrought-tattoo",
+        "rarity": "Common",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Staff of Adornment",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:staff-of-adornment",
+        "rarity": "Common",
+        "type": "Staff"
+    },
+    {
+        "name": "Staff of Birdcalls",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:staff-of-birdcalls",
+        "rarity": "Common",
+        "type": "Staff"
+    },
+    {
+        "name": "Staff of Flowers",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:staff-of-flowers",
+        "rarity": "Common",
+        "type": "Staff"
+    },
+    {
+        "name": "Strixhaven Pennant",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:strixhaven-pennant",
+        "rarity": "Common",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Talking Doll",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:talking-doll",
+        "rarity": "Common",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Tankard of Plenty",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:tankard-of-plenty",
+        "rarity": "Common",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Tankard of Sobriety",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:tankard-of-sobriety",
+        "rarity": "Common",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Thermal Cube",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:thermal-cube",
+        "rarity": "Common",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Unbreakable Arrow",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:unbreakable-arrow",
+        "rarity": "Common",
+        "type": "Weapon"
+    },
+    {
+        "name": "Veteran's Cane",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:veterans-cane",
+        "rarity": "Common",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Vox Seeker",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:vox-seeker",
+        "rarity": "Common",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Walloping Ammunition",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:walloping-ammunition",
+        "rarity": "Common",
+        "type": "Weapon"
+    },
+    {
+        "name": "Wand of Conducting",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:wand-of-conducting",
+        "rarity": "Common",
+        "type": "Wand"
+    },
+    {
+        "name": "Wand of Pyrotechnics",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:wand-of-pyrotechnics",
+        "rarity": "Common",
+        "type": "Wand"
+    },
+    {
+        "name": "Wand of Scowls",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:wand-of-scowls",
+        "rarity": "Common",
+        "type": "Wand"
+    },
+    {
+        "name": "Wand of Smiles",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:wand-of-smiles",
+        "rarity": "Common",
+        "type": "Wand"
+    },
+    {
+        "name": "Wand Sheath",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:wand-sheath",
+        "rarity": "Common",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Adamantine Armor",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:adamantine-armor",
+        "rarity": "Uncommon",
+        "type": "Armor"
+    },
+    {
+        "name": "Alchemy Jug",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:alchemy-jug",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Alchemy Jug (Blue)",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:alchemy-jug-blue",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Alchemy Jug (Orange)",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:alchemy-jug-orange",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "All-Purpose Tool",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:all-purpose-tool",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Ammunition, +1, +2, or +3",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:ammunition",
+        "rarity": "Uncommon",
+        "type": "Weapon"
+    },
+    {
+        "name": "Amulet of Proof Against Detection and Location",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:amulet-of-proof-against-detection-and-locatio",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Amulet of the Devout",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:amulet-of-the-devout",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Amulet of the Drunkard",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:amulet-of-the-drunkard",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Arcane Grimoire",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:arcane-grimoire",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Armor Of Fungal Spores",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:armor-of-fungal-spores",
+        "rarity": "Uncommon",
+        "type": "Armor"
+    },
+    {
+        "name": "Armor Of The Fallen",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:armor-of-the-fallen",
+        "rarity": "Uncommon",
+        "type": "Armor"
+    },
+    {
+        "name": "Armor Of Weightlessness",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:armor-of-weightlessness",
+        "rarity": "Uncommon",
+        "type": "Armor"
+    },
+    {
+        "name": "Bag Of Bounty",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:bag-of-bounty",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Bag of Holding",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:bag-of-holding",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Bag of Tricks",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:bag-of-tricks",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Balance of Harmony",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:balance-of-harmony",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Balloon Pack",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:balloon-pack",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Barrier Tattoo",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:barrier-tattoo",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Blasted Goggles",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:blasted-goggles",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Blood of the Lycanthrope Antidote",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:blood-of-the-lycanthrope-antidote",
+        "rarity": "Uncommon",
+        "type": "Potion"
+    },
+    {
+        "name": "Blood Spear",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:blood-spear",
+        "rarity": "Uncommon",
+        "type": "Weapon"
+    },
+    {
+        "name": "Bloodrage Greataxe",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:bloodrage-greataxe",
+        "rarity": "Uncommon",
+        "type": "Weapon"
+    },
+    {
+        "name": "Bloodwell Vial",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:bloodwell-vial",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Boomerang Shield",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:boomerang-shield",
+        "rarity": "Uncommon",
+        "type": "Armor"
+    },
+    {
+        "name": "Boots of Elvenkind",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:boots-of-elvenkind",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Boots of Striding and Springing",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:boots-of-striding-and-springing",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Boots of the Winterlands",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:boots-of-the-winterlands",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Bottled Breath",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:bottled-breath",
+        "rarity": "Uncommon",
+        "type": "Potion"
+    },
+    {
+        "name": "Bracers of Archery",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:bracers-of-archery",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Brooch of Living Essence",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:brooch-of-living-essence",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Brooch of Shielding",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:brooch-of-shielding",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Broom of Flying",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:broom-of-flying",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Cap of Water Breathing",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:cap-of-water-breathing",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Card Sharp's Deck",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:card-sharps-deck",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Circlet of Blasting",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:circlet-of-blasting",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Circlet of Human Perfection",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:circlet-of-human-perfection",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Cloak of Elvenkind",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:cloak-of-elvenkind",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Cloak of Protection",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:cloak-of-protection",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Cloak of the Manta Ray",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:cloak-of-the-manta-ray",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Coiling Grasp Tattoo",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:coiling-grasp-tattoo",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Cracked Driftglobe",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:cracked-driftglobe",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Cursed Luckstone",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:cursed-luckstone",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Decanter of Endless Water",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:decanter-of-endless-water",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Deck of Illusions",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:deck-of-illusions",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Deck Of Miscellany",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:deck-of-miscellany",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Deck Of Wonder",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:deck-of-wonder",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Dragon Vessel",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:dragon-vessel",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Dragonhide Belt",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:dragonhide-belt",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Dragon's Wrath Weapon",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:dragons-wrath-weapon",
+        "rarity": "Uncommon",
+        "type": "Weapon"
+    },
+    {
+        "name": "Dragon-Touched Focus",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:dragon-touched-focus",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Dried Leech",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:dried-leech",
+        "rarity": "Uncommon",
+        "type": "Weapon"
+    },
+    {
+        "name": "Driftglobe",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:driftglobe",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Dust of Corrosion",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:dust-of-corrosion",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Dust of Deliciousness",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:dust-of-deliciousness",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Dust of Disappearance",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:dust-of-disappearance",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Dust of Dryness",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:dust-of-dryness",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Dust of Sneezing and Choking",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:dust-of-sneezing-and-choking",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Earworm",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:earworm",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Eldritch Claw Tattoo",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:eldritch-claw-tattoo",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Elemental Gem",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:elemental-gem",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Emerald Pen",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:emerald-pen",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Eversmoking Bottle",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:eversmoking-bottle",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Eyes of Charming",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:eyes-of-charming",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Eyes of Minute Seeing",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:eyes-of-minute-seeing",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Eyes of the Eagle",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:eyes-of-the-eagle",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Fabulist Gem",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:fabulist-gem",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Feywild Shard",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:feywild-shard",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Figurine of Wondrous Power",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:figurine-of-wondrous-power",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Finder's Goggles",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:finders-goggles",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Gauntlets of Ogre Power",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:gauntlets-of-ogre-power",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Gem of Brightness",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:gem-of-brightness",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Glamerweave",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:glamerweave",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Gloves of Missile Snaring",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:gloves-of-missile-snaring",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Gloves of Swimming and Climbing",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:gloves-of-swimming-and-climbing",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Gloves of Thievery",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:gloves-of-thievery",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Goggles of Night",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:goggles-of-night",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Goggles of Object Reading",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:goggles-of-object-reading",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Guardian Emblem",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:guardian-emblem",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Guild Keyrune",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:guild-keyrune",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Guild Signet",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:guild-signet",
+        "rarity": "Uncommon",
+        "type": "Ring"
+    },
+    {
+        "name": "Harkon's Bite",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:harkon-s-bite",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Hat of Disguise",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:hat-of-disguise",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Headband of Intellect",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:headband-of-intellect",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Hellfire Weapon",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:hellfire-weapon",
+        "rarity": "Uncommon",
+        "type": "Weapon"
+    },
+    {
+        "name": "Helm of Comprehending Languages",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:helm-of-comprehending-languages",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Helm of Telepathy",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:helm-of-telepathy",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Helm of Underwater Action",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:helm-of-underwater-action",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "House Of Cards",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:house-of-cards",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Immovable Rod",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:immovable-rod",
+        "rarity": "Uncommon",
+        "type": "Rod"
+    },
+    {
+        "name": "Infernal Puzzle Box",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:infernal-puzzle-box",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Inquisitive's Goggles",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:inquisitives-goggles",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Insignia of Claws",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:insignia-of-claws",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Instrument of the Bards",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:instrument-of-the-bards",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Javelin of Lightning",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:javelin-of-lightning",
+        "rarity": "Uncommon",
+        "type": "Weapon"
+    },
+    {
+        "name": "Keoghtom's Ointment",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:keoghtoms-ointment",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Lantern of Revealing",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:lantern-of-revealing",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Living Gloves",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:living-gloves",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Lorehold Primer",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:lorehold-primer",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Mariner's Armor",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:mariners-armor",
+        "rarity": "Uncommon",
+        "type": "Armor"
+    },
+    {
+        "name": "Mask of the Beast",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:mask-of-the-beast",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Medallion of Thoughts",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:medallion-of-thoughts",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Mind Carapace Armor",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:mind-carapace-armor",
+        "rarity": "Uncommon",
+        "type": "Armor"
+    },
+    {
+        "name": "Mind Crystal",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:mind-crystal",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Mithral Armor",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:mithral-armor",
+        "rarity": "Uncommon",
+        "type": "Armor"
+    },
+    {
+        "name": "Mizzium Apparatus",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:mizzium-apparatus",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Moon Sickle",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:moon-sickle",
+        "rarity": "Uncommon",
+        "type": "Weapon"
+    },
+    {
+        "name": "Mummy Rot Antidote",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:mummy-rot-antidote",
+        "rarity": "Uncommon",
+        "type": "Potion"
+    },
+    {
+        "name": "Nature's Mantle",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:natures-mantle",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Necklace of Adaptation",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:necklace-of-adaptation",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Night Caller",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:night-caller",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Oil of Slipperiness",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:oil-of-slipperiness",
+        "rarity": "Uncommon",
+        "type": "Potion"
+    },
+    {
+        "name": "Paper Bird",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:paper-bird",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Pearl of Power",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:pearl-of-power",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Periapt of Health",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:periapt-of-health",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Periapt of Wound Closure",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:periapt-of-wound-closure",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Philter of Love",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:philter-of-love",
+        "rarity": "Uncommon",
+        "type": "Potion"
+    },
+    {
+        "name": "Pipes of Haunting",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:pipes-of-haunting",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Pipes of the Sewers",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:pipes-of-the-sewers",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Piwafwi",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:piwafwi",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Pixie Dust",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:pixie-dust",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Plate Of Knight's Fellowship",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:plate-of-knights-fellowship",
+        "rarity": "Uncommon",
+        "type": "Armor"
+    },
+    {
+        "name": "Portal Compass",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:portal-compass",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Potion of Advantage",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:potion-of-advantage",
+        "rarity": "Uncommon",
+        "type": "Potion"
+    },
+    {
+        "name": "Potion of Animal Friendship",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:potion-of-animal-friendship",
+        "rarity": "Uncommon",
+        "type": "Potion"
+    },
+    {
+        "name": "Potion of Fire Breath",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:potion-of-fire-breath",
+        "rarity": "Uncommon",
+        "type": "Potion"
+    },
+    {
+        "name": "Potion of Giant Strength",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:potion-of-giant-strength",
+        "rarity": "Uncommon",
+        "type": "Potion"
+    },
+    {
+        "name": "Potion of Growth",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:potion-of-growth",
+        "rarity": "Uncommon",
+        "type": "Potion"
+    },
+    {
+        "name": "Potion of Healing",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:potion-of-healing",
+        "rarity": "Uncommon",
+        "type": "Potion"
+    },
+    {
+        "name": "Potion of Poison",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:potion-of-poison",
+        "rarity": "Uncommon",
+        "type": "Potion"
+    },
+    {
+        "name": "Potion Of Polychromy",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:potion-of-polychromy",
+        "rarity": "Uncommon",
+        "type": "Potion"
+    },
+    {
+        "name": "Potion of Psionic Fortitude",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:potion-of-psionic-fortitude",
+        "rarity": "Uncommon",
+        "type": "Potion"
+    },
+    {
+        "name": "Potion of Resistance",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:potion-of-resistance",
+        "rarity": "Uncommon",
+        "type": "Potion"
+    },
+    {
+        "name": "Potion of Water Breathing",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:potion-of-water-breathing",
+        "rarity": "Uncommon",
+        "type": "Potion"
+    },
+    {
+        "name": "Prehistoric Figurines of Wondrous Power",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:prehistoric-figurines-of-wondrous-power",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Prismari Primer",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:prismari-primer",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Propeller Helm",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:propeller-helm",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Psi Crystal",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:psi-crystal",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Pyroconverger",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:pyroconverger",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Quandrix Primer",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:quandrix-primer",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Quiver of Ehlonna",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:quiver-of-ehlonna",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Rhythm Maker's Drum",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:rhythm-makers-drum",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Ring of Jumping",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:ring-of-jumping",
+        "rarity": "Uncommon",
+        "type": "Ring"
+    },
+    {
+        "name": "Ring of Mind Shielding",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:ring-of-mind-shielding",
+        "rarity": "Uncommon",
+        "type": "Ring"
+    },
+    {
+        "name": "Ring of Obscuring",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:ring-of-obscuring",
+        "rarity": "Uncommon",
+        "type": "Ring"
+    },
+    {
+        "name": "Ring Of Puzzler's Wit",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:ring-of-puzzlers-wit",
+        "rarity": "Uncommon",
+        "type": "Ring"
+    },
+    {
+        "name": "Ring of Swimming",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:ring-of-swimming",
+        "rarity": "Uncommon",
+        "type": "Ring"
+    },
+    {
+        "name": "Ring of the Orator",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:ring-of-the-orator",
+        "rarity": "Uncommon",
+        "type": "Ring"
+    },
+    {
+        "name": "Ring of Truth Telling",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:ring-of-truth-telling",
+        "rarity": "Uncommon",
+        "type": "Ring"
+    },
+    {
+        "name": "Ring of Warmth",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:ring-of-warmth",
+        "rarity": "Uncommon",
+        "type": "Ring"
+    },
+    {
+        "name": "Ring of Water Walking",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:ring-of-water-walking",
+        "rarity": "Uncommon",
+        "type": "Ring"
+    },
+    {
+        "name": "Rings of Shared Suffering",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:rings-of-shared-suffering",
+        "rarity": "Uncommon",
+        "type": "Ring"
+    },
+    {
+        "name": "Robe of Serpents",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:robe-of-serpents",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Robe of Useful Items",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:robe-of-useful-items",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Rod of Retribution",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:rod-of-retribution",
+        "rarity": "Uncommon",
+        "type": "Rod"
+    },
+    {
+        "name": "Rod of the Pact Keeper, +1, +2, +3",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:rod-of-the-pact-keeper",
+        "rarity": "Uncommon",
+        "type": "Rod"
+    },
+    {
+        "name": "Rope of Climbing",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:rope-of-climbing",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Saddle of the Cavalier",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:saddle-of-the-cavalier",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Scaled Ornament",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:scaled-ornament",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Seeker Dart",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:seeker-dart",
+        "rarity": "Uncommon",
+        "type": "Weapon"
+    },
+    {
+        "name": "Sending Stones",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:sending-stones",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Sensory Stone",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:sending-stones",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Sentinel Shield",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:sentinel-shield",
+        "rarity": "Uncommon",
+        "type": "Armor"
+    },
+    {
+        "name": "Serpent Scale Armor",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:serpent-scale-armor",
+        "rarity": "Uncommon",
+        "type": "Armor"
+    },
+    {
+        "name": "Shatterspike",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:shatterspike",
+        "rarity": "Uncommon",
+        "type": "Weapon"
+    },
+    {
+        "name": "Shield, +1, +2, +3",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:shield-1-2-3",
+        "rarity": "Uncommon",
+        "type": "Armor"
+    },
+    {
+        "name": "Shield Of The Tortoise",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:shield-of-the-tortoise",
+        "rarity": "Uncommon",
+        "type": "Armor"
+    },
+    {
+        "name": "Silverquill Primer",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:silverquill-primer",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Skyblinder Staff",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:skyblinder-staff",
+        "rarity": "Uncommon",
+        "type": "Staff"
+    },
+    {
+        "name": "Sling Of Giant Felling",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:sling-of-giant-felling",
+        "rarity": "Uncommon",
+        "type": "Weapon"
+    },
+    {
+        "name": "Slippers of Spider Climbing",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:slippers-of-spider-climbing",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Smokepowder",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:smokepowder",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Soul Coin",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:soul-coin",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Spell Gem",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:spell-gem",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Spell Scroll",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:spell-scroll",
+        "rarity": "Uncommon",
+        "type": "Scroll"
+    },
+    {
+        "name": "Spellwrought Tattoo",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:spellwrought-tattoo",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Spies' Murmur",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:spies-murmur",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Staff of the Adder",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:staff-of-the-adder",
+        "rarity": "Uncommon",
+        "type": "Staff"
+    },
+    {
+        "name": "Staff of the Python",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:staff-of-the-python",
+        "rarity": "Uncommon",
+        "type": "Staff"
+    },
+    {
+        "name": "Stone of Good Luck (Luckstone)",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:luckstone",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Stone of Ill Luck",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:stone-of-ill-luck",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Storm Boomerang",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:storm-boomerang",
+        "rarity": "Uncommon",
+        "type": "Weapon"
+    },
+    {
+        "name": "Sword of Vengeance",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:sword-of-vengeance",
+        "rarity": "Uncommon",
+        "type": "Weapon"
+    },
+    {
+        "name": "Thessaltoxin Antidote",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:thessaltoxin-antidote",
+        "rarity": "Uncommon",
+        "type": "Potion"
+    },
+    {
+        "name": "Trident of Fish Command",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:trident-of-fish-command",
+        "rarity": "Uncommon",
+        "type": "Weapon"
+    },
+    {
+        "name": "Wand of Entangle",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:wand-of-entangle",
+        "rarity": "Uncommon",
+        "type": "Wand"
+    },
+    {
+        "name": "Wand of Magic Detection",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:wand-of-magic-detection",
+        "rarity": "Uncommon",
+        "type": "Wand"
+    },
+    {
+        "name": "Wand of Magic Missiles",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:wand-of-magic-missiles",
+        "rarity": "Uncommon",
+        "type": "Wand"
+    },
+    {
+        "name": "Wand of Secrets",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:wand-of-secrets",
+        "rarity": "Uncommon",
+        "type": "Wand"
+    },
+    {
+        "name": "Wand of the War Mage",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:wand-of-the-war-mage",
+        "rarity": "Uncommon",
+        "type": "Wand"
+    },
+    {
+        "name": "Wand of Web",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:wand-of-web",
+        "rarity": "Uncommon",
+        "type": "Wand"
+    },
+    {
+        "name": "Weapon, +1, +2, or +3",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:weapon-1-2-3",
+        "rarity": "Uncommon",
+        "type": "Weapon"
+    },
+    {
+        "name": "Weapon of Warning",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:weapon-of-warning",
+        "rarity": "Uncommon",
+        "type": "Weapon"
+    },
+    {
+        "name": "Wheel of Wind and Water",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:wheel-of-wind-and-water",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Wildspace Orrery",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:wildspace-orrery",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Wind Fan",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:wind-fan",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Winged Ammunition",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:winged-ammunition",
+        "rarity": "Uncommon",
+        "type": "Weapon"
+    },
+    {
+        "name": "Winged Boots",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:winged-boots",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Wingwear",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:wingwear",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Witherbloom Primer",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:witherbloom-primer",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Wraps Of Unarmed Prowess",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:wraps-of-unarmed-prowess",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Acheron Blade",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:acheron-blade",
+        "rarity": "Rare",
+        "type": "Weapon"
+    },
+    {
+        "name": "Alchemical Compendium",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:alchemical-compendium",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "All-Purpose Tool",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:all-purpose-tool",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Ammunition, +1, +2, or +3",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:ammunition",
+        "rarity": "Rare",
+        "type": "Weapon"
+    },
+    {
+        "name": "Amulet of Health",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:amulet-of-health",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Amulet of Protection from Turning",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:amulet-of-protection-from-turning",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Amulet of the Devout",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:amulet-of-the-devout",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Arcane Grimoire",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:arcane-grimoire",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Armor, +1, +2, or +3",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:armor-1-2-3",
+        "rarity": "Rare",
+        "type": "Armor"
+    },
+    {
+        "name": "Armor of Resistance",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:armor-of-resistance",
+        "rarity": "Rare",
+        "type": "Armor"
+    },
+    {
+        "name": "Armor of Vulnerability",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:armor-of-vulnerability",
+        "rarity": "Rare",
+        "type": "Armor"
+    },
+    {
+        "name": "Arrow-Catching Shield",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:arrow-catching-shield",
+        "rarity": "Rare",
+        "type": "Armor"
+    },
+    {
+        "name": "Astral Shard",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:astral-shard",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Astromancy Archive",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:astromancy-archive",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Atlas of Endless Horizons",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:atlas-of-endless-horizons",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Badge of the Watch",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:badge-of-the-watch",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Bag of Beans",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:bag-of-beans",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Banner of the Krig Rune",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:banner-of-the-krig-rune",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Barrier Tattoo",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:barrier-tattoo",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Battering Shield",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:battering-shield",
+        "rarity": "Rare",
+        "type": "Armor"
+    },
+    {
+        "name": "Bead of Force",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:bead-of-force",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Bell Branch",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:bell-branch",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Belt of Dwarvenkind",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:belt-of-dwarvenkind",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Belt of Giant Strength",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:belt-of-giant-strength",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Berserker Axe",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:berserker-axe",
+        "rarity": "Rare",
+        "type": "Weapon"
+    },
+    {
+        "name": "Blod Stone",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:blod-stone",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Bloodwell Vial",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:bloodwell-vial",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Bonecounter",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:bonecounter",
+        "rarity": "Rare",
+        "type": "Weapon"
+    },
+    {
+        "name": "Boots of Levitation",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:boots-of-levitation",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Boots of Speed",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:boots-of-speed",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Bow Of Conflagration",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:bow-of-conflagration",
+        "rarity": "Rare",
+        "type": "Weapon"
+    },
+    {
+        "name": "Bowl of Commanding Water Elementals",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:bowl-of-commanding-water-elementals",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Bracer of Flying Daggers",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:bracer-of-flying-daggers",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Bracers of Celerity",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:bracers-of-celerity",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Bracers of Defense",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:bracers-of-defense",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Brazier of Commanding Fire Elementals",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:brazier-of-commanding-fire-elementals",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Breastplate Of Balance",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:breastplate-of-balance",
+        "rarity": "Rare",
+        "type": "Armor"
+    },
+    {
+        "name": "Bridle of Capturing",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:bridle-of-capturing",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Butcher's Bib",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:butchers-bib",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Cape of the Mountebank",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:cape-of-the-mountebank",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Cauldron of Plenty",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:cauldron-of-plenty",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Censer of Controlling Air Elementals",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:censer-of-controlling-air-elementals",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Charm of Plant Command",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:charm-of-plant-command",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Chime of Opening",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:chime-of-opening",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Chromatic Rose",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:chromatic-rose",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Claw of the Wyrm Rune",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:claw-of-the-wyrm-rune",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Claws of the Umber Hulk",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:claws-of-the-umber-hulk",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Cloak of Displacement",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:cloak-of-displacement",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Cloak of the Bat",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:cloak-of-the-bat",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Corpse Slayer",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:corpse-slayer",
+        "rarity": "Rare",
+        "type": "Weapon"
+    },
+    {
+        "name": "Crown of the Wrath Bringer",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:crown-of-the-wrath-bringer",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Crystal Blade",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:crystal-blade",
+        "rarity": "Rare",
+        "type": "Weapon"
+    },
+    {
+        "name": "Cube of Force",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:cube-of-force",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Daern's Instant Fortress",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:daerns-instant-fortress",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Dagger of Blindsight",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:dagger-of-blindsight",
+        "rarity": "Rare",
+        "type": "Weapon"
+    },
+    {
+        "name": "Dagger of Venom",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:dagger-of-venom",
+        "rarity": "Rare",
+        "type": "Weapon"
+    },
+    {
+        "name": "Deck Of Oracles",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:deck-of-oracles",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Delver's Claws",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:delvers-claws",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Demon Skin",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:demon-skin",
+        "rarity": "Rare",
+        "type": "Armor"
+    },
+    {
+        "name": "Devotee's Censer",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:devotees-censer",
+        "rarity": "Rare",
+        "type": "Weapon"
+    },
+    {
+        "name": "Dimensional Shackles",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:dimensional-shackles",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Docent",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:docent",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Dodecahedron of Doom",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:dodecahedron-of-doom",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Donjon's Sundering Sphere",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:donjons-sundering-sphere",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Dragon Slayer",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:dragon-slayer",
+        "rarity": "Rare",
+        "type": "Weapon"
+    },
+    {
+        "name": "Dragon Vessel",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:dragon-vessel",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Dragon Wing Bow",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:dragon-wing-bow",
+        "rarity": "Rare",
+        "type": "Weapon"
+    },
+    {
+        "name": "Dragonhide Belt",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:dragonhide-belt",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Dragon's Wrath Weapon",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:dragons-wrath-weapon",
+        "rarity": "Rare",
+        "type": "Weapon"
+    },
+    {
+        "name": "Dragontooth Dagger",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:dragontooth-dagger",
+        "rarity": "Rare",
+        "type": "Weapon"
+    },
+    {
+        "name": "Dragon-Touched Focus",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:dragon-touched-focus",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Duplicitous Manuscript",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:duplicitous-manuscript",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Eagle Whistle",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:eagle-whistle",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Elemental Essence Shard",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:elemental-essence-shard",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Elixir of Health",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:elixir-of-health",
+        "rarity": "Rare",
+        "type": "Potion"
+    },
+    {
+        "name": "Elven Chain",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:elven-chain",
+        "rarity": "Rare",
+        "type": "Armor"
+    },
+    {
+        "name": "Far Realm Shard",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:far-realm-shard",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Fate Dealer's Deck",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:fate-dealers-deck",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Feather of Diatryma Summoning",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:feather-of-diatryma-summoning",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Feywrought Armor",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:feywrought-armor",
+        "rarity": "Rare",
+        "type": "Armor"
+    },
+    {
+        "name": "Figurine of Wondrous Power",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:figurine-of-wondrous-power",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Flame Tongue",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:flame-tongue",
+        "rarity": "Rare",
+        "type": "Weapon"
+    },
+    {
+        "name": "Flayer Slayer",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:flayer-slayer",
+        "rarity": "Rare",
+        "type": "Weapon"
+    },
+    {
+        "name": "Flying Chariot",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:flying-chariot",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Folding Boat",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:folding-boat",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Fulminating Treatise",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:fulminating-treatise",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Galder's Bubble Pipe",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:galders-bubble-pipe",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Gambler's Blade",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:gamblers-blade",
+        "rarity": "Rare",
+        "type": "Weapon"
+    },
+    {
+        "name": "Gauntlets of Flaming Fury",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:gauntlets-of-flaming-fury",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Gavel of the Venn Rune",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:gavel-of-the-venn-rune",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Gem of Seeing",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:gem-of-seeing",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Ghost Lantern",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:ghost-lantern",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Giant Slayer",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:giant-slayer",
+        "rarity": "Rare",
+        "type": "Weapon"
+    },
+    {
+        "name": "Glamoured Studded Leather",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:glamoured-studded-leather",
+        "rarity": "Rare",
+        "type": "Armor"
+    },
+    {
+        "name": "Glimmering Moonbow",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:glimmering-moonbow",
+        "rarity": "Rare",
+        "type": "Weapon"
+    },
+    {
+        "name": "Gloomwrought Armor",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:gloomwrought-armor",
+        "rarity": "Rare",
+        "type": "Armor"
+    },
+    {
+        "name": "Glowrune Pigment",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:glowrune-pigment",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Grasping Whip",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:grasping-whip",
+        "rarity": "Rare",
+        "type": "Weapon"
+    },
+    {
+        "name": "Guild Keyrune",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:guild-keyrune",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Gulthias Staff",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:gulthias-staff",
+        "rarity": "Rare",
+        "type": "Staff"
+    },
+    {
+        "name": "Heart Weaver's Primer",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:heart-weavers-primer",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Hell Hound Cloak",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:hell-hound-cloak",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Helm of Teleportation",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:helm-of-teleportation",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Helm of the Gods",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:helm-of-the-gods",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Heward's Handy Haversack",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:hewards-handy-haversack",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Hook of Fisher's Delight",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:hook-of-fishers-delight",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Horn of Blasting",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:horn-of-blasting",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Horn of the Endless Maze",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:horn-of-the-endless-maze",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Horn of Valhalla",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:horn-of-valhalla",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Horseshoes of Speed",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:horseshoes-of-speed",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Iggwylv's Horn",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:iggwylvs-horn",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Instrument of the Bards",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:instrument-of-the-bards",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Ioun Stone",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:ioun-stone",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Iron Bands of Bilarro",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:iron-bands-of-bilarro",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Kagonesti Forest Shroud",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:kagonesti-forest-shroud",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Knave's Eye Patch",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:knaves-eye-patch",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Lash of Immolation",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:lash-of-immolation",
+        "rarity": "Rare",
+        "type": "Weapon"
+    },
+    {
+        "name": "Leather Golem Armor",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:leather-golem-armor",
+        "rarity": "Rare",
+        "type": "Armor"
+    },
+    {
+        "name": "Libram of Souls and Flesh",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:libram-of-souls-and-flesh",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Loadstone",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:loadstone",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Luminous War Pick",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:luminous-war-pick",
+        "rarity": "Rare",
+        "type": "Weapon"
+    },
+    {
+        "name": "Lyre of Building",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:lyre-of-building",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Mace of Disruption",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:mace-of-disruption",
+        "rarity": "Rare",
+        "type": "Weapon"
+    },
+    {
+        "name": "Mace of Smiting",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:mace-of-smiting",
+        "rarity": "Rare",
+        "type": "Weapon"
+    },
+    {
+        "name": "Mace of Terror",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:mace-of-terror",
+        "rarity": "Rare",
+        "type": "Weapon"
+    },
+    {
+        "name": "Mantle of Spell Resistance",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:mantle-of-spell-resistance",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Mimir",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:mimir",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Mind Blade",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:mind-blade",
+        "rarity": "Rare",
+        "type": "Weapon"
+    },
+    {
+        "name": "Mind Crystal",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:mind-crystal",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Mind Lash",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:mind-lash",
+        "rarity": "Rare",
+        "type": "Weapon"
+    },
+    {
+        "name": "Mirror of the Past",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:mirror-of-the-past",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Mizzium Armor",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:mizzium-armor",
+        "rarity": "Rare",
+        "type": "Armor"
+    },
+    {
+        "name": "Mizzium Mortar",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:mizzium-mortar",
+        "rarity": "Rare",
+        "type": "Armor"
+    },
+    {
+        "name": "Molten Bronze Skin",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:molten-bronze-skin",
+        "rarity": "Rare",
+        "type": "Armor"
+    },
+    {
+        "name": "Moon Sickle",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:moon-sickle",
+        "rarity": "Rare",
+        "type": "Weapon"
+    },
+    {
+        "name": "Necklace of Fireballs",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:necklace-of-fireballs",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Necklace of Prayer Beads",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:necklace-of-prayer-beads",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Needle of Mending",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:needle-of-mending",
+        "rarity": "Rare",
+        "type": "Weapon"
+    },
+    {
+        "name": "Oil of Etherealness",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:oil-of-etherealness",
+        "rarity": "Rare",
+        "type": "Potion"
+    },
+    {
+        "name": "Opal of the Ild Rune",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:opal-of-the-ild-rune",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Orb of the Stein Rune",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:orb-of-the-stein-rune",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Outer Essence Shard",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:outer-essence-shard",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Pariah's Shield",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:pariahs-shield",
+        "rarity": "Rare",
+        "type": "Armor"
+    },
+    {
+        "name": "Periapt of Proof against Poison",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:periapt-of-proof-against-poison",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Piwafwi of Fire Resistance",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:piwafwi-of-fire-resistance",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Planecaller's Codex",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:planecallers-codex",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Portable Hole",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:portable-hole",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Potion of Aqueous Form",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:potion-of-aqueous-form",
+        "rarity": "Rare",
+        "type": "Potion"
+    },
+    {
+        "name": "Potion of Clairvoyance",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:potion-of-clairvoyance",
+        "rarity": "Rare",
+        "type": "Potion"
+    },
+    {
+        "name": "Potion of Diminution",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:potion-of-diminution",
+        "rarity": "Rare",
+        "type": "Potion"
+    },
+    {
+        "name": "Potion of Gaseous Form",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:potion-of-gaseous-form",
+        "rarity": "Rare",
+        "type": "Potion"
+    },
+    {
+        "name": "Potion of Giant Strength",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:potion-of-giant-strength",
+        "rarity": "Rare",
+        "type": "Potion"
+    },
+    {
+        "name": "Potion of Healing",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:potion-of-healing",
+        "rarity": "Rare",
+        "type": "Potion"
+    },
+    {
+        "name": "Potion of Heroism",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:potion-of-heroism",
+        "rarity": "Rare",
+        "type": "Potion"
+    },
+    {
+        "name": "Potion of Invulnerability",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:potion-of-invulnerability",
+        "rarity": "Rare",
+        "type": "Potion"
+    },
+    {
+        "name": "Potion of Maximum Power",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:potion-of-maximum-power",
+        "rarity": "Rare",
+        "type": "Potion"
+    },
+    {
+        "name": "Potion of Mind Control",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:potion-of-mind-control",
+        "rarity": "Rare",
+        "type": "Potion"
+    },
+    {
+        "name": "Potion of Mind Reading",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:potion-of-mind-reading",
+        "rarity": "Rare",
+        "type": "Potion"
+    },
+    {
+        "name": "Prehistoric Figurines of Wondrous Power",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:prehistoric-figurines-of-wondrous-power",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Professor Orb",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:professor-orb",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Protective Verses",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:protective-verses",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Quaal's Feather Token",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:quaals-feather-token",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Reveler's Concertina",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:revelers-concertina",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Rhythm Maker's Drum",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:rhythm-makers-drum",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Ring of Animal Influence",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:ring-of-animal-influence",
+        "rarity": "Rare",
+        "type": "Ring"
+    },
+    {
+        "name": "Ring of Evasion",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:ring-of-evasion",
+        "rarity": "Rare",
+        "type": "Ring"
+    },
+    {
+        "name": "Ring of Feather Falling",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:ring-of-feather-falling",
+        "rarity": "Rare",
+        "type": "Ring"
+    },
+    {
+        "name": "Ring of Free Action",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:ring-of-free-action",
+        "rarity": "Rare",
+        "type": "Ring"
+    },
+    {
+        "name": "Ring of Protection",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:ring-of-protection",
+        "rarity": "Rare",
+        "type": "Ring"
+    },
+    {
+        "name": "Ring of Resistance",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:ring-of-resistance",
+        "rarity": "Rare",
+        "type": "Ring"
+    },
+    {
+        "name": "Ring of Spell Storing",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:ring-of-spell-storing",
+        "rarity": "Rare",
+        "type": "Ring"
+    },
+    {
+        "name": "Ring of Temporal Salvation",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:ring-of-temporal-salvation",
+        "rarity": "Rare",
+        "type": "Ring"
+    },
+    {
+        "name": "Ring of the Ram",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:ring-of-the-ram",
+        "rarity": "Rare",
+        "type": "Ring"
+    },
+    {
+        "name": "Ring of X-Ray Vision",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:ring-of-x-ray-vision",
+        "rarity": "Rare",
+        "type": "Ring"
+    },
+    {
+        "name": "Robe of Eyes",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:robe-of-eyes",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Robe of Summer",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:robe-of-summer",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Rod of Rulership",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:rod-of-rulership",
+        "rarity": "Rare",
+        "type": "Rod"
+    },
+    {
+        "name": "Rod of the Pact Keeper, +1, +2, +3",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:rod-of-the-pact-keeper",
+        "rarity": "Rare",
+        "type": "Rod"
+    },
+    {
+        "name": "Rod of the Vonindod",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:rod-of-the-vonindod",
+        "rarity": "Rare",
+        "type": "Rod"
+    },
+    {
+        "name": "Rogue's Mantle",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:rogues-mantle",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Rope of Entanglement",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:rope-of-entanglement",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Ruinous Flail",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:ruinous-flail",
+        "rarity": "Rare",
+        "type": "Weapon"
+    },
+    {
+        "name": "Sage's Signet",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:sages-signet",
+        "rarity": "Rare",
+        "type": "Ring"
+    },
+    {
+        "name": "Saint Markovia's Thighbone",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:saint-markovias-thighbone",
+        "rarity": "Rare",
+        "type": "Weapon"
+    },
+    {
+        "name": "Scaled Ornament",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:scaled-ornament",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Scissors of Shadow Snipping",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:scissors-of-shadow-snipping",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Scorpion Armor",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:scorpion-armor",
+        "rarity": "Rare",
+        "type": "Armor"
+    },
+    {
+        "name": "Scroll of Protection",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:scroll-of-protection",
+        "rarity": "Rare",
+        "type": "Scroll"
+    },
+    {
+        "name": "Serpent's Fang",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:serpent-s-fang",
+        "rarity": "Rare",
+        "type": "Weapon"
+    },
+    {
+        "name": "Shadowfell Brand Tattoo",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:shadowfell-brand-tattoo",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Shadowfell Shard",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:shadowfell-shard",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Shard of Xeluan",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:shard-of-xeluan",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Shield, +1, +2, +3",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:shield-1-2-3",
+        "rarity": "Rare",
+        "type": "Armor"
+    },
+    {
+        "name": "Shield of Far Sight",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:shield-of-far-sight",
+        "rarity": "Rare",
+        "type": "Armor"
+    },
+    {
+        "name": "Shield of Missile Attraction",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:shield-of-missile-attraction",
+        "rarity": "Rare",
+        "type": "Armor"
+    },
+    {
+        "name": "Shrieking Greaves",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:shrieking-greaves",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Siren Song Lyre",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:siren-song-lyre",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Spell Gem",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:spell-gem",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Spell Scroll",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:spell-scroll",
+        "rarity": "Rare",
+        "type": "Scroll"
+    },
+    {
+        "name": "Spelljamming Helm",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:spelljamming-helm",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Spellwrought Tattoo",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:spellwrought-tattoo",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Spider Staff",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:spider-staff",
+        "rarity": "Rare",
+        "type": "Staff"
+    },
+    {
+        "name": "Staff of Charming",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:staff-of-charming",
+        "rarity": "Rare",
+        "type": "Staff"
+    },
+    {
+        "name": "Staff of Defense",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:staff-of-defense",
+        "rarity": "Rare",
+        "type": "Staff"
+    },
+    {
+        "name": "Staff of Healing",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:staff-of-healing",
+        "rarity": "Rare",
+        "type": "Staff"
+    },
+    {
+        "name": "Staff of Ruling",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:staff-of-ruling",
+        "rarity": "Rare",
+        "type": "Staff"
+    },
+    {
+        "name": "Staff of Swarming Insects",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:staff-of-swarming-insects",
+        "rarity": "Rare",
+        "type": "Staff"
+    },
+    {
+        "name": "Staff of the Ivory Claw",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:staff-of-the-ivory-claw",
+        "rarity": "Rare",
+        "type": "Staff"
+    },
+    {
+        "name": "Staff of the Rooted Hills",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:staff-of-the-rooted-hills",
+        "rarity": "Rare",
+        "type": "Staff"
+    },
+    {
+        "name": "Staff of the Woodlands",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:staff-of-the-woodlands",
+        "rarity": "Rare",
+        "type": "Staff"
+    },
+    {
+        "name": "Staff of Withering",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:staff-of-withering",
+        "rarity": "Rare",
+        "type": "Staff"
+    },
+    {
+        "name": "Starshot Crossbow",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:starshot-crossbow",
+        "rarity": "Rare",
+        "type": "Weapon"
+    },
+    {
+        "name": "Stone of Controlling Earth Elementals",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:stone-of-controlling-earth-elementals",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Stonespeaker Crystal",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:stonespeaker-crystal",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Sun Blade",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:sun-blade",
+        "rarity": "Rare",
+        "type": "Weapon"
+    },
+    {
+        "name": "Sun Staff",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:sun-staff",
+        "rarity": "Rare",
+        "type": "Staff"
+    },
+    {
+        "name": "Sunforger",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:sunforger",
+        "rarity": "Rare",
+        "type": "Weapon"
+    },
+    {
+        "name": "Sword of Life Stealing",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:sword-of-life-stealing",
+        "rarity": "Rare",
+        "type": "Weapon"
+    },
+    {
+        "name": "Sword of Wounding",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:sword-of-wounding",
+        "rarity": "Rare",
+        "type": "Weapon"
+    },
+    {
+        "name": "Teleportation Tablet",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:teleportation-tablet",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Tentacle Rod",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:tentacle-rod",
+        "rarity": "Rare",
+        "type": "Rod"
+    },
+    {
+        "name": "Two-Birds Sling",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:two-birds-sling",
+        "rarity": "Rare",
+        "type": "Weapon"
+    },
+    {
+        "name": "Ventilating Lungs",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:ventilating-lungs",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Vicious Weapon",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:vicious-weapon",
+        "rarity": "Rare",
+        "type": "Weapon"
+    },
+    {
+        "name": "Voidwalker Armor",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:voidwalker-armor",
+        "rarity": "Rare",
+        "type": "Armor"
+    },
+    {
+        "name": "Wand of Binding",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:wand-of-binding",
+        "rarity": "Rare",
+        "type": "Wand"
+    },
+    {
+        "name": "Wand of Enemy Detection",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:wand-of-enemy-detection",
+        "rarity": "Rare",
+        "type": "Wand"
+    },
+    {
+        "name": "Wand of Fear",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:wand-of-fear",
+        "rarity": "Rare",
+        "type": "Wand"
+    },
+    {
+        "name": "Wand of Fireballs",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:wand-of-fireballs",
+        "rarity": "Rare",
+        "type": "Wand"
+    },
+    {
+        "name": "Wand of Lightning Bolts",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:wand-of-lightning-bolts",
+        "rarity": "Rare",
+        "type": "Wand"
+    },
+    {
+        "name": "Wand of Paralysis",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:wand-of-paralysis",
+        "rarity": "Rare",
+        "type": "Wand"
+    },
+    {
+        "name": "Wand of the War Mage",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:wand-of-the-war-mage",
+        "rarity": "Rare",
+        "type": "Wand"
+    },
+    {
+        "name": "Wand of Viscid Globs",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:wand-of-viscid-globs",
+        "rarity": "Rare",
+        "type": "Wand"
+    },
+    {
+        "name": "Wand of Winter",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:wand-of-winter",
+        "rarity": "Rare",
+        "type": "Wand"
+    },
+    {
+        "name": "Wand of Wonder",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:wand-of-wonder",
+        "rarity": "Rare",
+        "type": "Wand"
+    },
+    {
+        "name": "War Horn of Valor",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:war-horn-of-valor",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Warrior's Passkey",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:warriors-passkey",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Wayfarer's Boots",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:wayfarers-boots",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Weapon, +1, +2, or +3",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:weapon-1-2-3",
+        "rarity": "Rare",
+        "type": "Weapon"
+    },
+    {
+        "name": "Weapon of Certain Death",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:weapon-of-certain-death",
+        "rarity": "Rare",
+        "type": "Weapon"
+    },
+    {
+        "name": "Weird Tank",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:weird-tank",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Wings of Flying",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:wings-of-flying",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Woodcutter's Axe",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:woodcutter-s-axe",
+        "rarity": "Rare",
+        "type": "Weapon"
+    },
+    {
+        "name": "Wraps Of Unarmed Prowess",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:wraps-of-unarmed-prowess",
+        "rarity": "Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Zephyr Armor",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:zephyr-armor",
+        "rarity": "Rare",
+        "type": "Armor"
+    },
+    {
+        "name": "Abracadabrus",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:abracadabrus",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Absorbing Tattoo",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:absorbing-tattoo",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "All-Purpose Tool",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:all-purpose-tool",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Amethyst Lodestone",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:amethyst-lodestone",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Ammunition, +1, +2, or +3",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:ammunition",
+        "rarity": "Very Rare",
+        "type": "Weapon"
+    },
+    {
+        "name": "Amulet of the Black Skull",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:amulet-of-the-black-skull",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Amulet of the Devout",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:amulet-of-the-devout",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Amulet of the Planes",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:amulet-of-the-planes",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Animated Shield",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:animated-shield",
+        "rarity": "Very Rare",
+        "type": "Armor"
+    },
+    {
+        "name": "Antimagic Armor",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:antimagic-armor",
+        "rarity": "Very Rare",
+        "type": "Armor"
+    },
+    {
+        "name": "Arcane Cannon",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:arcane-cannon",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Arcane Grimoire",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:arcane-grimoire",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Arcane Propulsion Arm",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:arcane-propulsion-arm",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Armor, +1, +2, or +3",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:armor-1-2-3",
+        "rarity": "Very Rare",
+        "type": "Armor"
+    },
+    {
+        "name": "Armor of Safeguarding",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:armor-of-safeguarding",
+        "rarity": "Very Rare",
+        "type": "Armor"
+    },
+    {
+        "name": "Arrow of Slaying",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:arrow-of-slaying",
+        "rarity": "Very Rare",
+        "type": "Weapon"
+    },
+    {
+        "name": "Bag of Devouring",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:bag-of-devouring",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Baleful Talon",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:baleful-talon",
+        "rarity": "Very Rare",
+        "type": "Weapon"
+    },
+    {
+        "name": "Barrier Tattoo",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:barrier-tattoo",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Battle Standard of Infernal Power",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:battle-standard-of-infernal-power",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Belt of Giant Strength",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:belt-of-giant-strength",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Blade of the Medusa",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:blade-of-the-medusa",
+        "rarity": "Very Rare",
+        "type": "Weapon"
+    },
+    {
+        "name": "Blast Scepter",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:blast-scepter",
+        "rarity": "Very Rare",
+        "type": "Rod"
+    },
+    {
+        "name": "Bloodaxe",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:bloodaxe",
+        "rarity": "Very Rare",
+        "type": "Weapon"
+    },
+    {
+        "name": "Bloodseeker Ammunition",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:bloodseeker-ammunition",
+        "rarity": "Very Rare",
+        "type": "Weapon"
+    },
+    {
+        "name": "Bloodshed Blade",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:bloodshed-blade",
+        "rarity": "Very Rare",
+        "type": "Weapon"
+    },
+    {
+        "name": "Bloodwell Vial",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:bloodwell-vial",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Bobbing Lily Pad",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:bobbing-lily-pad",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Bow Of Melodies",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:bow-of-melodies",
+        "rarity": "Very Rare",
+        "type": "Weapon"
+    },
+    {
+        "name": "Bracelet of Rock Magic",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:bracelet-of-rock-magic",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Candle of Invocation",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:candle-of-invocation",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Cape of Enlargement",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:cape-of-enlargement",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Carpet of Flying",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:carpet-of-flying",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Cauldron of Rebirth",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:cauldron-of-rebirth",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Chime of Exile",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:chime-of-exile",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Chronolometer",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:chronolometer",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Cloak of Arachnida",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:cloak-of-arachnida",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Clockwork Armor",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:clockwork-armor",
+        "rarity": "Very Rare",
+        "type": "Armor"
+    },
+    {
+        "name": "Conch of Teleportation",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:conch-of-teleportation",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Constantori's Portrait",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:constantoris-portrait",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Crown Of Whirling Comets",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:crown-of-whirling-comets",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Crystal Ball",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:crystal-ball",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Crystalline Chronicle",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:crystalline-chronicle",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Dancing Sword",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:dancing-sword",
+        "rarity": "Very Rare",
+        "type": "Weapon"
+    },
+    {
+        "name": "Deck Of Dimensions",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:deck-of-dimensions",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Deck Of Wild Cards",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:deck-of-wild-cards",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Demon Armor",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:demon-armor",
+        "rarity": "Very Rare",
+        "type": "Armor"
+    },
+    {
+        "name": "Devastation Orb",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:devastation-orb",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Dimensional Loop",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:dimensional-loop",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Dispelling Stone",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:dispelling-stone",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Dragon Scale Mail",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:dragon-scale-mail",
+        "rarity": "Very Rare",
+        "type": "Armor"
+    },
+    {
+        "name": "Dragon Vessel",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:dragon-vessel",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Dragonhide Belt",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:dragonhide-belt",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Dragon's Wrath Weapon",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:dragons-wrath-weapon",
+        "rarity": "Very Rare",
+        "type": "Weapon"
+    },
+    {
+        "name": "Dragon-Touched Focus",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:dragon-touched-focus",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Duskcrusher",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:duskcrusher",
+        "rarity": "Very Rare",
+        "type": "Weapon"
+    },
+    {
+        "name": "Dwarven Plate",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:dwarven-plate",
+        "rarity": "Very Rare",
+        "type": "Armor"
+    },
+    {
+        "name": "Dwarven Thrower",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:dwarven-thrower",
+        "rarity": "Very Rare",
+        "type": "Weapon"
+    },
+    {
+        "name": "Dyrrn's Tentacle Whip",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:dyrrns-tentacle-whip",
+        "rarity": "Very Rare",
+        "type": "Weapon"
+    },
+    {
+        "name": "Efreeti Bottle",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:efreeti-bottle",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Eldritch Staff",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:eldritch-staff",
+        "rarity": "Very Rare",
+        "type": "Staff"
+    },
+    {
+        "name": "Far Gear",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:far-gear",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Fate Cutter Shears",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:fate-cutter-shears",
+        "rarity": "Very Rare",
+        "type": "Weapon"
+    },
+    {
+        "name": "Fate Dealer's Deck",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:fate-dealers-deck",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Figurine of Wondrous Power",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:figurine-of-wondrous-power",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Fish Suit",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:fish-suit",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Flying Citadel Helm",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:flying-citadel-helm",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Fool's Blade",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:fools-blade",
+        "rarity": "Very Rare",
+        "type": "Weapon"
+    },
+    {
+        "name": "Forcebreaker Weapon",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:forcebreaker-weapon",
+        "rarity": "Very Rare",
+        "type": "Weapon"
+    },
+    {
+        "name": "Frost Brand",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:frost-brand",
+        "rarity": "Very Rare",
+        "type": "Weapon"
+    },
+    {
+        "name": "Ghost Step Tattoo",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:ghost-step-tattoo",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Guild Keyrune",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:guild-keyrune",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Hammer of Runic Focus",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:hammer-of-runic-focus",
+        "rarity": "Very Rare",
+        "type": "Weapon"
+    },
+    {
+        "name": "Helm of Brilliance",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:helm-of-brilliance",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Helm of Devil Command",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:helm-of-devil-command",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Heward's Hireling Armor",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:hewards-hireling-armor",
+        "rarity": "Very Rare",
+        "type": "Armor"
+    },
+    {
+        "name": "Horn of Valhalla",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:horn-of-valhalla",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Horned Ring",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:horned-ring",
+        "rarity": "Very Rare",
+        "type": "Ring"
+    },
+    {
+        "name": "Horseshoes of a Zephyr",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:horseshoes-of-a-zephyr",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Hunter's Coat",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:hunters-coat",
+        "rarity": "Very Rare",
+        "type": "Armor"
+    },
+    {
+        "name": "Illusionist's Bracers",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:illusionists-bracers",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Ingot of the Skold Rune",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:ingot-of-the-skold-rune",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Instrument of the Bards",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:instrument-of-the-bards",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Ioun Stone",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:ioun-stone",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Kyrzin's Ooze",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:kyrzins-ooze",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Last Stand Armor",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:last-stand-armor",
+        "rarity": "Very Rare",
+        "type": "Armor"
+    },
+    {
+        "name": "Lifewell Tattoo",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:lifewell-tattoo",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Living Armor",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:living-armor",
+        "rarity": "Very Rare",
+        "type": "Armor"
+    },
+    {
+        "name": "Lord's Ensemble",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:lords-ensemble",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Lucent Destroyer",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:lucent-destroyer",
+        "rarity": "Very Rare",
+        "type": "Weapon"
+    },
+    {
+        "name": "Manual of Bodily Health",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:manual-of-bodily-health",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Manual of Gainful Exercise",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:manual-of-gainful-exercise",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Manual of Golems",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:manual-of-golems",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Manual of Quickness of Action",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:manual-of-quickness-of-action",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Mindblasting Cap",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:mindblasting-cap",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Mindguard Crown",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:mindguard-crown",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Mirror of Life Trapping",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:mirror-of-life-trapping",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Mirror of Reflected Pasts",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:mirror-of-reflected-pasts",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Mistral Mantle",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:mistral-mantle",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Moon Sickle",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:moon-sickle",
+        "rarity": "Very Rare",
+        "type": "Weapon"
+    },
+    {
+        "name": "Mudslick Tower",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:mudslick-tower",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Navigation Orb",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:navigation-orb",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Nimbus Coronet",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:nimbus-coronet",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Nine Lives Stealer",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:nine-lives-stealer",
+        "rarity": "Very Rare",
+        "type": "Weapon"
+    },
+    {
+        "name": "Nolzur's Marvelous Pigments",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:nolzurs-marvelous-pigments",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Oathbow",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:oathbow",
+        "rarity": "Very Rare",
+        "type": "Weapon"
+    },
+    {
+        "name": "Oil of Sharpness",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:oil-of-sharpness",
+        "rarity": "Very Rare",
+        "type": "Potion"
+    },
+    {
+        "name": "Orb of the Veil",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:orb-of-the-veil",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Ornithopter of Flying",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:ornithopter-of-flying",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Pennant of the Vind Rune",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:pennant-of-the-vind-rune",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Peregrine Mask",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:peregrine-mask",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Polymorph Blade",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:polymorph-blade",
+        "rarity": "Very Rare",
+        "type": "Weapon"
+    },
+    {
+        "name": "Potion of Flying",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:potion-of-flying",
+        "rarity": "Very Rare",
+        "type": "Potion"
+    },
+    {
+        "name": "Potion of Giant Strength",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:potion-of-giant-strength",
+        "rarity": "Very Rare",
+        "type": "Potion"
+    },
+    {
+        "name": "Potion of Healing",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:potion-of-healing",
+        "rarity": "Very Rare",
+        "type": "Potion"
+    },
+    {
+        "name": "Potion of Invisibility",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:potion-of-invisibility",
+        "rarity": "Very Rare",
+        "type": "Potion"
+    },
+    {
+        "name": "Potion of Longevity",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:potion-of-longevity",
+        "rarity": "Very Rare",
+        "type": "Potion"
+    },
+    {
+        "name": "Potion of Mind Control",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:potion-of-mind-control",
+        "rarity": "Very Rare",
+        "type": "Potion"
+    },
+    {
+        "name": "Potion of Possibility",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:potion-of-possibility",
+        "rarity": "Very Rare",
+        "type": "Potion"
+    },
+    {
+        "name": "Potion of Speed",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:potion-of-speed",
+        "rarity": "Very Rare",
+        "type": "Potion"
+    },
+    {
+        "name": "Potion of Vitality",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:potion-of-vitality",
+        "rarity": "Very Rare",
+        "type": "Potion"
+    },
+    {
+        "name": "Prehistoric Figurines of Wondrous Power",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:prehistoric-figurines-of-wondrous-power",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Reincarnation Dust",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:reincarnation-dust",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Rhythm Maker's Drum",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:rhythm-makers-drum",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Ring of Amity",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:ring-of-amity",
+        "rarity": "Very Rare",
+        "type": "Ring"
+    },
+    {
+        "name": "Ring of Red Fury",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:ring-of-red-fury",
+        "rarity": "Very Rare",
+        "type": "Ring"
+    },
+    {
+        "name": "Ring of Regeneration",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:ring-of-regeneration",
+        "rarity": "Very Rare",
+        "type": "Ring"
+    },
+    {
+        "name": "Ring of Shooting Stars",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:ring-of-shooting-stars",
+        "rarity": "Very Rare",
+        "type": "Ring"
+    },
+    {
+        "name": "Ring of Telekinesis",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:ring-of-telekinesis",
+        "rarity": "Very Rare",
+        "type": "Ring"
+    },
+    {
+        "name": "Robe of Scintillating Colors",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:robe-of-scintillating-colors",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Robe of Stars",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:robe-of-stars",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Rod of Absorption",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:rod-of-absorption",
+        "rarity": "Very Rare",
+        "type": "Rod"
+    },
+    {
+        "name": "Rod of Alertness",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:rod-of-alertness",
+        "rarity": "Very Rare",
+        "type": "Rod"
+    },
+    {
+        "name": "Rod Of Hellish Flames",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:rod-of-hellish-flames",
+        "rarity": "Very Rare",
+        "type": "Rod"
+    },
+    {
+        "name": "Rod of Security",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:rod-of-security",
+        "rarity": "Very Rare",
+        "type": "Rod"
+    },
+    {
+        "name": "Rod of the Pact Keeper, +1, +2, +3",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:rod-of-the-pact-keeper",
+        "rarity": "Very Rare",
+        "type": "Rod"
+    },
+    {
+        "name": "Rotor of Return",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:rotor-of-return",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Ruidium Armor",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:ruidium-armor",
+        "rarity": "Very Rare",
+        "type": "Armor"
+    },
+    {
+        "name": "Ruidium Shield",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:ruidium-shield",
+        "rarity": "Very Rare",
+        "type": "Armor"
+    },
+    {
+        "name": "Ruidium Weapon",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:ruidium-weapon",
+        "rarity": "Very Rare",
+        "type": "Weapon"
+    },
+    {
+        "name": "Sage's Signet",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:sages-signet",
+        "rarity": "Very Rare",
+        "type": "Ring"
+    },
+    {
+        "name": "Sanctum Amulet",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:sanctum-amulet",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Sapphire Buckler",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:sapphire-buckler",
+        "rarity": "Very Rare",
+        "type": "Armor"
+    },
+    {
+        "name": "Scaled Ornament",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:scaled-ornament",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Scimitar of Speed",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:scimitar-of-speed",
+        "rarity": "Very Rare",
+        "type": "Weapon"
+    },
+    {
+        "name": "Shard of the Ise Rune",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:shard-of-the-ise-rune",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Shield, +1, +2, +3",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:shield-1-2-3",
+        "rarity": "Very Rare",
+        "type": "Armor"
+    },
+    {
+        "name": "Shield of the Uven Rune",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:shield-of-the-uven-rune",
+        "rarity": "Very Rare",
+        "type": "Armor"
+    },
+    {
+        "name": "Skull Helm",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:skull-helm",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Sling Bullets of Althemone",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:sling-bullets-of-althemone",
+        "rarity": "Very Rare",
+        "type": "Weapon"
+    },
+    {
+        "name": "Speaking Stone",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:speaking-stone",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Spear of Backbiting",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:spear-of-backbiting",
+        "rarity": "Very Rare",
+        "type": "Weapon"
+    },
+    {
+        "name": "Spell Gem",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:spell-gem",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Spell Scroll",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:spell-scroll",
+        "rarity": "Very Rare",
+        "type": "Scroll"
+    },
+    {
+        "name": "Spellguard Shield",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:spellguard-shield",
+        "rarity": "Very Rare",
+        "type": "Armor"
+    },
+    {
+        "name": "Staff of Dunamancy",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:staff-of-dunamancy",
+        "rarity": "Very Rare",
+        "type": "Staff"
+    },
+    {
+        "name": "Staff of Fate",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:staff-of-fate",
+        "rarity": "Very Rare",
+        "type": "Staff"
+    },
+    {
+        "name": "Staff of Fire",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:staff-of-fire",
+        "rarity": "Very Rare",
+        "type": "Staff"
+    },
+    {
+        "name": "Staff of Frost",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:staff-of-frost",
+        "rarity": "Very Rare",
+        "type": "Staff"
+    },
+    {
+        "name": "Staff of Power",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:staff-of-power",
+        "rarity": "Very Rare",
+        "type": "Staff"
+    },
+    {
+        "name": "Staff of Striking",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:staff-of-striking",
+        "rarity": "Very Rare",
+        "type": "Staff"
+    },
+    {
+        "name": "Staff of Thunder and Lightning",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:staff-of-thunder-and-lightning",
+        "rarity": "Very Rare",
+        "type": "Staff"
+    },
+    {
+        "name": "Steel",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:steel",
+        "rarity": "Very Rare",
+        "type": "Weapon"
+    },
+    {
+        "name": "Stonemaker War Pick",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:stonemaker-war-pick",
+        "rarity": "Very Rare",
+        "type": "Weapon"
+    },
+    {
+        "name": "Sword of Sharpness",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:sword-of-sharpness",
+        "rarity": "Very Rare",
+        "type": "Weapon"
+    },
+    {
+        "name": "Sword of the Paruns",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:sword-of-the-paruns",
+        "rarity": "Very Rare",
+        "type": "Weapon"
+    },
+    {
+        "name": "Tasha's Creeping Keepboat",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:tashas-creeping-keepboat",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Thunderbuss",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:thunderbuss",
+        "rarity": "Very Rare",
+        "type": "Weapon"
+    },
+    {
+        "name": "Tidecaller Trident",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:tidecaller-trident",
+        "rarity": "Very Rare",
+        "type": "Weapon"
+    },
+    {
+        "name": "Timepiece of Travel",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:timepiece-of-travel",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Tome of Clear Thought",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:tome-of-clear-thought",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Tome of Leadership and Influence",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:tome-of-leadership-and-influence",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Tome of Understanding",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:tome-of-understanding",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Voyager Staff",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:voyager-staff",
+        "rarity": "Very Rare",
+        "type": "Staff"
+    },
+    {
+        "name": "Wand of Polymorph",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:wand-of-polymorph",
+        "rarity": "Very Rare",
+        "type": "Wand"
+    },
+    {
+        "name": "Wand of the War Mage",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:wand-of-the-war-mage",
+        "rarity": "Very Rare",
+        "type": "Wand"
+    },
+    {
+        "name": "Watchful Helm",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:watchful-helm",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Weapon, +1, +2, or +3",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:weapon-1-2-3",
+        "rarity": "Very Rare",
+        "type": "Weapon"
+    },
+    {
+        "name": "Weapon of Throne's Command",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:weapon-of-thrones-command",
+        "rarity": "Very Rare",
+        "type": "Weapon"
+    },
+    {
+        "name": "Wheel of Stars",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:wheel-of-stars",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Wraps Of Unarmed Prowess",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:wraps-of-unarmed-prowess",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Wyrmreaver Gauntlets",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:wyrmreaver-gauntlets",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Apparatus of Kwalish",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:apparatus-of-kwalish",
+        "rarity": "Legendary",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Armor, +1, +2, or +3",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:armor-1-2-3",
+        "rarity": "Legendary",
+        "type": "Armor"
+    },
+    {
+        "name": "Armor of Invulnerability",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:armor-of-invulnerability",
+        "rarity": "Legendary",
+        "type": "Armor"
+    },
+    {
+        "name": "Azuredge",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:azuredge",
+        "rarity": "Legendary",
+        "type": "Weapon"
+    },
+    {
+        "name": "Belashyrra's Beholder Crown",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:belashyrras-beholder-crown",
+        "rarity": "Legendary",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Belt of Giant Strength",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:belt-of-giant-strength",
+        "rarity": "Legendary",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Black Crystal Tablet",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:black-crystal-tablet",
+        "rarity": "Legendary",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Blackrazor",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:blackrazor",
+        "rarity": "Legendary",
+        "type": "Weapon"
+    },
+    {
+        "name": "Blackstaff",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:blackstaff",
+        "rarity": "Legendary",
+        "type": "Staff"
+    },
+    {
+        "name": "Blood Fury Tattoo",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:blood-fury-tattoo",
+        "rarity": "Legendary",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Bookmark",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:bookmark",
+        "rarity": "Legendary",
+        "type": "Weapon"
+    },
+    {
+        "name": "Cloak of Invisibility",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:cloak-of-invisibility",
+        "rarity": "Legendary",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Crystal Ball",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:crystal-ball",
+        "rarity": "Legendary",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Cubic Gate",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:cubic-gate",
+        "rarity": "Legendary",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Danoth's Visor",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:danoths-visor",
+        "rarity": "Legendary",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Dawnbringer",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:dawnbringer",
+        "rarity": "Legendary",
+        "type": "Weapon"
+    },
+    {
+        "name": "Deck Of Many More Things",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:deck-of-many-more-things",
+        "rarity": "Legendary",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Deck of Many Things",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:deck-of-many-things",
+        "rarity": "Legendary",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Deck of Several Things",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:deck-of-several-things",
+        "rarity": "Legendary",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Defender",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:defender",
+        "rarity": "Legendary",
+        "type": "Weapon"
+    },
+    {
+        "name": "Dragon Mask",
+        "link": "https://dnd5e.wikidus-items:dragon-mask",
+        "rarity": "Legendary",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Dragon Vessel",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:dragon-vessel",
+        "rarity": "Legendary",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Dragonlance",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:dragonlance",
+        "rarity": "Legendary",
+        "type": "Weapon"
+    },
+    {
+        "name": "Dragon's Wrath Weapon",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:dragons-wrath-weapon",
+        "rarity": "Legendary",
+        "type": "Weapon"
+    },
+    {
+        "name": "Dragonstaff of Ahghairon",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:dragonstaff-of-ahghairon",
+        "rarity": "Legendary",
+        "type": "Staff"
+    },
+    {
+        "name": "Dragon-Touched Focus",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:dragon-touched-focus",
+        "rarity": "Legendary",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Drown",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:drown",
+        "rarity": "Legendary",
+        "type": "Weapon"
+    },
+    {
+        "name": "Efreeti Chain",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:efreeti-chain",
+        "rarity": "Legendary",
+        "type": "Armor"
+    },
+    {
+        "name": "Euryale's Aegis",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:euryales-aegis",
+        "rarity": "Legendary",
+        "type": "Armor"
+    },
+    {
+        "name": "Fane-Eater",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:fane-eater",
+        "rarity": "Legendary",
+        "type": "Weapon"
+    },
+    {
+        "name": "Fate Dealer's Deck",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:fate-dealers-deck",
+        "rarity": "Legendary",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Figurine of Wondrous Power",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:figurine-of-wondrous-power",
+        "rarity": "Legendary",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Flail of Tiamat",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:flail-of-tiamat",
+        "rarity": "Legendary",
+        "type": "Weapon"
+    },
+    {
+        "name": "Gloves of Soul Catching",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:gloves-of-soul-catching",
+        "rarity": "Legendary",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Grimoire Infinitus",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:grimoire-infinitus",
+        "rarity": "Legendary",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Gurt's Greataxe",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:gurts-greataxe",
+        "rarity": "Legendary",
+        "type": "Weapon"
+    },
+    {
+        "name": "Hammer of Thunderbolts",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:hammer-of-thunderbolts",
+        "rarity": "Legendary",
+        "type": "Weapon"
+    },
+    {
+        "name": "Hammock of Worlds",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:hammock-of-worlds",
+        "rarity": "Legendary",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Harp of Gilded Plenty",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:harp-of-gilded-plenty",
+        "rarity": "Legendary",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Hazirawn",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:hazirawn",
+        "rarity": "Legendary",
+        "type": "Weapon"
+    },
+    {
+        "name": "Helm of Disjunction",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:helm-of-disjunction",
+        "rarity": "Legendary",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Helm of the Scavenger",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:helm-of-the-scavenger",
+        "rarity": "Legendary",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Heretic",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:heretic",
+        "rarity": "Legendary",
+        "type": "Weapon"
+    },
+    {
+        "name": "Hide of the Feral Guardian",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:hide-of-the-feral-guardian",
+        "rarity": "Legendary",
+        "type": "Armor"
+    },
+    {
+        "name": "Hither-Thither Staff",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:hither-thither-staff",
+        "rarity": "Legendary",
+        "type": "Staff"
+    },
+    {
+        "name": "Holy Avenger",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:holy-avenger",
+        "rarity": "Legendary",
+        "type": "Weapon"
+    },
+    {
+        "name": "Holy Symbol of Ravenkind",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:holy-symbol-of-ravenkind",
+        "rarity": "Legendary",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Horn of Beckoning Death",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:horn-of-beckoning-death",
+        "rarity": "Legendary",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Horn of Valhalla",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:horn-of-valhalla",
+        "rarity": "Legendary",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Icon of Ravenloft",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:icon-of-ravenloft",
+        "rarity": "Legendary",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Infernal Tack",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:infernal-tack",
+        "rarity": "Legendary",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Infiltrator's Key",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:infiltrators-key",
+        "rarity": "Legendary",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Instrument of the Bards",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:instrument-of-the-bards",
+        "rarity": "Legendary",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Ioun Stone",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:ioun-stone",
+        "rarity": "Legendary",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Iron Flask",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:iron-flask",
+        "rarity": "Legendary",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Ironfang",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:ironfang",
+        "rarity": "Legendary",
+        "type": "Weapon"
+    },
+    {
+        "name": "Jester's Mask",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:jesters-mask",
+        "rarity": "Legendary",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Jewel of Three Prayers",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:jewel-of-three-prayers",
+        "rarity": "Legendary",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Korolnor Scepter",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:korolnor-scepter",
+        "rarity": "Legendary",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Longbow of the Healing Hearth",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:longbow-of-the-healing-hearth",
+        "rarity": "Legendary",
+        "type": "Weapon"
+    },
+    {
+        "name": "Lost Crown of Besilmer",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:lost-crown-of-besilmer",
+        "rarity": "Legendary",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Luck Blade",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:luck-blade",
+        "rarity": "Legendary",
+        "type": "Weapon"
+    },
+    {
+        "name": "Luxon Beacon",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:luxon-beacon",
+        "rarity": "Legendary",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Matalotok",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:matalotok",
+        "rarity": "Legendary",
+        "type": "Weapon"
+    },
+    {
+        "name": "Moonblade",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:moonblade",
+        "rarity": "Legendary",
+        "type": "Weapon"
+    },
+    {
+        "name": "Murgaxor's Orb",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:murgaxor-s-orb",
+        "rarity": "Legendary",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Nepenthe",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:nepenthe",
+        "rarity": "Legendary",
+        "type": "Weapon"
+    },
+    {
+        "name": "Nether Scroll of Azumar",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:nether-scroll-of-azumar",
+        "rarity": "Legendary",
+        "type": "Scroll"
+    },
+    {
+        "name": "Nightbringer",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:nightbringer",
+        "rarity": "Legendary",
+        "type": "Weapon"
+    },
+    {
+        "name": "Nightfall Pearl",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:nightfall-pearl",
+        "rarity": "Legendary",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Obsidian Flint Dragon Plate",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:obsidian-flint-dragon-plate",
+        "rarity": "Legendary",
+        "type": "Armor"
+    },
+    {
+        "name": "Orb of Skoraeus",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:orb-of-skoraeus",
+        "rarity": "Legendary",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Orcsplitter",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:orcsplitter",
+        "rarity": "Legendary",
+        "type": "Weapon"
+    },
+    {
+        "name": "Plate Armor of Etherealness",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:plate-armor-of-etherealness",
+        "rarity": "Legendary",
+        "type": "Armor"
+    },
+    {
+        "name": "Platinum Scarf",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:platinum-scarf",
+        "rarity": "Legendary",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Potion of Dragon's Majesty",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:potion-of-dragons-majesty",
+        "rarity": "Legendary",
+        "type": "Potion"
+    },
+    {
+        "name": "Potion of Giant Size",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:potion-of-giant-size",
+        "rarity": "Legendary",
+        "type": "Potion"
+    },
+    {
+        "name": "Potion of Giant Strength",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:potion-of-giant-strength",
+        "rarity": "Legendary",
+        "type": "Potion"
+    },
+    {
+        "name": "Powered Armor",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:powered-armor",
+        "rarity": "Legendary",
+        "type": "Armor"
+    },
+    {
+        "name": "Prehistoric Figurines of Wondrous Power",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:prehistoric-figurines-of-wondrous-power",
+        "rarity": "Legendary",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Pyxis of Pandemonium",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:pyxis-of-pandemonium",
+        "rarity": "Legendary",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Rakdos Riteknife",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:rakdos-riteknife",
+        "rarity": "Legendary",
+        "type": "Weapon"
+    },
+    {
+        "name": "Reaper's Scream",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:reapers-scream",
+        "rarity": "Legendary",
+        "type": "Weapon"
+    },
+    {
+        "name": "Red Wizard Blade",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:red-wizard-blade",
+        "rarity": "Legendary",
+        "type": "Weapon"
+    },
+    {
+        "name": "Ring of Djinni Summoning",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:ring-of-djinni-summoning",
+        "rarity": "Legendary",
+        "type": "Ring"
+    },
+    {
+        "name": "Ring of Elemental Command",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:ring-of-elemental-command",
+        "rarity": "Legendary",
+        "type": "Ring"
+    },
+    {
+        "name": "Ring of Invisibility",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:ring-of-invisibility",
+        "rarity": "Legendary",
+        "type": "Ring"
+    },
+    {
+        "name": "Ring of Spell Turning",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:ring-of-spell-turning",
+        "rarity": "Legendary",
+        "type": "Ring"
+    },
+    {
+        "name": "Ring of Three Wishes",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:ring-of-three-wishes",
+        "rarity": "Legendary",
+        "type": "Ring"
+    },
+    {
+        "name": "Robe of the Archmagi",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:robe-of-the-archmagi",
+        "rarity": "Legendary",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Rod of Lordly Might",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:rod-of-lordly-might",
+        "rarity": "Legendary",
+        "type": "Rod"
+    },
+    {
+        "name": "Rod of Resurrection",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:rod-of-resurrection",
+        "rarity": "Legendary",
+        "type": "Rod"
+    },
+    {
+        "name": "Ruby Weave Gem",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:ruby-weave-gem",
+        "rarity": "Legendary",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Ruinblade",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:ruinblade",
+        "rarity": "Legendary",
+        "type": "Weapon"
+    },
+    {
+        "name": "Scaled Ornament",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:scaled-ornament",
+        "rarity": "Legendary",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Scarab of Protection",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:scarab-of-protection",
+        "rarity": "Legendary",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Scroll of Tarrasque Summoning",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:scroll-of-tarrasque-summoning",
+        "rarity": "Legendary",
+        "type": "Scroll"
+    },
+    {
+        "name": "Scroll of the Comet",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:scroll-of-the-comet",
+        "rarity": "Legendary",
+        "type": "Scroll"
+    },
+    {
+        "name": "Shard Solitaire",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:shard-solitaire",
+        "rarity": "Legendary",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Shield of the Blazing Dreadnought",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:shield-of-the-blazing-dreadnought",
+        "rarity": "Legendary",
+        "type": "Armor"
+    },
+    {
+        "name": "Shield of the Hidden Lord",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:shield-of-the-hidden-lord",
+        "rarity": "Legendary",
+        "type": "Armor"
+    },
+    {
+        "name": "Snicker-Snack",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:snicker-snack",
+        "rarity": "Legendary",
+        "type": "Weapon"
+    },
+    {
+        "name": "Sovereign Glue",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:sovereign-glue",
+        "rarity": "Legendary",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Spell Bottle",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:spell-bottle",
+        "rarity": "Legendary",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Spell Gem",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:spell-gem",
+        "rarity": "Legendary",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Spell Scroll",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:spell-scroll",
+        "rarity": "Legendary",
+        "type": "Scroll"
+    },
+    {
+        "name": "Sphere Of Annihilation",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:sphere-of-annihilation",
+        "rarity": "Legendary",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Spindle Of Fate",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:spindle-of-fate",
+        "rarity": "Legendary",
+        "type": "Wand"
+    },
+    {
+        "name": "Staff of the Magi",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:staff-of-the-magi",
+        "rarity": "Legendary",
+        "type": "Staff"
+    },
+    {
+        "name": "Stonebreaker's Breastplate",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:stonebreakers-breastplate",
+        "rarity": "Legendary",
+        "type": "Armor"
+    },
+    {
+        "name": "Stormgirdle",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:stormgirdle",
+        "rarity": "Legendary",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Sunsword",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:sunsword",
+        "rarity": "Legendary",
+        "type": "Weapon"
+    },
+    {
+        "name": "Sword of Answering",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:sword-of-answering",
+        "rarity": "Legendary",
+        "type": "Weapon"
+    },
+    {
+        "name": "Sword of the Planes",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:sword-of-the-planes",
+        "rarity": "Legendary",
+        "type": "Weapon"
+    },
+    {
+        "name": "Tablet of Reawakening",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:tablet-of-reawakening",
+        "rarity": "Legendary",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Talarith",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:talarith",
+        "rarity": "Legendary",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Talisman of Pure Good",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:talisman-of-pure-good",
+        "rarity": "Legendary",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Talisman of the Sphere",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:talisman-of-the-sphere",
+        "rarity": "Legendary",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Talisman of Ultimate Evil",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:talisman-of-ultimate-evil",
+        "rarity": "Legendary",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Telescopic Transporter",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:telescopic-transporter",
+        "rarity": "Legendary",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Tinderstrike",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:tinderstrike",
+        "rarity": "Legendary",
+        "type": "Weapon"
+    },
+    {
+        "name": "Tome of the Stilled Tongue",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:tome-of-the-stilled-tongue",
+        "rarity": "Legendary",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Topaz Annihilator",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:topaz-annihilator",
+        "rarity": "Legendary",
+        "type": "Weapon"
+    },
+    {
+        "name": "Universal Solvent",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:universal-solvent",
+        "rarity": "Legendary",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Verminshroud",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:verminshroud",
+        "rarity": "Legendary",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Vorpal Sword",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:vorpal-sword",
+        "rarity": "Legendary",
+        "type": "Weapon"
+    },
+    {
+        "name": "Wave",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:wave",
+        "rarity": "Legendary",
+        "type": "Weapon"
+    },
+    {
+        "name": "Waythe",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:waythe",
+        "rarity": "Legendary",
+        "type": "Weapon"
+    },
+    {
+        "name": "Well of Many Worlds",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:well-of-many-worlds",
+        "rarity": "Legendary",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Whelm",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:whelm",
+        "rarity": "Legendary",
+        "type": "Weapon"
+    },
+    {
+        "name": "Windvane",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:windvane",
+        "rarity": "Legendary",
+        "type": "Weapon"
+    },
+    {
+        "name": "Witchlight Vane",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:witchlight-vane",
+        "rarity": "Legendary",
+        "type": "Weapon"
+    },
+    {
+        "name": "Witchlight Watch",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:witchlight-watch",
+        "rarity": "Legendary",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Wreath of the Prism",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:wreath-of-the-prism",
+        "rarity": "Legendary",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Ythryn Mythallar",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:ythryn-mythallar",
+        "rarity": "Legendary",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Adze of Annam",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:adze-of-annam",
+        "rarity": "Artifact",
+        "type": "Weapon"
+    },
+    {
+        "name": "Akmon, Hammer of Purphoros",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:akmon",
+        "rarity": "Artifact",
+        "type": "Weapon"
+    },
+    {
+        "name": "Axe of the Dwarvish Lords",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:axe-of-the-dwarvish-lords",
+        "rarity": "Artifact",
+        "type": "Weapon"
+    },
+    {
+        "name": "Baba Yaga's Mortar and Pestle",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:baba-yagas-mortar-and-pestle",
+        "rarity": "Artifact",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Bigby's Beneficent Bracelet",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:bigbys-beneficent-bracelet",
+        "rarity": "Artifact",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Blade of Avernus",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:blade-of-avernus",
+        "rarity": "Artifact",
+        "type": "Weapon"
+    },
+    {
+        "name": "Blade of Broken Mirrors",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:blade-of-broken-mirrors",
+        "rarity": "Artifact",
+        "type": "Weapon"
+    },
+    {
+        "name": "Book of Exalted Deeds",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:book-of-exalted-deeds",
+        "rarity": "Artifact",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Book of Vile Darkness",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:book-of-vile-darkness",
+        "rarity": "Artifact",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Book of Vile Darkness (Variant)",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:book-of-vile-darkness-variant",
+        "rarity": "Artifact",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Crook of Rao",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:crook-of-rao",
+        "rarity": "Artifact",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Crown of Lies",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:crown-of-lies",
+        "rarity": "Artifact",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Daoud's Wondrous Lantern",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:daouds-wondrous-lantern",
+        "rarity": "Artifact",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Dekella, Bident of Thassa",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:dekella",
+        "rarity": "Artifact",
+        "type": "Weapon"
+    },
+    {
+        "name": "Demonomicon of Iggwilv",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:demonomicon-of-iggwilv",
+        "rarity": "Artifact",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Ephixis, Bow of Nyela",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:ephixis",
+        "rarity": "Artifact",
+        "type": "Weapon"
+    },
+    {
+        "name": "Eye and Hand of Vecna",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:eye-and-hand-of-vecna",
+        "rarity": "Artifact",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Grovelthrash",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:grovelthrash",
+        "rarity": "Artifact",
+        "type": "Weapon"
+    },
+    {
+        "name": "Helm of Perfect Potential",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:helm-of-perfect-potential",
+        "rarity": "Artifact",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Iggwilv's Cauldron",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:iggwilv-s-cauldron",
+        "rarity": "Artifact",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Khrusor, Spear of Heliod",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:khrusor",
+        "rarity": "Artifact",
+        "type": "Weapon"
+    },
+    {
+        "name": "Lash of Shadows",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:lash-of-shadows",
+        "rarity": "Artifact",
+        "type": "Weapon"
+    },
+    {
+        "name": "Luba's Tarokka of Souls",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:lubas-tarokka-of-souls",
+        "rarity": "Artifact",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Mace of the Black Crown",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:mace-of-the-black-crown",
+        "rarity": "Artifact",
+        "type": "Weapon"
+    },
+    {
+        "name": "Mastix, Whip of Erebos",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:mastix",
+        "rarity": "Artifact",
+        "type": "Weapon"
+    },
+    {
+        "name": "Mighty Servant of Leuk-o",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:mighty-servant-of-leuk-o",
+        "rarity": "Artifact",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Orb of Dragonkind",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:orb-of-dragonkind",
+        "rarity": "Artifact",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Orrery Of The Wanderer",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:orrery-of-the-wanderer",
+        "rarity": "Artifact",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Ring of Winter",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:ring-of-winter",
+        "rarity": "Artifact",
+        "type": "Ring"
+    },
+    {
+        "name": "Rod of Seven Parts",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:rod-of-seven-parts",
+        "rarity": "Artifact",
+        "type": "Rod"
+    },
+    {
+        "name": "Ruin's Wake",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:ruins-wake",
+        "rarity": "Artifact",
+        "type": "Weapon"
+    },
+    {
+        "name": "Ruinstone",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:ruinstone",
+        "rarity": "Artifact",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Silken Spite",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:silken-spite",
+        "rarity": "Artifact",
+        "type": "Weapon"
+    },
+    {
+        "name": "Staff of the Forgotten One",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:staff-of-the-forgotten-one",
+        "rarity": "Artifact",
+        "type": "Staff"
+    },
+    {
+        "name": "Stone of Golorr",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:stone-of-golorr",
+        "rarity": "Artifact",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Sword of Kas",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:sword-of-kas",
+        "rarity": "Artifact",
+        "type": "Weapon"
+    },
+    {
+        "name": "Sword of Zariel",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:sword-of-zariel",
+        "rarity": "Artifact",
+        "type": "Weapon"
+    },
+    {
+        "name": "Teeth of Dahlver-Nar",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:teeth-of-dahlver-nar",
+        "rarity": "Artifact",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "The Bloody End",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:the-bloody-end",
+        "rarity": "Artifact",
+        "type": "Weapon"
+    },
+    {
+        "name": "The Infernal Machine Of Lum The Mad",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:the-infernal-machine-of-lum-the-mad",
+        "rarity": "Artifact",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Wand of Orcus",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:wand-of-orcus",
+        "rarity": "Artifact",
+        "type": "Wand"
+    },
+    {
+        "name": "Will of the Talon",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:will-of-the-talon",
+        "rarity": "Artifact",
+        "type": "Weapon"
+    },
+    {
+        "name": "Wyrmskull Throne",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:wyrmskull-throne",
+        "rarity": "Artifact",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Draakhorn",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:draakhorn",
+        "rarity": "Unique",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Gnomengarde Grenade",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:gnomengarde-grenade",
+        "rarity": "Unique",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Mask of the Dragon Queen",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:mask-of-the-dragon-queen",
+        "rarity": "Unique",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Crusader's Shortsword",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:crusaders-shortsword",
+        "rarity": "???",
+        "type": "Weapon"
+    },
+    {
+        "name": "Orcus Figurine",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:orcus-figurine",
+        "rarity": "???",
+        "type": "Wondrous Item"
+    },
+    {
+        "name": "Radiance",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:radiance",
+        "rarity": "???",
+        "type": "Wand"
+    },
+    {
+        "name": "Shield of the Silver Dragon",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:shield-of-the-silver-dragon",
+        "rarity": "???",
+        "type": "Armor"
+    },
+    {
+        "name": "Stonky's Ring",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:stonkys-ring",
+        "rarity": "???",
+        "type": "Ring"
+    },
+    {
+        "name": "Tearulai",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:tearulai",
+        "rarity": "???",
+        "type": "Weapon"
+    },
+    {
+        "name": "Yester Hill Axe",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:yester-hill-axe",
+        "rarity": "???",
+        "type": "Weapon"
+    }
+]

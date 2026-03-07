@@ -139,6 +139,7 @@ export const ALL_FEATS: Feat[] = [
 ];
 
 // ── METAMAGIC SEÇENEKLERİ (Metamagic Adept veya Sorcerer için) ───────────────
+// ── METAMAGIC SEÇENEKLERİ (Metamagic Adept veya Sorcerer için) ───────────────
 export const ALL_METAMAGICS = [
     { name: "Careful Spell", desc: "1 sorcery point harcayarak büyünün kurtarma zarından bazı müttefikleri korursun." },
     { name: "Distant Spell", desc: "1 sorcery point harcayarak büyünün menzilini iki katına çıkar ya da touch büyüleri 30ft menzilli yap." },
@@ -150,4 +151,46 @@ export const ALL_METAMAGICS = [
     { name: "Twinned Spell", desc: "Büyü seviyesi kadar (cantrip için 1) point harcayarak tek hedefli büyüyü ikinci bir hedefe de ulaştır." },
     { name: "Seeking Spell", desc: "2 sorcery point harcayarak kaçıran bir büyü saldırı zarını yeniden at." },
     { name: "Transmuted Spell", desc: "1 sorcery point harcayarak elementel hasar tipini başka bir element tipine değiştir." }
+];
+
+// ── BATTLE MASTER MANEUVERS (Martial Adept veya Fighter için) ────────────────
+export const ALL_MANEUVERS = [
+    { name: "Ambush", desc: "İnisiyatif veya Stealth zarına Superiority Die ekle." },
+    { name: "Bait and Switch", desc: "Müttefikle yer değiştir ve AC bonusu kazan." },
+    { name: "Brace", desc: "Yaratık menziline girdiğinde reaksiyonla saldır." },
+    { name: "Commander's Strike", desc: "Saldırından feragat edip müttefike saldırı yaptır." },
+    { name: "Commanding Presence", desc: "Intimidation, Performance veya Persuasion zarına ekle." },
+    { name: "Disarming Attack", desc: "Hedefi elindeki eşyayı düşürmeye zorla." },
+    { name: "Distracting Strike", desc: "Hedefe yapılan bir sonraki saldırıya avantaj sağla." },
+    { name: "Evasive Footwork", desc: "Hareket ederken AC'ye Superiority Die ekle." },
+    { name: "Feinting Attack", desc: "Bonus eylemle bir sonraki saldırına avantaj ve ek hasar kazan." },
+    { name: "Goading Attack", desc: "Hedefi sana saldırmaya zorla (başkasına disadv)." },
+    { name: "Grappling Strike", desc: "Saldırı sonrası bonus eylemle Grapple dene." },
+    { name: "Lunging Attack", desc: "Melee saldırı menzilini 5ft artır." },
+    { name: "Maneuvering Attack", desc: "Müttefikin güvenle hareket etmesini sağla." },
+    { name: "Menacing Attack", desc: "Hedefi Frightened durumuna sokmaya çalış." },
+    { name: "Parry", desc: "Hasarı reaksiyonla azalt." },
+    { name: "Precision Attack", desc: "Saldırı zarına Superiority Die ekle." },
+    { name: "Pushing Attack", desc: "Hedefi 15ft uzağa itmeye çalış." },
+    { name: "Quick Toss", desc: "Bonus eylemle fırlatılan silah saldırısı yap." },
+    { name: "Rally", desc: "Müttefike geçici HP ver." },
+    { name: "Riposte", desc: "Sana ıskalayan düşmana reaksiyonla saldır." },
+    { name: "Sweeping Attack", desc: "Saldırı hasarını yanındaki başka birine de yay." },
+    { name: "Tactical Assessment", desc: "History, Insight veya Investigation zarına ekle." },
+    { name: "Trip Attack", desc: "Hedefi yere düşürmeye (prone) çalış." }
+];
+
+// ── FIGHTING STYLES (Fighting Initiate veya Fighter için) ────────────────────
+export const ALL_FIGHTING_STYLES = [
+    { name: "Archery", desc: "Menzilli silah saldırılarına +2 bonus." },
+    { name: "Blind Fighting", desc: "10ft Blindsight kazan." },
+    { name: "Defense", desc: "Zırhlıyken AC'ye +1." },
+    { name: "Dueling", desc: "Tek el silahta +2 hasar." },
+    { name: "Great Weapon Fighting", desc: "1-2 gelen hasar zarlarını yeniden at." },
+    { name: "Interception", desc: "Yanındakinin aldığı hasarı azalt." },
+    { name: "Protection", desc: "Yanındakine yapılan saldırıya dezavantaj ver." },
+    { name: "Superior Technique", desc: "1 Maneuver ve 1d6 Superiority Die kazan." },
+    { name: "Thrown Weapon Fighting", desc: "Fırlatılan silahlarda +2 hasar." },
+    { name: "Two-Weapon Fighting", desc: "Bonus saldırıya modifier ekle." },
+    { name: "Unarmed Fighting", desc: "Silahsız saldırılarda 1d6/1d8 hasar." }
 ];

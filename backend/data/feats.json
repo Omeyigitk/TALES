@@ -1,0 +1,480 @@
+[
+    {
+        "name": "Ability Score Improvement",
+        "name_tr": "Yetenek Puanı Artışı",
+        "category": "General",
+        "desc_tr": "Bir yetenek skorunu 2 puan artır, ya da iki farklı yetenek skorunu birer puan artır (maksimum 20).",
+        "effects": [
+            {
+                "type": "stat_choice",
+                "options": [
+                    "STR",
+                    "DEX",
+                    "CON",
+                    "INT",
+                    "WIS",
+                    "CHA"
+                ],
+                "value": 2
+            }
+        ]
+    },
+    {
+        "name": "Actor",
+        "name_tr": "Aktör",
+        "category": "Half Feat",
+        "desc_tr": "CHA +1. Ses taklidi ve başka bir kişinin kisvesine girme konusunda ustalaşırsın.",
+        "effects": [
+            {
+                "type": "stat_bonus",
+                "value": {
+                    "CHA": 1
+                }
+            },
+            {
+                "type": "expertise",
+                "value": "Deception"
+            },
+            {
+                "type": "expertise",
+                "value": "Performance"
+            }
+        ]
+    },
+    {
+        "name": "Alert",
+        "name_tr": "Tetikte",
+        "category": "Origin",
+        "desc_tr": "İnisiyatif zarlarına +5 bonus. Bilincin açıkken şaşırtılamazsın.",
+        "effects": [
+            {
+                "type": "initiative_bonus",
+                "value": 5
+            }
+        ]
+    },
+    {
+        "name": "Athlete",
+        "name_tr": "Atlet",
+        "category": "Half Feat",
+        "desc_tr": "STR veya DEX +1. Tırmanma hızın yarıya düşmez.",
+        "effects": [
+            {
+                "type": "stat_choice",
+                "options": [
+                    "STR",
+                    "DEX"
+                ],
+                "value": 1
+            },
+            {
+                "type": "speed_bonus",
+                "value": 0,
+                "note": "Climb speed normal"
+            }
+        ]
+    },
+    {
+        "name": "Crusher",
+        "name_tr": "Ezici",
+        "category": "Half Feat",
+        "desc_tr": "STR veya CON +1. Bludgeoning hasarı vurduğunda özneli 5ft itebilirsin.",
+        "effects": [
+            {
+                "type": "stat_choice",
+                "options": [
+                    "STR",
+                    "CON"
+                ],
+                "value": 1
+            }
+        ]
+    },
+    {
+        "name": "Durable",
+        "name_tr": "Dayanıklı",
+        "category": "Half Feat",
+        "desc_tr": "CON +1. Hit Dice atarken minimum CON modifier kadar atarsın.",
+        "effects": [
+            {
+                "type": "stat_bonus",
+                "value": {
+                    "CON": 1
+                }
+            }
+        ]
+    },
+    {
+        "name": "Fey Touched",
+        "name_tr": "Fey Touched",
+        "category": "Half Feat",
+        "desc_tr": "INT, WIS veya CHA +1. Misty Step öğren. Divination veya Enchantment'tan 1. seviye büyü öğren.",
+        "effects": [
+            {
+                "type": "stat_choice",
+                "options": [
+                    "INT",
+                    "WIS",
+                    "CHA"
+                ],
+                "value": 1
+            },
+            {
+                "type": "spell_auto",
+                "value": "Misty Step"
+            },
+            {
+                "type": "spell_choice",
+                "level": 1,
+                "schools": [
+                    "divination",
+                    "enchantment"
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Gunner",
+        "name_tr": "Nişancı",
+        "category": "Half Feat",
+        "desc_tr": "DEX +1. Ateşli silah ustalığı kazanırsın.",
+        "effects": [
+            {
+                "type": "stat_bonus",
+                "value": {
+                    "DEX": 1
+                }
+            },
+            {
+                "type": "proficiency",
+                "value": "Firearms"
+            }
+        ]
+    },
+    {
+        "name": "Heavily Armored",
+        "name_tr": "Ağır Zırhlı",
+        "category": "Half Feat",
+        "desc_tr": "STR +1. Ağır zırh ustalığı kazanırsın.",
+        "effects": [
+            {
+                "type": "stat_bonus",
+                "value": {
+                    "STR": 1
+                }
+            },
+            {
+                "type": "proficiency",
+                "value": "Heavy Armor"
+            }
+        ]
+    },
+    {
+        "name": "Heavy Armor Master",
+        "name_tr": "Ağır Zırh Ustası",
+        "category": "Half Feat",
+        "desc_tr": "STR +1. Ağır zırh giyerken B/P/S hasarı 3 azalır.",
+        "effects": [
+            {
+                "type": "stat_bonus",
+                "value": {
+                    "STR": 1
+                }
+            }
+        ]
+    },
+    {
+        "name": "Keen Mind",
+        "name_tr": "Keskin Zihin",
+        "category": "Half Feat",
+        "desc_tr": "INT +1. Kuzey yönünü her zaman bilirsin.",
+        "effects": [
+            {
+                "type": "stat_bonus",
+                "value": {
+                    "INT": 1
+                }
+            }
+        ]
+    },
+    {
+        "name": "Moderately Armored",
+        "name_tr": "Orta Zırhlı",
+        "category": "Half Feat",
+        "desc_tr": "STR veya DEX +1. Orta zırh ve kalkan ustalığı kazanırsın.",
+        "effects": [
+            {
+                "type": "stat_choice",
+                "options": [
+                    "STR",
+                    "DEX"
+                ],
+                "value": 1
+            },
+            {
+                "type": "proficiency",
+                "value": "Medium Armor"
+            },
+            {
+                "type": "proficiency",
+                "value": "Shields"
+            }
+        ]
+    },
+    {
+        "name": "Observant",
+        "name_tr": "Gözlemci",
+        "category": "Half Feat",
+        "desc_tr": "INT veya WIS +1. Pasif Perception ve Investigation +5.",
+        "effects": [
+            {
+                "type": "stat_choice",
+                "options": [
+                    "INT",
+                    "WIS"
+                ],
+                "value": 1
+            }
+        ]
+    },
+    {
+        "name": "Piercer",
+        "name_tr": "Delici",
+        "category": "Half Feat",
+        "desc_tr": "STR veya DEX +1. Piercing hasarını iyileştirir.",
+        "effects": [
+            {
+                "type": "stat_choice",
+                "options": [
+                    "STR",
+                    "DEX"
+                ],
+                "value": 1
+            }
+        ]
+    },
+    {
+        "name": "Resilient",
+        "name_tr": "Dirençli",
+        "category": "Half Feat",
+        "desc_tr": "Seçilen özellik +1 ve o özelliğin kurtarma atışında ustalık.",
+        "effects": [
+            {
+                "type": "stat_choice",
+                "options": [
+                    "STR",
+                    "DEX",
+                    "CON",
+                    "INT",
+                    "WIS",
+                    "CHA"
+                ],
+                "value": 1
+            }
+        ]
+    },
+    {
+        "name": "Shadow Touched",
+        "name_tr": "Shadow Touched",
+        "category": "Half Feat",
+        "desc_tr": "INT, WIS veya CHA +1. Invisibility öğren. Illusion veya Necromancy'den 1. seviye büyü öğren.",
+        "effects": [
+            {
+                "type": "stat_choice",
+                "options": [
+                    "INT",
+                    "WIS",
+                    "CHA"
+                ],
+                "value": 1
+            },
+            {
+                "type": "spell_auto",
+                "value": "Invisibility"
+            },
+            {
+                "type": "spell_choice",
+                "level": 1,
+                "schools": [
+                    "illusion",
+                    "necromancy"
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Skill Expert",
+        "name_tr": "Beceri Uzmanı",
+        "category": "Half Feat",
+        "desc_tr": "Herhangi bir özellik +1. Bir beceri ustalığı ve bir Expertise kazandırır.",
+        "effects": [
+            {
+                "type": "stat_choice",
+                "options": [
+                    "STR",
+                    "DEX",
+                    "CON",
+                    "INT",
+                    "WIS",
+                    "CHA"
+                ],
+                "value": 1
+            },
+            {
+                "type": "proficiency",
+                "value": "Skill"
+            },
+            {
+                "type": "expertise",
+                "value": "Skill"
+            }
+        ]
+    },
+    {
+        "name": "Slasher",
+        "name_tr": "Parçalayıcı",
+        "category": "Half Feat",
+        "desc_tr": "STR veya DEX +1. Slashing hasarı hızı düşürür.",
+        "effects": [
+            {
+                "type": "stat_choice",
+                "options": [
+                    "STR",
+                    "DEX"
+                ],
+                "value": 1
+            }
+        ]
+    },
+    {
+        "name": "Telekinetic",
+        "name_tr": "Telekinetik",
+        "category": "Half Feat",
+        "desc_tr": "INT, WIS veya CHA +1. Mage Hand cantrip öğren.",
+        "effects": [
+            {
+                "type": "stat_choice",
+                "options": [
+                    "INT",
+                    "WIS",
+                    "CHA"
+                ],
+                "value": 1
+            },
+            {
+                "type": "spell_auto",
+                "value": "Mage Hand"
+            }
+        ]
+    },
+    {
+        "name": "Telepathic",
+        "name_tr": "Telepatik",
+        "category": "Half Feat",
+        "desc_tr": "INT, WIS veya CHA +1. Zihinsel iletişim kurarsın.",
+        "effects": [
+            {
+                "type": "stat_choice",
+                "options": [
+                    "INT",
+                    "WIS",
+                    "CHA"
+                ],
+                "value": 1
+            },
+            {
+                "type": "spell_auto",
+                "value": "Detect Thoughts"
+            }
+        ]
+    },
+    {
+        "name": "Tough",
+        "name_tr": "Güçlü",
+        "category": "Origin",
+        "desc_tr": "Maksimum HP her seviye için 2 artar.",
+        "effects": [
+            {
+                "type": "hp_per_level",
+                "value": 2
+            }
+        ]
+    },
+    {
+        "name": "Weapon Master",
+        "name_tr": "Silah Ustası",
+        "category": "Half Feat",
+        "desc_tr": "STR veya DEX +1. 4 silah ustalığı kazanırsın.",
+        "effects": [
+            {
+                "type": "stat_choice",
+                "options": [
+                    "STR",
+                    "DEX"
+                ],
+                "value": 1
+            }
+        ]
+    },
+    {
+        "name": "Magic Initiate",
+        "name_tr": "Sihre Giriş",
+        "category": "Origin",
+        "desc_tr": "Bir sınıftan (Bard, Cleric, Druid, Sorcerer, Warlock, Wizard) 2 cantrip ve 1. seviye bir büyü öğrenirsin. 1. seviye büyüyü her uzun dinlenmede bir kez ücretsiz atabilirsin.",
+        "effects": [
+            {
+                "type": "spell_choice",
+                "label": "Cantrip 1",
+                "level": 0
+            },
+            {
+                "type": "spell_choice",
+                "label": "Cantrip 2",
+                "level": 0
+            },
+            {
+                "type": "spell_choice",
+                "label": "1. Seviye Büyü",
+                "level": 1
+            }
+        ]
+    },
+    {
+        "name": "Spell Sniper",
+        "name_tr": "Büyü Keskin Nişancısı",
+        "category": "General",
+        "desc_tr": "Büyü menzilin iki katına çıkar. Saldırı zarı gerektiren bir cantrip öğrenirsin.",
+        "effects": [
+            {
+                "type": "spell_choice",
+                "label": "Saldırı Cantrip'i",
+                "level": 0,
+                "needsAttackRoll": true
+            }
+        ]
+    },
+    {
+        "name": "Artificer Initiate",
+        "name_tr": "Artificer Girişi",
+        "category": "General",
+        "desc_tr": "Artificer listesinden bir cantrip ve bir 1. seviye büyü öğrenirsin. Bir alet ustalığı kazanırsın.",
+        "effects": [
+            {
+                "type": "spell_choice",
+                "label": "Artificer Cantrip",
+                "level": 0,
+                "classRestriction": "Artificer"
+            },
+            {
+                "type": "spell_choice",
+                "label": "Artificer 1. Seviye Büyü",
+                "level": 1,
+                "classRestriction": "Artificer"
+            },
+            {
+                "type": "proficiency",
+                "value": "Tool"
+            }
+        ]
+    }
+]

@@ -32,6 +32,8 @@ const NPC = require('./models/NPC');
 const Note = require('./models/Note');
 const Item = require('./models/Item');
 const User = require('./models/User');
+const Feat = require('./models/Feat');
+const Whisper = require('./models/Whisper');
 
 const app = express();
 app.use(cors({
@@ -116,6 +118,11 @@ app.post('/api/admin/seed', authenticate, async (req, res) => {
     const items = JSON.parse(fs.readFileSync(path.join(dataPath, 'items.json'), 'utf8'));
     await Item.deleteMany({});
     await Item.insertMany(items);
+
+    // Featler (YENİ)
+    const feats = JSON.parse(fs.readFileSync(path.join(dataPath, 'feats.json'), 'utf8'));
+    await Feat.deleteMany({});
+    await Feat.insertMany(feats);
 
     res.json({ success: true, message: 'Tüm veriler başarıyla yüklendi!' });
   } catch (error) {
@@ -290,6 +297,15 @@ app.get('/api/spells', async (req, res) => {
   }
 });
 
+app.get('/api/feats', async (req, res) => {
+  try {
+    const feats = await Feat.find({}).sort({ name: 1 });
+    res.json(feats);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 app.get('/api/classes', async (req, res) => {
   try {
     const classes = await Class.find({});
@@ -426,7 +442,7 @@ app.post('/api/campaigns/:id/media', upload.single('file'), async (req, res) => 
     let name = req.body.name || 'Paylaşılan Medya';
 
     if (req.file) {
-      url = `${process.env.BASE_URL || `http://localhost:${PORT}`}/uploads/${req.file.filename}`;
+      url = `/uploads/${req.file.filename}`;
       type = 'image';
       name = req.file.originalname;
     }
@@ -659,6 +675,37 @@ io.on('connection', (socket) => {
       if (campaign && campaign.mapData) {
         socket.emit('map_updated', campaign.mapData);
       }
+
+      // Send initial party stats
+      const characters = await Character.find({ campaignId, isNpc: false });
+      const statsMap = {};
+      characters.forEach(c => {
+        statsMap[c.name] = {
+          characterId: c._id,
+          level: c.level,
+          subclass: c.subclass,
+          currentHp: c.currentHp,
+          maxHp: c.maxHp,
+          conditions: c.conditions || []
+        };
+      });
+      socket.emit('party_sync', statsMap);
+
+      // Send whisper history
+      const userCharacter = await Character.findOne({ campaignId, userId: socket.user.id });
+      const charName = userCharacter ? userCharacter.name : (role === 'DM' ? 'DM' : null);
+
+      if (charName) {
+        const history = await Whisper.find({
+          campaignId,
+          $or: [
+            { senderName: charName },
+            { targetName: charName }
+          ]
+        }).sort({ createdAt: 1 }).limit(100);
+        socket.emit('whisper_history', history);
+      }
+
     } catch (err) {
       console.error(err);
     }
@@ -669,9 +716,16 @@ io.on('connection', (socket) => {
   socket.on('update_character_stat', async ({ campaignId, characterId, stat, value }) => {
     try {
       // Veritabanı güncellemesi
-      await Character.findByIdAndUpdate(characterId, { [stat]: value });
-      // Diğerlerine yansıt
-      io.to(campaignId).emit('character_stat_updated', { characterId, stat, value });
+      const updatedChar = await Character.findByIdAndUpdate(characterId, { [stat]: value }, { new: true });
+      if (!updatedChar) return;
+
+      // Diğerlerine yansıt - Frontend'de Name üzerinden indexlediği için ismi de gönderiyoruz
+      io.to(campaignId).emit('character_stat_updated', {
+        characterId,
+        name: updatedChar.name,
+        stat,
+        value
+      });
     } catch (err) {
       console.error(err);
     }
@@ -690,8 +744,45 @@ io.on('connection', (socket) => {
     io.to(campaignId).emit('dice_revealed', { rollId });
   });
 
-  socket.on('whisper_player', ({ campaignId, targetPlayerName, message }) => {
-    io.to(campaignId).emit('whisper_received', { targetPlayerName, message });
+  socket.on('whisper_player', async ({ campaignId, targetPlayerName, message, senderName }) => {
+    try {
+      // Save whisper to database
+      const newWhisper = new Whisper({
+        campaignId,
+        senderName,
+        targetName: targetPlayerName,
+        message
+      });
+      await newWhisper.save();
+
+      // Find target sockets
+      const sockets = io.sockets.adapter.rooms.get(campaignId);
+      if (sockets) {
+        for (const socketId of sockets) {
+          const targetSocket = io.sockets.sockets.get(socketId);
+          if (targetPlayerName === 'DM') {
+            if (targetSocket.user.role === 'DM') {
+              targetSocket.emit('whisper_received', newWhisper);
+            }
+          } else {
+            // Check if socket's user owns the target character
+            // We'll need a way to verify character name for socket
+            // For now, simpler: check if targetSocket.user is playing target character
+            const targetChar = await Character.findOne({ campaignId, name: targetPlayerName });
+            if (targetChar && targetSocket.user.id === targetChar.userId.toString()) {
+              targetSocket.emit('whisper_received', newWhisper);
+            }
+          }
+
+          // Also send to sender so they see it in their history/log immediately
+          if (targetSocket.id === socket.id) {
+            targetSocket.emit('whisper_received', newWhisper);
+          }
+        }
+      }
+    } catch (err) {
+      console.error('Whisper save error:', err);
+    }
   });
 
   socket.on('share_media', ({ campaignId, url, type }) => {

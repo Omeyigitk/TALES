@@ -1,0 +1,452 @@
+[
+    {
+        "name": "Illusionist's Bracers",
+        "name_tr": "İllüzyonist Bileklikleri",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:illusionists-bracers",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item",
+        "description": "Powerful bracers that allow the wearer to cast the same cantrip twice in one turn using a bonus action.",
+        "description_tr": "Büyüsel hızı artıran ve aynı büyüyü (cantrip) tek turda iki kez yapmanızı sağlayan güçlü bileklikler."
+    },
+    {
+        "name": "Ingot of the Skold Rune",
+        "name_tr": "Skold Rünü Külçesi",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:ingot-of-the-skold-rune",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item",
+        "description": "Iron ingot inscribed with a shield rune that provides AC bonuses and can protect allies by absorbing their damage.",
+        "description_tr": "Üzerindeki kalkan rünüyle savunmayı artıran ve dostların aldığı hasarı üstlenmenizi sağlayan demir külçe."
+    },
+    {
+        "name": "Instrument of the Bards",
+        "name_tr": "Ozan Enstrümanı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:instrument-of-the-bards",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item",
+        "description": "Masterwork instruments that grant bards access to various powerful spells and enhance charm-based magic.",
+        "description_tr": "Ozanların (Bard) kadim büyüler yapmasını sağlayan ve büyülerinin direncini kıran eşsiz müzik aletleri."
+    },
+    {
+        "name": "Ioun Stone",
+        "name_tr": "Ioun Taşı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:ioun-stone",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item",
+        "description": "Magical stones that orbit the user's head, providing benefits like stat increases, spell absorption, or regeneration.",
+        "description_tr": "Kafanızın etrafında dönerek size güç (İstatistik artışı, büyü emme vb.) veren kadim sihirli taşlar."
+    },
+    {
+        "name": "Kyrzin's Ooze",
+        "name_tr": "Kyrzin'in Balçığı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:kyrzins-ooze",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item",
+        "description": "Symbiotic goo that provides acid/poison resistance, amorphous movement, and the ability to exhale acid breath.",
+        "description_tr": "İçildiğinde vücuda yayılan, asit direnci veren ve asit püskürtmenizi sağlayan canlı bir balçık."
+    },
+    {
+        "name": "Last Stand Armor",
+        "name_tr": "Son Direniş Zırhı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:last-stand-armor",
+        "rarity": "Very Rare",
+        "type": "Armor",
+        "description": "Shimmering +1 armor that banishes nearby extraplanar creatures when the wearer dies.",
+        "description_tr": "Sahibi öldüğünde kendini yok ederek etraftaki tüm iblis ve perileri ana dünyalarına süren fedakar zırh."
+    },
+    {
+        "name": "Lifewell Tattoo",
+        "name_tr": "Can Kuyusu Dövmesi",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:lifewell-tattoo",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item",
+        "description": "Tattoo providing necrotic resistance and a one-time survival effect that leaves the wearer at 1 hit point.",
+        "description_tr": "Ölüm büyülerini engelleyen ve ölümcül darbeler aldığınızda sizi 1 canla hayatta tutan sihirli dövme."
+    },
+    {
+        "name": "Living Armor",
+        "name_tr": "Canlı Zırh",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:living-armor",
+        "rarity": "Very Rare",
+        "type": "Armor",
+        "description": "Symbiotic chitin armor that provides multiple resistances but requires the wearer to feed it their own vitality.",
+        "description_tr": "Sahibiyle bütünleşen, ona dirençler veren ancak karşılığında kanla beslenmek isteyen ürkütücü canlı zırh."
+    },
+    {
+        "name": "Lord's Ensemble",
+        "name_tr": "Lord Takımı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:lords-ensemble",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item",
+        "description": "Set of helm, amulet, and robe used by Waterdeep's lords to conceal their identity and protect against mental intrusion.",
+        "description_tr": "Kullanıcının kimliğini tamamen gizleyen ve zihnini okunamaz kılan, Waterdeep Lordlarına özel kıyafet seti."
+    },
+    {
+        "name": "Lucent Destroyer",
+        "name_tr": "Parlak Yok Edici",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:lucent-destroyer",
+        "rarity": "Very Rare",
+        "type": "Weapon",
+        "description": "Triple-barreled bronze musket that fires radiant energy and can cast the Sunbeam spell via its light rune.",
+        "description_tr": "Mühimmat gerektirmeyen, vuruşlarında saf ışık (radiant) saçan ve dev bir güneş ışını atan antik tüfek."
+    },
+    {
+        "name": "Manual of Bodily Health",
+        "name_tr": "Beden Sağlığı Kitabı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:manual-of-bodily-health",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item",
+        "description": "Magic book that permanently increases the reader's Constitution score and maximum.",
+        "description_tr": "Okuyup içindeki tavsiyeleri uygulayan kişinin dayanıklılığını (Constitution) kalıcı olarak artıran kitap."
+    },
+    {
+        "name": "Manual of Gainful Exercise",
+        "name_tr": "Verimli Egzersiz Kitabı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:manual-of-gainful-exercise",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item",
+        "description": "Magic book that permanently increases the reader's Strength score and maximum.",
+        "description_tr": "İçindeki idman tekniklerini çalışan kişinin fiziksel gücünü (Strength) kalıcı olarak artıran sihirli kitap."
+    },
+    {
+        "name": "Manual of Golems",
+        "name_tr": "Golem Yapım Kitabı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:manual-of-golems",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item",
+        "description": "Detailed tome providing the incantations and instructions needed to build a specific type of golem.",
+        "description_tr": "Devasa ve güçlü bir golem yaratmak için gereken tüm gizli bilgileri ve rünleri içeren rehber kitap."
+    },
+    {
+        "name": "Manual of Quickness of Action",
+        "name_tr": "Hareket Çevikliği Kitabı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:manual-of-quickness-of-action",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item",
+        "description": "Magic book that permanently increases the reader's Dexterity score and maximum.",
+        "description_tr": "İçindeki çeviklik egzersizlerini yapan kişinin reflekslerini (Dexterity) kalıcı olarak geliştiren kitap."
+    },
+    {
+        "name": "Mindblasting Cap",
+        "name_tr": "Zihin Patlatan Başlık",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:mindblasting-cap",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item",
+        "description": "Violet cap that projects a cone of psychic energy to damage and stun enemies.",
+        "description_tr": "Düşmanların zihnini felç eden ve onlara psişik hasar veren, beyin kıvrımları desenli mor başlık."
+    },
+    {
+        "name": "Mindguard Crown",
+        "name_tr": "Zihin Koruyucu Taç",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:mindguard-crown",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item",
+        "description": "Adamantine crown providing resistance to psychic damage and advantage on mental saving throws.",
+        "description_tr": "Takan kişinin zihnini çelik gibi yapan; psişik saldırılardan ve zihin kontrolünden koruyan taç."
+    },
+    {
+        "name": "Mirror of Life Trapping",
+        "name_tr": "Yaşam Hapseden Ayna",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:mirror-of-life-trapping",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item",
+        "description": "Large mirror containing twelve extradimensional cells used to trap creatures who see their reflection.",
+        "description_tr": "Kendine bakanları içine çekip hapsetmek için kullanılan on iki hücreli, tehlikeli bir sihirli ayna."
+    },
+    {
+        "name": "Mirror of Reflected Pasts",
+        "name_tr": "Geçmişi Yansıtan Ayna",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:mirror-of-reflected-pasts",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item",
+        "description": "Elven mirror that paralyzes viewers by showing them beautiful versions of their past memories.",
+        "description_tr": "Rakipleri geçmişin güzel ama sahte anılarıyla büyüleyip oldukları yerde donduran elf aynası."
+    },
+    {
+        "name": "Mistral Mantle",
+        "name_tr": "Mistral Pelerini",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:mistral-mantle",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item",
+        "description": "Fur-lined cloak with a frost rune that provides cold resistance and can summon a massive sleet storm.",
+        "description_tr": "Etrafında dondurucu rüzgarlar estiren ve büyük bir tipi (Sleet Storm) çıkarabilen buz rünlü pelerin."
+    },
+    {
+        "name": "Moon Sickle",
+        "name_tr": "Ay Orağı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:moon-sickle",
+        "rarity": "Very Rare",
+        "type": "Weapon",
+        "description": "Silver-bladed sickle that enhances druid and ranger spells and provides a bonus to healing magic.",
+        "description_tr": "Druid ve Ranger'ların büyülerine güç katan ve iyileştirme güçlerini artıran gümüşi ay orağı."
+    },
+    {
+        "name": "Mudslick Tower",
+        "name_tr": "Balçık Kulesi",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:mudslick-tower",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item",
+        "description": "Adamantine sphere that expands into a stout two-story tower on command, dealing damage to nearby creatures.",
+        "description_tr": "Yere atıldığında anında iki katlı devasa bir adamantine kuleye dönüşen sihirli granit küre."
+    },
+    {
+        "name": "Navigation Orb",
+        "name_tr": "Navigasyon Küresi",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:navigation-orb",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item",
+        "description": "Levitating mithral sphere used to navigate and control the movement of cloud castles.",
+        "description_tr": "Devasa bulut kalelerini ve uçan sarayları havada yönlendirmek için kullanılan gümüşi küre."
+    },
+    {
+        "name": "Nimbus Coronet",
+        "name_tr": "Nimbus Tacı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:nimbus-coronet",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item",
+        "description": "Cloud-themed circlet that prevents fall damage, allows short teleports, and transformation into cloud form.",
+        "description_tr": "Düşme hasarını önleyen, sahibini ışınlayan ve onu uçabilen bir bulut formuna sokan taç."
+    },
+    {
+        "name": "Nine Lives Stealer",
+        "name_tr": "Dokuz Can Hırsızı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:nine-lives-stealer",
+        "rarity": "Very Rare",
+        "type": "Weapon",
+        "description": "+2 sword that can instantly slay a weakened creature by tearing its life force away.",
+        "description_tr": "Rakiplerinin yaşam özünü söküp alan ve zayıf hedefleri tek vuruşta katleden karanlık kılıç."
+    },
+    {
+        "name": "Nolzur's Marvelous Pigments",
+        "name_tr": "Nolzur'un Harika Boyaları",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:nolzurs-marvelous-pigments",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item",
+        "description": "Magic paint that brings two-dimensional drawings of objects and terrain into the real world.",
+        "description_tr": "Duvara veya yere çizdiğiniz her şeyi (Kapı, çukur, eşya vb.) gerçek nesnelere dönüştüren boyalar."
+    },
+    {
+        "name": "Oathbow",
+        "name_tr": "Yemin Yayı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:oathbow",
+        "rarity": "Very Rare",
+        "type": "Weapon",
+        "description": "Elven bow that allows naming a sworn enemy, granting massive accuracy and damage against that single target.",
+        "description_tr": "Düşmanınıza ölüm yemini ettiğinizde (Sworn Enemy) onu asla kaçırmayan ve yok eden elf yayı."
+    },
+    {
+        "name": "Oil of Sharpness",
+        "name_tr": "Keskinlik Yağı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:oil-of-sharpness",
+        "rarity": "Very Rare",
+        "type": "Potion",
+        "description": "Gelatinous oil that grants a weapon a +3 bonus to attack and damage for 1 hour.",
+        "description_tr": "Silahlara uygulandığında onları bir saat boyunca inanılmaz keskin ve güçlü (+3) kılan gümüşi yağ."
+    },
+    {
+        "name": "Orb of the Veil",
+        "name_tr": "Peçe Küresi",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:orb-of-the-veil",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item",
+        "description": "Cursed onyx sphere that enhances senses but extinguishes nearby nonmagical lights and reduces fire power.",
+        "description_tr": "Görüş gücünü artıran ancak etraftaki tüm ışıkları söndüren ve sahibini ateşten soğutan lanetli küre."
+    },
+    {
+        "name": "Ornithopter of Flying",
+        "name_tr": "Uçan Ornithopter",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:ornithopter-of-flying",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item",
+        "description": "Mechanical contraption that allows a single rider to fly through the air.",
+        "description_tr": "Kanat çırparak havada süzülmenizi sağlayan, tek kişilik mekanik bir uçuş aracı."
+    },
+    {
+        "name": "Pennant of the Vind Rune",
+        "name_tr": "Vind Rünü Flaması",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:pennant-of-the-vind-rune",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item",
+        "description": "Blue silk pennant providing wind-based movement and protection from suffocation and falling.",
+        "description_tr": "Hava rünü sayesinde uçmanızı sağlayan ve asla havasız kalmamanızı garanti eden ipek flama."
+    },
+    {
+        "name": "Peregrine Mask",
+        "name_tr": "Doğan Maskesi",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:peregrine-mask",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item",
+        "description": "Winged helm that grants a high flying speed and advantage on initiative rolls.",
+        "description_tr": "Takan kişiye bir kuşun hızını ve çevikliğini veren, uçuş sağlayan kanatlı maske/miğfer."
+    },
+    {
+        "name": "Polymorph Blade",
+        "name_tr": "Dönüşüm Bıçağı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:polymorph-blade",
+        "rarity": "Very Rare",
+        "type": "Weapon",
+        "description": "Weapon that can transform enemies into harmless creatures on powerful strikes, but risks backfiring on the wielder.",
+        "description_tr": "Vurduğu rakipleri rastgele bir hayvana çeviren ancak yanlış kullanıldığında sahibini de dönüştüren kılıç."
+    },
+    {
+        "name": "Potion of Flying",
+        "name_tr": "Uçuş İksiri",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:potion-of-flying",
+        "rarity": "Very Rare",
+        "type": "Potion",
+        "description": "Grants the user a flying speed for 1 hour, allowing them to hover in mid-air.",
+        "description_tr": "İçen kişiye bir saat boyunca gökyüzünde özgürce süzülme ve havada durma yeteneği verir."
+    },
+    {
+        "name": "Potion of Giant Strength",
+        "name_tr": "Dev Gücü İksiri",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:potion-of-giant-strength",
+        "rarity": "Very Rare",
+        "type": "Potion",
+        "description": "Temporarily boosts the user's Strength score to match that of a specific type of giant.",
+        "description_tr": "Tüketildiğinde sahibine geçici olarak bir devin (Ateş, Buz vb.) muazzam kas gücünü bahşeder."
+    },
+    {
+        "name": "Potion of Healing",
+        "name_tr": "Efsanevi İyileştirme İksiri",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:potion-of-healing",
+        "rarity": "Very Rare",
+        "type": "Potion",
+        "description": "Restores a significant amount of hit points upon consumption.",
+        "description_tr": "Ağır yaraları anında kapatan ve en bitkin savaşçıyı bile ayağa kaldıran çok güçlü iksir."
+    },
+    {
+        "name": "Potion of Invisibility",
+        "name_tr": "Görünmezlik İksiri",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:potion-of-invisibility",
+        "rarity": "Very Rare",
+        "type": "Potion",
+        "description": "Renders the user and their equipment invisible for 1 hour or until they attack or cast a spell.",
+        "description_tr": "Kullanıcıyı ve eşyalarını bir saat boyunca tamamen görünmez kılarak gizlilik sağlar."
+    },
+    {
+        "name": "Potion of Longevity",
+        "name_tr": "Uzun Ömür İksiri",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:potion-of-longevity",
+        "rarity": "Very Rare",
+        "type": "Potion",
+        "description": "Reduces the user's physical age, though excessive use carries a risk of accidental aging.",
+        "description_tr": "İçen kişiyi birkaç yıl gençleştiren ancak fazla kullanıldığında ters etki yapabilen hayat iksiri."
+    },
+    {
+        "name": "Potion of Mind Control",
+        "name_tr": "Zihin Kontrol İksiri",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:potion-of-mind-control",
+        "rarity": "Very Rare",
+        "type": "Potion",
+        "description": "Allows the user to dominate the mind of a single creature (beast, person, or monster) for 1 hour.",
+        "description_tr": "Bir canlının zihnine girip onu bir saat boyunca kendi kuklanız gibi yönetmenizi sağlar."
+    },
+    {
+        "name": "Potion of Possibility",
+        "name_tr": "Olasılık İksiri",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:potion-of-possibility",
+        "rarity": "Very Rare",
+        "type": "Potion",
+        "description": "Grants beads of energy that can be expended to reroll dice or force an attacker to reroll.",
+        "description_tr": "Zarları tekrar atmanızı veya kaderi kendi lehinize bükmenizi sağlayan şans enerjisi iksiri."
+    },
+    {
+        "name": "Potion of Speed",
+        "name_tr": "Hız İksiri",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:potion-of-speed",
+        "rarity": "Very Rare",
+        "type": "Potion",
+        "description": "Grants the effects of the Haste spell for 1 minute without requiring concentration.",
+        "description_tr": "Kullanıcıyı inanılmaz hızlandırarak (Haste) ona ekstra hamle yapma ve hızlı kaçma gücü verir."
+    },
+    {
+        "name": "Potion of Vitality",
+        "name_tr": "Canlılık İksiri",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:potion-of-vitality",
+        "rarity": "Very Rare",
+        "type": "Potion",
+        "description": "Cures diseases and poisons while removing exhaustion and ensuring maximum recovery from rest.",
+        "description_tr": "Tüm bitkinliği (Exhaustion) silen, zehirleri temizleyen ve bedeni en üst seviyeye çıkaran iksir."
+    },
+    {
+        "name": "Prehistoric Figurines of Wondrous Power",
+        "name_tr": "Kadim Canavar Figürini",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:prehistoric-figurines-of-wondrous-power",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item",
+        "description": "Roughly hewn figurines that transform into dinosaurs and prehistoric beasts on command.",
+        "description_tr": "Atıldığında devasa dinozorlara veya tarih öncesi canavarlara dönüşen kaba yontulmuş heykeller."
+    },
+    {
+        "name": "Reincarnation Dust",
+        "name_tr": "Yeniden Doğuş Tozu",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:reincarnation-dust",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item",
+        "description": "Magical dust that can restore a dead creature to life with a completely new body.",
+        "description_tr": "Ölen bir dostunuzun ruhunu yeni bir bedende (Reincarnate) hayata döndüren mor büyü tozu."
+    },
+    {
+        "name": "Rhythm Maker's Drum",
+        "name_tr": "Ritim Yapıcı Davul",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:rhythm-makers-drum",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item",
+        "description": "Enchanted drum that enhances a bard's spells and restores uses of Bardic Inspiration.",
+        "description_tr": "Ozanın (Bard) ilham gücünü (Inspiration) yenilemesini sağlayan ve büyülerini güçlendiren davul."
+    },
+    {
+        "name": "Ring of Amity",
+        "name_tr": "Dostluk Yüzüğü",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:ring-of-amity",
+        "rarity": "Very Rare",
+        "type": "Ring",
+        "description": "Forms a magical bond with an ally to share healing and guarantee critical hits via its friend rune.",
+        "description_tr": "Bir dostla bağ kurup iyileştirme gücünü paylaşmanızı ve ona kritik vuruş yaptırmanızı sağlayan rünlü yüzük."
+    },
+    {
+        "name": "Ring of Red Fury",
+        "name_tr": "Kızıl Öfke Yüzüğü",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:ring-of-red-fury",
+        "rarity": "Very Rare",
+        "type": "Ring",
+        "description": "Infused with ruidium, it grants temporary rage benefits but risks corrupting the wearer.",
+        "description_tr": "Sahibini kontrolsüz bir öfkeye sokarak güçlendiren ancak onu yozlaştırma riski taşıyan ruidium yüzüğü."
+    },
+    {
+        "name": "Ring of Regeneration",
+        "name_tr": "Yenilenme Yüzüğü",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:ring-of-regeneration",
+        "rarity": "Very Rare",
+        "type": "Ring",
+        "description": "Gradually restores the wearer's hit points and can even regrow lost limbs over time.",
+        "description_tr": "Zamanla yaraları iyice kapatan ve kaybedilmiş uzuvları bile geri getiren efsanevi yüzük."
+    },
+    {
+        "name": "Ring of Shooting Stars",
+        "name_tr": "Kayan Yıldızlar Yüzüğü",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:ring-of-shooting-stars",
+        "rarity": "Very Rare",
+        "type": "Ring",
+        "description": "Produces various light and electrical effects, including Faerie Fire and spheres of lightning.",
+        "description_tr": "Karanlıkta parlayan mermiler fırlatan, yıldırımlar ve ateş saçan sürprizli sihirli yüzük."
+    },
+    {
+        "name": "Ring of Telekinesis",
+        "name_tr": "Telekinezi Yüzüğü",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:ring-of-telekinesis",
+        "rarity": "Very Rare",
+        "type": "Ring",
+        "description": "Allows the wearer to repeatedly cast the Telekinesis spell on unattended objects.",
+        "description_tr": "Eşyaları düşünce gücüyle havaya kaldırmanızı ve fırlatmanızı (Telekinesis) sağlayan yüzük."
+    },
+    {
+        "name": "Robe of Scintillating Colors",
+        "name_tr": "Parlayan Renkler Bornozu",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:robe-of-scintillating-colors",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item",
+        "description": "Displays dazzling hues that impose disadvantage on attacks and can stun nearby creatures.",
+        "description_tr": "Saçtığı hipnotik renklerle rakiplerin gözünü kamaştıran ve onları oldukları yerde donduran bornoz."
+    }
+]

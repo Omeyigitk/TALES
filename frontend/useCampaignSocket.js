@@ -25,6 +25,7 @@ export function useCampaignSocket(campaignId, role, userId, token) {
     const [partyStats, setPartyStats] = useState({});
     const [diceLogs, setDiceLogs] = useState([]);
     const [whisperData, setWhisperData] = useState(null);
+    const [whisperHistory, setWhisperHistory] = useState([]);
     const [dmLevelPermission, setDmLevelPermission] = useState(false);
     const [mapData, setMapData] = useState({ bgUrl: '', gridSize: 50, showGrid: true, tokens: [] });
     /** @type {[import('socket.io-client').Socket | null, Function]} */
@@ -41,14 +42,23 @@ export function useCampaignSocket(campaignId, role, userId, token) {
         s.emit("join_campaign", { campaignId, role, userId });
 
         // Dinleyiciler (Listeners)
-        s.on("character_stat_updated", ({ characterId, stat, value }) => {
-            setPartyStats(prev => ({
-                ...prev,
-                [characterId]: {
-                    ...prev[characterId],
-                    [stat]: value
+        s.on("character_stat_updated", ({ characterId, name, stat, value }) => {
+            setPartyStats(prev => {
+                const updated = { ...prev };
+                // İsim üzerinden indexleme (party_sync ile uyumlu)
+                if (name && updated[name]) {
+                    updated[name] = { ...updated[name], [stat]: value };
                 }
-            }));
+                // ID üzerinden indexleme (eskiden kalma veya yedek)
+                else if (characterId && updated[characterId]) {
+                    updated[characterId] = { ...updated[characterId], [stat]: value };
+                }
+                return updated;
+            });
+        });
+
+        s.on("party_sync", (data) => {
+            setPartyStats(data || {});
         });
 
         s.on("encounter_updated", (data) => {
@@ -64,17 +74,24 @@ export function useCampaignSocket(campaignId, role, userId, token) {
         });
 
         s.on("whisper_received", (data) => {
-            setWhisperData(data);
+            if (!data) return;
+            const whisperWithTime = { ...data, createdAt: data.createdAt || new Date().toISOString() };
+            setWhisperData(whisperWithTime);
+            setWhisperHistory(prev => [...prev, whisperWithTime]);
+        });
+
+        s.on("whisper_history", (history) => {
+            setWhisperHistory(history || []);
         });
 
         // DM seviye değiştirme izni
         s.on("level_permission_updated", ({ granted }) => {
-            setDmLevelPermission(granted);
+            setDmLevelPermission(!!granted);
         });
 
         // Map Sync
         s.on("map_updated", (data) => {
-            setMapData(data);
+            setMapData(data || { bgUrl: '', gridSize: 50, showGrid: true, tokens: [] });
         });
 
         s.on("token_moved", ({ tokenId, x, y }) => {
@@ -98,5 +115,5 @@ export function useCampaignSocket(campaignId, role, userId, token) {
         };
     }, [campaignId, role, userId, token]);
 
-    return { encounterStatus, partyStats, diceLogs, whisperData, socket, dmLevelPermission, mapData };
+    return { encounterStatus, partyStats, diceLogs, whisperData, whisperHistory, socket, dmLevelPermission, mapData };
 }

@@ -1,0 +1,352 @@
+[
+  {
+    "name": "Spies' Murmur",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:spies-murmur",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "This headpiece, crafted from dark metal, is worn curved around the ear. If you know a creature wearing another spies' murmur and that creature is within 1 mile of you, you can communicate telepathically with each other. As a bonus action, you can allow that creature to hear everything you hear for 1 hour. You can end this effect as a bonus action, and it ends if you're incapacitated."
+  },
+  {
+    "name": "Staff of the Adder",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:staff-of-the-adder",
+    "rarity": "Uncommon",
+    "type": "Staff",
+    "description": "You can use a bonus action to speak this staff's command word and make the head of the staff become that of an animate poisonous snake for 1 minute. By using another bonus action to speak the command word again, you return the staff to its normal inanimate form.\n\nYou can make a melee attack using the snake head, which has a reach of 5 feet. Your proficiency bonus applies to the attack roll. On a hit, the target takes 1d6 piercing damage and must succeed on a DC 15 Constitution saving throw or take 3d6 poison damage.\n\nThe snake head can be attacked while it is animate. It has an Armor Class of 15 and 20 hit points. If the head drops to 0 hit points, the staff is destroyed. As long as it's not destroyed, the staff regains all lost hit points when it reverts to its inanimate form."
+  },
+  {
+    "name": "Staff of the Python",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:staff-of-the-python",
+    "rarity": "Uncommon",
+    "type": "Staff",
+    "description": "You can use an action to speak this staff's command word and throw the staff on the ground within 10 feet of you. The staff becomes a giant constrictor snake (see the Monster Manual for statistics) under your control and acts on its own initiative count. By using a bonus action to speak the command word again, you return the staff to its normal form in a space formerly occupied by the snake.\n\nOn your turn, you can mentally command the snake if it is within 60 feet of you and you aren't incapacitated. You decide what action the snake takes and where it moves during its next turn, or you can issue it a general command, such as to attack your enemies or guard a location.\n\nIf the snake is reduced to 0 hit points, it dies and reverts to its staff form. The staff then shatters and is destroyed. If the snake reverts to staff form before losing all its hit points, it regains all of them."
+  },
+  {
+    "name": "Stone of Good Luck (Luckstone)",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:luckstone",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "While this polished agate is on your person, you gain a + 1 bonus to ability checks and saving throws."
+  },
+  {
+    "name": "Stone of Ill Luck",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:stone-of-ill-luck",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "This polished agate appears to be a Stone of Good Luck to anyone who tries to identify it, and it confers that item's property while on your person.\n\nCurse. This item is cursed. While it is on your person, you take a -2 penalty to ability checks and saving throws. Until the curse is discovered, the DM secretly applies this penalty, assuming you are adding the item's bonus. You are unwilling to part with the stone until the curse is broken with remove curse or similar magic."
+  },
+  {
+    "name": "Storm Boomerang",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:storm-boomerang",
+    "rarity": "Uncommon",
+    "type": "Weapon",
+    "description": "This boomerang is a ranged weapon carved from griffon bone and etched with the symbol of elemental air. When thrown, it has a range of 60/120 feet, and any creature that is proficient with the javelin is also proficient with this weapon. On a hit, the boomerang deals 1d4 bludgeoning damage and 3d4 thunder damage, and the target must succeed on a DC 10 Constitution saving throw or be stunned until the end of its next turn. On a miss, the boomerang returns to the thrower’s hand.\n\nOnce the boomerang deals thunder damage to a target, the weapon loses its ability to deal thunder damage and its ability to stun a target. These properties return after the boomerang spends at least 1 hour inside an elemental air node."
+  },
+  {
+    "name": "Sword of Vengeance",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:sword-of-vengeance",
+    "rarity": "Uncommon",
+    "type": "Weapon",
+    "description": "You gain a +1 bonus to attack and damage rolls made with this magic weapon.\n\nCurse. This sword is cursed and possessed by a vengeful spirit. Becoming attuned to it extends the curse to you. As long as you remain cursed, you are unwilling to part with the sword, keeping it on your person at all times. While attuned to this weapon, you have disadvantage on attack rolls made with weapons other than this one.\n\nIn addition, while the sword is on your person, you must succeed on a DC 15 Wisdom saving throw whenever you take damage in combat. On a failed save, you must attack the creature that damaged you until you drop to 0 hit points or it does, or until you can't reach the creature to make a melee attack against it.\n\nYou can break the curse in the usual ways. Alternatively, casting Banishment on the sword forces the vengeful spirit to leave it. The sword then becomes a +1 weapon with no other properties."
+  },
+  {
+    "name": "Thessaltoxin Antidote",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:thessaltoxin-antidote",
+    "rarity": "Uncommon",
+    "type": "Potion",
+    "description": "This potion appears to change color and texture each time you look at it. When you drink the potion, it ends the Polymorph effect imposed by thessaltoxin."
+  },
+  {
+    "name": "Trident of Fish Command",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:trident-of-fish-command",
+    "rarity": "Uncommon",
+    "type": "Weapon",
+    "description": "This trident is a magic weapon. It has 3 charges. While you carry it, you can use an action and expend 1 charge to cast Dominate Beast (save DC 15) from it on a beast that has an innate swimming speed. The trident regains 1d3 expended charges daily at dawn."
+  },
+  {
+    "name": "Wand of Entangle",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:wand-of-entangle",
+    "rarity": "Uncommon",
+    "type": "Wand",
+    "description": "This wand has 7 charges. While holding it, you can use an action to expend 1 of its charges to cast the Entangle spell (save DC 13) from it.\n\nThe wand regains 1d6 + 1 expended charges daily at dawn. If you expend the wand's last charge, roll a d20. On a 1, the wand crumbles into ashes and is destroyed."
+  },
+  {
+    "name": "Wand of Magic Detection",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:wand-of-magic-detection",
+    "rarity": "Uncommon",
+    "type": "Wand",
+    "description": "This wand has 3 charges. While holding it, you can expend 1 charge as an action to cast the Detect Magic spell from it. The wand regains 1d3 expended charges daily at dawn."
+  },
+  {
+    "name": "Wand of Magic Missiles",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:wand-of-magic-missiles",
+    "rarity": "Uncommon",
+    "type": "Wand",
+    "description": "This wand has 7 charges. While holding it, you can use an action to expend 1 or more of its charges to cast the Magic Missile from it. For 1 charge, you cast the 1st-level version of the spell. You can increases the spell slot level by one for each additional charge you expend.\n\nThe wand regains 1d6 + 1 expended charges daily at dawn. If you expend the wand's last charge, roll a d20. On a 1, the wand crumbles into ashes and is destroyed."
+  },
+  {
+    "name": "Wand of Secrets",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:wand-of-secrets",
+    "rarity": "Uncommon",
+    "type": "Wand",
+    "description": "The wand has 3 charges. While holding it, you can use an action to expend 1 of its charges, and if a secret door or trap is within 30 feet of you, the wand pulses and points at the one nearest to you. The wand regains 1d3 expended charges daily at dawn."
+  },
+  {
+    "name": "Wand of the War Mage",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:wand-of-the-war-mage",
+    "rarity": "Uncommon",
+    "type": "Wand",
+    "description": "While holding this wand, you gain a bonus to spell attack rolls determined by the wand's rarity. In addition, you ignore half cover when making a spell attack."
+  },
+  {
+    "name": "Wand of Web",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:wand-of-web",
+    "rarity": "Uncommon",
+    "type": "Wand",
+    "description": "This wand has 7 charges. While holding it, you can use an action to expend 1 of its charges to cast the Web spell (save DC 15) from it.\n\nThe wand regains 1d6 + 1 expended charges daily at dawn. If you expend the wand's last charge, roll a d20. On a 1, the wand crumbles into ashes and is destroyed."
+  },
+  {
+    "name": "Weapon, +1, +2, or +3",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:weapon-1-2-3",
+    "rarity": "Uncommon",
+    "type": "Weapon",
+    "description": "You have a bonus to attack and damage rolls made with this magic weapon. The bonus is determined by the weapon's rarity."
+  },
+  {
+    "name": "Weapon of Warning",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:weapon-of-warning",
+    "rarity": "Uncommon",
+    "type": "Weapon",
+    "description": "This magic weapon warns you of danger. While the weapon is on your person, you have advantage on initiative rolls. In addition, you and any of your companions within 30 feet of you can't be surprised, except when incapacitated by something other than nonmagical sleep. The weapon magically awakens you and your companions within range if any of you are sleeping naturally when combat begins."
+  },
+  {
+    "name": "Wheel of Wind and Water",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:wheel-of-wind-and-water",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "When mounted at the helm of an elemental galleon or airship, this wheel allows a creature that possesses the Mark of Storm to telepathically control the elemental bound inside the vessel.\n\nIf a wheel of wind and water is mounted on a mundane sailing ship, a creature with the Mark of Storm who is using the wheel can create an area of ideal conditions around the vessel, increasing its speed by 5 miles per hour."
+  },
+  {
+    "name": "Wildspace Orrery",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:wildspace-orrery",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "Inside a Wildspace system, this portable arcane device automatically tracks the positions and movements of all suns, planets, moons, and comets within that system, projecting a display of all these bodies in the space above its current location. In that display, a white, pulsating pinprick of light marks the orrery's location."
+  },
+  {
+    "name": "Wind Fan",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:wind-fan",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "While holding this fan, you can use an action to cast the Gust of Wind spell (save DC 13) from it. Once used, the fan shouldn't be used again until the next dawn. Each time it is used again before then, it has a cumulative 20 percent chance of not working and tearing into useless, nonmagical tatters."
+  },
+  {
+    "name": "Winged Ammunition",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:winged-ammunition",
+    "rarity": "Uncommon",
+    "type": "Weapon",
+    "description": "Ranged weapon attack rolls made with this ammunition ignore half and three-quarters cover. In addition, attacking at long range doesn’t impose disadvantage on ranged weapon attack rolls made with this ammunition."
+  },
+  {
+    "name": "Winged Boots",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:winged-boots",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "While you wear these boots, you have a flying speed equal to your walking speed. You can use the boots to fly for up to 4 hours, all at once or in several shorter flights, each one using a minimum of 1 minute from the duration. If you are flying when the duration expires, you descend at a rate of 30 feet per round until you land.\n\nThe boots regain 2 hours of flying capability for every 12 hours they aren't in use."
+  },
+  {
+    "name": "Wingwear",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:wingwear",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "This snug uniform has symbols of air stitched into it and leathery flaps that stretch along the arms, waist, and legs to create wings for gliding. A suit of Wingwear has 3 charges. While you wear the suit, you can use a bonus action and expend 1 charge to gain a flying speed of 30 feet until you land. At the end of each of your turns, your altitude drops by 5 feet. Your altitude drops instantly to 0 feet at the end of your turn if you didn’t fly at least 30 feet horizontally on that turn. When your altitude drops to 0 feet, you land (or fall), and you must expend another charge to use the suit again.\n\nThe suit regains all of its expended charges after spending at least 1 hour in an elemental air node."
+  },
+  {
+    "name": "Witherbloom Primer",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:witherbloom-primer",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "The Witherbloom Primer is a magic textbook created at Strixhaven's Witherbloom College. The primer has 3 charges, and it regains 1d3 expended charges daily at dawn. If you make an Intelligence (Nature) or Wisdom (Survival) check while holding the primer, you can expend 1 charge to give yourself a 1d4 bonus to the check, immediately after you roll the d20.\n\nIn addition, if you study the primer at the end of a long rest, you can choose one 1st-level spell from the Druid or Wizard spell list. Before you finish your next long rest, you can cast the chosen spell once without a spell slot if you are holding the primer. Your spellcasting ability for this spell is your choice of Intelligence, Wisdom, or Charisma."
+  },
+  {
+    "name": "Wraps Of Unarmed Prowess",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:wraps-of-unarmed-prowess",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "While you’re wearing these cloth wraps, your unarmed strikes are considered magical for the purpose of overcoming immunity and resistance to nonmagical attacks and damage, and you gain a bonus to the attack and damage rolls of your unarmed strikes, determined by the wraps’ rarity."
+  },
+  {
+    "name": "Acheron Blade",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:acheron-blade",
+    "rarity": "Rare",
+    "type": "Weapon",
+    "description": "The black blade of this sword is crafted from a mysterious arcane alloy. You gain a +1 bonus to attack and damage rolls made with this magic weapon. While the sword is on your person, you are immune to effects that turn undead.\n\nDark Blessing. While holding the sword, you can use an action to give yourself 1d4 + 4 temporary hit points. This property can't be used again until the next dusk.\n\nDisheartening Strike. When you hit a creature with an attack using this weapon, you can fill the target with unsettling dread: the target has disadvantage on the next saving throw it makes before the end of your next turn. The creature ignores this effect if it's immune to the frightened condition. Once you use this property, you can't do so again until the next dusk."
+  },
+  {
+    "name": "Alchemical Compendium",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:alchemical-compendium",
+    "rarity": "Rare",
+    "type": "Wondrous Item",
+    "description": "Acrid odors cling to this stained, heavy volume. The book's metal fittings are copper, iron, lead, silver, and gold, some frozen mid-transition from one metal to another. When found, the book contains the following spells: Enlarge/Reduce, Feather Fall, Flesh to Stone, Gaseous Form, Magic Weapon, and Polymorph. It functions as a spellbook for you.\n\nWhile you are holding the book, you can use it as a spellcasting focus for your wizard spells.\n\nThe book has 3 charges, and it regains 1d3 expended charges daily at dawn. You can use the charges in the following ways while holding it:"
+  },
+  {
+    "name": "All-Purpose Tool",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:all-purpose-tool",
+    "rarity": "Rare",
+    "type": "Wondrous Item",
+    "description": "This simple screwdriver can transform into a variety of tools; as an action, you can touch the item and transform it into any type of artisan's tool of your choice (see the \"Equipment\" chapter in the Player's Handbook for a list of artisan's tools). Whatever form the tool takes, you are proficient with it. While holding this tool, you gain a bonus to the spell attack rolls and the saving throw DCs of your artificer spells. The bonus is determined by the tool's rarity.\n\nAs an action, you can focus on the tool to channel your creative forces. Choose a cantrip that you don't know from any class list. For 8 hours, you can cast that cantrip, and it counts as an artificer cantrip for you. Once this property is used, it can't be used again until the next dawn."
+  },
+  {
+    "name": "Ammunition, +1, +2, or +3",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:ammunition",
+    "rarity": "Rare",
+    "type": "Weapon",
+    "description": "You have a bonus to attack and damage rolls made with this piece of magic ammunition. The bonus is determined by the rarity of the ammunition. Once it hits a target, the ammunition is no longer magical."
+  },
+  {
+    "name": "Amulet of Health",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:amulet-of-health",
+    "rarity": "Rare",
+    "type": "Wondrous Item",
+    "description": "Your Constitution score is 19 while you wear this amulet. It has no effect on you if your Constitution is 19 or higher without it."
+  },
+  {
+    "name": "Amulet of Protection from Turning",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:amulet-of-protection-from-turning",
+    "rarity": "Rare",
+    "type": "Wondrous Item",
+    "description": "While you wear this amulet of silver and turquoise, you have advantage on saving throws against effects that turn undead.\n\nIf you fail a saving throw against such an effect, you can choose to succeed instead. You can do so three times, and expended uses recharge daily at dawn.\n\nEach time an effect that turns undead is used against you, the amulet glows with silvery blue light for a few seconds."
+  },
+  {
+    "name": "Amulet of the Devout",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:amulet-of-the-devout",
+    "rarity": "Rare",
+    "type": "Wondrous Item",
+    "description": "This amulet bears the symbol of a deity inlaid with precious stones or metals. While you wear the holy symbol, you gain a bonus to spell attack rolls and the saving throw DCs of your spells. The bonus is determined by the amulet's rarity.\n\nWhile you wear this amulet, you can use your Channel Divinity feature without expending one of the feature's uses. Once this property is used, it can't be used again until the next dawn."
+  },
+  {
+    "name": "Arcane Grimoire",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:arcane-grimoire",
+    "rarity": "Rare",
+    "type": "Wondrous Item",
+    "description": "While you are holding this leather-bound book, you can use it as a spellcasting focus for your wizard spells, and you gain a bonus to spell attack rolls and to the saving throw DCs of your wizard spells. The bonus is determined by the book's rarity.\n\nYou can use this book as a spellbook. In addition, when you use your Arcane Recovery feature, you can increase the number of spell slot levels you regain by 1."
+  },
+  {
+    "name": "Armor, +1, +2, or +3",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:armor-1-2-3",
+    "rarity": "Rare",
+    "type": "Armor",
+    "description": "You have a bonus to AC while wearing this armor. The bonus is determined by its rarity."
+  },
+  {
+    "name": "Armor of Resistance",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:armor-of-resistance",
+    "rarity": "Rare",
+    "type": "Armor",
+    "description": "You have resistance to one type of damage while you wear this armor. The DM chooses the type or determines it randomly from the options below."
+  },
+  {
+    "name": "Armor of Vulnerability",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:armor-of-vulnerability",
+    "rarity": "Rare",
+    "type": "Armor",
+    "description": "While wearing this armor, you have resistance to one of the following damage types: bludgeoning, piercing, or slashing. The DM chooses the type or determines it randomly.\n\nCurse. This armor is cursed, a fact that is revealed only when an Identify spell is cast on the armor or you attune to it. Attuning to the armor curses you until you are target by the Remove Curse spell or similar magic; removing the armor fails to end the curse. While cursed, you have vulnerability to two of the three damage types associated with the armor (not the one to which it grants resistance)."
+  },
+  {
+    "name": "Arrow-Catching Shield",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:arrow-catching-shield",
+    "rarity": "Rare",
+    "type": "Armor",
+    "description": "You gain a +2 bonus to AC against ranged attacks while you wield this shield. This bonus is in addition to the shield's normal bonus to AC. In addition, whenever an attacker makes a ranged attack against a target within 5 feet of you, you can use your reaction to become the target of the attack instead."
+  },
+  {
+    "name": "Astral Shard",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:astral-shard",
+    "rarity": "Rare",
+    "type": "Wondrous Item",
+    "description": "This crystal is a solidified shard of the Astral Plane, swirling with silver mist. As an action, you can attach the shard to a Tiny object (such as a weapon or a piece of jewelry) or detach it. It falls off if your attunement to it ends. You can use the shard as a spellcasting focus while you hold or wear it.\n\nWhen you use a Metamagic option on a spell while you are holding or wearing the shard, immediately after casting the spell you can teleport to an unoccupied space you can see within 30 feet of you."
+  },
+  {
+    "name": "Astromancy Archive",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:astromancy-archive",
+    "rarity": "Rare",
+    "type": "Wondrous Item",
+    "description": "This brass disc of articulated, concentric rings unfolds into an armillary sphere. As a bonus action, you can unfold it into the sphere or back into a disc. When found, it contains the following spells, which are wizard spells for you while you are attuned to it: Augury, Divination, Find the Path, Foresight, Locate Creature, and Locate Object. It functions as a spellbook for you, with spells encoded on the rings.\n\nWhile you are holding the archive, you can use it as a spellcasting focus for your wizard spells.\n\nThe archive has 3 charges, and it regains 1d3 expended charges daily at dawn. You can use the charges in the following ways while holding it:"
+  },
+  {
+    "name": "Atlas of Endless Horizons",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:atlas-of-endless-horizons",
+    "rarity": "Rare",
+    "type": "Wondrous Item",
+    "description": "This thick book is bound in dark leather, crisscrossed with inlaid silver lines suggesting a map or chart. When found, the book contains the following spells, which are wizard spells for you while you are attuned to the book: Arcane Gate, Dimension Door, Gate, Misty Step, Plane Shift, Teleportation Circle, and Word of Recall. It functions as a spell book for you.\n\nWhile you are holding the book, you can use it as a spellcasting focus for your wizard spells.\n\nThe book has 3 charges, and it regains 1d3 expended charges daily at dawn. You can use the charges in the following ways while holding it:"
+  },
+  {
+    "name": "Badge of the Watch",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:badge-of-the-watch",
+    "rarity": "Rare",
+    "type": "Wondrous Item",
+    "description": "A Badge of the Watch is given only to those who have earned the trust of the Open Lord of Waterdeep. The badge, signifying the rank of captain in Waterdeep's City Watch, bears the emblem of Waterdeep and is meant to be worn or carried.\n\nWhile wearing the badge, you gain a +2 bonus to AC if you aren't using a shield.\n\nIf the badge is more than 5 feet away from you for more than 1 minute, it vanishes and harmlessly reappears on a surface within 5 feet of the Open Lord. While holding the badge, the Open Lord knows your location, provided the two of you are on the same plane of existence and your attunement to the badge hasn't ended.\n\nAs an action, the Open Lord can touch the badge and end your attunement to it."
+  },
+  {
+    "name": "Bag of Beans",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:bag-of-beans",
+    "rarity": "Rare",
+    "type": "Wondrous Item",
+    "description": "Inside this heavy cloth bag are 3d4 dry beans. The bag weighs 1/2 pound plus 1/4 pound for each bean it contains.\n\nIf you dump the bag's contents out on the ground, they explode in a 10-foot radius, extending from the beans. Each creature in the area, including you, must make a DC 15 Dexterity saving throw, taking 5d4 fire damage on a failed save, or half as much damage on a successful one. The fire ignites flammable objects in the area that aren't being worn or carried.\n\nIf you remove a bean from the bag, plant it in the dirt or sand, and then water it, the bean produces an effect 1 minute later from the ground where it was planted. The DM can choose an effect from the following table, determine it randomly, or create an effect."
+  },
+  {
+    "name": "Banner of the Krig Rune",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:banner-of-the-krig-rune",
+    "rarity": "Rare",
+    "type": "Wondrous Item",
+    "description": "Crafted from a thick, red fabric, this banner measures 5 feet high and 3 feet wide. The krig (war) rune is displayed on the fabric with round, metal plates sewn into it. It can be attached to a 10-foot pole to serve as a standard. Furling or unfurling the banner requires an action. The banner has the following properties.\n\nMark of Courage. As a bonus action, you can touch the unfurled banner and cause it to emanate courage. You and your allies are immune to the frightened condition while within 20 feet of it. This benefit lasts for 10 minutes or until the banner is furled. Once you use this property, you can't use it again until you finish a short or long rest.\n\nSentinel Standard. You can see invisible creatures while they are within 20 feet of the unfurled banner and within your line of sight.\n\nStandard's Shield. As a bonus action, you can touch the unfurled banner and invoke this power. Any ranged attack roll that targets you or an ally of yours has disadvantage if the target is within 20 feet of the unfurled banner. This benefit lasts for 1 minute or until the banner is furled. Once you use this property, you can't use it again until you finish a short or long rest.\n\nGift of Battle. You can transfer the banner's magic to a place by tracing the krig rune on the ground with your finger. The point where you trace it becomes the center of a spherical area of magic that has a 500-foot radius and that is fixed to the place. The transfer takes 8 hours of work that requires the banner to be within 5 feet of you and during which you choose creatures, creature types, or both that will benefit from the magic. At the end, the banner is destroyed, and the area gains the following property:"
+  },
+  {
+    "name": "Barrier Tattoo",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:barrier-tattoo",
+    "rarity": "Rare",
+    "type": "Wondrous Item",
+    "description": "Tattoo Attunement. To attune to this item, you hold the needle to your skin where you want the tattoo to appear, pressing the needle there throughout the attunement process. When the attunement is complete, the needle turns into the ink that becomes the tattoo, which appears on the skin.\n\nIf your attunement to the tattoo ends, the tattoo vanishes, and the needle reappears in your space.\n\nProtection. While you aren't wearing armor, the tattoo grants you an Armor Class depending on the tattoo's rarity, as shown below. You can use a shield and still gain this benefit."
+  },
+  {
+    "name": "Battering Shield",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:battering-shield",
+    "rarity": "Rare",
+    "type": "Armor",
+    "description": "While holding this iron tower shield, you gain a +1 bonus to AC. This bonus is in addition to the shield's normal bonus to AC.\n\nAdditionally, the shield has 3 charges, and it regains 1d3 expended charges daily at dawn. If you are holding the shield and push a creature within your reach at least 5 feet away, you can expend 1 charge to push that creature an additional 10 feet, knock it prone, or both."
+  },
+  {
+    "name": "Bead of Force",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:bead-of-force",
+    "rarity": "Rare",
+    "type": "Wondrous Item",
+    "description": "This small black sphere measures 3/4 of an inch in diameter and weighs an ounce. Typically, 1d4 + 4 beads of force are found together.\n\nYou can use an action to throw the bead up to 60 feet. The bead explodes on impact and is destroyed. Each creature within a 10-foot radius of where the bead landed must succeed on a DC 15 Dexterity saving throw or take 5d4 force damage. A sphere of transparent force then encloses the area for 1 minute. Any creature that failed the save and is completely within the area is trapped inside this sphere. Creatures that succeeded on the save, or are partially within the area, are pushed away from the center of the sphere until they are no longer inside it. Only breathable air can pass through the sphere's wall. No attack or other effect can.\n\nAn enclosed creature can use its action to push against the sphere's wall, moving the sphere up to half the creature's walking speed. The sphere can be picked up, and its magic causes it to weigh only 1 pound, regardless of the weight of creatures inside."
+  },
+  {
+    "name": "Bell Branch",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:bell-branch",
+    "rarity": "Rare",
+    "type": "Wondrous Item",
+    "description": "This silver implement is shaped like a tree branch and is strung with small golden bells. The branch is a spellcasting focus for your spells while you hold it.\n\nThe branch has 3 charges, and it regains 1d3 expended charges daily at dawn. You can use the charges in the following ways while holding it:"
+  },
+  {
+    "name": "Belt of Dwarvenkind",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:belt-of-dwarvenkind",
+    "rarity": "Rare",
+    "type": "Wondrous Item",
+    "description": "While wearing this belt, you gain the following benefits:\n\nIn addition, while attuned to the belt, you have a 50 percent chance each day at dawn of growing a full beard if you're capable of growing one, or a visibly thicker beard if you already have one.\n\nIf you aren't a dwarf, you gain the following additional benefits while wearing the belt:"
+  },
+  {
+    "name": "Belt of Giant Strength",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:belt-of-giant-strength",
+    "rarity": "Rare",
+    "type": "Wondrous Item",
+    "description": "While wearing this belt, your Strength score changes to a score granted by the belt. If your Strength is already equal to or greater than the belt's score, the item has no effect on you.\n\nSix varieties of this belt exist, corresponding with and having rarity according to the six kinds of true giants. The Belt of Stone Giant Strength and the Belt of Frost Giant Strength look different, but they have the same effect."
+  },
+  {
+    "name": "Berserker Axe",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:berserker-axe",
+    "rarity": "Rare",
+    "type": "Weapon",
+    "description": "You gain a +1 bonus to attack and damage rolls made with this magic weapon. In addition, while you are attuned to this weapon, your hit point maximum increases by 1 for each level you have attained.\n\nCurse. This axe is cursed, and becoming attuned to it extends the curse to you. As long as you remain cursed, you are unwilling to part with the axe, keeping it within reach at all times. You also have disadvantage on attack rolls with weapons other than this one, unless no foe is within 60 feet of you that you can see or hear.\n\nWhenever a hostile creature damages you while the axe is in your possession, you must succeed on a DC 15 Wisdom saving throw or go berserk. While berserk, you must use your action each round to attack the creature nearest to you with the axe. If you can make extra attacks as part of the Attack action, you use those extra attacks, moving to attack the next nearest creature after you fell your current target. If you have multiple possible targets, you attack one at random. You are berserk until you start your turn with no creatures within 60 feet of you that you can see or hear."
+  }
+]

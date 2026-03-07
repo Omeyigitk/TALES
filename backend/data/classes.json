@@ -4609,5 +4609,203 @@
                 ]
             }
         ]
+    },
+    {
+        "name": "Artificer",
+        "hit_die": "d8",
+        "primary_ability": "Intelligence",
+        "saves": [
+            "Constitution",
+            "Intelligence"
+        ],
+        "armor_proficiencies": [
+            "Light Armor",
+            "Medium Armor",
+            "Shields"
+        ],
+        "weapon_proficiencies": [
+            "Simple Weapons",
+            "Firearms (Optional)"
+        ],
+        "description_tr": "Büyü ve teknolojiyi harmanlayarak eşyaları efsunlayan, icatlar yapan ve taktiksel destek sağlayan zanaatkar büyücü.",
+        "subclass_unlock_level": 3,
+        "features": [
+            {
+                "level": 1,
+                "name": "Magical Tinkering",
+                "desc_tr": "Sıradan bir objeye (dokunarak) sınırlı büyülü özellikler verirsin: Işık saçma, ses kaydetme, koku yayma veya statik bir görsel/metin gösterme."
+            },
+            {
+                "level": 1,
+                "name": "Spellcasting",
+                "desc_tr": "Zanaatkar araçlarını odak noktası olarak kullanarak büyü yaparsın. Intelligence (Zeka) senin büyü yeteneğindir."
+            },
+            {
+                "level": 2,
+                "name": "Infuse Item",
+                "desc_tr": "Sıradan nesneleri büyülü eşyalara dönüştürürsün. +1 Silah/Zırh, Bag of Holding gibi çeşitli infüzyonlar seçebilirsin."
+            },
+            {
+                "level": 3,
+                "name": "Artificer Specialist",
+                "desc_tr": "Uzmanlık alanını seçersin (Alchemist, Artillerist, Battle Smith veya Armorer)."
+            },
+            {
+                "level": 3,
+                "name": "Right Tool for the Job",
+                "desc_tr": "1 saatlik çalışma ile ihtiyacın olan herhangi bir zanaatkar aracını (thieves' tools vb.) sihirli bir şekilde yaratabilirsin."
+            },
+            {
+                "level": 6,
+                "name": "Tool Expertise",
+                "desc_tr": "Yeterli olduğun tüm araç (tool) kontrollerinde yeterlilik bonusun iki katına çıkar."
+            },
+            {
+                "level": 7,
+                "name": "Flash of Genius",
+                "desc_tr": "Senin veya 30 ft içindeki bir müttefikinin yetenek veya kurtarma zarına Reaksiyonla Zeka modifiye edicini ekleyebilirsin."
+            },
+            {
+                "level": 10,
+                "name": "Magic Item Adept",
+                "desc_tr": "Aynı anda 4 büyülü eşyaya uyum (attunement) sağlayabilirsin. Common ve Uncommon eşya üretim süresi ve maliyeti yarıya iner."
+            },
+            {
+                "level": 11,
+                "name": "Spell-Storing Item",
+                "desc_tr": "Bir silaha veya odağa 1. veya 2. seviye bir büyü depolarsın. Bu eşyayı tutan kişi büyüyü INT modifiye edicinin iki katı kadar kullanabilir."
+            },
+            {
+                "level": 14,
+                "name": "Magic Item Savant",
+                "desc_tr": "Aynı anda 5 büyülü eşyaya uyum sağlayabilirsin. Eşya kullanımındaki sınıf, ırk ve seviye kısıtlamalarını görmezden gelirsin."
+            },
+            {
+                "level": 18,
+                "name": "Magic Item Master",
+                "desc_tr": "Aynı anda 6 büyülü eşyaya uyum sağlayabilirsin."
+            },
+            {
+                "level": 20,
+                "name": "Soul of Artifice",
+                "desc_tr": "Uyum sağladığın her büyülü eşya başına kurtarma zarlarına +1 kazanırsın. 0 HP'ye düşersen bir infüzyonu iptal ederek 1 HP'de kalabilirsin."
+            }
+        ],
+        "subclasses": [
+            {
+                "name": "Alchemist",
+                "description_tr": "İksirler ve kimyasallarla dostlarını iyileştiren, düşmanlarını asitle eriten simyacı uzmanlığı.",
+                "features": [
+                    {
+                        "level": 3,
+                        "name": "Experimental Elixir",
+                        "desc_tr": "Uzun dinlenmeden sonra rastgele bir iksir yaratırsın (İyileştirme, Hız, Uçuş vb.). Büyü slotu harcayarak istediğin iksiri de yapabilirsin."
+                    },
+                    {
+                        "level": 5,
+                        "name": "Alchemical Savant",
+                        "desc_tr": "Şifa veya belirli hasar türleri (asit, ateş, nekrotik, zehir) veren büyülerine Zeka modifiye edicini eklersin."
+                    },
+                    {
+                        "level": 9,
+                        "name": "Restorative Reagents",
+                        "desc_tr": "Experimental Elixir içenler geçici HP kazanır. Lesser Restoration büyüsünü slot harcamadan INT mod kadar atabilirsin."
+                    },
+                    {
+                        "level": 15,
+                        "name": "Chemical Mastery",
+                        "desc_tr": "Asit ve Zehir hasarına direnc kazanırsın. Heal ve Greater Restoration büyülerini günde birer kez slot harcamadan atabilirsin."
+                    }
+                ]
+            },
+            {
+                "name": "Artillerist",
+                "description_tr": "Savaş alanına büyülü toplar yerleştiren ve yıkıcı patlamalar yaratan menzilli saldırı uzmanı.",
+                "features": [
+                    {
+                        "level": 3,
+                        "name": "Eldritch Cannon",
+                        "desc_tr": "Bonus aksiyonla küçük bir top yaratırsın: Alev püskürten, menzilli vuruş yapan veya geçici HP veren kalkan oluşturan 3 moddan birini seç."
+                    },
+                    {
+                        "level": 5,
+                        "name": "Arcane Firearm",
+                        "desc_tr": "Asanı veya asanı büyülü bir silaha dönüştürürsün. Bu odakla attığın büyülerin hasar zarına 1d8 eklersin."
+                    },
+                    {
+                        "level": 9,
+                        "name": "Explosive Cannon",
+                        "desc_tr": "Toplarının hasar zarı 1d8 artar. Aksiyonla topu imha ederek 20 ft içindekilere 3d8 hasar verebilirsin."
+                    },
+                    {
+                        "level": 15,
+                        "name": "Fortified Position",
+                        "desc_tr": "Aynı anda iki top yaratabilirsin. Topların 10 ft yakınındaki müttefikler yarı siper (+2 AC) kazanır."
+                    }
+                ]
+            },
+            {
+                "name": "Battle Smith",
+                "description_tr": "Mekanik bir yoldaşla (Steel Defender) birlikte savaşan, ön saflarda etkili olan koruyucu uzmanlık.",
+                "features": [
+                    {
+                        "level": 3,
+                        "name": "Battle Ready",
+                        "desc_tr": "Sihirli silahlarla saldırırken Strenght/Dexterity yerine Intelligence kullanabilirsin. Martial Weapons yeterliliği kazanırsın."
+                    },
+                    {
+                        "level": 3,
+                        "name": "Steel Defender",
+                        "desc_tr": "Sana sadık mekanik bir koruyucu yaratırsın. Turunda bonus aksiyonla ona komut verebilirsin; tepkisiyle saldırıları engelleyebilir."
+                    },
+                    {
+                        "level": 5,
+                        "name": "Extra Attack",
+                        "desc_tr": "Saldırı aksiyonunda 2 saldırı yapabilirsin."
+                    },
+                    {
+                        "level": 9,
+                        "name": "Arcane Jolt",
+                        "desc_tr": "İsabetli bir vuruşta ekstra 2d6 hasar verebilir veya bir müttefiki 2d6 iyileştirebilirsin (INT mod / gün)."
+                    },
+                    {
+                        "level": 15,
+                        "name": "Improved Defender",
+                        "desc_tr": "Arcane Jolt hasarı/iyileştirmesi 4d6 olur. Steel Defender'ın AC'si +2 artar."
+                    }
+                ]
+            },
+            {
+                "name": "Armorer",
+                "description_tr": "Zırhını ikinci bir deri gibi kullanan, onu teknolojiyle donatarak tank veya suikastçı moduna geçen uzmanlık.",
+                "features": [
+                    {
+                        "level": 3,
+                        "name": "Arcane Armor",
+                        "desc_tr": "Giydiğin ağır zırhı büyülü bir protez gibi kullanırsın; STR gereksinimi kalkar ve zırhı odak olarak kullanabilirsin."
+                    },
+                    {
+                        "level": 3,
+                        "name": "Armor Model",
+                        "desc_tr": "Guardian (Tank: Geçici HP ve kışkırtma) veya Infiltrator (Gizlilik: Hız ve elektrik hasarı) modlarından birini seçersin."
+                    },
+                    {
+                        "level": 5,
+                        "name": "Extra Attack",
+                        "desc_tr": "Saldırı aksiyonunda 2 saldırı yapabilirsin."
+                    },
+                    {
+                        "level": 9,
+                        "name": "Armor Modifications",
+                        "desc_tr": "Zırhının farklı bölgelerine (kask, bot vb.) ayrı ayrı infüzyon ekleyebilirsin (+2 infüzyon hakkı)."
+                    },
+                    {
+                        "level": 15,
+                        "name": "Perfected Armor",
+                        "desc_tr": "Guardian moduyla düşmanları kendine çekersin; Infiltrator moduyla elektrik yükleyip düşmana dezavantaj verirsin."
+                    }
+                ]
+            }
+        ]
     }
 ]

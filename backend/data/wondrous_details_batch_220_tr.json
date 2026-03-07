@@ -1,0 +1,452 @@
+[
+    {
+        "name": "Potion of Giant Strength",
+        "name_tr": "Dev Gücü İksiri",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:potion-of-giant-strength",
+        "rarity": "Uncommon",
+        "type": "Potion",
+        "description": "When you drink this potion, your Strength score changes for 1 hour. The type of giant determines the score. This potion has no effect on you if your Strength is equal to or greater than that score.",
+        "description_tr": "Bu iksiri içtiğinizde, Güç (Strength) skorunuz 1 saat boyunca değişir. Dev türüne göre skor belirlenir. Eğer mevcut Güç skorunuz belirlenen skordan yüksekse iksirin etkisi olmaz."
+    },
+    {
+        "name": "Potion of Growth",
+        "name_tr": "Büyüme İksiri",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:potion-of-growth",
+        "rarity": "Uncommon",
+        "type": "Potion",
+        "description": "When you drink this potion, you gain the \"enlarge\" effect of the Enlarge/Reduce spell for 1d4 hours (no concentration required).",
+        "description_tr": "Bu iksiri içtiğinizde, 1d4 saat boyunca Enlarge/Reduce büyüsünün büyütme (enlarge) etkisini kazanırsınız (konsantrasyon gerektirmez)."
+    },
+    {
+        "name": "Potion of Healing",
+        "name_tr": "İyileştirme İksiri",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:potion-of-healing",
+        "rarity": "Uncommon",
+        "type": "Potion",
+        "description": "You regain hit points when you drink this potion. The number of hit points depends on the potion's rarity.",
+        "description_tr": "Bu iksiri içtiğinizde can puanı (HP) kazanırsınız. İyileşme miktarı iksirin nadirliğine bağlıdır."
+    },
+    {
+        "name": "Potion of Poison",
+        "name_tr": "Zehir İksiri",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:potion-of-poison",
+        "rarity": "Uncommon",
+        "type": "Potion",
+        "description": "This concoction looks, smells, and tastes like a Potion of Healing but is actually poison masked by illusion magic. Drinker takes 3d6 poison damage and may be poisoned.",
+        "description_tr": "İyileştirme iksiri gibi görünür ve tadı ona benzer ancak aslında illüzyonla maskelenmiş zehirdir. İçen kişi 3d6 zehir hasarı alır ve zehirlenebilir."
+    },
+    {
+        "name": "Potion Of Polychromy",
+        "name_tr": "Çok Renklilik İksiri",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:potion-of-polychromy",
+        "rarity": "Uncommon",
+        "type": "Potion",
+        "description": "Drink to take on a rainbow-hued appearance for 1 hour. Can change colors as a bonus action and gain advantage on Stealth checks if mimicking surroundings.",
+        "description_tr": "1 saat boyunca gökkuşağı renklerine bürünmenizi sağlar. Bonus eylemle renk değiştirebilir ve çevreye uyum sağlarsanız Gizlilik kontrollerinde avantaj kazanırsınız."
+    },
+    {
+        "name": "Potion of Psionic Fortitude",
+        "name_tr": "Psiyonik Dayanıklılık İksiri",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:potion-of-psionic-fortitude",
+        "rarity": "Uncommon",
+        "type": "Potion",
+        "description": "Drink to gain advantage for 1 hour on saving throws to avoid or end the charmed or stunned condition.",
+        "description_tr": "1 saat boyunca büyülenme (charmed) veya sersemleme (stunned) durumlarından kaçınmak veya kurtulmak için yapılan zarlarda avantaj sağlar."
+    },
+    {
+        "name": "Potion of Resistance",
+        "name_tr": "Direnç İksiri",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:potion-of-resistance",
+        "rarity": "Uncommon",
+        "type": "Potion",
+        "description": "When you drink this potion, you gain resistance to one type of damage for 1 hour.",
+        "description_tr": "Bu iksiri içtiğinizde, 1 saat boyunca belirli bir hasar türüne karşı direnç kazanırsınız."
+    },
+    {
+        "name": "Potion of Water Breathing",
+        "name_tr": "Su Altında Nefes Alma İksiri",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:potion-of-water-breathing",
+        "rarity": "Uncommon",
+        "type": "Potion",
+        "description": "You can breathe underwater for 1 hour after drinking this potion.",
+        "description_tr": "Bu iksiri içtikten sonra 1 saat boyunca su altında nefes alabilirsiniz."
+    },
+    {
+        "name": "Prehistoric Figurines of Wondrous Power",
+        "name_tr": "Tarih Öncesi Harika Güç Figürinleri",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:prehistoric-figurines-of-wondrous-power",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Statuettes of dinosaurs that transform into living, friendly creatures on command.",
+        "description_tr": "Komutla yaşayan ve dost canlısı dinozorlara dönüşen heykelcikler."
+    },
+    {
+        "name": "Prismari Primer",
+        "name_tr": "Prismari Rehberi",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:prismari-primer",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Grants bonus to Acrobatics or Performance checks and allows casting one 1st-level spell daily.",
+        "description_tr": "Akrobasi (Acrobatics) veya Performans kontrollerine bonus verir ve günde bir kez 1. seviye büyü yapma imkanı sunar."
+    },
+    {
+        "name": "Propeller Helm",
+        "name_tr": "Pervaneli Miğfer",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:propeller-helm",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Allows casting Levitate at will; has a 50% chance to become nonmagical after each use.",
+        "description_tr": "Levitate büyüsü yapmanızı sağlar ancak her kullanımda %50 ihtimalle sihrini kaybedip sıradan bir başlığa dönüşebilir."
+    },
+    {
+        "name": "Psi Crystal",
+        "name_tr": "Psi Kristali",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:psi-crystal",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Grants telepathy based on your Intelligence score while attuned.",
+        "description_tr": "Zeka skorunuza bağlı olarak telepati yeteneği kazandıran kristal."
+    },
+    {
+        "name": "Pyroconverger",
+        "name_tr": "Alev Dönüştürücü",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:pyroconverger",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Izzet-made flamethrower that projects fire in a cone; risks malfunctioning with repeated use.",
+        "description_tr": "10 fitlik bir koniye ateş püskürten Izzet yapımı alev makinesi. Tekrarlandıkça bozulma riski artar."
+    },
+    {
+        "name": "Quandrix Primer",
+        "name_tr": "Quandrix Rehberi",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:quandrix-primer",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Grants bonus to Arcana or Nature checks and allows casting one 1st-level spell daily.",
+        "description_tr": "Arkane (Arcana) veya Doğa (Nature) kontrollerine bonus verir ve günde bir kez 1. seviye büyü yapma imkanı sunar."
+    },
+    {
+        "name": "Quiver of Ehlonna",
+        "name_tr": "Ehlonna'nın Okluğu",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:quiver-of-ehlonna",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Three extradimensional compartments to hold arrows, javelins, and long objects like bows/spears.",
+        "description_tr": "Oklar, ciritler ve uzun silahlar için üç farklı boyutlu bölmeye sahip, her zaman hafif kalan ok kılıfı."
+    },
+    {
+        "name": "Rhythm Maker's Drum",
+        "name_tr": "Ritim Yapıcının Davulu",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:rhythm-makers-drum",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Bonus to spell attacks and DCs for bards; can regain one Bardic Inspiration use daily.",
+        "description_tr": "Ozan (Bard) büyüleri için bonus sağlar ve günde bir kez Bardic Inspiration kullanımını yeniler."
+    },
+    {
+        "name": "Ring of Jumping",
+        "name_tr": "Zıplama Yüzüğü",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:ring-of-jumping",
+        "rarity": "Uncommon",
+        "type": "Ring",
+        "description": "Cast the Jump spell as a bonus action at will (self only).",
+        "description_tr": "Sadece kendiniz için sınırsız olarak bonus eylemle Jump büyüsü yapmanızı sağlar."
+    },
+    {
+        "name": "Ring of Mind Shielding",
+        "name_tr": "Zihin Koruma Yüzüğü",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:ring-of-mind-shielding",
+        "rarity": "Uncommon",
+        "type": "Ring",
+        "description": "Immune to mind-reading magic and can store the wearer's soul upon death.",
+        "description_tr": "Zihin okuma büyülerini engeller ve öldüğünüzde ruhunuzu yüzüğün içine saklayabilir."
+    },
+    {
+        "name": "Ring of Obscuring",
+        "name_tr": "Perdeleme Yüzüğü",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:ring-of-obscuring",
+        "rarity": "Uncommon",
+        "type": "Ring",
+        "description": "Expend charges to cast Fog Cloud centered on yourself (no concentration required).",
+        "description_tr": "Günde 3 kez, konsantrasyon gerektirmeden üzerinize Fog Cloud büyüsü yapmanızı sağlar."
+    },
+    {
+        "name": "Ring Of Puzzler's Wit",
+        "name_tr": "Bulmacacının Zekası Yüzüğü",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:ring-of-puzzlers-wit",
+        "rarity": "Uncommon",
+        "type": "Ring",
+        "description": "Expend charges to gain advantage on Intelligence checks.",
+        "description_tr": "Yük harcayarak Zeka (Intelligence) kontrollerinde avantaj kazanmanızı sağlar."
+    },
+    {
+        "name": "Ring of Swimming",
+        "name_tr": "Yüzme Yüzüğü",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:ring-of-swimming",
+        "rarity": "Uncommon",
+        "type": "Ring",
+        "description": "Grants a swimming speed of 40 feet.",
+        "description_tr": "Takan kişiye 40 fit yüzme hızı kazandırır."
+    },
+    {
+        "name": "Ring of the Orator",
+        "name_tr": "Hatip Yüzüğü",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:ring-of-the-orator",
+        "rarity": "Uncommon",
+        "type": "Ring",
+        "description": "Project your voice up to 1 mile and make listeners understand you even if they don't speak your language.",
+        "description_tr": "Sesinizi 1 mil uzağa duyurmanızı ve dilinizi bilmeyenlerin sizi anlamasını sağlar."
+    },
+    {
+        "name": "Ring of Truth Telling",
+        "name_tr": "Doğru Sözlülük Yüzüğü",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:ring-of-truth-telling",
+        "rarity": "Uncommon",
+        "type": "Ring",
+        "description": "Advantage on Insight checks to determine if someone is lying.",
+        "description_tr": "Birinin yalan söyleyip söylemediğini anlamak için yapılan Sezgi (Insight) kontrollerinde avantaj kazandırır."
+    },
+    {
+        "name": "Ring of Warmth",
+        "name_tr": "Sıcaklık Yüzüğü",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:ring-of-warmth",
+        "rarity": "Uncommon",
+        "type": "Ring",
+        "description": "Resistance to cold damage and protection against extreme cold temperatures.",
+        "description_tr": "Soğuk hasarına karşı direnç sağlar ve dondurucu soğuklarda vücut ısısını korur."
+    },
+    {
+        "name": "Ring of Water Walking",
+        "name_tr": "Su Üstünde Yürüme Yüzüğü",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:ring-of-water-walking",
+        "rarity": "Uncommon",
+        "type": "Ring",
+        "description": "Stand on and move across liquid surfaces as if they were solid ground.",
+        "description_tr": "Sıvı yüzeyler üzerinde katı zeminmiş gibi ayakta durabilir ve yürüyebilirsiniz."
+    },
+    {
+        "name": "Rings of Shared Suffering",
+        "name_tr": "Ortak Acı Yüzükleri",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:rings-of-shared-suffering",
+        "rarity": "Uncommon",
+        "type": "Ring",
+        "description": "Pair of rings that allow sharing damage taken by one wearer with the other.",
+        "description_tr": "Birbirine bağlı bu yüzüklerden birini takan kişi hasar aldığında, hasarın yarısını diğer yüzüğü takan kişi üstlenir."
+    },
+    {
+        "name": "Robe of Serpents",
+        "name_tr": "Yılanlı Cübbe",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:robe-of-serpents",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Stylish robe with serpents that can be transformed into giant poisonous snakes to aid you.",
+        "description_tr": "Üzerindeki yılan desenlerini gerçek zehirli yılanlara dönüştürüp yardımınıza çağırmanızı sağlayan cübbe."
+    },
+    {
+        "name": "Robe of Useful Items",
+        "name_tr": "Faydalı Eşyalar Cübbesi",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:robe-of-useful-items",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Robe with patches that can be detached to become the objects or creatures they represent.",
+        "description_tr": "Üzerindeki yamalar söküldüğünde yamada tasvir edilen eşyaya (merdiven, bot, fener vb.) dönüşür."
+    },
+    {
+        "name": "Rod of Retribution",
+        "name_tr": "İntikam Asası",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:rod-of-retribution",
+        "rarity": "Uncommon",
+        "type": "Rod",
+        "description": "Use reaction to deal lightning damage to a creature that damages you.",
+        "description_tr": "Size hasar veren bir yaratığa reaksiyonunuzla yıldırım hasarıyla karşılık vermenizi sağlar."
+    },
+    {
+        "name": "Rod of the Pact Keeper, +1, +2, +3",
+        "name_tr": "Pakt Koruyucusu Asası (+1, +2, +3)",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:rod-of-the-pact-keeper",
+        "rarity": "Uncommon",
+        "type": "Rod",
+        "description": "Bonus to spell attacks and DCs for warlocks; can regain one spell slot daily.",
+        "description_tr": "Warlock büyüleri için bonus sağlar ve günde bir kez warlock büyü yuvasını (spell slot) yeniler."
+    },
+    {
+        "name": "Rope of Climbing",
+        "name_tr": "Tırmanma Halatı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:rope-of-climbing",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Animated silk rope that can move, fasten itself, and knot on command.",
+        "description_tr": "Komutla hareket eden, kendini bir yere bağlayan veya düğümlenen sihirli halat."
+    },
+    {
+        "name": "Saddle of the Cavalier",
+        "name_tr": "Süvari Eyeri",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:saddle-of-the-cavalier",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Wearer cannot be dismounted against their will; attacks against the mount have disadvantage.",
+        "description_tr": "Bu eyeri kullanan kişi isteği dışında binek üzerinden düşürülemez; bineğe yapılan saldırılar dezavantajlı olur."
+    },
+    {
+        "name": "Scaled Ornament",
+        "name_tr": "Pullu Süsleme",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:scaled-ornament",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Dragon-themed accessory that provides protection against being charmed or frightened.",
+        "description_tr": "Ejderha temalı bu süsleme, büyülenme veya korkutulmaya karşı koruma ve avantaj sağlar."
+    },
+    {
+        "name": "Seeker Dart",
+        "name_tr": "Arayıcı Dart",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:seeker-dart",
+        "rarity": "Uncommon",
+        "type": "Weapon",
+        "description": "Magic dart that targets a creature within 120 feet, bypassing some cover and flying around corners.",
+        "description_tr": "Fırlatıldığında hedefi arayıp bulan, köşeleri dönebilen ve yıldırım hasarı veren sihirli dart."
+    },
+    {
+        "name": "Sending Stones",
+        "name_tr": "Haberleşme Taşları",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:sending-stones",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Pair of stones that allow casting the Sending spell to the bearer of the other stone once per day.",
+        "description_tr": "Birbirine bağlı iki taş. Birini tutan kişi günde bir kez diğerini tutan kişiye 'Sending' büyüsüyle mesaj gönderebilir."
+    },
+    {
+        "name": "Sensory Stone",
+        "name_tr": "Duyusal Taş",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:sending-stones",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Duplicate entry for Sending Stones in Wikidot (often used for storing memories).",
+        "description_tr": "Görüntü, ses veya anı kaydedebilen ve başkalarının deneyimlemesine izin veren sihirli taş."
+    },
+    {
+        "name": "Sentinel Shield",
+        "name_tr": "Gözcü Kalkanı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:sentinel-shield",
+        "rarity": "Uncommon",
+        "type": "Armor",
+        "description": "Advantage on initiative rolls and Perception checks while holding the shield.",
+        "description_tr": "Bu kalkanı tutarken inisiyatif zarlarında ve Algı (Perception) kontrollerinde avantaj kazanırsınız."
+    },
+    {
+        "name": "Serpent Scale Armor",
+        "name_tr": "Yılan Pullu Zırh",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:serpent-scale-armor",
+        "rarity": "Uncommon",
+        "type": "Armor",
+        "description": "Shimmering scale armor that allows full Dexterity modifier and has no Stealth disadvantage.",
+        "description_tr": "Gizlilik dezavantajı vermeyen ve Çeviklik (Dexterity) bonusunun tamamını kullanmanıza izin veren zırh."
+    },
+    {
+        "name": "Shatterspike",
+        "name_tr": "Shatterspike",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:shatterspike",
+        "rarity": "Uncommon",
+        "type": "Weapon",
+        "description": "+1 bonus to attack/damage; automatically deals a critical hit when hitting an object.",
+        "description_tr": "Nesnelere karşı her vuruşta kritik atan ve +1 bonusu olan özel bir sihirli kılıç."
+    },
+    {
+        "name": "Shield, +1, +2, +3",
+        "name_tr": "Kalkan (+1, +2, +3)",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:shield-1-2-3",
+        "rarity": "Uncommon",
+        "type": "Armor",
+        "description": "Grants a bonus to AC determined by the shield's rarity.",
+        "description_tr": "Nadirliğine göre +1, +2 veya +3 ekstra zırh sınıfı (AC) sağlar."
+    },
+    {
+        "name": "Shield Of The Tortoise",
+        "name_tr": "Kaplumbağa Kalkanı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:shield-of-the-tortoise",
+        "rarity": "Uncommon",
+        "type": "Armor",
+        "description": "+1 bonus to AC; cursed to reduce speed and initiative.",
+        "description_tr": "+1 AC bonusu verir ancak lanetlidir: hareket hızını yarıya indirir ve inisiyatifi 1'e sabitler."
+    },
+    {
+        "name": "Silverquill Primer",
+        "name_tr": "Silverquill Rehberi",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:silverquill-primer",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Grants bonus to Intimidation or Persuasion checks and allows casting one 1st-level spell daily.",
+        "description_tr": "Gözdağı (Intimidation) veya İkna (Persuasion) kontrollerine bonus verir ve günde bir kez 1. seviye büyü yapma imkanı sunar."
+    },
+    {
+        "name": "Skyblinder Staff",
+        "name_tr": "Gök Kör Eden Asa",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:skyblinder-staff",
+        "rarity": "Uncommon",
+        "type": "Staff",
+        "description": "+1 weapon/spell attack bonus; use reaction to impose disadvantage and potentially blind flying attackers.",
+        "description_tr": "Uçan rakiplere karşı reaksiyonla onları kör etme veya dezavantaj verme imkanı sunan +1 asa."
+    },
+    {
+        "name": "Sling Of Giant Felling",
+        "name_tr": "Dev Deviren Sapan",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:sling-of-giant-felling",
+        "rarity": "Uncommon",
+        "type": "Weapon",
+        "description": "Forces Giant creatures to succeed on a DC 18 Con save or be knocked prone.",
+        "description_tr": "Dev yaratıkları yere devirme (prone) şansı yüksek olan sihirli sapan."
+    },
+    {
+        "name": "Slippers of Spider Climbing",
+        "name_tr": "Örümcek Tırmanışı Terlikleri",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:slippers-of-spider-climbing",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Allows moving across vertical surfaces and ceilings; grants climbing speed equal to walking speed.",
+        "description_tr": "Duvarda ve tavanda örümcek gibi yürümenizi sağlar; yürüme hızınız kadar tırmanma hızı verir."
+    },
+    {
+        "name": "Smokepowder",
+        "name_tr": "Sihirli Barut",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:smokepowder",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Magical explosive used in firearms; deals fire damage in a 20-foot radius when ignited.",
+        "description_tr": "Ateşli silahlarda kullanılan veya patlayıcı olarak kullanılan sihirli barut."
+    },
+    {
+        "name": "Soul Coin",
+        "name_tr": "Ruh Sikkesi",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:soul-coin",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Infernal currency containing a trapped soul; can be used for various dark benefits.",
+        "description_tr": "İçinde bir ruh hapsedilmiş olan, cehennemde para birimi olarak kullanılan sikke; çeşitli karanlık güçler için harcanabilir."
+    },
+    {
+        "name": "Spell Gem",
+        "name_tr": "Büyü Kristali",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:spell-gem",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Gem that can store a single spell for later casting; rarity determines maximum spell level.",
+        "description_tr": "İçine bir büyü depolanabilen ve daha sonra kullanılabilen kristal."
+    },
+    {
+        "name": "Spell Scroll",
+        "name_tr": "Büyü Parşömeni",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:spell-scroll",
+        "rarity": "Uncommon",
+        "type": "Scroll",
+        "description": "Contains a single spell that can be cast once. Rarity determines the spell level.",
+        "description_tr": "Tek kullanımlık, içinde bir büyü barındıran sihirli parşömen."
+    },
+    {
+        "name": "Spellwrought Tattoo",
+        "name_tr": "Büyü İşlemeli Dövme",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:spellwrought-tattoo",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Magic tattoo that allows casting a single spell without material components; vanishes after use.",
+        "description_tr": "Vücuda işlenen ve bir büyüyü malzeme gerekmeden yapmanızı sağlayan, kullanıldıktan sonra yok olan dövme."
+    }
+]

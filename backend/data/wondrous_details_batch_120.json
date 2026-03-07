@@ -1,0 +1,352 @@
+[
+  {
+    "name": "Boots of Striding and Springing",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:boots-of-striding-and-springing",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "While you wear these boots, your walking speed becomes 30 feet, unless your walking speed is higher, and your speed isn't reduced if you are encumbered or wearing heavy armor. In addition, you can jump three times the normal distance, though you can't jump farther than your remaining movement would allow."
+  },
+  {
+    "name": "Boots of the Winterlands",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:boots-of-the-winterlands",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": ""
+  },
+  {
+    "name": "Bottled Breath",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:bottled-breath",
+    "rarity": "Uncommon",
+    "type": "Potion",
+    "description": "This bottle contains a breath of elemental air. When you inhale it, you either exhale it or hold it.\n\nIf you exhale the breath, you gain the effect of the Gust of Wind spell. If you hold the breath, you don’t need to breathe for 1 hour, though you can end this benefit early (for example, to speak). Ending it early doesn’t give you the benefit of exhaling the breath."
+  },
+  {
+    "name": "Bracers of Archery",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:bracers-of-archery",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "While wearing these bracers, you have proficiency with the longbow and shortbow, and you gain a +2 bonus to damage rolls on ranged attacks made with such weapons."
+  },
+  {
+    "name": "Brooch of Living Essence",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:brooch-of-living-essence",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "While wearing this nondescript brooch, spells and anything else that would detect or reveal your creature type treat you as humanoid, and those that would reveal your alignment treat it as neutral."
+  },
+  {
+    "name": "Brooch of Shielding",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:brooch-of-shielding",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "While wearing this brooch, you have resistance to force damage, and you have immunity to damage from the Magic Missile spell."
+  },
+  {
+    "name": "Broom of Flying",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:broom-of-flying",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "This wooden broom, which weighs 3 pounds, functions like a mundane broom until you stand astride it and speak its command word. It then hovers beneath you and can be ridden in the air. It has a flying speed of 50 feet. It can carry up to 400 pounds, but its flying speed becomes 30 feet while carrying over 200 pounds. The broom stops hovering when you land.\n\nYou can send the broom to travel alone to a destination within 1 mile of you if you speak the command word, name the location, and are familiar with that place. The broom comes back to you when you speak another command word, provided that the broom is still within 1 mile of you."
+  },
+  {
+    "name": "Cap of Water Breathing",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:cap-of-water-breathing",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "While wearing this cap underwater, you can speak its command word as an action to create a bubble of air around your head. It allows you to breathe normally underwater. This bubble stays with you until you speak the command word again, the cap is removed, or you are no longer underwater."
+  },
+  {
+    "name": "Card Sharp's Deck",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:card-sharps-deck",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "The cards of this deck shimmer around the edges. While holding this deck, you can use the following properties:\n\nDeadly Deal. As an action, you can use this deck to make a ranged spell attack by throwing a spectral card and using Dexterity for the attack roll. The card has a range of 120 feet and deals 1d8 force damage on a hit.\n\nSpray of Cards. As an action, you can shuffle the deck and cast the Spray of Cards spell at 3rd level from the deck (spell save DC 15). Once the deck has cast the spell, it can’t cast the spell again until the next dawn."
+  },
+  {
+    "name": "Circlet of Blasting",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:circlet-of-blasting",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "While wearing this circlet, you can use an action to cast the Scorching Ray spell with it. When you make the spell's attacks, you do so with an attack bonus of +5. The circlet can't be used this way again until the next dawn."
+  },
+  {
+    "name": "Circlet of Human Perfection",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:circlet-of-human-perfection",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "The Circlet of Human Perfection transforms its attuned wearer into an attractive human of average height and weight. The circlet chooses the physical characteristics of the form, such as age, gender, skin color, hair color, and voice. Except for size, the wearer's statistics and racial traits don't change, nor do items worn or carried by the wearer.\nRemoving the circlet ends the effect."
+  },
+  {
+    "name": "Cloak of Elvenkind",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:cloak-of-elvenkind",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "While you wear this cloak with its hood up, Wisdom (Perception) checks made to see you have disadvantage, and you have advantage on Dexterity (Stealth) checks made to hide, as the cloak's color shifts to camouflage you. Pulling the hood up or down requires an action."
+  },
+  {
+    "name": "Cloak of Protection",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:cloak-of-protection",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "You gain a +1 bonus to AC and saving throws while you wear this cloak."
+  },
+  {
+    "name": "Cloak of the Manta Ray",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:cloak-of-the-manta-ray",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "While wearing this cloak with its hood up, you can breathe underwater, and you have a swimming speed of 60 feet. Pulling the hood up or down requires an action."
+  },
+  {
+    "name": "Coiling Grasp Tattoo",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:coiling-grasp-tattoo",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "Produced by a special needle, this magic tattoo has long intertwining designs.\n\nTattoo Attunement. To attune to this item, you hold the needle to your skin where you want the tattoo to appear, pressing the needle there throughout the attunement process. When the attunement is complete, the needle turns into the ink that becomes the tattoo, which appears on the skin.\n\nIf your attunement to the tattoo ends, the tattoo vanishes, and the needle reappears in your space.\n\nGrasping Tendrils. While the tattoo is on your skin, you can, as an action, cause the tattoo to extrude into inky tendrils, which reach for a creature you can see within 15 feet of you. The creature must succeed on a DC 14 Strength saving throw or take 3d6 force damage and be grappled by you. As an action, the creature can escape the grapple by succeeding on a DC 14 Strength (Athletics) or Dexterity (Acrobatics) check. The grapple also ends if you halt it (no action required), if the creature is ever more than 15 feet away from you, or if you use this tattoo on a different creature."
+  },
+  {
+    "name": "Cracked Driftglobe",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:cracked-driftglobe",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "This small sphere of thick glass weighs 1 pound. If you are within 60 feet of it, you can speak its command word cause it to emanate the Light spell."
+  },
+  {
+    "name": "Cursed Luckstone",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:cursed-luckstone",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "This flat, gray-and-black river stone is inscribed with an unknown arcane symbol and feels cool to the touch. While carrying the stone, you can gain advantage on one ability check of your choice. The stone can't be used this way again until the next dawn.\n\nCurse. This item is cursed. Attuning to it curses you until you are targeted by a remove curse spell or similar magic. As long as you remain cursed, you cannot discard the stone, which immediately teleports back into your pocket or pack. After you use the stone's magic, your next two ability checks are made with disadvantage."
+  },
+  {
+    "name": "Decanter of Endless Water",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:decanter-of-endless-water",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "This stoppered flask sloshes when shaken, as if it contains water. The decanter weighs 2 pounds.\n\nYou can use an action to remove the stopper and speak one of three command words, whereupon an amount of fresh water or salt water (your choice) pours out of the flask. The water stops pouring out at the start of your next turn. Choose from the following options:"
+  },
+  {
+    "name": "Deck of Illusions",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:deck-of-illusions",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "This box contains a set of parchment cards. A full deck has 34 cards. A deck found as treasure is usually missing 1d20 - 1 cards.\n\nThe magic of the deck functions only if cards are drawn at random (you can use an altered deck of playing cards to simulate the deck). You can use an action to draw a card at random from the deck and throw it to the ground at a point within 30 feet of you.\n\nAn illusion of one or more creatures forms over the thrown card and remains until dispelled. An illusory creature appears real, of the appropriate size, and behaves as if it were a real creature (as presented in the Monster Manual), except that it can do no harm. While you are within 120 feet of the illusory creature and can see it, you can use an action to move it magically anywhere within 30 feet of its card. Any physical interaction with the illusory creature reveals it to be an illusion, because objects pass through it. Someone who uses an action to visually inspect the creature identifies it as illusory with a successful DC 15 Intelligence (Investigation) check. The creature then appears translucent.\n\nThe illusion lasts until its card is moved or the illusion is dispelled. When the illusion ends, the image on its card disappears, and that card can't be used again."
+  },
+  {
+    "name": "Deck Of Miscellany",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:deck-of-miscellany",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "This wooden box contains a set of thirty-two parchment cards.\n\nThe face of each card bears an illustration of a different item or set of items. As an action, you can draw a card of your choice from the deck and throw it to the ground in an unoccupied space within 5 feet of yourself. When the card hits the ground, the card permanently transforms into the item or set of items depicted on its face. An altered deck of real-world playing cards can simulate the deck, as shown on the Deck of Miscellany table."
+  },
+  {
+    "name": "Deck Of Wonder",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:deck-of-wonder",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "Created in the image of the Deck of Many Things, this deck of ivory or vellum cards bestows an assortment of minor benefits and penalties on those who draw from it. Most (75 percent) of these decks have only thirteen cards, but the rest have twenty-two.\n\nBefore you draw a card, you must declare how many cards you intend to draw, then draw them randomly. Any additional cards drawn have no effect. Unless a card states otherwise, as soon as you draw a card from the deck, its magic takes effect. You must draw each card you declared no more than 1 hour after the previous draw. If you fail to draw the chosen number, the remaining number of cards fly from the deck and take effect simultaneously.\n\nUnless it is the Mystery card, a drawn card immediately takes effect, fades from existence, and reappears in the deck, making it possible to draw the same card multiple times.\n\nYou can use an altered deck of playing cards to simulate the deck, as shown in the Deck of Wonder table.\n\nDeck of Wonder\n\n*Found only in a deck with twenty-two cards.\n\nBeginning. Your hit point maximum and current hit points increase by 2d10. Your hit point maximum remains increased in this way for the next 8 hours.\n\nChampion. You gain a +1 bonus to weapon attack and damage rolls. This bonus lasts for 8 hours.\n\nChancellor*. Within 8 hours of drawing this card, you can cast Augury once as an action, requiring no material components. Use your Intelligence, Wisdom, or Charisma as the spellcasting ability (your choice).\n\nChaos. You gain resistance to one of the following damage types (chosen by the DM): acid, cold, fire, lightning, or thunder. This resistance lasts for 1d12 days.\n\nCoin*. Five pieces of jewelry, each worth 100 gp, or ten gemstones, each worth 50 gp, appear at your feet.\n\nCrown. You learn the Friends cantrip. Use your Intelligence, Wisdom, or Charisma as the spellcasting ability (your choice). If you already know this cantrip, the card has no effect.\n\nDawn. This card invigorates you. For the next 8 hours, you can add your proficiency bonus to your initiative rolls.\n\nDay. You gain a +1 bonus to saving throws. This benefit lasts until you finish a long rest.\n\nDestiny*. This card protects you against an untimely demise. The first time after drawing this card that you would drop to 0 hit points from taking damage, you instead drop to 1 hit point.\n\nDusk*. This card supernaturally saps your energy. You have disadvantage on initiative rolls. This effect lasts until you finish a long rest, but it can be ended early by a Remove Curse spell or similar magic.\n\nEnd. This card is an omen of death. You take 2d10 necrotic damage, and your hit point maximum is reduced by an amount equal to the damage taken. This effect can’t reduce your hit point maximum below 10 hit points. This reduction lasts until you finish a long rest, but it can be ended early by a Remove Curse spell or similar magic.\n\nIsolation*. You disappear, along with anything you are wearing or carrying, and become trapped in a harmless extradimensional space for 1d4 minutes. You draw no more cards. You then reappear in the space you left or the nearest unoccupied space. When you reappear, you must succeed on a DC 11 Constitution saving throw or have the poisoned condition for 1 hour as your body reels from the extradimensional travel.\n\nJustice*. You momentarily gain the ability to balance the scales of fate. For the next 8 hours, whenever you or a creature within 60 feet of you is about to roll a d20 with advantage or disadvantage, you can use your reaction to prevent the roll from being affected by advantage or disadvantage.\n\nKnife. An uncommon magic weapon you’re proficient with appears in your hands. The DM chooses the weapon.\n\nLock. You gain the ability to cast Knock 1d3 times. Use your Intelligence, Wisdom, or Charisma as the spellcasting ability (your choice).\n\nMischief. You receive an uncommon wondrous item (chosen by the DM), or you can draw two additional cards beyond your declared draws.\n\nMonster. This card’s monstrous visage curses you. While cursed in this way, whenever you make a saving throw, you must roll 1d4 and subtract the number rolled from the total. The curse lasts until you finish a long rest, but it can be ended early with a Remove Curse spell or similar magic.\n\nMystery*. You have disadvantage on Intelligence saving throws for 1 hour. Discard this card and draw from the deck again; together, the two draws count as one of your declared draws.\n\nNight. You gain darkvision within a range of 300 feet. This darkvision lasts for 8 hours.\n\nOrder. You gain resistance to one of the following damage types (chosen by the DM): force, necrotic, poison, psychic, or radiant. This resistance lasts for 1d12 days.\n\nStudent*. You gain proficiency in Wisdom saving throws. If you already have this proficiency, you instead gain proficiency in Intelligence or Charisma saving throws (your choice).\n\nVulture*. One nonmagical item or piece of equipment in your possession (chosen by the DM) disappears. The item remains nearby but concealed for a short time, so it can be found with a successful DC 15 Wisdom (Perception) check. If the item isn’t recovered within 1 hour, it disappears forever."
+  },
+  {
+    "name": "Dragon Vessel",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:dragon-vessel",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "This vessel can be a potion bottle, drinking horn, or other container meant to hold a liquid.\n\nSlumbering (Uncommon). As a bonus action, if the vessel is empty, you can speak the command word to fill the vessel with one of the following (your choice): Ale, Olive Oil, a Potion of Healing, or a Potion of Climbing. Once this property is used, it can’t be used until the next dawn. A potion you create in this way loses its magical properties if it isn’t imbibed within 24 hours.\n\nStirring (Rare). In addition to the options for a Slumbering vessel, you can fill a Stirring vessel with Mead, a Potion of Fire Breath, or a Greater Potion of Healing.\n\nWakened (Very Rare). In addition to the options for a Slumbering or Stirring vessel, you can fill a Wakened vessel with Wine, a Potion of Flying, or a Superior Potion of Healing.\n\nAscendant (Legendary). In addition to the options for other states, you can fill an Ascendant vessel with Whiskey, a Supreme Potion of Healing, or a Potion of Dragon’s Majesty."
+  },
+  {
+    "name": "Dragonhide Belt",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:dragonhide-belt",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "This finely detailed belt is made of dragonhide. While wearing it, you gain a bonus to the saving throw DCs of your ki features. The bonus is determined by the belt’s rarity. In addition, you can use an action to regain ki points equal to a roll of your Martial Arts die. You can’t use this action again until the next dawn."
+  },
+  {
+    "name": "Dragon's Wrath Weapon",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:dragons-wrath-weapon",
+    "rarity": "Uncommon",
+    "type": "Weapon",
+    "description": "This weapon is decorated with dragon heads, claws, wings, scales, or Draconic letters. When it steeps in a dragon’s hoard, it absorbs the energy of the dragon’s breath weapon and deals damage of that type with its special properties.\n\nSlumbering (Uncommon). Whenever you roll a 20 on your attack roll with this weapon, each creature of your choice within 5 feet of the target takes 5 damage of the type dealt by the dragon’s breath weapon.\n\nStirring (Rare). The Stirring weapon has the Slumbering property. In addition, you gain a +1 bonus to attack and damage rolls made using the weapon. On a hit, the weapon deals an extra 1d6 damage of the type dealt by the dragon’s breath weapon.\n\nWakened (Very Rare). The Wakened weapon has the Slumbering property, and it improves on the Stirring property. The bonus to attack and damage rolls increases to +2, and the extra damage dealt by the weapon increases to 2d6.\n\nAs an action, you can unleash a 30-foot cone of destructive energy from the weapon. Each creature in that area must make a DC 16 Dexterity saving throw, taking 8d6 damage of the type dealt by the dragon’s breath weapon on a failed save, or half as much damage on a successful one. Once this action is used, it can’t be used again until the next dawn.\n\nAscendant (Legendary). The Ascendant weapon has the Slumbering property, and it improves on the Stirring and Wakened properties. The bonus to attack and damage rolls increases to +3, and the extra damage dealt by the weapon increases to 3d6.\n\nThe cone of destructive energy the weapon creates increases to a 60-foot cone, the save DC increases to 18, and the damage increases to 12d6."
+  },
+  {
+    "name": "Dragon-Touched Focus",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:dragon-touched-focus",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "This wondrous item can be a scepter, an orb, an amulet, a crystal, or another finely crafted object. It typically incorporates imagery of dragons’ wings, claws, teeth, or scales.\n\nSlumbering (Uncommon). You have advantage on initiative rolls. While you are holding the focus, it can function as a spellcasting focus for all your spells.\n\nStirring (Rare). The Stirring focus has the Slumbering property, and it gains an additional property determined by the family of the dragon in whose hoard it became Stirring:\n\nChromatic. Whenever you use a spell slot to cast a spell that deals acid, cold, fire, lightning, or poison damage, roll a d6, and you gain a bonus equal to the number rolled to one of the spell’s damage rolls.\n\nGem. Whenever you use a spell slot to cast a spell, you can immediately teleport to an unoccupied space you can see within 15 feet of you.\n\nMetallic. When a creature you can see within 30 feet of you makes a saving throw, you can use your reaction to give that creature advantage on the saving throw.\n\nWakened (Very Rare). The Wakened focus has the Slumbering and Stirring properties, and while you are holding a Wakened focus, you can use it to cast certain spells. Once the item is used to cast a given spell, it can’t be used to cast that spell again until the next dawn. The spells are determined by the family of the dragon in whose hoard it became Wakened.\n\nChromatic. Hold Monster, Rime’s Binding Ice\n\nGem. Rary’s Telepathic Bond, Raulothim’s Psychic Lance\n\nMetallic. Fizban’s Platinum Shield, Legend Lore\n\nAscendant (Legendary). The Ascendant focus has the Slumbering, Stirring, and Wakened properties. In addition, when you cast a spell of 1st level or higher while holding this focus, you can treat the spell as if it were cast using a 9th-level spell slot. Once this property is used, it can’t be used again until the next dawn."
+  },
+  {
+    "name": "Dried Leech",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:dried-leech",
+    "rarity": "Uncommon",
+    "type": "Weapon",
+    "description": "This leech has been dried and imbued with a mote of animating magic. If you hit a creature with a ranged attack roll using this ammunition, the leech springs to life and sinks its teeth into the target, dealing 1d4 piercing damage at the start of each of the target’s turns. If the leech deals at least 10 damage or the target dies, the leech falls off. A creature, including the target, can use its action to detach the leech. Once a leech is no longer attached to its target, the leech dies and is no longer magical."
+  },
+  {
+    "name": "Driftglobe",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:driftglobe",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "This small sphere of thick glass weighs 1 pound. If you are within 60 feet of it, you can speak its command word and cause it to emanate the Light or Daylight spell. Once used, the Daylight effect can't be used again until the next dawn.\n\nYou can speak another command word as an action to make the illuminated globe rise into the air and float no more than 5 feet off the ground. The globe hovers in this way until you or another creature grasps it. If you move more than 60 feet from the hovering globe, it follows you until it is within 60 feet of you. It takes the shortest route to do so. If prevented from moving, the globe sinks gently to the ground and becomes inactive, and its light winks out."
+  },
+  {
+    "name": "Dust of Corrosion",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:dust-of-corrosion",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "As an action, you can throw this dust into the air, filling a 10-foot cube that extends out from you. Surfaces and objects made of nonmagical ferrous metal in the area instantly corrode and turn to dust, becoming useless and unsalvageable. Any creature in the area that is made wholly or partly out of ferrous metal must make a DC 13 Constitution saving throw, taking 4d8 necrotic damage on a failed save, or half as much damage on a successful one.\n\nFound in a small packet, this dust is made from finely ground rust monster antennae. There is enough dust in each packet for one use."
+  },
+  {
+    "name": "Dust of Deliciousness",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:dust-of-deliciousness",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "This reddish brown dust can be sprinkled over any edible substance to greatly improve the flavor. The dust also dulls the eater's senses: anyone eating food treated with this dust has disadvantage on Wisdom ability checks and Wisdom saving throws for 1 hour. There is enough dust to flavor six servings."
+  },
+  {
+    "name": "Dust of Disappearance",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:dust-of-disappearance",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "Found in a small packet, this powder resembles very fine sand. There is enough of it for one use. When you use an action to throw the dust into the air, you and each creature and object within 10 feet of you become invisible for 2d4 minutes. The duration is the same for all subjects, and the dust is consumed when its magic takes effect. If a creature affected by the dust attacks or casts a spell, the invisibility ends for that creature."
+  },
+  {
+    "name": "Dust of Dryness",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:dust-of-dryness",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "This small packet contains 1d6 + 4 pinches of dust. You can use an action to sprinkle a pinch of it over water. The dust turns a cube of water 15 feet on a side into one marble-sized pellet, which floats or rests near where the dust was sprinkled. The pellet's weight is negligible.\n\nSomeone can use an action to smash the pellet against a hard surface, causing the pellet to shatter and release the water the dust absorbed. Doing so ends that pellet's magic.\n\nAn elemental composed mostly of water that is exposed to a pinch of the dust must make a DC 13 Constitution saving throw, taking 10d6 necrotic damage on a failed save, or half as much damage on a successful one."
+  },
+  {
+    "name": "Dust of Sneezing and Choking",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:dust-of-sneezing-and-choking",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "Found in a small container, this powder resembles very fine sand. It appears to be Dust of Disappearance, and an Identify spell reveals it to be such. There is enough of it for one use.\n\nWhen you use an action to throw a handful of the dust into the air, you and each creature that needs to breathe within 30 feet of you must succeed on a DC 15 Constitution saving throw or become unable to breathe, while sneezing uncontrollably. A creature affected in this way is incapacitated and suffocating. As long as it is conscious, a creature can repeat the saving throw at the end of each of its turns, ending the effect on it on a success. The Lesser Restoration spell can also end the effect on a creature."
+  },
+  {
+    "name": "Earworm",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:earworm",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "To attune to this symbiont, you must hold it against the skin behind your ear for the entire attunement period, whereupon it burrows into your head and bonds to your skull. While the earworm is inside you, you can speak, read, and write Deep Speech.\n\nSpells. The earworm has 4 charges. You can cast the following spells from it, expending the necessary number of charges (spell save DC 15): Detect Thoughts (2 charges) or Dissonant Whispers (1 charge). Each time you use the earworm to cast the Detect Thought spell, it sends the information gleaned to the nearest daelkyr, or to the next nearest earworm until it reaches a daelkyr.\n\nThe earworm regains 1d4 expended charges daily at dawn.\n\nSymbiotic Nature. The earworm can't be removed from you while you're attuned to it, and you can't voluntarily end your attunement to it. If you're targeted by a spell that ends a curse, your attunement to the earworm ends, and it exits your body."
+  },
+  {
+    "name": "Eldritch Claw Tattoo",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:eldritch-claw-tattoo",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "Produced by a special needle, this magic tattoo depicts clawlike forms and other jagged shapes.\n\nTattoo Attunement. To attune to this item, you hold the needle to your skin where you want the tattoo to appear, pressing the needle there throughout the attunement process. When the attunement is complete, the needle turns into the ink that becomes the tattoo, which appears on the skin.\n\nIf your attunement to the tattoo ends, the tattoo vanishes, and the needle reappears in your space.\n\nMagical Strikes. While the tattoo is on your skin, your unarmed strikes are considered magical for the purpose of overcoming immunity and resistance to nonmagical attacks, and you gain a +1 bonus to attack and damage rolls with unarmed strikes.\n\nEldritch Maul. As a bonus action, you can empower the tattoo for 1 minute. For the duration, each of your melee attacks with a weapon or an unarmed strike can reach a target up to 15 feet away from you, as inky tendrils launch toward the target. In addition, your melee attacks deal an extra 1d6 force damage on a hit. Once used, this bonus action can't be used again until the next dawn."
+  },
+  {
+    "name": "Elemental Gem",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:elemental-gem",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "This gem contains a mote of elemental energy. When you use an action to break the gem, an elemental is summoned as if you had cast the Conjure Elemental spell, and the gem's magic is lost. The type of gem determines the elemental summoned by the spell."
+  },
+  {
+    "name": "Emerald Pen",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:emerald-pen",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "This pen is tipped with an emerald nib and requires no ink to write. While holding this pen, you can cast Illusory Script at will, requiring no material components."
+  },
+  {
+    "name": "Eversmoking Bottle",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:eversmoking-bottle",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "Smoke leaks from the lead-stoppered mouth of this brass bottle, which weighs 1 pound. When you use an action to remove the stopper, a cloud of thick smoke pours out in a 60-foot radius from the bottle. The cloud's area is heavily obscured. Each minute the bottle remains open and within the cloud, the radius increases by 10 feet until it reaches its maximum radius of 120 feet.\n\nThe cloud persists as long as the bottle is open. Closing the bottle requires you to speak its command word as an action. Once the bottle is closed, the cloud disperses after 10 minutes. A moderate wind (11 to 20 miles per hour) can also disperse the smoke after 1 minute, and a strong wind (21 or more miles per hour) can do so after 1 round."
+  },
+  {
+    "name": "Eyes of Charming",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:eyes-of-charming",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "These crystal lenses fit over the eyes. They have 3 charges. While wearing them, you can expend 1 charge as an action to cast the Charm Person spell (save DC 13) on a humanoid within 30 feet of you, provided that you and the target can see each other. The lenses regain all expended charges daily at dawn."
+  },
+  {
+    "name": "Eyes of Minute Seeing",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:eyes-of-minute-seeing",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "These crystal lenses fit over the eyes. While wearing them, you can see much better than normal out to a range of 1 foot. You have advantage on Intelligence (Investigation) checks that rely on sight while searching an area or studying an object within that range."
+  },
+  {
+    "name": "Eyes of the Eagle",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:eyes-of-the-eagle",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "These crystal lenses fit over the eyes. While wearing them, you have advantage on Wisdom (Perception) checks that rely on sight. In conditions of clear visibility, you can make out details of even extremely distant creatures and objects as small as 2 feet across."
+  },
+  {
+    "name": "Fabulist Gem",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:fabulist-gem",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "This glittering red gem is commonly found embedded in a ring or brooch.\n\nWhile wearing the gem, you gain the following benefits.\n\nCounterfeit Coins. You can use your action to magically create a pile of coins, worth no more than 100 gp total, in an unoccupied space within 10 feet of yourself. The pile must appear on a surface that can support it. After 1 hour, the coins vanish, regardless of where they are. Once this action is used, it can’t be used again until the next dawn.\n\nIllusory Fashion. As a bonus action, you can magically change the appearance of your clothing and armor. You can change the style, color, and apparent quality of what you’re wearing, or you can make it appear as if you were wearing different garments entirely. In either case, the changes wrought by this magic fail to pass physical inspection."
+  },
+  {
+    "name": "Feywild Shard",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:feywild-shard",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "This warm crystal glints with the sunset colors of the Feywild sky and evokes whispers of emotional memory. As an action, you can attach the shard to a Tiny object (such as a weapon or a piece of jewelry) or detach it. It falls off if your attunement to it ends. You can use the shard as a spellcasting focus while you hold or wear it.\n\nWhen you use a Metamagic option on a spell while you are holding or wearing the shard, you can roll on the Wild Magic Surge table in the Player's Handbook. If the result is a spell, it is too wild to be affected by your Metamagic, and if it normally requires concentration, it doesn't require concentration in this case; the spell lasts for its full duration.\n\nIf you don't have the Wild Magic Sorcerous Origin, once this property is used to roll on the Wild Magic Surge table, it can't be used again until the next dawn."
+  },
+  {
+    "name": "Figurine of Wondrous Power",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:figurine-of-wondrous-power",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "A Figurine of Wondrous Power is a statuette of a beast small enough to fit in a pocket. If you use an action to speak the command word and throw the figurine to a point on the ground within 60 feet of you, the figurine becomes a living creature. If the space where the creature would appear is occupied by other creatures or objects, or if there isn't enough space for the creature, the figurine doesn't become a creature.\n\nThe creature is friendly to you and your companions. It understands your languages and obeys your spoken commands. If you issue no commands, the creature defends itself but takes no other actions. See the Monster Manuel for the creature's statistics.\n\nThe creature exists for a duration specific to each figurine. At the end of the duration, the creature reverts to its figurine form. It reverts to a figurine early if it drops to 0 hit points or if you use an action to speak the command word again while touching it. When the creature becomes a figurine again, its property can't be used again until a certain amount of time has passed, as specified in the figurine's description.\n\nBronze Griffon (Rare). This bronze statuette is of a griffon rampant. It can become a griffon for up to 6 hours. Once it has been used, it can't be used again until 5 days have passed.\n\nEbony Fly (Rare). This ebony statuette is carved in the likeness of a horsefly. It can become a giant fly for up to 12 hours and can be ridden as a mount. Once it has been used, it can't be used again until 2 days have passed.\n\nGolden Lions (Rare). These gold statuettes of lions are always created in pairs. You can use one figurine or both simultaneously. Each can become a lion for up to 1 hour. Once a lion has been used, it can't be used again until 7 days have passed.\n\nIvory Goats (Rare). These ivory statuettes of goats are always created in sets of three. Each goat looks unique and functions differently from the others. Their properties are as follows\n\nMarble Elephant (Rare). This marble statuette is about 4 inches high and long. It can become an elephant for up to 24 hours. Once it has been used, it can't be used again until 7 days have passed.\n\nObsidian Steed (Very Rare). This polished obsidian horse can become a nightmare for up to 24 hours. The nightmare fights only to defend itself. Once it has been used, it can't be used again until 5 days have passed.\n\nIf you have a good alignment, the figurine has a 10 percent chance each time you use it to ignore your orders, including a command to revert to figurine form. If you mount the nightmare while it is ignoring your orders, you and the nightmare are instantly transported to a random location on the plane of Hades, where the nightmare reverts to figurine form.\n\nOnyx Dog (Rare). This onyx statuette of a dog can become a mastiff for up to 6 hours. The mastiff has an Intelligence of 8 and can speak Common. It also has darkvision out to a range of 60 feet and can see invisible creatures and objects within that range. Once it has been used, it can't be used again until 7 days have passed.\n\nSerpentine Owl (Rare). This serpentine statuette of an owl can become a giant owl for up to 8 hours. Once it has been used, it can't be used again until 2 days have passed. The owl can telepathically communicate with you at any range if you and it are on the same plane of existence.\n\nSilver Raven (Uncommon). This silver statuette of a raven can become a raven for up to 12 hours. Once it has been used, it can't be used again until 2 days have passed. While in raven form, the figurine allows you to cast the Animal Messenger spell on it at will.\n\nIn addition, the following Figurine of Wondrous Power was added in Fizban's Treasury of Dragons:\n\nGold Canary (Legendary)\nGiant Canary Form. The figurine becomes a giant canary (see the accompanying stat block) for up to 8 hours and can be ridden as a mount. Once the figurine has become a giant canary, it can’t be used this way again until the next dawn.\nGold Dragon Form. While you are missing half or more of your hit points, you can speak a different command word and the figurine becomes an adult gold dragon for up to 1 hour. The dragon can’t use any legendary actions or lair actions. Once the figurine has become an adult gold dragon, it can’t be used this way again until 1 year has passed."
+  },
+  {
+    "name": "Finder's Goggles",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:finders-goggles",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "The lenses of these garish goggles are carved from Siberys dragonshards. While wearing these lenses, you gain the following benefits:"
+  },
+  {
+    "name": "Gauntlets of Ogre Power",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:gauntlets-of-ogre-power",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "Your Strength score is 19 while you wear these gauntlets. They have no effect on you if your Strength is 19 or higher without them."
+  },
+  {
+    "name": "Gem of Brightness",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:gem-of-brightness",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "This prism has 50 charges. While you are holding it, you can use an action to speak one of three command words to cause one of the following effects:\n\nWhen all of the gem's charges are expended, the gem becomes a non magical jewel worth 50 gp."
+  },
+  {
+    "name": "Glamerweave",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:glamerweave",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "Glamerweave is clothing imbued with harmless illusory magic. While wearing the common version of these clothes, you can use a bonus action to create a moving illusory pattern within the cloth.\n\nUncommon glamerweave can have the pattern rise from the cloth. For example, a glamerweave gown might be wreathed in harmless, illusory flames, while a glamerweave hat might have illusory butterflies fluttering around it.\n\nWhen you make a Charisma (Performance) or Charisma (Persuasion) check while wearing the uncommon version of glamerweave, you can roll a d4 and add the number rolled to the check. Once you use this property, it can't be used again until the next dawn."
+  },
+  {
+    "name": "Gloves of Missile Snaring",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:gloves-of-missile-snaring",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "These gloves seem to almost meld into your hands when you don them. When a ranged weapon attack hits you while you're wearing them, you can use your reaction to reduce the damage by 1d10 + your Dexterity modifier, provided that you have a free hand. If you reduce the damage to 0, you can catch the missile if it is small enough for you to hold in that hand."
+  },
+  {
+    "name": "Gloves of Swimming and Climbing",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:gloves-of-swimming-and-climbing",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "While wearing these gloves, climbing and swimming don't cost you extra movement, and you gain a +5 bonus to Strength (Athletics) checks made to climb or swim."
+  },
+  {
+    "name": "Gloves of Thievery",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:gloves-of-thievery",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "These gloves are invisible while worn. While wearing them, you gain a +5 bonus to Dexterity (Sleight of Hand) checks and Dexterity checks made to pick locks."
+  }
+]

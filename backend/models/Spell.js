@@ -13,6 +13,7 @@ const spellSchema = new mongoose.Schema({
     ritual: Boolean,
     concentration: Boolean,
     classes: [String],
+    subclasses: [String],
     desc: String,
     higher_level: String
 }, { strict: false });

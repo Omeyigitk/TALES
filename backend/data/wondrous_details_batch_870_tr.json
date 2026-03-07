@@ -1,0 +1,362 @@
+[
+    {
+        "name": "Dekella, Bident of Thassa",
+        "name_tr": "Dekella (Thassa'nın Çuvaldızı)",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:dekella",
+        "rarity": "Artifact",
+        "type": "Weapon",
+        "description": "Divine two-pronged weapon of the sea goddess Thassa, granting control over waves, sea creatures, and planar metamorphosis.",
+        "description_tr": "Deniz tanrıçası Thassa'nın kutsal mızrağı; dalgalara hükmeden, deniz canavarlarını köle yapan ve kurbanlarını deniz canlılarına dönüştüren eser."
+    },
+    {
+        "name": "Demonomicon of Iggwilv",
+        "name_tr": "Iggwilv'in Demonomicon'u",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:demonomicon-of-iggwilv",
+        "rarity": "Artifact",
+        "type": "Wondrous Item",
+        "description": "The ultimate tome of demonology, allowing the binding and containment of powerful fiends within its pages.",
+        "description_tr": "İblis biliminin en kutsal kitabı; Abyss'in tüm sırlarını barındıran ve en güçlü iblisleri sayfalarına hapsedebilen kadim eser."
+    },
+    {
+        "name": "Ephixis, Bow of Nyela",
+        "name_tr": "Ephixis (Nylea'nın Yayı)",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:ephixis",
+        "rarity": "Artifact",
+        "type": "Weapon",
+        "description": "Divine shortbow associated with the seasons, firing magical arrows that can change the environment and hinder foes.",
+        "description_tr": "Mevsimlerin döngüsünü kontrol eden; her biri farklı bir mevsime ait sihirli oklar atan bereket tanrıçasının yayı."
+    },
+    {
+        "name": "Eye and Hand of Vecna",
+        "name_tr": "Vecna'nın Gözü ve Eli",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:eye-and-hand-of-vecna",
+        "rarity": "Artifact",
+        "type": "Wondrous Item",
+        "description": "Grisly remains of the lich-god Vecna that grant immense dark power but require self-mutilation to use.",
+        "description_tr": "Lich tanrı Vecna'nın kalıntıları; kullanmak için kendi gözünü veya elini feda etmeyi gerektiren, evrendeki en karanlık eserler."
+    },
+    {
+        "name": "Grovelthrash",
+        "name_tr": "Grovelthrash (Acı Çekici)",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:grovelthrash",
+        "rarity": "Artifact",
+        "type": "Weapon",
+        "description": "Sentient obsidian warhammer of Torog that feeds on the pain of others and seeks to dominate its wielder.",
+        "description_tr": "Obsidyenden dövülmüş; kurbanların acısıyla beslenen ve sahibini karanlığa iten canlı efsanevi savaş çekici."
+    },
+    {
+        "name": "Helm of Perfect Potential",
+        "name_tr": "Kusursuz Potansiyel Miğferi",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:helm-of-perfect-potential",
+        "rarity": "Artifact",
+        "type": "Wondrous Item",
+        "description": "Copper helm containing a shard of Elemental Chaos, allowing the wielder to channel searing elemental energy.",
+        "description_tr": "Elemental Kaos'un bir parçasını barındıran; sahibine elementlerin saf ve yıkıcı gücünü kullanma imkanı veren miğfer."
+    },
+    {
+        "name": "Iggwilv's Cauldron",
+        "name_tr": "Iggwilv'in Kazanı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:iggwilv-s-cauldron",
+        "rarity": "Artifact",
+        "type": "Wondrous Item",
+        "description": "Magical cauldron with gold and iron forms, central to the power of hag covens across the multiverse.",
+        "description_tr": "Tüm cadı meclislerinin (coven) güç kaynağı olan; hem altın hem demir formuna bürünebilen efsanevi büyü kazanı."
+    },
+    {
+        "name": "Khrusor, Spear of Heliod",
+        "name_tr": "Khrusor (Heliod'un Mızrağı)",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:khrusor",
+        "rarity": "Artifact",
+        "type": "Weapon",
+        "description": "Divine spear of the sun god Heliod, dealing radiant damage and capable of casting powerful solar spells.",
+        "description_tr": "Güneş tanrısı Heliod'un mızrağı; güneş ışığı saçan, rakiplerini kör eden ve kutsal bir nurla yakan eser."
+    },
+    {
+        "name": "Lash of Shadows",
+        "name_tr": "Gölgelerin Kamçısı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:lash-of-shadows",
+        "rarity": "Artifact",
+        "type": "Weapon",
+        "description": "Sentient snakeskin whip containing a mad marilith, dealing poison and necrotic damage through five serpent heads.",
+        "description_tr": "Beş yılan başlı; içinde deli bir Marilith'in ruhunu barındıran ve vurduğu her şeye zehir kusan canlı kırbaç."
+    },
+    {
+        "name": "Luba's Tarokka of Souls",
+        "name_tr": "Luba'nın Ruhlar Destesi",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:lubas-tarokka-of-souls",
+        "rarity": "Artifact",
+        "type": "Wondrous Item",
+        "description": "Deck of cards capable of trapping the most wicked souls in a nether-realm hidden within its shuffle.",
+        "description_tr": "En kötü ruhları içine hapseden; kaderi değiştirebilen ama her kullanıldığında bir iblisi serbest bırakma riski taşıyan deste."
+    },
+    {
+        "name": "Mace of the Black Crown",
+        "name_tr": "Siyah Taç Gürzü",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:mace-of-the-black-crown",
+        "rarity": "Artifact",
+        "type": "Weapon",
+        "description": "Sentient mace of Asmodeus that seeks to recruit souls for the Nine Hells and manipulate its wielder's dreams.",
+        "description_tr": "Dokuz Cehennem'in efendisi Asmodeus'un gürzü; sahibinin rüyalarına giren ve onu kötülüğe iten canlı silah."
+    },
+    {
+        "name": "Mastix, Whip of Erebos",
+        "name_tr": "Mastix (Erebos'un Kırbacı)",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:mastix",
+        "rarity": "Artifact",
+        "type": "Weapon",
+        "description": "Divine whip of the god of the dead that can drag souls into the Underworld and snatch hit points from targets.",
+        "description_tr": "Ölüler tanrısı Erebos'un kırbacı; kurbanın ruhunu çekip alan ve sahibine onun yaşam enerjisini aktaran efsanevi eser."
+    },
+    {
+        "name": "Mighty Servant of Leuk-o",
+        "name_tr": "Leuk-o'nun Kudretli Hizmetkarı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:mighty-servant-of-leuk-o",
+        "rarity": "Artifact",
+        "type": "Wondrous Item",
+        "description": "Massive 10-foot-tall magical construct piloted by two crew members, capable of immense destruction.",
+        "description_tr": "İçine iki kişinin binip kontrol edebildiği; önüne çıkan her şeyi yerle bir eden devasa siyah metal mekanizmalı dev."
+    },
+    {
+        "name": "Orb of Dragonkind",
+        "name_tr": "Ejderha Küresi (Orb of Dragonkind)",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:orb-of-dragonkind",
+        "rarity": "Artifact",
+        "type": "Wondrous Item",
+        "description": "Ancient crystal globe containing the essence of an evil dragon, used to call and control dragons.",
+        "description_tr": "Kadim çağlardan kalma; ejderhaları yanına çağırabilen ve onları iradesi altına alabilen kristal küre."
+    },
+    {
+        "name": "Orrery Of The Wanderer",
+        "name_tr": "Gezgin'in Saat Düzeneği",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:orrery-of-the-wanderer",
+        "rarity": "Artifact",
+        "type": "Wondrous Item",
+        "description": "Complex clockwork device used to tap into the power of the planes and predict future events.",
+        "description_tr": "Boyutların ve yıldızların hareketini gösteren; sahibine geleceği fısıldayan ve boyutlar arası kapılar açan karmaşık düzenek."
+    },
+    {
+        "name": "Ring of Winter",
+        "name_tr": "Kış Yüzüğü",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:ring-of-winter",
+        "rarity": "Artifact",
+        "type": "Ring",
+        "description": "Sentient ring that grants immortality and powerful ice magic while seeking to freeze the entire world.",
+        "description_tr": "Takanı yaşlanmaktan koruyan; ona devasa buz büyüleri yaptıran ama dünyayı sonsuz bir kışa boğmak isteyen canlı yüzük."
+    },
+    {
+        "name": "Rod of Seven Parts",
+        "name_tr": "Yedi Parçalı Asa (Rod of Law)",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:rod-of-seven-parts",
+        "rarity": "Artifact",
+        "type": "Rod",
+        "description": "Legendary rod of law shattered into seven pieces, capable of binding the most powerful chaotic entities when reassembled.",
+        "description_tr": "Evrenin düzenini temsil eden; yedi parçaya ayrılmış ve birleştiğinde tanrısal güçler bahşeden efsanevi asa."
+    },
+    {
+        "name": "Ruin's Wake",
+        "name_tr": "Yıkım İzi (Ruin's Wake - Mızrak)",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:ruins-wake",
+        "rarity": "Artifact",
+        "type": "Weapon",
+        "description": "Sentient spear made from gold dragon bone that seeks blood and pushes its wielder toward violence.",
+        "description_tr": "Altın ejderha kemiğinden yapılmış; Gruumsh'un gazabını taşıyan ve kan dökmeye susamış canlı mızrak."
+    },
+    {
+        "name": "Ruinstone",
+        "name_tr": "Yıkım Taşı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:ruinstone",
+        "rarity": "Artifact",
+        "type": "Wondrous Item",
+        "description": "Fiery red crystal capable of undoing deeds by erasing people from reality as a side effect.",
+        "description_tr": "Zamanı geriye alıp yapılan bir hatayı düzelten ama karşılığında birini gerçeklikten sonsuza dek silen lanetli taş."
+    },
+    {
+        "name": "Silken Spite",
+        "name_tr": "İpek Kin (Silken Spite - Rapier)",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:silken-spite",
+        "rarity": "Artifact",
+        "type": "Weapon",
+        "description": "Sentient rapier made of spider silk that pushes its wielder to trust no one and kill for any offense.",
+        "description_tr": "Örümcek ipeğinden yapılmış; örümcek kraliçe Lolth'un kutsamasını taşıyan ve sahibini suikastlara iten canlı kılıç."
+    },
+    {
+        "name": "Staff of the Forgotten One",
+        "name_tr": "Unutulmuş Olan'ın Asası",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:staff-of-the-forgotten-one",
+        "rarity": "Artifact",
+        "type": "Staff",
+        "description": "Acererak's bone staff containing the life force of a dead archmage, capable of inflicting terrible curses.",
+        "description_tr": "Acererak'a ait; kurbanlarını lanetleyen ve onların canlanmasını engelleyen, içinde bir baş büyücünün ruhu olan asa."
+    },
+    {
+        "name": "Stone of Golorr",
+        "name_tr": "Golorr Taşı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:stone-of-golorr",
+        "rarity": "Artifact",
+        "type": "Wondrous Item",
+        "description": "Sentient greenish stone containing an aboleth that holds ancient secrets and can erase memories.",
+        "description_tr": "İçinde kadim bir Aboleth'in hapsolduğu; sınırsız bilgi barındıran ama sahibinin hafızasını silebilir yapıda canlı taş."
+    },
+    {
+        "name": "Sword of Kas",
+        "name_tr": "Kas'ın Kılıcı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:sword-of-kas",
+        "rarity": "Artifact",
+        "type": "Weapon",
+        "description": "Sentient longsword created to destroy Vecna, requiring constant blood to remain satisfied.",
+        "description_tr": "Vecna'yı öldürmek için dövülmüş; kana susamış ve sahibini Vecna'nın eserlerini yok etmeye zorlayan canlı kılıç."
+    },
+    {
+        "name": "Sword of Zariel",
+        "name_tr": "Zariel'in Kılıcı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:sword-of-zariel",
+        "rarity": "Artifact",
+        "type": "Weapon",
+        "description": "Celestial longsword that transforms its wielder into an idealized heavenly version of themselves.",
+        "description_tr": "Melek Zariel'in kılıcı; takanı bir ışık varlığına dönüştüren ve iblisleri yakan efsanevi kutsal silah."
+    },
+    {
+        "name": "Teeth of Dahlver-Nar",
+        "name_tr": "Dahlver-Nar'ın Dişleri",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:teeth-of-dahlver-nar",
+        "rarity": "Artifact",
+        "type": "Wondrous Item",
+        "description": "Collection of teeth that can be sown to summon legendary creatures or implanted for magical benefits.",
+        "description_tr": "Yere ekildiğinde efsanevi yaratıklar çağıran veya ağıza takıldığında tanrısal güçler veren büyülü diş koleksiyonu."
+    },
+    {
+        "name": "The Bloody End",
+        "name_tr": "Kanlı Son (The Bloody End)",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:the-bloody-end",
+        "rarity": "Artifact",
+        "type": "Weapon",
+        "description": "Sentient adamantine morningstar of Bane that pushes its wielder to subjugate others.",
+        "description_tr": "Tiranlık tanrısı Bane'in gürzü; sahibini herkesi diz çöktürmeye ve mutlak otorite kurmaya zorlayan canlı silah."
+    },
+    {
+        "name": "The Infernal Machine Of Lum The Mad",
+        "name_tr": "Deli Lum'un Cehennem Makinesi",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:the-infernal-machine-of-lum-the-mad",
+        "rarity": "Artifact",
+        "type": "Wondrous Item",
+        "description": "Massive ancient device with countless controls capable of bending reality and summoning monsters.",
+        "description_tr": "Binlerce kolu ve düğmesi olan; dilekleri gerçekleştiren ama her an patlayabilecek kadar dengesiz antik devasa makine."
+    },
+    {
+        "name": "Wand of Orcus",
+        "name_tr": "Orcus'un Asası",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:wand-of-orcus",
+        "rarity": "Artifact",
+        "type": "Wand",
+        "description": "Skull-topped bone wand that can conjure hoards of undead and kill with a single word.",
+        "description_tr": "Ölümsüzlük prensi Orcus'un asası; bir ordu dolusu zombi çağıran ve tek kelimeyle can alan korkunç eser."
+    },
+    {
+        "name": "Will of the Talon",
+        "name_tr": "Pençe'nin İradesi",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:will-of-the-talon",
+        "rarity": "Artifact",
+        "type": "Weapon",
+        "description": "Sentient war pick that channels the power of Tiamat and values strong leadership and greed.",
+        "description_tr": "Tiamat'ın gücünü taşıyan; sahibini zenginlik biriktirmeye ve sert bir lider olmaya zorlayan canlı kazma."
+    },
+    {
+        "name": "Wyrmskull Throne",
+        "name_tr": "Ejderha Kafatası Tahtı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:wyrmskull-throne",
+        "rarity": "Artifact",
+        "type": "Wondrous Item",
+        "description": "Massive obsidian throne adorned with dragon skulls, capable of unleashing blue dragon breath and flying.",
+        "description_tr": "Dört mavi ejderha kafatası üzerine kurulmuş; uçabilen ve şimşekler saçabilen efsanevi cüce krallığı tahtı."
+    },
+    {
+        "name": "Draakhorn",
+        "name_tr": "Draakhorn (Ejderha Borusu)",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:draakhorn",
+        "rarity": "Unique",
+        "type": "Wondrous Item",
+        "description": "Massive signal horn that alerts all dragons within 2,000 miles of impending danger.",
+        "description_tr": "Çalındığında 2000 mil içindeki tüm ejderhaları uyandıran ve onları savaş düzenine sokan devasa boru."
+    },
+    {
+        "name": "Gnomengarde Grenade",
+        "name_tr": "Gnomengarde El Bombası",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:gnomengarde-grenade",
+        "rarity": "Unique",
+        "type": "Wondrous Item",
+        "description": "Powerful explosive device created by gnomes, dealing massive force and thunder damage in a large radius.",
+        "description_tr": "Gnomlar tarafından yapılmış; patladığında arkasında hiçbir şey bırakmayan son derece güçlü patlayıcı düzenek."
+    },
+    {
+        "name": "Mask of the Dragon Queen",
+        "name_tr": "Ejderha Kraliçesi Maskesi",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:mask-of-the-dragon-queen",
+        "rarity": "Unique",
+        "type": "Wondrous Item",
+        "description": "Legendary crown formed by the five dragon masks, granting the user Tiamat's divine protections.",
+        "description_tr": "Beş ejderha maskesinin birleşiminden oluşan; sahibini bir ejderha ilahı kadar güçlü ve dayanıklı kılan taç."
+    },
+    {
+        "name": "Crusader's Shortsword",
+        "name_tr": "Haçlı Kısa Kılıcı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:crusaders-shortsword",
+        "rarity": "???",
+        "type": "Weapon",
+        "description": "Sentient holy shortsword that sheds light and allows casting of Crusader's Mantle.",
+        "description_tr": "Sürekli ışık saçan; kötülükle savaşmak için adanmış ve çevresindekileri kutsayan canlı kısa kılıç."
+    },
+    {
+        "name": "Orcus Figurine",
+        "name_tr": "Orcus Biblosu",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:orcus-figurine",
+        "rarity": "???",
+        "type": "Wondrous Item",
+        "description": "Grim statuette of Orcus that causes plants to wither and drinks to spoil in its presence.",
+        "description_tr": "Orcus'un tasviri; çevresindeki bitkileri kurutan, yemekleri bozan ve huzursuzluk saçan lanetli heykelcik."
+    },
+    {
+        "name": "Radiance",
+        "name_tr": "Radiance (Işıltı Aynası)",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:radiance",
+        "rarity": "???",
+        "type": "Wand",
+        "description": "Golden hand mirror that functions as a magical focus and can enhance the user's abilities.",
+        "description_tr": "Kadın el aynası formunda; büyülerin etkisini artıran ve sahibinin yeteneklerini güçlendiren altın ayna."
+    },
+    {
+        "name": "Shield of the Silver Dragon",
+        "name_tr": "Gümüş Ejderha Kalkanı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:shield-of-the-silver-dragon",
+        "rarity": "???",
+        "type": "Armor",
+        "description": "Emblematic shield of the Order of the Silver Dragon, whispering warnings and granting initiative bonuses.",
+        "description_tr": "Gümüş Ejderha Şövalyeleri'nin kalkanı; sahibine tehlikeyi fısıldayan ve onu her an savaşa hazır tutan kalkan."
+    },
+    {
+        "name": "Stonky's Ring",
+        "name_tr": "Stonky'nin Yüzüğü",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:stonkys-ring",
+        "rarity": "???",
+        "type": "Ring",
+        "description": "Allows casting of Telekinesis at will and grants control over specific mechanical constructs.",
+        "description_tr": "Zihin gücüyle nesneleri hareket ettirmeyi (Telekinesis) ve mekanik yaratıkları kontrol etmeyi sağlayan yüzük."
+    },
+    {
+        "name": "Tearulai",
+        "name_tr": "Tearulai (Zümrüt Kılıç)",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:tearulai",
+        "rarity": "???",
+        "type": "Weapon",
+        "description": "Sentient emerald-bladed sword of sharpness that loves beauty and seeks to return to its home forest.",
+        "description_tr": "Zümrüt yeşili namlulu; sanat ve müziğe düşkün, tek vuruşta kafa koparabilen son derece gururlu canlı kılıç."
+    },
+    {
+        "name": "Yester Hill Axe",
+        "name_tr": "Yester Tepesi Baltası",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:yester-hill-axe",
+        "rarity": "???",
+        "type": "Weapon",
+        "description": "Magical battleaxe that deals extra damage to plants but pricks non-good wielders with thorns.",
+        "description_tr": "Bitki yaratıklarını saniyeler içinde biçen ama kötü niyetli biri tuttuğunda onu dikenleriyle yaralayan balta."
+    }
+]

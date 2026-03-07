@@ -1,0 +1,173 @@
+[
+    {
+        "name": "Armblade",
+        "name_tr": "Kol Bıçağı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:armblade",
+        "rarity": "Common",
+        "type": "Weapon",
+        "description": "An armblade is a magic weapon that attaches to your arm, becoming inseparable from you as long as you're attuned to it. To attune to this item, you must hold it against your forearm for the entire attunement period.\n\nAs a bonus action, you can retract the armblade into your forearm or extend it from there. While it is extended, you can use the weapon as if you were holding it, and you can't use that hand for other purposes.",
+        "description_tr": "Kol bıçağı, kolunuza takılan ve uyumlandığınız sürece sizden ayrılmaz hale gelen büyülü bir silahtır. Bu eşyaya uyumlanmak için, uyumlanma süresi boyunca onu ön kolunuza dayalı tutmalısınız.\n\nBonus eylem olarak, kol bıçağını ön kolunuza geri çekebilir veya oradan dışarı uzatabilirsiniz. Uzatılmış durumdayken, silahı sanki elinizde tutuyormuş gibi kullanabilirsiniz ve o elinizi başka amaçlar için kullanamazsınız."
+    },
+    {
+        "name": "Armor of Gleaming",
+        "name_tr": "Parıldayan Zırh",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:armor-of-gleaming",
+        "rarity": "Common",
+        "type": "Armor",
+        "description": "This armor never gets dirty.",
+        "description_tr": "Bu zırh asla kirlenmez."
+    },
+    {
+        "name": "Band of Loyalty",
+        "name_tr": "Sadakat Halkası",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:band-of-loyalty",
+        "rarity": "Common",
+        "type": "Ring",
+        "description": "If you are reduced to 0 hit points while attuned to a Band of Loyalty, you instantly die. These rings are favored by spies who can’t afford to fall into enemy hands.",
+        "description_tr": "Bir Sadakat Halkası'na uyumlu durumdayken can puanınız 0'a düşerse anında ölürsünüz. Bu yüzükler, düşman eline düşmeyi göze alamayan casuslar tarafından tercih edilir."
+    },
+    {
+        "name": "Bead of Nourishment",
+        "name_tr": "Beslenme Tanesi",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:bead-of-nourishment",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "description": "This spongy, flavorless, gelatinous bead dissolves on your tongue and provides as much nourishment as 1 day of rations.",
+        "description_tr": "Bu süngerimsi, tatsız, jelatin benzeri tane dilinizin üzerinde çözünür ve 1 günlük rasyon kadar besin sağlar."
+    },
+    {
+        "name": "Bead of Refreshment",
+        "name_tr": "Ferahlama Tanesi",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:bead-of-refreshment",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "description": "This spongy, flavorless, gelatinous bead dissolves in liquid, transforming up to a pint of the liquid into fresh, cold drinking water. The bead has no effect on magical liquids or harmful substances such as poison.",
+        "description_tr": "Bu süngerimsi, tatsız, jelatin benzeri tane sıvıda çözünür ve bir pint'e kadar sıvıyı taze, soğuk içme suyuna dönüştürür. Tanenin büyülü sıvılar veya zehir gibi zararlı maddeler üzerinde bir etkisi yoktur."
+    },
+    {
+        "name": "Boots of False Tracks",
+        "name_tr": "Sahte İz Çizmeleri",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:boots-of-false-tracks",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "description": "Only humanoids can wear these boots. While wearing the boots, you can choose to have them leave tracks like those of another kind of humanoid of your size.",
+        "description_tr": "Bu çizmeleri sadece insansılar giyebilir. Çizmeleri giyerken, sizin boyutunuzdaki başka bir insansı türününki gibi izler bırakmalarını seçebilirsiniz."
+    },
+    {
+        "name": "Bottle of Boundless Coffee",
+        "name_tr": "Sonsuz Kahve Şişesi",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:bottle-of-boundless-coffee",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "description": "This metal bottle carries delicious, warm coffee. The bottle comes with a stopper, which is attached to the bottle by a little chain. Even when open, the bottle won't accept any liquid other than the coffee it produces. The coffee inside is always comfortably warm, and none of the heat can be felt through the bottle.\n\nEach time you drink the coffee, roll a d20. On a 1, the bottle refuses to dispense coffee for the next hour. If you pour coffee from the bottle, rather than drinking from it, the coffee vanishes the moment it leaves the bottle.",
+        "description_tr": "Bu metal şişe lezzetli, sıcak kahve taşır. Şişe, küçük bir zincirle şişeye takılmış bir tıpa ile birlikte gelir. Açık olsa bile şişe ürettiği kahveden başka bir sıvıyı kabul etmez. İçerideki kahve her zaman rahatlatıcı bir şekilde sıcaktır ve ısının hiçbiri şişeden hissedilmez.\n\nKahveyi her içtiğinizde bir d20 atın. 1 gelirse, şişe önümüzdeki bir saat boyunca kahve vermeyi reddeder. Kahveyi içmek yerine şişeden dökerseniz, kahve şişeden çıktığı anda yok olur."
+    },
+    {
+        "name": "Breathing Bubble",
+        "name_tr": "Nefes Balonu",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:breathing-bubble",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "description": "This translucent, bubble-like sphere has a slightly tacky outer surface, and you gain the item's benefits only while wearing it over your head like a helmet.\n\nThe bubble contains 1 hour of breathable air. The bubble regains all its expended air daily at dawn.",
+        "description_tr": "Bu yarı saydam, balon benzeri küre biraz yapışkan bir dış yüzeye sahiptir ve eşyanın faydalarını yalnızca bir kask gibi kafanıza taktığınızda kazanırsınız.\n\nBalon 1 saatlik solunabilir hava içerir. Balon harcanan tüm havasını her gün şafak vaktinde geri kazanır."
+    },
+    {
+        "name": "Candle of the Deep",
+        "name_tr": "Derinlik Mumu",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:candle-of-the-deep",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "description": "The flame of this candle is not extinguished when immersed in water. It gives off light and heat like a normal candle.",
+        "description_tr": "Bu mumun alevi suya batırıldığında sönmez. Normal bir mum gibi ışık ve ısı canlandırır."
+    },
+    {
+        "name": "Cast-Off Armor",
+        "name_tr": "Atılabilir Zırh",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:cast-off-armor",
+        "rarity": "Common",
+        "type": "Armor",
+        "description": "You can doff this armor as an action.",
+        "description_tr": "Bu zırhı bir eylem olarak üzerinizden çıkarabilirsiniz."
+    },
+    {
+        "name": "Charlatan's Die",
+        "name_tr": "Şarlatan Zarı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:charlatans-die",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "description": "Whenever you roll this six-sided die, you can control which number it rolls.",
+        "description_tr": "Bu altı yüzlü zarı her attığınızda, hangi sayının geleceğini kontrol edebilirsiniz."
+    },
+    {
+        "name": "Chest of Preserving",
+        "name_tr": "Koruma Sandığı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:chest-of-preserving",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "description": "This common wondrous item has the following magical property: food and other perishable items do not age or decay while inside it. The chest is 2½ feet long, 1½ feet wide and 1 foot tall with a half barrel lid. It weighs 25 pounds.",
+        "description_tr": "Bu yaygın büyülü eşya şu sihirli özelliğe sahiptir: yiyecekler ve diğer bozulabilir eşyalar içindeyken eskimez veya çürümez. Sandık 2,5 fit uzunluğunda, 1,5 fit genişliğinde ve 1 fit boyundadır ve yarım varil kapağına sahiptir. 25 libre ağırlığındadır."
+    },
+    {
+        "name": "Cleansing Stone",
+        "name_tr": "Temizlik Taşı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:cleansing-stone",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "description": "A cleansing stone is a sphere 1 foot in diameter, engraved with mystic sigils. When touching the stone, you can use an action to activate it and remove dirt and grime from your garments and your person.\n\nSuch stones are often embedded in pedestals in public squares in Aundair or in high-end Ghallanda inns.",
+        "description_tr": "Temizleme taşı, mistik mühürlerle kazınmış 1 fit çapında bir küredir. Taşa dokunurken, onu etkinleştirmek ve giysilerinizdeki ve üzerinizdeki kiri ve pası temizlemek için bir eylem kullanabilirsiniz.\n\nBu tür taşlar genellikle Aundair'deki halk meydanlarındaki kaideler içine veya üst düzey Ghallanda hanlarına yerleştirilir."
+    },
+    {
+        "name": "Cloak of Billowing",
+        "name_tr": "Dalgalanan Pelerin",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:cloak-of-billowing",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "description": "While wearing this cloak, you can use a bonus action to make it billow dramatically.",
+        "description_tr": "Bu pelerini giyerken, dramatik bir şekilde dalgalanmasını sağlamak için bir bonus eylem kullanabilirsiniz."
+    },
+    {
+        "name": "Cloak of Many Fashions",
+        "name_tr": "Bin Moda Pelerini",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:cloak-of-many-fashions",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "description": "While wearing this cloak, you can use a bonus action to change the style, color, and apparent quality of the garment. The cloak's weight doesn't change. Regardless of its appearance, the cloak can't be anything but a cloak. Although it can duplicate the appearance of other magic cloaks, it doesn't gain their magical properties.",
+        "description_tr": "Bu pelerini giyerken, giysinin stilini, rengini ve görünür kalitesini değiştirmek için bir bonus eylem kullanabilirsiniz. Pelerinin ağırlığı değişmez. Görünümü ne olursa olsun, pelerin bir pelerinden başka bir şey olamaz. Diğer sihirli pelerinlerin görünümünü kopyalayabilse de, onların sihirli özelliklerini kazanmaz."
+    },
+    {
+        "name": "Clockwork Amulet",
+        "name_tr": "Saat Mekanizmalı Muska",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:clockwork-amulet",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "description": "This copper amulet contains tiny interlocking gears and is powered by magic from Mechanus, a plane of clockwork predictability. A creature that puts an ear to the amulet can hear faint ticking and whirring noises coming from within.\n\nWhen you make an attack roll while wearing the amulet, you can forgo rolling the d20 to get a 10 on the die. Once used, this property can't be used again until the next dawn.",
+        "description_tr": "Bu bakır muska minik birbirine kenetlenmiş dişliler içerir ve saat mekanizması öngörülebilirliği düzlemi olan Mechanus'tan gelen sihirle güçlendirilmiştir. Kulağını muskaya dayayan bir yaratık, içeriden gelen hafif tıkırtı ve vızıltı seslerini duyabilir.\n\nMuskayı takarken bir saldırı zarı attığınızda, d20 atmaktan vazgeçerek zarda 10 alabilirsiniz. Bir kez kullanıldığında, bu özellik bir sonraki şafak vaktine kadar tekrar kullanılamaz."
+    },
+    {
+        "name": "Clothes of Mending",
+        "name_tr": "Onarım Giysileri",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:clothes-of-mending",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "description": "This elegant outfit of traveler's clothes magically mends itself to counteract daily wear and tear. Pieces of the outfit that are destroyed can't be repaired in this way.",
+        "description_tr": "Bu zarif yolcu kıyafeti, günlük aşınma ve yıpranmaya karşı kendini sihirli bir şekilde onarır. Kıyafetin yok edilen parçaları bu şekilde onarılamaz."
+    },
+    {
+        "name": "Coin of Delving",
+        "name_tr": "Derinlik Sikkesi",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:coin-of-delving",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "description": "This scintillating copper coin sheds dim light in a 5-foot radius. If dropped a distance greater than 5 feet, the coin issues a melodious ringing sound when it hits a surface. Any creature that can hear the chime can determine the distance the coin dropped based on the tone.",
+        "description_tr": "Bu parıldayan bakır sikke 5 fit yarıçapında loş ışık yayar. 5 fitten daha büyük bir mesafeden düşürülürse, sikke bir yüzeye çarptığında melodik bir çınlama sesi çıkarır. Çınlamayı duyabilen herhangi bir yaratık, tonuna dayanarak sikkenin düştüğü mesafeyi belirleyebilir."
+    },
+    {
+        "name": "Cuddly Strixhaven Mascot",
+        "name_tr": "Sevimli Strixhaven Maskotu",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:cuddly-strixhaven-mascot",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "description": "Representing one of the mascots of Strixhaven, this soft, Tiny, magic toy is perfect for cuddling. If you press it to your arm, shoulder, or leg as an action, the toy stays attached there for 1 hour or until you use an action to remove it.\n\nThe toy can also be used to fight off fear. When you make a saving throw to avoid or end the frightened condition on yourself, you can give yourself advantage on the roll if the toy is on your person. You must decide to do so before rolling the d20. If the save succeeds, you can't use the toy in this way until you finish a long rest.",
+        "description_tr": "Strixhaven maskotlarından birini temsil eden bu yumuşak, minik, sihirli oyuncak kucaklanmak için mükemmeldir. Bir eylem olarak kolunuza, omzunuza veya bacağınıza bastırırsanız, oyuncak orada 1 saat boyunca veya siz onu çıkarmak için bir eylem kullanana kadar takılı kalır.\n\nOyuncak ayrıca korkuyla savaşmak için de kullanılabilir. Kendi üzerinizdeki korkmuş (frightened) durumundan kaçınmak veya bu durumu bitirmek için bir kurtarma zarı (saving throw) attığınızda, oyuncak üzerinizdeyse zara avantaj verebilirsiniz. d20'yi atmadan önce buna karar vermelisiniz. Zar başarılı olursa, oyuncağı uzun bir dinlenme bitirene kadar bu şekilde kullanamazsınız."
+    }
+]

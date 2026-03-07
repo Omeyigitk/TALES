@@ -1,0 +1,452 @@
+[
+    {
+        "name": "Spies' Murmur",
+        "name_tr": "Casus Fısıltısı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:spies-murmur",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Allows telepathic communication with another wearer within 1 mile. Can also allow them to hear what you hear for 1 hour.",
+        "description_tr": "1 mil içindeki diğer Casus Fısıltısı kullanıcılarıyla telepatik olarak iletişim kurmanızı sağlar."
+    },
+    {
+        "name": "Staff of the Adder",
+        "name_tr": "Engerek Asası",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:staff-of-the-adder",
+        "rarity": "Uncommon",
+        "type": "Staff",
+        "description": "The head of the staff becomes an animate poisonous snake for 1 minute; can make melee attacks dealing piercing and poison damage.",
+        "description_tr": "Asanın başı 1 dakikalığına canlı bir zehirli yılana dönüşür; yakındaki düşmanlara saldırıp zehir hasarı verebilir."
+    },
+    {
+        "name": "Staff of the Python",
+        "name_tr": "Piton Asası",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:staff-of-the-python",
+        "rarity": "Uncommon",
+        "type": "Staff",
+        "description": "Transforms into a giant constrictor snake under your control when thrown on the ground.",
+        "description_tr": "Yere atıldığında kontrolünüz altında dev bir piton yılanına (giant constrictor snake) dönüşür."
+    },
+    {
+        "name": "Stone of Good Luck (Luckstone)",
+        "name_tr": "Şans Taşı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:luckstone",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Grants a +1 bonus to ability checks and saving throws.",
+        "description_tr": "Üzerinizde taşıdığınız sürece tüm yetenek kontrollerine ve kurtarma zarlarına +1 bonus sağlar."
+    },
+    {
+        "name": "Stone of Ill Luck",
+        "name_tr": "Şanssızlık Taşı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:stone-of-ill-luck",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Appears to be a Stone of Good Luck but imposes a -2 penalty to ability checks and saving throws.",
+        "description_tr": "Şans taşı gibi görünür ancak lanetlidir: yetenek kontrollerine ve kurtarma zarlarına -2 ceza (penalty) verir."
+    },
+    {
+        "name": "Storm Boomerang",
+        "name_tr": "Fırtına Bumerangı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:storm-boomerang",
+        "rarity": "Uncommon",
+        "type": "Weapon",
+        "description": "Deals bludgeoning and thunder damage; target must save or be stunned. Returns to thrower on a miss.",
+        "description_tr": "Hedefe çarptığında gök gürültüsü (thunder) hasarı verir ve sersemletebilir. Iskalarsa atanın eline geri döner."
+    },
+    {
+        "name": "Sword of Vengeance",
+        "name_tr": "İntikam Kılıcı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:sword-of-vengeance",
+        "rarity": "Uncommon",
+        "type": "Weapon",
+        "description": "Cursed +1 weapon that forces the wielder to attack any creature that damages them in combat.",
+        "description_tr": "+1 saldırı bonusu olan lanetli bir kılıç; hasar aldığınızda size vuran kişiye saldırana kadar durmanızı engeller."
+    },
+    {
+        "name": "Thessaltoxin Antidote",
+        "name_tr": "Thessaltoxin Panzehiri",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:thessaltoxin-antidote",
+        "rarity": "Uncommon",
+        "type": "Potion",
+        "description": "Ends the Polymorph effect imposed by thessaltoxin.",
+        "description_tr": "Thessaltoxin zehri tarafından uygulanan Polymorph etkisini sonlandırır."
+    },
+    {
+        "name": "Trident of Fish Command",
+        "name_tr": "Balık Komuta Üçlü Mızrağı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:trident-of-fish-command",
+        "rarity": "Uncommon",
+        "type": "Weapon",
+        "description": "Expend charges to cast Dominate Beast on a creature with a swimming speed.",
+        "description_tr": "Yüzme hızı olan hayvanlara karşı Dominate Beast büyü etkisini kullanmanızı sağlar."
+    },
+    {
+        "name": "Wand of Entangle",
+        "name_tr": "Sarmaşık Değneği",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:wand-of-entangle",
+        "rarity": "Uncommon",
+        "type": "Wand",
+        "description": "Expend charges to cast the Entangle spell.",
+        "description_tr": "Sarmaşıklar oluşturmak için Entangle büyüsü yapmanızı sağlayan değnek."
+    },
+    {
+        "name": "Wand of Magic Detection",
+        "name_tr": "Büyü Tespit Değneği",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:wand-of-magic-detection",
+        "rarity": "Uncommon",
+        "type": "Wand",
+        "description": "Expend charges to cast the Detect Magic spell.",
+        "description_tr": "Etraftaki sihirleri tespit etmek için Detect Magic büyüsü yapmanızı sağlar."
+    },
+    {
+        "name": "Wand of Magic Missiles",
+        "name_tr": "Magic Missile Değneği",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:wand-of-magic-missiles",
+        "rarity": "Uncommon",
+        "type": "Wand",
+        "description": "Expend charges to cast Magic Missile at varying levels.",
+        "description_tr": "Eski ve güvenilir Magic Missile büyüsünü yük harcayarak yapmanızı sağlar."
+    },
+    {
+        "name": "Wand of Secrets",
+        "name_tr": "Sır Değneği",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:wand-of-secrets",
+        "rarity": "Uncommon",
+        "type": "Wand",
+        "description": "Locates the nearest secret door or trap within 30 feet.",
+        "description_tr": "30 fit içindeki en yakın gizli kapıyı veya tuzağı tespit eder."
+    },
+    {
+        "name": "Wand of the War Mage",
+        "name_tr": "Savaş Büyücüsü Değneği",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:wand-of-the-war-mage",
+        "rarity": "Uncommon",
+        "type": "Wand",
+        "description": "Bonus to spell attack rolls and ignores half cover.",
+        "description_tr": "Büyü saldırı zarlarına bonus verir ve rakiplerin yarım siperini (half cover) yok sayar."
+    },
+    {
+        "name": "Wand of Web",
+        "name_tr": "Ağ Değneği",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:wand-of-web",
+        "rarity": "Uncommon",
+        "type": "Wand",
+        "description": "Expend charges to cast the Web spell.",
+        "description_tr": "Rakipleri hareketsiz kılmak için Web (Ağ) büyüsü yapmanızı sağlar."
+    },
+    {
+        "name": "Weapon, +1, +2, or +3",
+        "name_tr": "Silah (+1, +2, +3)",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:weapon-1-2-3",
+        "rarity": "Uncommon",
+        "type": "Weapon",
+        "description": "Magic weapon with a bonus to attack and damage rolls.",
+        "description_tr": "Saldırı ve hasar zarlarına nadirliğine göre bonus veren sihirli silah."
+    },
+    {
+        "name": "Weapon of Warning",
+        "name_tr": "Uyarı Silahı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:weapon-of-warning",
+        "rarity": "Uncommon",
+        "type": "Weapon",
+        "description": "Advantage on initiative rolls; you and nearby companions cannot be surprised.",
+        "description_tr": "İnisiyatif zarlarında avantaj sağlar. Takan kişi ve yakın arkadaşları baskına (surprised) uğramaz."
+    },
+    {
+        "name": "Wheel of Wind and Water",
+        "name_tr": "Rüzgar ve Su Çarkı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:wheel-of-wind-and-water",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Allows those with the Mark of Storm to control elementals in ships or improve sea conditions.",
+        "description_tr": "Gemi kullanımında elementelleri kontrol etmek veya hava/deniz şartlarını iyileştirmek için kullanılan kaptan çarkı."
+    },
+    {
+        "name": "Wildspace Orrery",
+        "name_tr": "Wildspace Orery'si",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:wildspace-orrery",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Tracks the positions and movements of stars and planets within a Wildspace system.",
+        "description_tr": "Bulunulan güneş sistemindeki gezegenlerin ve yıldızların konumlarını gösteren astronomik cihaz."
+    },
+    {
+        "name": "Wind Fan",
+        "name_tr": "Rüzgar Yelpazesi",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:wind-fan",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Cast Gust of Wind at will; chance to break if used more than once daily.",
+        "description_tr": "Gust of Wind büyüsü yapmanızı sağlar ancak günde birden fazla kullanıldığında yırtılabilir."
+    },
+    {
+        "name": "Winged Ammunition",
+        "name_tr": "Kanatlı Mühimmat",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:winged-ammunition",
+        "rarity": "Uncommon",
+        "type": "Weapon",
+        "description": "Ignores cover and attacks at long range without disadvantage.",
+        "description_tr": "Siperleri (cover) yok sayan ve uzak menzilde dezavantajsız saldırı yapılabilen ok/mermi."
+    },
+    {
+        "name": "Winged Boots",
+        "name_tr": "Kanatlı Çizmeler",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:winged-boots",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Provides a flying speed equal to your walking speed for up to 4 hours daily.",
+        "description_tr": "Günde toplam 4 saate kadar yürüme hızınızda uçmanızı sağlar."
+    },
+    {
+        "name": "Wingwear",
+        "name_tr": "Kanat Giysisi",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:wingwear",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Snug suit with flaps that allow gliding and temporary flight.",
+        "description_tr": "Süzülmenizi ve kısa süreliğine uçmanızı sağlayan kanatlı kıyafet."
+    },
+    {
+        "name": "Witherbloom Primer",
+        "name_tr": "Witherbloom Rehberi",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:witherbloom-primer",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Grants bonus to Nature or Survival checks and allows casting one 1st-level spell daily.",
+        "description_tr": "Doğa veya Hayatta Kalma (Survival) kontrollerine bonus verir ve günde bir kez 1. seviye büyü sunar."
+    },
+    {
+        "name": "Wraps Of Unarmed Prowess",
+        "name_tr": "Silahsız Ustalık Sargıları",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:wraps-of-unarmed-prowess",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Make unarmed strikes magical and gain a bonus to attack and damage rolls.",
+        "description_tr": "Silahsız vuruşları sihirli yapar ve vuruşlara bonus verir."
+    },
+    {
+        "name": "Acheron Blade",
+        "name_tr": "Acheron Kılıcı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:acheron-blade",
+        "rarity": "Rare",
+        "type": "Weapon",
+        "description": "Immune to effects that turn undead and provides temporary hit points and a disheartening strike.",
+        "description_tr": "Takanı 'turn undead' etkilerine karşı bağışık yapar, geçici can puanı sağlar ve rakipleri korkutabilir."
+    },
+    {
+        "name": "Alchemical Compendium",
+        "name_tr": "Simyacı Kitabı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:alchemical-compendium",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Spellbook containing alchemical transmutation spells that also acts as a focus for wizard spells.",
+        "description_tr": "Dönüşüm büyüleri içeren ve büyücü odağı olarak kullanılabilen simya kitabı."
+    },
+    {
+        "name": "All-Purpose Tool",
+        "name_tr": "Çok Amaçlı Alet",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:all-purpose-tool",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Artificer tool that can transform into any artisan's tool and grants a temporary cantrip.",
+        "description_tr": "Her türlü zanaatkar aletine dönüşebilen ve bilmediğiniz bir cantrip büyü yapmanıza izin veren Artificer aleti."
+    },
+    {
+        "name": "Ammunition, +1, +2, or +3",
+        "name_tr": "Mühimmat (+1, +2, +3)",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:ammunition",
+        "rarity": "Rare",
+        "type": "Weapon",
+        "description": "Magic ammunition that gains a bonus to attack and damage rolls.",
+        "description_tr": "Hedefe daha iyi isabet eden ve daha fazla hasar veren sihirli oklar/mermiler."
+    },
+    {
+        "name": "Amulet of Health",
+        "name_tr": "Sağlık Muskası",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:amulet-of-health",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Your Constitution score is 19 while you wear this amulet.",
+        "description_tr": "Bu muskayı taktığınızda Dayanıklılık (Constitution) skorunuz 19 olur."
+    },
+    {
+        "name": "Amulet of Protection from Turning",
+        "name_tr": "Kovulmaya Karşı Koruma Muskası",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:amulet-of-protection-from-turning",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Gives advantage on saving throws against being turned (for undead).",
+        "description_tr": "Hortlaklar (undead) için tasarlanmış, kovulma (turning) etkilerine karşı direnç sağlayan muska."
+    },
+    {
+        "name": "Amulet of the Devout",
+        "name_tr": "Dindar Muskası",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:amulet-of-the-devout",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Bonus to spell attacks and DCs for clerics/paladins; allows extra use of Channel Divinity.",
+        "description_tr": "Cleric/Paladin büyüleri için bonus sağlar ve fazladan Channel Divinity hakkı verir."
+    },
+    {
+        "name": "Arcane Grimoire",
+        "name_tr": "Arkane Grimoire",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:arcane-grimoire",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Focus and spellbook for wizards that provides bonuses to spell attack rolls and saving throw DCs.",
+        "description_tr": "Büyücü saldırılarına bonus veren ve Arcane Recovery etkisini artıran büyü kitabı."
+    },
+    {
+        "name": "Armor, +1, +2, or +3",
+        "name_tr": "Zırh (+1, +2, +3)",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:armor-1-2-3",
+        "rarity": "Rare",
+        "type": "Armor",
+        "description": "Provides a bonus to AC while worn.",
+        "description_tr": "Takan kişiye nadirliğine göre ekstra Zırh Sınıfı (AC) sağlar."
+    },
+    {
+        "name": "Armor of Resistance",
+        "name_tr": "Direnç Zırhı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:armor-of-resistance",
+        "rarity": "Rare",
+        "type": "Armor",
+        "description": "Grants resistance to one type of damage while worn.",
+        "description_tr": "Belirli bir hasar türüne (ateş, soğuk vb.) karşı direnç sağlayan zırh."
+    },
+    {
+        "name": "Armor of Vulnerability",
+        "name_tr": "Zafiyet Zırhı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:armor-of-vulnerability",
+        "rarity": "Rare",
+        "type": "Armor",
+        "description": "Provides resistance to one damage type but makes the wearer vulnerable to two others.",
+        "description_tr": "Bir hasar türüne direnç verirken diğer ikisine karşı sizi zayıf (vulnerable) bırakan lanetli zırh."
+    },
+    {
+        "name": "Arrow-Catching Shield",
+        "name_tr": "Ok Yakalayan Kalkan",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:arrow-catching-shield",
+        "rarity": "Rare",
+        "type": "Armor",
+        "description": "Bonus to AC against ranged attacks; allows using a reaction to protect nearby allies.",
+        "description_tr": "Menzilli saldırılara karşı koruma sağlar ve yakındaki dostlara gelen oklara siper olmanıza izin verir."
+    },
+    {
+        "name": "Astral Shard",
+        "name_tr": "Astral Kristal",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:astral-shard",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Crystal that grants temporary teleportation when using Metamagic.",
+        "description_tr": "Sorcerer karakterleri için Metamagic etkisinden hemen sonra 30 fit ışınlanma (teleport) imkanı sunar."
+    },
+    {
+        "name": "Astromancy Archive",
+        "name_tr": "Astromansi Arşivi",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:astromancy-archive",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Spherical device containing divination spells that can be used as a focus and spellbook.",
+        "description_tr": "Kehanet (Divination) büyüleri içeren ve yıldızları temel alan büyü kitabı."
+    },
+    {
+        "name": "Atlas of Endless Horizons",
+        "name_tr": "Sonsuz Ufuklar Atlası",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:atlas-of-endless-horizons",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Book focused on teleportation spells and navigation between planes.",
+        "description_tr": "Işınlanma ve düzlemler arası yolculuk büyüleri içeren kalın deri kaplı kitap."
+    },
+    {
+        "name": "Badge of the Watch",
+        "name_tr": "Şehir İzleme Rozeti",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:badge-of-the-watch",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Grants +2 bonus to AC if not using a shield and provides connection to the Open Lord of Waterdeep.",
+        "description_tr": "Kalkan kullanmıyorken +2 AC bonusu veren Waterdeep kaptan rozeti."
+    },
+    {
+        "name": "Bag of Beans",
+        "name_tr": "Sihirli Fasulye Torbası",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:bag-of-beans",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Contains beans that, when planted and watered, cause random magical effects.",
+        "description_tr": "Ekilip sulandığında yerden dev ağaçlar, hazineler veya canavarlar çıkaran sihirli fasulyeler."
+    },
+    {
+        "name": "Banner of the Krig Rune",
+        "name_tr": "Krig Rünü Sancağı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:banner-of-the-krig-rune",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Large war banner that can grant immunity to being frightened and protects against ranged attacks.",
+        "description_tr": "Savaş alanında müttefiklerin korkmasını engelleyen ve menzilli saldırılara karşı koruyan görkemli sancak."
+    },
+    {
+        "name": "Barrier Tattoo",
+        "name_tr": "Bariyer Dövmesi",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:barrier-tattoo",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Tattoo providing varying levels of Armor Class while not wearing armor.",
+        "description_tr": "Zırh giymiyorken cilde işlenen ve AC bonusu sağlayan sihirli dövme."
+    },
+    {
+        "name": "Battering Shield",
+        "name_tr": "Darbe Kalkanı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:battering-shield",
+        "rarity": "Rare",
+        "type": "Armor",
+        "description": "+1 AC bonus; uses charges to push and knock creatures prone during combat.",
+        "description_tr": "Rakipleri geri itmek veya yere devirmek için kullanılan +1 bonuslu kalkan."
+    },
+    {
+        "name": "Bead of Force",
+        "name_tr": "Kuvvet Boncuğu",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:bead-of-force",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Explodes on impact dealing force damage and trapping creatures in a transparent sphere.",
+        "description_tr": "Çarptığında patlayarak kuvvet (force) hasarı veren ve rakipleri bir kürenin içine hapseden bilye."
+    },
+    {
+        "name": "Bell Branch",
+        "name_tr": "Çan Dalı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:bell-branch",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Silver implement that acts as a focus and senses various types of creatures.",
+        "description_tr": "Hortlakları veya fey yaratıklarını tespit edebilen altın çanlı gümüş asa dalı."
+    },
+    {
+        "name": "Belt of Dwarvenkind",
+        "name_tr": "Cüce Kemeri",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:belt-of-dwarvenkind",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Grants various benefits as if the wearer were a dwarf, including Constitution bonus and darkvision.",
+        "description_tr": "Constitution skorunu artırır, karanlık görüşü verir ve sakal çıkma şansını yükseltir."
+    },
+    {
+        "name": "Belt of Giant Strength",
+        "name_tr": "Dev Gücü Kemeri",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:belt-of-giant-strength",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Changes the wearer's Strength score to match that of a specific type of giant.",
+        "description_tr": "Güç skorunuzu devlerin (Hill, Frost, Fire vb.) seviyesine çıkaran kemer."
+    },
+    {
+        "name": "Berserker Axe",
+        "name_tr": "Berserker Baltası",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:berserker-axe",
+        "rarity": "Rare",
+        "type": "Weapon",
+        "description": "+1 bonus weapon that increases hit point maximum but can drive the wielder into a berserk rage.",
+        "description_tr": "Can puanını artıran ama hasar alındığında sizi kontrolsüz bir öfkeye (berserk) sokan lanetli balta."
+    }
+]

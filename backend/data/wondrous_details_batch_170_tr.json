@@ -1,0 +1,452 @@
+[
+    {
+        "name": "Goggles of Night",
+        "name_tr": "Gece Gözlükleri",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:goggles-of-night",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "While wearing these dark lenses, you have darkvision out to a range of 60 feet. If you already have darkvision, wearing the goggles increases its range by 60 feet.",
+        "description_tr": "Bu koyu mercekleri takarken 60 fit karanlık görüşüne (darkvision) sahip olursunuz. Halihazırda karanlık görüşünüz varsa, menzili 60 fit artırır."
+    },
+    {
+        "name": "Goggles of Object Reading",
+        "name_tr": "Nesne Okuma Gözlükleri",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:goggles-of-object-reading",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Grants advantage on Arcana checks to reveal information about a creature or object you can see. Can cast Identify once per day.",
+        "description_tr": "Gördüğünüz bir yaratık veya nesne hakkında bilgi edinmek için yapılan Arkane (Arcana) kontrollerinde avantaj sağlar. Günde bir kez Identify büyüsü yapabilir."
+    },
+    {
+        "name": "Guardian Emblem",
+        "name_tr": "Gardiyan Amblemi",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:guardian-emblem",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "3 charges; use reaction to turn a critical hit against you or a nearby ally into a normal hit.",
+        "description_tr": "3 yükü vardır. Müttefiklerinize veya size yapılan kritik vuruşları normal vuruşa dönüştürmek için reaksiyonunuzu kullanabilirsiniz."
+    },
+    {
+        "name": "Guild Keyrune",
+        "name_tr": "Lonca Anahtar Taşı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:guild-keyrune",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Ceremonial key that can transform into a specific creature associated with a guild.",
+        "description_tr": "Belirli bir lonca ile ilişkili bir yaratığa dönüşebilen törensel anahtar."
+    },
+    {
+        "name": "Guild Signet",
+        "name_tr": "Lonca Mührü",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:guild-signet",
+        "rarity": "Uncommon",
+        "type": "Ring",
+        "description": "Allows casting one spell associated with a specific guild using charges.",
+        "description_tr": "Loncanızın statüsünü gösteren ve bazı büyüleri yük harcayarak yapmanızı sağlayan bir yüzük."
+    },
+    {
+        "name": "Harkon's Bite",
+        "name_tr": "Harkon'un Isırığı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:harkon-s-bite",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Grants +1 bonus to ability checks and saves. Cursed: afflicts wearer with werewolf lycanthropy.",
+        "description_tr": "Yetenek kontrollerine ve kurtarma zarlarına +1 bonus sağlar. Lanetlidir: takanı kurtadamlık lanetine maruz bırakır."
+    },
+    {
+        "name": "Hat of Disguise",
+        "name_tr": "Kılık Değiştirme Şapkası",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:hat-of-disguise",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Cast Disguise Self from the hat at will.",
+        "description_tr": "Bu şapkayı takarken sınırsız olarak Disguise Self büyüsü yapabilirsiniz."
+    },
+    {
+        "name": "Headband of Intellect",
+        "name_tr": "Zeka Bandı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:headband-of-intellect",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Your Intelligence score is 19 while you wear this headband.",
+        "description_tr": "Bu bandı taktığınızda Zeka (Intelligence) skorunuz 19 olur."
+    },
+    {
+        "name": "Hellfire Weapon",
+        "name_tr": "Cehennem Ateşi Silahı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:hellfire-weapon",
+        "rarity": "Uncommon",
+        "type": "Weapon",
+        "description": "Sheds dim light; humanoids killed by this weapon have their souls turned into lemure devils.",
+        "description_tr": "Hafif ışık saçar; bu silahla öldürülen insansıların ruhları bir 'lemure' şeytanına dönüşür."
+    },
+    {
+        "name": "Helm of Comprehending Languages",
+        "name_tr": "Dil Anlama Miğferi",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:helm-of-comprehending-languages",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Cast Comprehend Languages from the helm at will.",
+        "description_tr": "Bu miğferi takarken sınırsız olarak Comprehend Languages büyüsü yapabilirsiniz."
+    },
+    {
+        "name": "Helm of Telepathy",
+        "name_tr": "Telepati Miğferi",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:helm-of-telepathy",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Cast Detect Thoughts and Suggestion from the helm.",
+        "description_tr": "Başkalarının zihnini okumanızı (Detect Thoughts) ve telkin vermenizi (Suggestion) sağlar."
+    },
+    {
+        "name": "Helm of Underwater Action",
+        "name_tr": "Su Altı Eylem Miğferi",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:helm-of-underwater-action",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Breathe underwater, gain darkvision (60 feet), and a swimming speed of 30 feet.",
+        "description_tr": "Su altında nefes alma, 60 fit karanlık görüşü ve 30 fit yüzme hızı sağlar."
+    },
+    {
+        "name": "House Of Cards",
+        "name_tr": "Karttan Ev",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:house-of-cards",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Transform the deck into a temporary shelter with AC 15 and 50 hit points.",
+        "description_tr": "Desteyi 40 fitlik bir küpe sığan, konforlu bir barınağa dönüştürür."
+    },
+    {
+        "name": "Immovable Rod",
+        "name_tr": "Hareket Etmez Çubuk",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:immovable-rod",
+        "rarity": "Uncommon",
+        "type": "Rod",
+        "description": "Press a button to magically fix the rod in place; can hold up to 8,000 pounds.",
+        "description_tr": "Düğmesine basıldığında havada asılı kalır ve 8000 libreye kadar yük taşıyabilir."
+    },
+    {
+        "name": "Infernal Puzzle Box",
+        "name_tr": "Cehennem Bulmaca Kutusu",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:infernal-puzzle-box",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Airtight container from the Nine Hells that magically seals objects inside.",
+        "description_tr": "İçindeki nesneleri sihirle mühürleyen, açmak için zeka ve dikkat gerektiren cehennem kutusu."
+    },
+    {
+        "name": "Inquisitive's Goggles",
+        "name_tr": "Soruşturmacı Gözlükleri",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:inquisitives-goggles",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Lenses carved from Siberys dragonshards that provide benefits to those with the Mark of Finding.",
+        "description_tr": "House Tharashk üyeleri için tasarlanmış, ipucu ve yer bulmada ustalık sağlayan gözlükler."
+    },
+    {
+        "name": "Insignia of Claws",
+        "name_tr": "Pençe Nişanı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:insignia-of-claws",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Gain a +1 bonus to attack and damage rolls with unarmed strikes and natural weapons; attacks are magical.",
+        "description_tr": "Silahsız vuruşlara ve doğal silahlara +1 bonus verir; bu saldırılar sihirli sayılır."
+    },
+    {
+        "name": "Instrument of the Bards",
+        "name_tr": "Ozan Enstrümanı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:instrument-of-the-bards",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Exquisite instruments that allow casting specific spells; imposes disadvantage on saves against being charmed.",
+        "description_tr": "Farklı büyüler yapmanızı sağlayan ve ozanlara özel avantajlar sunan enstrümanlar."
+    },
+    {
+        "name": "Javelin of Lightning",
+        "name_tr": "Yıldırım Cirit'i",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:javelin-of-lightning",
+        "rarity": "Uncommon",
+        "type": "Weapon",
+        "description": "Transforms into a bolt of lightning when thrown, dealing 4d6 lightning damage in a line.",
+        "description_tr": "Fırlatıldığında bir yıldırım hattı oluşturup hedef ve yolundakilere hasar verir."
+    },
+    {
+        "name": "Keoghtom's Ointment",
+        "name_tr": "Keoghtom'un Merhemi",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:keoghtoms-ointment",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Regain 2d8 + 2 hit points, ceases to be poisoned, and cured of any disease when applied.",
+        "description_tr": "Yaraları iyileştiren (2d8+2), zehri ve hastalığı temizleyen sihirli merhem."
+    },
+    {
+        "name": "Lantern of Revealing",
+        "name_tr": "İfşa Eden Fener",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:lantern-of-revealing",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Invisible creatures and objects are visible in the lantern's bright light (30-foot radius).",
+        "description_tr": "Parlak ışığı altındaki (30 fit) görünmez yaratıkları ve nesneleri görünür kılar."
+    },
+    {
+        "name": "Living Gloves",
+        "name_tr": "Yaşayan Eldivenler",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:living-gloves",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Symbiotic gloves that grant double proficiency bonus to a chosen skill check.",
+        "description_tr": "Vücudunuza bağlanan ve seçilen bir beceride uzmanlık (double proficiency) sağlayan eldivenler."
+    },
+    {
+        "name": "Lorehold Primer",
+        "name_tr": "Lorehold Rehberi",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:lorehold-primer",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Provides bonus to History or Religion checks and allows casting one 1st-level spell daily.",
+        "description_tr": "Tarih veya Din kontrollerine bonus verir ve günde bir kez 1. seviye büyü yapma imkanı sunar."
+    },
+    {
+        "name": "Mariner's Armor",
+        "name_tr": "Denizci Zırhı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:mariners-armor",
+        "rarity": "Uncommon",
+        "type": "Armor",
+        "description": "Gain swimming speed equal to walking speed; causes you to rise toward the surface if at 0 hit points underwater.",
+        "description_tr": "Yürüme hızınıza eşit yüzme hızı kazandırır; su altında bayılırsanız sizi yüzeye çıkarır."
+    },
+    {
+        "name": "Mask of the Beast",
+        "name_tr": "Vahşi Hayvan Maskesi",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:mask-of-the-beast",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Use charges to cast Animal Friendship from the mask.",
+        "description_tr": "Günde 3 kez Animal Friendship büyüsü yapmanızı sağlayan ahşap maske."
+    },
+    {
+        "name": "Medallion of Thoughts",
+        "name_tr": "Düşünce Madalyonu",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:medallion-of-thoughts",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Expend charges to cast Detect Thoughts from the medallion.",
+        "description_tr": "Günde 3 kez Detect Thoughts büyüsü yapmanızı sağlayan madalyon."
+    },
+    {
+        "name": "Mind Carapace Armor",
+        "name_tr": "Zihin Zırhı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:mind-carapace-armor",
+        "rarity": "Uncommon",
+        "type": "Armor",
+        "description": "Advantage on Intelligence, Wisdom, and Charisma saves; immunity to the frightened condition for intended wearers.",
+        "description_tr": "Zihinsel kurtarma zarlarında avantaj ve korkuya karşı bağışıklık sağlayan Mind Flayer yapımı zırh."
+    },
+    {
+        "name": "Mind Crystal",
+        "name_tr": "Zihin Kristali",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:mind-crystal",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Modify a spell casting (Careful, Distant, Empowered, etc.). Single-use gem.",
+        "description_tr": "Büyü yaparken Metamagic etkileri uygulayan tek kullanımlık kristal."
+    },
+    {
+        "name": "Mithral Armor",
+        "name_tr": "Mitril Zırh",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:mithral-armor",
+        "rarity": "Uncommon",
+        "type": "Armor",
+        "description": "Doesn't impose disadvantage on Stealth checks or have a Strength requirement.",
+        "description_tr": "Gizlilik dezavantajını kaldıran ve güç gereksinimi istemeyen hafif ve sağlam zırh."
+    },
+    {
+        "name": "Mizzium Apparatus",
+        "name_tr": "Mizzium Cihazı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:mizzium-apparatus",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Attempt to cast spells you don't know with an Arcana check; risks casting a different spell on failure.",
+        "description_tr": "Bilmediğiniz büyüleri Arkane kontrolüyle yapmanızı sağlar; başarısızlık rastgele büyü riskini getirir."
+    },
+    {
+        "name": "Moon Sickle",
+        "name_tr": "Ay Orağı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:moon-sickle",
+        "rarity": "Uncommon",
+        "type": "Weapon",
+        "description": "Bonus to attack, damage, and spell DCs for druids/rangers; adds 1d4 to healing spells.",
+        "description_tr": "Druid ve Rangerlar için büyü bonusu sağlar ve iyileştirme büyülerini 1d4 artırır."
+    },
+    {
+        "name": "Mummy Rot Antidote",
+        "name_tr": "Mumya Çürümesi Panzehiri",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:mummy-rot-antidote",
+        "rarity": "Uncommon",
+        "type": "Potion",
+        "description": "飲むとミイラの腐敗を治療するポーション。 (Wait, translating to Turkish).",
+        "description_tr": "İçildiğinde mumya çürümesi (mummy rot) hastalığını tedavi eden iksir."
+    },
+    {
+        "name": "Nature's Mantle",
+        "name_tr": "Doğa Pelerini",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:natures-mantle",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Functions as a spellcasting focus for druids/rangers; allow Hiding as a bonus action in lightly obscured areas.",
+        "description_tr": "Druid/Rangerlar için odak görevi görür; loş ışıkta bonus eylemle saklanma imkanı verir."
+    },
+    {
+        "name": "Necklace of Adaptation",
+        "name_tr": "Uyum Kolyesi",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:necklace-of-adaptation",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Breathe normally in any environment; advantage on saves against harmful gases/vapors.",
+        "description_tr": "Her ortamda nefes almanızı sağlar ve zehirli gazlara karşı avantaj verir."
+    },
+    {
+        "name": "Night Caller",
+        "name_tr": "Gece Çağıran",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:night-caller",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Crystal whistle that can cast Animate Dead in darkness or under the night sky.",
+        "description_tr": "Karanlıkta veya gece vakti çaldığında ölüleri diriltmenizi (Animate Dead) sağlayan kristal düdük."
+    },
+    {
+        "name": "Oil of Slipperiness",
+        "name_tr": "Kayganlık Yağı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:oil-of-slipperiness",
+        "rarity": "Uncommon",
+        "type": "Potion",
+        "description": "Gain Freedom of Movement for 8 hours or duplicate the effect of a Grease spell.",
+        "description_tr": "Vücuda sürüldüğünde Freedom of Movement etkisi verir veya yere döküldüğünde Grease gibi kayganlaştırır."
+    },
+    {
+        "name": "Paper Bird",
+        "name_tr": "Kağıt Kuş",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:paper-bird",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Parchment that transforms into a paper bird to deliver a message of up to 50 words.",
+        "description_tr": "Üzerine yazılan mesajı (en fazla 50 kelime) uçarak alıcısına ulaştıran kağıt kuş."
+    },
+    {
+        "name": "Pearl of Power",
+        "name_tr": "Güç İncisi",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:pearl-of-power",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Regain one expended spell slot of up to 3rd level daily.",
+        "description_tr": "Günde bir kez expended bir büyü yuvasını (3. seviyeye kadar) geri kazanmanızı sağlar."
+    },
+    {
+        "name": "Periapt of Health",
+        "name_tr": "Sağlık Tılsımı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:periapt-of-health",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Immune to contracting any disease; suppresses existing diseases while worn.",
+        "description_tr": "Hastalıklara karşı bağışıklık sağlar; mevcut hastalık etkilerini bastırır."
+    },
+    {
+        "name": "Periapt of Wound Closure",
+        "name_tr": "Yara Kapatma Tılsımı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:periapt-of-wound-closure",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Stabilize automatically when dying at the start of your turn; double hit points restored by Hit Dice.",
+        "description_tr": "Kan kaybını durdurur ve dinlenme sırasında iyileşme miktarını iki katına çıkarır."
+    },
+    {
+        "name": "Philter of Love",
+        "name_tr": "Aşk İksiri",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:philter-of-love",
+        "rarity": "Uncommon",
+        "type": "Potion",
+        "description": "Become charmed by the next creature you see for 1 hour.",
+        "description_tr": "İçtikten sonra görülen ilk kişiye 1 saatliğine aşık (Charmed) olunmasını sağlar."
+    },
+    {
+        "name": "Pipes of Haunting",
+        "name_tr": "Dehşet Kavalı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:pipes-of-haunting",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Expend charges to make creatures within 30 feet frightened of you for 1 minute.",
+        "description_tr": "30 fit içindekileri 1 dakikalığına korkutan (Frightened) ürkütücü kaval."
+    },
+    {
+        "name": "Pipes of the Sewers",
+        "name_tr": "Kanalizasyon Kavalı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:pipes-of-the-sewers",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Influence and summon swarms of rats within half a mile.",
+        "description_tr": "Fareleri çağırmanızı ve kontrol etmenizi sağlayan kaval."
+    },
+    {
+        "name": "Piwafwi",
+        "name_tr": "Piwafwi",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:piwafwi",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Drow-made Cloak of Elvenkind; loses magic in sunlight.",
+        "description_tr": "Drow yapımı Elvankind pelerini; güneş ışığında sihri kaybolur."
+    },
+    {
+        "name": "Pixie Dust",
+        "name_tr": "Pixie Tozu",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:pixie-dust",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Gain a flying speed of 30 feet and ability to hover for 1 minute.",
+        "description_tr": "1 dakikalığına uçma hızı ve havada asılı kalma yeteneği sağlar."
+    },
+    {
+        "name": "Plate Of Knight's Fellowship",
+        "name_tr": "Şövalye Kardeşliği Zırhı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:plate-of-knights-fellowship",
+        "rarity": "Uncommon",
+        "type": "Armor",
+        "description": "Summon the spirit of a knight to aid you in combat for 1 minute.",
+        "description_tr": "Günde bir kez yardımınıza bir şövalye ruhu çağırmanızı sağlar."
+    },
+    {
+        "name": "Portal Compass",
+        "name_tr": "Portal Pusulası",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:portal-compass",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Points in the direction of the last portal it passed through on the same plane.",
+        "description_tr": "Aynı düzlemdeki en son geçilen portalın yönünü gösterir."
+    },
+    {
+        "name": "Potion of Advantage",
+        "name_tr": "Avantaj İksiri",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:potion-of-advantage",
+        "rarity": "Uncommon",
+        "type": "Potion",
+        "description": "Gain advantage on one ability check, attack roll, or saving throw within 1 hour.",
+        "description_tr": "1 saat içindeki bir yetenek, saldırı veya kurtarma zarında avantaj sağlar."
+    },
+    {
+        "name": "Potion of Animal Friendship",
+        "name_tr": "Hayvan Dostluğu İksiri",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:potion-of-animal-friendship",
+        "rarity": "Uncommon",
+        "type": "Potion",
+        "description": "Cast Animal Friendship at will for 1 hour.",
+        "description_tr": "1 saat boyunca sınırsız Animal Friendship büyüsü yapmanızı sağlar."
+    },
+    {
+        "name": "Potion of Fire Breath",
+        "name_tr": "Ateş Nefesi İksiri",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:potion-of-fire-breath",
+        "rarity": "Uncommon",
+        "type": "Potion",
+        "description": "Exhale fire up to three times within 1 hour (4d6 fire damage).",
+        "description_tr": "1 saat içinde 3 kez ateş püskürmenize (4d6 hasar) izin verir."
+    }
+]

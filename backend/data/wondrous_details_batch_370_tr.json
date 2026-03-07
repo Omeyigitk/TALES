@@ -1,0 +1,452 @@
+[
+    {
+        "name": "Elven Chain",
+        "name_tr": "Elven Zincir Zırh",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:elven-chain",
+        "rarity": "Rare",
+        "type": "Armor",
+        "description": "Provides a +1 bonus to AC. You are considered proficient with this armor even if you lack medium armor proficiency.",
+        "description_tr": "+1 AC bonusu veren ve orta zırh eğitimi olmayanların bile ustalıkla kullanabildiği elf yapımı zincir zırh."
+    },
+    {
+        "name": "Far Realm Shard",
+        "name_tr": "Uzak Diyar Kristali",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:far-realm-shard",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Sorcerer focus that summons a tentacle to deal psychic damage and frighten enemies when Metamagic is used.",
+        "description_tr": "Sorcerer büyücülerinin Metamagic kullanımı sonrası düşmanlara psişik hasar veren dokunaçlar salmasını sağlar."
+    },
+    {
+        "name": "Fate Dealer's Deck",
+        "name_tr": "Kader Dağıtıcı Destesi",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:fate-dealers-deck",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Magical deck used as a spellcasting focus that can also heal allies or damage enemies using Hit Dice.",
+        "description_tr": "Büyü odağı olarak kullanılan ve can harcayarak dostlarını iyileştiren veya rakiplerine ışık hasarı veren deste."
+    },
+    {
+        "name": "Feather of Diatryma Summoning",
+        "name_tr": "Diatryma Çağırma Tüyü",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:feather-of-diatryma-summoning",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Transforms into a Large flightless Underdark bird that can be used as a mount for 6 hours.",
+        "description_tr": "Underdark'a özgü dev ve uçamayan bir kuşu (diatryma) binek olarak çağırmanızı sağlar."
+    },
+    {
+        "name": "Feywrought Armor",
+        "name_tr": "Fey-işlemeli Zırh",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:feywrought-armor",
+        "rarity": "Rare",
+        "type": "Armor",
+        "description": "Feywild-forged armor that gives advantage against being charmed and can cast Compulsion.",
+        "description_tr": "Büyülenmeye (charmed) karşı koruyan ve rakipleri kontrol etmenizi sağlayan renkli Feywild zırhı."
+    },
+    {
+        "name": "Figurine of Wondrous Power",
+        "name_tr": "Harika Güç Figürini",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:figurine-of-wondrous-power",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Statuettes that transform into living creatures on command to assist the owner.",
+        "description_tr": "Komutla canlı hayvanlara (aslan, fil, baykuş vb.) dönüşen küçük heykeller."
+    },
+    {
+        "name": "Flame Tongue",
+        "name_tr": "Alev Dili",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:flame-tongue",
+        "rarity": "Rare",
+        "type": "Weapon",
+        "description": "Sword that can be ignited as a bonus action to deal an extra 2d6 fire damage on each hit.",
+        "description_tr": "Komutla alev alarak vuruş başına fazladan 2d6 ateş hasarı veren sihirli kılıç."
+    },
+    {
+        "name": "Flayer Slayer",
+        "name_tr": "Flayer Katili",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:flayer-slayer",
+        "rarity": "Rare",
+        "type": "Weapon",
+        "description": "+1 greataxe that deals extra damage to Aberrations and can force them to release grappled targets.",
+        "description_tr": "Aberration türü canavarlara karşı etkili olan ve onları geri iten +1 baltası."
+    },
+    {
+        "name": "Flying Chariot",
+        "name_tr": "Uçan Savaş Arabası",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:flying-chariot",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Magic chariot that grants an AC bonus to riders and can fly if pulled by flying creatures.",
+        "description_tr": "İçindekilere AC bonusu veren ve uçan yaratıklar tarafından çekildiğinde uçabilen savaş arabası."
+    },
+    {
+        "name": "Folding Boat",
+        "name_tr": "Katlanır Tekne",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:folding-boat",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Wooden box that can unfold into a small boat or a larger ship on command.",
+        "description_tr": "Sıradan bir kutu gibi görünen ama komutla önce tekneye sonra koca bir gemiye dönüşen sihirli kutu."
+    },
+    {
+        "name": "Fulminating Treatise",
+        "name_tr": "Yıldırımsal İnceleme",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:fulminating-treatise",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Scorched spellbook filled with offensive and protective evocations like Fireball and Wall of Force.",
+        "description_tr": "Ateş ve yıkım büyüleri içeren, duman kokulu ve sayfaları elektriklenen sihirli büyü kitabı."
+    },
+    {
+        "name": "Galder's Bubble Pipe",
+        "name_tr": "Galder'in Kabarcık Piposu",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:galders-bubble-pipe",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Carved pipe that blows magic bubbles that can hinder enemies or provide benefits.",
+        "description_tr": "Duman yerine sihirli kabarcıklar çıkararak rakipleri engelleyebilen oyma pipo."
+    },
+    {
+        "name": "Gambler's Blade",
+        "name_tr": "Kumarbazın Bıçağı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:gamblers-blade",
+        "rarity": "Rare",
+        "type": "Weapon",
+        "description": "Cursed sword that grants a +1 to +3 bonus but imposes an equal penalty to death saves.",
+        "description_tr": "Saldırı bonusu veren ancak ölüm (death save) zarlarınızı zorlaştıran lanetli bir risk kılıcı."
+    },
+    {
+        "name": "Gauntlets of Flaming Fury",
+        "name_tr": "Alevli Öfke Eldivenleri",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:gauntlets-of-flaming-fury",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Makes weapons held magical and allows igniting them for extra fire damage once per day.",
+        "description_tr": "Tutulan silahları sihirli yapan ve günde bir kez onları alevler içinde bırakan eldivenler."
+    },
+    {
+        "name": "Gavel of the Venn Rune",
+        "name_tr": "Venn Rünü Çekici",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:gavel-of-the-venn-rune",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Wooden gavel that protects the wielder at the start of combat and can bond creatures in amity.",
+        "description_tr": "Savaş başında koruma sağlayan ve rakiplerin hasarını kendilerine yansıtan sihirli dev çekici."
+    },
+    {
+        "name": "Gem of Seeing",
+        "name_tr": "Görüş Mücekheri",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:gem-of-seeing",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Gem that grants truesight for 10 minutes when looked through by expending charges.",
+        "description_tr": "İçinden bakıldığında 10 dakika boyunca gerçek görüş (truesight) sağlayan mücevher."
+    },
+    {
+        "name": "Ghost Lantern",
+        "name_tr": "Hayalet Feneri",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:ghost-lantern",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Lantern containing a spirit that can illuminate areas, use Mage Hand, or stabilize its owner.",
+        "description_tr": "İçinde hapsolmuş ruh sayesinde ışık veren ve sahibini ölümden kurtarabilen fener."
+    },
+    {
+        "name": "Giant Slayer",
+        "name_tr": "Dev Katili",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:giant-slayer",
+        "rarity": "Rare",
+        "type": "Weapon",
+        "description": "+1 weapon that deals extra damage to giants and can knock them prone.",
+        "description_tr": "Devlere (Giant, Troll, Ettin) karşı çok etkili olan ve onları yere devirebilen +1 silah."
+    },
+    {
+        "name": "Glamoured Studded Leather",
+        "name_tr": "Efsunlu Çivili Deri Zırh",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:glamoured-studded-leather",
+        "rarity": "Rare",
+        "type": "Armor",
+        "description": "+1 armor that can change its appearance to look like any set of clothes or other armor.",
+        "description_tr": "Görünüşünü her türlü kıyafete çevirebilen gizli +1 zırh."
+    },
+    {
+        "name": "Glimmering Moonbow",
+        "name_tr": "Işıltılı Ay Yayı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:glimmering-moonbow",
+        "rarity": "Rare",
+        "type": "Weapon",
+        "description": "+1 bow that deals extra radiant damage and can grant resistance to physical damage.",
+        "description_tr": "Işık hasarı veren ve sahibini kısa süreliğine yarı-saydam yaparak koruyan özel yay."
+    },
+    {
+        "name": "Gloomwrought Armor",
+        "name_tr": "Kasvet-işlemeli Zırh",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:gloomwrought-armor",
+        "rarity": "Rare",
+        "type": "Armor",
+        "description": "Shadowfell-forged armor that helps against fear and can calm emotions.",
+        "description_tr": "Korkuya karşı koruyan ve duyguları yatıştırma gücü olan karanlık Shadowfell zırhı."
+    },
+    {
+        "name": "Glowrune Pigment",
+        "name_tr": "Parlayan Rün Boyası",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:glowrune-pigment",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Magical paint used to draw runes and bestow temporary gifts like darkvision or immunity to being prone.",
+        "description_tr": "Cilde sürülerek karanlık görüş, can puanı veya sarsılmazlık veren sihirli boya."
+    },
+    {
+        "name": "Grasping Whip",
+        "name_tr": "Yakalayıcı Kırbaç",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:grasping-whip",
+        "rarity": "Rare",
+        "type": "Weapon",
+        "description": "+1 whip that can pull creatures or objects closer instead of dealing damage.",
+        "description_tr": "Rakipleri veya eşyaları kendinize çekmenizi sağlayan +1 sihirli kırbaç."
+    },
+    {
+        "name": "Guild Keyrune",
+        "name_tr": "Lonca Anahtar-rünü",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:guild-keyrune",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Badges of authority in Ravnica that can transform into guild-aligned monsters.",
+        "description_tr": "Ravnica loncalarına ait, dev kartal veya kurt gibi canavarlara dönüşebilen rozetler."
+    },
+    {
+        "name": "Gulthias Staff",
+        "name_tr": "Gulthias Asası",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:gulthias-staff",
+        "rarity": "Rare",
+        "type": "Staff",
+        "description": "Evil staff that can heal the user on a hit but risks causing madness. Controls blights.",
+        "description_tr": "Vurduğunda kullanıcısını iyileştiren ancak delirten, bitki canavarlarını kontrol eden karanlık asa."
+    },
+    {
+        "name": "Heart Weaver's Primer",
+        "name_tr": "Kalp Dokumacı Rehberi",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:heart-weavers-primer",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Spellbook containing enchantment spells that also acts as a focus and provides bonuses.",
+        "description_tr": "Büyüleme ve ikna gücü veren, içinde aşk ve zihin kontrol büyüleri olan kitap."
+    },
+    {
+        "name": "Hell Hound Cloak",
+        "name_tr": "Cehennem Tazısı Pelerini",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:hell-hound-cloak",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Cursed cloak that allows transforming into a hell hound but risks permanent transformation.",
+        "description_tr": "Cehennem tazısına dönüşmenizi sağlayan ancak sizi sonsuza dek o formda hapsedebilecek lanetli pelerin."
+    },
+    {
+        "name": "Helm of Teleportation",
+        "name_tr": "Işınlanma Miğferi",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:helm-of-teleportation",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Helm that allows casting the Teleport spell up to 3 times per day.",
+        "description_tr": "Günde 3 kez uzak mesafelere ışınlanmanızı sağlayan miğfer."
+    },
+    {
+        "name": "Helm of the Gods",
+        "name_tr": "Tanrıların Miğferi",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:helm-of-the-gods",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Senses celestials and fiends and can store specific spells from different deities.",
+        "description_tr": "Hortlakları tespit eden ve dua ederek içine tanrıların büyülerini kaydedebildiğiniz kutsal kask."
+    },
+    {
+        "name": "Heward's Handy Haversack",
+        "name_tr": "Heward'ın Pratik Heybesi",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:hewards-handy-haversack",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Magical backpack with three extradimensional pouches where the desired item is always on top.",
+        "description_tr": "İçindeki her şeyi hafifleten ve aradığınız eşyanın her zaman en üstte belirdiği sihirli çanta."
+    },
+    {
+        "name": "Hook of Fisher's Delight",
+        "name_tr": "Balıkçı Keyfi Oltası",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:hook-of-fishers-delight",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Silver fishhook that can conjure magical fish with various properties once per day.",
+        "description_tr": "Sihirli ve farklı özelliklere sahip balıklar yakalamanızı sağlayan gümüş olta iğnesi."
+    },
+    {
+        "name": "Horn of Blasting",
+        "name_tr": "Patlama Borusu",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:horn-of-blasting",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Emits a deafening thunderous blast in a cone; has a chance to explode on use.",
+        "description_tr": "Üflendiğinde rakiplere gök gürültüsü hasarı veren ve onları sağır eden, ama patlama riski olan boru."
+    },
+    {
+        "name": "Horn of the Endless Maze",
+        "name_tr": "Sonsuz Labirent Borusu",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:horn-of-the-endless-maze",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Summons 3d4+3 Minotaur warrior spirits from the Abyss for 1 hour.",
+        "description_tr": "Uçurum'dan (Abyss) size yardım edecek minotor savaşçıları çağıran boru."
+    },
+    {
+        "name": "Horn of Valhalla",
+        "name_tr": "Valhalla Borusu",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:horn-of-valhalla",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Summons berserker spirits from Ysgard to assist in combat.",
+        "description_tr": "Savaşta yanınızda çarpışacak kudretli berserker ruhlarını çağıran boru."
+    },
+    {
+        "name": "Horseshoes of Speed",
+        "name_tr": "Hız Nalları",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:horseshoes-of-speed",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Increases a mount's walking speed by 30 feet when all four hooves are shod.",
+        "description_tr": "Bineğin (at) yürüme hızını 30 fit artıran dörtlü nal seti."
+    },
+    {
+        "name": "Iggwylv's Horn",
+        "name_tr": "Iggwylv'in Borusu",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:iggwylvs-horn",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Can be used to cast specific control spells like Web and Fog Cloud.",
+        "description_tr": "İçinde sis ve ağ gibi engelleme büyüleri barındıran efsanevi cadı borusu."
+    },
+    {
+        "name": "Instrument of the Bards",
+        "name_tr": "Ozan Enstrümanı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:instrument-of-the-bards",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Famed musical instruments that allow bards to cast additional powerful spells.",
+        "description_tr": "Ozanların (Bard) ekstra güçlü büyüler yapmasını sağlayan efsanevi müzik aletleri."
+    },
+    {
+        "name": "Ioun Stone",
+        "name_tr": "Ioun Taşı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:ioun-stone",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Magic stones that orbit the head and provide various passive or active benefits.",
+        "description_tr": "Başı etrafında dönerek özellik artıran, koruma sağlayan veya büyü emen kristal taşlar."
+    },
+    {
+        "name": "Iron Bands of Bilarro",
+        "name_tr": "Bilarro'nun Demir Bantları",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:iron-bands-of-bilarro",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Iron sphere that can be thrown to restrain a Large or smaller creature.",
+        "description_tr": "Fırlatıldığında açılarak dev bir örümcek ağı gibi düşmanı saran demir halkalar."
+    },
+    {
+        "name": "Kagonesti Forest Shroud",
+        "name_tr": "Kagonesti Orman Örtüsü",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:kagonesti-forest-shroud",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Cloak of autumn leaves that grants Stealth checks advantage and 30-foot teleportation.",
+        "description_tr": "Gizlilik avantajı veren ve kısa mesafe ışınlanmaya izin veren elf pelerini."
+    },
+    {
+        "name": "Knave's Eye Patch",
+        "name_tr": "Düzenbaz Göz Bandı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:knaves-eye-patch",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Provides various sneaky benefits, often including darkvision and advantage on certain saves.",
+        "description_tr": "Karanlıkta görmeyi sağlayan ve zihin okuma büyülerini zorlaştıran korsan göz bandı."
+    },
+    {
+        "name": "Lash of Immolation",
+        "name_tr": "Yakım Kırbacı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:lash-of-immolation",
+        "rarity": "Rare",
+        "type": "Weapon",
+        "description": "+1 whip that deals fire damage and can restrain targets on a critical hit.",
+        "description_tr": "Hasar verdiğinde yakan ve kritik vuruşta rakibi alevlerle bağlayan +1 kırbaç."
+    },
+    {
+        "name": "Leather Golem Armor",
+        "name_tr": "Deri Golem Zırhı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:leather-golem-armor",
+        "rarity": "Rare",
+        "type": "Armor",
+        "description": "Cursed sentient armor made from flesh golem parts that grants AC and spell resistance but can lose control.",
+        "description_tr": "Golem parçalarından yapılmış, koruma sağlayan ama sahibini ele geçirebilen lanetli zırh."
+    },
+    {
+        "name": "Libram of Souls and Flesh",
+        "name_tr": "Ruhlar ve Bedenler Kitabı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:libram-of-souls-and-flesh",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Necromantic spellbook that acts as a focus and contains spells to raise or communicate with the dead.",
+        "description_tr": "Ölüleri diriltme ve onlarla konuşma büyüleri içeren, deri ve kemikten yapılmış karanlık kitap."
+    },
+    {
+        "name": "Loadstone",
+        "name_tr": "Yük Taşı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:loadstone",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Cursed gem that reduces movement speed and lifting capacity significantly.",
+        "description_tr": "Taşıyan kişiyi ağırlaştıran ve hareketini kısıtlayan lanetli mücevher."
+    },
+    {
+        "name": "Luminous War Pick",
+        "name_tr": "Işıltılı Savaş Kazması",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:luminous-war-pick",
+        "rarity": "Rare",
+        "type": "Weapon",
+        "description": "+1 war pick that can cast the Daylight spell once per day.",
+        "description_tr": "Etrafına ışık saçan ve günde bir kez güneş kadar parlak (Daylight) ışık yayan +1 kazma."
+    },
+    {
+        "name": "Lyre of Building",
+        "name_tr": "İnşa Liri",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:lyre-of-building",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Musical instrument that can cast construction and terrain-shaping spells and protect structures.",
+        "description_tr": "Çalındığında binaları koruyan veya kendiliğinden yapılar inşa eden sihirli lir."
+    },
+    {
+        "name": "Mace of Disruption",
+        "name_tr": "Bozum Topuzu",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:mace-of-disruption",
+        "rarity": "Rare",
+        "type": "Weapon",
+        "description": "Deals massive radiant damage to fiends and undead and can destroy them instantly.",
+        "description_tr": "İblis ve hortlaklara karşı ışık hasarı veren ve onları anında yok edebilen kutsal topuz."
+    },
+    {
+        "name": "Mace of Smiting",
+        "name_tr": "Darbe Topuzu",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:mace-of-smiting",
+        "rarity": "Rare",
+        "type": "Weapon",
+        "description": "+1 mace that is particularly effective against constructs, dealing extra damage on critical hits.",
+        "description_tr": "Golem ve robotik varlıklara (construct) karşı yıkıcı gücü olan +3 silah."
+    },
+    {
+        "name": "Mace of Terror",
+        "name_tr": "Dehşet Topuzu",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:mace-of-terror",
+        "rarity": "Rare",
+        "type": "Weapon",
+        "description": "Allows emitting a wave of terror that frightens enemies and forces them to flee.",
+        "description_tr": "Rakiplerin içine büyük bir korku salan ve onları kaçmaya zorlayan sihirli topuz."
+    }
+]

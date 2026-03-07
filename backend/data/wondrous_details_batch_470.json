@@ -1,0 +1,352 @@
+[
+  {
+    "name": "Robe of Summer",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:robe-of-summer",
+    "rarity": "Rare",
+    "type": "Wondrous Item",
+    "description": "This elegant garment is made from fine cloth in hues of red, orange, and gold. While you wear the robe, you have resistance to cold damage. In addition, you are comfortable as if the temperature were that of a balmy day, so you suffer no ill effects from the weather's temperature extremes."
+  },
+  {
+    "name": "Rod of Rulership",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:rod-of-rulership",
+    "rarity": "Rare",
+    "type": "Rod",
+    "description": "You can use an action to present the rod and command obedience from each creature of your choice that you can see within 120 feet of you. Each target must succeed on a DC 15 Wisdom saving throw or be charmed by you for 8 hours. While charmed in this way, the creature regards you as its trusted leader. If harmed by you or your companions, or commanded to do something contrary to its nature, a target ceases to be charmed in this way. The rod can't be used again until the next dawn."
+  },
+  {
+    "name": "Rod of the Pact Keeper, +1, +2, +3",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:rod-of-the-pact-keeper",
+    "rarity": "Rare",
+    "type": "Rod",
+    "description": "While holding this rod, you gain a bonus to spell attack rolls and to the saving throw DCs of your warlock spells. This bonus is determined by the rod's rarity.\n\nIn addition, you can regain one warlock spell slot as an action while holding the rod. You can't use this property again until you finish a long rest."
+  },
+  {
+    "name": "Rod of the Vonindod",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:rod-of-the-vonindod",
+    "rarity": "Rare",
+    "type": "Rod",
+    "description": "The fire giant duke Zalto hired a wizard to craft several of these adamantine rods. Each measures 4 feet long, weighs 100 pounds, and is sized to fit comfortably in a fire giant's hand. The rod has two prongs at one end and a molded handle grip on the opposite end.\n\nThe rod has 10 charges and regains 1d6 + 4 of its expended charges daily at dawn. As an action, you can grasp it by the handle and expend 1 charge to cast the Locate Object spell from it. When the rod is used to detect objects made of adamantine, such as fragments of the Vonindod construct, its range increases to 10 miles."
+  },
+  {
+    "name": "Rogue's Mantle",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:rogues-mantle",
+    "rarity": "Rare",
+    "type": "Wondrous Item",
+    "description": "This dark, hooded mantle of thick cloth is infused with secretive and deceptive magic. While wearing it, you gain the following benefits:\n\nDarkvision. You gain darkvision within a range of 60 feet. If you already have darkvision, the mantle increases your darkvision’s range by 60 feet instead.\n\nMove in Shadows. While you are in dim light or darkness, you can use a bonus action to teleport, along with anything you are wearing or carrying, up to 30 feet to an unoccupied space you can see that is also in dim light or darkness. You then have advantage on the first melee attack you make before the end of the turn.\n\nWillful Enmity. You can cast the Antagonize spell (save DC 15) from the mantle. Once the mantle has cast the spell, it can’t cast the spell again until the next dawn."
+  },
+  {
+    "name": "Rope of Entanglement",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:rope-of-entanglement",
+    "rarity": "Rare",
+    "type": "Wondrous Item",
+    "description": "This rope is 30 feet long and weighs 3 pounds. If you hold one end of the rope and use an action to speak its command word, the other end darts forward to entangle a creature you can see within 20 feet of you. The target must succeed on a DC 15 Dexterity saving throw or become restrained.\n\nYou can release the creature by using a bonus action to speak a second command word. A target restrained by the rope can use an action to make a DC 15 Strength or Dexterity check (target's choice). On a success, the creature is no longer restrained by the rope.\n\nThe rope has AC 20 and 20 hit points. It regains 1 hit point every 5 minutes as long as it has at least 1 hit point. If the rope drops to 0 hit points, it is destroyed."
+  },
+  {
+    "name": "Ruinous Flail",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:ruinous-flail",
+    "rarity": "Rare",
+    "type": "Weapon",
+    "description": "This ash-gray flail is cold to the touch. You gain a +1 bonus to attack and damage rolls made with this magic weapon, and it deals double damage to objects and structures.\n\nAdditionally, when you hit a creature with this weapon, you can force the creature to make a DC 15 Constitution saving throw. On a failed save, the creature has the poisoned condition for 1 minute. The poisoned creature takes 2d4 necrotic damage at the start of each of its turns. The creature can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success. Once this property is used in this way, it can’t be used again until the next dawn."
+  },
+  {
+    "name": "Sage's Signet",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:sages-signet",
+    "rarity": "Rare",
+    "type": "Ring",
+    "description": "This gilded ring bears a beautiful engraving and is imbued with powers of keen wisdom and foresight. While wearing this ring, you can use an action to cast the Augury spell from the ring. Once you use the ring to cast the spell, the ring can’t cast the spell again until the next dawn.\n\nSix varieties of Sage’s Signet rings exist, each with a different signet (see the table below). A ring’s signet determines its rarity as well as the additional spells it can cast. While wearing a Sage’s Signet, you can cast each of its additional spells once from the ring using your Intelligence as the spellcasting ability. Once you cast each of the additional spells from the ring, it can’t cast the spell again until the next dawn.\n\nSage’s Signet"
+  },
+  {
+    "name": "Saint Markovia's Thighbone",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:saint-markovias-thighbone",
+    "rarity": "Rare",
+    "type": "Weapon",
+    "description": "Saint Markovia's thighbone has the properties of a Mace of Disruption. If it scores one or more hits against a vampire or a vampire spawn in the course of a single battle, the thighbone crumbles into dust once the battle concludes.\n\nAs a youth, Markovia followed her heart and became a priest of the Morninglord soon after her eighteenth birthday. She proved to be a charismatic proselytizer and, before the age of thirty, had gained a reputation for allowing no evil to stand before her.\n\nMarkovia had long considered Strahd a mad tyrant, but only after his transformation into a vampire did she dare to challenge him. As she rallied her followers and prepared to march on Castle Ravenloft, Strahd sent a group of vampire spawn to her abbey. They confronted Markovia and were destroyed to a one.\n\nSuffused with confidence born of righteous victory, Markovia advanced on Castle Ravenloft. A great battle raged from the catacombs to the parapets. In the end, Markovia never returned to Barovia, and Strahd long afterward walked with a limp and a grimace of pain. It is said that he trapped Markovia in a crypt beneath his castle, and her remains linger there yet.\n\nThe essence of Markovia's saintliness passed partly into her bones as the rest of her body decomposed. Her remaining thighbone is imbued with power that inflicts grievous injury on the undead."
+  },
+  {
+    "name": "Scaled Ornament",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:scaled-ornament",
+    "rarity": "Rare",
+    "type": "Wondrous Item",
+    "description": "This ornament can be jewelry, a cloak, or another wearable accessory. It appears to be fashioned from a dragon’s scale, tooth, or claw, or it incorporates images in those shapes.\n\nSlumbering (Uncommon). You have advantage on saving throws you make to avoid being charmed or frightened or to end those conditions on you.\n\nStirring (Rare). You gain a +1 bonus to AC, and you can’t be charmed or frightened. Moreover, each creature of your choice within 30 feet of you has advantage on saving throws it makes to avoid being charmed or frightened or to end those conditions on itself.\n\nWakened (Very Rare). The Wakened ornament has the Stirring property. In addition, when you would take damage of the type dealt by the breath of the dragon in whose hoard the ornament became Wakened, you can use your reaction to take no damage instead, and you regain hit points equal to the damage you would have taken. Once this property is used, it can’t be used again until the next dawn.\n\nAscendant (Legendary). The Ascendant ornament has the Stirring and Wakened properties. In addition, while you are wearing the ornament, you gain a flying speed equal to your walking speed and can hover. While you are flying using this speed, spectral dragon wings appear on your back."
+  },
+  {
+    "name": "Scissors of Shadow Snipping",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:scissors-of-shadow-snipping",
+    "rarity": "Rare",
+    "type": "Wondrous Item",
+    "description": "As an action, you make a few snips with these iron shears and cause the shadow of a Humanoid creature you can see within 5 feet of you to detach from its source. If the creature is unwilling to give up its shadow, it can make a DC 15 Charisma saving throw, retaining its shadow on a success. Whether or not the shadow is snipped, this property of the scissors can't be used again until the next dawn.\n\nThe detached shadow is rooted to the spot where it was snipped until you use a bonus action to cause it to behave in one of the following ways, either of which is possible only if you can see the shadow:\n\nA creature whose shadow has detached from it is cursed. If a shadowless creature is subjected to any spell that ends a curse, or if its detached shadow is reduced to 0 hit points, the detached shadow disappears, and the creature regains its normal shadow instantly."
+  },
+  {
+    "name": "Scorpion Armor",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:scorpion-armor",
+    "rarity": "Rare",
+    "type": "Armor",
+    "description": "This suit of plate armor is fashioned from giant scorpion chitin. While wearing this armor, you gain the following benefits:\n\nCurse. This armor is cursed. Whenever you don or doff it, you must make a DC 15 Constitution saving throw, taking 100 (10d10 + 45) poison damage on a failed save, or half as much damage on a successful one. Only a Wish spell can remove the armor's curse."
+  },
+  {
+    "name": "Scroll of Protection",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:scroll-of-protection",
+    "rarity": "Rare",
+    "type": "Scroll",
+    "description": "Each scroll of protection works against a specific type of creature chosen by the DM or determined randomly by rolling on the following table.\n\nUsing an action to read the scroll encloses you in a invisible barrier that extends from you to form a 5-foot-radius, 10-foot-high cylinder. For 5 minutes, this barrier prevents creatures of the specified type from entering or affecting anything within the cylinder.\n\nThe cylinder moves with you and remains centered on you. However, if you move in such a way that a creature of the specified type would be inside the cylinder, the effect ends.\n\nA creature can attempt to overcome the barrier by using an action to make a DC 15 Charisma check. On a success, the creature ceases to be affected by the barrier."
+  },
+  {
+    "name": "Serpent's Fang",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:serpent-s-fang",
+    "rarity": "Rare",
+    "type": "Weapon",
+    "description": "This single-edged magic sword is made from the scrimshawed fang of a giant serpent. Its hilt changes shape to adjust to the grasp of any creature that picks it up. The weapon deals an extra 1d10 poison damage to any target it hits."
+  },
+  {
+    "name": "Shadowfell Brand Tattoo",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:shadowfell-brand-tattoo",
+    "rarity": "Rare",
+    "type": "Wondrous Item",
+    "description": "Produced by a special needle, this magic tattoo is dark in color and abstract.\n\nTattoo Attunement. To attune to this item, you hold the needle to your skin where you want the tattoo to appear, pressing the needle there throughout the attunement process. When the attunement is complete, the needle turns into the ink that becomes the tattoo, which appears on the skin.\n\nIf your attunement to the tattoo ends, the tattoo vanishes, and the needle reappears in your space.\n\nShadow Essence. You gain darkvision with a range of 60 feet, and you have advantage on Dexterity (Stealth) checks.\n\nShadowy Defense. When you take damage, you can use your reaction to become insubstantial for a moment, halving the damage you take. Then the reaction can't be used again until the next sunset."
+  },
+  {
+    "name": "Shadowfell Shard",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:shadowfell-shard",
+    "rarity": "Rare",
+    "type": "Wondrous Item",
+    "description": "This dull, cold crystal sits heavy and leaden, saturated by the Shadowfell's despair. As an action, you can attach the shard to a Tiny object (such as a weapon or a piece of jewelry) or detach it. It falls off if your attunement to it ends. You can use the shard as a spellcasting focus while you hold or wear it.\n\nWhen you use a Metamagic option on a spell while you are holding or wearing the shard, you can momentarily curse one creature targeted by the spell; choose one ability score, and until the end of your next turn, the creature has disadvantage on ability checks and saving throws that use that ability."
+  },
+  {
+    "name": "Shard of Xeluan",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:shard-of-xeluan",
+    "rarity": "Rare",
+    "type": "Wondrous Item",
+    "description": "This 1-foot-long shard of obsidian has veins of silver and gold beneath its cold surface.\n\nEmpowered Magic. While holding the shard, you can use it as a spellcasting focus, and it gives you a +1 bonus to your spell attack rolls.\n\nEnhanced Strength. Your Strength score increases by 4 while the shard is on your person. The shard can't raise your Strength score above 22.\n\nCurse. Attuning to this item extends its curse to you. You remain cursed until you are targeted by a Remove Curse spell or similar magic, or until the shard is reattached to Xeluan's petrified heart.\n\nThe shard's curse causes misfortune to befall you. When you roll a 1 on an attack roll, an ability check, or a saving throw, roll on the Shard Misfortunes table to determine the misfortune. For as long as this misfortune lasts, no other shard misfortunes befall you."
+  },
+  {
+    "name": "Shield, +1, +2, +3",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:shield-1-2-3",
+    "rarity": "Rare",
+    "type": "Armor",
+    "description": "While holding this shield, you have a bonus to AC determined by the shield's rarity. This bonus is in addition to the shield's normal bonus to AC."
+  },
+  {
+    "name": "Shield of Far Sight",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:shield-of-far-sight",
+    "rarity": "Rare",
+    "type": "Armor",
+    "description": "A mind flayer skilled at crafting magic items creates a shield of far sight by harvesting an eye from an intelligent humanoid and magically implanting it on the outer surface of a nonmagical shield. The shield becomes a magic item once the eye is implanted, whereupon the mind flayer can give the shield to a thrall or hang it on a wall in its lair. As long as the shield is on the same plane of existence as its creator, the mind flayer can see through the shield's eye, which has darkvision out to a range of 60 feet. While peering through this magical eye, the mind flayer can use its Mind Blast action as though it were standing behind the shield.\n\nIf a shield of far sight is destroyed, the mind flayer that created it is blinded for 2d12 hours."
+  },
+  {
+    "name": "Shield of Missile Attraction",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:shield-of-missile-attraction",
+    "rarity": "Rare",
+    "type": "Armor",
+    "description": "While holding this shield, you have resistance to damage from ranged weapon attacks.\n\nCurse. This shield is cursed. Attuning to it curses you until you are targeted by the Remove Curse spell or similar magic. Removing the shield fails to end the curse on you. Whenever a ranged weapon attack is made against a target within 10 feet of you, the curse causes you to become the target instead."
+  },
+  {
+    "name": "Shrieking Greaves",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:shrieking-greaves",
+    "rarity": "Rare",
+    "type": "Wondrous Item",
+    "description": "Each of these black leg guards is decorated with a motif of monstrous skulls screaming in terror.\n\nThe greaves have 3 charges. While wearing these greaves, you can use a bonus action to expend 1 charge to increase your walking speed by 30 feet, and you have advantage on Dexterity saving throws. These effects last for 1 minute. The greaves regain 1d3 expended charges daily at dawn.\n\nCurse. The greaves are cursed, and becoming attuned to them extends the curse to you. You can’t remove the greaves or end your attunement to them until you are targeted by a Remove Curse spell or similar magic.\n\nYou have disadvantage on saving throws against the frightened condition. Whenever you start your turn frightened, the greaves release an ear-piercing scream. You and each creature within 10 feet of you must make a DC 15 Constitution saving throw, taking 9 (2d8) thunder damage on a failed save, or half as much damage on a successful one."
+  },
+  {
+    "name": "Siren Song Lyre",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:siren-song-lyre",
+    "rarity": "Rare",
+    "type": "Wondrous Item",
+    "description": "You can use an action to play this lyre and cast one of the following spells from it: Animal Friendship, Charm Person, Enthrall, Suggestion. If the spell requires a saving throw, the spell save DC is 13.\n\nOnce the instrument has been used to cast a spell, it can't be used to cast that spell again until the next dawn."
+  },
+  {
+    "name": "Spell Gem",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:spell-gem",
+    "rarity": "Rare",
+    "type": "Wondrous Item",
+    "description": "A spell gem can contain one spell from any class's spell list. You become aware of the spell when you learn the gems properties. While holding the gem. you can cast the spell from it as an action if you know the spell or if the spell is on your class spell list. Doing so doesn‘t require any components and doesn't require attunement. The spell then disappears from the gem.\n\nIf the spell is of a higher level than you can normally cast. you must make an ability check using your spellcasting ability to determine whether you cast it successfully. The DC equals 10 + the spell's level. On a failed check. the spell disappears from the gem with no other effect.\n\nEach spell gem has a maximum level for the spell it can store. The spell level determines the gems rarity and the stored spell's saving throw DC and attack bonus. as shown in the Spell Gem table.\n\nYou can imbue the gem with a spell if you're attuned to it and it's empty. To do so, you cast the spell while holding the gem. The spell is stored in the gem instead of having any effect. Casting the spell must require either 1 action or 1 minute or longer, and the spell's level must be no higher than the gem's maximum. If the spell belongs to the school of abjuration and requires material components that are consumed. you must provide them. but they can be worth half as much as normal.\n\nOnce imbued with a spell. the gem can't be imbued again until the next dawn.\n\nDeep gnomes created these magic gemstones and keep the creation process a secret."
+  },
+  {
+    "name": "Spell Scroll",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:spell-scroll",
+    "rarity": "Rare",
+    "type": "Scroll",
+    "description": "A spell scroll bears the words of a single spell, written in a mystical cipher. If the spell is on your class’s spell list, you can read the scroll and cast its spell without providing any material components. Otherwise, the scroll is unintelligible. Casting the spell by reading the scroll requires the spell’s normal casting time. Once the spell is cast, the words on the scroll fade, and it crumbles to dust. If the casting is interrupted, the scroll is not lost.\n\nIf the spell is on your class's spell list but of a higher level than you can normally cast, you must make an ability check using your spellcasting ability to determine whether you cast it successfully. The DC equals 10 + the spell's level. On a failed check, the spell disappears from the scroll with no other effect.\n\nOnce the spell is cast, the words on the scroll fade, and the scroll itself crumbles to dust.\n\nThe level of the spell on the scroll determines the spell's saving throw DC and attack bonus, as well as the scroll's rarity, as shown in the Spell Scroll table.\n\nA wizard spell on a spell scroll can be copied just as spells in spellbooks can be copied. When a spell is copied from a spell scroll, the copier must succeed on an Intelligence (Arcana) check with a DC equal to 10 + the spell's level. If the check succeeds, the spell is successfully copied. Whether the check succeeds or fails, the spell scroll is destroyed."
+  },
+  {
+    "name": "Spelljamming Helm",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:spelljamming-helm",
+    "rarity": "Rare",
+    "type": "Wondrous Item",
+    "description": "The function of this ornate chair is to propel and maneuver a ship on which it has been installed through space and air. It can also propel and maneuver a ship on water or underwater, provided the ship is built for such travel. The ship in question must weigh 1 ton or more.\n\nThe sensation of being attuned to a spelljamming helm is akin to the pins-and-needles effect one experiences after one's arm or leg falls asleep, but not painful.\n\nWhile attuned to a spelljamming helm and sitting in it, you gain the following abilities for as long as you maintain concentration (as if concentrating on a spell):\n\nTransfer Attunement. You can use an action to touch a willing spellcaster. That creature attunes to the spelljamming helm immediately, and your attunement to it ends."
+  },
+  {
+    "name": "Spellwrought Tattoo",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:spellwrought-tattoo",
+    "rarity": "Rare",
+    "type": "Wondrous Item",
+    "description": "Produced by a special needle, this magic tattoo contains a single spell of up to 5th level, wrought on your skin by a magic needle. To use the tattoo, you must hold the needle against your skin and speak the command word. The needle turns into ink that becomes the tattoo, which appears on the skin in whatever design you like. Once the tattoo is there, you can cast its spell, requiring no material components. The tattoo glows faintly while you cast the spell and for the spell's duration. Once the spell ends, the tattoo vanishes from your skin.\n\nThe level of the spell in the tattoo determines the spell's saving throw DC, attack bonus, spellcasting ability modifier, and the tattoo's rarity, as shown in the Spellwrought Tattoo table."
+  },
+  {
+    "name": "Spider Staff",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:spider-staff",
+    "rarity": "Rare",
+    "type": "Staff",
+    "description": "The top of this magic quarterstaff is shaped like a spider. It deals an extra 1d6 poison damage on a hit when used to make a weapon attack.\n\nSpells. The staff has 10 charges. While holding it, you can expend the requisite number of charges to cast one of the following spells from the staff: Spider Climb (1 charge) or Web (2 charges, spell save DC 15).\n\nThe staff regains 1d6 + 4 expended charges daily at dusk. If you expend the staff’s last charge, roll a d20. On a 1, the staff crumbles to dust and is destroyed."
+  },
+  {
+    "name": "Staff of Charming",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:staff-of-charming",
+    "rarity": "Rare",
+    "type": "Staff",
+    "description": "While holding this staff, you can use an action to expend 1 of its 10 charges to cast Charm Person, Command, or Comprehend Languages from it using your spell save DC. The staff can also be used as a magic quarterstaff.\n\nIf you are holding the staff and fail a saving throw against an enchantment spell that targets only you , you can turn your failed save into a successful one. You can't use this property of the staff again until the next dawn. If you succeed on a save against an enchantment that targets only you, with or without the staff's intervention, you can use your reaction to expend 1 charge from the staff and turn the spell back on its caster as if you had cast the spell.\n\nThe staff regains 1d8 + 2 expended charges daily at dawn. If you expend the last charge, roll a d20. On a 1, the staff becomes a nonmagical quarterstaff."
+  },
+  {
+    "name": "Staff of Defense",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:staff-of-defense",
+    "rarity": "Rare",
+    "type": "Staff",
+    "description": "This slender, hollow staff is made of glass yet is as strong as oak. It weighs 3 pounds. While holding the staff, you have a +1 bonus to your Armor Class.\n\nSpells. The staff has 10 charges. While holding it, you can expend the requisite number of charges to cast one of the following spells from the staff: mage armor (1 charge) or shield (2 charges).\n\nThe staff regains 1d6 + 4 expended charges each day at dawn. If you expend the staff's last charge, roll a d20. On a 1, the staff shatters and is destroyed."
+  },
+  {
+    "name": "Staff of Healing",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:staff-of-healing",
+    "rarity": "Rare",
+    "type": "Staff",
+    "description": "The staff has 10 charges. While holding it, you can use an action to expend 1 or more of its charges to cast one of the following spells from it, using your spell save DC and spellcasting ability modifier: Cure Wounds (1 charge per spell level, up to 4th), Lesser Restoration (2 charges), or Mass Cure Wounds (5 charges).\n\nThe staff regains 1d6 + 4 expended charges daily at dawn. If you expend the last charge, roll a d20. On a 1, the staff vanishes in a flash of light, lost forever."
+  },
+  {
+    "name": "Staff of Ruling",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:staff-of-ruling",
+    "rarity": "Rare",
+    "type": "Staff",
+    "description": "An ornate carving of a serpent adorned with a coursing river spirals down the length of this red and gold staff. While you're holding it, you can use an action to produce one of the following effects. Once the staff has produced an effect, it can't produce that effect again until the next dawn.\n\nOrb of Lightning. You create a Small orb of lightning in an unoccupied space you can see within 60 feet of yourself. You concentrate on this orb as if concentrating on a spell. As a bonus action, you can move the orb up to 20 feet in any direction.\nWhen your concentration ends, or when a creature enters the orb's space or starts its turn there, the orb detonates in a 20-foot-radius sphere. Each creature in that area must make a DC 15 Dexterity saving throw, taking lightning damage equal to the total accumulated damage on a failed save, or half as much damage on a successful one; the orb's base damage is 6d6, and if at the end of your turn the orb hasn't detonated, its damage increases by 2d6, to a maximum of 10d6.\n\nStaff to Snake. You throw the staff to an unoccupied space within 10 feet of you, and the staff becomes a giant poisonous snake. The snake is under your control and shares your initiative count, but it takes its turn immediately after yours.\nOn your turn, you can mentally command the snake if it is within 60 feet of you and you don't have the incapacitated condition. You decide what action the snake takes and where it moves during its turn, or you can issue it a general command, such as to attack your enemies or guard a location.\n\nIf you use a bonus action to speak the command word again, or if the snake is reduced to 0 hit points, the snake reverts to staff form in its current space.\n\nThunderclap. You point the staff skyward, producing a fearsome thunderclap. Each creature of your choice in a 30-foot-radius sphere centered on you must succeed on a DC 15 Constitution saving throw or have the deafened and frightened conditions until the end of your next turn."
+  },
+  {
+    "name": "Staff of Swarming Insects",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:staff-of-swarming-insects",
+    "rarity": "Rare",
+    "type": "Staff",
+    "description": "This staff has 10 charges and regains 1d6 + 4 expended charges daily at dawn. If you expend the last charge, roll a d20. On a 1, a swarm of insects consumes and destroys the staff, then disperses.\n\nSpells. While holding the staff, you can use an action to expend some of its charges to cast one of the following spells from it, using your spell save DC: Giant Insect (4 charges) or Insect Plague (5 charges).\n\nInsect Cloud. While holding the staff, you can use an action and expend 1 charge to cause a swarm of harmless flying insects to spread out in a 30-foot radius from you. The insects remain for 10 minutes, making the area heavily obscured for creatures other than you. The swarm moves with you, remaining centered on you. A wind of at least 10 miles per hour disperses the swarm and ends the effect."
+  },
+  {
+    "name": "Staff of the Ivory Claw",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:staff-of-the-ivory-claw",
+    "rarity": "Rare",
+    "type": "Staff",
+    "description": "This gray-and-cerulean staff is topped with a small dragon claw carved from ivory. While holding the staff, you gain a +1 bonus to spell attack rolls. Whenever you score a critical hit with a spell attack, the target takes an extra 3d6 radiant damage."
+  },
+  {
+    "name": "Staff of the Rooted Hills",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:staff-of-the-rooted-hills",
+    "rarity": "Rare",
+    "type": "Staff",
+    "description": "The hill rune is carved into this gnarled wooden staff. The staff magically resizes to match the height of any creature that attunes to it.\n\nThe staff can be wielded as a magic quarterstaff that grants a +1 bonus to attack and damage rolls made with it. The first time you hit any creature with the staff on your turn, the creature must succeed on a DC 12 Strength saving throw or be restrained by spectral vines until the start of your next turn.\n\nInvoking the Rune. As an action, you can invoke the staff’s rune to cast either Hold Person (save DC 12) or Speak with Plants with the staff. When you cast Hold Person using the staff, the target is wreathed in spectral vines.\n\nOnce the rune has been invoked to cast either spell, it can’t be invoked again until the next dawn."
+  },
+  {
+    "name": "Staff of the Woodlands",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:staff-of-the-woodlands",
+    "rarity": "Rare",
+    "type": "Staff",
+    "description": "This staff can be wielded as a magic quarterstaff that grants a +2 bonus to attack and damage rolls made with it. While holding it, you have a +2 bonus to spell attack rolls.\n\nThe staff has 10 charges for the following properties. It regains 1d6 + 4 expended charges daily at dawn. If you expend the last charge, roll a d20. On a 1, the staff loses its properties and becomes a nonmagical quarterstaff.\n\nSpells. You can use an action to expend 1 or more of the staff's charges to cast one of the following spells from it, using your spell save DC: Animal Friendship (1 charge), Awaken (5 charges), Barkskin (2 charges), Locate Animals or Plants (2 charges), Speak with Animals (1 charge), Speak with Plants (3 charges), or Wall of Thorns (6 charges).\n\nYou can also use an action to cast the Pass Without Trace spell from the staff without using any charges.\n\nTree Form. You can use an action to plant one end of the staff in fertile earth and expend 1 charge to transform the staff into a healthy tree. The tree is 60 feet tall and has a 5-foot-diameter trunk, and its branches at the top spread out in a 20-foot radius. The tree appears ordinary but radiates a faint aura of transmutation magic if targeted by detect magic. While touching the tree and using another action to speak its command, word, you return the staff to its normal form. Any creature in the tree falls when it reverts to a staff."
+  },
+  {
+    "name": "Staff of Withering",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:staff-of-withering",
+    "rarity": "Rare",
+    "type": "Staff",
+    "description": "The staff has 3 charges and regains 1d3 expended charges daily at dawn.\n\nThe staff can be wielded as a magic quarterstaff. On a hit, it deals damage as a normal quarterstaff, and you can expend 1 charge to deal an extra 2d10 necrotic damage to the target. In addition, the target must succeed on a DC 15 Constitution saving throw or have disadvantage for 1 hour on any ability check or saving throw that uses Strength or Constitution."
+  },
+  {
+    "name": "Starshot Crossbow",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:starshot-crossbow",
+    "rarity": "Rare",
+    "type": "Weapon",
+    "description": "This crossbow is crafted from blackened wood, and its limbs bear pearl inlays depicting constellations. You ignore the loading property with this crossbow. If you load no ammunition in the weapon, it produces its own, automatically creating one piece of magic ammunition when you make a ranged attack with it. The ammunition created by the weapon vanishes the instant after it hits or misses a target. The crossbow has 3 charges and regains 1d3 expended charges daily at dawn.\n\nConstellations. The crossbow is decorated with three constellations. As a bonus action, you can tap one of the constellations to invoke it, expending 1 charge and producing one of the following effects:\n\nBalance. The next time you hit a creature with a ranged attack roll using this crossbow before the end of your next turn, you or another creature of your choice within 30 feet of you can regain hit points equal to 1d8 plus your proficiency bonus.\n\nFlames. Until the end of your next turn, when you hit a creature with a ranged attack roll using this crossbow, the attack deals an additional 2d8 fire damage.\n\nRogue. Until the end of your next turn, you have the invisible condition, and anything you are wearing or carrying is also invisible."
+  },
+  {
+    "name": "Stone of Controlling Earth Elementals",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:stone-of-controlling-earth-elementals",
+    "rarity": "Rare",
+    "type": "Wondrous Item",
+    "description": "If the stone is touching the ground, you can use an action to speak its command word and summon an earth elemental, as if you had cast the Conjure Elemental spell. The stone can't be used this way again until the next dawn. This stone weighs 5 pounds."
+  },
+  {
+    "name": "Stonespeaker Crystal",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:stonespeaker-crystal",
+    "rarity": "Rare",
+    "type": "Wondrous Item",
+    "description": "Created by the stone giant librarians of Gravenhollow. this nineteen-inch-long shard of quartz grants you advantage on Intelligence (investigation) checks while it is on your person.\n\nThe crystal has 10 charges. While holding it, you can use an action to expend some of its charges to east one of the following spells from it: speak with animals (2 charges), speak with dead (4 charges), or speak with plants (3 charges).\n\nWhen you cast a divination spell, you can use the crystal in place of one material component that would normally be consumed by the spell, at a cost of 1 charge per level of the spell. The crystal is not consumed when used in this way.\n\nThe crystal regains 1d6 + 4 expended charges daily at dawn. If you expend the crystal's last charge, roll a d20. On a 1, the crystal vanishes, lost forever."
+  },
+  {
+    "name": "Sun Blade",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:sun-blade",
+    "rarity": "Rare",
+    "type": "Weapon",
+    "description": "This item appears to be a longsword hilt. While grasping the hilt, you can use a bonus action to cause a blade of pure radiance to spring into existence, or make the blade disappear. While the blade exists, this magic longsword has the finesse property. If you are proficient with shortswords or longswords, you are proficient with the sun blade.\n\nYou gain a +2 bonus to attack and damage rolls made with this weapon, which deals radiant damage instead of slashing damage. When you hit an undead with it, that target takes an extra 1d8 radiant damage.\n\nThe sword's luminous blade emits bright light in a 15-foot radius and dim light for an additional 15 feet. The light is sunlight. While the blade persists, you can use an action to expand or reduce its radius of bright and dim light by 5 feet each, to a maximum of 30 feet each or a minimum of 10 feet each."
+  },
+  {
+    "name": "Sun Staff",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:sun-staff",
+    "rarity": "Rare",
+    "type": "Staff",
+    "description": "Veins of sunstone run through this wooden staff. This staff can be wielded as a magic quarterstaff that grants a +1 bonus to attack and damage rolls made with it. When you hit with an attack roll using this staff, the target takes an extra 1d8 fire damage.\n\nSolar Focus. You can use the staff as a spellcasting focus. While holding the staff, you can reroll a number of damage dice up to your proficiency bonus when you use a spell slot to cast a spell that deals fire or radiant damage. You must use the new rolls. Once this property is used, it can’t be used again until the next dawn.\n\nSunny Glow. As a bonus action, you can cause the staff to glow with sunlight. While glowing, the staff sheds bright light in a 15-foot radius and dim light for an additional 15 feet. The light lasts until you use another bonus action to extinguish it."
+  },
+  {
+    "name": "Sunforger",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:sunforger",
+    "rarity": "Rare",
+    "type": "Weapon",
+    "description": "You gain a +2 bonus to attack and damage rolls made with this magic weapon.\n\nAs an action, you can hurl the weapon up to 120 feet to a point you can see. When it reaches that point, the weapon vanishes in an explosion, and each creature in a 20-foot-radius sphere centered on that point must make a DC 15 Dexterity saving throw, taking 6d6 fire damage on a failed save, or half as much damage on a successful one. Afterward, you can use an action to cause the weapon to reappear in your empty hand. You can't cause it to explode again until you finish a short or long rest.\n\nIf you don't call the weapon back to your hand, it reappears at the point where it exploded when you are no longer attuned to it or when 24 hours have passed."
+  },
+  {
+    "name": "Sword of Life Stealing",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:sword-of-life-stealing",
+    "rarity": "Rare",
+    "type": "Weapon",
+    "description": "When you attack a creature with this magic weapon and roll a 20 on the attack roll, that target takes an extra 10 necrotic damage if it isn't a construct or an undead. You also gain 10 temporary hit points."
+  },
+  {
+    "name": "Sword of Wounding",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:sword-of-wounding",
+    "rarity": "Rare",
+    "type": "Weapon",
+    "description": "Hit points lost to this weapon's damage can be regained only through a short or long rest, rather than by regeneration, magic, or any other means.\n\nOnce per turn, when you hit a creature with an attack using this magic weapon, you can wound the target. At the start of each of the wounded creature's turns, it takes 1d4 necrotic damage for each time you've wounded it, and it can then make a DC 15 Constitution saving throw, ending the effect of all such wounds on itself on a success. Alternatively, the wounded creature, or a creature within 5 feet of it, can use an action to make a DC 15 Wisdom (Medicine) check, ending the effect of such wounds on it on a success."
+  },
+  {
+    "name": "Teleportation Tablet",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:teleportation-tablet",
+    "rarity": "Rare",
+    "type": "Wondrous Item",
+    "description": "This clay tablet is eight inches long, four inches wide, and half an inch thick. Inscribed on it is the sigil sequence for a permanent teleportation circle. A creature that studies the sequence for 10 minutes can make a DC 21 Intelligence (Arcana) check, learning the circle’s destination on a success.\n\nYou can use an action to break the tablet in half, turning it to dust. If the tablet is broken while it is on the same plane of existence as the teleportation circle whose sigil sequence was engraved on it, a 10-foot-diameter teleportation circle of glowing blue light appears on the ground in an unoccupied space you choose within 30 feet of you. This teleportation circle has the characteristics of one created using the Teleportation Circle spell, except that it connects to the teleportation circle whose sigil sequence appears on the tablet.\n\nThe teleportation circle created by the tablet disappears at the end of your next turn."
+  },
+  {
+    "name": "Tentacle Rod",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:tentacle-rod",
+    "rarity": "Rare",
+    "type": "Rod",
+    "description": "Made by the drow, this rod is a magic weapon that ends in three rubbery tentacles. While holding the rod, you can use an action to direct each tentacle to attack a creature you can see within 15 feet of you. Each tentacle makes a melee attack roll with a +9 bonus. On a hit, the tentacle deals 1d6 bludgeoning damage. If you hit a target with all three tentacles, it must make a DC 15 Constitution saving throw. On a failure, the creature's speed is halved, it has disadvantage on Dexterity saving throws, and it can't use reactions for 1 minute. Moreover, on each of its turns, it can take either an action or a bonus action, but not both. At the end of each of its turns, it can repeat the saving throw, ending the effect on itself on a success."
+  },
+  {
+    "name": "Two-Birds Sling",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:two-birds-sling",
+    "rarity": "Rare",
+    "type": "Weapon",
+    "description": "You have a +1 bonus to attack and damage rolls made with this weapon.\n\nWhen you make a ranged attack with this sling and hit a target, you can cause the ammunition to ricochet toward a second target within 10 feet of the first, and then make a ranged attack against the second target."
+  },
+  {
+    "name": "Ventilating Lungs",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:ventilating-lungs",
+    "rarity": "Rare",
+    "type": "Wondrous Item",
+    "description": "These metallic nodules were created in response to the poisonous gases used on the battlefields of the Last War. When you attune to these lungs, they replace the lungs in your chest, which disappear. The lungs allow you to breathe normally, even in an antimagic field, and their breathing function can't be suppressed by magic.\n\nOutside an antimagic field or any other effect that suppresses magic, these lungs allow you to breathe normally in any environment (including a vacuum), and you have advantage on saving throws against harmful gases such as those created by a Cloudkill spell, a Stinking Cloud spell, inhaled poisons, and gaseous breath weapons .\n\nAs an action, you can use these lungs to exhale a gust of wind, as if you had cast the Gust of Wind spell (spell save DC 15) with no components. This property of the lungs can't be used again until the next dawn.\n\nIf your attunement to the lungs ends, your original lungs reappear."
+  },
+  {
+    "name": "Vicious Weapon",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:vicious-weapon",
+    "rarity": "Rare",
+    "type": "Weapon",
+    "description": "When you roll a 20 on your attack roll with this magic weapon, the target takes an extra 7 damage of the weapon's type."
+  },
+  {
+    "name": "Voidwalker Armor",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:voidwalker-armor",
+    "rarity": "Rare",
+    "type": "Armor",
+    "description": "This black studded leather armor bears a red sheen. While wearing this armor, you can use a bonus action to summon a projection of yourself in an unoccupied space within 30 feet of yourself. The projection is a translucent copy of you that has immunity to all damage and conditions, and you can make attacks and cast spells with a range other than self as if standing in the projection’s space. The projection disappears at the end of your turn. Once you use this bonus action, it can’t be used again until the next dawn.\n\nCurse. This armor is cursed, and attuning to it extends the curse to you. As long as you remain cursed, you’re unwilling to part with the armor. Taking it off fails to end the curse. While cursed in this way, you feel disconnected from your body, continuously hearing whispers that call for you to join them. Whenever you finish a long rest while cursed, you must make a DC 11 Charisma saving throw. On a failed save, your soul is drawn from your body and trapped in an object on a different plane of existence. The object and location of this object are chosen by the DM (but might be the House of Cards; see chapter 18). While your soul is trapped in this way, your body is inert and doesn’t age or require sustenance. Destroying the object frees your soul; otherwise, only a Wish spell can restore your soul to your body."
+  }
+]

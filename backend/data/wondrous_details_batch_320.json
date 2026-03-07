@@ -1,0 +1,352 @@
+[
+  {
+    "name": "Blod Stone",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:blod-stone",
+    "rarity": "Rare",
+    "type": "Wondrous Item",
+    "description": "This diamond contains the blood of a creature — blood that appears in the form of the blod (blood) rune. While the item is on your person, you can use your action to divine the location of the creature nearest to you that is related to the blood in the item and that isn't undead. You sense the distance and direction of the creature relative to your location. The creature is either the one whose blood is in the item or a blood relative.\n\nThis item is made from a large diamond worth at least 5,000 gp. When the blood of a creature is poured onto it during the creation process, the blood seeps into the heart of the gem. If the gem is destroyed, the blood evaporates and is gone forever. A vengeful being might use a Blod Stone to hunt down an entire bloodline. Such stones are sometimes given as gifts to siblings or handed down from parent to child."
+  },
+  {
+    "name": "Bloodwell Vial",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:bloodwell-vial",
+    "rarity": "Rare",
+    "type": "Wondrous Item",
+    "description": "To attune to this vial, you must place a few drops of your blood into it. The vial can't be opened while your attunement to it lasts. If your attunement to the vial ends, the contained blood turns to ash. You can use the vial as a spellcasting focus for your spells while wearing or holding it, and you gain a bonus to spell attack rolls and to the saving throw DCs of your sorcerer spells. The bonus is determined by the vial's rarity.\n\nIn addition, when you roll any Hit Dice to recover hit points while you are carrying the vial, you can regain 5 sorcery points. This property of the vial can't be used again until the next dawn."
+  },
+  {
+    "name": "Bonecounter",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:bonecounter",
+    "rarity": "Rare",
+    "type": "Weapon",
+    "description": "This weapon is a magical +2 mace called Bonecounter. Whenever this weapon is used to destroy an undead creature, a single silver piece appears in the wielder’s pocket."
+  },
+  {
+    "name": "Boots of Levitation",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:boots-of-levitation",
+    "rarity": "Rare",
+    "type": "Wondrous Item",
+    "description": "While you wear these boots, you can use an action to cast the Levitate spell on yourself at will."
+  },
+  {
+    "name": "Boots of Speed",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:boots-of-speed",
+    "rarity": "Rare",
+    "type": "Wondrous Item",
+    "description": "While you wear these boots, you can use a bonus action and click the boots' heels together. If you do, the boots double your walking speed, and any creature that makes an opportunity attack against you has disadvantage on the attack roll. If you click your heels together again, you end the effect.\n\nWhen the boots' property has been used for a total of 10 minutes, the magic ceases to function until you finish a long rest."
+  },
+  {
+    "name": "Bow Of Conflagration",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:bow-of-conflagration",
+    "rarity": "Rare",
+    "type": "Weapon",
+    "description": "Ammunition fired from this bow blazes brightly. When you hit with an attack roll using this bow, the target takes an extra 1d6 fire damage. If the target is a flammable, nonmagical object, it catches fire, taking 1d6 fire damage at the start of each of your turns until a creature uses an action to extinguish the flames."
+  },
+  {
+    "name": "Bowl of Commanding Water Elementals",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:bowl-of-commanding-water-elementals",
+    "rarity": "Rare",
+    "type": "Wondrous Item",
+    "description": "While this bowl is filled with water, you can use an action to speak the bowl's command word and summon a water elemental, as if you had cast the Conjure Elemental spell. The bowl can't be used this way again until the next dawn.\n\nThe bowl is about 1 foot in diameter and half as deep. It weighs 3 pounds and holds about 3 gallons."
+  },
+  {
+    "name": "Bracer of Flying Daggers",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:bracer-of-flying-daggers",
+    "rarity": "Rare",
+    "type": "Wondrous Item",
+    "description": "This armband appears to have thin daggers strapped to it. As an action, you can pull up to two magic daggers from the bracer and immediately hurl them, making a ranged attack with each dagger. A dagger vanishes if you don't hurl it right away, and the daggers disappear right after they hit or miss. The bracer never runs out of daggers."
+  },
+  {
+    "name": "Bracers of Celerity",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:bracers-of-celerity",
+    "rarity": "Rare",
+    "type": "Wondrous Item",
+    "description": "This pair of lightweight bronze bracers is lined with soft, purple velvet and engraved with swirling designs.\n\nWhile you’re wearing these bracers, all your speeds increase by 10 feet, and you have advantage on saving throws you make to avoid or end the paralyzed or restrained condition on yourself."
+  },
+  {
+    "name": "Bracers of Defense",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:bracers-of-defense",
+    "rarity": "Rare",
+    "type": "Wondrous Item",
+    "description": "While wearing these bracers, you gain a +2 bonus to AC if you are wearing no armor and using no shield."
+  },
+  {
+    "name": "Brazier of Commanding Fire Elementals",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:brazier-of-commanding-fire-elementals",
+    "rarity": "Rare",
+    "type": "Wondrous Item",
+    "description": "While a fire burns in this brass brazier, you can use an action to speak the brazier's command word and summon a fire elemental, as if you had cast the Conjure Elemental spell. The brazier can't be used this way again until the next dawn.\n\nThe brazier weighs 5 pounds."
+  },
+  {
+    "name": "Breastplate Of Balance",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:breastplate-of-balance",
+    "rarity": "Rare",
+    "type": "Armor",
+    "description": "This burnished copper breastplate looks as if it were made of interlocking gears. Merchant’s scales are emblazoned across the chest.\n\nThe armor has 4 charges. You can use the charges in the following ways while wearing the armor:\n\nEqualize. When you or a creature you can see within 60 feet of yourself is about to roll a d20 with advantage or disadvantage, you can expend 1 charge and take a reaction to prevent the roll from being affected by advantage or disadvantage.\n\nExpunge Imbalance. As a bonus action, you can expend 2 charges to cast the Lesser Restoration spell from the armor.\n\nThe armor regains 1d4 expended charges daily at dawn."
+  },
+  {
+    "name": "Bridle of Capturing",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:bridle-of-capturing",
+    "rarity": "Rare",
+    "type": "Wondrous Item",
+    "description": "This fine leather bridle tugs at the hand when first held, as though it longs to reach out for a beast nearby. When you hold one end of the bridle, you can use an action to speak its command word, causing the other end to lash out at a beast you can see within 20 feet of you. The target must succeed on a DC 17 Charisma saving throw or have the bridle tie itself around its neck, then fall under your command as if subjected to the Dominate Beast spell. Once the targeted is affected, you do not need to hold the other end of the bridle to command it. With a successful saving throw, the target becomes immune to the bridle’s power until the next dawn.\n\nA creature controlled by the bridle can be released by the creature that bound it as a bonus action. A creature controlled by the bridle can make a DC 17 Charisma check each day at dawn. On a success, the creature is no longer affected by the bridle."
+  },
+  {
+    "name": "Butcher's Bib",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:butchers-bib",
+    "rarity": "Rare",
+    "type": "Wondrous Item",
+    "description": "This black leather apron is perpetually covered by blood, even after being washed off. You gain the following benefits while wearing the apron:"
+  },
+  {
+    "name": "Cape of the Mountebank",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:cape-of-the-mountebank",
+    "rarity": "Rare",
+    "type": "Wondrous Item",
+    "description": "This cape smells faintly of brimstone. While wearing it, you can use it to cast the Dimension Door spell as an action. This property of the cape can't be used again until the next dawn.\n\nWhen you disappear, you leave behind a cloud of smoke, and you appear in a similar cloud of smoke at your destination. The smoke lightly obscures the space you left and the space you appear in, and it dissipates at the end of your next turn. A light or stronger wind disperses the smoke."
+  },
+  {
+    "name": "Cauldron of Plenty",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:cauldron-of-plenty",
+    "rarity": "Rare",
+    "type": "Wondrous Item",
+    "description": "This cauldron is made of thick copper that has turned green with age. It is 4 feet wide, has a mouth 3 1/2 feet in diameter, weighs 50 pounds, and can hold up to 30 gallons of liquid. Embossed on its bulging sides are images of satyrs and nymphs in repose, holding ladles. The cauldron comes with a lid and has side handles. It sits on five little clawed feet that keep it from tipping.\n\nIf water is poured into the cauldron and stirred for 1 minute, it transforms into a hearty, hot stew, which can provide one nourishing meal for up to four people per gallon. The stew remains hot while in the cauldron, then cools naturally after it is removed. The outside of the cauldron remains safe to touch despite the heat of the stew.\n\nThe cauldron can create stew three times. It then ceases to function until the next dawn, when it regains all its uses."
+  },
+  {
+    "name": "Censer of Controlling Air Elementals",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:censer-of-controlling-air-elementals",
+    "rarity": "Rare",
+    "type": "Wondrous Item",
+    "description": "While incense is burning in this censer, you can use an action to speak the censer's command word and summon an air elemental, as if you had cast the Conjure Elemental spell. The censer can't be used this way again until the next dawn.\n\nThis 6-inch wide, 1-foot-high vessel resembles a chalice with a decorated lid. It weighs 1 pound."
+  },
+  {
+    "name": "Charm of Plant Command",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:charm-of-plant-command",
+    "rarity": "Rare",
+    "type": "Wondrous Item",
+    "description": "This fist-sized charm is made from a bundle of dried plant stems wrapped in silver thread. Hung on a leather thong, it is typically worn around the neck or attached to a belt.\n\nThis charm has 3 charges. While you bear the charm, you can expend 1 charge as an action to cast the Speak with Plants spell. For the duration of the spell, you also have advantage on Charisma checks made to influence the behavior, demeanor. and attitude of plants. The charm regains all expended charges at dawn each day."
+  },
+  {
+    "name": "Chime of Opening",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:chime-of-opening",
+    "rarity": "Rare",
+    "type": "Wondrous Item",
+    "description": "This hollow metal tube measures about 1 foot long and weighs 1 pound. You can strike it as an action, pointing it at an object within 120 feet of you that can be opened, such as a door, lid, or lock. The chime issues a clear tone, and one lock or latch on the object opens unless the sound can't reach the object. If no locks or latches remain, the object itself opens.\n\nThe chime can be used ten times. After the tenth time, it cracks and becomes useless."
+  },
+  {
+    "name": "Chromatic Rose",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:chromatic-rose",
+    "rarity": "Rare",
+    "type": "Wondrous Item",
+    "description": "This magic rose comes in one of five colors, as noted in the Chromatic Roses table. While a rose is held, it gains a harmless visual effect as indicated on the table.\n\nWhile holding the rose by its stem, you gain resistance to damage of the type associated with the rose's color. If you would take more than 10 damage of this type from a single source (after applying the resistance), the rose disintegrates, and you take no damage instead.\n\nAs an action, you can blow the petals from the rose to produce a 20-foot cone of acid, lightning, poisonous gas, fire, or cold, as dictated by the rose's damage type. Each creature in the cone must make a DC 15 Constitution saving throw, taking 3d10 damage of the appropriate type on a failed save, or half as much damage on a successful one. Using this property destroys the rose."
+  },
+  {
+    "name": "Claw of the Wyrm Rune",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:claw-of-the-wyrm-rune",
+    "rarity": "Rare",
+    "type": "Wondrous Item",
+    "description": "This dragon's claw has been covered with a coat of molten silver, upon which has been inscribed the wyrm (dragon) rune. The claw has the following properties.\n\nWyrmslayer. As an action, you can point the claw at a dragon within 30 feet of you. The dragon must then succeed on a DC 15 Constitution saving throw or gain vulnerability to all damage types until the end of your next turn. This property can be used three times. The claw regains all expended uses at the next dawn.\n\nWyrm Shield. While the claw is displayed on your person, you have resistance to the damage caused by any dragon's breath weapon.\n\nWyrm Ward. You can transfer the claw's magic to a place by tracing the wyrm rune on the ground with your finger. The point where you trace it becomes the center of a spherical area of magic that has a 100-foot radius and that is fixed to the place. The transfer takes 8 hours of work that requires the claw to be within 5 feet of you. At the end, the claw is destroyed, and the area gains the following property:"
+  },
+  {
+    "name": "Claws of the Umber Hulk",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:claws-of-the-umber-hulk",
+    "rarity": "Rare",
+    "type": "Wondrous Item",
+    "description": "These heavy gauntlets of brown iron are forged in the shape of an umber hulk’s claws, and they fit the wearer’s hands and forearms all the way up to the elbow. While wearing both claws, you gain a burrowing speed of 20 feet, and you can tunnel through solid rock at a rate of 1 foot per round.\n\nYou can use a claw as a melee weapon while wearing it. You have proficiency with it, and it deals 1d8 slashing damage on a hit (your Strength modifier applies to the attack and damage rolls, as normal).\n\nWhile wearing the claws, you can’t manipulate objects or cast spells with somatic components."
+  },
+  {
+    "name": "Cloak of Displacement",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:cloak-of-displacement",
+    "rarity": "Rare",
+    "type": "Wondrous Item",
+    "description": "While you wear this cloak, it projects an illusion that makes you appear to be standing in a place near your actual location, causing any creature to have disadvantage on attack rolls against you. If you take damage, the property ceases to function until the start of your next turn. This property is suppressed while you are incapacitated, restrained, or otherwise unable to move."
+  },
+  {
+    "name": "Cloak of the Bat",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:cloak-of-the-bat",
+    "rarity": "Rare",
+    "type": "Wondrous Item",
+    "description": "While wearing this cloak, you have advantage on Dexterity (Stealth) checks. In an area of dim light or darkness, you can grip the edges of the cloak with both hands and use it to fly at a speed of 40 feet. If you ever fail to grip the cloak's edges while flying in this way, or if you are no longer in dim light or darkness, you lose this flying speed.\n\nWhile wearing the cloak in an area of dim light or darkness, you can use your action to cast Polymorph on yourself, transforming into a bat. While you are in the form of the bat, you retain your Intelligence, Wisdom, and Charisma scores. The cloak can't be used this way again until the next dawn."
+  },
+  {
+    "name": "Corpse Slayer",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:corpse-slayer",
+    "rarity": "Rare",
+    "type": "Weapon",
+    "description": "You gain a +1 bonus to attack and damage rolls made with this magic weapon.\n\nWhen you hit an undead creature with an attack using this weapon, the attack deals an extra 1d8 damage of the weapon's type, and the creature has disadvantage on saving throws against effects that turn undead until the start of your next turn."
+  },
+  {
+    "name": "Crown of the Wrath Bringer",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:crown-of-the-wrath-bringer",
+    "rarity": "Rare",
+    "type": "Wondrous Item",
+    "description": "This jagged iron circlet bears ornaments in the shape of the enemy rune. When worn, the crown glows with pale light as it draws upon the wearer’s fury to strike opponents with vicious terror.\n\nWhen you make an attack roll against a creature and hit it while wearing this crown, you can spend and roll one of your unspent Hit Dice. The creature takes extra psychic damage equal to the number rolled.\n\nInvoking the Rune. As an action, you can invoke the crown’s rune to cast the Fear spell (save DC 15) with it; the spell has a duration of 1 minute and doesn’t require concentration. Once the rune has been invoked, it can’t be invoked again until the next dawn."
+  },
+  {
+    "name": "Crystal Blade",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:crystal-blade",
+    "rarity": "Rare",
+    "type": "Weapon",
+    "description": "This magic sword’s blade is fashioned from a horn or spine from a crystal dragon. When you hit with an attack roll using this sword, the target takes an extra 1d8 radiant damage.\n\nThe sword has 3 charges and regains 1d3 expended charges daily at dawn. When you hit a creature with an attack roll using the sword, you can expend 1 charge to regain a number of hit points equal to the extra radiant damage the sword dealt.\n\nWhile you’re holding the sword, you can use a bonus action to cause it to shed bright light in a 30-foot radius and dim light for an additional 30 feet, to cause it to shed dim light in a 10-foot radius, or to douse the light."
+  },
+  {
+    "name": "Cube of Force",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:cube-of-force",
+    "rarity": "Rare",
+    "type": "Wondrous Item",
+    "description": "This cube is about an inch across. Each face has a distinct marking on it that can be pressed. The cube starts with 36 charges, and it regains 1d20 expended charges daily at dawn.\n\nYou can use an action to press one of the cube's faces, expending a number of charges based on the chosen face, as shown in the Cube of Force Faces table. Each face has a different effect. If the cube has insufficient charges remaining, nothing happens. Otherwise, a barrier of invisible force springs into existence, forming a cube 15 feet on a side. The barrier is centered on you, moves with you, and lasts for 1 minute, until you use an action to press the cube's sixth face, or the cube runs out of charges. You can change the barrier's effect by pressing a different face of the cube and expending the requisite number of charges, resetting the duration.\n\nIf your movement causes the barrier to come into contact with a solid object that can't pass through the cube, you can't move any closer to that object as long as the barrier remains.\n\nThe cube loses charges when the barrier is targeted by certain spells or comes into contact with certain spell or magic item effects, as shown in the table below."
+  },
+  {
+    "name": "Daern's Instant Fortress",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:daerns-instant-fortress",
+    "rarity": "Rare",
+    "type": "Wondrous Item",
+    "description": "You can use an action to place this 1-inch metal cube on the ground and speak its command word. The cube rapidly grows into a fortress that remains until you use an action to speak the command word that dismisses it, which works only if the fortress is empty.\n\nThe fortress is a square tower, 20 feet on a side and 30 feet high, with arrow slits on all sides and a battlement atop it. Its interior is divided into two floors, with a ladder running along one wall to connect them. The ladder ends at a trapdoor leading to the roof. When activated, the tower has a small door on the side facing you. The door opens only at your command, which you can speak as a bonus action. It is immune to the Knock spell and similar magic, such as that of a Chime of Opening.\n\nEach creature in the area where the fortress appears must make a DC 15 Dexterity saving throw, taking 10d10 bludgeoning damage on a failed save, or half as much damage on a successful one. In either case, the creature is pushed to an unoccupied space outside but next to the fortress. Objects in the area that aren't being worn or carried take this damage and are pushed automatically.\n\nThe tower is made of adamantine, and its magic prevents it from being tipped over. The roof, the door, and the walls each have 100 hit points, immunity to damage from nonmagical weapons excluding siege weapons, and resistance to all other damage. Only a Wish spell can repair the fortress (this use of the spell counts as replicating a spell of 8th level or lower). Each casting of wish causes the roof, the door, or one wall to regain 50 hit points."
+  },
+  {
+    "name": "Dagger of Blindsight",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:dagger-of-blindsight",
+    "rarity": "Rare",
+    "type": "Weapon",
+    "description": "This rare magic item requires attunement. A creature attuned to it gains blindsight out to a range of 30 feet. The dagger has a saw-toothed edge and a black pearl nested in its pommel."
+  },
+  {
+    "name": "Dagger of Venom",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:dagger-of-venom",
+    "rarity": "Rare",
+    "type": "Weapon",
+    "description": "You gain a +1 bonus to attack and damage rolls made with this magic weapon.\n\nYou can use an action to cause thick, black poison to coat the blade. The poison remains for 1 minute or until an attack using this weapon hits a creature. That creature must succeed on a DC 15 Constitution saving throw or take 2d10 poison damage and become poisoned for 1 minute. The dagger can't be used this way again until the next dawn."
+  },
+  {
+    "name": "Deck Of Oracles",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:deck-of-oracles",
+    "rarity": "Rare",
+    "type": "Wondrous Item",
+    "description": "The illustrations on this deck of oracle cards move or change subtly when viewed indirectly. When you finish a long rest, you can spend 10 minutes consulting the cards for an omen of the coming day. Roll a d20 and record the number rolled. Once in the next 8 hours, immediately after a creature within 60 feet of you makes an ability check, an attack roll, or a saving throw, you can use your reaction to discard the d20 roll; the creature must use the number you rolled in place of its roll.\n\nAdditionally, while holding the cards, you can cast Divination from them. Once this property is used, it can’t be used again until the next dawn."
+  },
+  {
+    "name": "Delver's Claws",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:delvers-claws",
+    "rarity": "Rare",
+    "type": "Wondrous Item",
+    "description": "The back of this weatherworn leather glove is adorned with three large metal hooks shaped like a mole’s claws. Stitched into the glove’s palm is the mountain rune.\n\nThe glove is considered a simple melee weapon with the finesse and light properties, and it deals 1d4 slashing damage on a hit. While attuned to the glove, you gain a burrowing speed equal to your walking speed and blindsight to 15 feet.\n\nInvoking the Rune. As an action, you can invoke the glove’s rune to bolster yourself with the sturdiness of the earth. Spend and roll a number of your unspent Hit Dice up to a maximum equal to your proficiency bonus. You then regain a number of hit points equal to the total roll plus your Constitution modifier.\n\nOnce the rune has been invoked, it can’t be invoked again until the next dawn."
+  },
+  {
+    "name": "Demon Skin",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:demon-skin",
+    "rarity": "Rare",
+    "type": "Armor",
+    "description": "This magic armor appears as a pot of bubbling black ichor. When you attune to it, the ichor adheres to and contours to your skin, and the pot disappears. The armor can be worn under normal clothes, and it doesn’t impede bodily functions. Once you put it on, it can’t be removed unless you choose to do so or you die, at which point the pot reappears and the ichor flows back into it.\n\nWhile wearing the armor, you have resistance to poison damage. The armor also doesn’t impose disadvantage on Dexterity (Stealth) checks."
+  },
+  {
+    "name": "Devotee's Censer",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:devotees-censer",
+    "rarity": "Rare",
+    "type": "Weapon",
+    "description": "The rounded head of this flail is perforated with tiny holes, arranged in symbols and patterns. The flail counts as a holy symbol for you. When you hit with an attack using this magic flail, the target takes an extra 1d8 radiant damage.\n\nAs a bonus action, you can speak the command word to cause the flail to emanate a thin cloud of incense out to 10 feet for 1 minute. At the start of each of your turns, you and any other creatures in the incense each regain 1d4 hit points. This property can't be used again until the next dawn."
+  },
+  {
+    "name": "Dimensional Shackles",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:dimensional-shackles",
+    "rarity": "Rare",
+    "type": "Wondrous Item",
+    "description": "You can use an action to place these shackles on an incapacitated creature. The shackles adjust to fit a creature of Small to Large size. In addition to serving as mundane manacles, the shackles prevent a creature bound by them from using any method of extradimensional movement, including teleportation or travel to a different plane of existence. They don't prevent the creature from passing-through an interdimensional portal.\n\nYou and any creature you designate when you use the shackles can use an action to remove them. Once every 30 days, the bound creature can make a DC 30 Strength (Athletics) check. On a success, the creature breaks free and destroys the shackles."
+  },
+  {
+    "name": "Docent",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:docent",
+    "rarity": "Rare",
+    "type": "Wondrous Item",
+    "description": "A docent is a small metal sphere, about 2 inches across, studded with dragonshards. To attune to a docent, you must embed the item somewhere on your body, such as your chest or your eye socket.\n\nSentience. A docent is a sentient item of any alignment with an Intelligence of 16, a Wisdom of 14, and a Charisma of 14. It perceives the world through your senses. It communicates telepathically with you and can speak, read, and understand any language it knows (see \"Random Properties\" below).\n\nLife Support. Whenever you end your turn with 0 hit points, the docent can make a Wisdom (Medicine) check with a +6 bonus. If this check succeeds, the docent stabilizes you.\n\nRandom Properties. A docent has the following properties:\n\nPersonality. A docent is designed to advise and assist the warforged it's attached to. One of the simple functions of a docent is to serve as a translator. The docent's properties are under its control, and if you have a bad relationship with your docent, it might refuse to assist you."
+  },
+  {
+    "name": "Dodecahedron of Doom",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:dodecahedron-of-doom",
+    "rarity": "Rare",
+    "type": "Wondrous Item",
+    "description": "This twelve-sided metal die is 12 inches across and bears the numbers 1 through 12 engraved on its pentagonal sides. The dodecahedron contains arcane clockwork mechanisms that whir and click whenever the die is cast.\nThe dodecahedron can be hurled up to 60 feet as an action: A random magical effect occurs when the die comes to a rest after rolling across the ground for at least 10 feet. If an effect requires a target and no eligible target is within range, nothing happens. Spells cast by the dodecahedron require no components. Roll a d12 and consult the following table to determine the effect:"
+  },
+  {
+    "name": "Donjon's Sundering Sphere",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:donjons-sundering-sphere",
+    "rarity": "Rare",
+    "type": "Wondrous Item",
+    "description": "This marble-size crystal sphere glows with extraplanar energy.\n\nAs part of attuning to this item, you press the crystal sphere to the hilt of a nonmagical melee weapon of your choice, magically attaching the sphere to the weapon. The weapon becomes a magic weapon with a +1 bonus to attack and damage rolls. While wielding this weapon, you gain the following benefits:\n\nDimensional Anchor. You have advantage on saving throws against spells or effects that would send you to an extradimensional space, a demiplane, or another plane of existence against your will.\n\nIsolating Smite. When you hit a creature with this weapon, you can force the creature to make a DC 16 Charisma saving throw. On a failed save, the creature is banished to a harmless demiplane until the end of its next turn. When the banished creature returns, it reappears in the space it left or the nearest unoccupied space if that space is occupied. Once this property is used, it can’t be used again until the next dawn.\n\nWhen you end your attunement to the sphere, the sphere harmlessly detaches from the weapon, and the weapon reverts to a nonmagical piece of equipment."
+  },
+  {
+    "name": "Dragon Slayer",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:dragon-slayer",
+    "rarity": "Rare",
+    "type": "Weapon",
+    "description": "You gain a +1 bonus to attack and damage rolls made with this magic weapon.\n\nWhen you hit a dragon with this weapon, the dragon takes an extra 3d6 damage of the weapon's type. For the purpose of this weapon, \"dragon\" refers to any creature with the dragon type, including dragon turtles and wyverns."
+  },
+  {
+    "name": "Dragon Vessel",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:dragon-vessel",
+    "rarity": "Rare",
+    "type": "Wondrous Item",
+    "description": "This vessel can be a potion bottle, drinking horn, or other container meant to hold a liquid.\n\nSlumbering (Uncommon). As a bonus action, if the vessel is empty, you can speak the command word to fill the vessel with one of the following (your choice): Ale, Olive Oil, a Potion of Healing, or a Potion of Climbing. Once this property is used, it can’t be used until the next dawn. A potion you create in this way loses its magical properties if it isn’t imbibed within 24 hours.\n\nStirring (Rare). In addition to the options for a Slumbering vessel, you can fill a Stirring vessel with Mead, a Potion of Fire Breath, or a Greater Potion of Healing.\n\nWakened (Very Rare). In addition to the options for a Slumbering or Stirring vessel, you can fill a Wakened vessel with Wine, a Potion of Flying, or a Superior Potion of Healing.\n\nAscendant (Legendary). In addition to the options for other states, you can fill an Ascendant vessel with Whiskey, a Supreme Potion of Healing, or a Potion of Dragon’s Majesty."
+  },
+  {
+    "name": "Dragon Wing Bow",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:dragon-wing-bow",
+    "rarity": "Rare",
+    "type": "Weapon",
+    "description": "The limb tips of this magic bow are shaped like a dragon’s wings, and the weapon is infused with the essence of a chromatic, gem, or metallic dragon’s breath. When you hit with an attack roll using this magic bow, the target takes an extra 1d6 damage of the same type as the breath infused in the bow—acid, cold, fire, force, lightning, necrotic, poison, psychic, radiant, or thunder.\n\nIf you load no ammunition in the weapon, it produces its own, automatically creating one piece of magic ammunition when you pull back the string. The ammunition created by the bow vanishes the instant after it hits or misses a target."
+  },
+  {
+    "name": "Dragonhide Belt",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:dragonhide-belt",
+    "rarity": "Rare",
+    "type": "Wondrous Item",
+    "description": "This finely detailed belt is made of dragonhide. While wearing it, you gain a bonus to the saving throw DCs of your ki features. The bonus is determined by the belt’s rarity. In addition, you can use an action to regain ki points equal to a roll of your Martial Arts die. You can’t use this action again until the next dawn."
+  },
+  {
+    "name": "Dragon's Wrath Weapon",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:dragons-wrath-weapon",
+    "rarity": "Rare",
+    "type": "Weapon",
+    "description": "This weapon is decorated with dragon heads, claws, wings, scales, or Draconic letters. When it steeps in a dragon’s hoard, it absorbs the energy of the dragon’s breath weapon and deals damage of that type with its special properties.\n\nSlumbering (Uncommon). Whenever you roll a 20 on your attack roll with this weapon, each creature of your choice within 5 feet of the target takes 5 damage of the type dealt by the dragon’s breath weapon.\n\nStirring (Rare). The Stirring weapon has the Slumbering property. In addition, you gain a +1 bonus to attack and damage rolls made using the weapon. On a hit, the weapon deals an extra 1d6 damage of the type dealt by the dragon’s breath weapon.\n\nWakened (Very Rare). The Wakened weapon has the Slumbering property, and it improves on the Stirring property. The bonus to attack and damage rolls increases to +2, and the extra damage dealt by the weapon increases to 2d6.\n\nAs an action, you can unleash a 30-foot cone of destructive energy from the weapon. Each creature in that area must make a DC 16 Dexterity saving throw, taking 8d6 damage of the type dealt by the dragon’s breath weapon on a failed save, or half as much damage on a successful one. Once this action is used, it can’t be used again until the next dawn.\n\nAscendant (Legendary). The Ascendant weapon has the Slumbering property, and it improves on the Stirring and Wakened properties. The bonus to attack and damage rolls increases to +3, and the extra damage dealt by the weapon increases to 3d6.\n\nThe cone of destructive energy the weapon creates increases to a 60-foot cone, the save DC increases to 18, and the damage increases to 12d6."
+  },
+  {
+    "name": "Dragontooth Dagger",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:dragontooth-dagger",
+    "rarity": "Rare",
+    "type": "Weapon",
+    "description": "A dagger fashioned from the tooth of a dragon. While the blade is obviously a fang or predator's tooth, the handle is leather wrapped around the root of the tooth, and there is no cross-guard.\n\nYou gain a +1 bonus to attack rolls and damage rolls you make with this weapon. On a hit with this weapon, the target takes an extra 1d6 acid damage.\n\nDraconic Potency. Against enemies of the Cult of the Dragon, the dagger's bonus to attack rolls and damage rolls increases to +2, and the extra acid damage increases to 2d6."
+  },
+  {
+    "name": "Dragon-Touched Focus",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:dragon-touched-focus",
+    "rarity": "Rare",
+    "type": "Wondrous Item",
+    "description": "This wondrous item can be a scepter, an orb, an amulet, a crystal, or another finely crafted object. It typically incorporates imagery of dragons’ wings, claws, teeth, or scales.\n\nSlumbering (Uncommon). You have advantage on initiative rolls. While you are holding the focus, it can function as a spellcasting focus for all your spells.\n\nStirring (Rare). The Stirring focus has the Slumbering property, and it gains an additional property determined by the family of the dragon in whose hoard it became Stirring:\n\nChromatic. Whenever you use a spell slot to cast a spell that deals acid, cold, fire, lightning, or poison damage, roll a d6, and you gain a bonus equal to the number rolled to one of the spell’s damage rolls.\n\nGem. Whenever you use a spell slot to cast a spell, you can immediately teleport to an unoccupied space you can see within 15 feet of you.\n\nMetallic. When a creature you can see within 30 feet of you makes a saving throw, you can use your reaction to give that creature advantage on the saving throw.\n\nWakened (Very Rare). The Wakened focus has the Slumbering and Stirring properties, and while you are holding a Wakened focus, you can use it to cast certain spells. Once the item is used to cast a given spell, it can’t be used to cast that spell again until the next dawn. The spells are determined by the family of the dragon in whose hoard it became Wakened.\n\nChromatic. Hold Monster, Rime’s Binding Ice\n\nGem. Rary’s Telepathic Bond, Raulothim’s Psychic Lance\n\nMetallic. Fizban’s Platinum Shield, Legend Lore\n\nAscendant (Legendary). The Ascendant focus has the Slumbering, Stirring, and Wakened properties. In addition, when you cast a spell of 1st level or higher while holding this focus, you can treat the spell as if it were cast using a 9th-level spell slot. Once this property is used, it can’t be used again until the next dawn."
+  },
+  {
+    "name": "Duplicitous Manuscript",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:duplicitous-manuscript",
+    "rarity": "Rare",
+    "type": "Wondrous Item",
+    "description": "To you, this book is a magical spellbook. To anyone else, the book appears to be a volume of verbose romance fiction. As an action, you can change the book's appearance and alter the plot of the romance.\n\nWhen found, the book contains the following spells: Hallucinatory Terrain, Major Image, Mirror Image, Mislead, Nystul's Magic Aura, Phantasmal Force, and Silent Image. It functions as a spellbook for you.\n\nWhile you are holding the book, you can use it as a spellcasting focus for your wizard spells.\n\nThe book has 3 charges, and it regains 1d3 expended charges daily at dawn. You can use the charges in the following ways while holding it:"
+  },
+  {
+    "name": "Eagle Whistle",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:eagle-whistle",
+    "rarity": "Rare",
+    "type": "Wondrous Item",
+    "description": "While you blow an Eagle Whistle continuously, you can fly twice as fast as your walking speed. You can blow the whistle continuously for a number of rounds equal to 5 + five times your Constitution modifier (minimum of 1 round) or until you talk, hold your breath, or start suffocating. A use of the whistle also ends if you land. If you are aloft when you stop blowing the whistle, you fall. The whistle has three uses. It regains expended uses daily at dawn."
+  },
+  {
+    "name": "Elemental Essence Shard",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:elemental-essence-shard",
+    "rarity": "Rare",
+    "type": "Wondrous Item",
+    "description": "This crackling crystal contains the essence of an elemental plane. As an action, you can attach the shard to a Tiny object (such as a weapon or a piece of jewelry) or detach it. It falls off if your attunement to it ends. You can use the shard as a spellcasting focus while you hold or wear it.\n\nRoll a d4 and consult the Elemental Essence Shards table to determine the shard's essence and property. When you use a Metamagic option on a spell while you are holding or wearing the shard, you can use that property."
+  },
+  {
+    "name": "Elixir of Health",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:elixir-of-health",
+    "rarity": "Rare",
+    "type": "Potion",
+    "description": "When you drink this potion, it cures any disease afflicting you, and it removes the blinded, deafened, paralyzed, and poisoned conditions. The clear red liquid has tiny bubbles of light in it."
+  }
+]

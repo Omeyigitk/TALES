@@ -1,0 +1,352 @@
+[
+  {
+    "name": "Dread Helm",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:dread-helm",
+    "rarity": "Common",
+    "type": "Wondrous Item",
+    "description": "This fearsome steel helm makes your eyes glow red while you wear it."
+  },
+  {
+    "name": "Ear Horn of Hearing",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:ear-horn-of-hearing",
+    "rarity": "Common",
+    "type": "Wondrous Item",
+    "description": "While held up to your ear, this horn suppresses the effects of the deafened condition on you, allowing you to hear normally."
+  },
+  {
+    "name": "Earring of Message",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:earring-of-message",
+    "rarity": "Common",
+    "type": "Wondrous Item",
+    "description": "The blue crystal of this earring is wrapped with delicate copper wire. The earring has 5 charges. While wearing it, you can use an action to expend 1 charge and cast the Message spell. The earring regains 1d4 + 1 expended charges daily at dawn."
+  },
+  {
+    "name": "Enduring Spellbook",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:enduring-spellbook",
+    "rarity": "Common",
+    "type": "Wondrous Item",
+    "description": "This spellbook, along with anything written on its pages, can't be damaged by fire or immersion in water. In addition, the spellbook doesn't deteriorate with age."
+  },
+  {
+    "name": "Ersatz Eye",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:ersatz-eye",
+    "rarity": "Common",
+    "type": "Wondrous Item",
+    "description": "This artificial eye replaces a real one that was lost or removed. While the ersatz eye is embedded in your eye socket, it can't be removed by anyone other than you, and you can see through the tiny orb as though it were a normal eye."
+  },
+  {
+    "name": "Everbright Lantern",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:everbright-lantern",
+    "rarity": "Common",
+    "type": "Wondrous Item",
+    "description": "This bullseye lantern contains an Eberron dragonshard that sheds light comparable to that produced by a Continual Flame spell. An everbright lantern sheds light in a 120-foot cone; the closest 60 feet is bright light, and the farthest 60 feet is dim light."
+  },
+  {
+    "name": "Feather Token",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:feather-token",
+    "rarity": "Common",
+    "type": "Wondrous Item",
+    "description": "This small metal disk is inscribed with the image of a feather. When you fall at least 20 feet while the token is on your person, you descend 60 feet per round and take no damage from falling. The token's magic is expended after you land, whereupon the disk becomes nonmagical."
+  },
+  {
+    "name": "Glamerweave",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:glamerweave",
+    "rarity": "Common",
+    "type": "Wondrous Item",
+    "description": "Glamerweave is clothing imbued with harmless illusory magic. While wearing the common version of these clothes, you can use a bonus action to create a moving illusory pattern within the cloth.\n\nUncommon glamerweave can have the pattern rise from the cloth. For example, a glamerweave gown might be wreathed in harmless, illusory flames, while a glamerweave hat might have illusory butterflies fluttering around it.\n\nWhen you make a Charisma (Performance) or Charisma (Persuasion) check while wearing the uncommon version of glamerweave, you can roll a d4 and add the number rolled to the check. Once you use this property, it can't be used again until the next dawn."
+  },
+  {
+    "name": "Hat of Vermin",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:hat-of-vermin",
+    "rarity": "Common",
+    "type": "Wondrous Item",
+    "description": "This hat has 3 charges. While holding the hat, you can use an action to expend 1 of its charges and speak a command word that summons your choice of a bat, a frog, or a rat (see the Player's Handbook or the Monster Manual for statistics). The summoned creature magically appears in the hat and tries to get away from you as quickly as possible. The creature is neither friendly nor hostile, and it isn't under your control. It behaves as an ordinary creature of its kind and disappears after 1 hour or when it drops to 0 hit points. The hat regains all expended charges daily at dawn."
+  },
+  {
+    "name": "Hat of Wizardry",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:hat-of-wizardry",
+    "rarity": "Common",
+    "type": "Wondrous Item",
+    "description": "This antiquated, cone-shaped hat is adorned with gold crescent moons and stars. While you are wearing it, you gain the following benefits:"
+  },
+  {
+    "name": "Heward's Handy Spice Pouch",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:hewards-handy-spice-pouch",
+    "rarity": "Common",
+    "type": "Wondrous Item",
+    "description": "This belt pouch appears empty and has 10 charges. While holding the pouch, you can use an action to expend 1 of its charges, speak the name of any nonmagical food seasoning (such as salt, pepper, saffron, or cilantro), and remove a pinch of the desired seasoning from the pouch. A pinch is enough to season a single meal. The pouch regains 1d6 + 4 expended charges daily at dawn."
+  },
+  {
+    "name": "Horn of Silent Alarm",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:horn-of-silent-alarm",
+    "rarity": "Common",
+    "type": "Wondrous Item",
+    "description": "This horn has 4 charges. When you use an action to blow it, one creature of your choice can hear the horn's blare, provided the creature is within 600 feet of the horn and not deafened. No other creature hears sound coming from the horn. The horn regains 1d4 expended charges daily at dawn."
+  },
+  {
+    "name": "Illuminator's Tattoo",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:illuminators-tattoo",
+    "rarity": "Common",
+    "type": "Wondrous Item",
+    "description": "Produced by a special needle, this magic tattoo features beautiful calligraphy, images of writing implements, and the like.\n\nTattoo Attunement. To attune to this item, you hold the needle to your skin where you want the tattoo to appear, pressing the needle there throughout the attunement process. When the attunement is complete, the needle turns into the ink that becomes the tattoo, which appears on the skin.\n\nIf your attunement to the tattoo ends, the tattoo vanishes, and the needle reappears in your space.\n\nMagical Scribing. While this tattoo is on your skin, you can write with your fingertip as if it were an ink pen that never runs out of ink.\n\nAs an action, you can touch a piece of writing up to one page in length and speak a creature's name. The writing becomes invisible to everyone other than you and the named creature for the next 24 hours. Either of you can dismiss the invisibility by touching the script (no action required). Once used, this action can't be used again until the next dawn."
+  },
+  {
+    "name": "Imbued Wood Focus",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:imbued-wood-focus",
+    "rarity": "Common",
+    "type": "Wondrous Item",
+    "description": "An imbued wood focus is a rod, staff, or wand cut from a tree infused with extraplanar energy. If you're a spellcaster, you can use this as a spellcasting focus.\n\nWhen you cast a damage-dealing spell using this item as your spellcasting focus, you gain a +1 bonus to one damage roll of the spell, provided the damage is of the type associated with the item's wood. The types of wood and their associated damage types are listed in the Imbued Wood Focus table."
+  },
+  {
+    "name": "Instrument of Illusions",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:instrument-of-illusions",
+    "rarity": "Common",
+    "type": "Wondrous Item",
+    "description": "While you are playing this musical instrument, you can create harmless, illusory visual effects within a 5-foot-radius sphere centered on the instrument. If you are a bard, the radius increases to 15 feet. Sample visual effects include luminous musical notes, a spectral dancer, butterflies, and gently falling snow. The magical effects have neither substance nor sound, and they are obviously illusory. The effects end when you stop playing."
+  },
+  {
+    "name": "Instrument of Scribing",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:instrument-of-scribing",
+    "rarity": "Common",
+    "type": "Wondrous Item",
+    "description": "This musical instrument has 3 charges. While you are playing it, you can use an action to expend 1 charge from the instrument and write a magical message on a nonmagical object or surface that you can see within 30 feet of you. The message can be up to six words long and is written in a language you know. If you are a bard, you can scribe an additional seven words and choose to make the message glow faintly, allowing it to be seen in nonmagical darkness. Casting Dispel Magic on the message erases it. Otherwise, the message fades away after 24 hours.\n\nThe instrument regains all expended charges daily at dawn."
+  },
+  {
+    "name": "Keycharm",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:keycharm",
+    "rarity": "Common",
+    "type": "Wondrous Item",
+    "description": "This small stylized key plays a vital role in the work of House Kundarak. If you cast the Alarm, Arcane Lock, or Glyph of Warding spell, you can tie the effect to the keycharm so that whoever holds it receives the notification from the Alarm spell, bypasses the lock of the Arcane Lock spell, or avoids triggering the glyph placed by the Glyph of Warding spell. In addition, the holder (who needn't be attuned to the item) can take an action to end any one spell tied to it, provided the holder knows the command word you set for ending the tied spells. The keycharm can have up to three tied spells at one time."
+  },
+  {
+    "name": "Lantern of Tracking",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:lantern-of-tracking",
+    "rarity": "Common",
+    "type": "Wondrous Item",
+    "description": "This hooded lantern burns for 6 hours on 1 pint of oil, shedding bright light in a 30-foot-radius and dim light for an additional 30 feet.\n\nEach Lantern of Tracking is designed to track down a certain type of creature, which is determined by rolling this creature type on the Lantern of Tracking table. Once determined, this creature type can't be changed. While the lantern is within 300 feet of any creature of that type, its flame turns bright green. The lantern doesn't pinpoint the creature's exact location, however."
+  },
+  {
+    "name": "Lock of Trickery",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:lock-of-trickery",
+    "rarity": "Common",
+    "type": "Wondrous Item",
+    "description": "This lock appears to be an ordinary lock (of the type described in chapter 5 of the Player's Handbook) and comes with a single key. The tumblers in this lock magically adjust to thwart burglars. Dexterity checks made to pick the lock have disadvantage."
+  },
+  {
+    "name": "Masque Charm",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:masque-charm",
+    "rarity": "Common",
+    "type": "Wondrous Item",
+    "description": "A masque charm is a small silver pin. While wearing this charm, you can use an action to cast the Disguise Self spell (DC 13 to discern the disguise). Once the spell is cast, it can't be cast from the charm again until the next sunset. When casting the spell, you can have the spell last for its normal 1 hour duration or for 6 hours. If you choose the 6-hour duration, the charm becomes nonmagical when the spell ends. In either case, the spell ends if the charm is removed from you."
+  },
+  {
+    "name": "Masquerade Tattoo",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:masquerade-tattoo",
+    "rarity": "Common",
+    "type": "Wondrous Item",
+    "description": "Produced by a special needle, this magic tattoo appears on your body as whatever you desire.\n\nTattoo Attunement. To attune to this item, you hold the needle to your skin where you want the tattoo to appear, pressing the needle there throughout the attunement process. When the attunement is complete, the needle turns into the ink that becomes the tattoo, which appears on the skin.\n\nIf your attunement to the tattoo ends, the tattoo vanishes, and the needle reappears in your space.\n\nFluid Ink. As a bonus action, you can shape the tattoo into any color or pattern and move it to any area of your skin. Whatever form it takes, it is always obviously a tattoo. It can range in size from no smaller than a copper piece to an intricate work of art that covers all your skin.\n\nDisguise Self. As an action, you can use the tattoo to cast the Disguise Self spell (DC 13 to discern the disguise). Once the spell is cast from the tattoo, it can't be cast from the tattoo again until the next dawn."
+  },
+  {
+    "name": "Medal of Muscle",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:medal-of-muscle",
+    "rarity": "Common",
+    "type": "Wondrous Item",
+    "description": "You can squeeze this medal tightly in the palm of your hand as an action. Doing so gives you advantage on Strength checks and Strength saving throws for 1 hour. Once this property has been used, it can’t be used again, and the medal becomes nonmagical."
+  },
+  {
+    "name": "Medal of the Conch",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:medal-of-the-conch",
+    "rarity": "Common",
+    "type": "Wondrous Item",
+    "description": "When you use an action to rub this medal, you gain a swimming speed equal to your walking speed for 1 hour. Once this property has been used, it can’t be used again, and the medal becomes nonmagical."
+  },
+  {
+    "name": "Medal of the Horizonback",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:medal-of-the-horizonback",
+    "rarity": "Common",
+    "type": "Wondrous Item",
+    "description": "When you would be hit by an attack, you can use your reaction to increase your AC by 5 until the start of your next turn, including against the triggering attack. You must be wearing the medal and able to see the creature that made the triggering attack to use this property. Once this property has been used, it can’t be used again, and the medal becomes nonmagical."
+  },
+  {
+    "name": "Medal of the Maze",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:medal-of-the-maze",
+    "rarity": "Common",
+    "type": "Wondrous Item",
+    "description": "When you use an action to trace the maze inscribed on this medal, you gain advantage on Wisdom checks and know the quickest route to the end of any nonmagical path or maze for 1 hour. Once this property has been used, it can’t be used again, and the medal becomes nonmagical."
+  },
+  {
+    "name": "Medal of the Meat Pie",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:medal-of-the-meat-pie",
+    "rarity": "Common",
+    "type": "Wondrous Item",
+    "description": "You gain 2d4 + 2 temporary hit points when you use an action to press this medal to your mouth. Once this property has been used, it can’t be used again, and the medal becomes nonmagical.\n\nWhile magical, this medal is slightly warm to the touch (as if it’s fresh from the oven) and smells faintly of baked pie crust."
+  },
+  {
+    "name": "Medal of the Wetlands",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:medal-of-the-wetlands",
+    "rarity": "Common",
+    "type": "Wondrous Item",
+    "description": "When you use an action to trace the edge of this medal, difficult terrain doesn’t cost you extra movement for 1 hour. Once this property has been used, it can’t be used again, and the medal becomes nonmagical."
+  },
+  {
+    "name": "Medal of Wit",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:medal-of-wit",
+    "rarity": "Common",
+    "type": "Wondrous Item",
+    "description": "You can press this medal to your temple as an action. Doing so gives you advantage on Intelligence checks and Intelligence saving throws for 1 hour. Once this property has been used, it can’t be used again, and the medal becomes nonmagical."
+  },
+  {
+    "name": "Mind Crystal",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:mind-crystal",
+    "rarity": "Common",
+    "type": "Wondrous Item",
+    "description": "These gemstones contain a crystallized bit of spellcasting magic. Different types of mind crystals exist, each with a different single-use effect.\n\nWhen you cast a spell that has a casting time of 1 action while holding a mind crystal, you can modify the spell in a specific way that has an effect described below. You can use only a single mind crystal to modify the spell, and you can’t use a mind crystal and a Metamagic option on the same spell. Once you use a mind crystal, it becomes a nonmagical gem worth 50 gp.\n\nCareful (Uncommon). Choose up to three creatures affected by the spell. The chosen creatures automatically succeed on their saving throws against the spell.\n\nDistant (Uncommon). If the spell has a range of 5 feet or more and doesn’t have a range of self, the spell’s range increases by 100 feet. If the spell has a range of touch, its range becomes 30 feet.\n\nEmpowered (Uncommon). When you roll damage for the spell, you can reroll up to three damage dice. You must use the new rolls.\n\nExtended (Uncommon). If the spell has a duration of 1 minute or longer, double the spell’s duration, to a maximum duration of 24 hours.\n\nHeightened (Rare). Choose one creature affected by the spell. That creature has disadvantage on the first saving throw it makes against the spell.\n\nQuickened (Rare). You change the spell’s casting time to 1 bonus action for this casting.\n\nSubtle (Common). You cast the spell without any somatic or verbal components for this casting."
+  },
+  {
+    "name": "Moodmark Paint",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:moodmark-paint",
+    "rarity": "Common",
+    "type": "Wondrous Item",
+    "description": "This thick, black paint is stored in a small jar, containing enough paint to apply moodmarks to one creature. The paint is dabbed on the face in spots or markings that often resemble the eyes of insects or spiders. Applying the paint in this way takes 1 minute.\n\nFor the next 8 hours, the marks change to reflect your mental state. A creature that can see you and makes a successful DC 10 Wisdom (Insight) check can discern whether you are happy, sad, angry, disgusted, surprised, or afraid, as well as the main source of that emotion. For example, you might communicate fear caused by a monster you just saw around the corner, grief at the loss of a friend, or happiness derived from pride in your performance in combat. A dark elf has advantage on this check."
+  },
+  {
+    "name": "Moon-Touched Sword",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:moon-touched-sword",
+    "rarity": "Common",
+    "type": "Weapon",
+    "description": "In darkness, the unsheathed blade of this sword sheds moonlight, creating bright light in a 15-foot radius and dim light for an additional 15 feet."
+  },
+  {
+    "name": "Mystery Key",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:mystery-key",
+    "rarity": "Common",
+    "type": "Wondrous Item",
+    "description": "A question mark is worked into the head of this key. The key has a 5 percent chance of unlocking any lock into which it's inserted. Once it unlocks something, the key disappears."
+  },
+  {
+    "name": "Orb of Direction",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:orb-of-direction",
+    "rarity": "Common",
+    "type": "Wondrous Item",
+    "description": "While holding this orb, you can use an action to determine which way is north. This property functions only on the Material Plane."
+  },
+  {
+    "name": "Orb of Gonging",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:orb-of-gonging",
+    "rarity": "Common",
+    "type": "Wondrous Item",
+    "description": "This common wondrous item is a hollow, 5-inch-diameter orb that weighs 5 pounds. Its outer shell is composed of notched bronze rings, which can be turned so that the notches line up. Aligning the notches requires an action, and doing so causes the orb to gong loudly until the notches are no longer aligned. The sounds are spaced 6 seconds apart and can be heard out to range of 600 feet."
+  },
+  {
+    "name": "Orb of Shielding",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:orb-of-shielding",
+    "rarity": "Common",
+    "type": "Wondrous Item",
+    "description": "An orb of shielding is a polished, spherical chunk of crystal or stone aligned to one of the planes of existence. If you're a spellcaster, you can use this orb as a spellcasting focus.\n\nIf you're holding the orb when you take damage of the type associated with the orb's material, you can use your reaction to reduce the damage by 1d4 (to a minimum of 0). The materials and their associated damage types are listed in the Orb of Shielding table."
+  },
+  {
+    "name": "Orb of Time",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:orb-of-time",
+    "rarity": "Common",
+    "type": "Wondrous Item",
+    "description": "While holding this orb, you can use an action to determine whether it is morning, afternoon, evening, or nighttime outside. This property functions only on the Material Plane."
+  },
+  {
+    "name": "Perfume of Bewitching",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:perfume-of-bewitching",
+    "rarity": "Common",
+    "type": "Wondrous Item",
+    "description": "This tiny vial contains magic perfume, enough for one use. You can use an action to apply the perfume to yourself, and its effect lasts 1 hour. For the duration, you have advantage on all Charisma checks directed at humanoids of challenge rating 1 or lower. Those subjected to the perfume's effect are not aware that they've been influenced by magic."
+  },
+  {
+    "name": "Pipe of Remembrance",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:pipe-of-remembrance",
+    "rarity": "Common",
+    "type": "Wondrous Item",
+    "description": "This long, delicate wooden pipe features a bowl made from smooth river stone. When the pipe is lit. smoke exhaled from it does not dissipate, instead lingering around the bearer. After 10 minutes, the smoke forms moving shapes that reenact the bearer's most impressive and heroic achievements for 5 minutes. When this realistic performance is complete, the smoke dissipates. The pipe can't be used this way again until the next dawn."
+  },
+  {
+    "name": "Pipe of Smoke Monsters",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:pipe-of-smoke-monsters",
+    "rarity": "Common",
+    "type": "Wondrous Item",
+    "description": "While smoking this pipe, you can use an action to exhale a puff of smoke that takes the form of a single creature, such as a dragon, a flumph, or a froghemoth. The form must be small enough to fit in a 1-foot cube and loses its shape after a few seconds, becoming an ordinary puff of smoke."
+  },
+  {
+    "name": "Pole of Angling",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:pole-of-angling",
+    "rarity": "Common",
+    "type": "Wondrous Item",
+    "description": "While holding this 10-foot pole, you can speak a command word and transform it into a fishing pole with a hook, a line, and a reel. Speaking the command word again changes the fishing pole back into a normal 10-foot pole."
+  },
+  {
+    "name": "Pole of Collapsing",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:pole-of-collapsing",
+    "rarity": "Common",
+    "type": "Wondrous Item",
+    "description": "While holding this 10-foot pole, you can use an action to speak a command word and cause it to collapse into a 1-foot-long rod, for ease of storage. The pole's weight doesn't change. You can use an action to speak a different command word and cause the rod to revert to a pole; however, the rod will elongate only as far as the surrounding space allows."
+  },
+  {
+    "name": "Pot of Awakening",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:pot-of-awakening",
+    "rarity": "Common",
+    "type": "Wondrous Item",
+    "description": "If you plant an ordinary shrub in this 10-pound clay pot and let it grow for 30 days, the shrub magically transforms into an awakened shrub (see the Monster Manual for statistics) at the end of that time. When the shrub awakens, its roots break the pot, destroying it.\n\nThe awakened shrub is friendly toward you. Absent commands from you, it does nothing."
+  },
+  {
+    "name": "Potion of Climbing",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:potion-of-climbing",
+    "rarity": "Common",
+    "type": "Potion",
+    "description": "When you drink this potion, you gain a climbing speed equal to your walking speed for 1 hour. During this time, you have advantage on Strength (Athletics) checks you make to climb. The potion is separated into brown, silver, and gray layers resembling bands of stone. Shaking the bottle fails to mix the colors."
+  },
+  {
+    "name": "Potion of Healing",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:potion-of-healing",
+    "rarity": "Common",
+    "type": "Potion",
+    "description": "You regain hit points when you drink this potion. The number of hit points depends on the potion's rarity, as shown in the Potions of Healing table. Whatever its potency, the potion's red liquid glimmers when agitated."
+  },
+  {
+    "name": "Potion of Watchful Rest",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:potion-of-watchful-rest",
+    "rarity": "Common",
+    "type": "Potion",
+    "description": "When you drink this potion, you gain the following benefits for the next 8 hours: magic can't put you to sleep, and you can remain awake during a long rest and still gain its benefits.\nThis sweet, amber-colored brew has no effect on creatures that don't require sleep, such as elves."
+  },
+  {
+    "name": "Pressure Capsule",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:pressure-capsule",
+    "rarity": "Common",
+    "type": "Wondrous Item",
+    "description": "This small capsule is made of beeswax blended with sand and a variety of enchanted water plants. A creature who consumes a pressure capsule ignores the effects of swimming at depths greater than 100 feet (see \"Unusual Environments\" in chapter 5 of the Dungeon Master's Guide)."
+  },
+  {
+    "name": "Prosthetic Limb",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:prosthetic-limb",
+    "rarity": "Common",
+    "type": "Wondrous Item",
+    "description": "This item replaces a lost limb a hand, an arm, a foot, a leg, or a similar body part. While the prosthetic is attached, it functions identically to the part it replaces. You can detach or reattach it as an action, and it can't be removed against your will. It detaches if you die."
+  },
+  {
+    "name": "Rope of Mending",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:rope-of-mending",
+    "rarity": "Common",
+    "type": "Wondrous Item",
+    "description": "You can cut this 50-foot coil of hempen rope into any number of smaller pieces, and then use an action to speak a command word and cause the pieces to knit back together. The pieces must be in contact with each other and not otherwise in use. A rope of mending is forever shortened if a section of it is lost or destroyed."
+  },
+  {
+    "name": "Ruby of the War Mage",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:ruby-of-the-war-mage",
+    "rarity": "Common",
+    "type": "Wondrous Item",
+    "description": "Etched with eldritch runes, this 1-inch-diameter ruby allows you to use a simple or martial weapon as a spellcasting focus for your spells. For this property to work, you must attach the ruby to the weapon by pressing the ruby against it for at least 10 minutes. Thereafter, the ruby can't be removed unless you detach it as an action or the weapon is destroyed. Not even an Antimagic Field causes it to fall off. The ruby does fall off the weapon if your attunement to the ruby ends."
+  },
+  {
+    "name": "Scribe's Pen",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:scribes-pen",
+    "rarity": "Common",
+    "type": "Wondrous Item",
+    "description": "You can use this pen to write on any surface. You decide whether the writing is visible or invisible, but the writing is always visible to a person with the Mark of Scribing.\n\nAny creature with the Mark of Scribing can use an action to touch the invisible writing, making it visible to all.\n\nIf you use the pen to write on a creature that isn't a construct, the writing fades after 7 days."
+  }
+]

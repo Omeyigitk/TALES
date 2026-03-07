@@ -1,0 +1,452 @@
+[
+    {
+        "name": "Dread Helm",
+        "name_tr": "Dehşet Başlığı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:dread-helm",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "description": "This fearsome steel helm makes your eyes glow red while you wear it.",
+        "description_tr": "Bu korkutucu çelik miğfer, taktığınızda gözlerinizin kırmızı parlamasını sağlar."
+    },
+    {
+        "name": "Ear Horn of Hearing",
+        "name_tr": "İşitme Boynuzu",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:ear-horn-of-hearing",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "description": "While held up to your ear, this horn suppresses the effects of the deafened condition on you, allowing you to hear normally.",
+        "description_tr": "Kulağınıza tutulduğunda, sağır (deafened) durumunun üzerinizdeki etkilerini bastırarak normal şekilde duymanızı sağlar."
+    },
+    {
+        "name": "Earring of Message",
+        "name_tr": "Mesaj Küpesi",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:earring-of-message",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "description": "The blue crystal of this earring is wrapped with delicate copper wire. The earring has 5 charges. While wearing it, you can use an action to expend 1 charge and cast the Message spell. The earring regains 1d4 + 1 expended charges daily at dawn.",
+        "description_tr": "Bu küpenin mavi kristali narin bakır tel ile sarılmıştır. Küpenin 5 yükü vardır. Takılıyken, 1 yük harcayarak Message büyüsünü yapmak için bir eylem kullanabilirsiniz. Küpe, her gün şafak vaktinde 1d4 + 1 harcanan yükü geri kazanır."
+    },
+    {
+        "name": "Enduring Spellbook",
+        "name_tr": "Dayanıklı Büyü Kitabı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:enduring-spellbook",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "description": "This spellbook, along with anything written on its pages, can't be damaged by fire or immersion in water. In addition, the spellbook doesn't deteriorate with age.",
+        "description_tr": "Bu büyü kitabı, sayfalarına yazılan her şeyle birlikte ateşten veya suya batırılmaktan zarar görmez. Ayrıca, büyü kitabı yaşla birlikte bozulmaz."
+    },
+    {
+        "name": "Ersatz Eye",
+        "name_tr": "Yapay Göz",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:ersatz-eye",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "description": "This artificial eye replaces a real one that was lost or removed. While the ersatz eye is embedded in your eye socket, it can't be removed by anyone other than you, and you can see through the tiny orb as though it were a normal eye.",
+        "description_tr": "Bu yapay göz, kaybolan veya çıkarılan gerçek bir gözün yerini alır. Yapay göz göz çukurunuza yerleştirilmişken, sizden başkası tarafından çıkarılamaz ve minik kürenin içinden sanki normal bir gözmüş gibi görebilirsiniz."
+    },
+    {
+        "name": "Everbright Lantern",
+        "name_tr": "Hiç Sönmeyen Fener",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:everbright-lantern",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "description": "This bullseye lantern contains an Eberron dragonshard that sheds light comparable to that produced by a Continual Flame spell. An everbright lantern sheds light in a 120-foot cone; the closest 60 feet is bright light, and the farthest 60 feet is dim light.",
+        "description_tr": "Bu fener, Continual Flame büyüsü tarafından üretilen ışığa benzer ışık yayan bir Eberron ejderha şard'ı içerir. 120 fitlik bir konide ışık saçar; en yakın 60 fit parlak ışık, en uzak 60 fit ise loş ışıktır."
+    },
+    {
+        "name": "Feather Token",
+        "name_tr": "Tüy Nişanı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:feather-token",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "description": "This small metal disk is inscribed with the image of a feather. When you fall at least 20 feet while the token is on your person, you descend 60 feet per round and take no damage from falling. The token's magic is expended after you land, whereupon the disk becomes nonmagical.",
+        "description_tr": "Bu küçük metal disk üzerine bir tüy resmi işlenmiştir. Nişan üzerinizdeyken en az 20 fit düştüğünüzde, tur başına 60 fit hızla inersiniz ve düşmekten hasar almazsınız. Nişanın sihri yere indiğinizde harcanır, ardından disk sihirli olmayan bir hale gelir."
+    },
+    {
+        "name": "Glamerweave",
+        "name_tr": "İllüzyon Dokuması",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:glamerweave",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "description": "Glamerweave is clothing imbued with harmless illusory magic. While wearing the common version of these clothes, you can use a bonus action to create a moving illusory pattern within the cloth.\n\nUncommon glamerweave can have the pattern rise from the cloth. For example, a glamerweave gown might be wreathed in harmless, illusory flames, while a glamerweave hat might have illusory butterflies fluttering around it.\n\nWhen you make a Charisma (Performance) or Charisma (Persuasion) check while wearing the uncommon version of glamerweave, you can roll a d4 and add the number rolled to the check. Once you use this property, it can't be used again until the next dawn.",
+        "description_tr": "Glamerweave, zararsız illüzyon büyüsüyle aşılanmış giysidir. Bu giysilerin yaygın versiyonunu giyerken, kumaş içinde hareket eden illüzyonlu bir desen oluşturmak için bir bonus eylem kullanabilirsiniz. Sıradışı (Uncommon) versiyonunda desen kumaştan yükselebilir; örneğin alevler veya kelebekler. Bu versiyon giyiliyken Karizma (Performans) veya Karizma (İkna) kontrolü yaptığınızda bir d4 atıp sonuca ekleyebilirsiniz. Şafakta yenilenir."
+    },
+    {
+        "name": "Hat of Vermin",
+        "name_tr": "Haşere Şapkası",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:hat-of-vermin",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "description": "This hat has 3 charges. While holding the hat, you can use an action to expend 1 of its charges and speak a command word that summons your choice of a bat, a frog, or a rat (see the Player's Handbook or the Monster Manual for statistics). The summoned creature magically appears in the hat and tries to get away from you as quickly as possible. The creature is neither friendly nor hostile, and it isn't under your control. It behaves as an ordinary creature of its kind and disappears after 1 hour or when it drops to 0 hit points. The hat regains all expended charges daily at dawn.",
+        "description_tr": "Bu şapkanın 3 yükü vardır. Şapkayı tutarken, 1 yük harcayarak bir yarasa, kurbağa veya sıçan çağırmak için bir eylem kullanabilirsiniz. Yaratık şapkada belirir ve sizden kaçmaya çalışır. Kontrolünüzde değildir ve 1 saat sonra veya canı 0 olduğunda yok olur. Şafakta yükler yenilenir."
+    },
+    {
+        "name": "Hat of Wizardry",
+        "name_tr": "Büyücülük Şapkası",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:hat-of-wizardry",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "description": "This antiquated, cone-shaped hat is adorned with gold crescent moons and stars. While you are wearing it, you gain the following benefits: (Can be used as a spellcasting focus for wizard spells; allows you to try to cast a cantrip you don't know).",
+        "description_tr": "Bu antika, koni şeklindeki şapka altın hilal ve yıldızlarla süslenmiştir. Takarken şu faydaları kazanırsınız: Büyücüler için büyü odağı (spellcasting focus) olarak kullanılabilir ve bilmediğiniz bir Cantrip denemenize izin verir."
+    },
+    {
+        "name": "Heward's Handy Spice Pouch",
+        "name_tr": "Heward'ın Pratik Baharat Kesesi",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:hewards-handy-spice-pouch",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "description": "This belt pouch appears empty and has 10 charges. While holding the pouch, you can use an action to expend 1 of its charges, speak the name of any nonmagical food seasoning (such as salt, pepper, saffron, or cilantro), and remove a pinch of the desired seasoning from the pouch. A pinch is enough to season a single meal. The pouch regains 1d6 + 4 expended charges daily at dawn.",
+        "description_tr": "Boş görünür ve 10 yükü vardır. Bir yük harcayarak herhangi bir sihirli olmayan baharatın (tuz, karabiber vb.) ismini söyleyip bir tutam çıkarabilirsiniz. Şafakta 1d6+4 yük yenilenir."
+    },
+    {
+        "name": "Horn of Silent Alarm",
+        "name_tr": "Sessiz Alarm Borusu",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:horn-of-silent-alarm",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "description": "This horn has 4 charges. When you use an action to blow it, one creature of your choice can hear the horn's blare, provided the creature is within 600 feet of the horn and not deafened. No other creature hears sound coming from the horn. The horn regains 1d4 expended charges daily at dawn.",
+        "description_tr": "4 yükü vardır. Seçtiğiniz bir yaratık (600 fit içindeyse) borunun sesini duyabilir, başkası duymaz. Şafakta 1d4 yük yenilenir."
+    },
+    {
+        "name": "Illuminator's Tattoo",
+        "name_tr": "Aydınlatıcı Dövmesi",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:illuminators-tattoo",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "description": "Produced by a special needle, this magic tattoo allows you to write with your fingertip as if it were an ink pen that never runs out of ink. As an action, you can touch a piece of writing and speak a creature's name to make it invisible to everyone except you and that creature for 24 hours.",
+        "description_tr": "Özel bir iğneyle yapılır. Parmağınızla mürekkebi bitmeyen bir kalemmiş gibi yazmanıza izin verir. Bir eylemle, bir sayfalık yazıyı sadece sizin ve ismini söylediğiniz kişinin görebileceği şekilde 24 saatliğine görünmez yapabilirsiniz."
+    },
+    {
+        "name": "Imbued Wood Focus",
+        "name_tr": "Enerji Yüklü Odak",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:imbued-wood-focus",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "description": "An imbued wood focus is a rod, staff, or wand cut from a tree infused with extraplanar energy. When you cast a damage-dealing spell using this item, you gain a +1 bonus to one damage roll of the associated damage type.",
+        "description_tr": "Ekstraplaner enerjiyle dolu bir ağaçtan kesilmiş sopa, asa veya değnek. Büyü yapma odağı olarak kullanılabilir. İlgili ağaç türüne göre hasar veren büyülere +1 hasar bonusu verir."
+    },
+    {
+        "name": "Instrument of Illusions",
+        "name_tr": "İllüzyon Enstrümanı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:instrument-of-illusions",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "description": "While you are playing this musical instrument, you can create harmless, illusory visual effects within a 5-foot-radius sphere centered on the instrument. If you are a bard, the radius increases to 15 feet.",
+        "description_tr": "Çalarken 5 fitlik (ozanlar için 15 fit) bir alanda zararsız görsel efektler oluşturabilirsiniz. Efektler çalmayı bıraktığınızda biter."
+    },
+    {
+        "name": "Instrument of Scribing",
+        "name_tr": "Yazı Enstrümanı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:instrument-of-scribing",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "description": "This musical instrument has 3 charges. While you are playing it, you can use an action to expend 1 charge to write a magical message on a nonmagical object or surface. The message fades after 24 hours.",
+        "description_tr": "3 yükü vardır. Çalarken 30 fit içindeki bir yüzeye sihirli bir mesaj yazabilirsiniz. Ozanlar daha uzun mesaj yazabilir ve parlamasını sağlayabilir. 24 saat sonra silinir."
+    },
+    {
+        "name": "Keycharm",
+        "name_tr": "Anahtarlık",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:keycharm",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "description": "This small stylized key can tie the effects of Alarm, Arcane Lock, or Glyph of Warding spells to it, allowing the holder to receive notifications or bypass the effects.",
+        "description_tr": "House Kundarak işlerinde kullanılır. Alarm, Arcane Lock veya Glyph of Warding büyülerini bu anahtara bağlayabilirsiniz. Tutan kişi uyarıları alır veya kilitleri geçer."
+    },
+    {
+        "name": "Lantern of Tracking",
+        "name_tr": "Takip Feneri",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:lantern-of-tracking",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "description": "This lantern's flame turns bright green when within 300 feet of a certain type of creature, as determined by the lantern.",
+        "description_tr": "Belirli bir yaratık türünü (fey, fiend vb.) 300 fit içinde tespit ettiğinde alevi yeşile döner."
+    },
+    {
+        "name": "Lock of Trickery",
+        "name_tr": "Hileli Kilit",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:lock-of-trickery",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "description": "This lock's tumblers magically adjust to thwart burglars; Dexterity checks made to pick the lock have disadvantage.",
+        "description_tr": "Hırsızları engellemek için sihirli bir şekilde ayarlanır. Maymuncukla açma kontrolleri dezavantajlıdır."
+    },
+    {
+        "name": "Masque Charm",
+        "name_tr": "Maskeli Balo Tılsımı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:masque-charm",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "description": "This small silver pin allow you to cast the Disguise Self spell. Once used, it can't be used again until the next sunset.",
+        "description_tr": "Gümüş bir iğne. Disguise Self büyüsü yapmanızı sağlar. Gün batımında yenilenir."
+    },
+    {
+        "name": "Masquerade Tattoo",
+        "name_tr": "Maskeli Balo Dövmesi",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:masquerade-tattoo",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "description": "This magic tattoo can change color and pattern as a bonus action and allows you to cast the Disguise Self spell once per day.",
+        "description_tr": "Rengini ve desenini değiştirebilirsiniz. Disguise Self büyüsü yapmanıza izin verir. Şafakta yenilenir."
+    },
+    {
+        "name": "Medal of Muscle",
+        "name_tr": "Kas Madalyası",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:medal-of-muscle",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "description": "Squeezing this medal gives you advantage on Strength checks and saves for 1 hour. Becomes nonmagical after use.",
+        "description_tr": "Sıktığınızda 1 saat boyunca Güç kontrollerinde ve Güç kurtarma zarlarında avantaj sağlar. Tek kullanımlıktır."
+    },
+    {
+        "name": "Medal of the Conch",
+        "name_tr": "Deniz Kabuğu Madalyası",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:medal-of-the-conch",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "description": "Rubbing this medal gives you a swimming speed equal to your walking speed for 1 hour. Becomes nonmagical after use.",
+        "description_tr": "Ovduğunuzda 1 saat boyunca yürüme hızınıza eşit yüzme hızı kazanmanızı sağlar. Tek kullanımlıktır."
+    },
+    {
+        "name": "Medal of the Horizonback",
+        "name_tr": "Ufuk Sırtı Madalyası",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:medal-of-the-horizonback",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "description": "Increases your AC by 5 as a reaction against an attack. Becomes nonmagical after use.",
+        "description_tr": "Bir saldırı size çarptığında, reaksiyonunuzla AC'nizi bir sonraki turunuza kadar 5 artırabilirsiniz. Tek kullanımlıktır."
+    },
+    {
+        "name": "Medal of the Maze",
+        "name_tr": "Labirent Madalyası",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:medal-of-the-maze",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "description": "Trace the maze to gain advantage on Wisdom checks and knowledge of the quickest route through any maze for 1 hour. Becomes nonmagical after use.",
+        "description_tr": "1 saat boyunca Hikmet kontrollerinde avantaj sağlar ve herhangi bir labirentin en hızlı çıkış yolunu bilmenizi sağlar. Tek kullanımlıktır."
+    },
+    {
+        "name": "Medal of the Meat Pie",
+        "name_tr": "Etli Turta Madalyası",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:medal-of-the-meat-pie",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "description": "Press to your mouth to gain 2d4 + 2 temporary hit points. Becomes nonmagical after use.",
+        "description_tr": "Ağzınıza bastırdığınızda 2d4+2 geçici can puanı sağlar. Tek kullanımlıktır. Sıcak bir turta gibi kokar."
+    },
+    {
+        "name": "Medal of the Wetlands",
+        "name_tr": "Sulak Alan Madalyası",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:medal-of-the-wetlands",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "description": "Ignore difficult terrain movement costs for 1 hour. Becomes nonmagical after use.",
+        "description_tr": "1 saat boyunca zorlu arazide (difficult terrain) hareket kaybı yaşamazsınız. Tek kullanımlıktır."
+    },
+    {
+        "name": "Medal of Wit",
+        "name_tr": "Zeka Madalyası",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:medal-of-wit",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "description": "Press to temple to gain advantage on Intelligence checks and saves for 1 hour. Becomes nonmagical after use.",
+        "description_tr": "Şakağınıza bastırdığınızda 1 saat boyunca Zeka kontrollerinde ve Zeka kurtarma zarlarında avantaj sağlar. Tek kullanımlıktır."
+    },
+    {
+        "name": "Mind Crystal",
+        "name_tr": "Zihin Kristali",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:mind-crystal",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "description": "Single-use effect that modifies a spell (Careful, Distant, Empowered, Extended, Heightened, Quickened, Subtle).",
+        "description_tr": "Büyü üzerine Metamagic benzeri etkiler uygulayan tek kullanımlık kristaldir. Çeşitli versiyonları vardır."
+    },
+    {
+        "name": "Moodmark Paint",
+        "name_tr": "Ruh Hali Boyası",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:moodmark-paint",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "description": "Changes to reflect your mental state for up to 8 hours.",
+        "description_tr": "Yüzünüze sürüldüğünde 8 saat boyunca ruh halinizi (mutlu, üzgün, kızgın vb.) yansıtacak şekilde renk değiştirir."
+    },
+    {
+        "name": "Moon-Touched Sword",
+        "name_tr": "Ay Dokunuşlu Kılıç",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:moon-touched-sword",
+        "rarity": "Common",
+        "type": "Weapon",
+        "description": "In darkness, the blade sheds moonlight (15-foot radius).",
+        "description_tr": "Karanlıkta kılıç çekildiğinde Ay ışığı saçar (15 fit parlak, 15 fit loş)."
+    },
+    {
+        "name": "Mystery Key",
+        "name_tr": "Gizemli Anahtar",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:mystery-key",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "description": "Has a 5 percent chance of unlocking any lock. Disappears after use.",
+        "description_tr": "Herhangi bir kilidi açma ihtimali %5'tir. Açtıktan sonra yok olur."
+    },
+    {
+        "name": "Orb of Direction",
+        "name_tr": "Yön Küresi",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:orb-of-direction",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "description": "Use an action to determine north.",
+        "description_tr": "Kuzeyin ne taraf olduğunu belirlemenizi sağlar."
+    },
+    {
+        "name": "Orb of Gonging",
+        "name_tr": "Gong Küresi",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:orb-of-gonging",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "description": "Causes the orb to gong loudly until deactivated.",
+        "description_tr": "İşaretler hizalandığında 600 fite kadar duyulabilen yüksek sesli bir gong çalar."
+    },
+    {
+        "name": "Orb of Shielding",
+        "name_tr": "Koruma Küresi",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:orb-of-shielding",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "description": "Use reaction to reduce specific damage type by 1d4.",
+        "description_tr": "Belirli bir düzlemle uyumlu kristal. Reaksiyonunuzla ilgili hasar türünü 1d4 azaltmanızı sağlar."
+    },
+    {
+        "name": "Orb of Time",
+        "name_tr": "Zaman Küresi",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:orb-of-time",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "description": "Determine time of day outside.",
+        "description_tr": "Dışarıda vaktin sabah mı, öğle mi, akşam mı yoksa gece mi olduğunu bilmenizi sağlar."
+    },
+    {
+        "name": "Perfume of Bewitching",
+        "name_tr": "Büyüleyici Parfüm",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:perfume-of-bewitching",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "description": "Advantage on Charisma checks against low CR humanoids for 1 hour.",
+        "description_tr": "1 saat boyunca düşük seviyeli (CR 1 veya altı) insansılar üzerinde Karizma kontrollerinde avantaj sağlar."
+    },
+    {
+        "name": "Pipe of Remembrance",
+        "name_tr": "Hatırlama Piposu",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:pipe-of-remembrance",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "description": "Exhaled smoke reenacts movements of heroic achievements.",
+        "description_tr": "İçildiğinde taşıyıcının kahramanlıklarını dumanlarla sergiler. Şafakta yenilenir."
+    },
+    {
+        "name": "Pipe of Smoke Monsters",
+        "name_tr": "Duman Canavarları Piposu",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:pipe-of-smoke-monsters",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "description": "Exhale smoke monsters that fit in a 1-foot cube.",
+        "description_tr": "Dumanla minik yaratık şekilleri oluşturmanıza izin verir."
+    },
+    {
+        "name": "Pole of Angling",
+        "name_tr": "Balık Avlama Sopası",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:pole-of-angling",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "description": "Transforms into a fishing pole with a hook and line.",
+        "description_tr": "Komut kelimesiyle balık oltasına dönüşür."
+    },
+    {
+        "name": "Pole of Collapsing",
+        "name_tr": "Kapanan Sopa",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:pole-of-collapsing",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "description": "Collapses into a 1-foot long rod.",
+        "description_tr": "Komut kelimesiyle 1 fitlik bir çubuğa dönüşür."
+    },
+    {
+        "name": "Pot of Awakening",
+        "name_tr": "Uyanış Saksısı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:pot-of-awakening",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "description": "Transforms a shrub into an awakened shrub after 30 days.",
+        "description_tr": "İçine ekilen bir çalıyı 30 gün sonra \"Awakened Shrub\"a dönüştürür."
+    },
+    {
+        "name": "Potion of Climbing",
+        "name_tr": "Tırmanma İksiri",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:potion-of-climbing",
+        "rarity": "Common",
+        "type": "Potion",
+        "description": "Gain climbing speed and advantage on Athletics checks for 1 hour.",
+        "description_tr": "1 saat boyunca yürüme hızınızda tırmanma hızı ve Atletizm kontrollerinde avantaj sağlar."
+    },
+    {
+        "name": "Potion of Healing",
+        "name_tr": "İyileştirme İksiri",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:potion-of-healing",
+        "rarity": "Common",
+        "type": "Potion",
+        "description": "Regain hit points when consumed.",
+        "description_tr": "Can puanı kazandırır."
+    },
+    {
+        "name": "Potion of Watchful Rest",
+        "name_tr": "Tetikte Dinlenme İksiri",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:potion-of-watchful-rest",
+        "rarity": "Common",
+        "type": "Potion",
+        "description": "Prevents magical sleep and allows wakefulness during long rest for 8 hours.",
+        "description_tr": "8 saat boyunca büyüyle uyutulamazsınız ve uzun dinlenme sırasında uyanık kalıp dinlenme faydalarından yararlanabilirsiniz."
+    },
+    {
+        "name": "Pressure Capsule",
+        "name_tr": "Basınç Kapsülü",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:pressure-capsule",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "description": "Ignore effects of swimming at great depths.",
+        "description_tr": "Derin sularda yüzme basıncının etkilerini yok saymanızı sağlar."
+    },
+    {
+        "name": "Prosthetic Limb",
+        "name_tr": "Protez Uzuv",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:prosthetic-limb",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "description": "Replaces a lost limb and functions identically.",
+        "description_tr": "Kayıp bir uzvun yerini alır ve normal bir uzuv gibi çalışır."
+    },
+    {
+        "name": "Rope of Mending",
+        "name_tr": "Onarım Halatı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:rope-of-mending",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "description": "Can be cut and magically knit back together.",
+        "description_tr": "Parçalara bölünse de komutla tekrar birleşebilir."
+    },
+    {
+        "name": "Ruby of the War Mage",
+        "name_tr": "Savaş Büyücüsü Yakutu",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:ruby-of-the-war-mage",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "description": "Enables using a weapon as a spellcasting focus.",
+        "description_tr": "Silahı büyü odağı olarak kullanmanıza izin verir."
+    },
+    {
+        "name": "Scribe's Pen",
+        "name_tr": "Yazıcı Kalemi",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:scribes-pen",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "description": "Write on any surface; results can be visible or invisible.",
+        "description_tr": "Her yüzeye yazmanızı sağlar; yazı görünür veya görünmez olabilir."
+    }
+]

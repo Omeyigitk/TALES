@@ -1,0 +1,452 @@
+[
+    {
+        "name": "Sekolahian Worshipping Statuette",
+        "name_tr": "Sekolahian Tapınma Heykelciği",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:sekolahian-worshipping-statuette",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "description": "Skillfully carved from sandstone, this 1-foot-tall statuette depicts a shark. If any Tiny sea-dwelling animal is within 1 inch of its mouth, it deals 1 piercing damage.",
+        "description_tr": "Kum taşından oyulmuş 1 fitlik köpekbalığı heykeli. Ağzına 1 inç yaklaşan minik deniz hayvanlarını ısırır (1 delici hasar)."
+    },
+    {
+        "name": "Shield of Expression",
+        "name_tr": "İfade Kalkanı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:shield-of-expression",
+        "rarity": "Common",
+        "type": "Armor",
+        "description": "While bearing the shield, you can use a bonus action to alter the face's expression.",
+        "description_tr": "Kalkanın ön yüzü bir surata benzer. Bonus eylemle ifadenizi değiştirebilirsiniz."
+    },
+    {
+        "name": "Shiftweave",
+        "name_tr": "Biçim Değiştiren Kumaş",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:shiftweave",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "description": "When created, up to five different outfits can be embedded into the cloth. Bonus action to transform into one of the other designs.",
+        "description_tr": "İçine 5 farklı kıyafet gömülüdür. Bonus eylemle görünümü değiştirebilirsiniz."
+    },
+    {
+        "name": "Smoldering Armor",
+        "name_tr": "Tüten Zırh",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:smoldering-armor",
+        "rarity": "Common",
+        "type": "Armor",
+        "description": "Wisps of harmless, odorless smoke rise from this armor while it is worn.",
+        "description_tr": "Giyildiğinde üzerinden zararsız dumanlar yükselir."
+    },
+    {
+        "name": "Spell Scroll",
+        "name_tr": "Büyü Parşömeni",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:spell-scroll",
+        "rarity": "Common",
+        "type": "Scroll",
+        "description": "A spell scroll bears the words of a single spell. Use to cast the spell; crumbles to dust after use.",
+        "description_tr": "Tek bir büyünün sözlerini içerir. Sınıf listenizdeyse büyü bileşeni olmadan yapmanızı sağlar. Seviyesi yüksekse kontrol (DC 10 + büyü seviyesi) gerekir."
+    },
+    {
+        "name": "Spellshard",
+        "name_tr": "Büyü Şard'ı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:spellshard",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "description": "Fits in the hand and stores information like a book. Can hold up to 320 pages. Wizard can use as spellbook.",
+        "description_tr": "Eberron ejderha şard'ı. 320 sayfalık bir kitap kadar bilgi depolar. Zihinle okunur. Büyücü kitabı olarak kullanılabilir."
+    },
+    {
+        "name": "Spellwrought Tattoo",
+        "name_tr": "Büyü İşlemeli Dövme",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:spellwrought-tattoo",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "description": "Produced by a needle, contains a single spell of up to 5th level. Vanishes from skin after spell ends.",
+        "description_tr": "5. seviyeye kadar tek bir büyü içerir. Büyü yapıldıktan sonra dövme yok olur."
+    },
+    {
+        "name": "Staff of Adornment",
+        "name_tr": "Süsleme Asası",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:staff-of-adornment",
+        "rarity": "Common",
+        "type": "Staff",
+        "description": "Objects weighing no more than 1 pound float above the tip of the staff and remain there until removed.",
+        "description_tr": "Ucunda 1 libreye kadar 3 nesneyi havada asılı tutabilir ve döndürebilir."
+    },
+    {
+        "name": "Staff of Birdcalls",
+        "name_tr": "Kuş Sesi Asası",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:staff-of-birdcalls",
+        "rarity": "Common",
+        "type": "Staff",
+        "description": "Wooden staff with 10 charges that can create various bird sounds within 60 feet.",
+        "description_tr": "10 yükü vardır. 60 fit mesafede farklı kuş sesleri (kuzgun, ördek vb.) çıkarmanızı sağlar."
+    },
+    {
+        "name": "Staff of Flowers",
+        "name_tr": "Çiçek Asası",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:staff-of-flowers",
+        "rarity": "Common",
+        "type": "Staff",
+        "description": "10 charges; use 1 charge to cause a flower to sprout from a patch of soil or from the staff.",
+        "description_tr": "10 yükü vardır. 5 fit içinde veya asanı üzerinde çiçek açmasını sağlar."
+    },
+    {
+        "name": "Strixhaven Pennant",
+        "name_tr": "Strixhaven Flaması",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:strixhaven-pennant",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "description": "Symbol on the pennant glitters while waved, shedding bright light in a 10-foot radius.",
+        "description_tr": "Sallandığında ışık saçar (10 fit parlak, 10 fit loş)."
+    },
+    {
+        "name": "Talking Doll",
+        "name_tr": "Konuşan Oyuncak",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:talking-doll",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "description": "Teach the doll up to six phrases and set conditions under which the doll speaks them.",
+        "description_tr": "Kısa dinlenme sırasında ona 6 kısa cümle ve söylenme koşulları öğretebilirsiniz."
+    },
+    {
+        "name": "Tankard of Plenty",
+        "name_tr": "Bolluk Maşrapası",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:tankard-of-plenty",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "description": "Speaki command word to fill the tankard with three pints of rich dwarven ale. 3 charges daily.",
+        "description_tr": "3 yükü vardır. 'Illefarn' dendiğinde 3 pint cüce birası ile dolar."
+    },
+    {
+        "name": "Tankard of Sobriety",
+        "name_tr": "Ayıklık Maşrapası",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:tankard-of-sobriety",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "description": "Drink alcoholic beverages from this tankard without becoming inebriated.",
+        "description_tr": "İçilen içkilerin sarhoş etmesini engeller."
+    },
+    {
+        "name": "Thermal Cube",
+        "name_tr": "Termal Küp",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:thermal-cube",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "description": "Generates dry heat to keep the temperature within 15 feet at 95 degrees Fahrenheit.",
+        "description_tr": "15 fitlik alanı 35 derecede sıcak tutar."
+    },
+    {
+        "name": "Unbreakable Arrow",
+        "name_tr": "Kırılmaz Ok",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:unbreakable-arrow",
+        "rarity": "Common",
+        "type": "Weapon",
+        "description": "Can't be broken, except when it is within an Antimagic Field.",
+        "description_tr": "Antimagic Field dışında kırılamaz."
+    },
+    {
+        "name": "Veteran's Cane",
+        "name_tr": "Kıdemli Bastonu",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:veterans-cane",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "description": "Bonus action to transform the cane into an ordinary longsword; ceases to be magical.",
+        "description_tr": "Bonus eylemle sıradan bir uzun kılıca (longsword) dönüşür ve sihri biter."
+    },
+    {
+        "name": "Vox Seeker",
+        "name_tr": "Ses Arayıcı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:vox-seeker",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "description": "Clockwork device that resembles a metal crab; under the DM's control while operational.",
+        "description_tr": "Saat mekanizmalı metal yengeç. Kurulduğunda 1-10 dakika çalışır. DM kontrolündedir."
+    },
+    {
+        "name": "Walloping Ammunition",
+        "name_tr": "Şiddetli Mühimmat",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:walloping-ammunition",
+        "rarity": "Common",
+        "type": "Weapon",
+        "description": "Creature hit must succeed on a DC 10 Strength save or be knocked prone.",
+        "description_tr": "Çarptığında yaratığın DC 10 Güç kurtarma zarı atıp yere düşmesini (prone) tetikler."
+    },
+    {
+        "name": "Wand of Conducting",
+        "name_tr": "Şef Değneği",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:wand-of-conducting",
+        "rarity": "Common",
+        "type": "Wand",
+        "description": "Expend charges to create orchestral music within range points of 60 feet.",
+        "description_tr": "3 yükü vardır. Sallandığında 60 fit mesafede orkestra müziği çalar."
+    },
+    {
+        "name": "Wand of Pyrotechnics",
+        "name_tr": "Havai Fişek Değneği",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:wand-of-pyrotechnics",
+        "rarity": "Common",
+        "type": "Wand",
+        "description": "7 charges; create a harmless burst of multicolored light and crackling noise up to 60 feet away.",
+        "description_tr": "7 yükü vardır. 60 fit mesafede renkli ışık ve ses patlamaları oluşturur."
+    },
+    {
+        "name": "Wand of Scowls",
+        "name_tr": "Somurtkanlık Değneği",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:wand-of-scowls",
+        "rarity": "Common",
+        "type": "Wand",
+        "description": "Expend 1 charge to force a humanoid to scowl for 1 minute (DC 10 Charisma save).",
+        "description_tr": "3 yükü vardır. Hedefin DC 10 Karizma kurtarma zarında başarısız olması durumunda 1 dakika somurtmasını sağlar."
+    },
+    {
+        "name": "Wand of Smiles",
+        "name_tr": "Gülümseme Değneği",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:wand-of-smiles",
+        "rarity": "Common",
+        "type": "Wand",
+        "description": "Expend 1 charge to force a humanoid to smile for 1 minute (DC 10 Charisma save).",
+        "description_tr": "3 yükü vardır. Hedefin DC 10 Karizma kurtarma zarında başarısız olması durumunda 1 dakika gülümsemesini sağlar."
+    },
+    {
+        "name": "Wand Sheath",
+        "name_tr": "Değnek Kılıfı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:wand-sheath",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "description": "Clamps onto your arm; sheathed wand and sheath count as one magic item for attunement slots.",
+        "description_tr": "Kolunuza takılır, takılı değnekle birlikte tek bir sihirli eşya sayılır."
+    },
+    {
+        "name": "Adamantine Armor",
+        "name_tr": "Adamantin Zırh",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:adamantine-armor",
+        "rarity": "Uncommon",
+        "type": "Armor",
+        "description": "Reinforced with adamantine; any critical hit against you becomes a normal hit.",
+        "description_tr": "Kritik vuruşları normal vuruşa dönüştürür."
+    },
+    {
+        "name": "Alchemy Jug",
+        "name_tr": "Simya Testisi",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:alchemy-jug",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Produce various liquids (acid, ale, beer, honey, oil, poison, vinegar, water, wine) from a set table.",
+        "description_tr": "Günde bir kez belirli miktarda sıvı (asit, bira, bal, su vb.) üretir."
+    },
+    {
+        "name": "Alchemy Jug (Blue)",
+        "name_tr": "Mavi Simya Testisi",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:alchemy-jug-blue",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Functions as Alchemy Jug, but can also produce boiling hot tea.",
+        "description_tr": "Sıcak çay da üretebilen versiyonu."
+    },
+    {
+        "name": "Alchemy Jug (Orange)",
+        "name_tr": "Turuncu Simya Testisi",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:alchemy-jug-orange",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Functions as Alchemy Jug, but can also produce soy sauce.",
+        "description_tr": "Soya sosu da üretebilen versiyonu."
+    },
+    {
+        "name": "All-Purpose Tool",
+        "name_tr": "Çok Amaçlı Alet",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:all-purpose-tool",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Transform into artisan's tools; provides bonus to artificer spell attack rolls and save DCs.",
+        "description_tr": "Herhangi bir zanaatkar aletine dönüşür. Artificer büyüleri için bonus sağlar ve bilinmeyen bir Cantrip öğrenmenize izin verir."
+    },
+    {
+        "name": "Ammunition, +1, +2, or +3",
+        "name_tr": "Büyülü Mühimmat",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:ammunition",
+        "rarity": "Uncommon",
+        "type": "Weapon",
+        "description": "Bonus to attack and damage rolls; ceases to be magical once it hits a target.",
+        "description_tr": "Saldırı ve hasar bonusu sağlar."
+    },
+    {
+        "name": "Amulet of Proof Against Detection and Location",
+        "name_tr": "Tespit ve Yer Belirlemeye Karşı Muska",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:amulet-of-proof-against-detection-and-locatio",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Hidden from divination magic and scrying sensors while wearing.",
+        "description_tr": "Divination büyülerinden ve sihirli gözlemden saklar."
+    },
+    {
+        "name": "Amulet of the Devout",
+        "name_tr": "Dindar Muskası",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:amulet-of-the-devout",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Bonus to spell attack rolls and save DCs; use Channel Divinity without expending a use once per day.",
+        "description_tr": "Din adamları için büyü bonusu ve Channel Divinity yükü harcamadan kullanma imkanı sağlar."
+    },
+    {
+        "name": "Amulet of the Drunkard",
+        "name_tr": "Sarhoş Muskası",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:amulet-of-the-drunkard",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Regain 4d4 + 4 hit points when drinking a pint of beer, ale, mead, or wine.",
+        "description_tr": "İçki içildiğinde 4d4+4 can kazandırır."
+    },
+    {
+        "name": "Arcane Grimoire",
+        "name_tr": "Arkane Grimoire",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:arcane-grimoire",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Spellcasting focus for wizard spells; bonus to attack rolls and save DCs; increases spell recovery effectiveness.",
+        "description_tr": "Büyücüler için büyü bonusu sağlar ve Arcane Recovery etkisini artırır."
+    },
+    {
+        "name": "Armor Of Fungal Spores",
+        "name_tr": "Mantar Sporu Zırhı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:armor-of-fungal-spores",
+        "rarity": "Uncommon",
+        "type": "Armor",
+        "description": "Bonus action to emit poisonous spores in a 10-foot-radius sphere.",
+        "description_tr": "Etrafa zehirli sporlar saçarak rakipleri zehirleyebilir."
+    },
+    {
+        "name": "Armor Of The Fallen",
+        "name_tr": "Düşenlerin Zırhı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:armor-of-the-fallen",
+        "rarity": "Uncommon",
+        "type": "Armor",
+        "description": "Use to cast Speak with Dead or Animate Dead once per day. Destroyed if you die while attuned.",
+        "description_tr": "Speak With Dead veya Animate Dead büyülerini yapmanızı sağlar. Öldüğünüzde zırh yok olur."
+    },
+    {
+        "name": "Armor Of Weightlessness",
+        "name_tr": "Ağırlıksızlık Zırhı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:armor-of-weightlessness",
+        "rarity": "Uncommon",
+        "type": "Armor",
+        "description": "Expend charges to cast Jump (1 charge) or Levitate (2 charges) on yourself.",
+        "description_tr": "Jump veya Levitate büyülerini yapmanızı sağlar."
+    },
+    {
+        "name": "Bag Of Bounty",
+        "name_tr": "Bereket Torbası",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:bag-of-bounty",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Cast Create Food and Water up to three times per day to produce a feast.",
+        "description_tr": "Create Food and Water büyüsüyle ziyafet çıkarmanızı sağlar."
+    },
+    {
+        "name": "Bag of Holding",
+        "name_tr": "Taşıma Çantası",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:bag-of-holding",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Stores up to 500 pounds in an extradimensional space; internal capacity is 64 cubic feet.",
+        "description_tr": "İç hacmi dışından çok daha büyüktür. 500 libre taşıyabilir."
+    },
+    {
+        "name": "Bag of Tricks",
+        "name_tr": "Hile Torbası",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:bag-of-tricks",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Pull out fuzzy objects that transform into friendly creatures when thrown.",
+        "description_tr": "İçinden küçük tüylü nesneler çıkarıp fırlattığınızda yaratıklara dönüşür."
+    },
+    {
+        "name": "Balance of Harmony",
+        "name_tr": "Uyum Terazisi",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:balance-of-harmony",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Cast Detect Evil and Good as a ritual with specific material requirements.",
+        "description_tr": "Detect Evil and Good büyüsünü ritüel olarak yapmanızı sağlar."
+    },
+    {
+        "name": "Balloon Pack",
+        "name_tr": "Balon Paketi",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:balloon-pack",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Deploy a balloon to gain the effect of Levitate or Feather Fall.",
+        "description_tr": "Levitate veya Feather Fall etkisi sağlar."
+    },
+    {
+        "name": "Barrier Tattoo",
+        "name_tr": "Bariyer Dövmesi",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:barrier-tattoo",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Provides an Armor Class while not wearing armor, based on the tattoo's rarity.",
+        "description_tr": "Zırh giymediğinizde AC bonusu sağlar."
+    },
+    {
+        "name": "Blasted Goggles",
+        "name_tr": "Patlamış Gözlük",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:blasted-goggles",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Shoot fiery beams (3d6 fire damage). Cursed: can't be removed and can cause blindness.",
+        "description_tr": "Ateş ışını saldırısı yapabilir. Lanetlidir, çıkarılamaz."
+    },
+    {
+        "name": "Blood of the Lycanthrope Antidote",
+        "name_tr": "Likantrop Kanı Panzehiri",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:blood-of-the-lycanthrope-antidote",
+        "rarity": "Uncommon",
+        "type": "Potion",
+        "description": "Removes the curse of lycanthropy when consumed.",
+        "description_tr": "Kurtadamlık lanetini temizler."
+    },
+    {
+        "name": "Blood Spear",
+        "name_tr": "Kan Mızrağı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:blood-spear",
+        "rarity": "Uncommon",
+        "type": "Weapon",
+        "description": "Gain 2d6 temporary hit points when you reduce a target to 0 hit points with a melee attack.",
+        "description_tr": "Birini öldürdüğünüzde geçici can puanı sağlar."
+    },
+    {
+        "name": "Bloodrage Greataxe",
+        "name_tr": "Kan Öfkesi Savaş Baltası",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:bloodrage-greataxe",
+        "rarity": "Uncommon",
+        "type": "Weapon",
+        "description": "+2 bonus to attack and damage rolls while you have half your hit points or fewer.",
+        "description_tr": "Canınız yarıdan az ise +2 saldırı ve hasar bonusu verir."
+    },
+    {
+        "name": "Bloodwell Vial",
+        "name_tr": "Kan Kuyusu Şişesi",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:bloodwell-vial",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Spellcasting focus for sorcerers; bonus to attack rolls and save DCs; regain 5 sorcery points daily.",
+        "description_tr": "Sorcerer büyü bonusu sağlar ve Sorcery Points puanlarını yenilemenize yardımcı olur."
+    },
+    {
+        "name": "Boomerang Shield",
+        "name_tr": "Bumerang Kalkan",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:boomerang-shield",
+        "rarity": "Uncommon",
+        "type": "Armor",
+        "description": "Make ranged attacks with the shield (1d6 slashing); returns to hand instantly after hit or miss.",
+        "description_tr": "Fırlatılabilir ve geri gelir."
+    },
+    {
+        "name": "Boots of Elvenkind",
+        "name_tr": "Elvankind Çizmeleri",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:boots-of-elvenkind",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "description": "Steps made no sound; advantage on Stealth checks to move silently.",
+        "description_tr": "Adımlarınız ses çıkarmaz ve sessiz hareket etmede avantaj sağlar."
+    }
+]

@@ -1,0 +1,352 @@
+[
+  {
+    "name": "Candle of Invocation",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:candle-of-invocation",
+    "rarity": "Very Rare",
+    "type": "Wondrous Item",
+    "description": "This slender taper is dedicated to a deity and shares that deity's alignment. The candle's alignment can be detected with the Detect Good and Evil spell. The DM chooses the god and associated alignment or determines the alignment randomly.\n\nThe candle's magic is activated when the candle is lit, which requires an action. After burning for 4 hours, the candle is destroyed. You can snuff it out early for use at a later time. Deduct the time it burned in increments of 1 minute from the candle's total burn time.\n\nWhile lit, the candle sheds dim light in a 30-foot radius. Any creature within that light whose alignment matches that of the candle makes attack rolls, saving throws, and ability checks with advantage. In addition, a cleric or druid in the light whose alignment matches the candle's can cast 1st-level spells he or she has prepared without expending spell slots, though the spell's effect is as if cast with a 1st-level slot.\n\nAlternatively, when you light the candle for the first time, you can cast the Gate spell with it. Doing so destroys the candle."
+  },
+  {
+    "name": "Cape of Enlargement",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:cape-of-enlargement",
+    "rarity": "Very Rare",
+    "type": "Wondrous Item",
+    "description": "Ancient runes are stitched in silver thread along the hem of this grayish-purple cape.\n\nThe cape has 3 charges. As a bonus action while wearing the cape, you can expend 1 of its charges to enlarge yourself, granting yourself the following benefits:\n\nThese benefits last for 10 minutes or until you use another bonus action to dismiss them. The cape regains 1d3 expended charges daily at dawn."
+  },
+  {
+    "name": "Carpet of Flying",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:carpet-of-flying",
+    "rarity": "Very Rare",
+    "type": "Wondrous Item",
+    "description": "You can speak the carpet's command word as an action to make the carpet hover and fly. It moves according to your spoken directions, provided that you are within 30 feet of it.\n\nFour sizes of carpet of flying exist. The DM chooses the size of a given carpet or determines it randomly.\n\nA carpet can carry up to twice the weight shown on the table, but it flies at half speed if it carries more than its normal capacity."
+  },
+  {
+    "name": "Cauldron of Rebirth",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:cauldron-of-rebirth",
+    "rarity": "Very Rare",
+    "type": "Wondrous Item",
+    "description": "This Tiny pot bears relief scenes of heroes on its cast iron sides. You can use the cauldron as a spell casting focus for your spells, and it functions as a suitable component for the Scrying spell. When you finish a long rest, you can use the cauldron to create a Potion of Greater Healing. The potion lasts for 24 hours, then loses its magic if not consumed.\n\nAs an action, you can cause the cauldron to grow large enough for a Medium creature to crouch within. You can revert the cauldron to its normal size as an action, harmlessly shunting anything that can't fit inside to the nearest unoccupied space.\n\nIf you place the corpse of a humanoid into the cauldron and cover the corpse with 200 pounds of salt (which costs 10 gp) for at least 8 hours, the salt is consumed and the creature returns to life as if by Raise Dead at the next dawn. Once used, this property can't be used again for 7 days."
+  },
+  {
+    "name": "Chime of Exile",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:chime-of-exile",
+    "rarity": "Very Rare",
+    "type": "Wondrous Item",
+    "description": "This silver chime is engraved with delicate magic sigils. While holding the chime, you can use an action to cast the Banishment spell (spell save DC 20). If the target of the spell has 50 hit points or fewer, it automatically fails its saving throw. Once the chime has been used to cast the spell, it can’t be used this way again until the next dawn."
+  },
+  {
+    "name": "Chronolometer",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:chronolometer",
+    "rarity": "Very Rare",
+    "type": "Wondrous Item",
+    "description": "While attuned to this device, you have a +1 bonus to Intelligence saving throws. The first time you attune to the chronolometer, you choose one language you don't know. You subsequently know that language while attuned to the device.\n\nTime Bandit. At the start of your turn, roll a d6 (no action required). On a 1-3, you slow down time, gaining an additional action on your turn and doubling your speed until the end of the turn. On a 4-6, you go forward in time to warn yourself of what is to come. The next time you fail a saving throw, attack roll, or ability check, you can reroll the check and take either result. Once you use this feature of the chronolometer, it cannot be used again until the next dawn.\n\nFate Swap. As a reaction when a creature you can see within 30 feet of you takes damage, that creature gains an additional action if it is the creature's turn, or can take an action immediately even though it isn't the creature's turn. Once you use this feature of the chronolometer, it cannot be used again until the next dawn.\n\nPart of a Whole. While this component is not installed in the Orrery of the Wanderer, its magic might function sporadically or with unpredictable side effects, as determined by the DM."
+  },
+  {
+    "name": "Cloak of Arachnida",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:cloak-of-arachnida",
+    "rarity": "Very Rare",
+    "type": "Wondrous Item",
+    "description": "This fine garment is made of black silk interwoven with faint silvery threads. While wearing it, you gain the following benefits:"
+  },
+  {
+    "name": "Clockwork Armor",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:clockwork-armor",
+    "rarity": "Very Rare",
+    "type": "Armor",
+    "description": "The outside surface and internal joints of this armor whir with interlocking gears, drawing on the orderly magic of the plane of Mechanus.\n\nThe armor has 4 charges. If you make a d20 roll while wearing this armor, you can expend 1 charge to change the number rolled to a 10. The armor regains 1d4 expended charges daily at dawn."
+  },
+  {
+    "name": "Conch of Teleportation",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:conch-of-teleportation",
+    "rarity": "Very Rare",
+    "type": "Wondrous Item",
+    "description": "This item is an ordinary, albeit rather large, conch shell that has been inscribed with the uvar rune. The conch measures 2 1/2 feet long and weighs 20 pounds.\n\nAs an action, you can cast the Teleport spell by blowing into the shell. The destination is fixed, and there is no chance of either a mishap or the spell being off target. Anyone teleported by the conch appears in a specific location designated by the item's creator at the time the uvar rune is inscribed on the conch. It doesn't allow teleportation to any other destination. Once its spell is cast, the conch can't be used again until the next dawn."
+  },
+  {
+    "name": "Constantori's Portrait",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:constantoris-portrait",
+    "rarity": "Very Rare",
+    "type": "Wondrous Item",
+    "description": "This painting by famed artist Dkesii Kwan depicts Constantori, a beautiful courtier, who was paid a staggering sum to be Dkesii's model. Whether Constantori's actual appearance matches the painting remains a subject of debate. The portrait is one of several paintings commissioned by the late Daiyani Grysthorn, a crime lord who frequently gave magical paintings as gifts to her most esteemed associates.\n\nSentience. Constantori's Portrait is a sentient, lawful evil item with an Intelligence score of 14, a Wisdom score of 12, and a Charisma score of 8. It can hear within a range of 120 feet and has darkvision within a range of 60 feet, but it can't see anything behind itself.\n\nThe painting can converse in Common, Draconic, and Elvish as if it were a living person, though Constantori's mouth doesn't move. Whenever conversation occurs within the portrait's auditory range, the painting eagerly gathers secrets, the names of secret tellers, significant events, or any political conversations.\n\nPersonality. Constantori's Portrait is demanding, condescending, and vain. It doesn't like being covered or placed out of sight, and it loudly condemns anyone who tries to remove it from its gold-leaf frame.\n\nWealth of Information. The painting's primary purpose is to observe and recall conversations. Over the past few decades, Constantori's Portrait has quietly observed countless conversations and now possesses an unquantifiable amount of lore—everything from criminal conspiracies to secret passwords. The DM decides what the painting knows and what it doesn't.\n\nWhile attuned to the painting, you can take an action to telepathically contact it over any distance, provided you and the painting are on the same plane of existence. The painting can't telepathically contact you, however. Maintaining telepathic contact with the painting requires your concentration (as if concentrating on a spell).\n\nGuardian Portrait. While you are attuned to the painting, you can command it to guard its location against one or more creatures you identify as the painting's enemies. The painting performs this function until you command it to stop or until your attunement to the painting ends.\n\nThe painting has 3 charges. When a creature the painting identifies as its enemy starts its turn in a space the painting can see, the painting expends 1 of its charges to cast Magic Missile (3 missiles), targeting that creature. The painting regains all expended charges daily at dawn.\n\nThe painting is a Small object with AC 12, 20 hit points, and immunity to poison damage. In its gold-leaf frame, the painting weighs 15 pounds. If the painting has at least 1 hit point and is targeted by a Mending spell, it regains 2d6 hit points."
+  },
+  {
+    "name": "Crown Of Whirling Comets",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:crown-of-whirling-comets",
+    "rarity": "Very Rare",
+    "type": "Wondrous Item",
+    "description": "This delicate silver tiara is decorated with stellar iconography. While you wear the crown, the gems on the tiara’s points detach and closely orbit your head.\n\nThe crown has 6 charges for the following properties, which you can use while wearing the crown:\n\nStar Flight. As a bonus action, you can spend 1 charge to gain the power of flight for 10 minutes. For the duration, you gain a flying speed equal to your walking speed, and you can hover. While flying, you glow faintly with starlight.\n\nStarlight Strike. As an action, you can spend any number of charges to launch bolts of frigid starlight. You launch a number of bolts equal to the number of charges spent, and you can direct the bolts to target one creature or several, so long as all creatures are within 120 feet of you and you can see them. The bolts automatically strike their targets, and each bolt deals 2d4 cold damage.\n\nWhirling Hail. As an action, you can spend 3 charges and cast the Ice Storm spell (save DC 16).\n\nThe crown regains 1d6 expended charges daily at dawn."
+  },
+  {
+    "name": "Crystal Ball",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:crystal-ball",
+    "rarity": "Very Rare",
+    "type": "Wondrous Item",
+    "description": "The typical crystal ball, a very rare item, is about 6 inches in diameter. While touching it, you can cast the Scrying spell (save DC 17) with it.\n\nThe following crystal ball variants are legendary items and have additional properties.\n\nCrystal Ball of Mind Reading. You can use an action to cast the Detect Thoughts spell (save DC 17) while you are scrying with the crystal ball, targeting creatures you can see within 30 feet of the spell's sensor. You don't need to concentrate on this Detect Thoughts to maintain it during its duration, but it ends if scrying ends.\n\nCrystal Ball of Telepathy. While scrying with the crystal ball, you can communicate telepathically with creatures you can see within 30 feet of the spell's sensor. You can also use an action to cast the Suggestion spell (save DC 17) through the sensor on one of those creatures. You don't need to concentrate on this Suggestion to maintain it during its duration, but it ends if scrying ends. Once used, the Suggestion power of the crystal ball can't be used again until the next dawn.\n\nCrystal Ball of True Seeing. While scrying with the crystal ball, you have truesight with a radius of 120 feet centered on the spell's sensor."
+  },
+  {
+    "name": "Crystalline Chronicle",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:crystalline-chronicle",
+    "rarity": "Very Rare",
+    "type": "Wondrous Item",
+    "description": "An etched crystal sphere the size of a grapefruit hums faintly and pulses with irregular flares of inner light. While you are touching the crystal, you can retrieve and store information and spells within the crystal at the same rate as reading and writing. When found, the crystal contains the following spells: Detect Thoughts, Intellect Fortress, Rary's Telepathic Bond, Sending, Telekinesis, Tasha's Mind Whip, and Tenser's Floating Disk. It functions as a spellbook for you, with its spells and other writing psychically encoded within it.\n\nWhile you are holding the crystal, you can use it as a spellcasting focus for your wizard spells, and you know the Mage Hand, Mind Sliver, and Message cantrips if you don't already know them.\n\nThe crystal has 3 charges, and it regains 1d3 expended charges daily at dawn. You can use the charges in the following ways while holding it:"
+  },
+  {
+    "name": "Dancing Sword",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:dancing-sword",
+    "rarity": "Very Rare",
+    "type": "Weapon",
+    "description": "You can use a bonus action to toss this magic sword into the air and speak the command word. When you do so, the sword begins to hover, flies up to 30 feet, and attacks one creature of your choice within 5 feet of it. The sword uses your attack roll and ability score modifier to damage rolls.\n\nWhile the sword hovers, you can use a bonus action to cause it to fly up to 30 feet to another spot within 30 feet of you. As part of the same bonus action, you can cause the sword to attack one creature within 5 feet of it.\n\nAfter the hovering sword attacks for the fourth time, it flies up to 30 feet and tries to return to your hand. If you have no hands free, it falls to the ground at your feet. If the sword has no unobstructed path to you, it moves as close to you as it can and then falls to the ground. It also ceases to hover if you grasp it or move more than 30 feet away from it."
+  },
+  {
+    "name": "Deck Of Dimensions",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:deck-of-dimensions",
+    "rarity": "Very Rare",
+    "type": "Wondrous Item",
+    "description": "The backs of the cards in this deck are decorated with intricate designs representing different planes of existence. The deck has 6 charges. While holding it, you can expend 1 or more of its charges to use the following properties:\n\nMarked Card. As a bonus action, you can expend 1 charge to draw a card from the deck and place it in an unoccupied space within 5 feet of you. The card then becomes marked with an invisible sigil. Once within the next 24 hours, as an action, you can speak the marked card’s name and teleport to the card’s location, along with any equipment you are wearing or carrying, appearing in the closest unoccupied space to the card. After you teleport in this way, or after 8 hours, the card returns to the deck, and the mark on it fades.\n\nRiffling Portal. As an action, you can expend 3 charges to cast the Arcane Gate spell from the deck. The deck vanishes, and fluttering cards create the spell’s portal rings. When the spell ends, the deck reappears in your possession.\n\nShuffling Stride. As a bonus action, you can expend 1 charge to throw a card from the deck to an unoccupied space within 60 feet of yourself and teleport, along with any equipment you’re wearing or carrying, to that space. The card then vanishes and returns to the deck.\n\nThe deck regains 1d6 expended charges daily at dawn."
+  },
+  {
+    "name": "Deck Of Wild Cards",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:deck-of-wild-cards",
+    "rarity": "Very Rare",
+    "type": "Wondrous Item",
+    "description": "This deck of heavy vellum cards hums with the magic of the Elemental Chaos.\n\nThe magic of the deck functions only if cards are drawn at random (a deck of real-world playing cards can simulate the deck). As an action, you can draw a random card from this deck and throw it to make a ranged spell attack, using Dexterity for the attack roll. The card has a range of 30 feet. On a hit, it deals 1d4 slashing damage and imposes a magical effect determined by its suit, as detailed in the Deck of Wild Cards table. The card immediately returns to the deck after it hits or misses a target.\n\nDeck of Wild Cards"
+  },
+  {
+    "name": "Demon Armor",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:demon-armor",
+    "rarity": "Very Rare",
+    "type": "Armor",
+    "description": "While wearing this armor, you gain a +1 bonus to AC, and you can understand and speak Abyssal. In addition, the armor's clawed gauntlets turn unarmed strikes with your hands into magic weapons that deal slashing damage, with a +1 bonus to attack rolls and damage rolls and a damage die of 1d8.\n\nCurse. Once you don this cursed armor, you can't doff it unless you are targeted by the Remove Curse spell or similar magic. While wearing the armor, you have disadvantage on attack rolls against demons and on saving throws against their spells and special abilities."
+  },
+  {
+    "name": "Devastation Orb",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:devastation-orb",
+    "rarity": "Very Rare",
+    "type": "Wondrous Item",
+    "description": "A Devastation Orb is an elemental bomb that can be created at the site of an elemental node by performing a ritual with an elemental weapon. The type of orb created depends on the node used. For example, an air node creates a Devastation Orb of Air. The ritual takes 1 hour to complete and requires 2,000 gp worth of special components, which are consumed.\n\nA Devastation Orb measures 12 inches in diameter, weighs 10 pounds, and has a solid outer shell. The orb detonates 1d100 hours after its creation, releasing the elemental energy it contains. The orb gives no outward sign of how much time remains before it will detonate. Spells such as Identify and Divination can be used to ascertain when the orb will explode. An orb has AC 10, 15 hit points, and immunity to poison and psychic damage. Reducing it to 0 hit points causes it to explode instantly.\n\nA special container can be crafted to contain a Devastation Orb and prevent it from detonating. The container must be inscribed with symbols of the orb’s opposing element. For example, a case inscribed with earth symbols can be used to contain a Devastation Orb of Air and keep it from detonating. While in the container, the orb thrums. If it is removed from the container after the time when it was supposed to detonate, it explodes 1d6 rounds later, unless it is returned to the container.\n\nRegardless of the type of orb, its effect is contained within a sphere with a 1 mile radius. The orb is the sphere’s point of origin. The orb is destroyed after one use.\n\nAir Orb. When this orb detonates, it creates a powerful windstorm that lasts for 1 hour. Whenever a creature ends its turn exposed to the wind, the creature must succeed on a DC 18 Constitution saving throw or take 1d4 bludgeoning damage, as the wind and debris batter it. The wind is strong enough to uproot weak trees and destroy light structures after at least 10 minutes of exposure. Otherwise, the rules for strong wind apply, as detailed in chapter 5 of the Dungeon Master’s Guide.\n\nEarth Orb. When this orb detonates, it subjects the area to the effects of the Earthquake spell for 1 minute (spell save DC 18). For the purpose of the spell’s effects, the spell is cast on the turn that the orb explodes.\n\nFire Orb. When this orb detonates, it creates a dry heat wave that lasts for 24 hours. Within the area of effect, the rules for extreme heat apply, as detailed in chapter 5 of the Dungeon Master’s Guide. At the end of each hour, there is a ten percent chance that the heat wave starts a wildfire in a random location within the area of effect. The wildfire covers a 10-foot-square area initially but expands to fill another 10-foot square each round until the fire is extinguished or burns itself out. A creature that comes within 10 feet of a wildfire for the first time on a turn or starts its turn there takes 3d6 fire damage.\n\nWater Orb. When this orb detonates, it creates a torrential rainstorm that lasts for 24 hours. Within the area of effect, the rules for heavy precipitation apply, as detailed in chapter 5 of the Dungeon Master’s Guide. If there is a substantial body of water in the area, it floods after 2d10 hours of heavy rain, rising 10 feet above its banks and inundating the surrounding area. The flood advances at a rate of 100 feet per round, moving away from the body of water where it began until it reaches the edge of the area of effect: at that point, the water flows downhill (and possibly recedes back to its origin). Light structures collapse and wash away. Any Large or smaller creature caught in the flood’s path is swept away. The flooding destroys crops and might trigger mudslides, depending on the terrain."
+  },
+  {
+    "name": "Dimensional Loop",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:dimensional-loop",
+    "rarity": "Very Rare",
+    "type": "Wondrous Item",
+    "description": "While attuned to this device, you have a +1 bonus to Strength saving throws. and you have darkvision out to a range of 60 feet. If you already have darkvision, its range increases by 30 feet.\n\nDimensional Cloak. As a bonus action, you send your body out of phase with the material world for 1 minute, granting you advantage on Dexterity (Stealth) checks made to hide, and imposing disadvantage on attack rolls against you. Once you use this feature of the dimensional loop, it cannot be used again until the next dawn.\n\nFold Space. Choose a space you can see within 60 feet of you (no action required). You treat that space as if it were within 5 feet of you until the end of your turn. This allows you to move immediately to that space without provoking opportunity attacks, or to interact with objects or creatures in that space as though they were next to you (including allowing you to make melee attacks into that space). Once you use this feature of the dimensional loop, it cannot be used again until the next dawn.\n\nPart of a Whole. While this component is not installed in the Orrery of the Wanderer, its magic might function sporadically or with unpredictable side effects, as determined by the DM."
+  },
+  {
+    "name": "Dispelling Stone",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:dispelling-stone",
+    "rarity": "Very Rare",
+    "type": "Wondrous Item",
+    "description": "This smooth, rainbow-colored, egg-shaped stone can be thrown up to 30 feet and explodes in a 10-foot-radius sphere of magical energy on impact, destroying the stone. Any active spell of 5th level or lower in the sphere ends."
+  },
+  {
+    "name": "Dragon Scale Mail",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:dragon-scale-mail",
+    "rarity": "Very Rare",
+    "type": "Armor",
+    "description": "Dragon scale mail is made of the scales of one kind of dragon. Sometimes dragons collect their cast-off scales and gift them to humanoids. Other times, hunters carefully skin and preserve the hide of a dead dragon. In either case, dragon scale mail is highly valued.\n\nWhile wearing this armor, you gain a +1 bonus to AC, you have advantage on saving throws against the Frightful Presence and breath weapons of dragons, and you have resistance to one damage type that is determined by the kind of dragon that provided the scales (see the table).\n\nAdditionally, you can focus your senses as an action to magically discern the distance and direction to the closest dragon within 30 miles of you that is of the same type as the armor. This special action can't be used again until the next dawn."
+  },
+  {
+    "name": "Dragon Vessel",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:dragon-vessel",
+    "rarity": "Very Rare",
+    "type": "Wondrous Item",
+    "description": "This vessel can be a potion bottle, drinking horn, or other container meant to hold a liquid.\n\nSlumbering (Uncommon). As a bonus action, if the vessel is empty, you can speak the command word to fill the vessel with one of the following (your choice): Ale, Olive Oil, a Potion of Healing, or a Potion of Climbing. Once this property is used, it can’t be used until the next dawn. A potion you create in this way loses its magical properties if it isn’t imbibed within 24 hours.\n\nStirring (Rare). In addition to the options for a Slumbering vessel, you can fill a Stirring vessel with Mead, a Potion of Fire Breath, or a Greater Potion of Healing.\n\nWakened (Very Rare). In addition to the options for a Slumbering or Stirring vessel, you can fill a Wakened vessel with Wine, a Potion of Flying, or a Superior Potion of Healing.\n\nAscendant (Legendary). In addition to the options for other states, you can fill an Ascendant vessel with Whiskey, a Supreme Potion of Healing, or a Potion of Dragon’s Majesty."
+  },
+  {
+    "name": "Dragonhide Belt",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:dragonhide-belt",
+    "rarity": "Very Rare",
+    "type": "Wondrous Item",
+    "description": "This finely detailed belt is made of dragonhide. While wearing it, you gain a bonus to the saving throw DCs of your ki features. The bonus is determined by the belt’s rarity. In addition, you can use an action to regain ki points equal to a roll of your Martial Arts die. You can’t use this action again until the next dawn."
+  },
+  {
+    "name": "Dragon's Wrath Weapon",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:dragons-wrath-weapon",
+    "rarity": "Very Rare",
+    "type": "Weapon",
+    "description": "This weapon is decorated with dragon heads, claws, wings, scales, or Draconic letters. When it steeps in a dragon’s hoard, it absorbs the energy of the dragon’s breath weapon and deals damage of that type with its special properties.\n\nSlumbering (Uncommon). Whenever you roll a 20 on your attack roll with this weapon, each creature of your choice within 5 feet of the target takes 5 damage of the type dealt by the dragon’s breath weapon.\n\nStirring (Rare). The Stirring weapon has the Slumbering property. In addition, you gain a +1 bonus to attack and damage rolls made using the weapon. On a hit, the weapon deals an extra 1d6 damage of the type dealt by the dragon’s breath weapon.\n\nWakened (Very Rare). The Wakened weapon has the Slumbering property, and it improves on the Stirring property. The bonus to attack and damage rolls increases to +2, and the extra damage dealt by the weapon increases to 2d6.\n\nAs an action, you can unleash a 30-foot cone of destructive energy from the weapon. Each creature in that area must make a DC 16 Dexterity saving throw, taking 8d6 damage of the type dealt by the dragon’s breath weapon on a failed save, or half as much damage on a successful one. Once this action is used, it can’t be used again until the next dawn.\n\nAscendant (Legendary). The Ascendant weapon has the Slumbering property, and it improves on the Stirring and Wakened properties. The bonus to attack and damage rolls increases to +3, and the extra damage dealt by the weapon increases to 3d6.\n\nThe cone of destructive energy the weapon creates increases to a 60-foot cone, the save DC increases to 18, and the damage increases to 12d6."
+  },
+  {
+    "name": "Dragon-Touched Focus",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:dragon-touched-focus",
+    "rarity": "Very Rare",
+    "type": "Wondrous Item",
+    "description": "This wondrous item can be a scepter, an orb, an amulet, a crystal, or another finely crafted object. It typically incorporates imagery of dragons’ wings, claws, teeth, or scales.\n\nSlumbering (Uncommon). You have advantage on initiative rolls. While you are holding the focus, it can function as a spellcasting focus for all your spells.\n\nStirring (Rare). The Stirring focus has the Slumbering property, and it gains an additional property determined by the family of the dragon in whose hoard it became Stirring:\n\nChromatic. Whenever you use a spell slot to cast a spell that deals acid, cold, fire, lightning, or poison damage, roll a d6, and you gain a bonus equal to the number rolled to one of the spell’s damage rolls.\n\nGem. Whenever you use a spell slot to cast a spell, you can immediately teleport to an unoccupied space you can see within 15 feet of you.\n\nMetallic. When a creature you can see within 30 feet of you makes a saving throw, you can use your reaction to give that creature advantage on the saving throw.\n\nWakened (Very Rare). The Wakened focus has the Slumbering and Stirring properties, and while you are holding a Wakened focus, you can use it to cast certain spells. Once the item is used to cast a given spell, it can’t be used to cast that spell again until the next dawn. The spells are determined by the family of the dragon in whose hoard it became Wakened.\n\nChromatic. Hold Monster, Rime’s Binding Ice\n\nGem. Rary’s Telepathic Bond, Raulothim’s Psychic Lance\n\nMetallic. Fizban’s Platinum Shield, Legend Lore\n\nAscendant (Legendary). The Ascendant focus has the Slumbering, Stirring, and Wakened properties. In addition, when you cast a spell of 1st level or higher while holding this focus, you can treat the spell as if it were cast using a 9th-level spell slot. Once this property is used, it can’t be used again until the next dawn."
+  },
+  {
+    "name": "Duskcrusher",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:duskcrusher",
+    "rarity": "Very Rare",
+    "type": "Weapon",
+    "description": "This item takes the form of a leather-wrapped metal rod emblazoned with the symbol of Pelor, the Dawn Father. While grasping the rod, you can use a bonus action to cause a warhammer head of crackling radiance to spring into existence. The warhammer's radiant head emits bright light in a 15-foot radius and dim light for an additional 15 feet. The light is sunlight. You can use an action to make the radiant head disappear.\n\nWhile the radiant head is active, you gain a +2 bonus to attack and damage rolls made with this magic weapon, and attacks with the weapon deal radiant damage instead of bludgeoning damage. An undead creature hit by the weapon takes an extra 1d8 radiant damage.\n\nWhile you are holding Duskcrusher and its radiant head is active, you can use an action to cast the Sunbeam spell (save DC 15) from the weapon, and this action can't be used again until the next dawn."
+  },
+  {
+    "name": "Dwarven Plate",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:dwarven-plate",
+    "rarity": "Very Rare",
+    "type": "Armor",
+    "description": "While wearing this armor, you gain a +2 bonus to AC. In addition, if an effect moves you against your will along the ground, you can use your reaction to reduce the distance you are moved by up to 10 feet."
+  },
+  {
+    "name": "Dwarven Thrower",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:dwarven-thrower",
+    "rarity": "Very Rare",
+    "type": "Weapon",
+    "description": "You gain a +3 bonus to attack and damage rolls made with this magic weapon. It has the thrown property with a normal range of 20 feet and a long range of 60 feet. When you hit with a ranged attack using this weapon, it deals an extra 1d8 damage or, if the target is a giant, 2d8 damage. Immediately after the attack, the weapon flies back to your hand."
+  },
+  {
+    "name": "Dyrrn's Tentacle Whip",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:dyrrns-tentacle-whip",
+    "rarity": "Very Rare",
+    "type": "Weapon",
+    "description": "This long, whip-like strand of tough muscle bears a sharp stinger at one end. To attune to this symbiotic weapon, you wrap the whip around your wrist for the entire attunement period, during which time the whip painfully embeds its tendrils into your arm.\n\nYou gain a +2 bonus to attack and damage rolls made with this magic whip, but attack rolls made against aberrations with this weapon have disadvantage. A creature hit by this weapon takes an extra 1d6 psychic damage. When you roll a 20 on the d20 for an attack roll with this weapon, the target is stunned until the end of its next turn.\n\nAs a bonus action, you can sheathe the whip by causing it to retract into your arm, or draw the whip out of\nyour arm again.\n\nSymbiotic Nature. The whip can't be removed from you while you're attuned to it, and you can't voluntarily end your attunement to it. If you're targeted by a spell that ends a curse, your attunement to the whip ends, and it detaches from you."
+  },
+  {
+    "name": "Efreeti Bottle",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:efreeti-bottle",
+    "rarity": "Very Rare",
+    "type": "Wondrous Item",
+    "description": "This painted brass bottle weighs 1 pound. When you use an action to remove the stopper, a cloud of thick smoke flows out of the bottle. At the end of your turn, the smoke disappears with a flash of harmless fire, and an efreeti appears in an unoccupied space within 30 feet of you. See the Monster Manual for the efreeti's statistics.\n\nThe first time the bottle is opened, the DM rolls to determine what happens."
+  },
+  {
+    "name": "Eldritch Staff",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:eldritch-staff",
+    "rarity": "Very Rare",
+    "type": "Staff",
+    "description": "This staff can be wielded as a magic quarterstaff that grants a +1 bonus to attack and damage rolls.\n\nThe staff has 10 charges and regains 1d6 + 4 expended charges daily at dawn. If you expend the last charge, roll a d20. On a 1, the staff is destroyed in an otherwise harmless burst of eldritch energy.\n\nEldritch Attack. When you hit with a melee attack using the staff, you can expend up to 3 of its charges. For each charge you expend, the target takes an extra 1d8 lightning damage.\n\nEldritch Escape. If you take damage while holding the staff, you can use your reaction to expend 3 of the staff's charges, whereupon you turn invisible and teleport yourself, along with any equipment you are wearing or carrying, up to 60 feet to an unoccupied space that you can see. You remain invisible until the start of your next turn or until you attack, cast a spell, or deal damage."
+  },
+  {
+    "name": "Far Gear",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:far-gear",
+    "rarity": "Very Rare",
+    "type": "Wondrous Item",
+    "description": "While attuned to this device, you have a +1 bonus to Charisma saving throws. and you have advantage on Charisma (Intimidation) checks.\n\nAberrant Ally. You can conjure an aberrant creature from the chaos of the multiverse to serve you. This functions as the Conjure Celestial spell (no concentration required), except the creature you summon is an aberration of challenge rating 4 or lower. Once you use this feature of the far gear, it cannot be used again until the next dawn.\n\nUnnatural Bane. You can cast the Bane spell (save DC 15), which affects any number of creatures within range for 1 minute. Once you use this feature of the far gear, it cannot be used again until the next dawn.\n\nPart of a Whole. While this component is not installed in the Orrery of the Wanderer, its magic might function sporadically or with unpredictable side effects, as determined by the DM."
+  },
+  {
+    "name": "Fate Cutter Shears",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:fate-cutter-shears",
+    "rarity": "Very Rare",
+    "type": "Weapon",
+    "description": "The blades of these pruning shears bear many nicks and dents but still cut cleanly. The shears function as a magic dagger. The weapon has the following properties:\n\nEver Sharp. When you hit with an attack using the shears, the target takes an extra 1d6 force damage.\n\nSever Threads. When you hit a creature with the shears, you can cut that creature’s fate. Until the target finishes a long rest, attack rolls against it score a critical hit on a roll of 19 or 20 on the d20. Once this property is used, it can’t be used again until the next dawn."
+  },
+  {
+    "name": "Fate Dealer's Deck",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:fate-dealers-deck",
+    "rarity": "Very Rare",
+    "type": "Wondrous Item",
+    "description": "The backs of these cards are inscribed with glyphs representing the Inner Planes, the Outer Planes, or the holy symbols of various deities. While holding this deck, you can use it as a spellcasting focus, and you gain a bonus to spell attack rolls and to your spell save DC. The bonus is determined by the deck’s rarity.\n\nIn addition, while you’re holding the deck, you can draw a card as an action to expend and roll one of your Hit Dice and add the deck’s bonus to the number rolled. One creature you can see within 30 feet of you either takes radiant damage or regains hit points (your choice) equal to the total."
+  },
+  {
+    "name": "Figurine of Wondrous Power",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:figurine-of-wondrous-power",
+    "rarity": "Very Rare",
+    "type": "Wondrous Item",
+    "description": "A Figurine of Wondrous Power is a statuette of a beast small enough to fit in a pocket. If you use an action to speak the command word and throw the figurine to a point on the ground within 60 feet of you, the figurine becomes a living creature. If the space where the creature would appear is occupied by other creatures or objects, or if there isn't enough space for the creature, the figurine doesn't become a creature.\n\nThe creature is friendly to you and your companions. It understands your languages and obeys your spoken commands. If you issue no commands, the creature defends itself but takes no other actions. See the Monster Manuel for the creature's statistics.\n\nThe creature exists for a duration specific to each figurine. At the end of the duration, the creature reverts to its figurine form. It reverts to a figurine early if it drops to 0 hit points or if you use an action to speak the command word again while touching it. When the creature becomes a figurine again, its property can't be used again until a certain amount of time has passed, as specified in the figurine's description.\n\nBronze Griffon (Rare). This bronze statuette is of a griffon rampant. It can become a griffon for up to 6 hours. Once it has been used, it can't be used again until 5 days have passed.\n\nEbony Fly (Rare). This ebony statuette is carved in the likeness of a horsefly. It can become a giant fly for up to 12 hours and can be ridden as a mount. Once it has been used, it can't be used again until 2 days have passed.\n\nGolden Lions (Rare). These gold statuettes of lions are always created in pairs. You can use one figurine or both simultaneously. Each can become a lion for up to 1 hour. Once a lion has been used, it can't be used again until 7 days have passed.\n\nIvory Goats (Rare). These ivory statuettes of goats are always created in sets of three. Each goat looks unique and functions differently from the others. Their properties are as follows\n\nMarble Elephant (Rare). This marble statuette is about 4 inches high and long. It can become an elephant for up to 24 hours. Once it has been used, it can't be used again until 7 days have passed.\n\nObsidian Steed (Very Rare). This polished obsidian horse can become a nightmare for up to 24 hours. The nightmare fights only to defend itself. Once it has been used, it can't be used again until 5 days have passed.\n\nIf you have a good alignment, the figurine has a 10 percent chance each time you use it to ignore your orders, including a command to revert to figurine form. If you mount the nightmare while it is ignoring your orders, you and the nightmare are instantly transported to a random location on the plane of Hades, where the nightmare reverts to figurine form.\n\nOnyx Dog (Rare). This onyx statuette of a dog can become a mastiff for up to 6 hours. The mastiff has an Intelligence of 8 and can speak Common. It also has darkvision out to a range of 60 feet and can see invisible creatures and objects within that range. Once it has been used, it can't be used again until 7 days have passed.\n\nSerpentine Owl (Rare). This serpentine statuette of an owl can become a giant owl for up to 8 hours. Once it has been used, it can't be used again until 2 days have passed. The owl can telepathically communicate with you at any range if you and it are on the same plane of existence.\n\nSilver Raven (Uncommon). This silver statuette of a raven can become a raven for up to 12 hours. Once it has been used, it can't be used again until 2 days have passed. While in raven form, the figurine allows you to cast the Animal Messenger spell on it at will.\n\nIn addition, the following Figurine of Wondrous Power was added in Fizban's Treasury of Dragons:\n\nGold Canary (Legendary)\nGiant Canary Form. The figurine becomes a giant canary (see the accompanying stat block) for up to 8 hours and can be ridden as a mount. Once the figurine has become a giant canary, it can’t be used this way again until the next dawn.\nGold Dragon Form. While you are missing half or more of your hit points, you can speak a different command word and the figurine becomes an adult gold dragon for up to 1 hour. The dragon can’t use any legendary actions or lair actions. Once the figurine has become an adult gold dragon, it can’t be used this way again until 1 year has passed."
+  },
+  {
+    "name": "Fish Suit",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:fish-suit",
+    "rarity": "Very Rare",
+    "type": "Wondrous Item",
+    "description": "This bulky suit, which fully encases your head and body, takes 1 minute to don or doff. While worn, it enables you to breathe in an airless environment and renders you immune to the harmful effects of any gas that surrounds you. The suit also grants you a swimming speed equal to your walking speed while underwater, or a flying speed equal to your walking speed in an environment with no gravity."
+  },
+  {
+    "name": "Flying Citadel Helm",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:flying-citadel-helm",
+    "rarity": "Very Rare",
+    "type": "Wondrous Item",
+    "description": "The function of this ornate chair is to propel and maneuver a flying citadel on which it has been installed. The chair has an AC 15, 18 hit points, and immunity to poison and psychic damage. It is destroyed if reduced to 0 hit points.\n\nThe sensation of being attuned to a flying citadel helm is akin to the pins-and-needles effect one experiences after one's arm or leg falls asleep, but not as intense.\n\nWhile attuned to a flying citadel helm and sitting in it, you gain the following abilities for as long as you maintain concentration (as if concentrating on a spell):\n\nIf no creature attuned to the helm is maintaining concentration, the citadel remains motionless in its space.\n\nTransfer Attunement. You can use an action or bonus action to touch a willing spellcaster, whereupon that creature attunes to the flying citadel helm immediately, and your attunement to the flying citadel helm ends.\n\nCrash. Should the flying citadel helm be destroyed, the citadel it is installed on loses power and begins to crumble. If the crumbling citadel is in the air, it descends at a rate of 30 feet per round, or 300ft per minute. Any creature on the citadel or on the ground within 120 feet of the citadel when it lands must make a DC 20 Dexterity saving throw, taking 39 (6d12) bludgeoning damage on a failed save, or half as much damage on a successful one."
+  },
+  {
+    "name": "Fool's Blade",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:fools-blade",
+    "rarity": "Very Rare",
+    "type": "Weapon",
+    "description": "This weapon appears ordinary, but it bears strong illusion magic that allows its wielder to skillfully deceive opponents.\n\nYou have a +2 bonus to attack and damage rolls made with this magic weapon. While wielding it, you also gain the following benefits:\n\nFool’s Feint. As a bonus action, you can feint, choosing a creature within 5 feet of you as your target. Until the start of your next turn, you have advantage on attack rolls against the target. Once this bonus action is used, it can’t be used again until the next dawn.\n\nMisdirect. When a creature within 60 feet of you targets you with an attack roll, you can use your reaction to require that creature to make a DC 15 Intelligence saving throw. On a failed save, the attack instead targets another creature of your choice that is within the attacker’s reach. Once this reaction has been used, it can’t be used again until the next dawn."
+  },
+  {
+    "name": "Forcebreaker Weapon",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:forcebreaker-weapon",
+    "rarity": "Very Rare",
+    "type": "Weapon",
+    "description": "You gain a +2 bonus to attack and damage rolls made with this magic weapon.\n\nThis weapon was crafted to destroy structures made of force, such as those created by Forcecage or Wall of Force. Striking a Large or smaller structure of magical force with this weapon automatically shatters that structure. If the target is a Huge or larger structure of force, this weapon shatters a 20-foot-cube portion of it."
+  },
+  {
+    "name": "Frost Brand",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:frost-brand",
+    "rarity": "Very Rare",
+    "type": "Weapon",
+    "description": "When you hit with an attack using this magic sword, the target takes an extra 1d6 cold damage. In addition, while you hold the sword, you have resistance to fire damage.\n\nIn freezing temperatures, the blade sheds bright light in a 10-foot radius and dim light for an additional 10 feet.\n\nWhen you draw this weapon, you can extinguish all nonmagical flames within 30 feet of you. This property can be used no more than once per hour."
+  },
+  {
+    "name": "Ghost Step Tattoo",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:ghost-step-tattoo",
+    "rarity": "Very Rare",
+    "type": "Wondrous Item",
+    "description": "Produced by a special needle, this tattoo shifts and wavers on the skin, parts of it appearing blurred.\n\nTattoo Attunement. To attune to this item, you hold the needle to your skin where you want the tattoo to appear, pressing the needle there throughout the attunement process. When the attunement is complete, the needle turns into the ink that becomes the tattoo, which appears on the skin.\n\nIf your attunement to the tattoo ends, the tattoo vanishes, and the needle reappears in your space.\n\nGhostly Form. The tattoo has 3 charges, and it regains all expended charges daily at dawn. As a bonus action while the tattoo is on your skin, you can expend 1 of the tattoo's charges to become incorporeal until the end of your next turn. For the duration, you gain the following benefits:"
+  },
+  {
+    "name": "Guild Keyrune",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:guild-keyrune",
+    "rarity": "Very Rare",
+    "type": "Wondrous Item",
+    "description": "Associated with a particular guild, a guild keyrune is a ceremonial, stylized key, about 1 foot long, made from carved stone. Not a literal key, the item is a badge of authority that gives its bearer access to privileged places in its guild's headquarters and outposts. At the DM's discretion, a character might be given a keyrune upon attaining a renown score of 25 in their guild.\n\nWhen you use an action to speak the item's command word and place the keyrune on the ground in an unoccupied space within 5 feet of you, the keyrune transforms into a creature. If there isn't enough space for the creature, the keyrune doesn't transform. See the Monster Manual for the creature's stat block — the name of which is given in bold in the keyrune's description — unless you're directed to chapter 6 of this book instead.\n\nThe creature is friendly to you, your companions, and other members of your guild (unless those guild members are hostile to you). It understands your languages and obeys your spoken commands. If you issue no commands, the creature takes the Dodge action and moves to avoid danger.\n\nThe creature exists for a duration specific to each keyrune. At the end of the duration, the creature reverts to its keyrune form. It reverts early if it drops to 0 hit points or if you use an action to speak the command word again while touching it. When the creature reverts to its keyrune form, it can't transform again until 36 hours have passed.\n\nAzorius Keyrune (Rare). This keyrune is carved from white marble and lapis lazuli to resemble a noble bird of prey. It can become a giant eagle for up to 1 hour. While the transformed eagle is within l mile of you, you can communicate with it telepathically. As an action, you can see through the eagle's eyes and hear what it hears until the start of your next turn, and you gain the benefit of its keen sight. During this time, you are deaf and blind with regard to your own senses.\n\nBoros Keyrune (Rare). Carved from red sandstone with white granite elements to resemble a member of the Boros Legion, this keyrune can become a veteran (human) for up to 8 hours. In addition to fighting on your behalf, this veteran cheerfully offers tactical advice, which is usually sound. Anyone who talks with the transformed keyrune or examines it closely can easily recognize that it is an artificial human.\n\nDimir Keyrune (Very Rare). This keyrune, carved from black stone accented with steel, resembles a stylized horror. On command, it transforms into an intellect devourer that resembles the Dimir guild symbol, with six bladelike legs. The creature exists for up to 24 hours. During that time, it pursues only a single mission you give it — usually an assignment to take over someone's body, either to impersonate that person for a brief time or to extract secrets from their mind. When the mission is complete, the creature returns to you, reports its success, and reverts to its keyrune form.\n\nGolgari Keyrune (Very Rare). Made from deep green jade with black veins, this keyrune has an insectile shape. It can transform into a giant scorpion for up to 6 hours. The scorpion has an Intelligence of 4 and can communicate with you telepathically while it is within 60 feet of you, though its messages are largely limited to describing the passage of potential prey.\n\nGruul Keyrune (Rare). This crude keyrune is cobbled together from bits of rubble, broken glass, bone, and animal hair. One end resembles a horned beast. On command, the keyrune transforms into a ceratok, a horned creature much like a rhinoceros (and with the same statistics). It remains in its ceratok form for 1 hour.\n\nIzzet Keyrune (Rare). Formed of carved and polished red and blue stone, the keyrune includes bits of cable and wire. One end resembles a humanlike head, suggesting the jagged elemental form of the galvanice weird (see chapter 6 for the stat block) that it can become for a duration of 3 hours. In this form, it will serve you as a bodyguard, lift and carry things for you, act as a test subject for your experiments, or aid you in any other way that its capabilities allow.\n\nOrzhov Keyrune (Rare). This keyrune is carved from white marble with veins of black. The end is shaped like a thrull's head, with a gold faceplate affixed. On command, the keyrune transforms into a winged thrull (see chapter 6 for the stat block) for up to 2 hours. If you don't come from an Orzhov oligarch family, it serves you grudgingly, clownishly aping your movements and mannerisms while carrying out your orders.\n\nRakdos Keyrune (Uncommon). This dark granite keyrune is marbled with scarlet veins and carved with the leering visage of a mischievous demon. When activated, it transforms into a cackler (see chapter 6 for the stat block) for up to 1 hour.\n\nSelesnya Keyrune (Rare). Carved from white and green marble in the shape of a wolf's head, this keyrune transforms into a dire wolf. The wolf persists for 8 hours. Its Intelligence is 6, and it understands Elvish and Sylvan but can't speak those languages. While it is within 1 mile of you. you can communicate with each other telepathically.\n\nSimic Keyrune (Uncommon). This keyrune is assembled from coral, mother-of pearl, and chrome and adorned with the spirals and curves characteristic of Simic ornamentation. The head resembles the shell of a sea creature. On command, the keyrune turns into a category 1 krasis (see chapter 6 for the stat block) that has the Grabber and Stabilizing Legs adaptations. The transformation lasts for up to 5 hours."
+  },
+  {
+    "name": "Hammer of Runic Focus",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:hammer-of-runic-focus",
+    "rarity": "Very Rare",
+    "type": "Weapon",
+    "description": "This magic hammer has 3 charges. As a bonus action, you can expend 1 charge and slam this hammer on the ground, creating a 15-foot-radius circle of glowing runes centered on the point of impact. While you’re inside that area, your hammer glows with matching runes, and you gain a +3 bonus to attack and damage rolls made with this hammer. The rune circle disappears after 1 minute, when you create another rune circle, or when you dismiss the rune circle as a bonus action. This hammer regains 1d3 expended charges daily at dawn."
+  },
+  {
+    "name": "Helm of Brilliance",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:helm-of-brilliance",
+    "rarity": "Very Rare",
+    "type": "Wondrous Item",
+    "description": "This dazzling helm is set with 1d10 diamonds, 2d10 rubies, 3d10 fire opals, and 4d10 opals. Any gem pried from the helm crumbles to dust. When all the gems are removed or destroyed, the helm loses its magic.\n\nYou gain the following benefits while wearing it:\n\nRoll a d20 if you are wearing the helm and take fire damage as a result of failing a saving throw against a spell. On a roll of 1, the helm emits beams of light from its remaining gems. Each creature within 60 feet of the helm other than you must succeed on a DC 17 Dexterity saving throw or be struck by a beam, taking radiant damage equal to the number of gems in the helm. The helm and its gems are then destroyed."
+  },
+  {
+    "name": "Helm of Devil Command",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:helm-of-devil-command",
+    "rarity": "Very Rare",
+    "type": "Wondrous Item",
+    "description": "This bulky, eyeless helmet is made for a pit fiend but magically resizes to fit the heads of other wearers.\n\nWhile wearing the helm, you can see out of it as though you weren't wearing it. In addition, you know the exact location and type of all devils within 1,000 feet of you. You can telepathically communicate with a devil within range, or you can broadcast your thoughts to all devils within range. The devils receiving your broadcasted thoughts have no special means of replying to them.\n\nThe helm has 3 charges. As an action, you can expend 1 charge to cast Dominate Monster (save DC 21), which affects devils only. (The spell fails and the charge is wasted if you target any creature that's not a devil.) If a devil can see you when you cast this spell on it, the devil knows you tried to charm it. The helm regains all its charges 24 hours after its last charge is expended.\n\nIf you are not a devil, using the helm's Dominate Monster property in the Nine Hells has a 20 percent chance of attracting a narzugon (see page 238), which arrives on the back of a nightmare mount in 1d4 hours. The narzugon tries to recover the helm, killing you if necessary to obtain it. If it gets the helm, the narzugon tries to deliver it to its infernal master."
+  },
+  {
+    "name": "Heward's Hireling Armor",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:hewards-hireling-armor",
+    "rarity": "Very Rare",
+    "type": "Armor",
+    "description": "A number of Kwalish’s experiments were attempts to research the works of the legendary mage Heward, who first crafted what he named Hireling Armor. While wearing this armor, you gain a +1 bonus to AC. In addition, the armor’s animated straps can assist with the drawing and sheathing of weapons, such that you can draw or stow two one-handed weapons when you would normally be able to draw or stow only one.\n\nThis armor also has six pockets, each of which is an extradimensional space. Each pocket can hold up to 20 pounds of material, not exceeding a volume of 2 cubic feet. The armor always weighs 10 pounds, regardless of its pockets’ contents. Placing an object into one of the armor’s pockets follows the normal rules for interacting with objects. Retrieving an item from a pocket of the armor requires you to use an action. When you reach into a pocket for a specific item, the item is always magically on top.\n\nPlacing the armor inside an extradimensional space created by a Bag of Holding, a Heward’s Handy Haversack, or a similar item instantly destroys both items and opens a gate to the Astral Plane. The gate originates where the one item was placed inside the other. Any creature within 10 feet of the gate is sucked through it and deposited in a random location on the Astral Plane. The gate then closes. The gate is one-way only and can’t be reopened."
+  },
+  {
+    "name": "Horn of Valhalla",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:horn-of-valhalla",
+    "rarity": "Very Rare",
+    "type": "Wondrous Item",
+    "description": "You can use an action to blow this horn. In response, warrior spirits from the plane of Ysgard appear within 60 feet of you. These spirits use the berserker statistics from the Monster Manual. They return to Ysgard after 1 hour or when they drop to 0 hit points. Once you use the horn, it can't be used again until 7 days have passed.\n\nFour types of horn of Valhalla are known to exist, each made of a different metal. The horn's type determines how many berserkers answer its summons, as well as the requirement for its use. The DM chooses the horn's type or determines it randomly.\n\nIf you blow the horn without meeting its requirement, the summoned berserkers attack you. If you meet the requirement, they are friendly to you and your companions and follow your commands."
+  },
+  {
+    "name": "Horned Ring",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:horned-ring",
+    "rarity": "Very Rare",
+    "type": "Ring",
+    "description": "Allows an attuned wearer to ignore Undermountain's magical restrictions (see \"Alterations to Magic\" in source)."
+  },
+  {
+    "name": "Horseshoes of a Zephyr",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:horseshoes-of-a-zephyr",
+    "rarity": "Very Rare",
+    "type": "Wondrous Item",
+    "description": "These iron horseshoes come in a set of four. While all four shoes are affixed to the hooves of a horse or similar creature, they allow the creature to move normally while floating 4 inches above the ground. This effect means the creature can cross or stand above nonsolid or unstable surfaces, such as water or lava. The creature leaves no tracks and ignores difficult terrain. In addition, the creature can move at normal speed for up to 12 hours a day without suffering exhaustion from a forced march."
+  },
+  {
+    "name": "Hunter's Coat",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:hunters-coat",
+    "rarity": "Very Rare",
+    "type": "Armor",
+    "description": "You gain a +1 bonus to AC while wearing this armor.\n\nThe coat has 3 charges. When you hit a creature with an attack and that creature doesn't have all its hit points, you can expend 1 charge to deal an extra 1d10 necrotic damage to the target. The coat regains 1d3 expended charges daily at dawn."
+  }
+]

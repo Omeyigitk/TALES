@@ -8,6 +8,8 @@ import { useCampaignSocket } from "../../../../../useCampaignSocket";
 import { ASI_LEVELS, CLASS_FEATURES, type Feat } from "../levelup_data";
 import { ALL_FEATS } from "../feats_data";
 import { ALL_BACKGROUNDS } from "../background_data";
+import { getFeatRequirements } from "../../feat_utils";
+import { FeatSpellSelectionArea, FeatStatSelectionArea, FeatChoiceSelectionArea } from "../../FeatComponents";
 // SINIFLARA GÖRE BAŞLANGIÇ EKİPMANLARI (CLASS_EQUIPMENT)
 import { getSpellSlotTotals, isSpellcaster, CLASS_ATTACKS, CLASS_RESOURCES, CONCENTRATION_SPELLS } from "../combat_data";
 
@@ -56,6 +58,7 @@ const CLASS_SAVES: Record<string, string[]> = {
 export default function PlayerSheet() {
     const { campaignId } = useParams();
     const router = useRouter();
+    const role = 'Player';
 
     const { user, token, loading: authLoading } = useAuth();
     const [character, setCharacter] = useState<any>(null);
@@ -72,7 +75,7 @@ export default function PlayerSheet() {
     const [selectedSkill, setSelectedSkill] = useState<typeof SKILLS[0] | null>(null);
 
     // ── Socket & DM Permission ──────────────────────────────────────────────
-    const { dmLevelPermission, socket, whisperData, partyStats, diceLogs, mapData } = useCampaignSocket(campaignId, 'Player', user?.username || 'Player', token);
+    const { dmLevelPermission, socket, whisperData, whisperHistory, partyStats, diceLogs, mapData } = useCampaignSocket(campaignId, 'Player', user?.username || 'Player', token);
     const [showDmPopup, setShowDmPopup] = useState(false);
     const [levelPermEnabled, setLevelPermEnabled] = useState(false);
 
@@ -104,9 +107,19 @@ export default function PlayerSheet() {
     const [showLevelChart, setShowLevelChart] = useState(false);
     const [expandedAtkIdx, setExpandedAtkIdx] = useState<number | null>(null);
 
-    // Spells Tab Details
     const [spellDetails, setSpellDetails] = useState<Record<string, any>>({});
     const [expandedSpell, setExpandedSpell] = useState<string | null>(null);
+    const [libFeats, setLibFeats] = useState<any[]>([]);
+
+    useEffect(() => {
+        const fetchFeats = async () => {
+            try {
+                const res = await axios.get(`${API_URL}/api/feats`, { headers: { 'Authorization': `Bearer ${token}` } });
+                setLibFeats(res.data);
+            } catch (err) { console.error("Feat fetch error:", err); }
+        };
+        fetchFeats();
+    }, [token]);
 
     useEffect(() => {
         if (character?.spells?.length > 0) {
@@ -123,7 +136,7 @@ export default function PlayerSheet() {
     // Watch for whispers
     useEffect(() => {
         const wData = whisperData as any;
-        if (wData && wData.targetPlayerName === character?.name) {
+        if (wData && wData.targetName === character?.name) {
             showToast(`🤫 Fısıltı: ${wData.senderName || 'Birisi'}`, wData.message, 'bg-purple-900 border-purple-500 text-purple-100');
         }
     }, [whisperData, character?.name]);
@@ -140,6 +153,9 @@ export default function PlayerSheet() {
     const [asiPicks, setAsiPicks] = useState<{ stat: string; amount: number }[]>([]);
     const [featPick, setFeatPick] = useState<Feat | null>(null);
     const [featSearch, setFeatSearch] = useState("");
+    const [featStatSelections, setFeatStatSelections] = useState<Record<string, string>>({});
+    const [featSpellSelections, setFeatSpellSelections] = useState<Record<string, string[]>>({});
+    const [featChoiceSelections, setFeatChoiceSelections] = useState<Record<string, Record<string, string[]>>>({}); // { "Metamagic Adept": { "Metamagic": ["Twinned", "Subtle"] } }
     const [isLevelingUp, setIsLevelingUp] = useState(false);
 
     // Backstory
@@ -157,6 +173,12 @@ export default function PlayerSheet() {
     const [gallery, setGallery] = useState<any[]>([]);
     const [isGalleryOpen, setIsGalleryOpen] = useState(false);
     const [selectedImage, setSelectedImage] = useState<string | null>(null);
+    const [gallerySearch, setGallerySearch] = useState("");
+    const [galleryFilter, setGalleryFilter] = useState<'all' | 'image' | 'link'>('all');
+    const [imgZoom, setImgZoom] = useState(1);
+    const [imgOffset, setImgOffset] = useState({ x: 0, y: 0 });
+    const [isImgPanning, setIsImgPanning] = useState(false);
+    const [imgPanStart, setImgPanStart] = useState({ x: 0, y: 0 });
 
     // Dynamic Shop
     const [shopData, setShopData] = useState<{ isOpen: boolean, items: any[] }>({ isOpen: false, items: [] });
@@ -166,11 +188,22 @@ export default function PlayerSheet() {
     // Grid Map State
     const [isMapOpen, setIsMapOpen] = useState(false);
     const [isDraggingToken, setIsDraggingToken] = useState<string | null>(null);
+    const [mapZoom, setMapZoom] = useState(1);
+    const [mapOffset, setMapOffset] = useState({ x: 0, y: 0 });
+    const [isPanning, setIsPanning] = useState(false);
+    const [panStart, setPanStart] = useState({ x: 0, y: 0 });
 
     // Whisper UI
     const [isWhisperModalOpen, setIsWhisperModalOpen] = useState(false);
     const [whisperMessage, setWhisperMessage] = useState("");
     const [whisperTarget, setWhisperTarget] = useState("DM");
+    const chatEndRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        if (isWhisperModalOpen) {
+            chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
+        }
+    }, [isWhisperModalOpen, whisperHistory]);
 
     const buyShopItem = async (item: any) => {
         if (!character) return;
@@ -183,9 +216,8 @@ export default function PlayerSheet() {
 
         const newMoney = { ...character.money, gp: currentGold - cost };
         const newInventory = [...(character.inventory || []), {
+            ...item, // Spread all item data (armor_class, effects, etc.)
             id: `item-${Date.now()}`,
-            name: item.name,
-            type: 'Eşya',
             isEquipped: false,
             notes: item.note || 'Dükkandan satın alındı.'
         }];
@@ -251,6 +283,11 @@ export default function PlayerSheet() {
                 if (char.conditions) setConditions(char.conditions);
                 if (char.hitDiceUsed !== undefined) setHitDiceUsed(char.hitDiceUsed);
                 if (char.privateNotes) setPrivateNotes(char.privateNotes);
+                if (char.featSelections) {
+                    setFeatStatSelections(char.featSelections.stats || {});
+                    setFeatSpellSelections(char.featSelections.spells || {});
+                    setFeatChoiceSelections(char.featSelections.choices || {});
+                }
             } catch (err) {
                 console.error('Character fetch error:', err);
                 router.push(`/player/${campaignId}/character-creator`);
@@ -286,8 +323,20 @@ export default function PlayerSheet() {
 
     const addItem = async () => {
         if (!newItemName.trim() || !characterRef.current) return;
-        const newItem = { name: newItemName, qty: newItemQty, note: newItemNote, type: "gear" };
-        const newInv = [...(characterRef.current.inventory || []), newItem];
+
+        let itemData: any = { name: newItemName, qty: newItemQty, note: newItemNote, type: "gear" };
+
+        // Try to fetch full item data from DB if it exists
+        try {
+            const res = await axios.get(`${API_URL}/api/items/${encodeURIComponent(newItemName)}`, { headers: { 'Authorization': `Bearer ${token}` } });
+            if (res.data) {
+                itemData = { ...res.data, ...itemData }; // Merge DB data with manual input
+            }
+        } catch (e) {
+            console.log("Item not found in DB, adding as custom item.");
+        }
+
+        const newInv = [...(characterRef.current.inventory || []), itemData];
         const newChar = { ...characterRef.current, inventory: newInv };
         setCharacter(newChar);
         setNewItemName(""); setNewItemQty(1); setNewItemNote("");
@@ -495,10 +544,15 @@ export default function PlayerSheet() {
     useEffect(() => {
         if (!whisperData || !character) return;
         const wd = whisperData as any;
-        if (wd.targetPlayerName === character.name || wd.targetPlayerName === character._id) {
-            showToast('DM Fısıldıyor 🤫', wd.message, 'bg-purple-900 border-purple-500 text-purple-100');
+        // Check if I am the target
+        if (wd.targetPlayerName === 'DM') {
+            if (dmLevelPermission) {
+                showToast(`${wd.senderName} Fısıldıyor 🤫`, wd.message, 'bg-purple-900 border-purple-500 text-purple-100');
+            }
+        } else if (wd.targetPlayerName === character.name) {
+            showToast(`${wd.senderName} Fısıldıyor 🤫`, wd.message, 'bg-purple-900 border-purple-500 text-purple-100');
         }
-    }, [whisperData, character]);
+    }, [whisperData, character, dmLevelPermission]);
 
     useEffect(() => {
         const fetchGallery = async () => {
@@ -550,7 +604,59 @@ export default function PlayerSheet() {
         showToast('Fısıltı Gönderildi 🤫', `${whisperTarget === 'DM' ? 'DM' : whisperTarget}'e gizli mesajın iletildi.`, 'bg-purple-900 border-purple-500 text-purple-100');
     };
 
-    const mod = (v: number) => Math.floor((v - 10) / 2);
+    const getItemBonus = (type: string, subType?: string) => {
+        let bonus = 0;
+        if (character?.inventory) {
+            character.inventory.forEach((item: any) => {
+                if (item.isEquipped && item.effects) {
+                    item.effects.forEach((eff: any) => {
+                        if (eff.type === type) {
+                            if (subType) {
+                                if (eff.value && eff.value[subType]) bonus += eff.value[subType];
+                            } else {
+                                if (typeof eff.value === 'number') bonus += eff.value;
+                            }
+                        }
+                    });
+                }
+            });
+        }
+        return bonus;
+    };
+
+    const mod = (v: number, statName?: string) => {
+        let bonus = 0;
+        let setVal: number | null = null;
+
+        // Feat bonuses
+        if (statName && character?.feats) {
+            character.feats.forEach((fName: string) => {
+                const fData = libFeats.find(x => x.name === fName);
+                if (fData && fData.effects) {
+                    fData.effects.forEach((eff: any) => {
+                        if (eff.type === 'stat_bonus' && eff.value && eff.value[statName]) bonus += eff.value[statName];
+                        if (eff.type === 'stat_choice' && character.featSelections?.stats?.[fName] === statName) bonus += eff.value;
+                    });
+                }
+            });
+        }
+        // Item Score bonuses
+        if (statName && character?.inventory) {
+            character.inventory.forEach((item: any) => {
+                if (item.isEquipped && item.effects) {
+                    item.effects.forEach((eff: any) => {
+                        if (eff.type === 'stat_bonus' && eff.value[statName]) bonus += eff.value[statName];
+                        if (eff.type === 'stat_set' && eff.value[statName]) {
+                            setVal = Math.max(setVal || 0, eff.value[statName]);
+                        }
+                    });
+                }
+            });
+        }
+
+        const finalScore = setVal !== null ? Math.max(setVal, v + bonus) : (v + bonus);
+        return Math.floor((finalScore - 10) / 2);
+    };
     const fmt = (n: number) => (n >= 0 ? `+${n}` : String(n));
 
     const handleLevelUpClick = () => {
@@ -570,8 +676,20 @@ export default function PlayerSheet() {
         // Use fallback hit_die if missing
         const hitDie = (cls.hit_die || 'd8') as string;
         const hitDieMax = parseInt(hitDie.replace('d', '')) || 8;
-        const conMod = mod(char.stats?.CON ?? 10);
-        const hpGained = Math.floor(hitDieMax / 2) + 1 + conMod;
+        const conMod = mod(char.stats?.CON ?? 10, 'CON');
+        let hpGained = Math.floor(hitDieMax / 2) + 1 + conMod;
+
+        // Feat HP Bonus (e.g. Tough: +2 per level)
+        if (char.feats) {
+            char.feats.forEach((fName: string) => {
+                const fData = libFeats.find(x => x.name === fName);
+                if (fData && fData.effects) {
+                    fData.effects.forEach((eff: any) => {
+                        if (eff.type === 'hp_per_level') hpGained += eff.value;
+                    });
+                }
+            });
+        }
 
         // Class features at new level
         const classFeats: any[] = CLASS_FEATURES[clsName]?.[newLv] ?? [];
@@ -624,6 +742,11 @@ export default function PlayerSheet() {
             setCurrentHp(res.data.currentHp);
             characterRef.current = res.data;
             showToast("Büyü Bozuldu", "Seviye düştü.", "bg-red-900 border-red-500 text-red-100");
+            if (res.data.featSelections) {
+                setFeatStatSelections(res.data.featSelections.stats || {});
+                setFeatSpellSelections(res.data.featSelections.spells || {});
+                setFeatChoiceSelections(res.data.featSelections.choices || {});
+            }
         } catch (error) {
             console.error(error);
             alert("Seviye düşürülürken hata oluştu.");
@@ -647,7 +770,23 @@ export default function PlayerSheet() {
         if (!lvModal) return false;
         if (lvModal.step === "subclass") return !!lvSubclassChoice;
         if (lvModal.step === "asi") {
-            if (lvChoice === "feat") return !!featPick;
+            if (lvChoice === "feat") {
+                if (!featPick) return false;
+                const reqs = getFeatRequirements(featPick.name, libFeats);
+                if (!reqs) return true;
+                if (reqs.statChoices && !featStatSelections[featPick.name]) return false;
+                if (reqs.slots) {
+                    const selections = featSpellSelections[featPick.name] || [];
+                    if (selections.length < reqs.slots.length || selections.some(s => !s)) return false;
+                }
+                if (reqs.choices) {
+                    for (const choice of reqs.choices) {
+                        const sels = featChoiceSelections[featPick.name]?.[choice.label] || [];
+                        if (sels.length < choice.count) return false;
+                    }
+                }
+                return true;
+            }
             const total = asiPicks.reduce((s, p) => s + p.amount, 0);
             return total === 2;
         }
@@ -683,6 +822,11 @@ export default function PlayerSheet() {
             };
             if (statsUpdate) payload.stats = statsUpdate;
             if (featsUpdate) payload.feats = featsUpdate;
+            payload.featSelections = {
+                stats: featStatSelections,
+                spells: featSpellSelections,
+                choices: featChoiceSelections
+            };
 
             const res = await axios.put(`${API_URL}/api/characters/${character._id}`, payload, { headers: { 'Authorization': `Bearer ${token}` } });
             setCharacter(res.data);
@@ -711,24 +855,30 @@ export default function PlayerSheet() {
     const cls = character.classRef?.name || "";
     const saves = CLASS_SAVES[cls] || [];
     const spells: string[] = character.spells || [];
-    const baseSpells = spells.filter(s => !s.startsWith("Feat: "));
+    const featSelsSpells = Object.values(featSpellSelections).flat().filter(Boolean) as string[];
+    const baseSpells = Array.from(new Set([...spells.filter(s => !s.startsWith("Feat: ")), ...featSelsSpells]));
     const featsFromSpells = spells.filter(s => s.startsWith("Feat: ")).map(f => f.replace("Feat: ", ""));
-    const actualFeats = [...(character.feats || []), ...featsFromSpells, ...(character.raceBonusFeats || [])];
+    const actualFeats = Array.from(new Set([...(character.feats || []), ...featsFromSpells, ...(character.raceBonusFeats || []), ...Object.keys(featSpellSelections), ...Object.keys(featStatSelections), ...Object.keys(featChoiceSelections)]));
 
-    const featureSpells: string[] = [];
-    if (actualFeats.some(f => f.includes('Fey Touched'))) featureSpells.push('Misty Step');
-    if (actualFeats.some(f => f.includes('Shadow Touched'))) featureSpells.push('Invisibility');
-    if (character.raceRef?.name === 'Tiefling' && level >= 3) featureSpells.push('Hellish Rebuke');
-    if (character.raceRef?.name === 'Tiefling' && level >= 5) featureSpells.push('Darkness');
-    if (character.raceRef?.name?.includes('Elf') && character.subrace === 'Drow (Dark Elf)' && level >= 3) featureSpells.push('Faerie Fire');
-    if (character.raceRef?.name?.includes('Elf') && character.subrace === 'Drow (Dark Elf)' && level >= 5) featureSpells.push('Darkness');
+    const itemSpells: string[] = [];
+    if (character?.inventory) {
+        character.inventory.forEach((item: any) => {
+            if (item.isEquipped && item.effects) {
+                item.effects.forEach((eff: any) => {
+                    if (eff.type === 'spell_auto' && eff.spellName) {
+                        itemSpells.push(eff.spellName);
+                    }
+                });
+            }
+        });
+    }
 
-    const actualSpells = Array.from(new Set([...baseSpells, ...featureSpells]));
+    const actualSpells = Array.from(new Set([...baseSpells, ...itemSpells]));
     const hpPct = Math.round((currentHp / character.maxHp) * 100);
 
     // ─── Skill bonus hesapla ─────────────────────────────────────────────────
     const getSkillMod = (skill: typeof SKILLS[0]) => {
-        const base = mod(stats[skill.ability] || 10);
+        let base = mod(stats[skill.ability] || 10, skill.ability);
         const hasProfSkill = false; // gelecek: character.skillProfs içinden kontrol
         const hasExpertise = (character.expertise || []).includes(skill.name) || (character.expertise || []).includes(skill.tr);
         if (hasExpertise) return base + prof * 2;
@@ -737,56 +887,55 @@ export default function PlayerSheet() {
 
     // ─── Class-aware AC terebilimi ────────────────────────────────────────────
     const calcAC = () => {
-        const dexMod = mod(stats.DEX || 10);
-        const wisMod = mod(stats.WIS || 10);
-        const conMod = mod(stats.CON || 10);
+        const dexMod = mod(stats.DEX || 10, 'DEX');
+        const wisMod = mod(stats.WIS || 10, 'WIS');
+        const conMod = mod(stats.CON || 10, 'CON');
 
         let baseAC = 10 + dexMod;
+        // Class Unarmored Defense
+        if (cls === 'Monk') baseAC = 10 + dexMod + wisMod;
+        if (cls === 'Barbarian') baseAC = 10 + dexMod + conMod;
+
         let shieldAC = 0;
+        let acBonus = 0;
+        let hasArmor = false;
 
-        // Check equipped armor and shields
-        const equippedArmor = character.inventory?.find((it: any) => it.isEquipped && it.type === 'armor' && !it.name.toLowerCase().includes('shield'));
-        const equippedShield = character.inventory?.find((it: any) => it.isEquipped && (it.type === 'armor' || it.type === 'shield') && it.name.toLowerCase().includes('shield'));
+        if (character.inventory) {
+            character.inventory.forEach((item: any) => {
+                if (!item.isEquipped) return;
 
-        if (equippedShield) shieldAC = 2;
-
-        if (equippedArmor) {
-            const name = equippedArmor.name.toLowerCase();
-            const note = (equippedArmor.note || "").toLowerCase();
-
-            // Simple parser for armor
-            if (name.includes('leather') || name.includes('padded')) baseAC = 11 + dexMod;
-            else if (name.includes('studded')) baseAC = 12 + dexMod;
-            else if (name.includes('hide')) baseAC = 12 + Math.min(2, dexMod);
-            else if (name.includes('chain shirt')) baseAC = 13 + Math.min(2, dexMod);
-            else if (name.includes('scale mail') || name.includes('breastplate')) baseAC = 14 + Math.min(2, dexMod);
-            else if (name.includes('half plate')) baseAC = 15 + Math.min(2, dexMod);
-            else if (name.includes('ring mail')) baseAC = 14;
-            else if (name.includes('chain mail')) baseAC = 16;
-            else if (name.includes('splint')) baseAC = 17;
-            else if (name.includes('plate') && !name.includes('half')) baseAC = 18;
-
-            // Try parsing note if not found in name (e.g. "AC 15")
-            const acMatch = note.match(/ac\s*(\d+)/i);
-            if (acMatch) {
-                const acVal = parseInt(acMatch[1]);
-                if (note.includes('dex') || note.includes('çeviklik')) {
-                    const limitMatch = note.match(/max\s*(\d+)/i);
-                    const limit = limitMatch ? parseInt(limitMatch[1]) : 99;
-                    baseAC = acVal + Math.min(limit, dexMod);
-                } else {
-                    baseAC = acVal;
+                if (item.armor_class) {
+                    if (item.name.toLowerCase().includes('shield')) {
+                        shieldAC += item.armor_class.base || 2;
+                    } else {
+                        hasArmor = true;
+                        const armorBase = item.armor_class.base;
+                        const useDex = item.armor_class.dex_bonus;
+                        const maxDex = item.armor_class.max_bonus;
+                        baseAC = useDex ? armorBase + (maxDex !== null ? Math.min(maxDex, dexMod) : dexMod) : armorBase;
+                    }
                 }
-            }
-            return baseAC + shieldAC;
+
+                if (item.effects) {
+                    item.effects.forEach((eff: any) => {
+                        if (eff.type === 'ac_bonus') acBonus += eff.value;
+                    });
+                }
+            });
         }
 
-        // Unarmored Defense / Features
-        if (cls === 'Monk') return 10 + dexMod + wisMod + shieldAC;
-        if (cls === 'Barbarian') return 10 + dexMod + conMod + shieldAC;
-        if (cls === 'Sorcerer' && character.subclass === 'Draconic Bloodline') return 13 + dexMod + shieldAC;
+        // Feat AC Bonuses
+        const allFeats = [...(character.feats || []), ...(character.raceBonusFeats || [])];
+        allFeats.forEach((fName: string) => {
+            const fData = libFeats.find(x => x.name === fName);
+            if (fData && fData.effects) {
+                fData.effects.forEach((eff: any) => {
+                    if (eff.type === 'ac_bonus') acBonus += eff.value;
+                });
+            }
+        });
 
-        return (character.ac || (10 + dexMod)) + shieldAC;
+        return baseAC + shieldAC + acBonus;
     };
 
     // ─── Class-aware Initiative ────────────────────────────────────────────────
@@ -794,12 +943,24 @@ export default function PlayerSheet() {
     // War Magic Wizard adds Int to Initiative (Tactical Wit)
     // Chronurgy Wizard adds Int to Initiative (Temporal Awareness)
     const calcInitiative = () => {
-        const dexMod = mod(stats.DEX || 10);
-        const wisMod = mod(stats.WIS || 10);
-        const intMod = mod(stats.INT || 10);
-        if (cls === 'Fighter' && character.subclass === 'Samurai') return dexMod + wisMod;
-        if (cls === 'Wizard' && (character.subclass === 'School of War Magic' || character.subclass === 'Chronurgy Magic')) return dexMod + intMod;
-        return dexMod;
+        let bonus = mod(stats.DEX || 10, 'DEX') + getItemBonus('initiative_bonus');
+
+        // Feat Initiative Bonuses
+        const allFeatsForInit = [...(character.feats || []), ...(character.raceBonusFeats || [])];
+        allFeatsForInit.forEach((fName: string) => {
+            const fData = libFeats.find(x => x.name === fName);
+            if (fData && fData.effects) {
+                fData.effects.forEach((eff: any) => {
+                    if (eff.type === 'initiative_bonus') bonus += eff.value;
+                });
+            }
+        });
+
+        const wisMod = mod(stats.WIS || 10, 'WIS');
+        const intMod = mod(stats.INT || 10, 'INT');
+        if (cls === 'Fighter' && character.subclass === 'Samurai') return bonus + wisMod;
+        if (cls === 'Wizard' && (character.subclass === 'War Magic' || character.subclass === 'Chronurgy')) return bonus + intMod;
+        return bonus;
     };
 
     // ─── Monk Unarmored Movement bonus speed ──────────────────────────────────
@@ -890,7 +1051,14 @@ export default function PlayerSheet() {
                                             const lv = i + 1;
                                             const isCurrent = lv === level;
                                             const profBonus = Math.ceil(lv / 4) + 1;
-                                            const feats = CLASS_FEATURES[clsName]?.[lv] ?? [];
+                                            let feats = [...(CLASS_FEATURES[clsName]?.[lv] ?? [])];
+                                            if (character.subclass && character.classRef?.subclasses) {
+                                                const sub = character.classRef.subclasses.find((s: any) => s.name === character.subclass);
+                                                if (sub) {
+                                                    const subFeats = sub.features.filter((f: any) => f.level === lv);
+                                                    feats = [...feats, ...subFeats];
+                                                }
+                                            }
                                             const isASI = aLevels.includes(lv);
                                             const slots = slotcaster ? getSpellSlotTotals(clsName, lv) : [];
                                             return (
@@ -1029,7 +1197,21 @@ export default function PlayerSheet() {
                     {/* Speed */}
                     <div className="flex items-center gap-2">
                         <span className="text-gray-400 text-sm font-bold">🏃 Speed</span>
-                        <span className="text-2xl font-black text-white">{(character.raceRef?.speed || 30) + monkSpeedBonus()} ft{monkSpeedBonus() > 0 ? <span className="text-xs text-purple-400 ml-1">(+{monkSpeedBonus()} Unarmored)</span> : null}</span>
+                        <span className="text-2xl font-black text-white">
+                            {(() => {
+                                let totalSpeed = (character.raceRef?.speed || 30) + monkSpeedBonus() + getItemBonus('speed_bonus');
+                                const allFeatsForSpeed = [...(character.feats || []), ...(character.raceBonusFeats || [])];
+                                allFeatsForSpeed.forEach((fName: string) => {
+                                    const fData = libFeats.find(x => x.name === fName);
+                                    if (fData && fData.effects) {
+                                        fData.effects.forEach((eff: any) => {
+                                            if (eff.type === 'speed_bonus') totalSpeed += eff.value;
+                                        });
+                                    }
+                                });
+                                return totalSpeed;
+                            })()} ft
+                        </span>
                     </div>
                     {/* Spell Save DC + Spell Attack — spellcaster ve Monk için */}
                     {(() => {
@@ -1045,8 +1227,8 @@ export default function PlayerSheet() {
                         const showForClass = isSpellcaster(cls) || cls === 'Monk';
                         if (!showForClass) return null;
                         const abilityMod = mod(stats[ability] || 10);
-                        const spellDC = 8 + prof + abilityMod;
-                        const spellAtk = prof + abilityMod;
+                        const spellDC = 8 + prof + abilityMod + getItemBonus('stat_bonus', 'SPELL_DC');
+                        const spellAtk = prof + abilityMod + getItemBonus('stat_bonus', 'SPELL_ATTACK');
                         return (
                             <>
                                 <div className="flex items-center gap-2">
@@ -1163,7 +1345,8 @@ export default function PlayerSheet() {
                                 <div className="p-2 space-y-0.5">
                                     {SAVING_THROWS.map(s => {
                                         const hasSave = saves.includes(s);
-                                        const bonus = mod(stats[s] || 10) + (hasSave ? prof : 0);
+                                        const globalSaveBonus = getItemBonus('stat_bonus', 'SAVE');
+                                        const bonus = mod(stats[s] || 10, s) + (hasSave ? prof : 0) + globalSaveBonus;
                                         return (
                                             <div key={s} className="flex items-center gap-2 px-2 py-1.5 rounded hover:bg-gray-700/50">
                                                 <div className={`w-4 h-4 rounded-full border-2 flex items-center justify-center shrink-0 ${hasSave ? 'bg-green-500 border-green-400' : 'border-gray-600'}`}>
@@ -1208,11 +1391,12 @@ export default function PlayerSheet() {
                                 </div>
                                 <div className="p-2 space-y-0.5 max-h-[500px] overflow-y-auto">
                                     {SKILLS.map(skill => {
-                                        const base = mod(stats[skill.ability] || 10);
+                                        const base = mod(stats[skill.ability] || 10, skill.ability);
                                         const skillProfs: string[] = (character.skillProfs || []).map((s: string) => s.toLowerCase().trim());
                                         const isProficient = skillProfs.some(s => s === skill.name.toLowerCase() || s === skill.tr?.toLowerCase());
                                         const isExpert = (character.expertise || []).some((e: string) => e.toLowerCase() === skill.name.toLowerCase() || e.toLowerCase() === skill.tr?.toLowerCase());
-                                        const bonus = isExpert ? base + prof * 2 : isProficient ? base + prof : base;
+                                        const globalSkillBonus = getItemBonus('stat_bonus', 'SKILL');
+                                        const bonus = (isExpert ? base + prof * 2 : isProficient ? base + prof : base) + globalSkillBonus;
                                         const isOpen = selectedSkill?.name === skill.name;
                                         return (
                                             <div key={skill.name}>
@@ -1305,8 +1489,7 @@ export default function PlayerSheet() {
                                     </div>
                                     <div className="p-3 space-y-2">
                                         {actualFeats.map((featName: string, idx: number) => {
-                                            const featList = ALL_FEATS as any[];
-                                            const featDetails = featList.find(f => f.name === featName || f.name_tr === featName);
+                                            const featDetails = libFeats.find(f => f.name === featName);
                                             const isExpanded = expandedFeat === featName;
                                             return (
                                                 <div key={idx}
@@ -1319,7 +1502,36 @@ export default function PlayerSheet() {
                                                     </div>
                                                     {isExpanded && featDetails && (
                                                         <div className="mt-2 text-xs text-gray-300 font-normal leading-relaxed border-t border-yellow-800/30 pt-2">
-                                                            {featDetails.desc_tr}
+                                                            <div className="mb-2 whitespace-pre-wrap">{featDetails.desc_tr || featDetails.desc}</div>
+                                                            {featDetails.effects && featDetails.effects.length > 0 && (
+                                                                <div className="bg-black/20 p-2 rounded border border-yellow-900/30">
+                                                                    <p className="font-black text-[10px] text-yellow-600 uppercase mb-1">Etkiler:</p>
+                                                                    <ul className="list-disc list-inside space-y-0.5">
+                                                                        {featDetails.effects.map((eff: any, ei: number) => (
+                                                                            <li key={ei} className="capitalize">
+                                                                                {eff.type.replace('_', ' ')}: {typeof eff.value === 'object' ? JSON.stringify(eff.value) : eff.value}
+                                                                            </li>
+                                                                        ))}
+                                                                    </ul>
+                                                                </div>
+                                                            )}
+                                                            {/* SELECTIONS DISPLAY */}
+                                                            {(() => {
+                                                                const sSel = featStatSelections[featName];
+                                                                const spSel = featSpellSelections[featName];
+                                                                const cSel = featChoiceSelections[featName];
+                                                                if (!sSel && (!spSel || spSel.length === 0) && (!cSel || Object.keys(cSel).length === 0)) return null;
+                                                                return (
+                                                                    <div className="mt-2 bg-yellow-900/20 p-2 rounded border border-yellow-700/30 space-y-1">
+                                                                        <p className="font-black text-[10px] text-yellow-500 uppercase">Seçimler:</p>
+                                                                        {sSel && <p className="text-[10px] text-yellow-300">Stat: <span className="text-white">{sSel} +1</span></p>}
+                                                                        {spSel && spSel.length > 0 && <p className="text-[10px] text-yellow-300">Büyüler: <span className="text-white">{spSel.join(", ")}</span></p>}
+                                                                        {cSel && Object.entries(cSel).map(([label, opts]: any) => (
+                                                                            <p key={label} className="text-[10px] text-yellow-300">{label}: <span className="text-white">{opts.join(", ")}</span></p>
+                                                                        ))}
+                                                                    </div>
+                                                                )
+                                                            })()}
                                                         </div>
                                                     )}
                                                 </div>
@@ -1953,6 +2165,11 @@ export default function PlayerSheet() {
                                                                                     <span className="font-semibold text-gray-200 text-sm group-hover:text-white transition">{sp}</span>
                                                                                     {details && (details.desc?.toLowerCase().includes('damage') || details.desc?.toLowerCase().includes('hasar') || details.desc?.includes('d4') || details.desc?.includes('d6') || details.desc?.includes('d8') || details.desc?.includes('d10') || details.desc?.includes('d12')) && <span className="text-[10px] bg-gray-800 px-1 py-0.5 rounded text-gray-400 border border-gray-700 shadow-sm leading-none flex items-center justify-center">🎲</span>}
                                                                                     {isConc && <span className="text-[9px] px-1 bg-blue-900/60 border border-blue-700 text-blue-300 rounded font-bold whitespace-nowrap leading-none tracking-wider flex items-center justify-center">C</span>}
+                                                                                    {(() => {
+                                                                                        const featEntry = Object.entries(featSpellSelections).find(([fName, sNames]: any) => Array.isArray(sNames) && sNames.includes(sp));
+                                                                                        if (featEntry) return <span className="text-[9px] px-1 bg-amber-900/60 border border-amber-700 text-amber-300 rounded font-bold whitespace-nowrap leading-none tracking-wider flex items-center justify-center ml-1">FEAT: {featEntry[0]}</span>;
+                                                                                        return null;
+                                                                                    })()}
                                                                                     {isActiveConc && <span className="text-[10px] text-blue-400 font-bold ml-1 animate-pulse">AKTİF</span>}
                                                                                 </div>
 
@@ -2292,21 +2509,21 @@ export default function PlayerSheet() {
                         </div>
 
                         {/* Other Players */}
-                        {Object.entries(partyStats).filter(([name]) => name !== character?.name).map(([name, stats]: any) => (
+                        {partyStats && Object.entries(partyStats).filter(([name]) => name !== character?.name).map(([name, stats]: any) => (
                             <div key={name} className="bg-gray-800 rounded-2xl border border-gray-700 p-5 flex flex-col gap-4 hover:border-gray-500 transition-all">
                                 <div className="flex justify-between items-start">
                                     <div className="overflow-hidden mr-2">
                                         <h3 className="font-black text-white text-xl truncate" title={name}>{name}</h3>
-                                        {stats.subclass ? (
+                                        {stats && stats.subclass ? (
                                             <p className="text-xs text-yellow-500 font-bold truncate">{stats.subclass}</p>
                                         ) : (
                                             <p className="text-xs text-gray-500 font-bold uppercase tracking-tighter">Maceracı</p>
                                         )}
                                     </div>
                                     <div className="flex flex-col items-end">
-                                        <span className="text-xs font-black text-gray-400">SVY {stats.level || 1}</span>
+                                        <span className="text-xs font-black text-gray-400">SVY {stats?.level || 1}</span>
                                         <div className="flex gap-1 mt-1">
-                                            {stats.conditions && stats.conditions.map((c: string) => (
+                                            {stats?.conditions && stats.conditions.map((c: string) => (
                                                 <span key={c} className="w-2 h-2 rounded-full bg-red-500 shadow-[0_0_5px_rgba(239,68,68,0.5)]" title={c}></span>
                                             ))}
                                         </div>
@@ -2316,10 +2533,10 @@ export default function PlayerSheet() {
                                 <div className="space-y-1.5">
                                     <div className="flex justify-between text-[10px] font-bold uppercase tracking-widest text-gray-500">
                                         <span>Can (HP)</span>
-                                        <span>{stats.currentHp} / {stats.maxHp}</span>
+                                        <span>{stats?.currentHp || 0} / {stats?.maxHp || 10}</span>
                                     </div>
                                     <div className="w-full bg-gray-950 h-2 rounded-full overflow-hidden border border-gray-700/50">
-                                        <div className={`h-full transition-all duration-500 ${(stats.currentHp / (stats.maxHp || 1)) > 0.5 ? 'bg-green-500' : 'bg-red-500'}`} style={{ width: `${(stats.currentHp / (stats.maxHp || 1)) * 100}%` }}></div>
+                                        <div className={`h-full transition-all duration-500 ${(stats?.currentHp / (stats?.maxHp || 1)) > 0.5 ? 'bg-green-500' : 'bg-red-500'}`} style={{ width: `${(stats?.currentHp / (stats?.maxHp || 1)) * 100}%` }}></div>
                                     </div>
                                 </div>
 
@@ -2329,7 +2546,7 @@ export default function PlayerSheet() {
                             </div>
                         ))}
 
-                        {Object.keys(partyStats).filter(([name]) => name !== character?.name).length === 0 && (
+                        {(!partyStats || Object.keys(partyStats).filter(name => name !== character?.name).length === 0) && (
                             <div className="col-span-full py-12 text-center border-2 border-dashed border-gray-800 rounded-2xl">
                                 <p className="text-gray-500 font-bold italic">Odadaki diğer oyuncular bekleniyor...</p>
                             </div>
@@ -2339,29 +2556,103 @@ export default function PlayerSheet() {
             </div>
 
             {/* ── GALLERY MODAL ── */}
+            {/* ── GALLERY MODAL ── */}
             {
                 isGalleryOpen && (
-                    <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-8 backdrop-blur-sm" onClick={() => setIsGalleryOpen(false)}>
-                        <div className="bg-gray-900 border border-gray-700 rounded-2xl p-6 max-w-5xl w-full max-h-[85vh] flex flex-col" onClick={e => e.stopPropagation()}>
-                            <div className="flex justify-between items-center mb-4">
-                                <h2 className="text-2xl font-black text-white">DM Galerisi</h2>
-                                <button onClick={() => setIsGalleryOpen(false)} className="text-gray-400 hover:text-white text-2xl">✕</button>
-                            </div>
-                            <div className="flex-1 overflow-y-auto">
-                                {gallery.length === 0 ? <p className="text-gray-500 text-center py-10">DM henüz bir şey paylaşmadı.</p> : (
-                                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                                        {gallery.map((m: any) => (
-                                            <div key={m._id} className="bg-gray-800 border border-gray-700 rounded-xl overflow-hidden">
-                                                <p className="px-3 py-2 text-sm font-bold text-gray-300 truncate">{m.name}</p>
-                                                {m.type === 'image' ? (
-                                                    <img src={m.url} alt={m.name} onClick={() => setSelectedImage(m.url)} className="w-full h-40 object-cover cursor-pointer hover:opacity-80 transition" />
-                                                ) : (
-                                                    <a href={m.url} target="_blank" className="block px-3 py-4 text-blue-400 hover:underline text-sm">🔗 Linke Git</a>
-                                                )}
-                                            </div>
-                                        ))}
+                    <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 md:p-8 backdrop-blur-md" onClick={() => setIsGalleryOpen(false)}>
+                        <div className="bg-gray-900/90 border border-gray-700/50 rounded-3xl p-6 md:p-8 max-w-6xl w-full max-h-[90vh] flex flex-col shadow-[0_0_50px_rgba(0,0,0,0.5)] backdrop-blur-xl animate-scale-in" onClick={e => e.stopPropagation()}>
+                            <div className="flex flex-col md:flex-row justify-between md:items-center gap-4 mb-8">
+                                <div>
+                                    <h2 className="text-3xl font-black text-white tracking-tighter flex items-center gap-3">
+                                        <span className="text-4xl">🖼️</span> DM Galerisi
+                                    </h2>
+                                    <p className="text-gray-400 text-sm mt-1">Paylaşılan görseller ve kaynaklar</p>
+                                </div>
+                                <div className="flex items-center gap-3">
+                                    <div className="relative group">
+                                        <input
+                                            type="text"
+                                            value={gallerySearch}
+                                            onChange={e => setGallerySearch(e.target.value)}
+                                            placeholder="Ara..."
+                                            className="bg-gray-800 border border-gray-700 rounded-xl px-4 py-2 text-sm text-white w-48 md:w-64 focus:outline-none focus:border-purple-500 transition-all pl-10"
+                                        />
+                                        <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">🔍</span>
                                     </div>
-                                )}
+                                    <button onClick={() => setIsGalleryOpen(false)} className="bg-gray-800 hover:bg-gray-700 text-gray-400 hover:text-white w-10 h-10 rounded-xl flex items-center justify-center transition-all text-xl">✕</button>
+                                </div>
+                            </div>
+
+                            {/* Filters */}
+                            <div className="flex gap-2 mb-6 bg-gray-800/50 p-1.5 rounded-2xl w-fit border border-gray-700/30">
+                                {[
+                                    { id: 'all', label: 'Hepsi', icon: '🌈' },
+                                    { id: 'image', label: 'Görseller', icon: '🖼️' },
+                                    { id: 'link', label: 'Bağlantılar', icon: '🔗' }
+                                ].map(cat => (
+                                    <button
+                                        key={cat.id}
+                                        onClick={() => setGalleryFilter(cat.id as any)}
+                                        className={`px-4 py-2 rounded-xl text-xs font-black transition-all flex items-center gap-2 ${galleryFilter === cat.id ? 'bg-purple-600 text-white shadow-lg' : 'text-gray-400 hover:bg-gray-700'}`}
+                                    >
+                                        <span>{cat.icon}</span> {cat.label}
+                                    </button>
+                                ))}
+                            </div>
+
+                            <div className="flex-1 overflow-y-auto pr-2 custom-scrollbar">
+                                {(() => {
+                                    const filtered = gallery.filter(m => {
+                                        const matchesSearch = m.name.toLowerCase().includes(gallerySearch.toLowerCase());
+                                        const matchesFilter = galleryFilter === 'all' || m.type === galleryFilter;
+                                        return matchesSearch && matchesFilter;
+                                    });
+
+                                    if (filtered.length === 0) {
+                                        return (
+                                            <div className="flex flex-col items-center justify-center py-20 text-center opacity-40">
+                                                <span className="text-6xl mb-4">🕵️‍♂️</span>
+                                                <p className="text-gray-400 font-bold">Herhangi bir şey bulunamadı.</p>
+                                            </div>
+                                        );
+                                    }
+
+                                    return (
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                                            {filtered.map((m: any) => (
+                                                <div key={m._id} className="group bg-gray-800/40 border border-gray-700/50 rounded-2xl overflow-hidden hover:border-purple-500/50 hover:bg-gray-800/60 transition-all duration-300 flex flex-col hover:shadow-[0_10px_30px_rgba(0,0,0,0.3)]">
+                                                    <div className="aspect-video bg-gray-950 flex items-center justify-center relative overflow-hidden">
+                                                        {m.type === 'image' ? (
+                                                            <>
+                                                                <img
+                                                                    src={m.url.startsWith('/uploads/') ? `${API_URL}${m.url}` : m.url}
+                                                                    alt={m.name}
+                                                                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 cursor-zoom-in"
+                                                                    onClick={() => setSelectedImage(m.url.startsWith('/uploads/') ? `${API_URL}${m.url}` : m.url)}
+                                                                />
+                                                                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
+                                                                    <span className="bg-white/20 backdrop-blur-md px-3 py-1.5 rounded-lg text-xs font-black text-white border border-white/20">BÜYÜT</span>
+                                                                </div>
+                                                            </>
+                                                        ) : (
+                                                            <div className="flex flex-col items-center gap-3">
+                                                                <span className="text-4xl opacity-50">🔗</span>
+                                                                <a href={m.url} target="_blank" className="bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-xl text-xs font-black transition-all">Bağlantıyı Aç</a>
+                                                            </div>
+                                                        )}
+                                                    </div>
+                                                    <div className="p-4 bg-gray-900/40 backdrop-blur-sm border-t border-gray-700/30 flex-1">
+                                                        <h4 className="text-gray-200 font-bold text-sm truncate mb-1">{m.name}</h4>
+                                                        <div className="flex items-center justify-between mt-auto">
+                                                            <span className="text-[10px] font-black text-gray-500 uppercase tracking-widest">{m.type === 'image' ? 'Görsel' : 'Kaynak'}</span>
+                                                            <span className="text-[10px] text-gray-600">{new Date(m.createdAt || Date.now()).toLocaleDateString('tr-TR')}</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    );
+                                })()}
                             </div>
                         </div>
                     </div>
@@ -2371,8 +2662,55 @@ export default function PlayerSheet() {
             {/* ── IMAGE VIEWER ── */}
             {
                 selectedImage && (
-                    <div className="fixed inset-0 bg-black/90 z-[60] flex items-center justify-center p-4 cursor-pointer" onClick={() => setSelectedImage(null)}>
-                        <img src={selectedImage} alt="" className="max-w-full max-h-[90vh] object-contain rounded-xl" onClick={e => e.stopPropagation()} />
+                    <div
+                        className="fixed inset-0 bg-black/95 z-[60] flex items-center justify-center p-4 cursor-default animate-fade-in"
+                        onWheel={(e) => {
+                            const delta = e.deltaY > 0 ? -0.1 : 0.1;
+                            setImgZoom(prev => Math.min(Math.max(0.5, prev + delta), 5));
+                        }}
+                        onMouseDown={(e) => {
+                            if (imgZoom > 1) {
+                                setIsImgPanning(true);
+                                setImgPanStart({ x: e.clientX - imgOffset.x, y: e.clientY - imgOffset.y });
+                            }
+                        }}
+                        onMouseMove={(e) => {
+                            if (isImgPanning) {
+                                setImgOffset({ x: e.clientX - imgPanStart.x, y: e.clientY - imgPanStart.y });
+                            }
+                        }}
+                        onMouseUp={() => setIsImgPanning(false)}
+                        onMouseLeave={() => setIsImgPanning(false)}
+                    >
+                        <div className="absolute top-6 right-6 flex gap-3 z-10">
+                            <div className="bg-gray-800/80 backdrop-blur-md rounded-xl px-4 py-2 flex items-center gap-4 border border-white/10 text-white font-black text-xs">
+                                <button onClick={() => setImgZoom(prev => Math.max(0.5, prev - 0.2))} className="hover:text-purple-400">➖</button>
+                                <span className="w-12 text-center">% {Math.round(imgZoom * 100)}</span>
+                                <button onClick={() => setImgZoom(prev => Math.min(5, prev + 0.2))} className="hover:text-purple-400">➕</button>
+                                <div className="w-px h-4 bg-gray-600 mx-1"></div>
+                                <button onClick={() => { setImgZoom(1); setImgOffset({ x: 0, y: 0 }); }} className="hover:text-purple-400">SIFIRLA</button>
+                            </div>
+                            <button onClick={() => { setSelectedImage(null); setImgZoom(1); setImgOffset({ x: 0, y: 0 }); }} className="bg-red-600 hover:bg-red-500 text-white w-12 h-12 rounded-xl flex items-center justify-center shadow-lg transition-all text-2xl font-black">✕</button>
+                        </div>
+
+                        <div
+                            className={`transition-transform duration-75 ease-out ${imgZoom > 1 ? 'cursor-grab' : ''} ${isImgPanning ? 'cursor-grabbing' : ''}`}
+                            style={{
+                                transform: `translate(${imgOffset.x}px, ${imgOffset.y}px) scale(${imgZoom})`,
+                            }}
+                        >
+                            <img
+                                src={selectedImage}
+                                alt=""
+                                className="max-w-[90vw] max-h-[90vh] object-contain rounded-xl shadow-2xl pointer-events-none select-none"
+                            />
+                        </div>
+
+                        {imgZoom <= 1 && (
+                            <div className="absolute bottom-10 left-1/2 -translate-x-1/2 bg-black/40 backdrop-blur-md px-6 py-2 rounded-full text-white/60 text-xs font-bold pointer-events-none border border-white/10">
+                                🖱️ Yakınlaştırmak için tekerleği kullanın
+                            </div>
+                        )}
                     </div>
                 )
             }
@@ -2632,11 +2970,51 @@ export default function PlayerSheet() {
                                                     <p className="text-gray-300 text-xs">{featPick.desc_tr}</p>
                                                 </div>
                                             )}
-                                            <div className="space-y-2 max-h-80 overflow-y-auto pr-1">
+                                            {featPick && (() => {
+                                                const reqs = getFeatRequirements(featPick.name, libFeats);
+                                                if (!reqs) return null;
+                                                return (
+                                                    <div className="mt-4 border-t border-purple-800/30 pt-4 space-y-4 bg-gray-900/50 p-4 rounded-xl">
+                                                        {reqs.statChoices && (
+                                                            <FeatStatSelectionArea
+                                                                featName={featPick.name}
+                                                                requirements={reqs}
+                                                                selection={featStatSelections[featPick.name]}
+                                                                onUpdate={(val: string) => setFeatStatSelections(prev => ({ ...prev, [featPick!.name]: val }))}
+                                                            />
+                                                        )}
+                                                        {reqs.slots && (
+                                                            <FeatSpellSelectionArea
+                                                                featName={featPick.name}
+                                                                requirements={reqs}
+                                                                selections={featSpellSelections[featPick.name] || []}
+                                                                token={token}
+                                                                onUpdate={(newSels: any[]) => setFeatSpellSelections(prev => ({ ...prev, [featPick!.name]: newSels }))}
+                                                            />
+                                                        )}
+                                                        {reqs.choices && reqs.choices.map((choice: any, ci: number) => (
+                                                            <FeatChoiceSelectionArea
+                                                                key={ci}
+                                                                featName={featPick!.name}
+                                                                choice={choice}
+                                                                selections={featChoiceSelections[featPick!.name]?.[choice.label] || []}
+                                                                onUpdate={(val: string[]) => setFeatChoiceSelections(prev => ({
+                                                                    ...prev,
+                                                                    [featPick!.name]: {
+                                                                        ...(prev[featPick!.name] || {}),
+                                                                        [choice.label]: val
+                                                                    }
+                                                                }))}
+                                                            />
+                                                        ))}
+                                                    </div>
+                                                );
+                                            })()}
+                                            <div className="space-y-2 max-h-80 overflow-y-auto pr-1 mt-4">
                                                 {(ALL_FEATS as any[]).filter((f, i, arr) => arr.findIndex(x => x.name === f.name) === i)
                                                     .filter(f => !featSearch || f.name.toLowerCase().includes(featSearch.toLowerCase()) || f.name_tr?.toLowerCase().includes(featSearch.toLowerCase()))
                                                     .map((f) => (
-                                                        <div key={f.name} onClick={() => setFeatPick(f)}
+                                                        <div key={f.name} onClick={() => { setFeatPick(f); setFeatStatSelections({}); setFeatSpellSelections({}); }}
                                                             className={`cursor-pointer p-3 rounded-xl border transition hover:border-purple-500/60 ${featPick?.name === f.name ? 'border-purple-500 bg-purple-900/20' : 'border-gray-700 bg-gray-800'}`}>
                                                             <div className="flex items-center justify-between mb-0.5">
                                                                 <span className="font-black text-sm text-white">{f.name_tr}</span>
@@ -2805,11 +3183,38 @@ export default function PlayerSheet() {
                                 <span>🤫</span> {whisperTarget === 'DM' ? "DM'e Fısılda" : `${whisperTarget}'e Fısılda`}
                             </h2>
                             <p className="text-gray-400 text-sm mb-4">Bu mesajı sadece {whisperTarget === 'DM' ? "Dungeon Master" : whisperTarget} görebilecek.</p>
+
+                            {/* Whisper History Log */}
+                            <div className="flex-1 overflow-y-auto mb-4 bg-gray-950/50 rounded-xl p-3 border border-gray-800 space-y-2 max-h-64 custom-scrollbar">
+                                {whisperHistory && whisperHistory.length > 0 ? (
+                                    whisperHistory.filter((w: any) =>
+                                        (w.senderName === character?.name && w.targetName === whisperTarget) ||
+                                        (w.senderName === whisperTarget && w.targetName === character?.name)
+                                    ).map((w: any, idx: number) => (
+                                        <div key={idx} className={`text-sm p-2 rounded-lg ${w.senderName === character?.name ? 'bg-purple-900/40 ml-6 border border-purple-500/20' : 'bg-gray-800/40 mr-6 border border-gray-700/20'}`}>
+                                            <div className="flex justify-between items-center mb-1">
+                                                <span className="font-black text-[9px] uppercase tracking-wider text-purple-400">
+                                                    {w.senderName === character?.name ? 'SEN' : w.senderName}
+                                                </span>
+                                                <span className="text-[9px] text-gray-500 opacity-50">{w.createdAt ? new Date(w.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : '--:--'}</span>
+                                            </div>
+                                            <p className="text-gray-200 text-xs leading-relaxed">{w.message}</p>
+                                        </div>
+                                    ))
+                                ) : (
+                                    <div className="h-full flex flex-col items-center justify-center opacity-20 text-center py-10">
+                                        <span className="text-4xl mb-2">🤫</span>
+                                        <p className="text-[10px] font-bold uppercase tracking-widest">Sessizce fısılda...</p>
+                                    </div>
+                                )}
+                                <div ref={chatEndRef} />
+                            </div>
+
                             <textarea
                                 value={whisperMessage}
                                 onChange={e => setWhisperMessage(e.target.value)}
                                 placeholder="Gizli mesajın..."
-                                className="w-full h-32 p-4 bg-gray-950 border border-gray-700 rounded-xl text-purple-100 resize-none focus:outline-none focus:border-purple-500 transition-colors mb-4"
+                                className="w-full h-24 p-4 bg-gray-950 border border-gray-700 rounded-xl text-purple-100 resize-none focus:outline-none focus:border-purple-500 transition-colors mb-4 text-sm"
                             />
                             <div className="flex gap-3">
                                 <button onClick={() => setIsWhisperModalOpen(false)} className="flex-1 py-3 bg-gray-800 hover:bg-gray-700 text-gray-300 font-bold rounded-xl transition">İptal</button>
@@ -2822,81 +3227,180 @@ export default function PlayerSheet() {
             {/* Grid Map Modalı (Player View) */}
             {
                 isMapOpen && (
-                    <div className="fixed inset-0 bg-black/90 z-[70] flex flex-col p-4 backdrop-blur-md animate-fade-in overflow-hidden">
+                    <div className="fixed inset-0 bg-black/95 z-[70] flex flex-col p-4 md:p-8 backdrop-blur-md animate-fade-in overflow-hidden shadow-2xl">
                         {/* Map Header */}
-                        <div className="flex justify-between items-center mb-4 bg-gray-900/80 p-4 rounded-xl border border-gray-700">
-                            <h2 className="text-2xl font-black text-white flex items-center gap-2">
-                                <span className="text-3xl">🗺️</span> Stratejik Harita
-                            </h2>
-                            <button onClick={() => setIsMapOpen(false)} className="bg-red-600 hover:bg-red-500 text-white w-10 h-10 rounded-lg font-black flex items-center justify-center shadow-lg transition-all">✕</button>
+                        <div className="flex justify-between items-center mb-6 bg-gray-900/40 backdrop-blur-md p-5 rounded-2xl border border-white/10 shadow-2xl">
+                            <div>
+                                <h2 className="text-3xl font-black text-white tracking-tighter flex items-center gap-3">
+                                    <span className="text-4xl">🗺️</span> Stratejik Harita
+                                </h2>
+                                <p className="text-gray-400 text-sm mt-1">{mapData.tokens.length} Token aktif • {Math.round(mapZoom * 100)}% Yakınlaştırma</p>
+                            </div>
+                            <div className="flex items-center gap-4">
+                                <div className="bg-gray-800/80 backdrop-blur-md rounded-xl px-4 py-2 flex items-center gap-4 border border-white/10 text-white font-black text-xs">
+                                    <button onClick={() => setMapZoom(prev => Math.max(0.2, prev - 0.1))} className="hover:text-purple-400">➖</button>
+                                    <span className="w-12 text-center">% {Math.round(mapZoom * 100)}</span>
+                                    <button onClick={() => setMapZoom(prev => Math.min(3, prev + 0.1))} className="hover:text-purple-400">➕</button>
+                                    <div className="w-px h-4 bg-gray-600 mx-1"></div>
+                                    <button onClick={() => { setMapZoom(1); setMapOffset({ x: 0, y: 0 }); }} className="hover:text-purple-400">SIFIRLA</button>
+                                </div>
+                                <button onClick={() => setIsMapOpen(false)} className="bg-red-700 hover:bg-red-600 text-white w-12 h-12 rounded-xl font-black flex items-center justify-center shadow-lg transition-all text-2xl">✕</button>
+                            </div>
                         </div>
 
-                        {/* Map Canvas Area */}
-                        <div
-                            className="flex-1 bg-gray-950 rounded-2xl border-2 border-gray-800 relative overflow-auto cursor-grab active:cursor-grabbing"
-                            style={{
-                                backgroundImage: mapData.bgUrl ? `url(${mapData.bgUrl})` : 'none',
-                                backgroundSize: 'contain',
-                                backgroundRepeat: 'no-repeat',
-                                backgroundPosition: 'center',
-                                minHeight: '800px'
-                            }}
-                            onDragOver={(e) => e.preventDefault()}
-                            onDrop={(e) => {
-                                e.preventDefault();
-                                if (!isDraggingToken) return;
+                        <div className="flex-1 flex gap-6 overflow-hidden">
+                            {/* Token Legend (Left Sidebar) */}
+                            <div className="w-64 bg-gray-900/60 backdrop-blur-md rounded-3xl border border-white/10 p-5 flex flex-col hidden lg:flex shadow-2xl">
+                                <h3 className="text-xs font-black text-gray-500 uppercase tracking-widest mb-4 border-b border-white/5 pb-2">Token Listesi</h3>
+                                <div className="flex-1 overflow-y-auto space-y-2 pr-2 custom-scrollbar">
+                                    {mapData.tokens.map((token: any) => (
+                                        <div
+                                            key={token.id}
+                                            onClick={() => {
+                                                setMapZoom(1.5);
+                                                // Center on token
+                                                const container = document.getElementById('map-viewport');
+                                                if (container) {
+                                                    const rect = container.getBoundingClientRect();
+                                                    setMapOffset({
+                                                        x: (rect.width / 2) - (token.x * 1.5),
+                                                        y: (rect.height / 2) - (token.y * 1.5)
+                                                    });
+                                                }
+                                            }}
+                                            className={`p-3 rounded-xl border flex items-center gap-3 cursor-pointer transition-all hover:scale-[1.02] ${token.entityId === character?._id ? 'bg-yellow-900/20 border-yellow-500/50' : 'bg-gray-800/40 border-white/5 hover:border-white/20'}`}
+                                        >
+                                            <div className="w-8 h-8 rounded-full border-2 border-white/20 flex items-center justify-center text-[10px] font-black" style={{ backgroundColor: token.color || '#ef4444' }}>
+                                                {token.name.substring(0, 2).toUpperCase()}
+                                            </div>
+                                            <div className="flex-1 min-w-0">
+                                                <p className="text-xs font-bold text-gray-200 truncate">{token.name}</p>
+                                                <p className="text-[10px] text-gray-500 uppercase">{token.type === 'player' ? 'Oyuncu' : 'Yaratık'}</p>
+                                            </div>
+                                        </div>
+                                    ))}
+                                    {mapData.tokens.length === 0 && <p className="text-gray-600 text-xs text-center py-10 italic">Henüz token yok.</p>}
+                                </div>
+                                <div className="mt-4 pt-4 border-t border-white/5">
+                                    <div className="bg-purple-900/20 border border-purple-500/30 p-3 rounded-xl text-[10px] text-purple-300 leading-tight">
+                                        💡 Tokenları sürükleyip taşıyabilir, haritayı kaydırmak için boş bir alandan sürükleyebilirsin.
+                                    </div>
+                                </div>
+                            </div>
 
-                                // Only allow dragging own player token (or DM if they ever use this view)
-                                if (!isDraggingToken.startsWith('player-')) return;
+                            {/* Map Canvas Area */}
+                            <div
+                                id="map-viewport"
+                                className="flex-1 bg-gray-950 rounded-3xl border border-white/10 relative overflow-hidden shadow-inner cursor-grab active:cursor-grabbing"
+                                onWheel={(e) => {
+                                    const delta = e.deltaY > 0 ? -0.05 : 0.05;
+                                    setMapZoom(prev => Math.min(Math.max(0.2, prev + delta), 3));
+                                }}
+                                onMouseDown={(e) => {
+                                    // Only pan if clicking the background, not a token
+                                    const target = e.target as HTMLElement;
+                                    if (target.id === 'map-viewport' || target.id === 'grid-overlay' || target.id === 'map-img') {
+                                        setIsPanning(true);
+                                        setPanStart({ x: e.clientX - mapOffset.x, y: e.clientY - mapOffset.y });
+                                    }
+                                }}
+                                onMouseMove={(e) => {
+                                    if (isPanning) {
+                                        setMapOffset({ x: e.clientX - panStart.x, y: e.clientY - panStart.y });
+                                    }
+                                }}
+                                onMouseUp={() => setIsPanning(false)}
+                                onMouseLeave={() => setIsPanning(false)}
+                                onDragOver={(e) => e.preventDefault()}
+                                onDrop={(e) => {
+                                    e.preventDefault();
+                                    if (!isDraggingToken) return;
 
-                                const rect = e.currentTarget.getBoundingClientRect();
-                                const x = e.clientX - rect.left;
-                                const y = e.clientY - rect.top;
+                                    // Only allow dragging own player token
+                                    if (!isDraggingToken.startsWith('player-')) return;
 
-                                socket?.emit('move_token', { campaignId, tokenId: isDraggingToken, x, y });
-                                setIsDraggingToken(null);
-                            }}
-                        >
-                            {/* Grid Overlay */}
-                            {mapData.showGrid && (
+                                    const rect = e.currentTarget.getBoundingClientRect();
+                                    // Inverse transform the drop coordinates
+                                    const x = (e.clientX - rect.left - mapOffset.x) / mapZoom;
+                                    const y = (e.clientY - rect.top - mapOffset.y) / mapZoom;
+
+                                    socket?.emit('move_token', { campaignId, tokenId: isDraggingToken, x, y });
+                                    setIsDraggingToken(null);
+                                }}
+                            >
                                 <div
-                                    className="absolute inset-0 pointer-events-none"
+                                    className="absolute origin-top-left transition-transform duration-75 ease-out"
                                     style={{
-                                        backgroundImage: 'linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px)',
-                                        backgroundSize: `${mapData.gridSize}px ${mapData.gridSize}px`
-                                    }}
-                                />
-                            )}
-
-                            {/* Tokens */}
-                            {mapData.tokens.map((token: any) => (
-                                <div
-                                    key={token.id}
-                                    draggable={token.type === 'player' && token.entityId === character?._id}
-                                    onDragStart={() => setIsDraggingToken(token.id)}
-                                    className={`absolute w-12 h-12 rounded-full border-2 border-white shadow-lg flex items-center justify-center text-[10px] font-black select-none group ${token.entityId === character?._id ? 'cursor-move ring-2 ring-yellow-400' : 'cursor-default'}`}
-                                    style={{
-                                        left: token.x - 24,
-                                        top: token.y - 24,
-                                        backgroundColor: token.color || '#ef4444',
-                                        zIndex: 10
+                                        transform: `translate(${mapOffset.x}px, ${mapOffset.y}px) scale(${mapZoom})`,
                                     }}
                                 >
-                                    <div className="absolute -top-6 left-1/2 -translate-x-1/2 bg-black/80 px-2 py-0.5 rounded text-white opacity-0 group-hover:opacity-100 whitespace-nowrap transition-opacity">
-                                        {token.name} {token.entityId === character?._id ? '(Sen)' : ''}
-                                    </div>
-                                    <div className="text-white text-center leading-tight uppercase">
-                                        {token.name.substring(0, 2)}
-                                    </div>
-                                </div>
-                            ))}
+                                    {/* Map Image */}
+                                    {mapData.bgUrl && (
+                                        <img
+                                            id="map-img"
+                                            src={mapData.bgUrl}
+                                            alt="Harita"
+                                            className="block pointer-events-auto select-none rounded shadow-2xl"
+                                            style={{ minWidth: '1000px' }} // Ensure some size if small image
+                                        />
+                                    )}
 
-                            {!mapData.bgUrl && (
-                                <div className="absolute inset-0 flex items-center justify-center text-gray-700 flex-col gap-4">
-                                    <span className="text-8xl">🖼️</span>
-                                    <p className="text-xl font-bold">DM henüz bir harita yüklemedi.</p>
+                                    {/* Grid Overlay */}
+                                    {mapData.showGrid && (
+                                        <div
+                                            id="grid-overlay"
+                                            className="absolute inset-0 pointer-events-auto cursor-grab active:cursor-grabbing"
+                                            style={{
+                                                backgroundImage: 'linear-gradient(to right, rgba(255,255,255,0.08) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.08) 1px, transparent 1px)',
+                                                backgroundSize: `${mapData.gridSize}px ${mapData.gridSize}px`,
+                                                width: '100%',
+                                                height: '100%'
+                                            }}
+                                        />
+                                    )}
+
+                                    {/* Tokens */}
+                                    {mapData.tokens.map((token: any) => (
+                                        <div
+                                            key={token.id}
+                                            draggable={token.type === 'player' && token.entityId === character?._id}
+                                            onDragStart={() => setIsDraggingToken(token.id)}
+                                            className={`absolute w-12 h-12 rounded-full border-2 border-white shadow-[0_0_15px_rgba(0,0,0,0.5)] flex items-center justify-center text-[10px] font-black select-none group transition-shadow hover:shadow-[0_0_20px_rgba(255,255,255,0.4)] ${token.entityId === character?._id ? 'cursor-move ring-4 ring-yellow-400 ring-offset-2 ring-offset-gray-900 border-yellow-400' : 'cursor-default border-white/40'}`}
+                                            style={{
+                                                left: token.x - 24,
+                                                top: token.y - 24,
+                                                backgroundColor: token.color || '#ef4444',
+                                                zIndex: 20
+                                            }}
+                                        >
+                                            <div className="absolute -top-10 left-1/2 -translate-x-1/2 bg-black/80 backdrop-blur-md px-3 py-1 rounded-lg text-white opacity-0 group-hover:opacity-100 whitespace-nowrap transition-all border border-white/10 shadow-xl pointer-events-none scale-90 group-hover:scale-100">
+                                                {token.name} {token.entityId === character?._id ? ' (Sen)' : ''}
+                                                <div className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-t-[6px] border-t-black/80"></div>
+                                            </div>
+                                            <div className="text-white text-center leading-tight uppercase font-black text-xs drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]">
+                                                {token.name.substring(0, 2)}
+                                            </div>
+
+                                            {/* Status Indicators Placeholder */}
+                                            {token.entityId === character?._id && (
+                                                <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-gray-900 flex items-center justify-center">
+                                                    <div className="w-1.5 h-1.5 bg-white rounded-full animate-pulse"></div>
+                                                </div>
+                                            )}
+                                        </div>
+                                    ))}
                                 </div>
-                            )}
+
+                                {!mapData.bgUrl && (
+                                    <div className="absolute inset-0 flex items-center justify-center text-gray-700 flex-col gap-6 backdrop-blur-sm bg-black/40">
+                                        <span className="text-9xl animate-bounce-slow">🔍</span>
+                                        <div className="text-center">
+                                            <p className="text-2xl font-black text-white tracking-widest uppercase">Harita Aranıyor...</p>
+                                            <p className="text-gray-400 mt-2">Dungeon Master henüz bir savaş alanı yüklemedi.</p>
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
                         </div>
                     </div>
                 )

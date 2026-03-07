@@ -1,0 +1,452 @@
+[
+    {
+        "name": "Robe of Summer",
+        "name_tr": "Yaz Robu",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:robe-of-summer",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Elegant red and gold garment that provides cold resistance and protection from extreme temperatures.",
+        "description_tr": "Soğuğa karşı direnç veren ve takan kişiyi aşırı hava koşullarından (sıcak/soğuk) koruyan zarif cübbe."
+    },
+    {
+        "name": "Rod of Rulership",
+        "name_tr": "Hükümdarlık Asası",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:rod-of-rulership",
+        "rarity": "Rare",
+        "type": "Rod",
+        "description": "Command obedience from creatures within 120 feet, charming them into regarding you as their leader.",
+        "description_tr": "120 fit içindeki canlıların size itaat etmesini ve sizi liderleri olarak görmelerini sağlayan otorite asası."
+    },
+    {
+        "name": "Rod of the Pact Keeper, +1, +2, +3",
+        "name_tr": "Pakt Koruyucusu Asası",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:rod-of-the-pact-keeper",
+        "rarity": "Rare",
+        "type": "Rod",
+        "description": "Warlock focus that grants bonuses to spell attacks and DCs, and allows regaining a spell slot.",
+        "description_tr": "Warlock büyücüleri için büyü bonusu sağlayan ve günde bir kez büyü yuvasını (slot) yenileyen asa."
+    },
+    {
+        "name": "Rod of the Vonindod",
+        "name_tr": "Vonindod Asası",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:rod-of-the-vonindod",
+        "rarity": "Rare",
+        "type": "Rod",
+        "description": "Adamantine rod used by fire giants to locate fragments of the ancient Vonindod construct.",
+        "description_tr": "Ateş devleri tarafından antik metal parçalarını 10 mil öteden tespit etmek için kullanılan ağır asa."
+    },
+    {
+        "name": "Rogue's Mantle",
+        "name_tr": "Düzenbaz Mantosu",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:rogues-mantle",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Grants darkvision, 30-foot teleportation in shadows, and the ability to cast the Antagonize spell.",
+        "description_tr": "Karanlıkta görmeyi ve gölgeler arasında ışınlanarak suikast yapmayı sağlayan hırsız pelerini."
+    },
+    {
+        "name": "Rope of Entanglement",
+        "name_tr": "Dolanma Halatı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:rope-of-entanglement",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Magical rope that darts forward to restrain a creature on command.",
+        "description_tr": "Kendi kendine hareket ederek hedefleri sıkıca bağlayan ve onları hareketsiz bırakan sihirli urgan."
+    },
+    {
+        "name": "Ruinous Flail",
+        "name_tr": "Yıkıcı Topuz",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:ruinous-flail",
+        "rarity": "Rare",
+        "type": "Weapon",
+        "description": "+1 flail that deals double damage to objects and can poison creatures for necrotic damage.",
+        "description_tr": "Yapılara iki kat hasar veren ve vurduğu rakipleri çürütücü (necrotic) bir zehirle zehirleyen +1 silah."
+    },
+    {
+        "name": "Sage's Signet",
+        "name_tr": "Bilgenin Mühür Yüzüğü",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:sages-signet",
+        "rarity": "Rare",
+        "type": "Ring",
+        "description": "Gilded ring that allows casting Augury and other academic-themed divination spells.",
+        "description_tr": "Gelecekten haber almanızı (Augury) ve çeşitli bilgi büyüleri yapmanızı sağlayan mühürlü yüzük."
+    },
+    {
+        "name": "Saint Markovia's Thighbone",
+        "name_tr": "Aziz Markovia'nın Kemik Topuzu",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:saint-markovias-thighbone",
+        "rarity": "Rare",
+        "type": "Weapon",
+        "description": "Holy relic with the properties of a Mace of Disruption, especially powerful against vampires.",
+        "description_tr": "Vampirleri anında yok edebilen ve hortlaklara karşı ışık hasarı veren azize ait kutsal kemik."
+    },
+    {
+        "name": "Scaled Ornament",
+        "name_tr": "Pullu Süs",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:scaled-ornament",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Dragon-scale accessory that protects against being charmed or frightened and grants AC.",
+        "description_tr": "Ejderha pulundan yapılmış, büyülenmeyi ve korkuyu engelleyen, savunma artıran aksesuar."
+    },
+    {
+        "name": "Scissors of Shadow Snipping",
+        "name_tr": "Gölge Kırpma Makası",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:scissors-of-shadow-snipping",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Iron shears that can detach a creature's shadow, turning it into a separate, controllable entity.",
+        "description_tr": "Canlıların gölgesini keserek onları lanetleyen ve gölgeyi ayrı bir varlık haline getiren makas."
+    },
+    {
+        "name": "Scorpion Armor",
+        "name_tr": "Akrep Zırhı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:scorpion-armor",
+        "rarity": "Rare",
+        "type": "Armor",
+        "description": "Cursed plate armor made from giant scorpion chitin that deals poison damage to its wearer.",
+        "description_tr": "Akrep kabuğundan yapılan güçlü ancak giyip çıkarırken sahibini zehirleyen lanetli zırh."
+    },
+    {
+        "name": "Scroll of Protection",
+        "name_tr": "Koruma Parşömeni",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:scroll-of-protection",
+        "rarity": "Rare",
+        "type": "Scroll",
+        "description": "Encloses you in an invisible barrier that prevents specific creature types from entering.",
+        "description_tr": "Belirli bir yaratık türüne (İblis, Hortlak vb.) karşı geçilmez bir koruma alanı yaratan kağıt."
+    },
+    {
+        "name": "Serpent's Fang",
+        "name_tr": "Yılan Dişi",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:serpent-s-fang",
+        "rarity": "Rare",
+        "type": "Weapon",
+        "description": "Giant serpent fang sword that deals an extra 1d10 poison damage on hits.",
+        "description_tr": "Dev bir yılanın dişinden yapılan ve her vuruşta 1d10 zehir hasarı veren sihirli kılıç."
+    },
+    {
+        "name": "Shadowfell Brand Tattoo",
+        "name_tr": "Shadowfell Dövmesi",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:shadowfell-brand-tattoo",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Grants darkvision, stealth advantage, and the ability to halve incoming damage as a reaction.",
+        "description_tr": "Karanlık görüş, gizlilik ve alınan hasarı yarıya indirme gücü veren gölge dövmesi."
+    },
+    {
+        "name": "Shadowfell Shard",
+        "name_tr": "Shadowfell Kristali",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:shadowfell-shard",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Crystal focus that curses enemies with disadvantage when metamagic is used.",
+        "description_tr": "Büyü yapıldığında rakipleri zayıflatan ve onları umutsuzlukla lanetleyen karanlık kristal."
+    },
+    {
+        "name": "Shard of Xeluan",
+        "name_tr": "Xeluan Kristali",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:shard-of-xeluan",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Obsidian shard that significantly increases Strength and spell attack power but is cursed with misfortune.",
+        "description_tr": "Kuvveti (Strength) büyük oranda artıran ama sahibine şanssızlık getiren lanetli kristal."
+    },
+    {
+        "name": "Shield, +1, +2, +3",
+        "name_tr": "Kalkan +1, +2, +3",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:shield-1-2-3",
+        "rarity": "Rare",
+        "type": "Armor",
+        "description": "Magical shield that provides a permanent bonus to AC.",
+        "description_tr": "Savunmayı (AC) kalıcı olarak artıran klasik sihirli kalkan."
+    },
+    {
+        "name": "Shield of Far Sight",
+        "name_tr": "Uzak Görüş Kalkanı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:shield-of-far-sight",
+        "rarity": "Rare",
+        "type": "Armor",
+        "description": "Mind flayer creation with an eye that allows its creator to see and attack through it.",
+        "description_tr": "Üzerindeki canlı göz sayesinde sahibinin uzağı görmesini sağlayan illithid kalkanı."
+    },
+    {
+        "name": "Shield of Missile Attraction",
+        "name_tr": "Ok Çeken Kalkan",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:shield-of-missile-attraction",
+        "rarity": "Rare",
+        "type": "Armor",
+        "description": "Cursed shield that provides projectile resistance but draws all nearby ranged attacks toward you.",
+        "description_tr": "Ok ve mermilere direnç sağlayan ama etraftaki tüm okları üzerinize çeken lanetli kalkan."
+    },
+    {
+        "name": "Shrieking Greaves",
+        "name_tr": "Çığlık Atan Tozluklar",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:shrieking-greaves",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Cursed leg guards that increase speed but emit deafening screams when the wearer is frightened.",
+        "description_tr": "Hız artıran ancak korktuğunuzda etrafa kulak tırmalayıcı çığlıklar atan lanetli tozluklar."
+    },
+    {
+        "name": "Siren Song Lyre",
+        "name_tr": "Siren Şarkısı Liri",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:siren-song-lyre",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Musical instrument that can cast enchantment spells like Charm Person and Suggestion.",
+        "description_tr": "İnsanları büyüleme, ikna etme ve sakinleştirme gücü olan efsanevi lir."
+    },
+    {
+        "name": "Spell Gem",
+        "name_tr": "Büyü Mücevheri",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:spell-gem",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Gem created by deep gnomes that can store and later cast a single spell.",
+        "description_tr": "İçine bir büyü kaydedip sonra o büyüyü materyal harcamadan yapmanızı sağlayan taş."
+    },
+    {
+        "name": "Spell Scroll",
+        "name_tr": "Büyü Parşömeni",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:spell-scroll",
+        "rarity": "Rare",
+        "type": "Scroll",
+        "description": "One-time use scroll that allows casting a specific spell written in cipher.",
+        "description_tr": "Üzerinde yazılı olan büyüyü tek seferlik yapmanızı sağlayan sihirli kağıt."
+    },
+    {
+        "name": "Spelljamming Helm",
+        "name_tr": "Uçuş Dümeni",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:spelljamming-helm",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Ornate chair used to maneuver spelljamming ships through space by a spellcaster's focus.",
+        "description_tr": "Uzay gemilerini (Spelljammer) zihin gücüyle uçurmak için kullanılan kaptan koltuğu/miğferi."
+    },
+    {
+        "name": "Spellwrought Tattoo",
+        "name_tr": "Büyü Dövmesi",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:spellwrought-tattoo",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Magic tattoo that bestows a single spell that can be cast once before the tattoo vanishes.",
+        "description_tr": "Cilde kazınan ve içindeki büyüyü bir kez kullanınca kaybolan sihirli dövme."
+    },
+    {
+        "name": "Spider Staff",
+        "name_tr": "Örümcek Asası",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:spider-staff",
+        "rarity": "Rare",
+        "type": "Staff",
+        "description": "Spider-topped staff that deals extra poison damage and can cast Spider Climb or Web.",
+        "description_tr": "Örümcek ağı örmenizi ve duvarlara tırmanmanızı sağlayan, zehir hasarı veren asa."
+    },
+    {
+        "name": "Staff of Charming",
+        "name_tr": "Büyüleme Asası",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:staff-of-charming",
+        "rarity": "Rare",
+        "type": "Staff",
+        "description": "Allows casting charm and command spells, and can redirect enchantments back at casters.",
+        "description_tr": "Başkalarını büyüleyen ve size yapılan zihin kontrol büyülerini geri yansıtan sihirli asa."
+    },
+    {
+        "name": "Staff of Defense",
+        "name_tr": "Savunma Asası",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:staff-of-defense",
+        "rarity": "Rare",
+        "type": "Staff",
+        "description": "Glass staff as strong as oak that increases AC and can cast Mage Armor or Shield.",
+        "description_tr": "AC bonusu veren, koruma kalkanı (Shield) yaratan camdan yapılma sağlam asa."
+    },
+    {
+        "name": "Staff of Healing",
+        "name_tr": "İyileştirme Asası",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:staff-of-healing",
+        "rarity": "Rare",
+        "type": "Staff",
+        "description": "Can be used to cast various healing and restoration spells.",
+        "description_tr": "Yaraları sarmak (Cure Wounds) ve hastalıkları iyileştirmek için kullanılan hayati bir asa."
+    },
+    {
+        "name": "Staff of Ruling",
+        "name_tr": "Yönetim Asası",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:staff-of-ruling",
+        "rarity": "Rare",
+        "type": "Staff",
+        "description": "Can summon a giant snake, emit thunderclaps, or create lightning orbs.",
+        "description_tr": "Yılana dönüşebilen, gök gürültüsüyle rakipleri korkutan ve yıldırımlar saçan asa."
+    },
+    {
+        "name": "Staff of Swarming Insects",
+        "name_tr": "Böcek Sürüsü Asası",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:staff-of-swarming-insects",
+        "rarity": "Rare",
+        "type": "Staff",
+        "description": "Can cast insect-based spells or create a cloud of insects to obscure sight.",
+        "description_tr": "Etrafınıza görüşü engelleyen böcek bulutları yayan ve böcek salgınları başlatan asa."
+    },
+    {
+        "name": "Staff of the Ivory Claw",
+        "name_tr": "Fildişi Pençe Asası",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:staff-of-the-ivory-claw",
+        "rarity": "Rare",
+        "type": "Staff",
+        "description": "+1 bonus to spell attacks that deals extra radiant damage on critical hits.",
+        "description_tr": "Büyülerin isabetini artıran ve kritik vuruşlarda ışık patlaması yaratan asa."
+    },
+    {
+        "name": "Staff of the Rooted Hills",
+        "name_tr": "Köklü Tepeler Asası",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:staff-of-the-rooted-hills",
+        "rarity": "Rare",
+        "type": "Staff",
+        "description": "Can restrain targets with spectral vines and cast Hold Person or Speak with Plants.",
+        "description_tr": "Düşmanları sihirli sarmaşıklarla (Hold Person) bağlayan ve bitkilerle konuşturmaya yarayan asa."
+    },
+    {
+        "name": "Staff of the Woodlands",
+        "name_tr": "Ormanlık Alanlar Asası",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:staff-of-the-woodlands",
+        "rarity": "Rare",
+        "type": "Staff",
+        "description": "+2 staff for druids that provides numerous nature-themed spells and can transform into a tree.",
+        "description_tr": "Druidler için efsanevi bir eşya; onlarca doğa büyüsü sağlar ve ağaca dönüşebilir."
+    },
+    {
+        "name": "Staff of Withering",
+        "name_tr": "Solma Asası",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:staff-of-withering",
+        "rarity": "Rare",
+        "type": "Staff",
+        "description": "Deals necrotic damage and withers the target's Strength and Constitution.",
+        "description_tr": "Dokunduğu rakipleri çürüten ve onları fiziksel olarak zayıflatan (weaken) karanlık asa."
+    },
+    {
+        "name": "Starshot Crossbow",
+        "name_tr": "Yıldız Atışlı Arbalet",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:starshot-crossbow",
+        "rarity": "Rare",
+        "type": "Weapon",
+        "description": "Crossbow that ignores loading, creates its own magic bolts, and has constellation-based powers.",
+        "description_tr": "Yıldızların gücüyle dolan, ok gerektirmeyen ve sahibini görünmez yapabilen özel arbalet."
+    },
+    {
+        "name": "Stone of Controlling Earth Elementals",
+        "name_tr": "Toprak Elementali Taşı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:stone-of-controlling-earth-elementals",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Summon or control an earth elemental while the stone is touching the ground.",
+        "description_tr": "Yere bırakılıp komut verildiğinde bir toprak elementali çağırmanızı sağlayan ağır taş."
+    },
+    {
+        "name": "Stonespeaker Crystal",
+        "name_tr": "Taşkonuşan Kristali",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:stonespeaker-crystal",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Giant-crafted crystal that grants advantage on Investigation and can speak with animals/dead/plants.",
+        "description_tr": "Ölülerle, hayvanlarla veya bitkilerle konuşmanızı sağlayan taş devlerine ait kristal."
+    },
+    {
+        "name": "Sun Blade",
+        "name_tr": "Güneş Kılıcı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:sun-blade",
+        "rarity": "Rare",
+        "type": "Weapon",
+        "description": "Hilt that produces a blade of pure radiance, dealing extra damage to undead.",
+        "description_tr": "Saf ışıktan bir bıçağı olan, hortlaklara karşı ölümcül +2 ışın kılıcı."
+    },
+    {
+        "name": "Sun Staff",
+        "name_tr": "Güneş Asası",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:sun-staff",
+        "rarity": "Rare",
+        "type": "Staff",
+        "description": "+1 staff that deals extra fire damage and functions as a solar focus for spells.",
+        "description_tr": "Ateş ve ışık büyülerini güçlendiren, vurduğunda yakan güneş enerjili asa."
+    },
+    {
+        "name": "Sunforger",
+        "name_tr": "Güneşdöven",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:sunforger",
+        "rarity": "Rare",
+        "type": "Weapon",
+        "description": "+2 hammer that can be hurled to explode in a burst of fire before returning to the wielder's hand.",
+        "description_tr": "Fırlatıldığında ateş patlaması yaratan ve elinize geri dönen +2 sihirli savaş çekici."
+    },
+    {
+        "name": "Sword of Life Stealing",
+        "name_tr": "Yaşam Çalan Kılıç",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:sword-of-life-stealing",
+        "rarity": "Rare",
+        "type": "Weapon",
+        "description": "Deals necrotic damage on critical hits and grants the wielder temporary hit points.",
+        "description_tr": "Kritik vuruşta rakibin canını sömürüp size geçici sağlık kazandıran kılıç."
+    },
+    {
+        "name": "Sword of Wounding",
+        "name_tr": "Yaralayan Kılıç",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:sword-of-wounding",
+        "rarity": "Rare",
+        "type": "Weapon",
+        "description": "Wounds targets so they take ongoing necrotic damage and cannot regain hit points easily.",
+        "description_tr": "Açtığı yaralar büyüyle bile kolay iyileşmeyen ve kan kaybına (hasara) devam eden kılıç."
+    },
+    {
+        "name": "Teleportation Tablet",
+        "name_tr": "Işınlanma Tableti",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:teleportation-tablet",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Clay tablet that can be broken to open a one-way teleportation circle to a fixed destination.",
+        "description_tr": "Kırıldığında sizi önceden belirlenmiş bir yere ışınlayan tek kullanımlık tablet."
+    },
+    {
+        "name": "Tentacle Rod",
+        "name_tr": "Dokunaçlı Asa",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:tentacle-rod",
+        "rarity": "Rare",
+        "type": "Rod",
+        "description": "Drow weapon with three tentacles that can make multiple attacks and hinder enemy movement.",
+        "description_tr": "Üç dokunacıyla aynı anda vuran ve rakipleri yavaşlatan drow yapımı sihirli asa."
+    },
+    {
+        "name": "Two-Birds Sling",
+        "name_tr": "Çift Vuruş Sapanı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:two-birds-sling",
+        "rarity": "Rare",
+        "type": "Weapon",
+        "description": "Allows a projectile to ricochet from the primary target to hit a second target.",
+        "description_tr": "Attığınız taşın bir düşmandan sekiyip ikincisine de vurmasını sağlayan +1 sapan."
+    },
+    {
+        "name": "Ventilating Lungs",
+        "name_tr": "Havalandıran Akciğer",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:ventilating-lungs",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "Metallic replacement lungs that allow breathing in any environment and exhaling gusts of wind.",
+        "description_tr": "Vücuda takıldığında zehirli gazlardan koruyan ve her yerde nefes aldıran metalik yapay akciğer."
+    },
+    {
+        "name": "Vicious Weapon",
+        "name_tr": "Vahşi Silah",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:vicious-weapon",
+        "rarity": "Rare",
+        "type": "Weapon",
+        "description": "Deals significant extra damage on critical hits.",
+        "description_tr": "Kritik vuruş (Natural 20) yapıldığında çok daha ağır hasarlar veren sihirli silah."
+    },
+    {
+        "name": "Voidwalker Armor",
+        "name_tr": "Boşluk Gezgini Zırhı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:voidwalker-armor",
+        "rarity": "Rare",
+        "type": "Armor",
+        "description": "Cursed armor that can summon a translucent projection but risks trapping the wearer's soul.",
+        "description_tr": "Kendi görüntünüzü uzağa yansıtmanızı sağlayan ama ruhunuzu hapsetme riski olan lanetli zırh."
+    }
+]

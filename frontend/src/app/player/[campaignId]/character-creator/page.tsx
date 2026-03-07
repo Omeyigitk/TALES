@@ -8,6 +8,8 @@ import { ASI_LEVELS, CLASS_FEATURES } from "../levelup_data";
 import { getSpellSlotTotals, isSpellcaster } from "../combat_data";
 import { ALL_FEATS, ALL_METAMAGICS } from "../feats_data";
 import { ALL_BACKGROUNDS } from "../background_data";
+import { getFeatRequirements } from "../../feat_utils";
+import { FeatSpellSelectionArea, FeatStatSelectionArea, FeatChoiceSelectionArea } from "../../FeatComponents";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
 
@@ -105,124 +107,6 @@ const getSpellTags = (spell: any) => {
     return tags.length > 0 ? tags : ["Utility"];
 };
 
-const FeatSpellSelectionArea = ({ featName, requirements, selections, onUpdate, token, isRaceFeat = false }: any) => {
-    const [libSpells, setLibSpells] = useState<any[]>([]);
-    const [loading, setLoading] = useState(false);
-    const [openSlotIdx, setOpenSlotIdx] = useState<number | null>(null);
-
-    useEffect(() => {
-        const fetchNeededSpells = async () => {
-            setLoading(true);
-            try {
-                // Fetch all level 0 and 1 spells to cover most feats
-                const res = await axios.get(`${API_URL}/api/spells?max_level=1`, { headers: { 'Authorization': `Bearer ${token}` } });
-                setLibSpells(res.data);
-            } catch (err) {
-                console.error("Feat spells fetch failed:", err);
-            } finally {
-                setLoading(false);
-            }
-        };
-        fetchNeededSpells();
-    }, []);
-
-    const toggleSpell = (spellName: string, slotIdx: number) => {
-        const newSels = [...selections];
-        newSels[slotIdx] = spellName;
-        onUpdate(newSels);
-        setOpenSlotIdx(null);
-    };
-
-    const borderColor = isRaceFeat ? 'border-rose-700/50' : 'border-yellow-700/50';
-    const textColor = isRaceFeat ? 'text-rose-400' : 'text-yellow-400';
-
-    return (
-        <div className="space-y-3">
-            <p className="text-[10px] font-black uppercase tracking-widest text-gray-400">{requirements.label}</p>
-            <div className="grid grid-cols-1 gap-2">
-                {requirements.slots.map((slot: any, idx: number) => {
-                    const currentSpell = selections[idx];
-                    const spellData = libSpells.find(s => s.name === currentSpell);
-
-                    // Filtering for this slot
-                    const filtered = libSpells.filter(s => {
-                        if (slot.type === 'cantrip' && s.level_int !== 0) return false;
-                        if (slot.type === 'leveled' && s.level_int !== slot.level) return false;
-                        if (slot.school && !slot.school.includes(s.school.toLowerCase())) return false;
-                        if (slot.hasAttack) {
-                            const desc = (s.desc || "").toLowerCase();
-                            if (!desc.includes("attack roll") && !desc.includes("saldırı zarı")) return false;
-                        }
-                        if (requirements.classes && !requirements.classes.some((c: string) => (s.class || "").includes(c))) return false;
-                        return true;
-                    });
-
-                    return (
-                        <div key={idx} className="relative">
-                            <button
-                                onClick={() => setOpenSlotIdx(openSlotIdx === idx ? null : idx)}
-                                className={`w-full flex items-center justify-between p-2 bg-gray-950 border rounded-lg text-xs font-bold transition-all ${borderColor} ${currentSpell ? textColor : 'text-gray-500'}`}
-                            >
-                                <span>{slot.label}: {currentSpell || 'Seçilmedi'}</span>
-                                <span>{openSlotIdx === idx ? '▲' : '▼'}</span>
-                            </button>
-
-                            {openSlotIdx === idx && (
-                                <div className="absolute z-[100] left-0 right-0 mt-1 max-h-48 overflow-y-auto bg-gray-900 border border-gray-700 rounded-lg shadow-2xl p-2 space-y-1">
-                                    {loading ? (
-                                        <p className="text-gray-500 text-xs p-2">Yükleniyor...</p>
-                                    ) : filtered.length === 0 ? (
-                                        <p className="text-gray-500 text-xs p-2">Uygun büyü bulunamadı.</p>
-                                    ) : (
-                                        filtered.map(s => (
-                                            <div
-                                                key={s.name}
-                                                onClick={() => toggleSpell(s.name, idx)}
-                                                className={`p-2 rounded hover:bg-gray-800 cursor-pointer text-xs flex justify-between items-center ${currentSpell === s.name ? 'bg-gray-800 text-white' : 'text-gray-400'}`}
-                                            >
-                                                <span>{s.name}</span>
-                                                <span className="text-[10px] opacity-50">{s.school}</span>
-                                            </div>
-                                        ))
-                                    )}
-                                </div>
-                            )}
-                        </div>
-                    );
-                })}
-            </div>
-            {requirements.autoSpells && (
-                <div className="flex flex-wrap gap-1">
-                    {requirements.autoSpells.map((s: string) => (
-                        <span key={s} className="text-[9px] bg-blue-900/30 text-blue-400 px-1.5 py-0.5 rounded border border-blue-800/50">Auto: {s}</span>
-                    ))}
-                </div>
-            )}
-        </div>
-    );
-};
-
-const FeatStatSelectionArea = ({ featName, requirements, selection, onUpdate, isRaceFeat = false }: any) => {
-    const borderColor = isRaceFeat ? 'border-rose-700/50' : 'border-yellow-700/50';
-    const textColor = isRaceFeat ? 'text-rose-400' : 'text-yellow-400';
-
-    return (
-        <div className="space-y-2 mt-3">
-            <p className="text-[10px] font-black uppercase tracking-widest text-gray-400">Yetenek Puanı Artışı (+1)</p>
-            <div className="flex flex-wrap gap-2">
-                {requirements.statChoices?.map((stat: string) => (
-                    <button
-                        key={stat}
-                        onClick={() => onUpdate(stat)}
-                        className={`px-3 py-1.5 rounded-lg border text-xs font-bold transition-all ${selection === stat ? `bg-gray-950 ${borderColor} ${textColor}` : 'bg-gray-900 border-gray-700 text-gray-500 hover:border-gray-500'}`}
-                    >
-                        {stat}
-                    </button>
-                ))}
-            </div>
-        </div>
-    );
-};
 
 export default function CharacterCreator() {
     const { campaignId } = useParams();
@@ -242,6 +126,7 @@ export default function CharacterCreator() {
     const [chartClass, setChartClass] = useState<any>(null); // level chart popup
     const [races, setRaces] = useState<any[]>([]);
     const [classes, setClasses] = useState<any[]>([]);
+    const [libFeats, setLibFeats] = useState<any[]>([]);
     const [castingSpell, setCastingSpell] = useState<string | null>(null);
 
     // Race UI Tabs
@@ -286,6 +171,7 @@ export default function CharacterCreator() {
     const [raceStatPicks, setRaceStatPicks] = useState<Record<string, string>>({}); // Any stat picks from race/subrace
     const [featSpellSelections, setFeatSpellSelections] = useState<Record<string, string[]>>({}); // Spells selected via feats: { 'Fey Touched': ['Hex'], 'Magic Initiate': ['Light', 'Mage Hand', 'Shield'] }
     const [featStatSelections, setFeatStatSelections] = useState<Record<string, string>>({}); // Stat picks from feats: { 'Fey Touched': 'INT' }
+    const [featChoiceSelections, setFeatChoiceSelections] = useState<Record<string, Record<string, string[]>>>({}); // Generic choices: { 'Metamagic Adept': { 'Metamagic': ['Twinned', 'Subtle'] } }
     const getRaceFeatCount = (race: any) => {
         if (!race) return 0;
         if (race.name?.includes('Variant Human') || race.name?.includes('Custom Lineage')) return 1;
@@ -352,115 +238,6 @@ export default function CharacterCreator() {
         ],
     };
 
-    // Feats that grant spells or stat choices and their requirements
-    const getFeatRequirements = (featName: string) => {
-        const name = featName.split('(')[0].trim();
-        switch (name) {
-            case 'Magic Initiate':
-                return {
-                    label: 'Magic Initiate (2 Cantrip + 1 Seviye 1 Büyü)',
-                    slots: [
-                        { type: 'cantrip', count: 1, label: 'Cantrip 1' },
-                        { type: 'cantrip', count: 1, label: 'Cantrip 2' },
-                        { type: 'leveled', count: 1, level: 1, label: 'Seviye 1 Büyü' }
-                    ],
-                    classes: ['Bard', 'Cleric', 'Druid', 'Sorcerer', 'Warlock', 'Wizard']
-                };
-            case 'Fey Touched':
-                return {
-                    label: 'Fey Touched (+1 Stat & Büyüler)',
-                    statChoices: ['INT', 'WIS', 'CHA'],
-                    slots: [
-                        { type: 'leveled', count: 1, level: 1, school: ['divination', 'enchantment'], label: 'Seviye 1 Büyü' }
-                    ],
-                    autoSpells: ['Misty Step']
-                };
-            case 'Shadow Touched':
-                return {
-                    label: 'Shadow Touched (+1 Stat & Büyüler)',
-                    statChoices: ['INT', 'WIS', 'CHA'],
-                    slots: [
-                        { type: 'leveled', count: 1, level: 1, school: ['illusion', 'necromancy'], label: 'Seviye 1 Büyü' }
-                    ],
-                    autoSpells: ['Invisibility']
-                };
-            case 'Spell Sniper':
-                return {
-                    label: 'Spell Sniper (1 Attack Cantrip)',
-                    slots: [
-                        { type: 'cantrip', count: 1, hasAttack: true, label: 'Saldırı Cantrip\'i' }
-                    ]
-                };
-            case 'Artificer Initiate':
-                return {
-                    label: 'Artificer Initiate (1 Cantrip + 1 Seviye 1 Büyü)',
-                    slots: [
-                        { type: 'cantrip', count: 1, label: 'Artificer Cantrip' },
-                        { type: 'leveled', count: 1, level: 1, label: 'Artificer Seviye 1 Büyü' }
-                    ],
-                    classes: ['Artificer']
-                };
-            case 'Telepathic':
-                return {
-                    label: 'Telepathic (+1 Stat & Büyü)',
-                    statChoices: ['INT', 'WIS', 'CHA'],
-                    autoSpells: ['Detect Thoughts']
-                };
-            case 'Telekinetic':
-                return {
-                    label: 'Telekinetic (+1 Stat & Büyü)',
-                    statChoices: ['INT', 'WIS', 'CHA'],
-                    autoSpells: ['Mage Hand']
-                };
-            case 'Resilient':
-                return {
-                    label: 'Resilient (+1 Stat & Saving Throw)',
-                    statChoices: ['STR', 'DEX', 'CON', 'INT', 'WIS', 'CHA']
-                };
-            case 'Elven Accuracy':
-                return {
-                    label: 'Elven Accuracy (+1 Stat)',
-                    statChoices: ['DEX', 'INT', 'WIS', 'CHA']
-                };
-            case 'Actor':
-                return {
-                    label: 'Actor (+1 CHA)',
-                    statChoices: ['CHA']
-                };
-            case 'Observant':
-                return {
-                    label: 'Observant (+1 Stat)',
-                    statChoices: ['INT', 'WIS']
-                };
-            case 'Skill Expert':
-                return {
-                    label: 'Skill Expert (+1 Stat)',
-                    statChoices: ['STR', 'DEX', 'CON', 'INT', 'WIS', 'CHA']
-                };
-            case 'Slasher':
-                return {
-                    label: 'Slasher (+1 Stat)',
-                    statChoices: ['STR', 'DEX']
-                };
-            case 'Crusher':
-                return {
-                    label: 'Crusher (+1 Stat)',
-                    statChoices: ['STR', 'CON']
-                };
-            case 'Piercer':
-                return {
-                    label: 'Piercer (+1 Stat)',
-                    statChoices: ['STR', 'DEX']
-                };
-            case 'Heavy Armor Master':
-                return {
-                    label: 'Heavy Armor Master (+1 STR)',
-                    statChoices: ['STR']
-                };
-            default:
-                return null;
-        }
-    };
 
     // ─── D&D 5e Class Skill Proficiencies (pick N from list) ─────────────────
     const CLASS_SKILL_PROFS: Record<string, { count: number; skills: string[] }> = {
@@ -522,7 +299,6 @@ export default function CharacterCreator() {
         'Genasi': ['Common', 'Primordial']
     };
     const [activeSpellTab, setActiveSpellTab] = useState<number>(0);
-    const [metamagicSelections, setMetamagicSelections] = useState<string[]>([]);
 
     // SINIFLARA GÖRE BAŞLANGIÇ EKİPMANLARI (CLASS_EQUIPMENT)
     const CLASS_EQUIPMENT: Record<string, any[]> = {
@@ -558,9 +334,10 @@ export default function CharacterCreator() {
 
         async function fetchData() {
             try {
-                const [racesRes, classRes] = await Promise.all([
+                const [racesRes, classRes, featsRes] = await Promise.all([
                     axios.get(`${API_URL}/api/races`, { headers: { 'Authorization': `Bearer ${token}` } }),
-                    axios.get(`${API_URL}/api/classes`, { headers: { 'Authorization': `Bearer ${token}` } })
+                    axios.get(`${API_URL}/api/classes`, { headers: { 'Authorization': `Bearer ${token}` } }),
+                    axios.get(`${API_URL}/api/feats`, { headers: { 'Authorization': `Bearer ${token}` } })
                 ]);
 
                 // Remove subraces that were mistakenly added as top-level races in the DB
@@ -569,6 +346,7 @@ export default function CharacterCreator() {
 
                 setRaces(filteredRaces);
                 setClasses(classRes.data);
+                setLibFeats(featsRes.data);
             } catch (error) {
                 console.error("Veri çekme hatası:", error);
             }
@@ -670,7 +448,8 @@ export default function CharacterCreator() {
                 }
 
                 if (featName === 'Metamagic Adept') {
-                    extraInventory.push({ name: "Metamagic Adept Feat", qty: 2, type: "roleplay", note: `2 Sorcery Point. Şunları kullanabilirsin: ${metamagicSelections.length > 0 ? metamagicSelections.join(', ') : 'Seçilmedi'}` });
+                    const mms = featChoiceSelections['Metamagic Adept']?.['Metamagic'] || [];
+                    extraInventory.push({ name: "Metamagic Adept Feat", qty: 2, type: "roleplay", note: `2 Sorcery Point. Şunları kullanabilirsin: ${mms.length > 0 ? mms.join(', ') : 'Seçilmedi'}` });
                 }
             };
 
@@ -703,7 +482,7 @@ export default function CharacterCreator() {
             // Process ALL selected feats for auto-granted spells and requirements
             selectedFeats.forEach(fStr => {
                 const featName = fStr.replace('Feat: ', '').split('(')[0].trim();
-                const reqs = getFeatRequirements(featName);
+                const reqs = getFeatRequirements(featName, libFeats);
                 if (reqs && reqs.autoSpells) {
                     reqs.autoSpells.forEach((s: string) => {
                         if (!extraSpells.includes(s)) extraSpells.push(s);
@@ -752,7 +531,20 @@ export default function CharacterCreator() {
             const hitDie = selectedClass?.hit_die ? parseInt(selectedClass.hit_die.replace("d", "")) : 8;
             const firstLevelHp = hitDie + conMod;
             const extraHp = (selectedLevel - 1) * (Math.floor(hitDie / 2) + 1 + conMod);
-            const totalMaxHp = Math.max(1, firstLevelHp + extraHp);
+
+            // Feat HP Bonus (e.g. Tough: +2 per level)
+            let featHpBonus = 0;
+            const activeFeats = asiSelections.filter(a => a.type === 'feat' && a.featName).map(a => a.featName);
+            activeFeats.forEach(fName => {
+                const fData = libFeats.find(x => x.name === fName);
+                if (fData && fData.effects) {
+                    fData.effects.forEach((eff: any) => {
+                        if (eff.type === 'hp_per_level') featHpBonus += (eff.value * selectedLevel);
+                    });
+                }
+            });
+
+            const totalMaxHp = Math.max(1, firstLevelHp + extraHp + featHpBonus);
             // Envanter ve Altın Hazırlığı
             let startingInventory: any[] = [];
             let startingGold = 0;
@@ -786,6 +578,11 @@ export default function CharacterCreator() {
                 subrace: selectedSubrace ? selectedSubrace.name : "",
                 fightingStyle: selectedFightingStyle,
                 stats: finalComputedStats,
+                featSelections: {
+                    stats: featStatSelections,
+                    spells: featSpellSelections,
+                    choices: featChoiceSelections
+                },
                 maxHp: totalMaxHp,
                 currentHp: totalMaxHp,
                 ac: (() => {
@@ -825,7 +622,7 @@ export default function CharacterCreator() {
                 isNpc: isNpc,
                 alignment: npcAlignment,
                 relationship: npcRelationship,
-                metamagicSelections: metamagicSelections, // Add this line
+                metamagicSelections: featChoiceSelections['Metamagic Adept']?.['Metamagic'] || [],
             };
 
             const res = await axios.post(`${API_URL}/api/characters`, payload, { headers: { 'Authorization': `Bearer ${token}` } });
@@ -1764,7 +1561,7 @@ export default function CharacterCreator() {
                                                     <span className={asi.featName ? 'text-yellow-300' : 'text-gray-500'}>
                                                         {asi.featName || '📖 Feat seçmek için tıkla...'}
                                                     </span>
-                                                    <span className="text-gray-500 text-xs">▼ {ALL_FEATS.length} feat</span>
+                                                    <span className="text-gray-500 text-xs">▼ {libFeats.length} feat</span>
                                                 </button>
                                                 {asi.featName && (() => {
                                                     const f = ALL_FEATS.find(x => x.name === asi.featName);
@@ -1773,41 +1570,9 @@ export default function CharacterCreator() {
                                                         <div className="mt-2 p-3 bg-yellow-900/10 border border-yellow-800/40 rounded-lg">
                                                             <p className="text-xs text-gray-300 leading-relaxed">{f.desc_tr}</p>
                                                             {f.prereq && <p className="text-yellow-600 text-[10px] mt-1 font-bold">Önkoşul: {f.prereq}</p>}
-                                                            {asi.featName === 'Metamagic Adept' && (
-                                                                <div className="mt-4 border-t border-yellow-800/30 pt-3">
-                                                                    <p className="text-xs font-bold text-yellow-400 mb-2 uppercase tracking-wide">2 Adet Metamagic Seçin ({metamagicSelections.length}/2)</p>
-                                                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                                                                        {ALL_METAMAGICS.map(m => {
-                                                                            const isSel = metamagicSelections.includes(m.name);
-                                                                            const isDisabled = !isSel && metamagicSelections.length >= 2;
-                                                                            return (
-                                                                                <label
-                                                                                    key={m.name}
-                                                                                    className={`flex items-center p-2 border rounded-lg transition-all cursor-pointer ${isSel ? 'bg-yellow-900/40 border-yellow-500' : isDisabled ? 'bg-gray-800 opacity-50 border-gray-700 cursor-not-allowed' : 'bg-gray-900 border-gray-700 hover:border-gray-500'}`}
-                                                                                >
-                                                                                    <input
-                                                                                        type="checkbox"
-                                                                                        checked={isSel}
-                                                                                        disabled={isDisabled}
-                                                                                        onChange={() => {
-                                                                                            if (isSel) setMetamagicSelections(metamagicSelections.filter(x => x !== m.name));
-                                                                                            else if (!isDisabled) setMetamagicSelections([...metamagicSelections, m.name]);
-                                                                                        }}
-                                                                                        className="form-checkbox h-4 w-4 text-yellow-600 transition duration-150 ease-in-out mr-2"
-                                                                                    />
-                                                                                    <div className="flex flex-col">
-                                                                                        <span className={`text-xs font-bold ${isSel ? 'text-yellow-300' : 'text-gray-300'}`}>{m.name}</span>
-                                                                                        <span className="text-[10px] text-gray-400 mt-0.5 line-clamp-2">{m.desc}</span>
-                                                                                    </div>
-                                                                                </label>
-                                                                            );
-                                                                        })}
-                                                                    </div>
-                                                                </div>
-                                                            )}
-                                                            {/* Feat Selection Area (Spells & Stats) */}
+                                                            {/* Feat Selection Area (Spells & Stats & Choices) */}
                                                             {(() => {
-                                                                const reqs = getFeatRequirements(asi.featName);
+                                                                const reqs = getFeatRequirements(asi.featName as string, libFeats);
                                                                 if (!reqs) return null;
                                                                 return (
                                                                     <div className="mt-4 border-t border-yellow-800/30 pt-3 space-y-4">
@@ -1828,6 +1593,21 @@ export default function CharacterCreator() {
                                                                                 onUpdate={(newSels: any[]) => setFeatSpellSelections(prev => ({ ...prev, [asi.featName as string]: newSels }))}
                                                                             />
                                                                         )}
+                                                                        {reqs.choices && reqs.choices.map((choice: any, ci: number) => (
+                                                                            <FeatChoiceSelectionArea
+                                                                                key={ci}
+                                                                                featName={asi.featName}
+                                                                                choice={choice}
+                                                                                selections={featChoiceSelections[asi.featName as string]?.[choice.label] || []}
+                                                                                onUpdate={(val: string[]) => setFeatChoiceSelections(prev => ({
+                                                                                    ...prev,
+                                                                                    [asi.featName as string]: {
+                                                                                        ...(prev[asi.featName as string] || {}),
+                                                                                        [choice.label]: val
+                                                                                    }
+                                                                                }))}
+                                                                            />
+                                                                        ))}
                                                                     </div>
                                                                 );
                                                             })()}
@@ -1866,47 +1646,15 @@ export default function CharacterCreator() {
                                                 <span className="text-gray-500 text-xs">▼ {ALL_FEATS.length} feat</span>
                                             </button>
                                             {raceFeatStore[i] && (() => {
-                                                const f = ALL_FEATS.find(x => x.name === raceFeatStore[i]);
+                                                const f = libFeats.find(x => x.name === raceFeatStore[i]);
                                                 if (!f) return null;
                                                 return (
                                                     <div className="mt-2 p-3 bg-rose-900/10 border border-rose-800/40 rounded-lg">
                                                         <p className="text-xs text-gray-300 leading-relaxed">{f.desc_tr}</p>
                                                         {f.prereq && <p className="text-rose-600 text-[10px] mt-1 font-bold">Önkoşul: {f.prereq}</p>}
-                                                        {raceFeatStore[i] === 'Metamagic Adept' && (
-                                                            <div className="mt-4 border-t border-rose-800/30 pt-3">
-                                                                <p className="text-xs font-bold text-rose-400 mb-2 uppercase tracking-wide">2 Adet Metamagic Seçin ({metamagicSelections.length}/2)</p>
-                                                                <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                                                                    {ALL_METAMAGICS.map(m => {
-                                                                        const isSel = metamagicSelections.includes(m.name);
-                                                                        const isDisabled = !isSel && metamagicSelections.length >= 2;
-                                                                        return (
-                                                                            <label
-                                                                                key={m.name}
-                                                                                className={`flex items-center p-2 border rounded-lg transition-all cursor-pointer ${isSel ? 'bg-rose-900/40 border-rose-500' : isDisabled ? 'bg-gray-800 opacity-50 border-gray-700 cursor-not-allowed' : 'bg-gray-900 border-gray-700 hover:border-gray-500'}`}
-                                                                            >
-                                                                                <input
-                                                                                    type="checkbox"
-                                                                                    checked={isSel}
-                                                                                    disabled={isDisabled}
-                                                                                    onChange={() => {
-                                                                                        if (isSel) setMetamagicSelections(metamagicSelections.filter(x => x !== m.name));
-                                                                                        else if (!isDisabled) setMetamagicSelections([...metamagicSelections, m.name]);
-                                                                                    }}
-                                                                                    className="form-checkbox h-4 w-4 text-rose-600 transition duration-150 ease-in-out mr-2"
-                                                                                />
-                                                                                <div className="flex flex-col">
-                                                                                    <span className={`text-xs font-bold ${isSel ? 'text-rose-300' : 'text-gray-300'}`}>{m.name}</span>
-                                                                                    <span className="text-[10px] text-gray-400 mt-0.5 line-clamp-2">{m.desc}</span>
-                                                                                </div>
-                                                                            </label>
-                                                                        );
-                                                                    })}
-                                                                </div>
-                                                            </div>
-                                                        )}
-                                                        {/* Feat Selection Area (Spells & Stats) */}
+                                                        {/* Feat Selection Area (Spells & Stats & Choices) */}
                                                         {(() => {
-                                                            const reqs = getFeatRequirements(raceFeatStore[i]);
+                                                            const reqs = getFeatRequirements(raceFeatStore[i], libFeats);
                                                             if (!reqs) return null;
                                                             return (
                                                                 <div className="mt-4 border-t border-rose-800/30 pt-3 space-y-4">
@@ -1929,6 +1677,22 @@ export default function CharacterCreator() {
                                                                             isRaceFeat={true}
                                                                         />
                                                                     )}
+                                                                    {reqs.choices && reqs.choices.map((choice: any, ci: number) => (
+                                                                        <FeatChoiceSelectionArea
+                                                                            key={ci}
+                                                                            featName={raceFeatStore[i]}
+                                                                            choice={choice}
+                                                                            selections={featChoiceSelections[raceFeatStore[i]]?.[choice.label] || []}
+                                                                            onUpdate={(val: string[]) => setFeatChoiceSelections(prev => ({
+                                                                                ...prev,
+                                                                                [raceFeatStore[i]]: {
+                                                                                    ...(prev[raceFeatStore[i]] || {}),
+                                                                                    [choice.label]: val
+                                                                                }
+                                                                            }))}
+                                                                            isRaceFeat={true}
+                                                                        />
+                                                                    ))}
                                                                 </div>
                                                             );
                                                         })()}

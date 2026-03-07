@@ -1,0 +1,352 @@
+[
+  {
+    "name": "Illusionist's Bracers",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:illusionists-bracers",
+    "rarity": "Very Rare",
+    "type": "Wondrous Item",
+    "description": "A powerful illusionist of House Dimir originally developed these bracers. which enabled her to create multiple minor illusions at once. The bracers' power, though, extends far beyond illusions.\n\nWhile wearing the bracers. whenever you cast a cantrip, you can use a bonus action on the same turn to cast that cantrip a second time."
+  },
+  {
+    "name": "Ingot of the Skold Rune",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:ingot-of-the-skold-rune",
+    "rarity": "Very Rare",
+    "type": "Wondrous Item",
+    "description": "This appears to be a simple ingot of iron ore, about a foot long and a few inches across. Inspection of its surface reveals the faint, silvery outline of the skold (shield) rune. The ingot has the following properties, which work only while it's on your person.\n\nRunic Shield. You have a +1 bonus to AC.\n\nShield Bond. As a bonus action, choose a creature that you can see within 30 feet of you, other than yourself. Until the end of your next turn, any damage the target takes is reduced to l, but you take half the damage prevented in this way. The damage you take can't be reduced in any way. Once you use this property, you can't use it again until you finish a short or long rest.\n\nShield Ward. You can transfer the ingot's magic to a nonmagical item — a shield or a two-handed melee weapon — by tracing the skold rune there with your finger. The transfer takes 8 hours of work that requires the two items to be within 5 feet of each other. At the end, the ingot is destroyed, and the rune appears in silver on the chosen item, which gains a benefit based on its form:"
+  },
+  {
+    "name": "Instrument of the Bards",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:instrument-of-the-bards",
+    "rarity": "Very Rare",
+    "type": "Wondrous Item",
+    "description": "An instrument of the bards is an exquisite example of its kind, superior to an ordinary instrument in every way. Seven types of these instruments exist, each named after a legendary bard college. The following table lists the spells common to all instruments, as well as the spells specific to each one and its rarity. A creature that attempts to play the instrument without being attuned to it must succeed on a DC 15 Wisdom saving throw or take 2d4 psychic damage.\n\nYou can use an action to play the instrument and cast one of its spells. Once the instrument has been used to cast a spell, it can't be used to cast that spell again until the next dawn. The spells use your spellcasting ability and spell save DC.\n\nYou can play the instrument while casting a spell that causes any of its targets to be charmed on a failed saving throw, thereby imposing disadvantage on the save. This effect applies only if the spell has a somatic or a material component."
+  },
+  {
+    "name": "Ioun Stone",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:ioun-stone",
+    "rarity": "Very Rare",
+    "type": "Wondrous Item",
+    "description": "An Ioun stone is named after Ioun, a god of knowledge and prophecy revered on some worlds. Many types of Ioun stone exist, each type a distant combination of shape and color.\n\nWhen you use an action to toss one of these stones into the air, the stone orbits your head at a distance of 1d3 feet and confers a benefit to you. Thereafter, another creature must use an action to grasp or net the stone to separate it from you, either by making a successful attack roll against AC 24 or a successful DC 24 Dexterity (Acrobatics) check. You can use an action to seize and stow the stone, ending its effect.\n\nA stone has AC 24, 10 hit points, and resistance to all damage. It is considered to be an object that is being worn while it orbits your head.\n\nAbsorption (Very Rare). While this pale lavender ellipsoid orbits your head, you can use your reaction to cancel a spell of 4th level or lower cast by a creature you can see and targeting only you\n\nOnce the stone has canceled 20 levels of spells, it burns out and turns dull gray, losing its magic. If you are targeted by a spell whose level is higher than the number of spell levels the stone has left, the stone can't cancel it.\n\nAgility (Very Rare). Your Dexterity score increases by 2, to a maximum of 20, while this deep red sphere orbits your head.\n\nAwareness (Rare). You can't be surprised while this dark blue rhomboid orbits your head.\n\nFortitude (Very Rare). Your Constitution score increases by 2, to a maximum of 20, while this pink rhomboid orbits your head.\n\nGreater Absorption (Legendary). While this marbled lavender and green ellipsoid orbits your head, you can use your reaction to cancel a spell of 8th level or lower cast by a creature you can see and targeting only you.\n\nOnce the stone has canceled 50 levels of spells, it burns out and turns dull gray, losing its magic. If you are targeted by a spell whose level is higher than the number of spell levels the stone has left, the stone can't cancel it.\n\nInsight (Very Rare). Your Wisdom score increases by 2, to a maximum of 20, while this incandescent blue sphere orbits your head.\n\nIntellect (Very Rare). Your Intelligence score increases by 2, to a maximum of 20, while this marbled scarlet and blue sphere orbits your head.\n\nLeadership (Very Rare). Your Charisma score increases by 2, to a maximum of 20, while this marbled pink and green sphere orbits your head.\n\nMastery (Legendary). Your proficiency bonus increases by 1 while this pale green prism orbits your head.\n\nProtection (Rare). You gain a +1 bonus to AC while this dusty rose prism orbits your head.\n\nRegeneration (Legendary). You regain 15 hit points at the end of each hour this pearly white spindle orbits your head, provided that you have at least 1 hit point.\n\nReserve (Rare). This vibrant purple prism stores spells cast into it, holding them until you use them. The stone can store up to 3 levels worth of spells at a time. When found, it contains 1d4-1 levels of stored spells chosen by the DM.\n\nAny creature can cast a spell of 1st through 3rd level into the stone by touching it as the spell is cast. The spell has no effect, other than to be stored in the stone. If the stone can't hold the spell, the spell is expended without effect. The level of the slot used to cast the spell determines how much space it uses.\n\nWhile this stone orbits your head, you can cast any spell stored in it. The spell uses the slot level, spell save DC, spell attack bonus, and spellcasting ability of the original caster, but is otherwise treated as if you cast the spell. The spell cast from the stone is no longer stored in it, freeing up space.\n\nStrength (Very Rare). Your Strength score increases by 2, to a maximum of 20, while this pale blue rhomboid orbits your head.\n\nSustenance (Rare). You don't need to eat or drink while this clear spindle orbits your head.\n\nIn addition, the following Ioun Stones were introduced in the adventure Lost Laboratory of Kwalish:\n\nHistorical Knowledge (Rare) You gain proficiency in the History skill, or a +1 bonus to checks with that skill if already proficient, while this polished, steely sphere orbits your head.\n\nLanguage Knowledge (Rare) You are fluent in one additional language while this pulsating bit of red jeweled crystal orbits your head. The DM chooses the language bestowed by the stone.\n\nNatural Knowledge (Rare) You gain proficiency in the Nature skill, or a +1 bonus to checks with that skill if already proficient, while this burnished, brassy stone orbits your head.\n\nReligious Knowledge (Rare) You gain proficiency in the Religion skill, or a +1 bonus to checks with that skill if already proficient, while this tiny golden gem orbits your head.\n\nSelf-Preservation (Rare) You gain a +1 bonus to Intelligence saving throws while this silvery gem orbits your head.\n\nSupreme Intellect (Rare) You gain a +1 bonus to Intelligence checks while this faceted sphere orbits your head."
+  },
+  {
+    "name": "Kyrzin's Ooze",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:kyrzins-ooze",
+    "rarity": "Very Rare",
+    "type": "Wondrous Item",
+    "description": "This opalescent, symbiotic goo comes sealed in a jar and slowly shifts and moves, as if endlessly exploring the jar's interior. To attune to this item, you must first drink the contents of the jar, unlocking the following properties.\n\nResistant. While attuned to Kyrzin's ooze, you have resistance to poison and acid damage, and you're immune to the poisoned condition.\n\nAmorphous. As an action, you can speak a command word and cause your body to assume the amorphous qualities of an ooze. For the next minute, you (along with any equipment you're wearing or carrying) can move through a space as narrow as 1 inch wide without squeezing. Once you use this property, it can't be used again until the next dawn.\n\nAcid Breath. As an action, you can exhale acid in a 30-foot line that is 5 feet wide. Each creature in that line must make a DC 15 Dexterity saving throw, taking 36 (8d8) acid damage on a failed save, or half as much damage on a successful one. Once you use this property, it can't be used again until the next dawn.\n\nSymbiotic Nature. The ooze can't be removed from you while you're attuned to it, and you can't voluntarily end your attunement to it. If you're targeted by a spell that ends a curse, your attunement to the ooze ends, as it seeps out of you.\n\nIf you die while the ooze is inside you, it bursts out and engulfs you, turning your corpse into a black pudding allied with the daelkyr (see the Monster Manual for the black pudding's stat block)."
+  },
+  {
+    "name": "Last Stand Armor",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:last-stand-armor",
+    "rarity": "Very Rare",
+    "type": "Armor",
+    "description": "You have a +1 bonus to AC while wearing this armor, which shimmers softly.\n\nIf you die while wearing the armor, it is destroyed, and each celestial, fey, and fiend with 30 feet of you must succeed on a DC 15 Charisma saving throw or be banished to its home plane of existence, unless it is already there."
+  },
+  {
+    "name": "Lifewell Tattoo",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:lifewell-tattoo",
+    "rarity": "Very Rare",
+    "type": "Wondrous Item",
+    "description": "Produced by a special needle, this magic tattoo features symbols of life and rebirth.\n\nTattoo Attunement. To attune to this item, you hold the needle to your skin where you want the tattoo to appear, pressing the needle there throughout the attunement process. When the attunement is complete, the needle turns into the ink that becomes the tattoo, which appears on the skin.\n\nIf your attunement to the tattoo ends, the tattoo vanishes, and the needle reappears in your space.\n\nNecrotic Resistance. You have resistance to necrotic damage.\n\nLife Ward. When you would be reduced to 0 hit points, you drop to 1 hit point instead. Once used, this property can't be used again until the next dawn."
+  },
+  {
+    "name": "Living Armor",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:living-armor",
+    "rarity": "Very Rare",
+    "type": "Armor",
+    "description": "This hideous armor is formed from black chitin, beneath which veins pulse and red sinews glisten. To attune to this item, you must wear it for the entire attunement period, during which tendrils on the inside burrow into you.\n\nWhile wearing this armor, you have a +1 bonus to Armor Class, and you have resistance to the following damage types: necrotic, poison, and psychic.\n\nSymbiotic Nature. The armor can't be removed from you while you're attuned to it, and you can't voluntarily end your attunement to it. If you're targeted by a spell that ends a curse, your attunement to the armor ends, and it detaches from you.\n\nThe armor requires fresh blood be fed to it. Immediately after you finish any long rest, you must either feed half of your remaining Hit Dice to the armor (round up) or take 1 level of exhaustion."
+  },
+  {
+    "name": "Lord's Ensemble",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:lords-ensemble",
+    "rarity": "Very Rare",
+    "type": "Wondrous Item",
+    "description": "The Masked Lords of Waterdeep don this ensemble when meeting with one another. This raiment renders each lord indistinguishable from the others. The ensemble consists of three pieces — a helm, an amulet, and a robe — that function as a single magic item when worn together, but only within the city of Waterdeep and its sewers. You become attuned to the ensemble as a single item.\n\nLord's Helm. This bucket helm covers your head and conceals your face. Screens over the eyes help to shroud your identity without blinding you. While you wear the helm, your voice is magically altered to sound genderless, and you are immune to magic that allows other creatures to read your thoughts, to determine whether you are lying, to know your alignment, or to know your creature type. Creatures can communicate telepathically with you only if you allow it.\n\nLord's Amulet. This amulet bears the crest of Waterdeep. It functions as an Amulet of Proof Against Detection and Location.\n\nLord's Robe. This elegant robe functions as a Ring of Free Action, and it creates the illusion that you have a nondescript. androgynous humanoid build and stand 6 feet tall."
+  },
+  {
+    "name": "Lucent Destroyer",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:lucent-destroyer",
+    "rarity": "Very Rare",
+    "type": "Weapon",
+    "description": "This magic weapon is a triple-barreled bronze musket. You gain a +1 bonus to attack and damage rolls made with it. It requires no ammunition, its damage is radiant instead of piercing, and it doesn’t have the loading property. The base of the weapon is emblazoned with the light rune.\n\nAdditionally, while attuned to the weapon, you can cast Dancing Lights from the musket at will.\n\nInvoking the Rune. As an action, you can invoke the weapon’s rune to cast the Sunbeam spell (save DC 17) with it. Once the rune has been invoked, it can’t be invoked again until the next dawn."
+  },
+  {
+    "name": "Manual of Bodily Health",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:manual-of-bodily-health",
+    "rarity": "Very Rare",
+    "type": "Wondrous Item",
+    "description": "This book contains health and diet tips, and its words are charged with magic. If you spend 48 hours over a period of 6 days or fewer studying the book's contents and practicing its guidelines, your Constitution score increases by 2, as does your maximum for that score. The manual then loses its magic, but regains it in a century."
+  },
+  {
+    "name": "Manual of Gainful Exercise",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:manual-of-gainful-exercise",
+    "rarity": "Very Rare",
+    "type": "Wondrous Item",
+    "description": "This book describes fitness exercises, and its words are charged with magic. If you spend 48 hours over a period of 6 days or fewer studying the book's contents and practicing its guidelines, your Strength score increases by 2, as does your maximum for that score. The manual then loses its magic, but regains it in a century."
+  },
+  {
+    "name": "Manual of Golems",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:manual-of-golems",
+    "rarity": "Very Rare",
+    "type": "Wondrous Item",
+    "description": "This tome contains information and incantations necessary to make a particular type of golem. The DM chooses the type or determines it randomly. To decipher and use the manual, you must be a spellcaster with at least two 5th-level spell slots. A creature that can't use a manual of golems and attempts to read it takes 6d6 psychic damage.\n\nTo create a golem, you must spend the time shown on the table, working without interruption with the manual at hand and resting no more than 8 hours per day. You must also pay the specified cost to purchase supplies.\n\nOnce you finish creating the golem, the book is consumed in eldritch flames. The golem becomes animate when the ashes of the manual are sprinkled on it. It is under your control, and it understands and obeys your spoken commands. See the Monster Manual for its game statistics."
+  },
+  {
+    "name": "Manual of Quickness of Action",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:manual-of-quickness-of-action",
+    "rarity": "Very Rare",
+    "type": "Wondrous Item",
+    "description": "This book contains coordination and balance exercises, and its words are charged with magic. If you spend 48 hours over a period of 6 days or fewer studying the book's contents and practicing its guidelines, your Dexterity score increases by 2, as does your maximum for that score. The manual then loses its magic, but regains it in a century."
+  },
+  {
+    "name": "Mindblasting Cap",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:mindblasting-cap",
+    "rarity": "Very Rare",
+    "type": "Wondrous Item",
+    "description": "This soft, violet cap bears stitching in the pattern of folds on a brain.\n\nAs a bonus action while wearing the cap, you can project psychic energy in a 60-foot cone. Each creature in that area must make a DC 15 Intelligence saving throw. On a failed save, a creature takes 5d8 psychic damage and has the stunned condition for 1 minute. On a successful save, the creature takes half as much damage only. At the end of each of its turns, a stunned creature can repeat the saving throw, ending the stunned condition on itself on a success.\n\nOnce this bonus action is used, it can’t be used again until the next dawn."
+  },
+  {
+    "name": "Mindguard Crown",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:mindguard-crown",
+    "rarity": "Very Rare",
+    "type": "Wondrous Item",
+    "description": "While you wear this adamantine crown, you have advantage on Intelligence, Wisdom, and Charisma saving throws, and you have resistance to psychic damage."
+  },
+  {
+    "name": "Mirror of Life Trapping",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:mirror-of-life-trapping",
+    "rarity": "Very Rare",
+    "type": "Wondrous Item",
+    "description": "When this 4-foot-tall mirror is viewed indirectly, its surface shows faint images of creatures. The mirror weighs 50 pounds, and it has AC 11, 10 hit points, and vulnerability to bludgeoning damage. It shatters and is destroyed when reduced to 0 hit points.\n\nIf the mirror is hanging on a vertical surface and you are within 5 feet of it, you can use an action to speak its command word and activate it. It remains activated until you use an action to speak the command word again.\n\nAny creature other than you that sees its reflection in the activated mirror while within 30 feet of it must succeed on a DC 15 Charisma saving throw or be trapped, along with anything it is wearing or carrying, in one of the mirror's twelve extradimensional cells. This saving throw is made with advantage if the creature knows the mirror's nature, and constructs succeed on the saving throw automatically.\n\nAn extradimensional cell is an infinite expanse filled with thick fog that reduces visibility to 10 feet. Creatures trapped in the mirror's cells don't age, and they don't need to eat, drink, or sleep. A creature trapped within a cell can escape using magic that permits planar travel. Otherwise, the creature is confined to the cell until freed.\n\nIf the mirror traps a creature but its twelve extradimensional cells are already occupied, the mirror frees one trapped creature at random to accommodate the new prisoner. A freed creature appears in an unoccupied space within sight of the mirror but facing away from it. If the mirror is shattered, all creatures it contains are freed and appear in unoccupied spaces near it.\n\nWhile within 5 feet of the mirror, you can use an action to speak the name of one creature trapped in it or call out a particular cell by number. The creature named or contained in the named cell appears as an image on the mirror's surface. You and the creature can then communicate normally.\n\nIn a similar way, you can use an action to speak a second command word and free one creature trapped in the mirror. The freed creature appears, along with its possessions, in the unoccupied space nearest to the mirror and facing away from it."
+  },
+  {
+    "name": "Mirror of Reflected Pasts",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:mirror-of-reflected-pasts",
+    "rarity": "Very Rare",
+    "type": "Wondrous Item",
+    "description": "This mirror of elven design allows those who stare into it to reflect on positive memories. The 3-foot-tall mirror weighs 25 pounds, and it has AC 11, 10 hit points, and vulnerability to bludgeoning damage. It shatters and is destroyed if reduced to 0 hit points.\n\nWhile holding the mirror upright, you can use an action to speak its command word and activate it. While activated, the mirror hovers in the air, and it can be destroyed but not moved. It remains activated until you use an action to speak the command word again or your attunement to the mirror ends, at which the mirror harmlessly floats to the ground. Once the mirror has been deactivated, it can't be activated again until the next dawn.\n\nIf a non-Construct creature other than you sees its reflection in the activated mirror while within 30 feet of it, that creature must succeed on a DC 15 Wisdom saving throw or become paralyzed until the mirror is deactivated or until the creature can no longer see the mirror. A creature paralyzed by the mirror can repeat the saving throw at the end of each of its turns, ending the effect on a success. If a creature's saving throw is successful or the effect ends for it, the creature is immune to this mirror's effect for the next 24 hours.\n\nWhile paralyzed by the mirror, the creature sees events from their past reflected in the mirror's glass. These memories aren't real, but rather idealized versions of those occurrences. Nearby observers can glimpse flashes of these memories if looking indirectly at the mirror."
+  },
+  {
+    "name": "Mistral Mantle",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:mistral-mantle",
+    "rarity": "Very Rare",
+    "type": "Wondrous Item",
+    "description": "This thick, fur-lined cloak has the frost rune stitched on the hem in silvery blue thread. Frigid wind swirls around the cloak, regardless of the weather.\n\nWhile wearing this cloak, you have resistance to cold damage. Additionally, when you move within 5 feet of a creature, you can cause the cloak’s cold wind to buffet the creature. The creature must succeed on a DC 14 Dexterity saving throw or take 1d6 cold damage and have the prone condition. A creature can be affected by the mantle only once during a turn.\n\nInvoking the Rune. As an action, you can invoke the mantle’s rune to cast the Sleet Storm spell (save DC 14) with it. When you use the mantle to cast the spell, the area of the spell isn’t difficult terrain for you, and you can see through the storm, ignoring the normal penalties of a heavily obscured area.\n\nOnce the rune has been invoked, it can’t be invoked again until the next dawn."
+  },
+  {
+    "name": "Moon Sickle",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:moon-sickle",
+    "rarity": "Very Rare",
+    "type": "Weapon",
+    "description": "This silver-bladed sickle glimmers softly with moonlight. While holding this magic weapon, you gain a bonus to attack and damage rolls made with it, and you gain a bonus to spell attack rolls and the saving throw DCs of your druid and ranger spells. The bonus is determined by the weapon's rarity. In addition, you can use the sickle as a spellcasting focus for your druid and ranger spells.\n\nWhen you cast a spell that restores hit points, you can roll a d4 and add the number rolled to the amount of hit points restored, provided you are holding the sickle."
+  },
+  {
+    "name": "Mudslick Tower",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:mudslick-tower",
+    "rarity": "Very Rare",
+    "type": "Wondrous Item",
+    "description": "You can use an action to place this 1-inch-diameter granite sphere on the ground and speak its command word, which is “petrification” in Terran. The sphere rapidly grows into a stout tower that remains until you use an action to touch the tower and speak the command word again, whereupon the tower shrinks back to a 1-inch-diameter granite sphere. The tower must be empty to shrink in this way. The tower bristles with muddy knobs that constantly extrude and retract across its surface, as though the tower were breathing through a coating of thick mud.\n\nEach creature in the area where the tower appears must make a DC 15 Dexterity saving throw, taking 10d10 bludgeoning damage on a failed save, or half as much damage on a successful one. In either case, the creature is pushed to an unoccupied space outside but next to the tower. Objects in the area that aren’t being worn or carried take this damage and are pushed automatically.\n\nWhenever it expands, the mudslick tower merges with any natural stone it touches, awkwardly tipping and wedging itself to touch as much natural stone as it can.\n\nThe tower is 20 feet on a side and 30 feet high, with arrow slits on all sides and a battlement atop it. Its interior is divided into two floors, with a ladder running along one wall to connect them. The ladder ends at a trapdoor leading to the roof. When activated, the tower has a small door on the side facing you. The door opens only at your command, which you can speak as a bonus action. It is immune to the Knock spell and similar magic, such as that of a Chime of Opening.\n\nAlthough it looks like stone, the tower is made of adamantine, and its magic prevents creatures from tipping it over. The roof, the door, and the walls each have 100 hit points, immunity to damage from nonmagical weapons excluding siege weapons, and resistance to all other damage. While merged with natural stone, the mudslick tower has immunity to all damage. Only a Wish spell can repair the tower (this use of the spell counts as replicating a spell of 8th level or lower). Each casting of Wish causes the roof, the door, or one wall to regain 50 hit points."
+  },
+  {
+    "name": "Navigation Orb",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:navigation-orb",
+    "rarity": "Very Rare",
+    "type": "Wondrous Item",
+    "description": "A Navigation Orb is a hollow, 7-foot-diameter sphere of thin, polished mithral with a large skye (cloud) rune embossed on its outer surface. The orb levitates 10 feet above the ground and is keyed to a particular cloud castle, allowing you to control that castle's altitude and movement while the orb is inside the castle. If the orb is destroyed or removed from its castle, the castle's altitude and location remain fixed until the orb is returned or replaced.\n\nAs an action, you can cause one of the following effects to occur if you are touching the orb:\n\nAny creature touching the orb knows the altitude of the base of the castle above the ground or water below it."
+  },
+  {
+    "name": "Nimbus Coronet",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:nimbus-coronet",
+    "rarity": "Very Rare",
+    "type": "Wondrous Item",
+    "description": "The design of this bronze circlet resembles swirling clouds. At its center is set a deep-blue stone, upon which is inscribed the cloud rune.\n\nWhile wearing this circlet, you take no damage from falling. Additionally, as a bonus action, you and everything you are wearing or carrying can teleport to an unoccupied space you can see within 15 feet of yourself, reappearing in a puff of shimmering clouds.\n\nInvoking the Rune. As an action, you can invoke the circlet’s rune to assume a cloudlike form. The form lasts for 1 minute, until you are incapacitated, or until you dismiss it (no action required).\n\nWhile in cloud form, you have a flying speed of 60 feet and resistance to bludgeoning, piercing, and slashing damage.\n\nOnce the rune has been invoked, it can’t be invoked again until the next dawn."
+  },
+  {
+    "name": "Nine Lives Stealer",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:nine-lives-stealer",
+    "rarity": "Very Rare",
+    "type": "Weapon",
+    "description": "You gain a +2 bonus to attack and damage rolls made with this magic weapon.\n\nThe sword has 1d8 + 1 charges. If you score a critical hit against a creature that has fewer than 100 hit points, it must succeed on a DC 15 Constitution saving throw or be slain instantly as the sword tears its life force from its body (a construct or an undead is immune). The sword loses 1 charge if the creature is slain. When the sword has no charges remaining, it loses this property."
+  },
+  {
+    "name": "Nolzur's Marvelous Pigments",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:nolzurs-marvelous-pigments",
+    "rarity": "Very Rare",
+    "type": "Wondrous Item",
+    "description": "Typically found in 1d4 pots inside a fine wooden box with a brush (weighing 1 pound in total), these pigments allow you to create three-dimensional objects by painting them in two dimensions. The paint flows from the brush to form the desired object as you concentrate on its image.\n\nEach pot of paint is sufficient to cover 1,000 square feet of a surface, which lets you create inanimate objects or terrain features-such as a door, a pit, flowers, trees, cells, rooms, or weapons- that are up to 10,000 cubic feet. It takes 10 minutes to cover 100 square feet.\n\nWhen you complete the painting, the object or terrain feature depicted becomes a real, nonmagical object. Thus, painting a door on a wall creates an actual door that can be opened to whatever is beyond. Painting a pit on a floor creates a real pit, and its depth counts against the total area of objects you create.\n\nNothing created by the pigments can have a value greater than 25 gp. If you paint an object of greater value (such as a diamond or a pile of gold), the object looks authentic, but close inspection reveals it is made from paste, bone, or some other worthless material.\n\nIf you paint a form of energy such as fire or lightning, the energy appears but dissipates as soon as you complete the painting, doing no harm to anything."
+  },
+  {
+    "name": "Oathbow",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:oathbow",
+    "rarity": "Very Rare",
+    "type": "Weapon",
+    "description": "When you nock an arrow on this bow, it whispers in Elvish, \"Swift defeat to my enemies.\" When you use this weapon to make a ranged attack, you can, as a command phrase, say, \"Swift death to you who have wronged me.\" The target of your attack becomes your sworn enemy until it dies or until dawn seven days later. You can have only one such sworn enemy at a time. When your sworn enemy dies, you can choose a new one after the next dawn.\n\nWhen you make a ranged attack roll with this weapon against your sworn enemy, you have advantage on the roll. In addition, your target gains no benefit from cover, other than total cover, and you suffer no disadvantage due to long range. If the attack hits, your sworn enemy takes an extra 3d6 piercing damage.\n\nWhile your sworn enemy lives, you have disadvantage on attack rolls with all other weapons."
+  },
+  {
+    "name": "Oil of Sharpness",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:oil-of-sharpness",
+    "rarity": "Very Rare",
+    "type": "Potion",
+    "description": "This clear, gelatinous oil sparkles with tiny, ultrathin silver shards. The oil can coat one slashing or piercing weapon or up to 5 pieces of slashing or piercing ammunition. Applying the oil takes 1 minute. For 1 hour, the coated item is magical and has a +3 bonus to attack and damage rolls."
+  },
+  {
+    "name": "Orb of the Veil",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:orb-of-the-veil",
+    "rarity": "Very Rare",
+    "type": "Wondrous Item",
+    "description": "This onyx sphere bears deep, spiraling grooves and dangles from an iron chain. While the orb is on your person, you gain the following benefits:\n\nCurse. The orb is cursed, and becoming attuned to it extends the curse to you. As long as you remain cursed, you are unwilling to part with the orb, keeping it on your person at all times. All nonmagical flames within 30 feet of you automatically extinguish, and fire damage dealt by you is halved."
+  },
+  {
+    "name": "Ornithopter of Flying",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:ornithopter-of-flying",
+    "rarity": "Very Rare",
+    "type": "Wondrous Item",
+    "description": "You can use this contraption to fly, provided your weight (including whatever you are wearing or carrying) doesn't exceed 300 pounds. The ornithopter has a flying speed of 30 feet, and it moves according to your spoken directions while you are riding it. It can't hover. If the ornithopter loses its rider while airborne, it falls and can't fly again for 1d6 + 4 days.\n\nThe ornithopter is 8 feet long, has a 14-foot wingspan, and weighs 25 pounds."
+  },
+  {
+    "name": "Pennant of the Vind Rune",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:pennant-of-the-vind-rune",
+    "rarity": "Very Rare",
+    "type": "Wondrous Item",
+    "description": "This blue pennant is crafted from silk and is five feet long and whips about as if buffeted by a wind. The vind (wind) rune appears on its surface, looking almost like a cloud. The pennant has the following properties, which work only while it's on your person.\n\nWind Step. As an action, you fly up to 20 feet. If you don't land at the end of this flight, you fall unless you have another means of staying aloft.\n\nComforting Wind. You can't suffocate.\n\nWind's Grasp. As a reaction when you fall, you can cause yourself to take no damage from the fall. Once you use this property, you can't use it again until you finish a short or long rest.\n\nWind Walker. While you are attuned to this rune, you can cast Levitate as a bonus action. Once you use this property, you can't use it again until you finish a short or long rest.\n\nGift of Wind. You can transfer the pennant's magic to a nonmagical item — a suit of armor, a pair of boots, or a cloak — by tracing the vind rune there with your finger. The transfer takes 8 hours of work that requires the two items to be within 5 feet of each other. At the end, the pennant is destroyed, and the rune appears in silver on the chosen item, which gains a benefit based on its form:"
+  },
+  {
+    "name": "Peregrine Mask",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:peregrine-mask",
+    "rarity": "Very Rare",
+    "type": "Wondrous Item",
+    "description": "While wearing this winged helm, you have a flying speed of 60 feet. In addition, you have advantage on initiative rolls."
+  },
+  {
+    "name": "Polymorph Blade",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:polymorph-blade",
+    "rarity": "Very Rare",
+    "type": "Weapon",
+    "description": "When you attack a creature with this magic weapon and roll a 20 on the attack roll, the creature must make a DC 15 Wisdom saving throw in addition to suffering the attack’s normal effects. On a failed save, the creature also suffers the effects of a Polymorph spell. Roll a d20 and consult the following table to determine the form the target creature is transformed into.\n\nA creature is immune to this effect if it is immune to damage of the weapon’s type, is a shapechanger, or has legendary actions.\n\nCurse. This weapon is cursed, and becoming attuned to it extends the curse to you. Until the curse is broken with a Remove Curse spell or similar magic, you are unwilling to part with the weapon. Whenever you attack a creature with this weapon and roll a 1 on the attack roll, you suffer the effect of a Polymorph spell for 1 hour, rolling on the table to determine your new form."
+  },
+  {
+    "name": "Potion of Flying",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:potion-of-flying",
+    "rarity": "Very Rare",
+    "type": "Potion",
+    "description": "When you drink this potion, you gain a flying speed equal to your walking speed for 1 hour and can hover. If you're in the air when the potion wears off, you fall unless you have some other means of staying aloft. This potion's clear liquid floats at the top of its container and has cloudy white impurities drifting in it."
+  },
+  {
+    "name": "Potion of Giant Strength",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:potion-of-giant-strength",
+    "rarity": "Very Rare",
+    "type": "Potion",
+    "description": "When you drink this potion, your Strength score changes for 1 hour. The type of giant determines the score (see the table below). This potion has no effect on you if your Strength is equal to or greater than that score.\n\nThis potion's transparent liquid has floating in it a sliver of fingernail from a giant of the appropriate type. The potion of frost giant strength and the potion of stone giant strength have the same effect."
+  },
+  {
+    "name": "Potion of Healing",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:potion-of-healing",
+    "rarity": "Very Rare",
+    "type": "Potion",
+    "description": "You regain hit points when you drink this potion. The number of hit points depends on the potion's rarity, as shown in the Potions of Healing table. Whatever its potency, the potion's red liquid glimmers when agitated."
+  },
+  {
+    "name": "Potion of Invisibility",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:potion-of-invisibility",
+    "rarity": "Very Rare",
+    "type": "Potion",
+    "description": "This potion's container looks empty but feels as though it holds liquid. When you drink it, you become invisible for 1 hour. Anything you wear or carry is invisible with you. The effect ends early if you attack or cast a spell."
+  },
+  {
+    "name": "Potion of Longevity",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:potion-of-longevity",
+    "rarity": "Very Rare",
+    "type": "Potion",
+    "description": "When you drink this potion, your physical age is reduced by 1d6 + 6 years, to a minimum of 13 years. Each time you subsequently drink a potion of longevity, there is a 10 percent cumulative chance that you instead age by 1d6 + 6 years. Suspended in this amber liquid are a scorpion's tail, an adder's fang, a dead spider, and a tiny heart that, against all reason, is still beating. These ingredients vanish when the potion is opened."
+  },
+  {
+    "name": "Potion of Mind Control",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:potion-of-mind-control",
+    "rarity": "Very Rare",
+    "type": "Potion",
+    "description": "When you drink a Potion of Mind Control, you can cast a Dominate spell (save DC 15) on a specific creature if you do so before the end of your next turn. If you don't, the potion is wasted.\n\nA Potion of Mind Control produces the effect of a Dominate Beast, a Dominate Person (humanoid), or a Dominate Monster spell (see the table below). If the target's initial saving throw fails, the effect lasts for 1 hour, with no concentration required on your part. The charmed creature has disadvantage on new saving throws to break the effect during this time."
+  },
+  {
+    "name": "Potion of Possibility",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:potion-of-possibility",
+    "rarity": "Very Rare",
+    "type": "Potion",
+    "description": "When you drink this clear potion, you gain two Fragments of Possibility, each of which looks like a Tiny, grayish bead of energy that follows you around, staying within 1 foot of you at all times. Each fragment lasts for 8 hours or until used.\n\nWhen you make an attack roll, an ability check, or a saving throw, you can expend your fragment to roll an additional d20 and choose which of the d20s to use. Alternatively, when an attack roll is made against you, you can expend your fragment to roll a d20 and choose which of the d20s to use, the one you rolled or the one the attacker rolled.\n\nIf the original d20 roll has advantage or disadvantage, you roll your d20 after advantage or disadvantage has been applied to the original roll.\n\nWhile you have one or more Fragments of Possibility from this potion, you can't gain another Fragment of Possibility from any source."
+  },
+  {
+    "name": "Potion of Speed",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:potion-of-speed",
+    "rarity": "Very Rare",
+    "type": "Potion",
+    "description": "When you drink this potion, you gain the effect of the Haste spell for 1 minute (no concentration required). The potion's yellow fluid is streaked with black and swirls on its own."
+  },
+  {
+    "name": "Potion of Vitality",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:potion-of-vitality",
+    "rarity": "Very Rare",
+    "type": "Potion",
+    "description": "When you drink this potion, it removes any exhaustion you are suffering and cures any disease or poison affecting you. For the next 24 hours, you regain the maximum number of hit points for any Hit Die you spend. The potion's crimson liquid regularly pulses with dull light, calling to mind a heartbeat."
+  },
+  {
+    "name": "Prehistoric Figurines of Wondrous Power",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:prehistoric-figurines-of-wondrous-power",
+    "rarity": "Very Rare",
+    "type": "Wondrous Item",
+    "description": "Larger and more roughly hewn than typical figurines of wondrous power, these statuettes depict dinosaurs and related creatures from the earliest days of the world.\n\nAs an action, you can throw a prehistoric figurine of wondrous power to a point on the ground within 60 feet of yourself while speaking a command word, whereupon the figurine magically transforms into a living creature. If the space where the creature would appear is occupied by other creatures or objects, or if there isn’t enough space for the creature, the figurine doesn’t become a creature.\n\nThe creature is friendly to you and your companions. It understands your languages and obeys your spoken commands. If you issue no commands, the creature defends itself but takes no other actions. See the Monster Manual for the creature’s statistics.\n\nThe creature exists for a duration specific to each figurine. At the end of the duration, the creature reverts to its statuette form. It reverts to a figurine early if it drops to 0 hit points or if you use an action to speak the command word again while touching it. When the creature becomes a figurine again, its property can’t be used again until a certain amount of time has passed, as specified in the figurine’s description.\n\nCarnelian Triceratops (Very Rare). This figurine becomes a triceratops for up to 6 hours and can be ridden as a mount. Once it has been used, it can’t be used again until 10 days have passed.\n\nJasper Tyrannosaurus Rex (Legendary). This figurine, crafted from rare green jasper, becomes a tyrannosaurus rex for up to 1 hour. Once it has been used, it can’t be used again until 14 days have passed.\n\nWhenever you command the figurine while it’s in tyrannosaurus rex form (including commanding it to revert to figurine form), you must roll a d20. On a 1, you lose control of the figurine, and it becomes hostile to you and your companions until it is reduced to 0 hit points, at which point it reverts to figurine form.\n\nKyanite Pteranodon (Rare). This figurine becomes a pteranodon for up to 8 hours. If your size is Medium or smaller, you can ride the pteranodon as a mount. Once it has been used, it can’t be used again until 7 days have passed.\n\nPyrite Plesiosaurus (Uncommon). This figurine becomes a plesiosaurus for up to 12 hours and can be ridden as a mount. Once it has been used, it can’t be used again until 4 days have passed.\n\nWhile you are riding the plesiosaurus, you can use it to cast Water Breathing at will."
+  },
+  {
+    "name": "Reincarnation Dust",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:reincarnation-dust",
+    "rarity": "Very Rare",
+    "type": "Wondrous Item",
+    "description": "When this small pouch of purple dust is sprinkled on a dead humanoid or a piece of a dead humanoid, the dust is absorbed by the remains. If willing, the dead creature returns to life with a new body as if the Reincarnate spell had been cast on the remains."
+  },
+  {
+    "name": "Rhythm Maker's Drum",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:rhythm-makers-drum",
+    "rarity": "Very Rare",
+    "type": "Wondrous Item",
+    "description": "While holding this drum, you gain a bonus to spell attack rolls and to the saving throw DCs of your bard spells. The bonus is determined by the drum's rarity.\n\nAs an action, you can play the drum to regain one use of your Bardic Inspiration feature. This property of the drum can't be used again until the next dawn."
+  },
+  {
+    "name": "Ring of Amity",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:ring-of-amity",
+    "rarity": "Very Rare",
+    "type": "Ring",
+    "description": "This ring is carved from hematite and bears an engraving of the friend rune.\n\nWhen you first attune to this ring, you can touch one willing creature and form a magical bond between the two of you. While this bond lasts, whenever you are subjected to a spell or magical effect that restores hit points, the bonded creature also receives the benefits of the spell or effect.\n\nYou can bond with a different creature whenever you finish a long rest, provided that you can touch the creature and the creature is willing.\n\nA creature can benefit from only one ring of amity’s bond at a time. The bond ends if either you or the creature travels to a different plane of existence, if you bond with a different creature at the end of a long rest, or if you sever the bond as a bonus action.\n\nInvoking the Rune. When the bonded creature hits a target with an attack roll, you can use your reaction to invoke the ring’s rune if you are within 60 feet of the bonded creature. The bonded creature’s attack is then turned into a critical hit.\n\nOnce the rune has been invoked, it can’t be invoked again until the next dawn."
+  },
+  {
+    "name": "Ring of Red Fury",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:ring-of-red-fury",
+    "rarity": "Very Rare",
+    "type": "Ring",
+    "description": "This ring has a stripe of ruidium running through it. While wearing the ring, you gain the following benefits:\n\nRuidium Rage. As a bonus action, you can use the ring to gain the following benefits, which last for 1 minute or until you are incapacitated:\n\nYou can’t use this property of the ring again until you finish a long rest.\n\nRuidium Corruption. When you use the Ruidium Rage property of the ring, you must make a DC 20 Charisma saving throw. On a failed save, you gain 1 level of exhaustion. If you are not already suffering from ruidium corruption, you become corrupted when you fail this save.\n\nIf Ruidium Is Destroyed. If the Apotheon is killed or redeemed, all of the ruidium in Exandria is destroyed instantly, and the Ring of Red Fury becomes a Ring of Free Action."
+  },
+  {
+    "name": "Ring of Regeneration",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:ring-of-regeneration",
+    "rarity": "Very Rare",
+    "type": "Ring",
+    "description": "While wearing this ring, you regain 1d6 hit points every 10 minutes, provided that you have at least 1 hit point. If you lose a body part, the ring causes the missing part to regrow and return to full functionality after 1d6 + 1 days if you have at least 1 hit point the whole time."
+  },
+  {
+    "name": "Ring of Shooting Stars",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:ring-of-shooting-stars",
+    "rarity": "Very Rare",
+    "type": "Ring",
+    "description": "While wearing this ring in dim light or darkness, you can cast Dancing Lights and Light from the ring at will. Casting either spell from the ring requires an action.\n\nThe ring has 6 charges for the following other properties. The ring regains 1d6 expended charges daily at dawn.\n\nFaerie Fire. You can expend 1 charge as an action to cast Faerie Fire from the ring.\n\nBall Lightning. You can expend 2 charges as an action to create one to four 3-foot-diameter spheres of lightning. The more spheres you create, the less powerful each sphere is individually.\n\nEach sphere appears in an unoccupied space you can see within 120 feet of you. The spheres last as long as you concentrate (as if concentrating on a spell), up to 1 minute. Each sphere sheds dim light in a 30-foot radius.\n\nAs a bonus action, you can move each sphere up to 30 feet, but no farther than 120 feet away from you. When a creature other than you comes within 5 feet of a sphere, the sphere discharges lightning at that creature and disappears. That creature must make a DC 15 Dexterity saving throw. On a failed save, the creature takes lightning damage based on the number of spheres you created.\n\nShooting Stars. You can expend 1 to 3 charges as an action. For every charge you expend, you launch a glowing mote of light from the ring at a point you can see within 60 feet of you. Each creature within a 15-foot cube originating from that point is showered in sparks and must make a DC 15 Dexterity saving throw. taking 5d4 fire damage on a failed save, or half as much damage on a successful one."
+  },
+  {
+    "name": "Ring of Telekinesis",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:ring-of-telekinesis",
+    "rarity": "Very Rare",
+    "type": "Ring",
+    "description": "While wearing this ring, you can cast the Telekinesis spell at will, but you can target only objects that aren't being worn or carried."
+  },
+  {
+    "name": "Robe of Scintillating Colors",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:robe-of-scintillating-colors",
+    "rarity": "Very Rare",
+    "type": "Wondrous Item",
+    "description": "This robe has 3 charges, and it regains 1d3 expended charges daily at dawn. While you wear it, you can use an action and expend 1 charge to cause the garment to display a shifting pattern of dazzling hues until the end of your next turn. During this time, the robe sheds bright light in a 30-foot radius and dim light for an additional 30 feet. Creatures that can see you have disadvantage on attack rolls against you. In addition, any creature in the bright light that can see you when the robe's power is activated must succeed on a DC 15 Wisdom saving throw or become stunned until the effect ends."
+  }
+]

@@ -1,0 +1,452 @@
+[
+    {
+        "name": "Wraps Of Unarmed Prowess",
+        "name_tr": "Silahsız Ustalık Sargıları",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:wraps-of-unarmed-prowess",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item",
+        "description": "Cloth wraps that make unarmed strikes magical and provide a bonus to attack and damage rolls.",
+        "description_tr": "Yumruk vuruşlarını büyülü kılan ve onlara güç/isabet bonusu (rarity'e göre) sağlayan kumaş sargılar."
+    },
+    {
+        "name": "Wyrmreaver Gauntlets",
+        "name_tr": "Ejderboğan Eldivenleri",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:wyrmreaver-gauntlets",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item",
+        "description": "Engraved gauntlets providing force damage on unarmed strikes and resistance to a chosen element.",
+        "description_tr": "Yumruklara saf enerji (force) hasarı ekleyen ve sahibine ejderha nefesi dirençleri bahşeden rünlü eldivenler."
+    },
+    {
+        "name": "Apparatus of Kwalish",
+        "name_tr": "Kwalish'in Aparatı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:apparatus-of-kwalish",
+        "rarity": "Legendary",
+        "type": "Wondrous Item",
+        "description": "Sealed iron barrel that transforms into a lobster-like vehicle for traveling underwater.",
+        "description_tr": "İçine iki kişinin binebildiği, dev bir ıstakoza dönüşerek su altında giden demir bir denizaltı aracı."
+    },
+    {
+        "name": "Armor, +1, +2, or +3",
+        "name_tr": "Efsanevi Zırh +3",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:armor-1-2-3",
+        "rarity": "Legendary",
+        "type": "Armor",
+        "description": "Legendary armor providing the highest magical bonus to Armor Class.",
+        "description_tr": "Dünyadaki en dayanıklı malzemelerden dövülmüş, sahibine en üst düzey (+3) savunma sağlayan efsanevi zırh."
+    },
+    {
+        "name": "Armor of Invulnerability",
+        "name_tr": "Dokunulmazlık Zırhı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:armor-of-invulnerability",
+        "rarity": "Legendary",
+        "type": "Armor",
+        "description": "Provides resistance to nonmagical damage and can grant total immunity to it temporarily.",
+        "description_tr": "Büyülü olmayan tüm saldırılara karşı direnç veren ve geçici olarak tam bağışıklık sağlayan muazzam zırh."
+    },
+    {
+        "name": "Azuredge",
+        "name_tr": "Azuredge (Canlı Balta)",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:azuredge",
+        "rarity": "Legendary",
+        "type": "Weapon",
+        "description": "Sentient battleaxe sworn to protect Waterdeep that deals extra radiant damage to fiends and undead.",
+        "description_tr": "Waterdeep şehrini korumaya yeminli, iblis ve zombilere karşı kutsal alevlerle yanan canlı ve sadık balta."
+    },
+    {
+        "name": "Belashyrra's Beholder Crown",
+        "name_tr": "Belashyrra'nın Beholder Tacı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:belashyrras-beholder-crown",
+        "rarity": "Legendary",
+        "type": "Wondrous Item",
+        "description": "Symbiotic crown providing truesight-like darkvision and access to multiple powerful eye-ray spells.",
+        "description_tr": "Kafanıza kenetlenen ve size bir Beholder'ın dehşet verici göz ışınlarını (Yıkım, korku, ölüm vb.) bahşeden taç."
+    },
+    {
+        "name": "Belt of Giant Strength",
+        "name_tr": "Efsanevi Dev Gücü Kemeri",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:belt-of-giant-strength",
+        "rarity": "Legendary",
+        "type": "Wondrous Item",
+        "description": "Massively increases Strength to match that of a Cloud or Storm Giant.",
+        "description_tr": "Takan kişiye bir Bulut veya Fırtına Devi'nin (27-29 Strength) durdurulamaz kas gücünü bahşeden kemer."
+    },
+    {
+        "name": "Black Crystal Tablet",
+        "name_tr": "Siyah Kristal Tablet",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:black-crystal-tablet",
+        "rarity": "Legendary",
+        "type": "Wondrous Item",
+        "description": "Relic used to cast Eyebite or open a Gate to the Far Realm, risking madness to the user.",
+        "description_tr": "Uzak Boyut'a (Far Realm) kapı açan ancak sahibini çılgınlığa sürükleyebilen karanlık kristal tablet."
+    },
+    {
+        "name": "Blackrazor",
+        "name_tr": "Blackrazor (Ruh Yiyen)",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:blackrazor",
+        "rarity": "Legendary",
+        "type": "Weapon",
+        "description": "Sentient life-stealing sword that devours the souls of its victims to empower its wielder.",
+        "description_tr": "Kurbanlarının ruhlarını yiyerek sahibine onların yaşam enerjisini veren, hırslı ve tehlikeli canlı kılıç."
+    },
+    {
+        "name": "Blackstaff",
+        "name_tr": "Blackstaff (Kara Asa)",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:blackstaff",
+        "rarity": "Legendary",
+        "type": "Staff",
+        "description": "The symbol of Waterdeep's highest wizard, containing spirits of past mages and providing massive power.",
+        "description_tr": "Waterdeep'in baş büyücüsüne özel; kadim ruhları barındıran ve şehri korumak için dev heykelleri uyandıran asa."
+    },
+    {
+        "name": "Blood Fury Tattoo",
+        "name_tr": "Kan Öfkesi Dövmesi",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:blood-fury-tattoo",
+        "rarity": "Legendary",
+        "type": "Wondrous Item",
+        "description": "Magic tattoo that allows for life-stealing strikes and immediate counterattacks.",
+        "description_tr": "Saldırılarınızdan can çalmanızı sağlayan ve size vuranlara anında ölümcül bir karşılık vermenizi sağlayan dövme."
+    },
+    {
+        "name": "Bookmark",
+        "name_tr": "Bookmark (Sihirli Hançer)",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:bookmark",
+        "rarity": "Legendary",
+        "type": "Weapon",
+        "description": "+3 magical dagger belonging to Artus Cimber with multiple utility properties.",
+        "description_tr": "Artus Cimber'in efsanevi +3 hançeri; ışık saçar, pusula görevi görür ve sahibini korur."
+    },
+    {
+        "name": "Cloak of Invisibility",
+        "name_tr": "Efsanevi Görünmezlik Pelerini",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:cloak-of-invisibility",
+        "rarity": "Legendary",
+        "type": "Wondrous Item",
+        "description": "Highly prized cloak that provides several hours of total invisibility to the wearer and gear.",
+        "description_tr": "Takan kişiyi ve eşyalarını saatlerce tamamen görünmez kılan, dünyanın en nadide büyülü pelerinlerinden biri."
+    },
+    {
+        "name": "Crystal Ball",
+        "name_tr": "Efsanevi Kristal Küre",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:crystal-ball",
+        "rarity": "Legendary",
+        "type": "Wondrous Item",
+        "description": "Advanced scrying device allowing mind reading, telepathy, or truesight across vast distances.",
+        "description_tr": "Uzakları izlemenin yanı sıra (Scrying), zihin okuma ve telepati kurma imkanı da veren gelişmiş küre."
+    },
+    {
+        "name": "Cubic Gate",
+        "name_tr": "Kübik Kapı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:cubic-gate",
+        "rarity": "Legendary",
+        "type": "Wondrous Item",
+        "description": "Six-sided cube used to open portals or shift between specific planes of existence.",
+        "description_tr": "Her bir kenarı farklı bir boyuta açılan ve anında boyutsal yolculuk (Plane Shift) yapmanızı sağlayan küp."
+    },
+    {
+        "name": "Danoth's Visor",
+        "name_tr": "Danoth'un Siperliği",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:danoths-visor",
+        "rarity": "Legendary",
+        "type": "Wondrous Item",
+        "description": "Dunamancy-enhanced goggles providing advanced darkvision, search, and combat vision capabilities.",
+        "description_tr": "Işığı bükerek görünmezleri görmenizi, karanlığı aydınlatmanızı ve uzaktaki detayları fark etmenizi sağlayan gözlük."
+    },
+    {
+        "name": "Dawnbringer",
+        "name_tr": "Dawnbringer (Şafak Getiren)",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:dawnbringer",
+        "rarity": "Legendary",
+        "type": "Weapon",
+        "description": "Sentient radiant blade that sheds sunlight and hates darkness and abandonment.",
+        "description_tr": "Karanlıkta güneş gibi parlayan, hastalıklara şifa olan efsanevi saf ışık kılıcı (Sun Blade varyantı)."
+    },
+    {
+        "name": "Deck Of Many More Things",
+        "name_tr": "Daha Fazla Şeyin Destesi",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:deck-of-many-more-things",
+        "rarity": "Legendary",
+        "type": "Wondrous Item",
+        "description": "Expanded legendary deck with 66 total cards, mixing classic effects with new beneficial and dangerous boons.",
+        "description_tr": "Kaderi kökten değiştiren klasik destenin 66 karta genişletilmiş, daha çok mucize (ve risk) içeren versiyonu."
+    },
+    {
+        "name": "Deck of Many Things",
+        "name_tr": "Birçok Şeyin Destesi",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:deck-of-many-things",
+        "rarity": "Legendary",
+        "type": "Wondrous Item",
+        "description": "Infamous legendary item containing cards that can grant vast wealth, powerful enemies, or alter reality.",
+        "description_tr": "Bir kartla krallıklar kazandıran veya ruhunuzu sonsuza dek hapseden, dünyanın en tehlikeli efsanevi eşyası."
+    },
+    {
+        "name": "Deck of Several Things",
+        "name_tr": "Birkaç Şeyin Destesi",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:deck-of-several-things",
+        "rarity": "Legendary",
+        "type": "Wondrous Item",
+        "description": "Variant deck created by Kwalish with technological and mechanical twists on classic effects.",
+        "description_tr": "Kwalish tarafından modifiye edilen; rünler yerine mekanik ve teknolojik etkiler kullanan efsanevi deste."
+    },
+    {
+        "name": "Defender",
+        "name_tr": "Koruyucu (Efsanevi Kılıç)",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:defender",
+        "rarity": "Legendary",
+        "type": "Weapon",
+        "description": "+3 sword that allows the user to transfer its attack bonus to their AC for defense.",
+        "description_tr": "Saldırı gücünü anında savunmaya (AC) aktarabilen, her duruma uyum sağlayan efsanevi +3 kılıç."
+    },
+    {
+        "name": "Dragon Mask",
+        "name_tr": "Ejderha Maskesi",
+        "link": "https://dnd5e.wikidus-items:dragon-mask",
+        "rarity": "Legendary",
+        "type": "Wondrous Item",
+        "description": "Powerful mask dedicated to a specific chromatic dragon type, granting breath resistance and other boons.",
+        "description_tr": "Sahibine ilgili ejderhanın nefes gücüne bağışıklık ve ejderha dillerini anlama yetisi veren maske."
+    },
+    {
+        "name": "Dragon Vessel",
+        "name_tr": "Ejderha Kabı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:dragon-vessel",
+        "rarity": "Legendary",
+        "type": "Wondrous Item",
+        "description": "Magic container that fills daily with valuable liquids, including high-level healing potions.",
+        "description_tr": "Her gün kendiliğinden dolan; içine en güçlü iyileştirme iksirlerini veya içecekleri doldurabilen sihirli matara."
+    },
+    {
+        "name": "Dragonlance",
+        "name_tr": "Ejderha Mızrağı (Dragonlance)",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:dragonlance",
+        "rarity": "Legendary",
+        "type": "Weapon",
+        "description": "Famed weapon for slaying dragons, dealing massive force damage and empowering nearby dragons.",
+        "description_tr": "Krynn dünyasının efsanevi silahı; ejderhaları tek hamlede yere sermek için tasarlanmış dev mızrak."
+    },
+    {
+        "name": "Dragon's Wrath Weapon",
+        "name_tr": "Ejderha Gazabı Silahı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:dragons-wrath-weapon",
+        "rarity": "Legendary",
+        "type": "Weapon",
+        "description": "Grows in power based on the dragon's hoard it was steeped in, eventually unleashing destructive energy cones.",
+        "description_tr": "İçinde bir ejderhanın nefes gücünü barındıran ve vuruşlarında bu enerjiyi rakiplerine boşaltan silah."
+    },
+    {
+        "name": "Dragonstaff of Ahghairon",
+        "name_tr": "Ahghairon'un Ejderha Asası",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:dragonstaff-of-ahghairon",
+        "rarity": "Legendary",
+        "type": "Staff",
+        "description": "Staff used to control the movement of dragons in Waterdeep and grant them access to the city.",
+        "description_tr": "Waterdeep'in ejderha savunmasını yöneten ve ejderhalara emir vermenizi (Command) sağlayan asası."
+    },
+    {
+        "name": "Dragon-Touched Focus",
+        "name_tr": "Ejderha Dokunuşlu Odak",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:dragon-touched-focus",
+        "rarity": "Legendary",
+        "type": "Wondrous Item",
+        "description": "Highly advanced spellcasting focus that can treat spells as if cast at 9th level.",
+        "description_tr": "Büyüleri sanki 9. seviyede yapılıyormuş gibi güçlendiren (günde bir kez) efsanevi büyü odağı."
+    },
+    {
+        "name": "Drown",
+        "name_tr": "Drown (Kötü Su Baltası)",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:drown",
+        "rarity": "Legendary",
+        "type": "Weapon",
+        "description": "Evil water trident containing a spark of Olhydra, granting mastery over water and aquatic creatures.",
+        "description_tr": "Denizlerin en derin ve karanlık güçlerini barındıran, su elementallerini köle yapan lanetli üçlü çatal."
+    },
+    {
+        "name": "Efreeti Chain",
+        "name_tr": "İfrit Zırhı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:efreeti-chain",
+        "rarity": "Legendary",
+        "type": "Armor",
+        "description": "Provides +3 AC, fire immunity, and the ability to walk on molten rock.",
+        "description_tr": "Ateşe tam bağışıklık veren ve lavların üstünde sanki toprakta yürüyormuş gibi yürümenizi sağlayan +3 zırh."
+    },
+    {
+        "name": "Euryale's Aegis",
+        "name_tr": "Euryale'nin Kalkanı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:euryales-aegis",
+        "rarity": "Legendary",
+        "type": "Armor",
+        "description": "Brass shield providing poison resistance, immunity to petrification, and its own petrifying gaze.",
+        "description_tr": "Sahibini taşa dönmekten koruyan ancak rakiplerini tek bir bakışla heykele çevirebilen altın kalkan."
+    },
+    {
+        "name": "Fane-Eater",
+        "name_tr": "Fane-Eater (Arkhan'ın Baltası)",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:fane-eater",
+        "rarity": "Legendary",
+        "type": "Weapon",
+        "description": "+3 battleaxe that deals extra necrotic damage on critical hits and heals the wielder.",
+        "description_tr": "Arkhan'ın efsanevi baltası; vurduğu rakibin canını söküp alarak sahibini anında iyileştirir."
+    },
+    {
+        "name": "Fate Dealer's Deck",
+        "name_tr": "Kader Dağıtanın Destesi",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:fate-dealers-deck",
+        "rarity": "Legendary",
+        "type": "Wondrous Item",
+        "description": "Provides a bonus to spell attacks and DCs, and can expend hit dice to damage or heal creatures.",
+        "description_tr": "Büyü gücünü devasa artıran ve her bir kartıyla birine şifa dağıtan veya ölüm saçan sihirli deste."
+    },
+    {
+        "name": "Figurine of Wondrous Power",
+        "name_tr": "Efsanevi Harika Güç Figürini",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:figurine-of-wondrous-power",
+        "rarity": "Legendary",
+        "type": "Wondrous Item",
+        "description": "Legendary gold canary figurine that can transform into a giant canary or an adult gold dragon.",
+        "description_tr": "Kritik anlarda devasa bir Altın Ejderha'ya (Gold Dragon) dönüşerek yardıma gelen efsanevi heykelcik."
+    },
+    {
+        "name": "Flail of Tiamat",
+        "name_tr": "Tiamat'ın Gürzlü Kamçısı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:flail-of-tiamat",
+        "rarity": "Legendary",
+        "type": "Weapon",
+        "description": "Five-headed flail dealing extra elemental damage and capable of breathing massive cones of fire/acid/etc.",
+        "description_tr": "Ejderhaların kraliçesi Tiamat'ın gücünü barındıran; beş farklı elementte nefes saldırısı yapabilen gürz."
+    },
+    {
+        "name": "Gloves of Soul Catching",
+        "name_tr": "Ruh Yakalama Eldivenleri",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:gloves-of-soul-catching",
+        "rarity": "Legendary",
+        "type": "Wondrous Item",
+        "description": "Sets Constitution to 20 and adds massive force damage/healing to unarmed strikes.",
+        "description_tr": "Sahibini çelik gibi yapan (Cons 20) ve her yumruğunda rakibin ruhunu çekip cana çeviren eldivenler."
+    },
+    {
+        "name": "Grimoire Infinitus",
+        "name_tr": "Grimoire Infinitus (Sonsuz Kitap)",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:grimoire-infinitus",
+        "rarity": "Legendary",
+        "type": "Wondrous Item",
+        "description": "Sentient spellbook with infinite pages containing numerous high-level wizard spells.",
+        "description_tr": "Sayfaları asla bitmeyen, içinde dünyanın en güçlü tüm büyülerini barındıran efsanevi büyücü kitabı."
+    },
+    {
+        "name": "Gurt's Greataxe",
+        "name_tr": "Gurt'un Dev Baltası",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:gurts-greataxe",
+        "rarity": "Legendary",
+        "type": "Weapon",
+        "description": "Massive 325 lb axe sized for giants, dealing enormous slashing and cold damage.",
+        "description_tr": "Bir devin bile zor taşıdığı, vurduğu yeri donduran ve insanlara karşı aşırı ölümcül olan devasa balta."
+    },
+    {
+        "name": "Hammer of Thunderbolts",
+        "name_tr": "Yıldırım Çekici",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:hammer-of-thunderbolts",
+        "rarity": "Legendary",
+        "type": "Weapon",
+        "description": "Legendary weapon that can potentially slay a giant in one hit when combined with specific other items.",
+        "description_tr": "Gauntlets of Ogre Power ve Kemeriyle birlikte kullanıldığında devleri tek hamlede öldüren çekic."
+    },
+    {
+        "name": "Hammock of Worlds",
+        "name_tr": "Dünyalar Hamalağı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:hammock-of-worlds",
+        "rarity": "Legendary",
+        "type": "Wondrous Item",
+        "description": "Unfolds to create a two-way portal between specific planes of existence.",
+        "description_tr": "İçine uzanıldığında sizi anında başka bir dünyaya (Feywild vb.) götüren boyutsal hamak."
+    },
+    {
+        "name": "Harp of Gilded Plenty",
+        "name_tr": "Yaldızlı Bolluk Arpı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:harp-of-gilded-plenty",
+        "rarity": "Legendary",
+        "type": "Wondrous Item",
+        "description": "Sentient golden harp that can cast Heroes' Feast and improve all Charisma checks.",
+        "description_tr": "Kendi kendine çalan ve konuşan, her gün muazzam bir ziyafet (Heroes' Feast) kurabilen altın arp."
+    },
+    {
+        "name": "Hazirawn",
+        "name_tr": "Hazirawn (Canlı Kara Kılıç)",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:hazirawn",
+        "rarity": "Legendary",
+        "type": "Weapon",
+        "description": "Sentient longsword dealing extra necrotic damage and preventing the target from regaining hit points.",
+        "description_tr": "Kurbanlarına bulaştırdığı karanlık enerjiyle onların canlarının dolmasını engelleyen zalim ve canlı kılıç."
+    },
+    {
+        "name": "Helm of Disjunction",
+        "name_tr": "Ayrışma Miğferi",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:helm-of-disjunction",
+        "rarity": "Legendary",
+        "type": "Wondrous Item",
+        "description": "Emits a massive antimagic pulse that destroys scrolls/potions and suppresses all magic items in the area.",
+        "description_tr": "Tek bir komutla etraftaki tüm büyüleri bozan ve tüm sihirli eşyaları geçici olarak etkisiz kılan miğfer."
+    },
+    {
+        "name": "Helm of the Scavenger",
+        "name_tr": "Hurdacı Miğferi",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:helm-of-the-scavenger",
+        "rarity": "Legendary",
+        "type": "Wondrous Item",
+        "description": "Allows control of a spelljamming ship but prevents the user from casting their own spells.",
+        "description_tr": "Devasa uzay gemilerini (Spelljammer) zihin gücüyle uçurmanızı sağlayan kontol kaskı/koltuğu."
+    },
+    {
+        "name": "Heretic",
+        "name_tr": "Kafir (Hain Kılıç)",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:heretic",
+        "rarity": "Legendary",
+        "type": "Weapon",
+        "description": "Chaos-aligned sentient sword that paralyzes worshippers of good deities and celestials.",
+        "description_tr": "İyilik tanrılarına tapanları ve melekleri gördüğünde çılgına dönen, onları felç eden efsanevi kılıç."
+    },
+    {
+        "name": "Hide of the Feral Guardian",
+        "name_tr": "Vahşi Gardiyanın Postu",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:hide-of-the-feral-guardian",
+        "rarity": "Legendary",
+        "type": "Armor",
+        "description": "Druidic leather armor that grows with the wearer and eventually grants flight and guardian powers.",
+        "description_tr": "Sürekli gelişen ve sonunda sahibini doğanın kudretiyle donatarak ona devasa güçler veren deri zırh."
+    },
+    {
+        "name": "Hither-Thither Staff",
+        "name_tr": "Ordan Oraya Asası",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:hither-thither-staff",
+        "rarity": "Legendary",
+        "type": "Staff",
+        "description": "Allows creating two linked teleportation portals to instantly bridge large distances.",
+        "description_tr": "İki nokta arasında kapı açarak her şeyin anında oradan oraya geçmesini sağlayan portal asası."
+    },
+    {
+        "name": "Holy Avenger",
+        "name_tr": "Kutsal İntikamcı",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:holy-avenger",
+        "rarity": "Legendary",
+        "type": "Weapon",
+        "description": "Ultimate paladin weapon that deals radiant damage and creates a protective aura against magic.",
+        "description_tr": "İblislerin korkulu rüyası; sahibini ve dostlarını büyülere karşı koruyan kutsal paladin kılıcı."
+    },
+    {
+        "name": "Holy Symbol of Ravenkind",
+        "name_tr": "Ravenkind Kutsal Sembolü",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:holy-symbol-of-ravenkind",
+        "rarity": "Legendary",
+        "type": "Wondrous Item",
+        "description": "Powerful artifact for fighting undead, especially vampires, utilizing charges and sunlight.",
+        "description_tr": "Vampirleri donduran ve etrafa gerçek güneş ışığı saçarak onları yok eden efsanevi platin muska."
+    },
+    {
+        "name": "Horn of Beckoning Death",
+        "name_tr": "Ölüm Çağıran Boru",
+        "link": "https://dnd5e.wikidot.com/wondrous-items:horn-of-beckoning-death",
+        "rarity": "Legendary",
+        "type": "Wondrous Item",
+        "description": "Creates a deadly crimson cloud that kills weak creatures and turns them into zombies.",
+        "description_tr": "Szass Tam'ın borusu; etrafa yayılan kızıl dumanla herkesi öldürüp zombiye çeviren dehşet verici alet."
+    }
+]

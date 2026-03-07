@@ -1,0 +1,352 @@
+[
+  {
+    "name": "Goggles of Night",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:goggles-of-night",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "While wearing these dark lenses, you have darkvision out to a range of 60 feet. If you already have darkvision, wearing the goggles increases its range by 60 feet."
+  },
+  {
+    "name": "Goggles of Object Reading",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:goggles-of-object-reading",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "These leather-framed goggles feature purple crystal lenses. While wearing the goggles, you have advantage on Intelligence (Arcana) checks made to reveal information about a creature or object you can see.\n\nIn addition, you can cast the Identify spell using the googles. Once you do so, you can't do so again until the next dawn."
+  },
+  {
+    "name": "Guardian Emblem",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:guardian-emblem",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "This emblem is the symbol of a deity or a spiritual tradition. As an action, you can attach the emblem to a suit of armor or a shield or remove it.\n\nThe emblem has 3 charges. When you or a creature you can see within 30 feet of you suffers a critical hit while you're wearing the armor or wielding the shield that bears the emblem, you can use your reaction to expend 1 charge to turn the critical hit into a normal hit instead.\n\nThe emblem regains all expended charges daily at dawn."
+  },
+  {
+    "name": "Guild Keyrune",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:guild-keyrune",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "Associated with a particular guild, a guild keyrune is a ceremonial, stylized key, about 1 foot long, made from carved stone. Not a literal key, the item is a badge of authority that gives its bearer access to privileged places in its guild's headquarters and outposts. At the DM's discretion, a character might be given a keyrune upon attaining a renown score of 25 in their guild.\n\nWhen you use an action to speak the item's command word and place the keyrune on the ground in an unoccupied space within 5 feet of you, the keyrune transforms into a creature. If there isn't enough space for the creature, the keyrune doesn't transform. See the Monster Manual for the creature's stat block — the name of which is given in bold in the keyrune's description — unless you're directed to chapter 6 of this book instead.\n\nThe creature is friendly to you, your companions, and other members of your guild (unless those guild members are hostile to you). It understands your languages and obeys your spoken commands. If you issue no commands, the creature takes the Dodge action and moves to avoid danger.\n\nThe creature exists for a duration specific to each keyrune. At the end of the duration, the creature reverts to its keyrune form. It reverts early if it drops to 0 hit points or if you use an action to speak the command word again while touching it. When the creature reverts to its keyrune form, it can't transform again until 36 hours have passed.\n\nAzorius Keyrune (Rare). This keyrune is carved from white marble and lapis lazuli to resemble a noble bird of prey. It can become a giant eagle for up to 1 hour. While the transformed eagle is within l mile of you, you can communicate with it telepathically. As an action, you can see through the eagle's eyes and hear what it hears until the start of your next turn, and you gain the benefit of its keen sight. During this time, you are deaf and blind with regard to your own senses.\n\nBoros Keyrune (Rare). Carved from red sandstone with white granite elements to resemble a member of the Boros Legion, this keyrune can become a veteran (human) for up to 8 hours. In addition to fighting on your behalf, this veteran cheerfully offers tactical advice, which is usually sound. Anyone who talks with the transformed keyrune or examines it closely can easily recognize that it is an artificial human.\n\nDimir Keyrune (Very Rare). This keyrune, carved from black stone accented with steel, resembles a stylized horror. On command, it transforms into an intellect devourer that resembles the Dimir guild symbol, with six bladelike legs. The creature exists for up to 24 hours. During that time, it pursues only a single mission you give it — usually an assignment to take over someone's body, either to impersonate that person for a brief time or to extract secrets from their mind. When the mission is complete, the creature returns to you, reports its success, and reverts to its keyrune form.\n\nGolgari Keyrune (Very Rare). Made from deep green jade with black veins, this keyrune has an insectile shape. It can transform into a giant scorpion for up to 6 hours. The scorpion has an Intelligence of 4 and can communicate with you telepathically while it is within 60 feet of you, though its messages are largely limited to describing the passage of potential prey.\n\nGruul Keyrune (Rare). This crude keyrune is cobbled together from bits of rubble, broken glass, bone, and animal hair. One end resembles a horned beast. On command, the keyrune transforms into a ceratok, a horned creature much like a rhinoceros (and with the same statistics). It remains in its ceratok form for 1 hour.\n\nIzzet Keyrune (Rare). Formed of carved and polished red and blue stone, the keyrune includes bits of cable and wire. One end resembles a humanlike head, suggesting the jagged elemental form of the galvanice weird (see chapter 6 for the stat block) that it can become for a duration of 3 hours. In this form, it will serve you as a bodyguard, lift and carry things for you, act as a test subject for your experiments, or aid you in any other way that its capabilities allow.\n\nOrzhov Keyrune (Rare). This keyrune is carved from white marble with veins of black. The end is shaped like a thrull's head, with a gold faceplate affixed. On command, the keyrune transforms into a winged thrull (see chapter 6 for the stat block) for up to 2 hours. If you don't come from an Orzhov oligarch family, it serves you grudgingly, clownishly aping your movements and mannerisms while carrying out your orders.\n\nRakdos Keyrune (Uncommon). This dark granite keyrune is marbled with scarlet veins and carved with the leering visage of a mischievous demon. When activated, it transforms into a cackler (see chapter 6 for the stat block) for up to 1 hour.\n\nSelesnya Keyrune (Rare). Carved from white and green marble in the shape of a wolf's head, this keyrune transforms into a dire wolf. The wolf persists for 8 hours. Its Intelligence is 6, and it understands Elvish and Sylvan but can't speak those languages. While it is within 1 mile of you. you can communicate with each other telepathically.\n\nSimic Keyrune (Uncommon). This keyrune is assembled from coral, mother-of pearl, and chrome and adorned with the spirals and curves characteristic of Simic ornamentation. The head resembles the shell of a sea creature. On command, the keyrune turns into a category 1 krasis (see chapter 6 for the stat block) that has the Grabber and Stabilizing Legs adaptations. The transformation lasts for up to 5 hours."
+  },
+  {
+    "name": "Guild Signet",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:guild-signet",
+    "rarity": "Uncommon",
+    "type": "Ring",
+    "description": "This ring, adorned with the symbol of a guild, allows you to cast one spell closely associated with that guild, as shown in the Guild Signet Spells table. A guild signet is sometimes awarded to a guild member whose renown score in that guild is 5 or higher, as a reward for performing special services for the guild. Aside from its magical properties, the ring is also an indicator of the guild's recognition and favor.\n\nA signet has 3 charges, and it regains 1d3 expended charges daily at dawn. While wearing it, you can expend 1 charge to cast the associated spell (save DC 13)."
+  },
+  {
+    "name": "Harkon's Bite",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:harkon-s-bite",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "A dire wolf tooth dangles from this simple cord necklace. While you wear it, the necklace grants you a +1 bonus to ability checks and saving throws.\n\nCurse. Attuning to Harkon's Bite curses you until either Harkon Lukas removes the necklace from you or you are targeted by a Remove Curse spell or similar magic. As long as you remain cursed, you cannot remove the necklace.\n\nUpon donning or removing the necklace, whether you are attuned to it or not, you are afflicted with werewolf lycanthropy as detailed in the Monster Manual. The curse lasts until the dawn after the next full moon. If you are still wearing the necklace at this time, you are afflicted with lycanthropy again."
+  },
+  {
+    "name": "Hat of Disguise",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:hat-of-disguise",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "While wearing this hat, you can use an action to cast the Disguise Self spell from it at will. The spell ends if the hat is removed."
+  },
+  {
+    "name": "Headband of Intellect",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:headband-of-intellect",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "Your Intelligence score is 19 while you wear this headband. It has no effect on you if your Intelligence is 19 or higher without it."
+  },
+  {
+    "name": "Hellfire Weapon",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:hellfire-weapon",
+    "rarity": "Uncommon",
+    "type": "Weapon",
+    "description": "This weapon is fashioned from infernal iron and traced with veins of hellfire that shed dim light in a 5-foot-radius.\n\nAny humanoid killed by an attack made with this weapon has its soul funneled into the River Styx, where it's reborn instantly as a lemure devil (described in the Monster Manual)."
+  },
+  {
+    "name": "Helm of Comprehending Languages",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:helm-of-comprehending-languages",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "While wearing this helm, you can use an action to cast the Comprehend Languages spell from it at will."
+  },
+  {
+    "name": "Helm of Telepathy",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:helm-of-telepathy",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "While wearing this helm, you can use an action to cast the Detect Thoughts spell (save DC 13) from it. As long as you maintain concentration on the spell, you can use a bonus action to send a telepathic message to a creature you are focused on. It can reply — using a bonus action to do so — while your focus on it continues.\n\nWhile focusing on a creature with Detect Thoughts, you can use an action to cast the Suggestion spell (save DC 13) from the helm on that creature. Once used, the Suggestion property can't be used again until the next dawn."
+  },
+  {
+    "name": "Helm of Underwater Action",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:helm-of-underwater-action",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "While wearing this brass helmet, you can breathe underwater, you gain dark vision with a range of 60 feet, and you gain a swimming speed of 30 feet."
+  },
+  {
+    "name": "House Of Cards",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:house-of-cards",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "This deck of cards is decorated with geometric shapes that have a protective motif. While you’re holding the deck, you can use an action to shuffle it and cause the cards to deal themselves out and transform into a shelter made of cards. The shelter can be shaped however you desire, but it must fit in a 40-foot cube centered on a point within 30 feet of you. The shelter has one door and up to four windows, and only you can open or close them. It has a floor and a roof, and it maintains a comfortable temperature inside.\n\nThe shelter has AC 15, 50 hit points, and immunity to poison and psychic damage. The shelter lasts for 24 hours, until you dismiss it as an action, or until it is reduced to 0 hit points. When the shelter’s duration ends, it transforms back into a deck of cards and appears in your hand. Once the deck has transformed into a shelter, it can’t be used again until the next dawn."
+  },
+  {
+    "name": "Immovable Rod",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:immovable-rod",
+    "rarity": "Uncommon",
+    "type": "Rod",
+    "description": "This flat iron rod has a button on one end. You can use an action to press the button, which causes the rod to become magically fixed in place. Until you or another creature uses an action to push the button again, the rod doesn't move, even if it is defying gravity. The rod can hold up to 8,000 pounds of weight. More weight causes the rod to deactivate and fall. A creature can use an action to make a DC 30 Strength check, moving the fixed rod up to 10 feet on a success."
+  },
+  {
+    "name": "Infernal Puzzle Box",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:infernal-puzzle-box",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "An infernal puzzle box is a cube-shaped container 5 to 6 inches on a side, composed of airtight, interlocking parts made from materials found in the Nine Hells. Most of these boxes are made of infernal iron, though some are carved from bone or horn. Infernal puzzle boxes are used to safeguard diabolical contracts signed between devils and mortals, even after the terms of these contracts are fulfilled. An empty infernal puzzle box weighs 3 pounds regardless of the materials used to fashion it.\n\nWhen an object small enough to fit inside an infernal puzzle box is placed in it, the container magically seals shut around the object, and no magic can force the box open. The sealed box becomes immune to all damage as well. Every infernal puzzle box is constructed with a unique means of opening it. The trick to solving the puzzle is always mundane, never magical. Once a creature figures out the trick or sequence of steps needed to open a particular infernal puzzle box, that creature can open the box as an action, allowing access to the box's contents.\n\nA creature that spends 1 hour holding an infernal puzzle box while trying to open it can make a DC 30 Intelligence (Investigation) check. If the check succeeds, the creature figures out the trick or sequence of steps needed to open the box. If the check fails by 5 or more, the creature must make a DC 18 Wisdom saving throw, taking 42 (12d6) psychic damage on a failed save, or half as much damage on a successful one."
+  },
+  {
+    "name": "Inquisitive's Goggles",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:inquisitives-goggles",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "The lenses of these goggles are carved from Siberys dragonshards. While garish in appearance, these goggles are a boon to any Tharashk inquisitive. To attune to the goggles, you must possess the Mark of Finding. As long as this condition is met, you gain the following benefits."
+  },
+  {
+    "name": "Insignia of Claws",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:insignia-of-claws",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "The jewels in this insignia of the Cult of the Dragon flare with purple light when you enter combat, empowering your natural fists or natural weapons.\n\nWhile wearing the insignia, you gain a +1 bonus to the attack rolls and the damage rolls you make with unarmed strikes and natural weapons. Such attacks are considered to be magical."
+  },
+  {
+    "name": "Instrument of the Bards",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:instrument-of-the-bards",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "An instrument of the bards is an exquisite example of its kind, superior to an ordinary instrument in every way. Seven types of these instruments exist, each named after a legendary bard college. The following table lists the spells common to all instruments, as well as the spells specific to each one and its rarity. A creature that attempts to play the instrument without being attuned to it must succeed on a DC 15 Wisdom saving throw or take 2d4 psychic damage.\n\nYou can use an action to play the instrument and cast one of its spells. Once the instrument has been used to cast a spell, it can't be used to cast that spell again until the next dawn. The spells use your spellcasting ability and spell save DC.\n\nYou can play the instrument while casting a spell that causes any of its targets to be charmed on a failed saving throw, thereby imposing disadvantage on the save. This effect applies only if the spell has a somatic or a material component."
+  },
+  {
+    "name": "Javelin of Lightning",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:javelin-of-lightning",
+    "rarity": "Uncommon",
+    "type": "Weapon",
+    "description": "This javelin is a magic weapon. When you hurl it and speak its command word, it transforms into a bolt of lightning, forming a line 5 feet wide that extends out from you to a target within 120 feet. Each creature in the line excluding you and the target must make a DC 13 Dexterity saving throw, taking 4d6 lightning damage on a failed save, and half as much damage on a successful one. The lightning bolt turns back into a javelin when it reaches the target. Make a ranged weapon attack against the target. On a hit, the target takes damage from the javelin plus 4d6 lightning damage.\n\nThe javelin's property can't be used again until the next dawn. In the meantime, the javelin can still be used as a magic weapon."
+  },
+  {
+    "name": "Keoghtom's Ointment",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:keoghtoms-ointment",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "This glass jar, 3 inches in diameter, contains 1d4 + 1 doses of a thick mixture that smells faintly of aloe. The jar and its contents weigh 1/2 pound.\n\nAs an action, one dose of the ointment can be swallowed or applied to the skin. The creature that receives it regains 2d8 + 2 hit points, ceases to be poisoned, and is cured of any disease."
+  },
+  {
+    "name": "Lantern of Revealing",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:lantern-of-revealing",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "While lit, this hooded lantern burns for 6 hours on 1 pint of oil, shedding bright light in a 30-foot radius and dim light for an additional 30 feet. Invisible creatures and objects are visible as long as they are in the lantern's bright light. You can use an action to lower the hood, reducing the light to dim light in a 5-foot radius."
+  },
+  {
+    "name": "Living Gloves",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:living-gloves",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "These symbiotic gloves — made of thin chitin and sinew — pulse with a life of their own. To attune to them, you must wear them for the entire attunement period, during which the gloves bond with your skin.\n\nWhile attuned to these gloves, you gain one of the following proficiencies (your choice when you attune to the gloves):\n\nWhen you make an ability check using the chosen proficiency, you add double your proficiency bonus to the check, instead of your normal proficiency bonus.\n\nSymbiotic Nature. The gloves can't be removed from you while you're attuned to them, and you can't voluntarily end your attunement to them. If you're targeted by a spell that ends a curse, your attunement to the gloves ends, and they can be removed."
+  },
+  {
+    "name": "Lorehold Primer",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:lorehold-primer",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "The Lorehold Primer is a magic textbook created at Strixhaven's Lorehold College. The primer has 3 charges, and it regains 1d3 expended charges daily at dawn. If you make an Intelligence (History) or Intelligence (Religion) check while holding the primer, you can expend 1 charge to give yourself 1d4 bonus to the check, immediately after you roll the d20.\n\nIn addition, if you study the primer at the end of a long rest, you can choose one 1st-level spell from the Cleric or Wizard spell list. Before you finish your next long rest, you can cast the chosen spell once without a spell slot if you are holding the primer. Your spellcasting ability for this spell is your choice of Intelligence, Wisdom, or Charisma."
+  },
+  {
+    "name": "Mariner's Armor",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:mariners-armor",
+    "rarity": "Uncommon",
+    "type": "Armor",
+    "description": "While wearing this armor, you have a swimming speed equal to your walking speed. In addition, whenever you start your turn underwater with 0 hit points, the armor causes you to rise 60 feet toward the surface. The armor is decorated with fish and shell motifs."
+  },
+  {
+    "name": "Mask of the Beast",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:mask-of-the-beast",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "This wooden mask is shaped in the likeness of a beast's visage and has 3 charges. While wearing the mask, you can expend 1 charge and use the mask to cast the Animal Friendship spell as an action. The mask regains all expended charges at dawn."
+  },
+  {
+    "name": "Medallion of Thoughts",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:medallion-of-thoughts",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "The medallion has 3 charges. While wearing it, you can use an action and expend 1 charge to cast the Detect Thoughts spell (save DC 13) from it. The medallion regains 1d3 expended charges daily at dawn."
+  },
+  {
+    "name": "Mind Carapace Armor",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:mind-carapace-armor",
+    "rarity": "Uncommon",
+    "type": "Armor",
+    "description": "Any nonmagical suit of heavy armor can be turned by mind flayers into mind carapace armor. Only one creature can attune to it: either a specific mind flayer or one of its thralls. While worn by any other creature, the mind carapace armor functions as normal armor of its kind. To its intended wearer, the armor grants advantage on Intelligence, Wisdom, and Charisma saving throws and makes its wearer immune to the frightened condition."
+  },
+  {
+    "name": "Mind Crystal",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:mind-crystal",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "These gemstones contain a crystallized bit of spellcasting magic. Different types of mind crystals exist, each with a different single-use effect.\n\nWhen you cast a spell that has a casting time of 1 action while holding a mind crystal, you can modify the spell in a specific way that has an effect described below. You can use only a single mind crystal to modify the spell, and you can’t use a mind crystal and a Metamagic option on the same spell. Once you use a mind crystal, it becomes a nonmagical gem worth 50 gp.\n\nCareful (Uncommon). Choose up to three creatures affected by the spell. The chosen creatures automatically succeed on their saving throws against the spell.\n\nDistant (Uncommon). If the spell has a range of 5 feet or more and doesn’t have a range of self, the spell’s range increases by 100 feet. If the spell has a range of touch, its range becomes 30 feet.\n\nEmpowered (Uncommon). When you roll damage for the spell, you can reroll up to three damage dice. You must use the new rolls.\n\nExtended (Uncommon). If the spell has a duration of 1 minute or longer, double the spell’s duration, to a maximum duration of 24 hours.\n\nHeightened (Rare). Choose one creature affected by the spell. That creature has disadvantage on the first saving throw it makes against the spell.\n\nQuickened (Rare). You change the spell’s casting time to 1 bonus action for this casting.\n\nSubtle (Common). You cast the spell without any somatic or verbal components for this casting."
+  },
+  {
+    "name": "Mithral Armor",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:mithral-armor",
+    "rarity": "Uncommon",
+    "type": "Armor",
+    "description": "Mithral is a light, flexible metal. A mithral chain shirt or breastplate can be worn under normal clothes. If the armor normally imposes disadvantage on Dexterity (Stealth) checks or has a Strength requirement, the mithral version of the armor doesn't."
+  },
+  {
+    "name": "Mizzium Apparatus",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:mizzium-apparatus",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "Innovation is a dangerous pursuit, at least the way the mages of the Izzet League engage in it. As protection against the risk of an experiment going awry, they have developed a device to help channel and control their magic. This apparatus is a collection of leather straps, flexible tubing, glass cylinders, and plates, bracers, and fittings made from a magic-infused metal alloy called mizzium, all assembled into a harness. The item weighs 8 pounds.\n\nWhile you are wearing the mizzium apparatus, you can use it as an arcane focus. In addition, you can attempt to cast a spell that you do not know or have prepared. The spell you choose must be on your class's spell list and of a level for which you have a spell slot, and you must provide the spell's components.\n\nYou expend a spell slot to cast the spell as normal, but before resolving it you must make an Intelligence (Arcana) check. The DC is 10 + twice the level of the spell slot you expend to cast the spell.\n\nOn a successful check, you cast the spell as normal, using your spell save DC and spellcasting ability modifier. On a failed check, you cast a different spell from the one you intended. Randomly determine the spell you cast by rolling on the table for the level of the spell slot you expended. If the slot is 6th level or higher, roll on the table for 5th-level spells.\n\nIf you try to cast a cantrip you don't know, the DC for the Intelligence (Arcana) check is 10, and on a failed check, there is no effect."
+  },
+  {
+    "name": "Moon Sickle",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:moon-sickle",
+    "rarity": "Uncommon",
+    "type": "Weapon",
+    "description": "This silver-bladed sickle glimmers softly with moonlight. While holding this magic weapon, you gain a bonus to attack and damage rolls made with it, and you gain a bonus to spell attack rolls and the saving throw DCs of your druid and ranger spells. The bonus is determined by the weapon's rarity. In addition, you can use the sickle as a spellcasting focus for your druid and ranger spells.\n\nWhen you cast a spell that restores hit points, you can roll a d4 and add the number rolled to the amount of hit points restored, provided you are holding the sickle."
+  },
+  {
+    "name": "Mummy Rot Antidote",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:mummy-rot-antidote",
+    "rarity": "Uncommon",
+    "type": "Potion",
+    "description": "White dust swirls constantly within this pale gray potion. When you drink the potion, it cures you of mummy rot."
+  },
+  {
+    "name": "Nature's Mantle",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:natures-mantle",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "This cloak shifts color and texture to blend with the terrain surrounding you. While wearing the cloak, you can use it as a spellcasting focus for your druid and ranger spells.\n\nWhile you are in an area that is lightly obscured, you can Hide as a bonus action even if you are being directly observed."
+  },
+  {
+    "name": "Necklace of Adaptation",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:necklace-of-adaptation",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "While wearing this necklace, you can breathe normally in any environment, and you have advantage on saving throws made against harmful gases and vapors (such as Cloudkill and Stinking Cloud effects, inhaled poisons, and the breath weapons of some dragons)."
+  },
+  {
+    "name": "Night Caller",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:night-caller",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "This whistle is carved from transparent crystal, and it resembles a tiny dragon curled up like a snail. The name Night Caller is etched on the whistle in Dwarvish runes. If a character succeeds on a DC 20 Intelligence (Arcana or History) check, the character recalls lore that says the duergar made several such whistles for various groups in an age past.\n\nIf you blow the whistle in darkness or under the night sky, it allows you to cast the Animate Dead spell. The target can be affected through up to 10 feet of soft earth or similar material, and if it is, it takes 1 minute to claw its way to the surface to serve you. Once the whistle has animated an undead creature, it can't do so again until 7 days have passed.\n\nOnce every 24 hours, you can blow the whistle to reassert control over one or two creatures you animated with it"
+  },
+  {
+    "name": "Oil of Slipperiness",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:oil-of-slipperiness",
+    "rarity": "Uncommon",
+    "type": "Potion",
+    "description": "This sticky black unguent is thick and heavy in the container, but it flows quickly when poured. The oil can cover a Medium or smaller creature, along with the equipment it's wearing and carrying (one additional vial is required for each size category above Medium). Applying the oil takes 10 minutes. The affected creature then gains the effect of a Freedom of Movement spell for 8 hours.\n\nAlternatively, the oil can be poured on the ground as an action, where it covers a 10-foot square, duplicating the effect of the Grease spell in that area for 8 hours."
+  },
+  {
+    "name": "Paper Bird",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:paper-bird",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "After you write a message of fifty words or fewer on this magic sheet of parchment and speak a creature's name, the parchment magically folds into a Tiny paper bird and flies to the recipient whose name you uttered. The recipient must be on the same plane of existence as you, otherwise the bird turns into ash as it takes flight.\n\nThe bird is an object that has 1 hit point, an Armor Class of 13, a flying speed of 60 feet, a Dexterity of 16 (+3), and a score of 1 (-5) in all other abilities, and it is immune to poison and psychic damage.\n\nIt travels to within 5 feet of its intended recipient by the most direct route, whereupon it turns into a nonmagical and inanimate sheet of parchment that can be unfolded only by the intended recipient. If the bird's hit points or speed is reduced to 0 or if it is otherwise immobilized, it turns into ash.\n\nPaper Birds usually come in small, flat boxes containing 1d6 + 3 sheets of the parchment."
+  },
+  {
+    "name": "Pearl of Power",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:pearl-of-power",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "While this pearl is on your person, you can use an action to speak its command word and regain one expended spell slot. If the expended slot was of 4th level or higher, the new slot is 3rd level. Once you have used the pearl, it can't be used again until the next dawn."
+  },
+  {
+    "name": "Periapt of Health",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:periapt-of-health",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "You are immune to contracting any disease while you wear this pendant. If you are already infected with a disease, the effects of the disease are suppressed while you wear the pendant."
+  },
+  {
+    "name": "Periapt of Wound Closure",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:periapt-of-wound-closure",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "While you wear this pendant, you stabilize whenever you are dying at the start of your turn. In addition, whenever you roll a Hit Die to regain hit points, double the number of hit points it restores."
+  },
+  {
+    "name": "Philter of Love",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:philter-of-love",
+    "rarity": "Uncommon",
+    "type": "Potion",
+    "description": "The next time you see a creature within 10 minutes after drinking this philter, you become charmed by that creature for 1 hour. If the creature is of a species and gender you are normally attracted to, you regard it as your true love while you are charmed. This potion's rose-hued, effervescent liquid contains one easy-to-miss bubble shaped like a heart."
+  },
+  {
+    "name": "Pipes of Haunting",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:pipes-of-haunting",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "You must be proficient with wind instruments to use these pipes. They have 3 charges. You can use an action to play them and expend 1 charge to create an eerie, spellbinding tune. Each creature within 30 feet of you that hears you play must succeed on a DC 15 Wisdom saving throw or become frightened of you for 1 minute. If you wish, all creatures in the area that aren't hostile toward you automatically succeed on the saving throw. A creature that fails the saving throw can repeat it at the end of each of its turns, ending the effect on itself on a success. A creature that succeeds on its saving throw is immune to the effect of these pipes for 24 hours. The pipes regain 1d3 expended charges daily at dawn."
+  },
+  {
+    "name": "Pipes of the Sewers",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:pipes-of-the-sewers",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "You must be proficient with wind instruments to use these pipes. While you are attuned to the pipes, ordinary rats and giant rats are indifferent toward you and will not attack you unless you threaten or harm them.\n\nThe pipes have 3 charges. If you play the pipes as an action, you can use a bonus action to expend 1 to 3 charges, calling forth one swarm of rats (see the Monster Manual for statistics) with each expended charge, provided that enough rats are within half a mile of you to be called in this fashion (as determined by the DM). If there aren't enough rats to form a swarm, the charge is wasted. Called swarms move toward the music by the shortest available route but aren't under your control otherwise. The pipes regain 1d3 expended charges daily at dawn.\n\nWhenever a swarm of rats that isn't under another creature's control comes within 30 feet of you while you are playing the pipes, you can make a Charisma check contested by the swarm's Wisdom check. If you lose the contest, the swarm behaves as it normally would and can't be swayed by the pipes' music for the next 24 hours. If you win the contest, the swarm is swayed by the pipes' music and becomes friendly to you and your companions for as long as you continue to play the pipes each round as an action. A friendly swarm obeys your commands. If you issue no commands to a friendly swarm, it defends itself but otherwise takes no actions. If a friendly swarm starts its turn and can't hear the pipes' music, your control over that swarm ends, and the swarm behaves as it normally would and can't be swayed by the pipes' music for the next 24 hours."
+  },
+  {
+    "name": "Piwafwi",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:piwafwi",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "This dark spider-silk cloak is made by drow. It is a Cloak of Elvenkind. It loses its magic if exposed to sunlight for 1 hour without interruption."
+  },
+  {
+    "name": "Pixie Dust",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:pixie-dust",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "As an action, you can sprinkle this dust on yourself or another creature you can see within 5 feet of you. The recipient gains a flying speed of 30 feet and the ability to hover for 1 minute. If the creature is airborne when this effect ends, it falls safely to the ground, taking no damage and landing on its feet.\n\nA small packet holds enough pixie dust for one use."
+  },
+  {
+    "name": "Plate Of Knight's Fellowship",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:plate-of-knights-fellowship",
+    "rarity": "Uncommon",
+    "type": "Armor",
+    "description": "This gleaming set of silver-and-gold plate armor never tarnishes.\n\nWhile wearing this armor, you can use a bonus action to summon the spirit of a warrior to your aid. The spirit’s corporeal form manifests in an unoccupied space of your choice within 30 feet of you, and it uses the knight stat block. The spirit disappears when it drops to 0 hit points or after 1 minute, whichever comes first.\n\nThe spirit is an ally to you and your companions. In combat, the spirit shares your initiative count but takes its turn immediately after yours. The spirit obeys your commands (no action required by you); if you don’t issue any commands, the spirit takes the Dodge action and uses its movement to avoid danger.\n\nOnce this bonus action is used, it can’t be used again until the next dawn."
+  },
+  {
+    "name": "Portal Compass",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:portal-compass",
+    "rarity": "Uncommon",
+    "type": "Wondrous Item",
+    "description": "This portable arcane instrument points in the direction of the last portal it passed through while it and the portal are on the same plane of existence. If that portal no longer exists, the needle becomes static until the compass passes through a new portal."
+  },
+  {
+    "name": "Potion of Advantage",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:potion-of-advantage",
+    "rarity": "Uncommon",
+    "type": "Potion",
+    "description": "When you drink this potion, you gain advantage on one ability check, attack roll, or saving throw of your choice that you make within the next hour.\n\nThis potion takes the form of a sparkling, golden mist that moves and pours like water"
+  },
+  {
+    "name": "Potion of Animal Friendship",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:potion-of-animal-friendship",
+    "rarity": "Uncommon",
+    "type": "Potion",
+    "description": "When you drink this potion, you can cast the Animal Friendship spell (save DC 13) for 1 hour at will. Agitating this muddy liquid brings little bits into view: a fish scale, a hummingbird tongue, a cat claw, or a squirrel hair."
+  },
+  {
+    "name": "Potion of Fire Breath",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:potion-of-fire-breath",
+    "rarity": "Uncommon",
+    "type": "Potion",
+    "description": "After drinking this potion, you can use a bonus action to exhale fire at a target within 30 feet of you. The target must make a DC 13 Dexterity saving throw, taking 4d6 fire damage on a failed save, or half as much damage on a successful one. The effect ends after you exhale the fire three times or when 1 hour has passed.\n\nThis potion's orange liquid flickers, and smoke fills the top of the container and wafts out whenever it is opened."
+  }
+]
