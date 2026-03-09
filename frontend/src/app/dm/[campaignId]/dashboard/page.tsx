@@ -570,6 +570,26 @@ export default function DMDashboard() {
                 {/* DM Controls Row */}
                 <div className="flex justify-end gap-3 animate-fade-in-up mt-2 pr-2">
                     <button
+                        onClick={async () => {
+                            if (!window.confirm("Tüm veritabanını (Eşyalar, Canavarlar, Büyüler vb.) sıfırlayıp yeniden yüklemek istediğinizden emin misiniz? Bu işlem canlıdaki verileri günceller.")) return;
+                            try {
+                                const res = await axios.post(`${API_URL}/api/admin/seed`, {}, {
+                                    headers: { 'Authorization': `Bearer ${token}` }
+                                });
+                                showToast("Başarılı", res.data.message || "Veritabanı başarıyla güncellendi!", "bg-green-900 border-green-500 text-green-100");
+                                setTimeout(() => window.location.reload(), 2000);
+                            } catch (err: any) {
+                                console.error(err);
+                                alert("Güncelleme sırasında bir hata oluştu: " + (err.response?.data?.error || err.message));
+                            }
+                        }}
+                        className="bg-purple-900/60 hover:bg-purple-700/80 text-purple-100 text-xs font-bold py-1.5 px-3 rounded-lg border border-purple-500/50 shadow-sm transition-all flex items-center gap-1"
+                        title="Tüm referans verilerini (Eşya/Canavar vb.) yeniden yükle"
+                    >
+                        ⚡ Veritabanını Güncelle (Seed)
+                    </button>
+
+                    <button
                         onClick={handleExportCampaign}
                         className="bg-green-900/60 hover:bg-green-700/80 text-green-100 text-xs font-bold py-1.5 px-3 rounded-lg border border-green-500/50 shadow-sm transition-all flex items-center gap-1"
                         title="Tüm Karakterleri, NPCleri ve Notları İndir"

@@ -93,38 +93,92 @@ app.post('/api/admin/seed', authenticate, async (req, res) => {
 
   try {
     const dataPath = path.join(__dirname, 'data');
+    console.log('Seeding process started...');
 
-    // Irklar
-    const races = JSON.parse(fs.readFileSync(path.join(dataPath, 'races.json'), 'utf8'));
-    await Race.deleteMany({});
-    await Race.insertMany(races);
+    // 1. Irklar
+    if (fs.existsSync(path.join(dataPath, 'races.json'))) {
+      const races = JSON.parse(fs.readFileSync(path.join(dataPath, 'races.json'), 'utf8'));
+      await Race.deleteMany({});
+      await Race.insertMany(races);
+      console.log('Races seeded.');
+    }
 
-    // Sınıflar
-    const classes = JSON.parse(fs.readFileSync(path.join(dataPath, 'classes.json'), 'utf8'));
-    await Class.deleteMany({});
-    await Class.insertMany(classes);
+    // 2. Sınıflar
+    if (fs.existsSync(path.join(dataPath, 'classes.json'))) {
+      const classes = JSON.parse(fs.readFileSync(path.join(dataPath, 'classes.json'), 'utf8'));
+      await Class.deleteMany({});
+      await Class.insertMany(classes);
+      console.log('Classes seeded.');
+    }
 
-    // Büyüler
-    const spells = JSON.parse(fs.readFileSync(path.join(dataPath, 'spells_hybrid.json'), 'utf8'));
-    await Spell.deleteMany({});
-    await Spell.insertMany(spells);
+    // 3. Büyüler
+    if (fs.existsSync(path.join(dataPath, 'spells_hybrid.json'))) {
+      const spells = JSON.parse(fs.readFileSync(path.join(dataPath, 'spells_hybrid.json'), 'utf8'));
+      await Spell.deleteMany({});
+      await Spell.insertMany(spells);
+      console.log('Spells seeded.');
+    }
 
-    // Canavarlar
-    const monsters = JSON.parse(fs.readFileSync(path.join(dataPath, 'monster_data_clean.json'), 'utf8'));
-    await Monster.deleteMany({});
-    await Monster.insertMany(monsters);
+    // 4. Canavarlar
+    if (fs.existsSync(path.join(dataPath, 'monster_data_clean.json'))) {
+      const monstersDataRaw = fs.readFileSync(path.join(dataPath, 'monster_data_clean.json'), 'utf8');
+      const monstersJson = JSON.parse(monstersDataRaw);
+      const monstersList = Object.entries(monstersJson).map(([name, data]) => ({ name, ...data }));
+      await Monster.deleteMany({});
+      await Monster.insertMany(monstersList);
+      console.log('Monsters seeded.');
+    }
 
-    // Eşyalar
-    const items = JSON.parse(fs.readFileSync(path.join(dataPath, 'items.json'), 'utf8'));
+    // 5. Eşyalar (ÖZEL İŞLEM)
+    console.log('Seeding Items...');
     await Item.deleteMany({});
-    await Item.insertMany(items);
 
-    // Featler (YENİ)
-    const feats = JSON.parse(fs.readFileSync(path.join(dataPath, 'feats.json'), 'utf8'));
-    await Feat.deleteMany({});
-    await Feat.insertMany(feats);
+    // SRD Items
+    if (fs.existsSync(path.join(dataPath, 'items.json'))) {
+      const srdItems = JSON.parse(fs.readFileSync(path.join(dataPath, 'items.json'), 'utf8'));
+      for (const item of srdItems) {
+        await Item.create({
+          ...item,
+          name_tr: translateName(item.name),
+          category: translateCategory(item.category),
+          rarity: item.rarity || 'Common',
+          type: item.subcategory || item.category
+        });
+      }
+    }
 
-    res.json({ success: true, message: 'Tüm veriler başarıyla yüklendi!' });
+    // Magic Item Batches
+    const batchFiles = fs.readdirSync(dataPath).filter(f => f.startsWith('wondrous_details_batch_') && f.endsWith('_tr.json'));
+    for (const file of batchFiles) {
+      const items = JSON.parse(fs.readFileSync(path.join(dataPath, file), 'utf8'));
+      for (const itemData of items) {
+        await Item.findOneAndUpdate(
+          { name: itemData.name },
+          {
+            $set: {
+              name_tr: itemData.name_tr || itemData.name,
+              description: itemData.description,
+              description_tr: itemData.description_tr,
+              category: 'Magic Item',
+              rarity: itemData.rarity,
+              type: itemData.type
+            }
+          },
+          { upsert: true }
+        );
+      }
+    }
+    console.log('Items seeded.');
+
+    // 6. Featler
+    if (fs.existsSync(path.join(dataPath, 'feats.json'))) {
+      const feats = JSON.parse(fs.readFileSync(path.join(dataPath, 'feats.json'), 'utf8'));
+      await Feat.deleteMany({});
+      await Feat.insertMany(feats);
+      console.log('Feats seeded.');
+    }
+
+    res.json({ success: true, message: 'Tüm veriler (Eşyalar ve Canavarlar dahil) başarıyla yüklendi!' });
   } catch (error) {
     console.error('Seeding error:', error);
     res.status(500).json({ error: error.message });
@@ -824,3 +878,62 @@ io.on('connection', (socket) => {
 server.listen(PORT, () => {
   console.log(`Server ${PORT} portunda çalışıyor.`);
 });
+
+function translateName(name) {
+  const map = {
+    'Club': 'Sopa',
+    'Dagger': 'Hançer',
+    'Greatclub': 'Büyük Sopa',
+    'Handaxe': 'El Baltası',
+    'Javelin': 'Cirit',
+    'Light Hammer': 'Hafif Çekiç',
+    'Mace': 'Gürz',
+    'Quarterstaff': 'Asa',
+    'Sickle': 'Orak',
+    'Spear': 'Mızrak',
+    'Crossbow, Light': 'Hafif Arbalet',
+    'Shortbow': 'Kısa Yay',
+    'Sling': 'Sapan',
+    'Battleaxe': 'Savaş Baltası',
+    'Flail': 'Topuzlu Kamçı',
+    'Glaive': 'Glaive',
+    'Greataxe': 'Büyük Balta',
+    'Greatsword': 'Büyük Kılıç',
+    'Halberd': 'Halberd',
+    'Longsword': 'Uzun Kılıç',
+    'Maul': 'Maul',
+    'Morningstar': 'Sabah Yıldızı',
+    'Pike': 'Kargı',
+    'Rapier': 'Mekik Kılıç',
+    'Shortsword': 'Kısa Kılıç',
+    'Warhammer': 'Savaş Çekici',
+    'Whip': 'Kamçı',
+    'Padded': 'Dolgulu Zırh',
+    'Leather': 'Deri Zırh',
+    'Studded Leather': 'Çivili Deri Zırh',
+    'Hide': 'Post Zırh',
+    'Chain Shirt': 'Zincir Gömlek',
+    'Scale Mail': 'Pullu Zırh',
+    'Breastplate': 'Göğüs Zırhı',
+    'Half Plate': 'Yarım Plaka',
+    'Ring Mail': 'Halkalı Zırh',
+    'Chain Mail': 'Zincir Zırh',
+    'Splint': 'Parçalı Zırh',
+    'Plate': 'Plaka Zırh',
+    'Shield': 'Kalkan',
+    'Backpack': 'Sırt Çantası',
+    'Bedroll': 'Yatak',
+    'Crowbar': 'Levye'
+  };
+  return map[name] || name;
+}
+
+function translateCategory(cat) {
+  const map = {
+    'Weapon': 'Silah',
+    'Armor': 'Zırh',
+    'Adventuring Gear': 'Eşya',
+    'Magic Item': 'Büyülü Eşya'
+  };
+  return map[cat] || cat;
+}
