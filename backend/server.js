@@ -129,15 +129,15 @@ app.post('/api/admin/seed', authenticate, async (req, res) => {
       console.log('Monsters seeded.');
     }
 
-    // 5. Eşyalar (ÖZEL İŞLEM)
+    // 5. Eşyalar (Optimized Bulk Seeding)
     console.log('Seeding Items...');
-    await Item.deleteMany({});
+    const itemMap = new Map();
 
     // SRD Items
     if (fs.existsSync(path.join(dataPath, 'items.json'))) {
       const srdItems = JSON.parse(fs.readFileSync(path.join(dataPath, 'items.json'), 'utf8'));
       for (const item of srdItems) {
-        await Item.create({
+        itemMap.set(item.name, {
           ...item,
           name_tr: translateName(item.name),
           category: translateCategory(item.category),
@@ -152,36 +152,45 @@ app.post('/api/admin/seed', authenticate, async (req, res) => {
     for (const file of batchFiles) {
       const items = JSON.parse(fs.readFileSync(path.join(dataPath, file), 'utf8'));
       for (const itemData of items) {
-        await Item.findOneAndUpdate(
-          { name: itemData.name },
-          {
-            $set: {
-              name_tr: itemData.name_tr || itemData.name,
-              description: itemData.description,
-              description_tr: itemData.description_tr,
-              category: 'Magic Item',
-              rarity: itemData.rarity,
-              type: itemData.type
-            }
-          },
-          { upsert: true }
-        );
+        // Enriched batches take precedence, merge with existing if needed
+        const existing = itemMap.get(itemData.name) || {};
+        itemMap.set(itemData.name, {
+          ...existing,
+          ...itemData,
+          category: 'Magic Item',
+          rarity: itemData.rarity || 'Uncommon',
+          type: itemData.type || 'Wondrous Item'
+        });
       }
     }
-    console.log('Items seeded.');
+
+    const finalItems = Array.from(itemMap.values());
+    await Item.deleteMany({});
+    if (finalItems.length > 0) {
+      await Item.insertMany(finalItems);
+    }
+    console.log(`Items seeded: ${finalItems.length} items added.`);
 
     // 6. Featler
     if (fs.existsSync(path.join(dataPath, 'feats.json'))) {
-      const feats = JSON.parse(fs.readFileSync(path.join(dataPath, 'feats.json'), 'utf8'));
+      feats = JSON.parse(fs.readFileSync(path.join(dataPath, 'feats.json'), 'utf8'));
       await Feat.deleteMany({});
       await Feat.insertMany(feats);
-      console.log('Feats seeded.');
     }
+    console.log('Finalizing seed process...');
+    res.json({
+      message: 'Veritabanı başarıyla güncellendi.',
+      details: {
+        items: finalItems.length,
+        monsters: monstersList.length,
+        spells: spells.length,
+        feats: feats.length
+      }
+    });
 
-    res.json({ success: true, message: 'Tüm veriler (Eşyalar ve Canavarlar dahil) başarıyla yüklendi!' });
-  } catch (error) {
-    console.error('Seeding error:', error);
-    res.status(500).json({ error: error.message });
+  } catch (err) {
+    console.error('Seeding error:', err);
+    res.status(500).json({ error: 'Veritabanı güncellenirken hata oluştu: ' + err.message });
   }
 });
 

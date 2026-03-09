@@ -66,6 +66,7 @@ export default function DMDashboard() {
     const [isItemBookOpen, setIsItemBookOpen] = useState(false);
     const [itemSearchTerm, setItemSearchTerm] = useState("");
     const [selectedItem, setSelectedItem] = useState<any>(null);
+    const [priceToSet, setPriceToSet] = useState<number>(10);
 
     // Whisper State
     const [whisperPlayerName, setWhisperPlayerName] = useState<string | null>(null);
@@ -1029,13 +1030,13 @@ export default function DMDashboard() {
                                                         onClick={() => setExpandedMonsterId(expandedMonsterId === monster._id ? null : monster._id)}
                                                     >
                                                         <div>
-                                                            <div className="font-bold text-gray-200 text-lg group-hover:text-purple-400 transition-colors">{monster.name}</div>
-                                                            <div className="text-sm text-gray-400">{monster.type} • Challenge Rating: <span className="text-yellow-500 font-bold">{monster.challenge}</span></div>
+                                                            <div className="font-bold text-gray-200 text-lg group-hover:text-purple-400 transition-colors">{monster.name || "Bilinmeyen Yaratık"}</div>
+                                                            <div className="text-sm text-gray-400">{monster.type || "Bilinmeyen Tür"} • Challenge Rating: <span className="text-yellow-500 font-bold">{monster.challenge || "?"}</span></div>
                                                         </div>
                                                         <div className="flex items-center space-x-6">
                                                             <div className="text-right">
-                                                                <div className="text-sm font-bold text-green-400">{monster.hp?.split?.(' ')?.[0] || '10'} HP</div>
-                                                                <div className="text-sm font-bold text-blue-400">{monster.ac?.split?.(' ')?.[0] || '10'} AC</div>
+                                                                <div className="text-sm font-bold text-green-400">{monster.hp?.toString().split?.(' ')?.[0] || '10'} HP</div>
+                                                                <div className="text-sm font-bold text-blue-400">{monster.ac?.toString().split?.(' ')?.[0] || '10'} AC</div>
                                                             </div>
                                                             <button
                                                                 onClick={(e) => addMonsterToEncounter(e, monster)}
@@ -1733,15 +1734,22 @@ export default function DMDashboard() {
                                                 <div className="grid grid-cols-3 gap-4 mb-8">
                                                     <div className="bg-gray-900/80 border border-gray-800 p-4 rounded-xl flex flex-col items-center justify-center">
                                                         <span className="text-xs text-gray-500 font-bold uppercase mb-1">Ağırlık</span>
-                                                        <span className="text-xl font-black text-white">{selectedItem.weight || '-'} <span className="text-xs opacity-50">lb</span></span>
+                                                        <span className="text-xl font-black text-white">
+                                                            {typeof selectedItem.weight === 'object' ? selectedItem.weight.quantity : (selectedItem.weight || '-')}
+                                                            <span className="text-xs opacity-50 ml-1">lb</span>
+                                                        </span>
                                                     </div>
                                                     <div className="bg-gray-900/80 border border-gray-800 p-4 rounded-xl flex flex-col items-center justify-center">
                                                         <span className="text-xs text-gray-500 font-bold uppercase mb-1">Maliyet</span>
-                                                        <span className="text-xl font-black text-yellow-500">{selectedItem.cost || '-'}</span>
+                                                        <span className="text-xl font-black text-yellow-500">
+                                                            {typeof selectedItem.cost === 'object' ? `${selectedItem.cost.quantity} ${selectedItem.cost.unit}` : (selectedItem.cost || '-')}
+                                                        </span>
                                                     </div>
                                                     <div className="bg-gray-900/80 border border-gray-800 p-4 rounded-xl flex flex-col items-center justify-center">
                                                         <span className="text-xs text-gray-500 font-bold uppercase mb-1">Hasar/Etki</span>
-                                                        <span className="text-xl font-black text-red-500">{selectedItem.damage?.damage_dice || '-'}</span>
+                                                        <span className="text-xl font-black text-red-500">
+                                                            {selectedItem.damage?.damage_dice || selectedItem.damage?.dice || selectedItem.damage || '-'}
+                                                        </span>
                                                     </div>
                                                 </div>
 
@@ -1753,21 +1761,32 @@ export default function DMDashboard() {
                                                 </div>
 
                                                 {/* Actions */}
-                                                <div className="flex flex-wrap gap-4 pt-4 border-t border-gray-800">
-                                                    <button
-                                                        onClick={() => {
-                                                            setShopItems([...shopItems, {
-                                                                id: Date.now().toString(),
-                                                                name: selectedItem.name_tr || selectedItem.name,
-                                                                price: parseInt(selectedItem.cost?.toString().replace(/\D/g, '') || '10'),
-                                                                note: selectedItem.type || ''
-                                                            }]);
-                                                            showToast("Dükkana Eklendi", `${selectedItem.name_tr || selectedItem.name} dükkan listesine eklendi.`, "bg-orange-900 border-orange-500 text-orange-100");
-                                                        }}
-                                                        className="flex-1 bg-orange-600 hover:bg-orange-500 text-white font-black py-4 rounded-xl transition-all shadow-lg shadow-orange-900/20 uppercase tracking-widest text-sm"
-                                                    >
-                                                        🏬 Dükkana Koy
-                                                    </button>
+                                                <div className="flex flex-col gap-4 pt-4 border-t border-gray-800">
+                                                    <div className="flex items-center gap-3 bg-gray-900 p-3 rounded-xl border border-gray-800">
+                                                        <div className="flex-1">
+                                                            <label className="block text-[10px] font-black text-gray-500 uppercase mb-1">Dükkan Satış Fiyatı (GP)</label>
+                                                            <input
+                                                                type="number"
+                                                                value={priceToSet}
+                                                                onChange={(e) => setPriceToSet(Number(e.target.value))}
+                                                                className="w-full bg-transparent text-yellow-500 font-black text-xl outline-none"
+                                                            />
+                                                        </div>
+                                                        <button
+                                                            onClick={() => {
+                                                                setShopItems([...shopItems, {
+                                                                    id: Date.now().toString(),
+                                                                    name: selectedItem.name_tr || selectedItem.name,
+                                                                    price: priceToSet,
+                                                                    note: selectedItem.type || selectedItem.category || ''
+                                                                }]);
+                                                                showToast("Dükkana Eklendi", `${selectedItem.name_tr || selectedItem.name} dükkan listesine ${priceToSet} GP fiyatla eklendi.`, "bg-orange-900 border-orange-500 text-orange-100");
+                                                            }}
+                                                            className="bg-orange-600 hover:bg-orange-500 text-white font-black px-6 py-3 rounded-lg transition-all shadow-lg shadow-orange-900/20 uppercase tracking-widest text-xs"
+                                                        >
+                                                            🏬 Dükkana Koy
+                                                        </button>
+                                                    </div>
                                                     <div className="w-full flex gap-2">
                                                         <select
                                                             id="target-player-item-final"
