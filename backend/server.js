@@ -171,7 +171,7 @@ app.post('/api/admin/seed', authenticate, async (req, res) => {
     }
     console.log(`Items seeded: ${finalItems.length} items added.`);
 
-    // 6. Featler
+    let feats = [];
     if (fs.existsSync(path.join(dataPath, 'feats.json'))) {
       feats = JSON.parse(fs.readFileSync(path.join(dataPath, 'feats.json'), 'utf8'));
       await Feat.deleteMany({});

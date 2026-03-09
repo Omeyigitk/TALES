@@ -68,6 +68,13 @@ export default function DMDashboard() {
     const [selectedItem, setSelectedItem] = useState<any>(null);
     const [priceToSet, setPriceToSet] = useState<number>(10);
 
+    useEffect(() => {
+        if (selectedItem) {
+            const baseCost = selectedItem.cost?.quantity || parseInt(selectedItem.cost?.toString().replace(/\D/g, '') || '10');
+            setPriceToSet(baseCost);
+        }
+    }, [selectedItem]);
+
     // Whisper State
     const [whisperPlayerName, setWhisperPlayerName] = useState<string | null>(null);
     const [whisperMessage, setWhisperMessage] = useState("");
@@ -246,9 +253,9 @@ export default function DMDashboard() {
     const addMonsterToEncounter = (e: React.MouseEvent, monster: any) => {
         if (!monster) return;
         e.stopPropagation(); // Satırın açılıp kapanmasını engelle
-        const hpValue = monster.hp ? parseInt(monster.hp.split?.(' ')?.[0]) || 10 : 10;
-        const acValue = monster.ac ? monster.ac.split?.(' ')?.[0] || '10' : '10';
-        const dexValue = monster.stats ? (parseInt(monster.stats.split?.(',')?.[1]?.trim() || "10") || 10) : 10;
+        const hpValue = monster.hp ? parseInt((monster.hp || '10').toString().split(' ')[0]) || 10 : 10;
+        const acValue = monster.ac ? (monster.ac || '10').toString().split(' ')[0] : '10';
+        const dexValue = monster.stats ? (parseInt(monster.stats.toString().split?.(',')?.[1]?.trim() || "10") || 10) : 10;
 
         const newCombatant = {
             ...monster,
@@ -1035,8 +1042,8 @@ export default function DMDashboard() {
                                                         </div>
                                                         <div className="flex items-center space-x-6">
                                                             <div className="text-right">
-                                                                <div className="text-sm font-bold text-green-400">{monster.hp?.toString().split?.(' ')?.[0] || '10'} HP</div>
-                                                                <div className="text-sm font-bold text-blue-400">{monster.ac?.toString().split?.(' ')?.[0] || '10'} AC</div>
+                                                                <div className="text-sm font-bold text-green-400">{(monster.hp || '10').toString().split(' ')[0]} HP</div>
+                                                                <div className="text-sm font-bold text-blue-400">{(monster.ac || '10').toString().split(' ')[0]} AC</div>
                                                             </div>
                                                             <button
                                                                 onClick={(e) => addMonsterToEncounter(e, monster)}
@@ -1694,10 +1701,10 @@ export default function DMDashboard() {
                                                         <h4 className="font-bold text-white group-hover:text-blue-400 transition-colors uppercase tracking-tight">{item.name_tr || item.name}</h4>
                                                         <div className="flex gap-2 mt-1">
                                                             <span className="text-[10px] font-black uppercase text-gray-500">{item.type || item.category || 'Eşya'}</span>
-                                                            <span className={`text-[10px] font-black uppercase ${item.rarity?.toLowerCase().includes('legendary') ? 'text-orange-500' :
-                                                                item.rarity?.toLowerCase().includes('very rare') ? 'text-purple-500' :
-                                                                    item.rarity?.toLowerCase().includes('rare') ? 'text-blue-500' :
-                                                                        item.rarity?.toLowerCase().includes('uncommon') ? 'text-green-500' : 'text-gray-500'
+                                                            <span className={`text-[10px] font-black uppercase ${(item.rarity || '').toLowerCase().includes('legendary') ? 'text-orange-500' :
+                                                                (item.rarity || '').toLowerCase().includes('very rare') ? 'text-purple-500' :
+                                                                    (item.rarity || '').toLowerCase().includes('rare') ? 'text-blue-500' :
+                                                                        (item.rarity || '').toLowerCase().includes('uncommon') ? 'text-green-500' : 'text-gray-500'
                                                                 }`}>{item.rarity || 'Common'}</span>
                                                         </div>
                                                     </div>
@@ -1720,10 +1727,10 @@ export default function DMDashboard() {
                                                         <h4 className="text-xl font-bold text-gray-500 italic lowercase">{selectedItem.name !== selectedItem.name_tr ? selectedItem.name : ''}</h4>
                                                     </div>
                                                     <div className="flex flex-col items-end gap-2">
-                                                        <span className={`px-4 py-1.5 rounded-full text-xs font-black uppercase border-2 shadow-sm ${selectedItem.rarity?.toLowerCase().includes('legendary') ? 'bg-orange-600/20 border-orange-500 text-orange-400' :
-                                                            selectedItem.rarity?.toLowerCase().includes('very rare') ? 'bg-purple-600/20 border-purple-500 text-purple-400' :
-                                                                selectedItem.rarity?.toLowerCase().includes('rare') ? 'bg-blue-600/20 border-blue-500 text-blue-400' :
-                                                                    selectedItem.rarity?.toLowerCase().includes('uncommon') ? 'bg-green-600/20 border-green-500 text-green-400' : 'bg-gray-800 border-gray-600 text-gray-400'
+                                                        <span className={`px-4 py-1.5 rounded-full text-xs font-black uppercase border-2 shadow-sm ${(selectedItem.rarity || '').toLowerCase().includes('legendary') ? 'bg-orange-600/20 border-orange-500 text-orange-400' :
+                                                            (selectedItem.rarity || '').toLowerCase().includes('very rare') ? 'bg-purple-600/20 border-purple-500 text-purple-400' :
+                                                                (selectedItem.rarity || '').toLowerCase().includes('rare') ? 'bg-blue-600/20 border-blue-500 text-blue-400' :
+                                                                    (selectedItem.rarity || '').toLowerCase().includes('uncommon') ? 'bg-green-600/20 border-green-500 text-green-400' : 'bg-gray-800 border-gray-600 text-gray-400'
                                                             }`}>
                                                             {selectedItem.rarity || 'Common'}
                                                         </span>
