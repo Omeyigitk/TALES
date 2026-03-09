@@ -172,6 +172,7 @@ export default function DMDashboard() {
         const fetchItems = async () => {
             try {
                 const res = await axios.get(`${API_URL}/api/items`, { headers: { 'Authorization': `Bearer ${activeToken}` } });
+                console.log(`Fetched ${res.data?.length || 0} items`);
                 setItems(Array.isArray(res.data) ? res.data : []);
             } catch (error) {
                 console.error("Eşyalar çekilemedi:", error instanceof Error ? error.message : String(error));
@@ -1042,8 +1043,12 @@ export default function DMDashboard() {
                                                         </div>
                                                         <div className="flex items-center space-x-6">
                                                             <div className="text-right">
-                                                                <div className="text-sm font-bold text-green-400">{(monster.hp || '10').toString().split(' ')[0]} HP</div>
-                                                                <div className="text-sm font-bold text-blue-400">{(monster.ac || '10').toString().split(' ')[0]} AC</div>
+                                                                <div className="text-sm font-bold text-green-400">
+                                                                    {typeof monster.hp === 'object' ? (monster.hp.average || '10') : (monster.hp || '10').toString().split(' ')[0]} HP
+                                                                </div>
+                                                                <div className="text-sm font-bold text-blue-400">
+                                                                    {typeof monster.ac === 'object' ? (monster.ac.base || '10') : (monster.ac || '10').toString().split(' ')[0]} AC
+                                                                </div>
                                                             </div>
                                                             <button
                                                                 onClick={(e) => addMonsterToEncounter(e, monster)}
