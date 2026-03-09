@@ -1,4 +1,5 @@
 const fs = require('fs');
+const path = require('path');
 const mongoose = require('mongoose');
 
 // Import Models
@@ -9,11 +10,11 @@ const Class = require('./models/Class');
 
 async function importData() {
     try {
-        await mongoose.connect('mongodb://localhost:27017/dnd_app');
-        console.log('MongoDB connected for seeding.');
+        await mongoose.connect('mongodb://localhost:27017/dnd_realtime');
+        console.log('MongoDB connected for seeding dnd_realtime.');
 
         // 1. Seed Monsters
-        const monstersDataRaw = fs.readFileSync('./data/monster_data_clean.json', 'utf-8');
+        const monstersDataRaw = fs.readFileSync(path.join(__dirname, 'data', 'monster_data_clean.json'), 'utf-8');
         const monstersJson = JSON.parse(monstersDataRaw);
         const monstersList = Object.entries(monstersJson).map(([name, data]) => ({ name, ...data }));
 
@@ -23,7 +24,7 @@ async function importData() {
         console.log(`Successfully seeded ${monstersList.length} monsters via Upsert.`);
 
         // 2. Seed Spells
-        const spellsDataRaw = fs.readFileSync('./data/spells_hybrid.json', 'utf-8');
+        const spellsDataRaw = fs.readFileSync(path.join(__dirname, 'data', 'spells_hybrid.json'), 'utf-8');
         const spellsJson = JSON.parse(spellsDataRaw);
         const spellsList = Object.values(spellsJson);
 
@@ -33,7 +34,7 @@ async function importData() {
         console.log(`Successfully seeded ${spellsList.length} spells via Upsert.`);
 
         // 3. Seed Races
-        const racesDataRaw = fs.readFileSync('./data/races.json', 'utf-8');
+        const racesDataRaw = fs.readFileSync(path.join(__dirname, 'data', 'races.json'), 'utf-8');
         const racesList = JSON.parse(racesDataRaw);
 
         await Race.bulkWrite(racesList.map(r => ({
@@ -42,7 +43,7 @@ async function importData() {
         console.log(`Successfully seeded ${racesList.length} races via Upsert.`);
 
         // 4. Seed Classes
-        const classesDataRaw = fs.readFileSync('./data/classes.json', 'utf-8');
+        const classesDataRaw = fs.readFileSync(path.join(__dirname, 'data', 'classes.json'), 'utf-8');
         const classesList = JSON.parse(classesDataRaw);
 
         await Class.bulkWrite(classesList.map(c => ({

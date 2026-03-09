@@ -66,27 +66,29 @@ export function useCampaignSocket(campaignId, role, userId, token) {
         });
 
         s.on("dice_rolled", (data) => {
-            setDiceLogs(prev => [data, ...prev].slice(0, 15));
+            if (!data) return;
+            setDiceLogs(prev => [data, ...(Array.isArray(prev) ? prev : [])].slice(0, 15));
         });
 
-        s.on("dice_revealed", ({ rollId }) => {
-            setDiceLogs(prev => prev.map(log => log.id === rollId ? { ...log, isHidden: false } : log));
+        s.on("dice_revealed", (payload) => {
+            if (!payload || !payload.rollId) return;
+            setDiceLogs(prev => (Array.isArray(prev) ? prev : []).map(log => log && log.id === payload.rollId ? { ...log, isHidden: false } : log));
         });
 
         s.on("whisper_received", (data) => {
             if (!data) return;
             const whisperWithTime = { ...data, createdAt: data.createdAt || new Date().toISOString() };
             setWhisperData(whisperWithTime);
-            setWhisperHistory(prev => [...prev, whisperWithTime]);
+            setWhisperHistory(prev => [...(Array.isArray(prev) ? prev : []), whisperWithTime]);
         });
 
         s.on("whisper_history", (history) => {
-            setWhisperHistory(history || []);
+            setWhisperHistory(Array.isArray(history) ? history : []);
         });
 
         // DM seviye değiştirme izni
-        s.on("level_permission_updated", ({ granted }) => {
-            setDmLevelPermission(!!granted);
+        s.on("level_permission_updated", (payload) => {
+            setDmLevelPermission(!!(payload && payload.granted));
         });
 
         // Map Sync
@@ -94,11 +96,16 @@ export function useCampaignSocket(campaignId, role, userId, token) {
             setMapData(data || { bgUrl: '', gridSize: 50, showGrid: true, tokens: [] });
         });
 
-        s.on("token_moved", ({ tokenId, x, y }) => {
-            setMapData(prev => ({
-                ...prev,
-                tokens: prev.tokens.map(t => t.id === tokenId ? { ...t, x, y } : t)
-            }));
+        s.on("token_moved", (payload) => {
+            if (!payload || !payload.tokenId) return;
+            const { tokenId, x, y } = payload;
+            setMapData(prev => {
+                if (!prev || !Array.isArray(prev.tokens)) return prev;
+                return {
+                    ...prev,
+                    tokens: prev.tokens.map(t => t && t.id === tokenId ? { ...t, x, y } : t)
+                };
+            });
         });
 
         return () => {

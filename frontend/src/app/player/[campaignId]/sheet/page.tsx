@@ -344,7 +344,7 @@ export default function PlayerSheet() {
     };
 
     const removeItem = async (index: number) => {
-        if (!characterRef.current) return;
+        if (!characterRef.current || !characterRef.current.inventory) return;
         const newInv = characterRef.current.inventory.filter((_: any, i: number) => i !== index);
         const newChar = { ...characterRef.current, inventory: newInv };
         setCharacter(newChar);
@@ -606,13 +606,13 @@ export default function PlayerSheet() {
 
     const getItemBonus = (type: string, subType?: string) => {
         let bonus = 0;
-        if (character?.inventory) {
+        if (character?.inventory && Array.isArray(character.inventory)) {
             character.inventory.forEach((item: any) => {
-                if (item.isEquipped && item.effects) {
+                if (item && item.isEquipped && item.effects && Array.isArray(item.effects)) {
                     item.effects.forEach((eff: any) => {
-                        if (eff.type === type) {
+                        if (eff && eff.type === type) {
                             if (subType) {
-                                if (eff.value && eff.value[subType]) bonus += eff.value[subType];
+                                if (eff.value && typeof eff.value === 'object' && eff.value[subType]) bonus += eff.value[subType];
                             } else {
                                 if (typeof eff.value === 'number') bonus += eff.value;
                             }
@@ -629,24 +629,24 @@ export default function PlayerSheet() {
         let setVal: number | null = null;
 
         // Feat bonuses
-        if (statName && character?.feats) {
+        if (statName && character?.feats && Array.isArray(character.feats)) {
             character.feats.forEach((fName: string) => {
-                const fData = libFeats.find(x => x.name === fName);
-                if (fData && fData.effects) {
+                const fData = (libFeats || []).find(x => x && x.name === fName);
+                if (fData && fData.effects && Array.isArray(fData.effects)) {
                     fData.effects.forEach((eff: any) => {
-                        if (eff.type === 'stat_bonus' && eff.value && eff.value[statName]) bonus += eff.value[statName];
-                        if (eff.type === 'stat_choice' && character.featSelections?.stats?.[fName] === statName) bonus += eff.value;
+                        if (eff && eff.type === 'stat_bonus' && eff.value && typeof eff.value === 'object' && eff.value[statName]) bonus += eff.value[statName];
+                        if (eff && eff.type === 'stat_choice' && character.featSelections?.stats?.[fName] === statName) bonus += eff.value;
                     });
                 }
             });
         }
         // Item Score bonuses
-        if (statName && character?.inventory) {
+        if (statName && character?.inventory && Array.isArray(character.inventory)) {
             character.inventory.forEach((item: any) => {
-                if (item.isEquipped && item.effects) {
+                if (item && item.isEquipped && item.effects && Array.isArray(item.effects)) {
                     item.effects.forEach((eff: any) => {
-                        if (eff.type === 'stat_bonus' && eff.value[statName]) bonus += eff.value[statName];
-                        if (eff.type === 'stat_set' && eff.value[statName]) {
+                        if (eff && eff.type === 'stat_bonus' && eff.value && typeof eff.value === 'object' && eff.value[statName]) bonus += eff.value[statName];
+                        if (eff && eff.type === 'stat_set' && eff.value && typeof eff.value === 'object' && eff.value[statName]) {
                             setVal = Math.max(setVal || 0, eff.value[statName]);
                         }
                     });
@@ -654,8 +654,8 @@ export default function PlayerSheet() {
             });
         }
 
-        const finalScore = setVal !== null ? Math.max(setVal, v + bonus) : (v + bonus);
-        return Math.floor((finalScore - 10) / 2);
+        const score = setVal !== null ? Math.max(v + bonus, setVal) : v + bonus;
+        return Math.floor((score - 10) / 2);
     };
     const fmt = (n: number) => (n >= 0 ? `+${n}` : String(n));
 
@@ -878,15 +878,16 @@ export default function PlayerSheet() {
 
     // ─── Skill bonus hesapla ─────────────────────────────────────────────────
     const getSkillMod = (skill: typeof SKILLS[0]) => {
+        if (!skill || !stats) return 0;
         let base = mod(stats[skill.ability] || 10, skill.ability);
-        const hasProfSkill = false; // gelecek: character.skillProfs içinden kontrol
-        const hasExpertise = (character.expertise || []).includes(skill.name) || (character.expertise || []).includes(skill.tr);
-        if (hasExpertise) return base + prof * 2;
+        const hasExpertise = (character?.expertise || []).includes(skill.name) || (character?.expertise || []).includes(skill.tr);
+        if (hasExpertise) return base + (prof || 0) * 2;
         return base;
     };
 
     // ─── Class-aware AC terebilimi ────────────────────────────────────────────
     const calcAC = () => {
+        if (!stats) return 10;
         const dexMod = mod(stats.DEX || 10, 'DEX');
         const wisMod = mod(stats.WIS || 10, 'WIS');
         const conMod = mod(stats.CON || 10, 'CON');
@@ -900,37 +901,38 @@ export default function PlayerSheet() {
         let acBonus = 0;
         let hasArmor = false;
 
-        if (character.inventory) {
+        if (character?.inventory && Array.isArray(character.inventory)) {
             character.inventory.forEach((item: any) => {
-                if (!item.isEquipped) return;
+                if (!item || !item.isEquipped) return;
 
                 if (item.armor_class) {
-                    if (item.name.toLowerCase().includes('shield')) {
-                        shieldAC += item.armor_class.base || 2;
+                    if (item.name && item.name.toLowerCase().includes('shield')) {
+                        shieldAC += (item.armor_class.base || 2);
                     } else {
                         hasArmor = true;
-                        const armorBase = item.armor_class.base;
-                        const useDex = item.armor_class.dex_bonus;
+                        const armorBase = item.armor_class.base || 10;
+                        const useDex = item.armor_class.dex_bonus !== false;
                         const maxDex = item.armor_class.max_bonus;
-                        baseAC = useDex ? armorBase + (maxDex !== null ? Math.min(maxDex, dexMod) : dexMod) : armorBase;
+                        baseAC = useDex ? armorBase + (maxDex !== null && maxDex !== undefined ? Math.min(maxDex, dexMod) : dexMod) : armorBase;
                     }
                 }
 
-                if (item.effects) {
+                if (item.effects && Array.isArray(item.effects)) {
                     item.effects.forEach((eff: any) => {
-                        if (eff.type === 'ac_bonus') acBonus += eff.value;
+                        if (eff && eff.type === 'ac_bonus' && typeof eff.value === 'number') acBonus += eff.value;
                     });
                 }
             });
         }
 
         // Feat AC Bonuses
-        const allFeats = [...(character.feats || []), ...(character.raceBonusFeats || [])];
+        const allFeats = [...(character?.feats || []), ...(character?.raceBonusFeats || [])];
         allFeats.forEach((fName: string) => {
-            const fData = libFeats.find(x => x.name === fName);
-            if (fData && fData.effects) {
+            if (!fName) return;
+            const fData = (libFeats || []).find(x => x && x.name === fName);
+            if (fData && fData.effects && Array.isArray(fData.effects)) {
                 fData.effects.forEach((eff: any) => {
-                    if (eff.type === 'ac_bonus') acBonus += eff.value;
+                    if (eff && eff.type === 'ac_bonus' && typeof eff.value === 'number') acBonus += eff.value;
                 });
             }
         });
@@ -943,15 +945,17 @@ export default function PlayerSheet() {
     // War Magic Wizard adds Int to Initiative (Tactical Wit)
     // Chronurgy Wizard adds Int to Initiative (Temporal Awareness)
     const calcInitiative = () => {
+        if (!stats) return 0;
         let bonus = mod(stats.DEX || 10, 'DEX') + getItemBonus('initiative_bonus');
 
         // Feat Initiative Bonuses
-        const allFeatsForInit = [...(character.feats || []), ...(character.raceBonusFeats || [])];
+        const allFeatsForInit = [...(character?.feats || []), ...(character?.raceBonusFeats || [])];
         allFeatsForInit.forEach((fName: string) => {
-            const fData = libFeats.find(x => x.name === fName);
-            if (fData && fData.effects) {
+            if (!fName) return;
+            const fData = (libFeats || []).find(x => x && x.name === fName);
+            if (fData && fData.effects && Array.isArray(fData.effects)) {
                 fData.effects.forEach((eff: any) => {
-                    if (eff.type === 'initiative_bonus') bonus += eff.value;
+                    if (eff && eff.type === 'initiative_bonus' && typeof eff.value === 'number') bonus += eff.value;
                 });
             }
         });

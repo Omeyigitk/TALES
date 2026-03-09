@@ -3,7 +3,7 @@ const fs = require('fs');
 const path = require('path');
 const Item = require('./models/Item');
 
-const MONGODB_URI = 'mongodb://localhost:27017/dnd_realtime';
+const MONGODB_URI = "mongodb://localhost:27017/dnd_realtime";
 
 async function seed() {
     try {
