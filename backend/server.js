@@ -133,14 +133,27 @@ app.post('/api/admin/seed', authenticate, async (req, res) => {
     console.log('Seeding Items...');
     const itemMap = new Map();
 
+    // Translation helpers (re-defined or imported if lost in context)
+    const safeTranslateCategory = (cat) => {
+      const map = {
+        'Weapon': 'Silah',
+        'Armor': 'Zırh',
+        'Adventuring Gear': 'Eşya',
+        'Tools': 'Araçlar',
+        'Mounts and Vehicles': 'Binek ve Araçlar',
+        'Magic Item': 'Büyülü Eşya'
+      };
+      return map[cat] || cat;
+    };
+
     // SRD Items
     if (fs.existsSync(path.join(dataPath, 'items.json'))) {
       const srdItems = JSON.parse(fs.readFileSync(path.join(dataPath, 'items.json'), 'utf8'));
       for (const item of srdItems) {
         itemMap.set(item.name, {
           ...item,
-          name_tr: translateName(item.name),
-          category: translateCategory(item.category),
+          name_tr: item.name_tr || item.name,
+          category: safeTranslateCategory(item.category),
           rarity: item.rarity || 'Common',
           type: item.subcategory || item.category
         });
@@ -152,12 +165,11 @@ app.post('/api/admin/seed', authenticate, async (req, res) => {
     for (const file of batchFiles) {
       const items = JSON.parse(fs.readFileSync(path.join(dataPath, file), 'utf8'));
       for (const itemData of items) {
-        // Enriched batches take precedence, merge with existing if needed
         const existing = itemMap.get(itemData.name) || {};
         itemMap.set(itemData.name, {
           ...existing,
           ...itemData,
-          category: 'Magic Item',
+          category: 'Büyülü Eşya', // Ensure it fits enum
           rarity: itemData.rarity || 'Uncommon',
           type: itemData.type || 'Wondrous Item'
         });
@@ -165,11 +177,18 @@ app.post('/api/admin/seed', authenticate, async (req, res) => {
     }
 
     const finalItems = Array.from(itemMap.values());
+    console.log(`Prepared ${finalItems.length} items. Deleting old records...`);
     await Item.deleteMany({});
+
     if (finalItems.length > 0) {
-      await Item.insertMany(finalItems);
+      // Chunking to avoid timeouts on large inserts
+      const chunkSize = 100;
+      for (let i = 0; i < finalItems.length; i += chunkSize) {
+        const chunk = finalItems.slice(i, i + chunkSize);
+        await Item.insertMany(chunk, { ordered: false }).catch(e => console.error('Partial item insert error:', e.message));
+        console.log(`Seeded items ${i + chunk.length}/${finalItems.length}`);
+      }
     }
-    console.log(`Items seeded: ${finalItems.length} items added.`);
 
     let feats = [];
     if (fs.existsSync(path.join(dataPath, 'feats.json'))) {
@@ -177,6 +196,7 @@ app.post('/api/admin/seed', authenticate, async (req, res) => {
       await Feat.deleteMany({});
       await Feat.insertMany(feats);
     }
+
     console.log('Finalizing seed process...');
     res.json({
       message: 'Veritabanı başarıyla güncellendi.',
@@ -189,8 +209,12 @@ app.post('/api/admin/seed', authenticate, async (req, res) => {
     });
 
   } catch (err) {
-    console.error('Seeding error:', err);
-    res.status(500).json({ error: 'Veritabanı güncellenirken hata oluştu: ' + err.message });
+    console.error('CRITICAL Seeding error:', err);
+    res.status(500).json({
+      error: 'Veritabanı güncellenirken hata oluştu',
+      message: err.message,
+      stack: process.env.NODE_ENV === 'development' ? err.stack : undefined
+    });
   }
 });
 
