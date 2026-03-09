@@ -6,7 +6,7 @@ const itemSchema = new mongoose.Schema({
     category: {
         type: String,
         required: true,
-        enum: ['Weapon', 'Armor', 'Adventuring Gear', 'Tools', 'Mounts and Vehicles', 'Magic Item', 'Silah', 'Zırh', 'Eşya', 'Büyülü Eşya']
+        enum: ['Weapon', 'Armor', 'Adventuring Gear', 'Tools', 'Mounts and Vehicles', 'Magic Item', 'Silah', 'Zırh', 'Eşya', 'Büyülü Eşya', 'Araçlar', 'Binek ve Araçlar']
     },
     subcategory: String, // e.g. 'Martial Melee Weapons', 'Heavy Armor', 'Artisan\'s Tools'
     cost: {

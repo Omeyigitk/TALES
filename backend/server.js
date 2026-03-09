@@ -475,8 +475,10 @@ app.get('/api/items', async (req, res) => {
     const { category } = req.query;
     const filter = category ? { category } : {};
     const items = await Item.find(filter).sort({ category: 1, name: 1 });
+    console.log(`[DEBUG] /api/items called. Filter: ${JSON.stringify(filter)}, Count found: ${items.length}`);
     res.json(items);
   } catch (error) {
+    console.error(`[ERROR] /api/items failed: ${error.message}`);
     res.status(500).json({ error: error.message });
   }
 });
