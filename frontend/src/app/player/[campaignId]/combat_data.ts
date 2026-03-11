@@ -155,6 +155,52 @@ export function isSpellcaster(className: string): boolean {
     return ['Wizard', 'Sorcerer', 'Bard', 'Cleric', 'Druid', 'Paladin', 'Ranger', 'Warlock', 'Artificer'].includes(className);
 }
 
+// ─── Multiclass Spell Slot Merging ────────────────────────────────────────────
+// Returns [normal merged slots, warlock pact slots]
+// normal slots: 9-element array (1st-9th level slot counts)
+// warlockSlots: { count, level } | null
+export function getMulticlassSpellSlots(
+    primaryClass: string,
+    primaryLevel: number,
+    multiclasses: { className: string; level: number }[]
+): { merged: number[]; warlockPact: { count: number; level: number } | null } {
+    const FULL_CASTERS = ['Wizard', 'Sorcerer', 'Bard', 'Cleric', 'Druid'];
+    const HALF_CASTERS = ['Paladin', 'Ranger'];
+    const THIRD_CASTERS: string[] = []; // e.g. Eldritch Knight / Arcane Trickster subclasses — skip for now
+    const ARTIFICER = 'Artificer';
+
+    // Sum caster levels (Warlock and non-casters excluded from merged)
+    let casterLevel = 0;
+    let warlockPact: { count: number; level: number } | null = null;
+
+    const allClasses = [{ className: primaryClass, level: primaryLevel }, ...multiclasses];
+
+    for (const { className, level } of allClasses) {
+        if (FULL_CASTERS.includes(className)) {
+            casterLevel += level;
+        } else if (HALF_CASTERS.includes(className)) {
+            casterLevel += Math.floor(level / 2);
+        } else if (className === ARTIFICER) {
+            casterLevel += Math.ceil(level / 2); // Artificer rounds up
+        } else if (className === 'Warlock') {
+            // Warlock pact magic is separate
+            const pactIdx = Math.min(level, 20) - 1;
+            const [count, slotLv] = WARLOCK_PACT[pactIdx];
+            warlockPact = { count, level: slotLv };
+        }
+        // Non-caster classes contribute 0
+    }
+
+    casterLevel = Math.min(casterLevel, 20);
+
+    let merged: number[] = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+    if (casterLevel >= 1) {
+        merged = [...FULL_CASTER[casterLevel - 1]];
+    }
+
+    return { merged, warlockPact };
+}
+
 // ─── Class Resources ─────────────────────────────────────────────────────────
 export interface ClassResource {
     key: string;

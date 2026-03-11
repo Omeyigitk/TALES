@@ -11,7 +11,7 @@ import { ALL_BACKGROUNDS } from "../background_data";
 import { getFeatRequirements } from "../../feat_utils";
 import { FeatSpellSelectionArea, FeatStatSelectionArea, FeatChoiceSelectionArea } from "../../FeatComponents";
 // SINIFLARA GÖRE BAŞLANGIÇ EKİPMANLARI (CLASS_EQUIPMENT)
-import { getSpellSlotTotals, isSpellcaster, CLASS_ATTACKS, CLASS_RESOURCES, CONCENTRATION_SPELLS } from "../combat_data";
+import { getSpellSlotTotals, isSpellcaster, getMulticlassSpellSlots, CLASS_ATTACKS, CLASS_RESOURCES, CONCENTRATION_SPELLS } from "../combat_data";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
 
@@ -957,6 +957,55 @@ export default function PlayerSheet() {
         }
     };
 
+    // Level up an existing secondary (multiclass) entry
+    const levelUpMulticlass = async (mcIndex: number) => {
+        const char = characterRef.current;
+        if (!char) return;
+        if ((char.level || 1) >= 20) { alert('Karakter zaten maksimum seviyeye ulaştı (20).'); return; }
+
+        const mcs: any[] = char.multiclasses || [];
+        const mc = mcs[mcIndex];
+        if (!mc) return;
+
+        // Look up that class's hit die
+        let hitDieStr = 'd8';
+        if (allClasses.length > 0) {
+            const clsData = allClasses.find((c: any) => c._id === (mc.classRef?._id || mc.classRef) || c.name === mc.className);
+            if (clsData) hitDieStr = clsData.hit_die || 'd8';
+        }
+        const hitDieMax = parseInt(hitDieStr.replace('d', '')) || 8;
+        const conMod = mod(char.stats?.CON ?? 10, 'CON');
+        const hpGained = Math.floor(hitDieMax / 2) + 1 + conMod;
+
+        const updatedMcs = mcs.map((m, i) =>
+            i === mcIndex ? { ...m, level: (m.level || 1) + 1 } : m
+        );
+
+        setIsLevelingUp(true);
+        try {
+            const newMaxHp = (char.maxHp ?? 10) + hpGained;
+            const res = await axios.put(`${API_URL}/api/characters/${char._id}`, {
+                level: (char.level || 1) + 1,
+                maxHp: newMaxHp,
+                currentHp: (char.currentHp || 0) + hpGained,
+                multiclasses: updatedMcs
+            }, { headers: { 'Authorization': `Bearer ${token}` } });
+            setCharacter(res.data);
+            characterRef.current = res.data;
+            setCurrentHp(res.data.currentHp);
+            if (socket) {
+                (socket as any).emit('update_character_stat', { campaignId, characterId: char._id, stat: 'level', value: res.data.level });
+            }
+            showToast(`🎉 ${mc.className} Sv.${(mc.level || 1) + 1}!`, `+${hpGained} maks HP.`, 'bg-violet-900 border-violet-500 text-violet-100');
+            setShowLevelChoiceModal(false);
+        } catch (e) {
+            console.error(e);
+            alert('Seviye yükseltme başarısız.');
+        } finally {
+            setIsLevelingUp(false);
+        }
+    };
+
     const advanceLvModal = () => {
         if (!lvModal) return;
         if (lvModal.needSubclass && lvModal.step === "preview") {
@@ -1322,26 +1371,49 @@ export default function PlayerSheet() {
                 <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 backdrop-blur-sm" onClick={() => setShowLevelChoiceModal(false)}>
                     <div className="bg-gray-900 border-2 border-yellow-700 rounded-2xl w-full max-w-md shadow-2xl p-6" onClick={e => e.stopPropagation()}>
                         <h2 className="text-2xl font-black text-white mb-2 tracking-tight">⬆️ Seviye Atla</h2>
-                        <p className="text-gray-400 text-sm mb-6">Bu seviye için bir seçim yap.</p>
+                        <p className="text-gray-400 text-sm mb-4">Hangi sınıfı yükseltmek istiyorsun?</p>
                         <div className="flex flex-col gap-3">
+                            {/* Primary class level-up */}
                             <button
                                 onClick={() => { setShowLevelChoiceModal(false); startLevelUp(); }}
                                 className="w-full bg-yellow-700 hover:bg-yellow-600 text-white font-black py-4 rounded-xl text-left px-5 transition shadow-lg border border-yellow-600 flex items-center gap-4"
                             >
                                 <span className="text-3xl">⚔️</span>
                                 <div>
-                                    <div className="text-white font-black text-lg">{character.classRef?.name || 'Ana Sınıf'} — Seviye {level + 1}</div>
-                                    <div className="text-yellow-200 text-xs font-normal mt-0.5">Mevcut sınıfını yükselt, yeni özellikler kazan</div>
+                                    <div className="text-white font-black text-lg">{character.classRef?.name || 'Ana Sınıf'}</div>
+                                    <div className="text-yellow-200 text-xs font-normal mt-0.5">
+                                        Sv. {character.level - ((character.multiclasses || []).reduce((s: number, mc: any) => s + (mc.level || 0), 0))} → {character.level - ((character.multiclasses || []).reduce((s: number, mc: any) => s + (mc.level || 0), 0))+1}
+                                    </div>
                                 </div>
                             </button>
+
+                            {/* Existing secondary class level-up buttons */}
+                            {(character.multiclasses || []).map((mc: any, idx: number) => (
+                                <button
+                                    key={idx}
+                                    onClick={() => levelUpMulticlass(idx)}
+                                    disabled={isLevelingUp}
+                                    className="w-full bg-violet-900/60 hover:bg-violet-800 text-white font-black py-4 rounded-xl text-left px-5 transition shadow-lg border border-violet-600 flex items-center gap-4 disabled:opacity-40"
+                                >
+                                    <span className="text-3xl">✨</span>
+                                    <div>
+                                        <div className="text-white font-black text-lg">{mc.className || 'Bilinmiyor'}</div>
+                                        <div className="text-violet-200 text-xs font-normal mt-0.5">
+                                            Sv. {mc.level || 1} → {(mc.level || 1) + 1}
+                                        </div>
+                                    </div>
+                                </button>
+                            ))}
+
+                            {/* Add a brand new multiclass */}
                             <button
                                 onClick={continueMulticlassChoice}
-                                className="w-full bg-violet-800 hover:bg-violet-700 text-white font-black py-4 rounded-xl text-left px-5 transition shadow-lg border border-violet-600 flex items-center gap-4"
+                                className="w-full bg-gray-800 hover:bg-gray-700 text-white font-black py-3 rounded-xl text-left px-5 transition border border-gray-600 flex items-center gap-3 text-sm"
                             >
-                                <span className="text-3xl">✨</span>
+                                <span className="text-xl">➕</span>
                                 <div>
-                                    <div className="text-white font-black text-lg">Yeni Sınıf Ekle (Multiclass)</div>
-                                    <div className="text-violet-200 text-xs font-normal mt-0.5">Farklı bir sınıfa 1. seviyeden başla</div>
+                                    <div className="text-white font-bold">Yeni Sınıf Ekle (Multiclass)</div>
+                                    <div className="text-gray-400 text-xs font-normal">Farklı bir sınıfa 1. seviyeden başla</div>
                                 </div>
                             </button>
                         </div>
@@ -1349,6 +1421,7 @@ export default function PlayerSheet() {
                     </div>
                 </div>
             )}
+
 
             {/* ── MULTICLASS CLASS PICKER MODAL ── */}
             {showMulticlassPickModal && (
