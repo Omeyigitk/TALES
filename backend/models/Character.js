@@ -52,6 +52,15 @@ const characterSchema = new mongoose.Schema({
         max: Number,
         recharge: { type: String, enum: ['short', 'long'], default: 'long' },
         desc: String
+    }],
+
+    // MULTICLASS: Secondary classes array (primary class stays in classRef/level)
+    multiclasses: [{
+        classRef: { type: mongoose.Schema.Types.ObjectId, ref: 'Class' },
+        className: { type: String, default: '' }, // cached name for quick display
+        level: { type: Number, default: 1 },
+        subclass: { type: String, default: '' },
+        hitDiceUsed: { type: Number, default: 0 }
     }]
 }, { strict: false });
 

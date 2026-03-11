@@ -165,6 +165,13 @@ export default function PlayerSheet() {
     const [featChoiceSelections, setFeatChoiceSelections] = useState<Record<string, Record<string, string[]>>>({}); // { "Metamagic Adept": { "Metamagic": ["Twinned", "Subtle"] } }
     const [isLevelingUp, setIsLevelingUp] = useState(false);
 
+    // Multiclass state
+    const [showLevelChoiceModal, setShowLevelChoiceModal] = useState(false); // choose: same class or multiclass
+    const [showMulticlassPickModal, setShowMulticlassPickModal] = useState(false);
+    const [mcPickedClassId, setMcPickedClassId] = useState<string>('');
+    const [allClasses, setAllClasses] = useState<any[]>([]);
+    const [isAddingMulticlass, setIsAddingMulticlass] = useState(false);
+
     // Backstory
     const [backstory, setBackstory] = useState("");
     const [isSavingStory, setIsSavingStory] = useState(false);
@@ -775,12 +782,7 @@ export default function PlayerSheet() {
     };
     const fmt = (n: number) => (n >= 0 ? `+${n}` : String(n));
 
-    const handleLevelUpClick = () => {
-        if (!dmLevelPermission) {
-            setShowDmPopup(true);
-            return;
-        }
-
+    const startLevelUp = () => {
         // Use characterRef for always-fresh data (fixes consecutive level-up bug)
         const char = characterRef.current;
         if (!char) return;
@@ -828,6 +830,90 @@ export default function PlayerSheet() {
         setFeatSearch("");
         setLvModal({ open: true, step: "preview", newLv, hpGained, classFeats, subFeats, needSubclass, needASI });
     };
+
+    const handleLevelUpClick = () => {
+        if (!dmLevelPermission) {
+            setShowDmPopup(true);
+            return;
+        }
+
+        const char = characterRef.current;
+        if (!char) return;
+        if ((char.level || 1) >= 20) {
+            alert('Karakter zaten maksimum seviyeye ulaştı (20).');
+            return;
+        }
+
+        // Show choice modal: same class or multiclass
+        setShowLevelChoiceModal(true);
+    };
+
+    const continueMulticlassChoice = async () => {
+        setShowLevelChoiceModal(false);
+        // Fetch classes if not loaded
+        if (allClasses.length === 0) {
+            try {
+                const res = await axios.get(`${API_URL}/api/classes`, { headers: { 'Authorization': `Bearer ${token}` } });
+                setAllClasses(res.data);
+            } catch (e) { console.error('Classes fetch failed', e); }
+        }
+        setMcPickedClassId('');
+        setShowMulticlassPickModal(true);
+    };
+
+    const addMulticlass = async () => {
+        const char = characterRef.current;
+        if (!char || !mcPickedClassId) return;
+        const pickedCls = allClasses.find((c: any) => c._id === mcPickedClassId);
+        if (!pickedCls) return;
+
+        // Hit die average + CON mod for new class first level
+        const hitDieMax = parseInt((pickedCls.hit_die || 'd8').replace('d', '')) || 8;
+        const conMod = mod(char.stats?.CON ?? 10, 'CON');
+        const hpGained = Math.floor(hitDieMax / 2) + 1 + conMod;
+
+        const currentMulticlasses = char.multiclasses || [];
+        // Check if already multclassed into this class
+        const alreadyExists = currentMulticlasses.find((mc: any) => mc.classRef === mcPickedClassId || mc.classRef?._id === mcPickedClassId);
+        if (alreadyExists) {
+            alert('Bu sınıfa zaten multiclass oldunuz.');
+            return;
+        }
+        // Check vs primary class
+        if (char.classRef?._id === mcPickedClassId || char.classRef === mcPickedClassId) {
+            alert('Bu zaten birincil sınıfınız.');
+            return;
+        }
+
+        const newMc = { classRef: mcPickedClassId, className: pickedCls.name, level: 1, subclass: '', hitDiceUsed: 0 };
+        const updatedMulticlasses = [...currentMulticlasses, newMc];
+
+        setIsAddingMulticlass(true);
+        try {
+            const newMaxHp = (char.maxHp ?? 10) + hpGained;
+            const res = await axios.put(`${API_URL}/api/characters/${char._id}`, {
+                level: (char.level || 1) + 1,
+                maxHp: newMaxHp,
+                currentHp: (char.currentHp || 0) + hpGained,
+                multiclasses: updatedMulticlasses
+            }, { headers: { 'Authorization': `Bearer ${token}` } });
+            setCharacter(res.data);
+            characterRef.current = res.data;
+            setCurrentHp(res.data.currentHp);
+            if (socket) {
+                (socket as any).emit('update_character_stat', { campaignId, characterId: char._id, stat: 'level', value: res.data.level });
+            }
+            showToast(`🎉 ${pickedCls.name} Eklendi!`, `+${hpGained} maks HP. Artık ${char.classRef?.name || ''} / ${pickedCls.name}!`, 'bg-violet-900 border-violet-500 text-violet-100');
+            setShowMulticlassPickModal(false);
+        } catch (e) {
+            console.error(e);
+            alert('Multiclass eklenirken hata oluştu.');
+        } finally {
+            setIsAddingMulticlass(false);
+        }
+    };
+
+
 
     const handleLevelDownClick = async () => {
         if (!dmLevelPermission) {
@@ -1231,6 +1317,84 @@ export default function PlayerSheet() {
                     </div>
                 );
             })()}
+            {/* ── LEVEL CHOICE MODAL (level same class OR multiclass?) ── */}
+            {showLevelChoiceModal && (
+                <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 backdrop-blur-sm" onClick={() => setShowLevelChoiceModal(false)}>
+                    <div className="bg-gray-900 border-2 border-yellow-700 rounded-2xl w-full max-w-md shadow-2xl p-6" onClick={e => e.stopPropagation()}>
+                        <h2 className="text-2xl font-black text-white mb-2 tracking-tight">⬆️ Seviye Atla</h2>
+                        <p className="text-gray-400 text-sm mb-6">Bu seviye için bir seçim yap.</p>
+                        <div className="flex flex-col gap-3">
+                            <button
+                                onClick={() => { setShowLevelChoiceModal(false); startLevelUp(); }}
+                                className="w-full bg-yellow-700 hover:bg-yellow-600 text-white font-black py-4 rounded-xl text-left px-5 transition shadow-lg border border-yellow-600 flex items-center gap-4"
+                            >
+                                <span className="text-3xl">⚔️</span>
+                                <div>
+                                    <div className="text-white font-black text-lg">{character.classRef?.name || 'Ana Sınıf'} — Seviye {level + 1}</div>
+                                    <div className="text-yellow-200 text-xs font-normal mt-0.5">Mevcut sınıfını yükselt, yeni özellikler kazan</div>
+                                </div>
+                            </button>
+                            <button
+                                onClick={continueMulticlassChoice}
+                                className="w-full bg-violet-800 hover:bg-violet-700 text-white font-black py-4 rounded-xl text-left px-5 transition shadow-lg border border-violet-600 flex items-center gap-4"
+                            >
+                                <span className="text-3xl">✨</span>
+                                <div>
+                                    <div className="text-white font-black text-lg">Yeni Sınıf Ekle (Multiclass)</div>
+                                    <div className="text-violet-200 text-xs font-normal mt-0.5">Farklı bir sınıfa 1. seviyeden başla</div>
+                                </div>
+                            </button>
+                        </div>
+                        <button onClick={() => setShowLevelChoiceModal(false)} className="mt-4 text-gray-500 hover:text-gray-300 text-sm w-full text-center transition">İptal</button>
+                    </div>
+                </div>
+            )}
+
+            {/* ── MULTICLASS CLASS PICKER MODAL ── */}
+            {showMulticlassPickModal && (
+                <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 backdrop-blur-sm" onClick={() => setShowMulticlassPickModal(false)}>
+                    <div className="bg-gray-900 border-2 border-violet-700 rounded-2xl w-full max-w-lg shadow-2xl p-6" onClick={e => e.stopPropagation()}>
+                        <h2 className="text-2xl font-black text-white mb-1 tracking-tight">✨ Multiclass Sınıf Seç</h2>
+                        <p className="text-gray-400 text-xs mb-5">Yeni bir sınıfa 1. seviyeden başlayacaksın. HP o sınıfın hit die'ına göre hesaplanır.</p>
+
+                        {/* Prerequisite Warning */}
+                        <div className="text-[10px] text-violet-300 bg-violet-900/30 border border-violet-700/40 rounded-lg px-3 py-2 mb-4 leading-relaxed">
+                            ⚠️ D&D kurallarına göre bazı sınıfların minimum stat ön koşulları vardır. Lütfen Dungeon Master'ınla kontrol et.
+                        </div>
+
+                        <div className="grid grid-cols-2 gap-2 max-h-64 overflow-y-auto pr-1 mb-5">
+                            {allClasses.filter((c: any) => {
+                                // Hide primary class and existing multiclasses
+                                const primaryId = character.classRef?._id || character.classRef;
+                                const mcIds = (character.multiclasses || []).map((mc: any) => mc.classRef?._id || mc.classRef);
+                                return c._id !== primaryId && !mcIds.includes(c._id);
+                            }).map((c: any) => (
+                                <button
+                                    key={c._id}
+                                    onClick={() => setMcPickedClassId(c._id)}
+                                    className={`p-3 rounded-xl border text-left transition font-bold text-sm ${
+                                        mcPickedClassId === c._id
+                                            ? 'bg-violet-700 border-violet-500 text-white'
+                                            : 'bg-gray-800 border-gray-700 text-gray-300 hover:border-violet-600 hover:bg-gray-700'
+                                    }`}
+                                >
+                                    <div className="font-black">{c.name}</div>
+                                    <div className="text-xs opacity-60 font-normal">{c.hit_die} hit die</div>
+                                </button>
+                            ))}
+                        </div>
+
+                        <button
+                            onClick={addMulticlass}
+                            disabled={!mcPickedClassId || isAddingMulticlass}
+                            className="w-full bg-violet-700 hover:bg-violet-600 disabled:opacity-40 text-white font-black py-3 rounded-xl transition shadow-lg"
+                        >
+                            {isAddingMulticlass ? 'Ekleniyor...' : `✨ ${allClasses.find((c: any) => c._id === mcPickedClassId)?.name || 'Sınıf'} Olarak Multiclass Ol`}
+                        </button>
+                        <button onClick={() => setShowMulticlassPickModal(false)} className="mt-3 text-gray-500 hover:text-gray-300 text-sm w-full text-center transition">İptal</button>
+                    </div>
+                </div>
+            )}
 
             {/* ── TOP BAR ── */}
             <div className="bg-gray-900 border-b border-gray-700 px-6 py-4 flex items-center justify-between sticky top-0 z-40 shadow-md">
@@ -1246,8 +1410,17 @@ export default function PlayerSheet() {
                             </div>
                         </div>
                         <p className="text-gray-400 text-sm mt-0.5">
-                            {character.raceRef?.name}{character.subrace ? ` (${character.subrace})` : ""} · {cls}
+                            {character.raceRef?.name}{character.subrace ? ` (${character.subrace})` : ''} ·{' '}
+                            {/* Primary class */}
+                            <span className="text-white font-bold">{cls}</span>
+                            {character.level && character.multiclasses?.length > 0 && (
+                                <span className="text-gray-400"> {character.level - (character.multiclasses || []).reduce((s: number, mc: any) => s + (mc.level || 0), 0)}</span>
+                            )}
                             {character.subclass && <span className="text-purple-400"> [{character.subclass}]</span>}
+                            {/* Secondary classes (multiclasses) */}
+                            {(character.multiclasses || []).map((mc: any, idx: number) => (
+                                <span key={idx} className="text-violet-300 font-bold"> / {mc.className || 'Bilinmiyor'} {mc.level}</span>
+                            ))}
                             {character.background && <span className="text-yellow-500 ml-1">· {character.background}</span>}
                         </p>
                         {conditions.length > 0 && (
