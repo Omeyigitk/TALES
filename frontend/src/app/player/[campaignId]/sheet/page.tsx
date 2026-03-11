@@ -153,7 +153,10 @@ export default function PlayerSheet() {
 
     // Level Up — multi-step modal state
     type LevelUpStep = "preview" | "subclass" | "asi";
-    const [lvModal, setLvModal] = useState<{ open: boolean; step: LevelUpStep; newLv: number; hpGained: number; classFeats: any[]; subFeats: any[]; needSubclass: boolean; needASI: boolean; } | null>(null);
+    const [lvModal, setLvModal] = useState<{ open: boolean; step: LevelUpStep; newLv: number; hpGained: number; classFeats: any[]; subFeats: any[]; needSubclass: boolean; needASI: boolean; mcAction?: 'add' | 'levelup'; mcData?: any } | null>(null);
+    const [showClassFeatsUI, setShowClassFeatsUI] = useState(true);
+    const [showFeatsUI, setShowFeatsUI] = useState(true);
+    const [showDiceLogUI, setShowDiceLogUI] = useState(true);
     const [lvSubclassChoice, setLvSubclassChoice] = useState<any>(null);
     // ASI/Feat
     const [lvChoice, setLvChoice] = useState<"asi" | "feat">("asi");
@@ -885,32 +888,24 @@ export default function PlayerSheet() {
             return;
         }
 
-        const newMc = { classRef: mcPickedClassId, className: pickedCls.name, level: 1, subclass: '', hitDiceUsed: 0 };
-        const updatedMulticlasses = [...currentMulticlasses, newMc];
+        const newLv = 1;
+        const classFeats: any[] = CLASS_FEATURES[pickedCls.name]?.[newLv] ?? [];
+        const needSubclass = newLv === pickedCls.subclass_unlock_level; // For Mc, subclass doesn't exist yet
+        const asiLevels = ASI_LEVELS[pickedCls.name] ?? [4, 8, 12, 16, 19];
+        const needASI = asiLevels.includes(newLv);
 
-        setIsAddingMulticlass(true);
-        try {
-            const newMaxHp = (char.maxHp ?? 10) + hpGained;
-            const res = await axios.put(`${API_URL}/api/characters/${char._id}`, {
-                level: (char.level || 1) + 1,
-                maxHp: newMaxHp,
-                currentHp: (char.currentHp || 0) + hpGained,
-                multiclasses: updatedMulticlasses
-            }, { headers: { 'Authorization': `Bearer ${token}` } });
-            setCharacter(res.data);
-            characterRef.current = res.data;
-            setCurrentHp(res.data.currentHp);
-            if (socket) {
-                (socket as any).emit('update_character_stat', { campaignId, characterId: char._id, stat: 'level', value: res.data.level });
-            }
-            showToast(`🎉 ${pickedCls.name} Eklendi!`, `+${hpGained} maks HP. Artık ${char.classRef?.name || ''} / ${pickedCls.name}!`, 'bg-violet-900 border-violet-500 text-violet-100');
-            setShowMulticlassPickModal(false);
-        } catch (e) {
-            console.error(e);
-            alert('Multiclass eklenirken hata oluştu.');
-        } finally {
-            setIsAddingMulticlass(false);
-        }
+        setLvSubclassChoice(null);
+        setLvChoice("asi");
+        setAsiPicks([]);
+        setFeatPick(null);
+        setFeatSearch("");
+        setLvModal({
+            open: true, step: "preview", newLv, hpGained, classFeats, subFeats: [], 
+            needSubclass, needASI, 
+            mcAction: 'add', mcData: { pickedClassId: mcPickedClassId, pickedClassName: pickedCls.name }
+        });
+        
+        setShowMulticlassPickModal(false);
     };
 
 
@@ -977,33 +972,32 @@ export default function PlayerSheet() {
         const conMod = mod(char.stats?.CON ?? 10, 'CON');
         const hpGained = Math.floor(hitDieMax / 2) + 1 + conMod;
 
-        const updatedMcs = mcs.map((m, i) =>
-            i === mcIndex ? { ...m, level: (m.level || 1) + 1 } : m
-        );
-
-        setIsLevelingUp(true);
-        try {
-            const newMaxHp = (char.maxHp ?? 10) + hpGained;
-            const res = await axios.put(`${API_URL}/api/characters/${char._id}`, {
-                level: (char.level || 1) + 1,
-                maxHp: newMaxHp,
-                currentHp: (char.currentHp || 0) + hpGained,
-                multiclasses: updatedMcs
-            }, { headers: { 'Authorization': `Bearer ${token}` } });
-            setCharacter(res.data);
-            characterRef.current = res.data;
-            setCurrentHp(res.data.currentHp);
-            if (socket) {
-                (socket as any).emit('update_character_stat', { campaignId, characterId: char._id, stat: 'level', value: res.data.level });
-            }
-            showToast(`🎉 ${mc.className} Sv.${(mc.level || 1) + 1}!`, `+${hpGained} maks HP.`, 'bg-violet-900 border-violet-500 text-violet-100');
-            setShowLevelChoiceModal(false);
-        } catch (e) {
-            console.error(e);
-            alert('Seviye yükseltme başarısız.');
-        } finally {
-            setIsLevelingUp(false);
+        const newLv = (mc.level || 1) + 1;
+        const classFeats: any[] = CLASS_FEATURES[mc.className]?.[newLv] ?? [];
+        
+        let subFeats: any[] = [];
+        const clsData = allClasses.length > 0 ? allClasses.find((c: any) => c._id === (mc.classRef?._id || mc.classRef) || c.name === mc.className) : null;
+        if (mc.subclass && clsData?.subclasses) {
+            const sub = clsData.subclasses.find((s: any) => s.name === mc.subclass);
+            if (sub) subFeats = sub.features.filter((f: any) => f.level === newLv);
         }
+
+        const needSubclass = newLv === clsData?.subclass_unlock_level && !mc.subclass;
+        const asiLevels = ASI_LEVELS[mc.className] ?? [4, 8, 12, 16, 19];
+        const needASI = asiLevels.includes(newLv);
+
+        setLvSubclassChoice(null);
+        setLvChoice("asi");
+        setAsiPicks([]);
+        setFeatPick(null);
+        setFeatSearch("");
+        setLvModal({
+            open: true, step: "preview", newLv, hpGained, classFeats, subFeats, 
+            needSubclass, needASI, 
+            mcAction: 'levelup', mcData: { mcIndex }
+        });
+        
+        setShowLevelChoiceModal(false);
     };
 
     const advanceLvModal = () => {
@@ -1066,11 +1060,37 @@ export default function PlayerSheet() {
 
         try {
             const payload: any = {
-                level: lvModal.newLv,
-                maxHp: newMaxHp,
                 currentHp: character.currentHp + lvModal.hpGained,
-                subclass: subclassStr,
             };
+            
+            if (!lvModal.mcAction) {
+                payload.level = lvModal.newLv;
+                payload.maxHp = newMaxHp;
+                payload.subclass = subclassStr;
+            } else if (lvModal.mcAction === 'add') {
+                const currentMulticlasses = character.multiclasses || [];
+                const newMc = { 
+                    classRef: lvModal.mcData.pickedClassId, 
+                    className: lvModal.mcData.pickedClassName, 
+                    level: 1, 
+                    subclass: lvSubclassChoice ? lvSubclassChoice.name : '', 
+                    hitDiceUsed: 0 
+                };
+                payload.multiclasses = [...currentMulticlasses, newMc];
+                payload.level = (character.level || 1) + 1;
+                payload.maxHp = newMaxHp;
+            } else if (lvModal.mcAction === 'levelup') {
+                const mcs = character.multiclasses || [];
+                const updatedMcs = mcs.map((m: any, i: number) => 
+                    i === lvModal.mcData.mcIndex 
+                    ? { ...m, level: lvModal.newLv, subclass: lvSubclassChoice ? lvSubclassChoice.name : (m.subclass || '') } 
+                    : m
+                );
+                payload.multiclasses = updatedMcs;
+                payload.level = (character.level || 1) + 1;
+                payload.maxHp = newMaxHp;
+            }
+
             if (statsUpdate) payload.stats = statsUpdate;
             if (featsUpdate) payload.feats = featsUpdate;
             payload.featSelections = {
@@ -1083,11 +1103,16 @@ export default function PlayerSheet() {
             setCharacter(res.data);
             setCurrentHp(res.data.currentHp);
             if (socket) {
-                (socket as any).emit('update_character_stat', { campaignId, characterId: character._id, stat: 'level', value: lvModal.newLv });
+                (socket as any).emit('update_character_stat', { campaignId, characterId: character._id, stat: 'level', value: payload.level });
                 (socket as any).emit('update_character_stat', { campaignId, characterId: character._id, stat: 'maxHp', value: newMaxHp });
             }
             setLvModal(null);
-            showToast(`Seviye ${lvModal.newLv}! 🎉`,
+            
+            let toastTitle = `Seviye ${lvModal.newLv}! 🎉`;
+            if (lvModal.mcAction === 'add') toastTitle = `🎉 ${lvModal.mcData.pickedClassName} Eklendi!`;
+            else if (lvModal.mcAction === 'levelup') toastTitle = `🎉 ${character.multiclasses?.[lvModal.mcData.mcIndex]?.className || 'Multiclass'} Sv.${lvModal.newLv}!`;
+
+            showToast(toastTitle,
                 `+${lvModal.hpGained} maks HP kazandın!${(lvModal.classFeats.length + lvModal.subFeats.length) > 0 ? ` ${lvModal.classFeats.length + lvModal.subFeats.length} yeni özellik açıldı.` : ''}`,
                 'bg-yellow-900 border-yellow-500 text-yellow-100');
         } catch (e) { console.error(e); }
@@ -1940,10 +1965,17 @@ export default function PlayerSheet() {
                                 
                                 return (
                                     <div className="bg-gray-800 rounded-xl border border-blue-800/50 overflow-hidden mb-4">
-                                        <div className="px-4 py-3 bg-blue-900/30 border-b border-blue-800/50 flex items-center gap-2">
-                                            <span className="text-blue-400 text-lg">⚔️</span>
-                                            <h3 className="font-black text-blue-300">Sınıf Özellikleri</h3>
+                                        <div 
+                                            className="px-4 py-3 bg-blue-900/30 border-b border-blue-800/50 flex items-center justify-between cursor-pointer hover:bg-blue-800/30 transition-colors"
+                                            onClick={() => setShowClassFeatsUI(!showClassFeatsUI)}
+                                        >
+                                            <div className="flex items-center gap-2">
+                                                <span className="text-blue-400 text-lg">⚔️</span>
+                                                <h3 className="font-black text-blue-300">Sınıf Özellikleri</h3>
+                                            </div>
+                                            <span className="text-blue-400 text-xs">{showClassFeatsUI ? '▼' : '▲'}</span>
                                         </div>
+                                        {showClassFeatsUI && (
                                         <div className="p-4 space-y-3">
                                             {features.map((f, i) => (
                                                 <div key={i} className="p-3 rounded-lg border border-gray-700 bg-gray-900/50">
@@ -1957,6 +1989,7 @@ export default function PlayerSheet() {
                                                 </div>
                                             ))}
                                         </div>
+                                        )}
                                     </div>
                                 );
                             })()}
@@ -1986,9 +2019,14 @@ export default function PlayerSheet() {
                             {/* Feats */}
                             {actualFeats.length > 0 && (
                                 <div className="bg-gray-800 rounded-xl border border-yellow-800/40 overflow-hidden mb-4">
-                                    <div className="px-4 py-2 bg-yellow-900/20 border-b border-yellow-800/40">
-                                        <h3 className="font-black text-yellow-500 uppercase text-xs tracking-widest">🌟 Featlar <span className="text-gray-500 normal-case font-normal ml-1">(tıkla: açıklama)</span></h3>
+                                    <div 
+                                        className="px-4 py-2 bg-yellow-900/20 border-b border-yellow-800/40 flex items-center justify-between cursor-pointer hover:bg-yellow-800/30 transition-colors"
+                                        onClick={() => setShowFeatsUI(!showFeatsUI)}
+                                    >
+                                        <h3 className="font-black text-yellow-500 uppercase text-xs tracking-widest">🌟 Featlar <span className="text-yellow-600/70 normal-case font-normal ml-1">(tıkla: {showFeatsUI ? 'gizle' : 'göster'})</span></h3>
+                                        <span className="text-yellow-500 text-xs">{showFeatsUI ? '▼' : '▲'}</span>
                                     </div>
+                                    {showFeatsUI && (
                                     <div className="p-3 space-y-2">
                                         {actualFeats.map((featName: string, idx: number) => {
                                             const featDetails = libFeats.find(f => f.name === featName);
@@ -2040,14 +2078,20 @@ export default function PlayerSheet() {
                                             );
                                         })}
                                     </div>
+                                    )}
                                 </div>
                             )}
 
                             {/* Dice Log */}
                             <div className="bg-gray-800 rounded-xl border border-gray-700 overflow-hidden">
-                                <div className="px-4 py-2 border-b border-gray-700">
+                                <div 
+                                    className="px-4 py-2 border-b border-gray-700 flex items-center justify-between cursor-pointer hover:bg-gray-700/50 transition-colors"
+                                    onClick={() => setShowDiceLogUI(!showDiceLogUI)}
+                                >
                                     <h3 className="font-black text-gray-300 uppercase text-xs tracking-widest">📜 Dice Log</h3>
+                                    <span className="text-gray-400 text-xs">{showDiceLogUI ? '▼' : '▲'}</span>
                                 </div>
+                                {showDiceLogUI && (
                                 <div className="p-3 space-y-1.5 max-h-64 overflow-y-auto">
                                     {diceLogs.filter((l: any) => !l.isHidden).length === 0 ? (
                                         <p className="text-gray-500 text-sm italic text-center py-4">No rolls yet.</p>
@@ -2061,6 +2105,7 @@ export default function PlayerSheet() {
                                         ))
                                     )}
                                 </div>
+                                )}
                             </div>
                         </div>
 
@@ -2265,12 +2310,23 @@ export default function PlayerSheet() {
                 {/* ══════════ TAB: ATTACKS & SPELLS ══════════ */}
                 {(activeTab === "attacks" || activeTab === "spells") && (() => {
                     const clsName = character.classRef?.name || '';
-                    const lv = level;
-                    const slotTotals = getSpellSlotTotals(clsName, lv);
-                    const canCast = isSpellcaster(clsName);
+                    const mcs = character.multiclasses || [];
+                    const mainLv = character.level - mcs.reduce((a: number, c: any) => a + (c.level || 1), 0);
+                    const mcList = mcs.map((mc: any) => ({ className: mc.className, level: mc.level || 1 }));
+                    const lv = character.level;
+                    const { merged: slotTotals, warlockPact } = getMulticlassSpellSlots(clsName, mainLv, mcList);
+                    if (warlockPact) {
+                        slotTotals[warlockPact.level - 1] += warlockPact.count;
+                    }
+                    const canCast = isSpellcaster(clsName) || mcs.some((mc: any) => isSpellcaster(mc.className));
                     const mods = { CHA: mod(stats.CHA || 10), WIS: mod(stats.WIS || 10), INT: mod(stats.INT || 10), STR: mod(stats.STR || 10), DEX: mod(stats.DEX || 10), CON: mod(stats.CON || 10) };
-                    const baseAttacks = CLASS_ATTACKS[clsName] || CLASS_ATTACKS['Fighter'];
+                    
+                    const baseAttacks = [...(CLASS_ATTACKS[clsName] || (mcs.length === 0 ? CLASS_ATTACKS['Fighter'] : []))];
                     const resources = [...(CLASS_RESOURCES[clsName] || [])];
+                    mcs.forEach((mc: any) => {
+                        if (CLASS_ATTACKS[mc.className]) baseAttacks.push(...CLASS_ATTACKS[mc.className]);
+                        if (CLASS_RESOURCES[mc.className]) resources.push(...CLASS_RESOURCES[mc.className]);
+                    });
 
                     // Merge Custom Resources
                     customResources.forEach((cr: any) => {
@@ -2505,16 +2561,8 @@ export default function PlayerSheet() {
                                                             <span className="text-gray-600 text-xs ml-auto">{expanded ? '▲' : '▼'}</span>
                                                         </div>
                                                         <div className="flex gap-4 text-xs mt-1 flex-wrap">
-                                                            {atk.toHit && (
-                                                                <span className="flex items-center gap-1 text-green-400 bg-green-900/30 px-2 py-0.5 rounded border border-green-800/50">
-                                                                    <span>🎯 İsabet:</span>
-                                                                    <span className="font-black text-sm">1d20 {atk.toHit.startsWith('-') ? atk.toHit : (atk.toHit.startsWith('+') ? atk.toHit : `+${atk.toHit}`)}</span>
-                                                                </span>
-                                                            )}
-                                                            <span className="flex items-center gap-1 text-yellow-300 bg-yellow-900/30 px-2 py-0.5 rounded border border-yellow-800/50">
-                                                                <span>🩸 Hasar:</span>
-                                                                <span className="font-black text-sm">{atk.damage}</span>
-                                                            </span>
+                                                            {atk.toHit && <span className="text-green-400">To Hit: <span className="font-black">{atk.toHit}</span></span>}
+                                                            <span className="text-yellow-300">Hasar: <span className="font-black">{atk.damage}</span></span>
                                                         </div>
                                                         {expanded && (
                                                             <div className="mt-2 text-gray-300 text-xs leading-relaxed border-t border-gray-700 pt-2">
@@ -3578,9 +3626,15 @@ export default function PlayerSheet() {
                             )}
 
                             {/* ─── STEP 2: SUBCLASS ─── */}
-                            {lvModal.step === "subclass" && character?.classRef?.subclasses && (
+                            {lvModal.step === "subclass" && (() => {
+                                const lvClassData = lvModal.mcAction === 'add' 
+                                    ? allClasses.find((c: any) => c._id === lvModal.mcData.pickedClassId)
+                                    : lvModal.mcAction === 'levelup'
+                                    ? allClasses.find((c: any) => c.name === character.multiclasses[lvModal.mcData.mcIndex].className)
+                                    : character?.classRef;
+                                return lvClassData?.subclasses ? (
                                 <div className="flex-1 overflow-y-auto p-6 space-y-3">
-                                    {character.classRef.subclasses.map((sub: any, idx: number) => (
+                                    {lvClassData.subclasses.map((sub: any, idx: number) => (
                                         <div key={idx} onClick={() => setLvSubclassChoice(sub)}
                                             className={`cursor-pointer p-5 rounded-xl border-2 transition hover:-translate-y-0.5 ${lvSubclassChoice?.name === sub.name ? 'border-purple-500 bg-purple-900/30' : 'border-gray-700 hover:border-purple-500/50 bg-gray-800'}`}>
                                             <div className="flex items-center justify-between mb-2">
@@ -3599,7 +3653,8 @@ export default function PlayerSheet() {
                                         </div>
                                     ))}
                                 </div>
-                            )}
+                                ) : null;
+                            })()}
 
                             {/* ─── STEP 3: ASI / FEAT ─── */}
                             {lvModal.step === "asi" && (
