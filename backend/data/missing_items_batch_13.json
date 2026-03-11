@@ -1,0 +1,16 @@
+[
+  {
+    "name": "Sanctum Amulet",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:sanctum-amulet",
+    "rarity": "Very Rare",
+    "type": "Wondrous Item",
+    "description": "A black opal pendant hangs at the base of this pearlescent chain. The sacred rune is inscribed on the back of the pendant.\n\nWhile wearing this item, you have resistance to necrotic damage. Additionally, you can cast the Spare the Dying cantrip using either an action or a bonus action.\n\nInvoking the Rune. When a creature you can see within 60 feet of you is reduced to 0 hit points as a result of taking damage, you can use your reaction to invoke the item’s rune, causing the pendant to flash with pale light. The creature then instead drops to 1 hit point.\n\nOnce the rune has been invoked, it can’t be invoked again until the next dawn."
+  },
+  {
+    "name": "Sapphire Buckler",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:sapphire-buckler",
+    "rarity": "Very Rare",
+    "type": "Armor",
+    "description": "This crystalline blue shield is fashioned from a sapphire dragon’s scale and is created to aid in rooting out the influence of Aberrations. While wielding the shield, you have resistance to psychic and thunder damage. Also, when you take damage from a creature that is within 5 feet of you, you can use your reaction to deal 2d6 thunder damage to that creature.\n\nAs an action, you can use the shield to help you locate Aberrations until the end of your next turn. If any Aberrations are within 1 mile of you, the shield emits a low humming tone for a moment, and you know the direction of all Aberrations within that range. Once this property is used, it can’t be used again until the next dawn."
+  }
+]

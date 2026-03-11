@@ -1,0 +1,15 @@
+404: https://dnd5e.wikidot.com/magic-items
+EXISTS: https://dnd5e.wikidot.com/wondrous-items
+404: https://dnd5e.wikidot.com/potions
+404: https://dnd5e.wikidot.com/rings
+404: https://dnd5e.wikidot.com/rods
+404: https://dnd5e.wikidot.com/scrolls
+404: https://dnd5e.wikidot.com/staves
+404: https://dnd5e.wikidot.com/wands
+404: https://dnd5e.wikidot.com/magic-armor
+404: https://dnd5e.wikidot.com/magic-weapons
+404: https://dnd5e.wikidot.com/magic-items-common
+404: https://dnd5e.wikidot.com/magic-items-uncommon
+404: https://dnd5e.wikidot.com/magic-items-rare
+404: https://dnd5e.wikidot.com/magic-items-very-rare
+404: https://dnd5e.wikidot.com/magic-items-legendary

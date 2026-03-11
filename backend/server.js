@@ -34,6 +34,7 @@ const Item = require('./models/Item');
 const User = require('./models/User');
 const Feat = require('./models/Feat');
 const Whisper = require('./models/Whisper');
+const DiceRoll = require('./models/DiceRoll');
 
 const app = express();
 app.use(cors({
@@ -152,7 +153,7 @@ app.post('/api/admin/seed', authenticate, async (req, res) => {
       for (const item of srdItems) {
         itemMap.set(item.name, {
           ...item,
-          name_tr: item.name_tr || item.name,
+          name_tr: item.name_tr || item.name, // Use Turkish name if available
           category: safeTranslateCategory(item.category),
           rarity: item.rarity || 'Common',
           type: item.subcategory || item.category
@@ -160,9 +161,10 @@ app.post('/api/admin/seed', authenticate, async (req, res) => {
       }
     }
 
-    // Magic Item Batches
-    const batchFiles = fs.readdirSync(dataPath).filter(f => f.startsWith('wondrous_details_batch_') && f.endsWith('_tr.json'));
+    // Magic Item Batches (Legacy/Original)
+    const batchFiles = fs.readdirSync(dataPath).filter(f => f.startsWith('wondrous_details_batch_') && (f.endsWith('_tr.json') || f.endsWith('.json')));
     for (const file of batchFiles) {
+      if (file.startsWith('enriched_')) continue; // Skip enriched here
       const items = JSON.parse(fs.readFileSync(path.join(dataPath, file), 'utf8'));
       for (const itemData of items) {
         const existing = itemMap.get(itemData.name) || {};
@@ -170,13 +172,29 @@ app.post('/api/admin/seed', authenticate, async (req, res) => {
           ...existing,
           ...itemData,
           category: 'Büyülü Eşya', // Ensure it fits enum
-          rarity: itemData.rarity || 'Uncommon',
-          type: itemData.type || 'Wondrous Item'
+          rarity: itemData.rarity || existing.rarity || 'Uncommon',
+          type: itemData.type || existing.type || 'Wondrous Item'
+        });
+      }
+    }
+
+    // ENRICHED Item Batches (Priority)
+    const enrichedFiles = fs.readdirSync(dataPath).filter(f => f.startsWith('enriched_items_batch_') && f.endsWith('.json'));
+    for (const file of enrichedFiles) {
+      const items = JSON.parse(fs.readFileSync(path.join(dataPath, file), 'utf8'));
+      for (const itemData of items) {
+        const existing = itemMap.get(itemData.name) || {};
+        itemMap.set(itemData.name, {
+          ...existing,
+          ...itemData,
+          name_tr: itemData.name, // Reverted to English name as per user correction
+          category: itemData.category || 'Büyülü Eşya'
         });
       }
     }
 
     const finalItems = Array.from(itemMap.values());
+
     console.log(`Prepared ${finalItems.length} items. Deleting old records...`);
     await Item.deleteMany({});
 
@@ -249,28 +267,60 @@ app.post('/api/campaigns/:campaignId/map-upload', authenticate, upload.single('m
   }
 });
 
-// Tüm kullanıcıları listele (Şifre hariç)
+// Tüm kullanıcıları listele (Sadece SystemAdmin)
 app.get('/api/admin/users', authenticate, async (req, res) => {
-  if (req.user.role !== 'DM') return res.status(403).json({ error: 'Yetkisiz erişim' });
+  if (req.user.username !== 'SystemAdmin') return res.status(403).json({ error: 'Yetkisiz erişim. Sadece SystemAdmin bu işlemi yapabilir.' });
   try {
-    const users = await User.find({}, 'username role'); // Sadece isim ve rol
+    const users = await User.find({}, 'username role').sort({ username: 1 });
     res.json(users);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 });
 
-// Şifre Sıfırlama
+// Şifre Sıfırlama (Sadece SystemAdmin)
 app.post('/api/admin/reset-password', authenticate, async (req, res) => {
-  if (req.user.role !== 'DM') return res.status(403).json({ error: 'Yetkisiz erişim' });
+  if (req.user.username !== 'SystemAdmin') return res.status(403).json({ error: 'Yetkisiz erişim. Sadece SystemAdmin bu işlemi yapabilir.' });
   try {
     const { targetUserId, newPassword } = req.body;
     const user = await User.findById(targetUserId);
     if (!user) return res.status(404).json({ error: 'Kullanıcı bulunamadı' });
 
-    user.password = newPassword; // pre-save hooku şifreleyecek
+    user.password = newPassword;
     await user.save();
     res.json({ success: true, message: 'Şifre başarıyla güncellendi!' });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Kullanıcı Adı Değiştirme (Sadece SystemAdmin)
+app.put('/api/admin/users/:id', authenticate, async (req, res) => {
+  if (req.user.username !== 'SystemAdmin') return res.status(403).json({ error: 'Yetkisiz erişim' });
+  try {
+    const { newUsername } = req.body;
+    if (!newUsername) return res.status(400).json({ error: 'Yeni kullanıcı adı gerekli' });
+
+    // Çakışma kontrolü
+    const existing = await User.findOne({ username: newUsername });
+    if (existing) return res.status(400).json({ error: 'Bu kullanıcı adı zaten alınmış' });
+
+    const user = await User.findByIdAndUpdate(req.params.id, { username: newUsername }, { new: true });
+    if (!user) return res.status(404).json({ error: 'Kullanıcı bulunamadı' });
+
+    res.json({ success: true, user });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Kullanıcı Silme (Sadece SystemAdmin)
+app.delete('/api/admin/users/:id', authenticate, async (req, res) => {
+  if (req.user.username !== 'SystemAdmin') return res.status(403).json({ error: 'Yetkisiz erişim' });
+  try {
+    const user = await User.findByIdAndDelete(req.params.id);
+    if (!user) return res.status(404).json({ error: 'Kullanıcı bulunamadı' });
+    res.json({ success: true, message: 'Kullanıcı silindi' });
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
@@ -339,17 +389,64 @@ app.post('/api/campaigns', authenticate, async (req, res) => {
 
 app.post('/api/campaigns/join', authenticate, async (req, res) => {
   try {
-    const { campaignName } = req.body; // Join by name for simplicity or we can use ID
-    const campaign = await Campaign.findOne({ name: campaignName });
+    const { campaignName } = req.body;
+    // Case-insensitive search
+    const campaign = await Campaign.findOne({ name: { $regex: new RegExp(`^${campaignName}$`, 'i') } });
     if (!campaign) return res.status(404).json({ error: 'Kampanya bulunamadı' });
 
-    if (!campaign.players.includes(req.user.id)) {
+    // Ensure player is not already in the campaign (comparing IDs as strings for reliability)
+    const isPlayerInCampaign = campaign.players.some(playerId => playerId.toString() === req.user.id);
+
+    if (!isPlayerInCampaign) {
       campaign.players.push(req.user.id);
       await campaign.save();
     }
     res.json(campaign);
   } catch (error) {
     res.status(400).json({ error: error.message });
+  }
+});
+
+app.delete('/api/campaigns/:id', authenticate, async (req, res) => {
+  try {
+    const campaign = await Campaign.findById(req.params.id);
+    if (!campaign) return res.status(404).json({ error: 'Kampanya bulunamadı' });
+
+    if (campaign.dmId.toString() !== req.user.id) {
+      return res.status(403).json({ error: 'Bu kampanyayı silme yetkiniz yok' });
+    }
+
+    await Campaign.findByIdAndDelete(req.params.id);
+    await Character.deleteMany({ campaignId: req.params.id });
+    await NPC.deleteMany({ campaignId: req.params.id });
+    await Note.deleteMany({ campaignId: req.params.id });
+    await SharedMedia.deleteMany({ campaignId: req.params.id });
+
+    res.json({ success: true, message: 'Kampanya ve tüm verileri silindi' });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+app.delete('/api/characters/:id', authenticate, async (req, res) => {
+  try {
+    const character = await Character.findById(req.params.id);
+    if (!character) return res.status(404).json({ error: 'Karakter bulunamadı' });
+
+    const campaign = await Campaign.findById(character.campaignId);
+    if (!campaign) return res.status(404).json({ error: 'Kampanya bulunamadı' });
+
+    const isOwner = character.userId && character.userId.toString() === req.user.id;
+    const isDM = campaign.dmId.toString() === req.user.id;
+
+    if (!isOwner && !isDM) {
+      return res.status(403).json({ error: 'Bu karakteri silme yetkiniz yok' });
+    }
+
+    await Character.findByIdAndDelete(req.params.id);
+    res.json({ success: true, message: 'Karakter başarıyla silindi' });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
   }
 });
 
@@ -780,6 +877,10 @@ io.on('connection', (socket) => {
       });
       socket.emit('party_sync', statsMap);
 
+      // Send dice history
+      const diceHistory = await DiceRoll.find({ campaignId }).sort({ createdAt: -1 }).limit(30);
+      socket.emit('dice_history', diceHistory.reverse());
+
       // Send whisper history
       const userCharacter = await Character.findOne({ campaignId, userId: socket.user.id });
       const charName = userCharacter ? userCharacter.name : (role === 'DM' ? 'DM' : null);
@@ -825,12 +926,35 @@ io.on('connection', (socket) => {
     io.to(campaignId).emit('encounter_updated', encounterData);
   });
 
-  socket.on('roll_dice', ({ campaignId, id, playerName, rollResult, type, isHidden }) => {
-    io.to(campaignId).emit('dice_rolled', { id, playerName, rollResult, type, isHidden });
+  socket.on('roll_dice', async ({ campaignId, id, playerName, rollResult, type, isHidden }) => {
+    try {
+      const newRoll = new DiceRoll({
+        campaignId,
+        playerName,
+        rollResult,
+        type,
+        isHidden: !!isHidden
+      });
+      const savedRoll = await newRoll.save();
+      io.to(campaignId).emit('dice_rolled', {
+        id: savedRoll._id,
+        playerName: savedRoll.playerName,
+        rollResult: savedRoll.rollResult,
+        type: savedRoll.type,
+        isHidden: savedRoll.isHidden
+      });
+    } catch (err) {
+      console.error('Dice roll save error:', err);
+    }
   });
 
-  socket.on('reveal_dice', ({ campaignId, rollId }) => {
-    io.to(campaignId).emit('dice_revealed', { rollId });
+  socket.on('reveal_dice', async ({ campaignId, rollId }) => {
+    try {
+      await DiceRoll.findByIdAndUpdate(rollId, { isHidden: false });
+      io.to(campaignId).emit('dice_revealed', { rollId });
+    } catch (err) {
+      console.error('Dice reveal error:', err);
+    }
   });
 
   socket.on('whisper_player', async ({ campaignId, targetPlayerName, message, senderName }) => {

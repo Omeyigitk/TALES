@@ -1,0 +1,970 @@
+[
+    {
+        "name": "Armblade",
+        "name_tr": "Kolluk Bıçağı",
+        "rarity": "Common",
+        "type": "Weapon",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Bir Kolluk Bıçağı, kolunuza takılan ve siz ona uyum sağladığınız sürece sizden ayrılmaz bir büyülü silahtır. Uyum sağlamak için, tüm uyumlanma süreci boyunca silahı ön kolunuza dayalı tutmalısınız.\n\nBir bonus eylem (bonus action) olarak, bıçağı ön kolunuzun içine çekebilir veya oradan dışarı çıkarabilirsiniz. Bıçak dışarıdayken, silahı elinizde tutuyormuşsunuz gibi kullanabilirsiniz ancak o elinizi başka amaçlar için kullanamazsınız.\n\n**[Atmosfer]** Savaşçı ile bıçak arasında kusursuz bir bağ arayanlar tarafından tercih edilen özel bir silahtır. Kolluk Bıçağı, genellikle çekildiğinde hafifçe parlayan rünler içeren bir entegrasyon şaheseridir.",
+        "effects": []
+    },
+    {
+        "name": "Armor of Gleaming",
+        "name_tr": "Parıldayan Zırh",
+        "rarity": "Common",
+        "type": "Armor",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Bu zırh, hiçbir zaman kirlenmesini önleyen küçük bir korunma (abjuration) büyüsü ile donatılmıştır. Temizlik gerektirmez ve çevre koşullarından veya kullanımdan bağımsız olarak cilalı görünümünü korur.\n\n**[Atmosfer]** Bu zırh takımı pislik kavramını reddediyor gibi görünür. İster en derin bataklıklarda yürüyün, ister en kanlı çatışmalardan çıkın, dövüldüğü günkü kadar tertemiz kalır.",
+        "effects": []
+    },
+    {
+        "name": "Band of Loyalty",
+        "name_tr": "Sadakat Yüzüğü",
+        "rarity": "Common",
+        "type": "Ring",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Bu yüzüğe uyumluyken can puanınız (hit points) 0'a inerse, anında ölürsünüz. Bu, yakalanmanızı önler ve işkence veya sorgulama yoluyla hiçbir sırrın sizden alınmamasını sağlar.\n\n**[Atmosfer]** Sırları hayatlarından daha değerli olan casuslar ve seçkin ajanlar tarafından takılan amansız bir aksesuardır. Yüzük, amaç ağırlığıyla dolu, basit ve koyu metal bir halkadır.",
+        "effects": []
+    },
+    {
+        "name": "Bead of Nourishment",
+        "name_tr": "Beslenme Taneciği",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Bu jölemsi tanecik dilinizin üzerinde çözünür ve 1 günlük rasyon (ration) kadar besin sağlar. Çorak arazilerdeki uzun yolculuklar için hayati bir araçtır.\n\n**[Atmosfer]** Tam bir günlük besinin konsantre özünü taşıyan küçük, süngerimsi bir tanecik. Tatsızdır ama merak uyandırıcı bir şekilde doyurucudur.",
+        "effects": []
+    },
+    {
+        "name": "Bead of Refreshment",
+        "name_tr": "Tazelik Taneciği",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Bu tanecik bir sıvı içinde çözünerek, bir pine (yaklaşık yarım litre) kadar olan sıvıyı taze, soğuk içme suyuna dönüştürür. Büyülü sıvılar veya zehir gibi zararlı maddeler üzerinde hiçbir etkisi yoktur.\n\n**[Atmosfer]** Bir dağ pınarının saflığını taşıyan, parıldayan şeffaf bir tanecik.",
+        "effects": []
+    },
+    {
+        "name": "Boots of False Tracks",
+        "name_tr": "Yanıltıcı İz Botları",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Bu botları yalnızca insansılar (humanoids) giyebilir. Botları giyerken, kendi boyutunuzdaki başka bir insansı türüne (örneğin bir cücenin izini bırakan bir elf gibi) ait izler bırakmayı seçebilirsiniz.\n\n**[Atmosfer]** Bu botlar sıradan görünür ancak yolunuzu takip etmeye çalışan herkesi yanıltan akıllıca bir büyüye sahiptir.",
+        "effects": []
+    },
+    {
+        "name": "Bottle of Boundless Coffee",
+        "rarity": "Common",
+        "name_tr": "Sonsuz Kahve Şişesi",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Bu şişe sıcak ve lezzetli kahve üretir. Başka hiçbir sıvıyı kabul etmez. İçtikten sonra bir d20 atın; 1 gelirse, bir saat boyunca kahve vermeyi durdurur. Şişeden dökülen kahve anında yok olur.\n\n**[Atmosfer]** Üzerinde buhar benzeri desenler kazınmış metal bir şişe, her zaman rahatlatıcı bir sıcaklık yayar. Soğuk gecelerde bir gezginin en iyi arkadaşıdır.",
+        "effects": []
+    },
+    {
+        "name": "Breathing Bubble",
+        "name_tr": "Nefes Baloncuğu",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Kask gibi başın üzerine tutulduğunda 1 saatlik solunabilir hava sağlar. Tüm havayı her gün şafak vaktinde geri kazanır; bu da onu kısa su altı gezileri için ideal kılar.\n\n**[Atmosfer]** Başın üzerine oturan, hafif mavi bir ışıkla parıldayan şeffaf, balon benzeri bir küre.",
+        "effects": []
+    },
+    {
+        "name": "Candle of the Deep",
+        "name_tr": "Derinlik Mumu",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Bu mumun alevi suya daldırıldığında sönmez. Normal bir mum gibi ışık ve ısı sağlar, su altında kusursuz çalışır.\n\n**[Atmosfer]** Okyanusun derinliklerinde bile sabit, boyun eğmez bir alevle yanan ağır balmumu bir mum.",
+        "effects": []
+    },
+    {
+        "name": "Cast-Off Armor",
+        "name_tr": "Anında Çıkarılan Zırh",
+        "rarity": "Common",
+        "type": "Armor",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Bu zırhı bir eylem (action) olarak üzerinizden çıkarabilirsiniz. Zırhsız olmanın gerekli olduğu acil durumlarda zırhı hızla soyunmanıza olanak tanır.\n\n**[Atmosfer]** Hızlı kaçışlar veya ani acil durumlar için tasarlanan bu zırh, bir dizi deneysel mandal ve tokaya sahiptir.",
+        "effects": []
+    },
+    {
+        "name": "Charlatan's Die",
+        "name_tr": "Şarlatanın Zarı",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Bu zarı her attığınızda, hangi sayının geleceğini kontrol edebilirsiniz. Kumarbazlar ve aldatma ustaları için paha biçilemez bir araçtır.\n\n**[Atmosfer]** Şanslı olanların... veya dürüst olmayanların lehine gibi görünen altı yüzlü bir zar. Hafif, neredeyse fark edilemez bir ağırlık dengesizliği vardır.",
+        "effects": []
+    },
+    {
+        "name": "Chest of Preserving",
+        "name_tr": "Koruma Sandığı",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Yiyecekler ve diğer bozulabilir eşyalar içindeyken eskimez veya çürümez. Boyutlar: 75cm uzunluk, 45cm genişlik, 30cm yükseklik. Ağırlık: 12 kg.\n\n**[Atmosfer]** İçeriğini askıya alınmış bir animasyon durumunda tutan, gümüş menteşeli sağlam ahşap bir sandık.",
+        "effects": []
+    },
+    {
+        "name": "Cleansing Stone",
+        "name_tr": "Temizlik Taşı",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Taşa dokunmak ve etkinleştirmek için bir eylem (action) kullanın; bu, kıyafetlerinizdeki ve üzerinizdeki kir ve pisliği temizler. Genellikle lüks hanlarda ve meydanlarda bulunur.\n\n**[Atmosfer]** Üzerine saflık mühürleri kazınmış pürüzsüz bir taş küre. Etkinleştirildiğinde yumuşak bir uğultu çıkarır.",
+        "effects": []
+    },
+    {
+        "name": "Cloak of Billowing",
+        "name_tr": "Dalgalanan Pelerin",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Bu pelerini giyerken, gerçek rüzgar koşullarından bağımsız olarak pelerinin dramatik bir şekilde dalgalanmasını sağlamak için bir bonus eylem (bonus action) kullanabilirsiniz.\n\n**[Atmosfer]** Dramatik bir giriş yapmak isteyen maceracılar için. Bu pelerin, en doğru anda var olmayan bir rüzgarı yakalıyor gibi görünür.",
+        "effects": []
+    },
+    {
+        "name": "Cloak of Many Fashions",
+        "name_tr": "Bin Moda Pelerini",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Tarzını, rengini ve görünür kalitesini değiştirmek için bir bonus eylem kullanın. Pelerin olarak kalmaya devam eder ve taklit ettiği pelerinlerin özelliklerini kazanmaz. Ağırlığı değişmez.\n\n**[Atmosfer]** Kendini bir dilenci paçavrasına dönüştürebilen veya bir soylunun şıklığına bürünebilen çok yönlü bir giysi.",
+        "effects": []
+    },
+    {
+        "name": "Clockwork Amulet",
+        "name_tr": "Saatli Muska",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Bir saldırı zarı atarken, d20 zarını atmaktan vazgeçip yerine 10 almayı seçebilirsiniz. Bu özellik her gün şafak vaktinde kullanım hakkını geri kazanır.\n\n**[Atmosfer]** Mechanus'un ritmiyle hafifçe tiktaklayan, karmaşık dişlilerden oluşan bakır bir muska. Mutlak öngörülebilirlik havası yayar.",
+        "effects": [
+            {
+                "type": "attack_bonus",
+                "value": "Fixed 10 once per day"
+            }
+        ]
+    },
+    {
+        "name": "Clothes of Mending",
+        "name_tr": "Onarılan Giysiler",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Bu zarif kıyafet, günlük aşınma ve yıpranmaya karşı kendini sihirli bir şekilde onarır. Not: Tamamen yok olan parçalar bu şekilde tamir edilemez.\n\n**[Atmosfer]** Bu kaliteli kıyafetin kendine ait bir hayatı var gibi görünür; yırtıldığında ipliklerini sessizce geri çeker.",
+        "effects": []
+    },
+    {
+        "name": "Coin of Delving",
+        "name_tr": "Derinlik Parası",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** 1.5 metre (5 feet) yarıçapında loş ışık yayar. 1.5 metreden fazla düşerse, melodik bir çınlama çıkarır. Ses tonu, ne kadar uzağa düştüğünü gösterir.\n\n**[Atmosfer]** Karanlığa atıldığında kendine özgü, müzikal bir tonla çınlayan bakır bir para.",
+        "effects": []
+    },
+    {
+        "name": "Cuddly Strixhaven Mascot",
+        "name_tr": "Sevimli Strixhaven Maskotu",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Bir uzva 1 saat boyunca bağlanabilir. Korkutulma (frightened) durumuna karşı yapılan kurtarma zarışarında avantaj sağlar. Uzun dinlenme (long rest) başına bir kez kullanılabilir.\n\n**[Atmosfer]** Kolejlerden birini temsil eden yumuşak, sevimli bir peluş oyuncak. Dehşet karşısında şaşırtıcı miktarda teselli sunar.",
+        "effects": []
+    },
+    {
+        "name": "Dark Shard Amulet",
+        "name_tr": "Karanlık Parça Muskası",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Yalnızca Warlock sınıfı içindir. Bilmediğiniz bir Warlock büyücüğünü (cantrip) çekmenize olanak tanır (DC 10 Arcana kontrolü). Bir büyü odağı (spellcasting focus) olarak işlev görür.\n\n**[Atmosfer]** Muskaya dönüştürülmüş tek, keskin bir düzlemler arası cam parçası. Patronunuzun gücüyle titrer.",
+        "effects": []
+    },
+    {
+        "name": "Dread Helm",
+        "name_tr": "Dehşet Miğferi",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Miğferi takarken gözleriniz korkutucu kırmızı bir ışıkla parlar. Mekanik bir savaş bonusu sağlamaz ancak görünüşü dehşet vericidir.\n\n**[Atmosfer]** Işığı içine çekiyor gibi görünen ve takanın yüzüne tehditkar bir gölge düşüren korkunç bir çelik miğfer.",
+        "effects": []
+    },
+    {
+        "name": "Ear Horn of Hearing",
+        "name_tr": "İşitme Borusu",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Kulağa tutulduğunda sağır (deafened) durumunu bastırır ve boru aracılığıyla normal şekilde duymanıza olanak tanır.\n\n**[Atmosfer]** Havadaki en zayıf fısıltıları bile yakalayan süslü bir pirinç boru.",
+        "effects": []
+    },
+    {
+        "name": "Earring of Message",
+        "name_tr": "Mesaj Küpesi",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** 5 yüke (charge) sahiptir. Bir eylem ve 1 yük kullanarak Message (Mesaj) büyüsünü yapabilirsiniz. Her gün şafak vaktinde 1d4+1 yük geri kazanır.\n\n**[Atmosfer]** Bakır telle sarılmış narin bir kristal küpe, sihirli bir potansiyelle hafifçe uğuldar.",
+        "effects": [
+            {
+                "type": "spell_auto",
+                "spellName": "Message"
+            }
+        ]
+    },
+    {
+        "name": "Enduring Spellbook",
+        "name_tr": "Dayanıklı Büyü Kitabı",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Ateş veya suya daldırma ile hasar görmez. Sayfalar zamanla yıpranmaz, büyülerin sonsuza dek korunmasını sağlar.\n\n**[Atmosfer]** Bir büyücünün en değerli mirası, zamana ve doğa koşullarına meydan okuyan tılsımlarla korunmaktadır.",
+        "effects": []
+    },
+    {
+        "name": "Ersatz Eye",
+        "name_tr": "Yapay Göz",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Kaybedilen bir gözün yerine geçer. Bir kez takıldığında sadece siz çıkarabilirsiniz. Sanki normal bir gözmüş gibi içinden görebilirsiniz.\n\n**[Atmosfer]** Gözünü kaybetmiş olanların görüşünü geri kazandıran gerçeğe yakın veya dekoratif bir küre.",
+        "effects": []
+    },
+    {
+        "name": "Everbright Lantern",
+        "name_tr": "Ebedi Fener",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** 36 metrelik (120 feet) bir koni şeklinde ışık yayar (ilk 18 metre parlak, sonraki 18 metre loş). Yakıt gerektirmez ve 'Continual Flame' büyüsü gibi çalışır.\n\n**[Atmosfer]** Bir Eberron ejderha şardından güç alan bu fener, sabit ve yorulmak bilmez bir ışık huzmesi sağlar.",
+        "effects": []
+    },
+    {
+        "name": "Feather Token",
+        "name_tr": "Tüy Yadigar",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** 6 metreden (20 feet) fazla düşerseniz, tur başına 18 metre hızla inersiniz ve düşme hasarı almazsınız. Yadigarın sihri yere indiğinizde tükenir.\n\n**[Atmosfer]** Üzerine tüy kazınmış küçük bir metal disk, avucunuzda imkansız derecede hafif hissedilir.",
+        "effects": []
+    },
+    {
+        "name": "Glamerweave",
+        "name_tr": "İllüzyon Örgüsü",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Hareketli illüzyon desenleri oluşturmak için bir bonus eylem kullanın. Sıradışı (Uncommon) versiyonları Performance veya Persuasion kontrollerine bonus verebilir.\n\n**[Atmosfer]** Kumaş üzerinde kayan ve değişen desenlere izin veren, illüzyon büyüsüyle dokunmuş giysiler.",
+        "effects": []
+    },
+    {
+        "name": "Hat of Vermin",
+        "name_tr": "Haşere Şapkası",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** 3 yüke sahiptir. Bir eylem kullanarak 1 yük harcayın ve bir yarasa, kurbağa veya fare çağırın. Yaratık sizin kontrolünüzde değildir. Şafakta yükleri yenilenir.\n\n**[Atmosfer]** Astarında birkaç sürpriz barındıran, hafifçe güve yemiş bir şapka.",
+        "effects": []
+    },
+    {
+        "name": "Hat of Wizardry",
+        "name_tr": "Büyücülük Şapkası",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Yalnızca Büyücü (Wizard) sınıfı içindir. Bir büyü odağı olarak kullanılabilir ve bilmediğiniz bir cantrip büyücüğünü denemenize (Arcana kontrolü ile) izin verir.\n\n**[Atmosfer]** Klasik koni şeklinde, yıldızlarla süslü ve hafifçe ozon ve eski parşömen kokan bir şapka.",
+        "effects": []
+    },
+    {
+        "name": "Heward's Handy Spice Pouch",
+        "name_tr": "Heward'ın Pratik Baharat Kesesi",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** 10 yüke sahiptir. Bir eylem harcayarak herhangi bir büyülü olmayan baharattan (tuz, karabiber, safran vb.) bir tutam üretebilirsiniz. Günde 1d6+4 yük geri kazanır.\n\n**[Atmosfer]** Hiçbir maceracının bir daha asla tatsız bir yemeğe katlanmak zorunda kalmamasını sağlayan küçük bir kese.",
+        "effects": []
+    },
+    {
+        "name": "Horn of Silent Alarm",
+        "name_tr": "Sessiz Alarm Borusu",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** 4 yüke sahiptir. 180 metre (600 feet) içindeki seçilen bir yaratık borunun sesini duyar. Başka kimse hiçbir şey duymaz. Günde 1d4 yük geri kazanır.\n\n**[Atmosfer]** Sadece tek bir kulak çifti için tasarlanmış bir ses çıkaran bir boru.",
+        "effects": []
+    },
+    {
+        "name": "Illuminator's Tattoo",
+        "name_tr": "Nakışçı Dövmesi",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Parmak ucunuzla hiç bitmeyen bir kalemmiş gibi yazabilirsiniz. Bir sayfaya dokunarak yazıyı siz ve isimlendirdiğiniz biri dışında herkesten 24 saat boyunca saklayabilirsiniz.\n\n**[Atmosfer]** Deriye işlenmiş, hem sanat hem de araç görevi gören güzel kaligrafi nakışları.",
+        "effects": []
+    },
+    {
+        "name": "Imbued Wood Focus",
+        "name_tr": "Özlü Odun Odağı",
+        "rarity": "Common",
+        "type": "Staff",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Büyü yapma odağıdır. İlgili element türündeki (örneğin ateş için Fernian külü) hasar zarlarına +1 bonus verir.\n\n**[Atmosfer]** Düzlemsel enerjiyle aşılanmış ağaçlardan kesilmiş, elementel güçle titreşen bir odak noktası.",
+        "effects": [
+            {
+                "type": "damage_bonus",
+                "value": 1
+            }
+        ]
+    },
+    {
+        "name": "Instrument of Illusions",
+        "name_tr": "İllüzyon Enstrümanı",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Çalarken 1.5 metre (Bards için 4.5 metre) yarıçapında zararsız görsel efektler oluşturun. Çalmayı bıraktığınızda efektler sona erer.\n\n**[Atmosfer]** Çalınırken havayı spektral görüntülerle boyayan müzikal bir enstrüman.",
+        "effects": []
+    },
+    {
+        "name": "Instrument of Scribing",
+        "name_tr": "Yazıcı Enstrümanı",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** 3 yüke sahiptir. Bir eylem kullanarak 9 metre içindeki bir yüzeye 6 kelimelik sihirli bir mesaj yazın. 24 saat sonra silinir.\n\n**[Atmosfer]** Şarkının gücüyle yüzeylere sihirli bir şekilde 'yazı yazabilen' bir enstrüman.",
+        "effects": []
+    },
+    {
+        "name": "Keycharm",
+        "name_tr": "Anahtar Tılsımı",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Alarm, Arcane Lock veya Glyph of Warding büyülerini anahtara bağlayın. Anahtarı tutan kişi bu etkileri tetiklemez veya bildirimleri alır.\n\n**[Atmosfer]** Karmaşık güvenlik mühürlerini yönetmek için House Kundarak tarafından kullanılan stilize gümüş bir anahtar.",
+        "effects": []
+    },
+    {
+        "name": "Lantern of Tracking",
+        "name_tr": "Takip Feneri",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Belirli bir yaratık türüne 90 metre mesafede olduğunda alevi yeşil yanar. 1 pint yağ ile 6 saat yanar.\n\n**[Atmosfer]** Belirli yaratıkları tespit etmek için tasarlanmış kukuletalı bir fener. Yakınlarda olduklarında alevi ürkütücü yeşil bir ışıkla yanar.",
+        "effects": []
+    },
+    {
+        "name": "Lock of Trickery",
+        "name_tr": "Düzenbaz Kilidi",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Bu kilidi açmak için yapılan el çabukluğu (Dexterity) kontrolleri dezavantajlıdır. Tek bir eşleşen anahtarla birlikte gelir.\n\n**[Atmosfer]** Hırsızları şaşırtmak için iç mekanizmalarını gizlice değiştiren sıradan görünümlü bir kilit.",
+        "effects": []
+    },
+    {
+        "name": "Masque Charm",
+        "name_tr": "Maske Tılsımı",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Disguise Self (DC 13) büyüsünü yapmanızı sağlar. 1 saat veya 6 saat sürebilir (6 saat kullanılırsa tılsım tılsımlı özelliğini kaybeder). Gün batımında sıfırlanır.\n\n**[Atmosfer]** Kimliğin hızlı bir şekilde değiştirilmesine olanak tanıyan küçük gümüş bir iğne.",
+        "effects": [
+            {
+                "type": "spell_auto",
+                "spellName": "Disguise Self"
+            }
+        ]
+    },
+    {
+        "name": "Masquerade Tattoo",
+        "name_tr": "Maskeli Balo Dövmesi",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Dövmenin desenini/rengini değiştirmek için bir bonus eylem kullanın. Disguise Self (DC 13) büyüsünü yapmak için bir eylem kullanın. Şafakta sıfırlanır.\n\n**[Atmosfer]** Bir anlık uyarıyla şeklini ve rengini değiştirebilen sihirli bir dövme.",
+        "effects": [
+            {
+                "type": "spell_auto",
+                "spellName": "Disguise Self"
+            }
+        ]
+    },
+    {
+        "name": "Medal of Muscle",
+        "name_tr": "Kas Madalyası",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Güç (Strength) kontrollerinde ve kurtarma zarlarında 1 saat boyunca avantaj elde etmek için madalyayı sıkın. Kullanıldıktan sonra sihirli özelliğini kaybeder.\n\n**[Atmosfer]** Fiziksel mükemmelliği temsil eden sağlam bir bronz madalya.",
+        "effects": []
+    },
+    {
+        "name": "Medal of the Conch",
+        "name_tr": "Deniz Kabuğu Madalyası",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** 1 saat boyunca yürüme hızınıza eşit bir yüzme hızı kazanmak için madalyayı ovun. Kullanıldıktan sonra sihirli özelliğini kaybeder.\n\n**[Atmosfer]** Kullanıcıya bir deniz yaratığının lütfunu bahşeden deniz kabuğu şeklinde bir madalya.",
+        "effects": [
+            {
+                "type": "speed_bonus",
+                "value": "Swim speed equal to walk speed"
+            }
+        ]
+    },
+    {
+        "name": "Medal of the Horizonback",
+        "name_tr": "Ufuk Sırtı Madalyası",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Bir saldırı isabet ettiğinde, sonraki turunuza kadar Zırh Sınıfınızı (AC) 5 artırmak için bir tepki (reaction) kullanın. Kullanıldıktan sonra sihirli özelliğini kaybeder.\n\n**[Atmosfer]** Büyük kaplumbağaları onurlandıran, ani bir koruma patlaması sunan bir madalya.",
+        "effects": [
+            {
+                "type": "ac_bonus",
+                "value": 5
+            }
+        ]
+    },
+    {
+        "name": "Medal of the Maze",
+        "name_tr": "Labirent Madalyası",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Hikmet (Wisdom) kontrollerinde avantaj kazanmak ve 1 saat boyunca labirentlerdeki en hızlı rotayı bilmek için labirenti takip edin. Kullanıldıktan sonra sihirli özelliğini kaybeder.\n\n**[Atmosfer]** Zihni en karmaşık yollarda yönlendiren labirent şeklinde bir madalya.",
+        "effects": []
+    },
+    {
+        "name": "Medal of the Meat Pie",
+        "name_tr": "Etli Börek Madalyası",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** 2d4+2 geçici can puanı kazanmak için madalyayı ağzınıza bastırın. Kullanıldıktan sonra sihirli özelliğini kaybeder.\n\n**[Atmosfer]** Canlılık patlaması sağlayan sıcak, iştah açıcı kokulu bir madalya.",
+        "effects": []
+    },
+    {
+        "name": "Medal of the Wetlands",
+        "name_tr": "Sulak Alan Madalyası",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Zorlu arazinin ek hareket maliyetini 1 saat boyunca yok saymak için kenarını takip edin. Kullanıldıktan sonra sihirli özelliğini kaybeder.\n\n**[Atmosfer]** Zorlu arazilerde gezinmeye yardımcı olan yosun renkli bir madalya.",
+        "effects": []
+    },
+    {
+        "name": "Medal of Wit",
+        "name_tr": "Zeka Madalyası",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Zeka (Intelligence) kontrollerinde ve kurtarma zarlarında 1 saat boyunca avantaj elde etmek için şakağınıza bastırın. Kullanıldıktan sonra sihirli özelliğini kaybeder.\n\n**[Atmosfer]** Kullanıcının zihinsel yetilerini keskinleştiren gümüş bir madalya.",
+        "effects": []
+    },
+    {
+        "name": "Mind Crystal",
+        "name_tr": "Zihin Kristali",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Bir eylem büyüsü yaparken, bir metamagic benzeri efekti (Careful, Distant, Empowered vb.) uygulamak için kullanın. Tek kullanımlıktır.\n\n**[Atmosfer]** Tek bir büyüyü güçlendiren, kristalleşmiş psişik enerji parçası.",
+        "effects": []
+    },
+    {
+        "name": "Moodmark Paint",
+        "name_tr": "Ruh Hali Boyası",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** 8 saat sürer. Zihinsel durumu yansıtır. Belirli duyguları (mutluluk, üzüntü, korku vb.) ayırt etmek için DC 10 Insight kontrolü gerekir.\n\n**[Atmosfer]** Kullanıcının gerçek duygularını ortaya çıkarmak için değişen siyah yüz boyası.",
+        "effects": []
+    },
+    {
+        "name": "Moon-Touched Sword",
+        "name_tr": "Ay Dokunuşlu Kılıç",
+        "rarity": "Common",
+        "type": "Weapon",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Karanlıkta kınından çıkarıldığında ay ışığı yayar (4.5 metre parlak, 4.5 metre loş). Dirençleri aşmak için büyülü bir silah sayılır.\n\n**[Atmosfer]** Dolunayın ışığında dövülmüş, en derin karanlığı bile yırtan gümüşümsü bir parıltı taşıyan bir bıçak.",
+        "effects": []
+    },
+    {
+        "name": "Mystery Key",
+        "name_tr": "Gizemli Anahtar",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Bir kilidi açma şansı %5'tir. Başarılı olursa anahtar yok olur.\n\n**[Atmosfer]** Baş kısmına bir soru işareti işlenmiş bu anahtar, potansiyel ve belirsizlikle dolar.",
+        "effects": []
+    },
+    {
+        "name": "Orb of Direction",
+        "name_tr": "Yön Küresi",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Kuzeyin hangi taraf olduğunu belirlemek için bir eylem kullanın. Sadece Maddi Düzlem'de (Material Plane) çalışır.\n\n**[Atmosfer]** Kullanıcısı nerede olursa olsun, her zaman kuzey yıldızını yansıtıyor gibi görünen cilalı bir cam küre.",
+        "effects": []
+    },
+    {
+        "name": "Orb of Gonging",
+        "name_tr": "Gong Küresi",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Çentikleri hizalamak bir eylem gerektirir; bu, kürenin durdurulana kadar her 6 saniyede bir yüksek sesle gong çalmasına neden olur. Ses 180 metre (600 feet) öteden duyulabilir.\n\n**[Atmosfer]** Çentikli halkalardan yapılmış içi boş bronz bir küre. Hizalandığında koridorlarda yankılanan bir ses çıkarır.",
+        "effects": []
+    },
+    {
+        "name": "Orb of Shielding",
+        "name_tr": "Kalkan Küresi",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Büyü odağı olarak kullanılabilir. İlgili hasar türünden (düzleme bağlı) hasar alırken, bu hasarı 1d4 azaltmak için bir tepki (reaction) kullanın.\n\n**[Atmosfer]** Temel düzlemlerle uyumlu, koruyucu enerjilerle titreşen cilalı kristal parçası.",
+        "effects": [
+            {
+                "type": "ac_bonus",
+                "value": "1d4 damage reduction on reaction"
+            }
+        ]
+    },
+    {
+        "name": "Orb of Time",
+        "name_tr": "Zaman Küresi",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Günün genel vaktini (sabah, öğleden sonra, akşam, gece) belirlemek için bir eylem kullanın. Maddi Düzlem dışında çalışmaz.\n\n**[Atmosfer]** Güneş ve ayın döngüsünü yakalayan, derin yer altında bile dış dünyayı hissetmeyi sağlayan bir küre.",
+        "effects": []
+    },
+    {
+        "name": "Perfume of Bewitching",
+        "name_tr": "Büyüleyici Parfüm",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** 1 saat sürer. Düşük CR'li (1 veya altı) insansılara karşı yapılan Charisma kontrollerinde avantaj sağlar. Hedefler büyülü etkinin farkında olmaz.\n\n**[Atmosfer]** Lavanta ve büyü notaları içeren tatlı, çekici bir koku.",
+        "effects": []
+    },
+    {
+        "name": "Pipe of Remembrance",
+        "name_tr": "Hatıra Piposu",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** 10 dakika tütün içtikten sonra, çıkan duman 5 dakika boyunca en büyük başarılarınızı canlandırır. Günde bir kez kullanılabilir.\n\n**[Atmosfer]** Taş hazneli ahşap bir pipo. Dumanı dağılmaz, eski hikayeleri anlatmak için bekler.",
+        "effects": []
+    },
+    {
+        "name": "Pipe of Smoke Monsters",
+        "name_tr": "Duman Canavarı Piposu",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Tütün içerken, dumanı küçük bir yaratık (ejderha, kurbağa vb.) formuna sokmak için bir eylem kullanın. Form birkaç saniye kalır.\n\n**[Atmosfer]** Sıkılmış denizcilerin ve hayalperest gezginlerin favorisi olan bu pipo, nefesinizi şekillendirmenize izin verir.",
+        "effects": []
+    },
+    {
+        "name": "Pole of Angling",
+        "name_tr": "Balıkçı Asası",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Bir komut kelimesiyle oltaya (kanca, misina, makara dahil) dönüşür. Tekrar söylendiğinde 3 metrelik normal bir asaya dönüşür.\n\n**[Atmosfer]** Bir gezginin çok amaçlı aleti; bu asa, içinde balıkçı sırrını gizler.",
+        "effects": []
+    },
+    {
+        "name": "Pole of Collapsing",
+        "name_tr": "Katlanır Asa",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Komut kelimesiyle 3 metreden 30 santimetreye küçülür veya uzar. Ağırlığı her iki formda da aynıdır.\n\n**[Atmosfer]** Kolay taşıma için el tipi bir çubuğa dönüşebilen, sıradan görünümlü bir asa.",
+        "effects": []
+    },
+    {
+        "name": "Pot of Awakening",
+        "name_tr": "Uyanış Çömleği",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** İçine sıradan bir çalı dikin; 30 gün sonra size dost olan bir 'Awakened Shrub' yaratığına dönüşür. Çalı uyandığında çömlek parçalanır.\n\n**[Atmosfer]** Doğanın büyümesiyle uğuldayan 5 kiloluk kilden bir saksı.",
+        "effects": []
+    },
+    {
+        "name": "Potion of Climbing",
+        "name_tr": "Tırmanış İksiri",
+        "rarity": "Common",
+        "type": "Potion",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** 1 saat boyunca yürüme hızınıza eşit bir tırmanma hızı ve tırmanma için yapılan Athletics kontrollerinde avantaj kazanarsınız.\n\n**[Atmosfer]** Çalkalansa bile asla birbirine karışmayan gri ve gümüş katmanlı bir iksir. Islak taş gibi kokar.",
+        "effects": [
+            {
+                "type": "speed_bonus",
+                "value": "Climb speed equal to walk speed"
+            }
+        ]
+    },
+    {
+        "name": "Potion of Healing",
+        "name_tr": "İyileştirme İksiri",
+        "rarity": "Common",
+        "type": "Potion",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Tüketildiğinde 2d4+2 can puanı kazandırır. Her maceracının sahip olması gereken standart bir iyileştirme aracıdır.\n\n**[Atmosfer]** Kiraz ve sihirli restorasyon kokan, parıldayan kırmızı bir sıvı.",
+        "effects": [
+            {
+                "type": "spell_auto",
+                "spellName": "Cure Wounds (2d4+2)"
+            }
+        ]
+    },
+    {
+        "name": "Potion of Watchful Rest",
+        "name_tr": "Uyanık Dinlenme İksiri",
+        "rarity": "Common",
+        "type": "Potion",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** 8 saat boyunca: sihir sizi uyutamaz ve uzun dinlenme (long rest) sırasında uyanık kalıp yine de dinlenme avantajlarını kazanabilirsiniz. Elfler üzerinde etkisi yoktur.\n\n**[Atmosfer]** Bu tatlı kehribar sıvı, zihni uyanık ve berrak tutarak uyku ihtiyacını ortadan kaldırır.",
+        "effects": []
+    },
+    {
+        "name": "Pressure Capsule",
+        "name_tr": "Basınç Kapsülü",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Tüketildiğinde, derin su yüzüşünün (30 metreden derin) ezici etkilerini kısa bir süreliğine yok saymanızı sağlar.\n\n**[Atmosfer]** Derin deniz kaşifleri için tasarlanmış balmumu ve büyülü yosundan yapılmış küçük bir kapsül.",
+        "effects": []
+    },
+    {
+        "name": "Prosthetic Limb",
+        "name_tr": "Protez Uzuv",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Kaybedilen bir uzvun (el, kol, ayak, bacak) işlevini tamamen yerine getirir. Bir eylem olarak sökülüp takılabilir.\n\n**[Atmosfer]** Kayıp bir vücut parçasının işlevini mükemmel şekilde taklit eden bir saat mekanizması veya büyü şaheseridir.",
+        "effects": []
+    },
+    {
+        "name": "Rope of Mending",
+        "name_tr": "Onarım Halatı",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Kesilebilir ve bir komut kelimesiyle tekrar birleştirilebilir. Parçalar temas halinde olmalıdır. Parçalar kaybolursa kalıcı olarak kısalır.\n\n**[Atmosfer]** Parçalanmayı reddeden 15 metrelik kenevir bir halat.",
+        "effects": []
+    },
+    {
+        "name": "Ruby of the War Mage",
+        "name_tr": "Savaş Büyücüsü Yakutu",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Bir silaha takılarak onu büyü odağı olarak kullanmanızı sağlar. Takılması 10 dakika sürer. Bağlandıktan sonra kolayca çıkarılamaz.\n\n**[Atmosfer]** Üzerine rünler kazınmış 2.5 santimetrelik parlak bir yakut.",
+        "effects": []
+    },
+    {
+        "name": "Scribe's Pen",
+        "name_tr": "Yazıcı Kalemi",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Her yüzeye görünen veya görünmeyen yazılar yazabilir. Görünmeyen yazılar 'Mark of Scribing' sahipleri tarafından görülebilir. Canlı dokudan 7 günde silinir.\n\n**[Atmosfer]** Neredeyse her yüzeye yazabilen, meraklı gözlerden saklanabilen mürekkebi olan süslü bir kalem.",
+        "effects": []
+    },
+    {
+        "name": "Sekolahian Worshipping Statuette",
+        "name_tr": "Sekolah Heykelciği",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Çok küçük bir deniz hayvanı 2.5 santimetre yakınına gelirse, köpekbalığı canlanır ve 1 delici hasar verir. Saatte bir kez çalışır.\n\n**[Atmosfer]** Vahşi bir köpekbalığının kumtaşı oyması, antik su altı tapınaklarında bulunur.",
+        "effects": [
+            {
+                "type": "extra_damage",
+                "value": 1
+            }
+        ]
+    },
+    {
+        "name": "Shield of Expression",
+        "name_tr": "İfade Kalkanı",
+        "rarity": "Common",
+        "type": "Armor",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Kalkanın üzerindeki yüz ifadesini (gülümseme, somurtma, parlama vb.) değiştirmek için bir bonus eylem kullanın. Tamamen kozmetik bir etkidir.\n\n**[Atmosfer]** Ön kısmına bir yüz şekli verilmiş bir kalkan. Düşmanı kullanıcının niyetiyle izliyor gibi görünür.",
+        "effects": []
+    },
+    {
+        "name": "Shiftweave",
+        "name_tr": "Değişken Dokuma",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** İçine gömülü 5 tasarımdan birine dönüşmek için bir bonus eylem kullanın. Tamamen kozmetiktir, başka büyü faydası sağlamaz.\n\n**[Atmosfer]** Tek bir kumaş parçasına sihirli bir şekilde sıkıştırılmış beş farklı kıyafet içeren ustalık işi giysi.",
+        "effects": []
+    },
+    {
+        "name": "Smoldering Armor",
+        "name_tr": "Tüten Zırh",
+        "rarity": "Common",
+        "type": "Armor",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Zırh giyildiği sürece ondan zararsız, kokusuz duman bulutları yükselir. Korkutucu veya gizemli bir görünüm sağlar.\n\n**[Atmosfer]** Bu zırh sürekli duman yayarak kullanıcının az önce fırından çıkmış gibi görünmesini sağlar.",
+        "effects": []
+    },
+    {
+        "name": "Spell Scroll",
+        "name_tr": "Büyü Parşömeni",
+        "rarity": "Common",
+        "type": "Scroll",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Parşömedeki büyü sınıfınızın büyü listesindeyse, onu okuyup yapabilirsiniz. Kullanıldıktan sonra parşömen toza dönüşür. Seviye 0 veya 1 büyüleri içerir.\n\n**[Atmosfer]** Üzerine titreyen sihirli rünler işlenmiş, kadim bir güçle parıldayan parşömen rulosu.",
+        "effects": []
+    },
+    {
+        "name": "Staff of Adornment",
+        "name_tr": "Süsleme Asası",
+        "rarity": "Common",
+        "type": "Staff",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Asanın tepesinde 3 adede kadar 1 kiloluk nesneyi komutla havada tutabilirsiniz. Nesneler asa ile birlikte hareket eder.\n\n**[Atmosfer]** Etrafında kristallerin veya tılsımların süzüldüğü, gösterişli bir sihirbaz asası.",
+        "effects": []
+    },
+    {
+        "name": "Staff of Birdcalls",
+        "name_tr": "Kuş Sesi Asası",
+        "rarity": "Common",
+        "type": "Staff",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** 10 yüke sahiptir. Bir eylem ve 1 yük kullanarak bir kuş sesini (karga, kartal, baykuş vb.) taklit edebilirsiniz. Şafakta 1d6+4 yük yenilenir.\n\n**[Atmosfer]** Üzerine minyatür kanat desenleri oyulmuş, hafif rüzgarlarda bile kuş cıvıltısını andıran sesler çıkaran bir asa.",
+        "effects": []
+    },
+    {
+        "name": "Staff of Flowers",
+        "name_tr": "Çiçek Asası",
+        "rarity": "Common",
+        "type": "Staff",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** 10 yüke sahiptir. Bir eylem ve 1 yük kullanarak asanın ucunda veya 1.5 metre içindeki toprakta sihirli bir çiçek yeşertebilirsiniz. Şafakta 1d6+4 yük yenilenir.\n\n**[Atmosfer]** Daima taze kesilmiş çimen ve polen kokan, ucu yeşil filizlerle bezeli zarif bir asa.",
+        "effects": []
+    },
+    {
+        "name": "Talking Doll",
+        "name_tr": "Konuşan Bebek",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** 6 adede kadar kısa mesaj (5 saniyelik) kaydedin. Belirli tetikleyicilerle (yaklaşan bir yaratık, belirli bir kelime vb.) bu mesajların söylenmesini sağlayın.\n\n**[Atmosfer]** İlk bakışta ürkütücü gelebilen ama aslında basit bir büyüyle donatılmış çocuk oyuncağı.",
+        "effects": []
+    },
+    {
+        "name": "Tankard of Sobriety",
+        "name_tr": "Ayıklık Kupası",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Bu kupadan içilen hiçbir içki sizi sarhoş edemez. Başka kaplardan içilen içkiler normal etkisini göstermeye devam eder.\n\n**[Atmosfer]** İşi gereği her zaman uyanık kalması gereken korumalar ve pazarlıkçıların gizli silahıdır.",
+        "effects": []
+    },
+    {
+        "name": "Thermal Cube",
+        "name_tr": "Termal Küp",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Dokunarak etkinleştirildiğinde 4.5 metre yarıçapında sıcaklık yayar. Bölge rüzgar ve soğuktan etkilenmez. Suyu kaynatmaz ama dondurucu soğuktan korur.\n\n**[Atmosfer]** Avun içine sığan, her zaman rahatlatıcı bir kış güneşi ısısı yayan metal bir küp.",
+        "effects": []
+    },
+    {
+        "name": "Token of Remembrance",
+        "name_tr": "Hatıra Yadigar",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** İçine bir görüntü kaydedin. Dokunulduğunda bu görüntü zihinsel veya görsel olarak belirir. Anılarınızı saklamak için harikadır.\n\n**[Atmosfer]** Sevilen birine ait bir portreyi veya unutulmaz bir manzarayı sonsuza dek saklayan küçük bir tılsım.",
+        "effects": []
+    },
+    {
+        "name": "Unbreakable Arrow",
+        "name_tr": "Kırılmaz Ok",
+        "rarity": "Common",
+        "type": "Ammunition",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Bu ok büyülü olmayan bir şekilde kırılmaz. Ateş edilip hedefe çarptıktan sonra kolayca toplanabilir ve tekrar kullanılabilir.\n\n**[Atmosfer]** En sert zırhlara veya taş duvarlara çarpsa bile tek bir kıymığı dahi oynamayan kusursuz bir ok.",
+        "effects": []
+    },
+    {
+        "name": "Veteran's Cane",
+        "name_tr": "Gazi Bastonu",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Bir bonus eylem kullanarak bastonu anında bir Longsword'a (Uzun Kılıç) dönüştürebilirsiniz. Dönüşüm kalıcıdır, bastona geri dönmez.\n\n**[Atmosfer]** Yaşlı bir adamın bastonu gibi görünüp, ihtiyaç anında ölümcül bir çeliğe dönüşen gizli bir silah.",
+        "effects": []
+    },
+    {
+        "name": "Walloping Arrow",
+        "name_tr": "Deviren Ok",
+        "rarity": "Common",
+        "type": "Ammunition",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Bir yaratığa isabet ettiğinde, hedef DC 10 Strength kurtarma zarı atmalıdır. Başarısız olursa yere devrilir (prone). Tek kullanımlıktır.\n\n**[Atmosfer]** Havada giderken normalden daha ağır bir ıslık çalan ve isabet ettiğinde balyoz gibi vuran bir ok.",
+        "effects": []
+    },
+    {
+        "name": "Wand of Conducting",
+        "name_tr": "Orkestra Asası",
+        "rarity": "Common",
+        "type": "Wand",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Bir eylem kullanarak 18 metre içinde orkestra müziği (trompet, flüt, davul vb.) başlatın. Sallandığı sürece müzik devam eder.\n\n**[Atmosfer]** Havada süzülen notaları yönetiyormuşçasına kullanılan, müzisyenlerin hayali bir orkestrayı canlandırmasını sağlayan asa.",
+        "effects": []
+    },
+    {
+        "name": "Wand of Pyrotechnics",
+        "name_tr": "Havai Fişek Asası",
+        "rarity": "Common",
+        "type": "Wand",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** 7 yüke sahiptir. Bir eylem ve 1 yük kullanarak 18 metre içinde renkli ışık patlamaları ve havai fişek efektleri oluşturun. Şafakta 1d6+1 yük yenilenir.\n\n**[Atmosfer]** Ucu hafifçe yanık kokan, şenliklerin ve kutlamaların vazgeçilmezi olan sihirli bir değnek.",
+        "effects": []
+    },
+    {
+        "name": "Wand of Scowls",
+        "name_tr": "Çatık Kaş Asası",
+        "rarity": "Common",
+        "type": "Wand",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** 3 yüke sahiptir. Bir eylem ve 1 yük kullanarak bir yaratığı DC 10 Charisma kurtarma zarı atmaya zorlayın; başarısız olursa 1 dakika boyunca kaşlarını çatar. Şafakta yükleri yenilenir.\n\n**[Atmosfer]** Şakacı büyücülerin, en neşeli kişileri bile somurtkan göstermek için kullandığı garip bir değnek.",
+        "effects": []
+    },
+    {
+        "name": "Wand of Smiles",
+        "name_tr": "Gülümseme Asası",
+        "rarity": "Common",
+        "type": "Wand",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** 3 yüke sahiptir. Bir eylem ve 1 yük kullanarak bir yaratığı DC 10 Charisma kurtarma zarı atmaya zorlayın; başarısız olursa 1 dakika boyunca gülümser. Şafakta yükleri yenilenir.\n\n**[Atmosfer]** En katı gardiyanların bile yüzünde anlık bir neşe (veya şaşkınlık) oluşturabilen parlak renkli bir değnek.",
+        "effects": []
+    },
+    {
+        "name": "Ammunition +1",
+        "name_tr": "Mühimmat +1",
+        "rarity": "Uncommon",
+        "type": "Ammunition",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Bu mühimmatla (ok, cıvata vb.) yapılan saldırı ve hasar zarlarına +1 bonus kazanırsınız. İsabette sihirli özelliği tükenir.\n\n**[Atmosfer]** Kusursuz dengelenmiş ve ucu görünmez bir sihirle keskinleştirilmiş, havayı sessizce yaran mühimmat.",
+        "effects": [
+            {
+                "type": "attack_bonus",
+                "value": 1
+            },
+            {
+                "type": "damage_bonus",
+                "value": 1
+            }
+        ]
+    },
+    {
+        "name": "Ammunition +2",
+        "name_tr": "Mühimmat +2",
+        "rarity": "Rare",
+        "type": "Ammunition",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Bu mühimmatla yapılan saldırı ve hasar zarlarına +2 bonus kazanırsınız. En sert zırhları bile delip geçmek için tasarlanmıştır.\n\n**[Atmosfer]** Üzerindeki rünler hızla hareket ettiğinde parlayan, yıkıcı bir delme gücüne sahip mühimmat.",
+        "effects": [
+            {
+                "type": "attack_bonus",
+                "value": 2
+            },
+            {
+                "type": "damage_bonus",
+                "value": 2
+            }
+        ]
+    },
+    {
+        "name": "Ammunition +3",
+        "name_tr": "Mühimmat +3",
+        "rarity": "Very Rare",
+        "type": "Ammunition",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Bu mühimmatla yapılan saldırı ve hasar zarlarına +3 bonus kazanırsınız. Efsanevi bir keskinliğe ve doğruluğa sahiptir.\n\n**[Atmosfer]** Hedefini asla ıskalamak istemeyen usta birinin elinden çıkmış, saf enerjiyle titreşen bir şaheser.",
+        "effects": [
+            {
+                "type": "attack_bonus",
+                "value": 3
+            },
+            {
+                "type": "damage_bonus",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "name": "Adamantine Armor",
+        "name_tr": "Adamantin Zırh",
+        "rarity": "Uncommon",
+        "type": "Armor",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Size karşı yapılan herhangi bir kritik vuruş (critical hit) normal bir vuruşa dönüşür. Sarsılmaz bir savunma sağlar.\n\n**[Atmosfer]** Bilinen en sert metallerden biri olan adamantinden dövülmüş, darbeleri emen ve asla ezilmeyen devasa bir zırh.",
+        "effects": []
+    },
+    {
+        "name": "Amulet of Health",
+        "name_tr": "Sağlık Muskası",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Dayanıklılık (Constitution) skorunuz bu muska takılıyken 19 olur. Eğer skorunuz zaten 19 veya üzerindeyse bir etkisi olmaz.\n\n**[Atmosfer]** Takanın damarlarına yaşam enerjisi pompalayan, kalp atışı gibi hafifçe atan bir mücevher.",
+        "effects": [
+            {
+                "type": "stat_set",
+                "value": {
+                    "stat": "constitution",
+                    "score": 19
+                }
+            }
+        ]
+    },
+    {
+        "name": "Amulet of Proof against Detection and Location",
+        "name_tr": "Tespitten Korunma Muskası",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Kehanet (divination) büyüsüyle tespit edilemez veya yeriniz bulunamazsınız. Ayrıca Scrying büyüsü için odak noktası olamazsınız.\n\n**[Atmosfer]** Varlığınızı sihirli gözlerden gizleyen, mat bir taştan yapılmış gösterişsiz bir kolye.",
+        "effects": []
+    },
+    {
+        "name": "Amulet of the Planes",
+        "name_tr": "Düzlemler Muskası",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Bir eylem kullanarak 'Plane Shift' büyüsünü yapmayı deneyin (DC 15 Intelligence kontrolü). Başarısızlık sizi rastgele bir yere ışınlayabilir.\n\n**[Atmosfer]** İçinde farklı boyutların girdap gibi döndüğü, düzlemler arası enerjiyi manipüle eden kadim bir muska.",
+        "effects": [
+            {
+                "type": "spell_auto",
+                "spellName": "Plane Shift"
+            }
+        ]
+    },
+    {
+        "name": "Apparatus of Kwalish",
+        "name_tr": "Kwalish'in Aparatı",
+        "rarity": "Legendary",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Kapalı bir metal araçtır (istakoz benzeri). İki orta boy yaratık sığabilir. Kollar, bacaklar ve kuyruk dahil 10 farklı komutla kontrol edilir.\n\n**[Atmosfer]** Usta bir zanaatkar olan Kwalish tarafından tasarlanan, hem su altında hem karada gidebilen mekanik bir canavar.",
+        "effects": []
+    }
+]

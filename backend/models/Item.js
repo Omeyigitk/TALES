@@ -6,18 +6,17 @@ const itemSchema = new mongoose.Schema({
     category: {
         type: String,
         required: true,
-        enum: ['Weapon', 'Armor', 'Adventuring Gear', 'Tools', 'Mounts and Vehicles', 'Magic Item', 'Silah', 'Zırh', 'Eşya', 'Büyülü Eşya', 'Araçlar', 'Binek ve Araçlar']
+        enum: ['Weapon', 'Armor', 'Adventuring Gear', 'Tools', 'Mounts and Vehicles', 'Magic Item', 'Ammunition', 'Equipment', 'Staff', 'Wondrous Item', 'Holy Symbol', 'Silah', 'Zırh', 'Eşya', 'Büyülü Eşya', 'Araçlar', 'Binek ve Araçlar']
     },
-    subcategory: String, // e.g. 'Martial Melee Weapons', 'Heavy Armor', 'Artisan\'s Tools'
+    subcategory: String,
     cost: {
         quantity: Number,
         unit: { type: String, enum: ['cp', 'sp', 'ep', 'gp', 'pp'] }
     },
-    weight: Number, // in lbs
+    weight: Number,
     description: String,
     description_tr: String,
 
-    // Weapon specific
     damage: {
         dice: { type: String },
         type: { type: String }
@@ -28,7 +27,6 @@ const itemSchema = new mongoose.Schema({
         long: { type: Number }
     },
 
-    // Armor specific
     armor_class: {
         base: { type: Number },
         dex_bonus: { type: Boolean },
@@ -37,19 +35,14 @@ const itemSchema = new mongoose.Schema({
     str_minimum: Number,
     stealth_disadvantage: Boolean,
 
-    // Magic Item specific
     rarity: {
         type: String,
-        enum: ['Common', 'Uncommon', 'Rare', 'Very Rare', 'Legendary', 'Artifact', 'Varies']
+        enum: ['Common', 'Uncommon', 'Rare', 'Very Rare', 'Legendary', 'Artifact', 'Varies', 'Unique', 'None']
     },
     attunement: Boolean,
 
-    // Combat Effects (NEW)
     effects: [{
-        type: {
-            type: String,
-            enum: ['stat_bonus', 'stat_set', 'ac_bonus', 'spell_auto', 'initiative_bonus', 'speed_bonus', 'attack_bonus', 'damage_bonus', 'resistance']
-        },
+        type: { type: String },
         value: mongoose.Schema.Types.Mixed,
         spellName: String
     }],

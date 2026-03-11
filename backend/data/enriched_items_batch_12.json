@@ -1,0 +1,1407 @@
+[
+    {
+        "name": "Club",
+        "name_tr": "Sopa",
+        "rarity": "None",
+        "type": "Weapon",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Basit bir yakın dövüş silahıdır. 1d4 vuruş puanı (bludgeoning) hasarı verir. Hafif (light) bir silahtır, bu da iki silahla dövüşürken kullanılmasını kolaylaştırır.\n\n**[Atmosfer]** İster bir köylünün kendini korumak için yerden aldığı ağır bir dal, ister bir haydutun kemik kırmak için kullandığı işlenmiş bir odun parçası olsun; sopa, insanlığın en eski ve en güvenilir silahlarından biridir.",
+        "effects": [
+            {
+                "type": "weapon_damage",
+                "dice": "1d4",
+                "damageType": "Bludgeoning",
+                "properties": [
+                    "Light"
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Dagger",
+        "name_tr": "Hançer",
+        "rarity": "None",
+        "type": "Weapon",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Basit bir yakın dövüş silahıdır. 1d4 delici (piercing) hasar verir. Beceri (finesse), hafif (light) ve fırlatılabilir (thrown) özelliklerine sahiptir. Menzili 20/60 feet'tir.\n\n**[Atmosfer]** Bir suikastçının pelerininde sakladığı sessiz ölüm veya bir büyücünün acil durumlarda elinin altında tuttuğu son çare. Hançer, boyundan büyük işler başaran, dengeli ve keskin bir silahtır.",
+        "effects": [
+            {
+                "type": "weapon_damage",
+                "dice": "1d4",
+                "damageType": "Piercing",
+                "properties": [
+                    "Finesse",
+                    "Light",
+                    "Thrown"
+                ],
+                "range": "20/60"
+            }
+        ]
+    },
+    {
+        "name": "Greatclub",
+        "name_tr": "Büyük Sopa",
+        "rarity": "None",
+        "type": "Weapon",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Basit bir yakın dövüş silahıdır. 1d8 vuruş puanı (bludgeoning) hasarı verir. İki elle (two-handed) kullanılmalıdır. Hacmi ve ağırlığı nedeniyle etkili bir darbe indirir.\n\n**[Atmosfer]** Genellikle devler, ogreler veya fiziksel gücüne güvenen kaba dövüşçüler tarafından tercih edilen, devasa ve budaklı bir odun parçası.",
+        "effects": [
+            {
+                "type": "weapon_damage",
+                "dice": "1d8",
+                "damageType": "Bludgeoning",
+                "properties": [
+                    "Two-handed"
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Handaxe",
+        "name_tr": "El Baltası",
+        "rarity": "None",
+        "type": "Weapon",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Basit bir yakın dövüş silahıdır. 1d6 kesici (slashing) hasar verir. Hafif (light) ve fırlatılabilir (thrown) özelliklerine sahiptir. Menzili 20/60 feet'tir.\n\n**[Atmosfer]** Hem odun kesmek hem de kafa yarmak için ideal olan bu çok yönlü araç, orman korucularının ve barbarların vazgeçilmezidir.",
+        "effects": [
+            {
+                "type": "weapon_damage",
+                "dice": "1d6",
+                "damageType": "Slashing",
+                "properties": [
+                    "Light",
+                    "Thrown"
+                ],
+                "range": "20/60"
+            }
+        ]
+    },
+    {
+        "name": "Javelin",
+        "name_tr": "Cirit",
+        "rarity": "None",
+        "type": "Weapon",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Basit bir yakın dövüş silahıdır. 1d6 delici (piercing) hasar verir. Fırlatılabilir (thrown) bir silahtır ve menzili 30/120 feet'tir.\n\n**[Atmosfer]** Uzun ve dengeli yapısı sayesinde havada süzülerek hedefine saplanan cirit, piyadelerin düşman hatlarına yaklaşmadan önce kullandıkları etkili bir saldırı aracıdır.",
+        "effects": [
+            {
+                "type": "weapon_damage",
+                "dice": "1d6",
+                "damageType": "Piercing",
+                "properties": [
+                    "Thrown"
+                ],
+                "range": "30/120"
+            }
+        ]
+    },
+    {
+        "name": "Light Hammer",
+        "name_tr": "Hafif Çekiç",
+        "rarity": "None",
+        "type": "Weapon",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Basit bir yakın dövüş silahıdır. 1d4 vuruş puanı (bludgeoning) hasarı verir. Hafif (light) ve fırlatılabilir (thrown) bir silahtır. Menzili 20/60 feet'tir.\n\n**[Atmosfer]** Bir zanaatkarın kemerinde taşıdığı kadar masum görünen bu çekiç, doğru ellerde kafaları ezebilen ölümcül bir silaha dönüşür.",
+        "effects": [
+            {
+                "type": "weapon_damage",
+                "dice": "1d4",
+                "damageType": "Bludgeoning",
+                "properties": [
+                    "Light",
+                    "Thrown"
+                ],
+                "range": "20/60"
+            }
+        ]
+    },
+    {
+        "name": "Mace",
+        "name_tr": "Gürz",
+        "rarity": "None",
+        "type": "Weapon",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Basit bir yakın dövüş silahıdır. 1d6 vuruş puanı (bludgeoning) hasarı verir. Genellikle tek elle kullanılır ve zırhlı rakiplere karşı oldukça etkilidir.\n\n**[Atmosfer]** Kutsal savaşçıların ve din adamlarının simgesi haline gelmiş bu silah, adaletin ve inancın kaba kuvvetle birleşimidir.",
+        "effects": [
+            {
+                "type": "weapon_damage",
+                "dice": "1d6",
+                "damageType": "Bludgeoning",
+                "properties": []
+            }
+        ]
+    },
+    {
+        "name": "Quarterstaff",
+        "name_tr": "Asa",
+        "rarity": "None",
+        "type": "Weapon",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Basit bir yakın dövüş silahıdır. 1d6 vuruş puanı (bludgeoning) hasarı verir. Çok yönlü (versatile) bir silahtır; iki elle kullanıldığında hasarı 1d8'e yükselir.\n\n**[Atmosfer]** Gezgin bir bilgenin bastonu veya bir dövüş sanatları ustasının uzantısı. Görünüşteki basitliği, kullanımındaki ustalığa göre çok büyük bir güce dönüşebilir.",
+        "effects": [
+            {
+                "type": "weapon_damage",
+                "dice": "1d6",
+                "damageType": "Bludgeoning",
+                "properties": [
+                    "Versatile (1d8)"
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Sickle",
+        "name_tr": "Orak",
+        "rarity": "None",
+        "type": "Weapon",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Basit bir yakın dövüş silahıdır. 1d4 kesici (slashing) hasar verir. Hafif (light) bir silahtır, bu da onu seri saldırılar için uygun kılar.\n\n**[Atmosfer]** Aslen bir tarım aleti olan orak, druidler ve köylü asiler tarafından hasat zamanının dışında da ölümcül bir ustalıkla kullanılır.",
+        "effects": [
+            {
+                "type": "weapon_damage",
+                "dice": "1d4",
+                "damageType": "Slashing",
+                "properties": [
+                    "Light"
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Spear",
+        "name_tr": "Mızrak",
+        "rarity": "None",
+        "type": "Weapon",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Basit bir yakın dövüş silahıdır. 1d6 delici (piercing) hasar verir. Fırlatılabilir (thrown) ve çok yönlü (versatile) bir silahtır. İki elle kullanıldığında 1d8 hasar verir. Fırlatma menzili 20/60 feet'tir.\n\n**[Atmosfer]** Savaş alanlarının en yaygın silahı. Basit tasarımı, ona hem muhafızların elinde bir kalkan duvarının arkasından saplama yapma, hem de avcıların elinde uzaktan avını düşürme yeteneği verir.",
+        "effects": [
+            {
+                "type": "weapon_damage",
+                "dice": "1d6",
+                "damageType": "Piercing",
+                "properties": [
+                    "Thrown",
+                    "Versatile (1d8)"
+                ],
+                "range": "20/60"
+            }
+        ]
+    },
+    {
+        "name": "Crossbow, Light",
+        "name_tr": "Hafif Arbalet",
+        "rarity": "None",
+        "type": "Weapon",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Basit bir menzilli silahtır. 1d8 delici (piercing) hasar verir. Mühimmat (ammunition), doldurma (loading) ve iki elle (two-handed) kullanım gerektirir. Menzili 80/320 feet'tir.\n\n**[Atmosfer]** Yay kullanma becerisi olmayanların bile kolayca nişan alıp ateş edebileceği, mekanik bir güç ve isabet şaheseridir.",
+        "effects": [
+            {
+                "type": "weapon_damage",
+                "dice": "1d8",
+                "damageType": "Piercing",
+                "properties": [
+                    "Ammunition",
+                    "Loading",
+                    "Two-handed"
+                ],
+                "range": "80/320"
+            }
+        ]
+    },
+    {
+        "name": "Shortbow",
+        "name_tr": "Kısa Yay",
+        "rarity": "None",
+        "type": "Weapon",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Basit bir menzilli silahtır. 1d6 delici (piercing) hasar verir. Mühimmat (ammunition) ve iki el (two-handed) gerektirir. Menzili 80/320 feet'tir.\n\n**[Atmosfer]** Hafif ve taşıması kolay olan kısa yay, ormanlarda hareket eden avcılar ve kısa mesafede hızlı ok atan okçular için tasarlanmıştır.",
+        "effects": [
+            {
+                "type": "weapon_damage",
+                "dice": "1d6",
+                "damageType": "Piercing",
+                "properties": [
+                    "Ammunition",
+                    "Two-handed"
+                ],
+                "range": "80/320"
+            }
+        ]
+    },
+    {
+        "name": "Battleaxe",
+        "name_tr": "Savaş Baltası",
+        "rarity": "None",
+        "type": "Weapon",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Savaşçı sınıfı bir yakın dövüş silahıdır. 1d8 kesici (slashing) hasar verir. Çok yönlü (versatile) bir silahtır; iki elle kullanıldığında hasarı 1d10'a yükselir.\n\n**[Atmosfer]** Cüce savaşçılarının favorisi olan bu ağır balta, kalkanları yarma ve kemikleri tek bir darbede kesme gücüne sahiptir.",
+        "effects": [
+            {
+                "type": "weapon_damage",
+                "dice": "1d8",
+                "damageType": "Slashing",
+                "properties": [
+                    "Versatile (1d10)"
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Flail",
+        "name_tr": "Topuz",
+        "rarity": "None",
+        "type": "Weapon",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Savaşçı sınıfı bir yakın dövüş silahıdır. 1d8 vuruş puanı (bludgeoning) hasarı verir. Zincirli yapısı sayesinde kalkanların üzerinden aşarak darbe indirmek için idealdir.\n\n**[Atmosfer]** Bir kabza ucuna zincirle bağlı dikenli bir metal küre. Her savuruşta havayı yırtarak düşmanlarına korku salar.",
+        "effects": [
+            {
+                "type": "weapon_damage",
+                "dice": "1d8",
+                "damageType": "Bludgeoning",
+                "properties": []
+            }
+        ]
+    },
+    {
+        "name": "Glaive",
+        "name_tr": "Kargı",
+        "rarity": "None",
+        "type": "Weapon",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Savaşçı sınıfı bir yakın dövüş silahıdır. 1d10 kesici (slashing) hasar verir. Ağır (heavy), uzun erimli (reach) ve iki elle (two-handed) kullanım gerektirir. Rakibe 10 feet mesafeden saldırmanızı sağlar.\n\n**[Atmosfer]** Uzun bir sırığın ucuna takılmış hilal şeklindeki bir bıçak. Gardiyanların ve mızraklı piyadelerin düşmanı uzakta tutmak için kullandığı zarif ama ölümcül bir silahtır.",
+        "effects": [
+            {
+                "type": "weapon_damage",
+                "dice": "1d10",
+                "damageType": "Slashing",
+                "properties": [
+                    "Heavy",
+                    "Reach",
+                    "Two-handed"
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Greataxe",
+        "name_tr": "Büyük Balta",
+        "rarity": "None",
+        "type": "Weapon",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Savaşçı sınıfı bir yakın dövüş silahıdır. 1d12 kesici (slashing) hasar verir. Ağır (heavy) ve iki elle (two-handed) kullanım gerektirir. Tek bir vuruşta devasa hasar potansiyeli taşır.\n\n**[Atmosfer]** Barbarların ve güçlü savaşçıların simgesi. Bu devasa balta, sadece en güçlülerin savurabileceği ve arkasında sadece yıkım bırakan bir güç abidesidir.",
+        "effects": [
+            {
+                "type": "weapon_damage",
+                "dice": "1d12",
+                "damageType": "Slashing",
+                "properties": [
+                    "Heavy",
+                    "Two-handed"
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Greatsword",
+        "name_tr": "Büyük Kılıç",
+        "rarity": "None",
+        "type": "Weapon",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Savaşçı sınıfı bir yakın dövüş silahıdır. 2d6 kesici (slashing) hasar verir. Ağır (heavy) ve iki elle (two-handed) kullanım gerektirir. İstikrarlı ve yüksek hasar çıktısı sağlar.\n\n**[Atmosfer]** Şövalyelik ve kahramanlık hikayelerinin vazgeçilmezi. Bu çift elli kılıç, bir savaşçının hem kalkanı hem de en keskin mızrağıdır.",
+        "effects": [
+            {
+                "type": "weapon_damage",
+                "dice": "2d6",
+                "damageType": "Slashing",
+                "properties": [
+                    "Heavy",
+                    "Two-handed"
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Halberd",
+        "name_tr": "Teber",
+        "rarity": "None",
+        "type": "Weapon",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Savaşçı sınıfı bir yakın dövüş silahıdır. 1d10 kesici (slashing) hasar verir. Ağır (heavy), uzun erimli (reach) ve iki elle (two-handed) kullanım gerektirir. Menzili 10 feet'tir.\n\n**[Atmosfer]** Balta, mızrak ve kancanın tek bir sırıkta birleşimi. Bir teber kullanıcısı, her türlü saldırıya karşı donanımlıdır.",
+        "effects": [
+            {
+                "type": "weapon_damage",
+                "dice": "1d10",
+                "damageType": "Slashing",
+                "properties": [
+                    "Heavy",
+                    "Reach",
+                    "Two-handed"
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Longsword",
+        "name_tr": "Uzun Kılıç",
+        "rarity": "None",
+        "type": "Weapon",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Savaşçı sınıfı bir yakın dövüş silahıdır. 1d8 kesici (slashing) hasar verir. Çok yönlü (versatile) bir silahtır; iki elle kullanıldığında hasarı 1d10'a yükselir.\n\n**[Atmosfer]** Çok yönlülüğü ve dengesiyle bilinir. Bir kılıç ustasının elinde hem zarif bir sanat eseri hem de durdurulamaz bir silahtır.",
+        "effects": [
+            {
+                "type": "weapon_damage",
+                "dice": "1d8",
+                "damageType": "Slashing",
+                "properties": [
+                    "Versatile (1d10)"
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Maul",
+        "name_tr": "Balyoz",
+        "rarity": "None",
+        "type": "Weapon",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Savaşçı sınıfı bir yakın dövüş silahıdır. 2d6 vuruş puanı (bludgeoning) hasarı verir. Ağır (heavy) ve iki elle (two-handed) kullanım gerektirir.\n\n**[Atmosfer]** Savaş alanında karşısındaki her şeyi ezip geçen devasa bir metal blok. Balyozun indiği yerde kimse ayakta kalamaz.",
+        "effects": [
+            {
+                "type": "weapon_damage",
+                "dice": "2d6",
+                "damageType": "Bludgeoning",
+                "properties": [
+                    "Heavy",
+                    "Two-handed"
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Morningstar",
+        "name_tr": "Sabah Yıldızı",
+        "rarity": "None",
+        "type": "Weapon",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Savaşçı sınıfı bir yakın dövüş silahıdır. 1d8 delici (piercing) hasar verir. Sabit, tek elli bir silahtır ve darbe gücüyle rakiplerini alt etmek için kullanılır.\n\n**[Atmosfer]** Metal bir topuzun üzerine yerleştirilmiş uzun ve keskin dikenler. Sabah yıldızı ismi, düşmanın son gördüğü şeyin güneş değil, bu ölümcül silahın parıltısı olacağına dair karanlık bir espri taşır.",
+        "effects": [
+            {
+                "type": "weapon_damage",
+                "dice": "1d8",
+                "damageType": "Piercing",
+                "properties": []
+            }
+        ]
+    },
+    {
+        "name": "Rapier",
+        "name_tr": "Mekik Kılıç",
+        "rarity": "None",
+        "type": "Weapon",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Savaşçı sınıfı bir yakın dövüş silahıdır. 1d8 delici (piercing) hasar verir. Beceri (finesse) özelliğine sahiptir, bu da onu çevik dövüşçüler için mükemmel bir seçenek yapar.\n\n**[Atmosfer]** Zarif, ince ve inanılmaz derecede keskin. Mekik kılıç, bir kaba kuvvet aracı değil, bir düello sanatçısının fırçasıdır. Her hamlesi ölümcül bir incelik taşır.",
+        "effects": [
+            {
+                "type": "weapon_damage",
+                "dice": "1d8",
+                "damageType": "Piercing",
+                "properties": [
+                    "Finesse"
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Shortsword",
+        "name_tr": "Kısa Kılıç",
+        "rarity": "None",
+        "type": "Weapon",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Savaşçı sınıfı bir yakın dövüş silahıdır. 1d6 delici (piercing) hasar verir. Beceri (finesse) ve hafif (light) özelliklerine sahiptir. İki silahla dövüşen çevik savaşçılar için idealdir.\n\n**[Atmosfer]** Bir askerin en sadık yoldaşı. Ne çok ağır, ne çok hafif; her durumda çekilmeye ve kan dökmeye hazır, güvenilir bir silah.",
+        "effects": [
+            {
+                "type": "weapon_damage",
+                "dice": "1d6",
+                "damageType": "Piercing",
+                "properties": [
+                    "Finesse",
+                    "Light"
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Warhammer",
+        "name_tr": "Savaş Çekici",
+        "rarity": "None",
+        "type": "Weapon",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Savaşçı sınıfı bir yakın dövüş silahıdır. 1d8 vuruş puanı (bludgeoning) hasarı verir. Çok yönlü (versatile) bir silahtır; iki elle kullanıldığında hasarı 1d10'a yükselir.\n\n**[Atmosfer]** Savaşın gürültüsü içinde kemiklerin kırılma sesini getiren silah. Bu ağır çekiç, sadece fiziksel bir engel değil, düşmanın zırhını ve iradesini ezip geçen bir güçtür.",
+        "effects": [
+            {
+                "type": "weapon_damage",
+                "dice": "1d8",
+                "damageType": "Bludgeoning",
+                "properties": [
+                    "Versatile (1d10)"
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Crossbow, Heavy",
+        "name_tr": "Ağır Arbalet",
+        "rarity": "None",
+        "type": "Weapon",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Savaşçı sınıfı bir menzilli silahtır. 1d10 delici (piercing) hasar verir. Mühimmat (ammunition), ağır (heavy), doldurma (loading) ve iki elle (two-handed) kullanım gerektirir. Menzili 100/400 feet'tir.\n\n**[Atmosfer]** Bir kuşatmanın sessizliği içinde çekilen tetiğin sesi, en ağır zırhları bile delip geçeceğinin habercisidir. Bu silah, taşınabilir bir balista gibidir.",
+        "effects": [
+            {
+                "type": "weapon_damage",
+                "dice": "1d10",
+                "damageType": "Piercing",
+                "properties": [
+                    "Ammunition",
+                    "Heavy",
+                    "Loading",
+                    "Two-handed"
+                ],
+                "range": "100/400"
+            }
+        ]
+    },
+    {
+        "name": "Longbow",
+        "name_tr": "Uzun Yay",
+        "rarity": "None",
+        "type": "Weapon",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Savaşçı sınıfı bir menzilli silahtır. 1d8 delici (piercing) hasar verir. Mühimmat (ammunition), ağır (heavy), menzil (range) ve iki el (two-handed) gerektirir. Menzili 150/600 feet'tir.\n\n**[Atmosfer]** Usta bir okçunun elinde, ufuk çizgisindeki bir hedefi bile vurabilen sessiz bir fırtına. Uzun yay, sabrın ve kesin isabetin vücut bulmuş halidir.",
+        "effects": [
+            {
+                "type": "weapon_damage",
+                "dice": "1d8",
+                "damageType": "Piercing",
+                "properties": [
+                    "Ammunition",
+                    "Heavy",
+                    "Two-handed"
+                ],
+                "range": "150/600"
+            }
+        ]
+    },
+    {
+        "name": "Padded",
+        "name_tr": "Dolgulu Zırh",
+        "rarity": "None",
+        "type": "Armor",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Hafif zırh sınıfındadır. Zırh Sınıfını (AC) 11 + Beceri (Dexterity) bonusu yapar. Gizlilik (Stealth) kontrollerinde dezavantaj sağlar.\n\n**[Atmosfer]** Kat kat kumaş ve pamukla doldurulmuş bu zırh, en basit koruma biçimidir. Genellikle bir zırhın altına giyilir veya imkanı kısıtlı askerlerin tek savunmasıdır.",
+        "effects": [
+            {
+                "type": "armor_stats",
+                "ac_base": 11,
+                "dex_bonus": true,
+                "stealth_disadvantage": true
+            }
+        ]
+    },
+    {
+        "name": "Leather",
+        "name_tr": "Deri Zırh",
+        "rarity": "None",
+        "type": "Armor",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Hafif zırh sınıfındadır. Zırh Sınıfını (AC) 11 + Beceri (Dexterity) bonusu yapar. Kullanıcıya iyi bir hareket kabiliyeti sunar.\n\n**[Atmosfer]** Sertleştirilmiş deri parçalarından yapılan bu zırh, sessiz kalması gereken keşifçiler ve hızlı hareket etmesi gereken maceracılar için vazgeçilmezdir.",
+        "effects": [
+            {
+                "type": "armor_stats",
+                "ac_base": 11,
+                "dex_bonus": true
+            }
+        ]
+    },
+    {
+        "name": "Studded Leather",
+        "name_tr": "Çivili Deri Zırh",
+        "rarity": "None",
+        "type": "Armor",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Hafif zırh sınıfındadır. Zırh Sınıfını (AC) 12 + Beceri (Dexterity) bonusu yapar. Deri zırhın üzerine eklenen metal çiviler ekstra koruma sağlar.\n\n**[Atmosfer]** Hem hafifliği hem de dayanıklılığı birleştiren usta işi bir zırh. Hareketliliğinden ödün vermek istemeyen seçkin askerlerin tercihidir.",
+        "effects": [
+            {
+                "type": "armor_stats",
+                "ac_base": 12,
+                "dex_bonus": true
+            }
+        ]
+    },
+    {
+        "name": "Hide",
+        "name_tr": "Post Zırh",
+        "rarity": "None",
+        "type": "Armor",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Orta zırh sınıfındadır. Zırh Sınıfını (AC) 12 + Beceri (Dexterity) bonusu (maks +2) yapar. Doğal malzemelerden üretilmiştir.\n\n**[Atmosfer]** Ayı, kurt veya daha egzotik yaratıkların postlarından yapılan kaba ama etkili bir zırh. Vahşi doğanın çocukları ve metal işçiliğine erişimi olmayan kabileler tarafından kullanılır.",
+        "effects": [
+            {
+                "type": "armor_stats",
+                "ac_base": 12,
+                "dex_bonus": true,
+                "dex_max": 2
+            }
+        ]
+    },
+    {
+        "name": "Chain Shirt",
+        "name_tr": "Örme Zırh Gömleği",
+        "rarity": "None",
+        "type": "Armor",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Orta zırh sınıfındadır. Zırh Sınıfını (AC) 13 + Beceri (Dexterity) bonusu (maks +2) yapar. Göğüs kafesini ve hayati organları korumak için tasarlanmış hafif bir zincir örgüdür.\n\n**[Atmosfer]** Elbisenin altına bile giyilebilen bu ince ama güçlü örme gömlek, ani saldırılara karşı harika bir savunma katmanıdır.",
+        "effects": [
+            {
+                "type": "armor_stats",
+                "ac_base": 13,
+                "dex_bonus": true,
+                "dex_max": 2
+            }
+        ]
+    },
+    {
+        "name": "Scale Mail",
+        "name_tr": "Pullu Zırh",
+        "rarity": "None",
+        "type": "Armor",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Orta zırh sınıfındadır. Zırh Sınıfını (AC) 14 + Beceri (Dexterity) bonusu (maks +2) yapar. Gizlilik (Stealth) kontrollerinde dezavantaj sağlar.\n\n**[Atmosfer]** Balık pulları gibi üst üste binen metal plakalardan oluşur. Her hareketinizde hafif bir metalik ses çıkarır ancak karşılığında sağlam bir koruma sunar.",
+        "effects": [
+            {
+                "type": "armor_stats",
+                "ac_base": 14,
+                "dex_bonus": true,
+                "dex_max": 2,
+                "stealth_disadvantage": true
+            }
+        ]
+    },
+    {
+        "name": "Breastplate",
+        "name_tr": "Zırh Göğüslüğü",
+        "rarity": "None",
+        "type": "Armor",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Orta zırh sınıfındadır. Zırh Sınıfını (AC) 14 + Beceri (Dexterity) bonusu (maks +2) yapar. Sadece gövdeyi korur, bu da yüksek hareket kabiliyeti ve gizlilik sağlar.\n\n**[Atmosfer]** Ustaca dövülmüş tek bir çelik plaka. Hem şık hem de pratik; kullanıcısının hareketlerini engellemeden en ölümcül darbeleri bile saptırabilir.",
+        "effects": [
+            {
+                "type": "armor_stats",
+                "ac_base": 14,
+                "dex_bonus": true,
+                "dex_max": 2
+            }
+        ]
+    },
+    {
+        "name": "Half Plate",
+        "name_tr": "Yarım Plaka Zırh",
+        "rarity": "None",
+        "type": "Armor",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Orta zırh sınıfındadır. Zırh Sınıfını (AC) 15 + Beceri (Dexterity) bonusu (maks +2) yapar. Gizlilik (Stealth) kontrollerinde dezavantaj sağlar. Plaka zırhın daha hafif ve esnek bir versiyonudur.\n\n**[Atmosfer]** Orta zırhların zirvesi. Hayati bölgeleri metal plakalarla örterken, eklemlerde esneklik bırakır. Modern bir ordunun ağır piyadeleri için standart bir tercihtir.",
+        "effects": [
+            {
+                "type": "armor_stats",
+                "ac_base": 15,
+                "dex_bonus": true,
+                "dex_max": 2,
+                "stealth_disadvantage": true
+            }
+        ]
+    },
+    {
+        "name": "Ring Mail",
+        "name_tr": "Halkalı Zırh",
+        "rarity": "None",
+        "type": "Armor",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Ağır zırh sınıfındadır. Zırh Sınıfını (AC) 14 yapar. Beceri (Dexterity) bonusu eklenmez. Gizlilik (Stealth) kontrollerinde dezavantaj sağlar.\n\n**[Atmosfer]** Deri bir temel üzerine dikilmiş metal halkalardan oluşur. Basit ve hantal bir korumadır; genellikle imkanı kısıtlı acemi şövalyeler tarafından giyilir.",
+        "effects": [
+            {
+                "type": "armor_stats",
+                "ac_base": 14,
+                "dex_bonus": false,
+                "stealth_disadvantage": true
+            }
+        ]
+    },
+    {
+        "name": "Chain Mail",
+        "name_tr": "Zincir Zırh",
+        "rarity": "None",
+        "type": "Armor",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Ağır zırh sınıfındadır. Zırh Sınıfını (AC) 16 yapar. Beceri (Dexterity) bonusu eklenmez. En az 13 Güç (Strength) gerektirir. Gizlilik (Stealth) kontrollerinde dezavantaj sağlar.\n\n**[Atmosfer]** Birbirine kenetlenmiş binlerce küçük metal halka. Her ne kadar ağır ve gürültülü olsa da, kılıç darbelerine karşı neredeyse aşılmaz bir bariyer sunar.",
+        "effects": [
+            {
+                "type": "armor_stats",
+                "ac_base": 16,
+                "dex_bonus": false,
+                "str_minimum": 13,
+                "stealth_disadvantage": true
+            }
+        ]
+    },
+    {
+        "name": "Splint",
+        "name_tr": "Şeritli Zırh",
+        "rarity": "None",
+        "type": "Armor",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Ağır zırh sınıfındadır. Zırh Sınıfını (AC) 17 yapar. Beceri (Dexterity) bonusu eklenmez. En az 15 Güç (Strength) gerektirir. Gizlilik (Stealth) kontrollerinde dezavantaj sağlar.\n\n**[Atmosfer]** Deri üzerine dikey metal şeritlerin perçinlenmesiyle yapılır. Plaka zırh kadar pürüzsüz değildir ama en sert darbelere bile meydan okuyacak kadar dirençlidir.",
+        "effects": [
+            {
+                "type": "armor_stats",
+                "ac_base": 17,
+                "dex_bonus": false,
+                "str_minimum": 15,
+                "stealth_disadvantage": true
+            }
+        ]
+    },
+    {
+        "name": "Plate",
+        "name_tr": "Plaka Zırh",
+        "rarity": "None",
+        "type": "Armor",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Ağır zırh sınıfındadır. Zırh Sınıfını (AC) 18 yapar. Beceri (Dexterity) bonusu eklenmez. En az 15 Güç (Strength) gerektirir. Gizlilik (Stealth) kontrollerinde dezavantaj sağlar. Bir savaşçının giyebileceği en iyi korumadır.\n\n**[Atmosfer]** Bir demir işçiliği şaheseri. Kusursuzca dövülmüş çelik plakalar, kullanıcısını adeta yürüyen bir kaleye dönüştürür. Sadece en zenginlerin ve en kudretli kahramanların zırhıdır.",
+        "effects": [
+            {
+                "type": "armor_stats",
+                "ac_base": 18,
+                "dex_bonus": false,
+                "str_minimum": 15,
+                "stealth_disadvantage": true
+            }
+        ]
+    },
+    {
+        "name": "Shield",
+        "name_tr": "Kalkan",
+        "rarity": "None",
+        "type": "Armor",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Zırh Sınıfınızı (AC) 2 artırır. Bir elinizi kalkanı tutmak için kullanmanız gerekir. Bir saldırıyı savuşturmak veya engellemek için hayati bir araçtır.\n\n**[Atmosfer]** Ahşap veya metalden yapılmış olsa da kalkan, bir savaşçının can damarıdır. Her çarpışmada, her düşen okta, kalkanın arkasındaki güven her şeyden değerlidir.",
+        "effects": [
+            {
+                "type": "armor_stats",
+                "ac_bonus": 2
+            }
+        ]
+    },
+    {
+        "name": "Backpack",
+        "name_tr": "Sırt Çantası",
+        "rarity": "None",
+        "type": "Adventuring Gear",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Ekipmanlarınızı taşımak için kullanılan standart bir aksesuardır. Yaklaşık 30 libre (13.6 kg) veya 1 kübik foot hacmindeki eşyayı taşıyabilir.\n\n**[Atmosfer]** Bir maceracının evi sırtındaki çantadır. İçinde meşalelerden rasyonlara, ganimetlerden halatlara kadar her şey, her an kullanıma hazır bekler.",
+        "effects": []
+    },
+    {
+        "name": "Bedroll",
+        "name_tr": "Yatak Rulosu",
+        "rarity": "None",
+        "type": "Adventuring Gear",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Vahşi doğada dinlenmek için temel bir eşyadır. Soğuktan ve nemden korur, kamp yaparken konfor sağlar.\n\n**[Atmosfer]** Bir maceracının yatağı, dursa bile her an toplanıp yola çıkmaya hazır, yün ve kumaştan yapılmış bu rulo olabilir. Yıldızların altında geçirilen bir gecenin en büyük lüksüdür.",
+        "effects": []
+    },
+    {
+        "name": "Crowbar",
+        "name_tr": "Levye",
+        "rarity": "None",
+        "type": "Adventuring Gear",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Güç (Strength) kontrollerinde, kaldıracın uygulanabildiği durumlarda avantaj sağlar. Kapıları zorla açmak veya ağır nesneleri yerinden oynatmak için kullanılır.\n\n**[Atmosfer]** Kaba kuvvetin yetmediği yerde fizik kurallarını maceracının lehine çeviren, bükülmez bir demir parçası. Her 'kilitli' kapının aslında sadece bir öneri olduğunu hatırlatır.",
+        "effects": [
+            {
+                "type": "check_advantage",
+                "stat": "Strength",
+                "condition": "mechanical leverage"
+            }
+        ]
+    },
+    {
+        "name": "Lantern, Bullseye",
+        "name_tr": "Mercekli Fener",
+        "rarity": "None",
+        "type": "Adventuring Gear",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** 60 feet (18 metre) bir koni şeklinde parlak ışık ve devamındaki 60 feet'lik alanda loş ışık yayar. 1 pint yağ ile 6 saat yanar.\n\n**[Atmosfer]** Karanlığı bir bıçak gibi yırtan odaklanmış bir ışık huzmesi. Gizlice ilerlerken veya uzaklardaki bir tehlikeyi saptamak için idealdir.",
+        "effects": []
+    },
+    {
+        "name": "Rope, Hempen (50 feet)",
+        "name_tr": "Kenevir Halat (15 metre)",
+        "rarity": "None",
+        "type": "Adventuring Gear",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** 2 can puanına sahiptir ve DC 17 Strength kontrolüyle koparılabilir. Tırmanma, bağlama ve tuzak kurma gibi sayısız kullanım alanı vardır.\n\n**[Atmosfer]** Sert, nasırlı eller tarafından dokunulmuş gibi hissettiren bu sağlam halat, bir maceracı ile uçurumun dibi arasındaki tek engeldir.",
+        "effects": []
+    },
+    {
+        "name": "Rope, Silk (50 feet)",
+        "name_tr": "İpek Halat (15 metre)",
+        "rarity": "None",
+        "type": "Adventuring Gear",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** 2 can puanına sahiptir ve DC 17 Strength kontrolüyle koparılabilir. Kenevir halattan daha hafiftir ve düğümlenmesi daha kolaydır.\n\n**[Atmosfer]** İnce, pürüzsüz ama inanılmaz derecede dayanıklı. Zengin maceracıların ve ustalıkla tırmanması gerekenlerin tercihi olan bu halat, profesyonelliğin simgesidir.",
+        "effects": []
+    },
+    {
+        "name": "Tinderbox",
+        "name_tr": "Kav Kutusu",
+        "rarity": "None",
+        "type": "Adventuring Gear",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Çelik, çakmak taşı ve kav içerir. Meşale veya benzeri bir şeyi yakmak bir eylem (action) gerektirir. Ateş yakmak için temel araçtır.\n\n**[Atmosfer]** Soğuk bir gecede yaşam ile ölüm arasındaki farkı yaratan o küçük kıvılcımı çakmak için gereken her şey bu küçük metal kutunun içindedir.",
+        "effects": []
+    },
+    {
+        "name": "Torch",
+        "name_tr": "Meşale",
+        "rarity": "None",
+        "type": "Adventuring Gear",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** 1 saat boyunca yanar, 20 feet yarıçapında parlak ışık ve devamındaki 20 feet'te loş ışık sağlar. Bir yakın dövüş saldırısı olarak kullanıldığında 1 ateş hasarı verir.\n\n**[Atmosfer]** Kadim bir zindanın rutubetli karanlığını dağıtan, çıtırtıyla yanan bir alev. Sadece ışık değil, aynı zamanda bilinmeyene karşı bir umut kaynağıdır.",
+        "effects": [
+            {
+                "type": "weapon_damage",
+                "dice": "1",
+                "damageType": "Fire"
+            }
+        ]
+    },
+    {
+        "name": "Healer's Kit",
+        "name_tr": "Şifacı Seti",
+        "rarity": "None",
+        "type": "Adventuring Gear",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Bandajlar, merhemler ve tahta çıtalar içerir. 10 kullanımı vardır. Bir eylem harcayarak 0 can puanındaki bir yaratığı stabil hale getirebilirsiniz.\n\n**[Atmosfer]** Kan kokusu ve bitkisel özlerin karışımı. Bir savaş alanında büyü gücü bittiğinde, bir yaralının kaderini bu setin içindeki temiz sargılar belirler.",
+        "effects": []
+    },
+    {
+        "name": "Thieves' Tools",
+        "name_tr": "Hırsız Aletleri",
+        "rarity": "None",
+        "type": "Tools",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Kilitleri açmak ve tuzakları devre dışı bırakmak için kullanılır. Bu aletler üzerinde yeterliliğe (proficiency) sahip olmak, ilgili kontrollere yeterlilik bonusunuzu eklemenizi sağlar.\n\n**[Atmosfer]** İnce eğeler, küçük anahtarlar, aynalar ve penseler. Bir profesyonelin elinde bu aletler, dünyanın en güvenli kasalarını bile bir çocuk oyuncağına dönüştürebilir.",
+        "effects": []
+    },
+    {
+        "name": "Potion of Healing",
+        "name_tr": "İyileştirme İksiri (SRD)",
+        "rarity": "Common",
+        "type": "Potion",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Tüketildiğinde 2d4+2 can puanı (hit points) kazandırır. Bir eylem (action) olarak içilebilir veya başka birine içirilebilir.\n\n**[Atmosfer]** Kiraz kırmızısı renginde parıldayan bu sıvı, boğazınızdan aşağı inerken sıcak ve canlandırıcı bir his bırakır; yaralarınızın gözleriniz önünde kapandığını hissedersiniz.",
+        "effects": [
+            {
+                "type": "heal",
+                "value": "2d4+2"
+            }
+        ]
+    },
+    {
+        "name": "Bag of Holding",
+        "name_tr": "Dipsiz Çanta (SRD)",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Dışarıdan 2 fit genişliğinde görünse de iç hacmi çok daha geniştir. Yaklaşık 500 libre (227 kg) ağırlığında ve 64 kübik foot hacmindeki eşyayı taşıyabilir. Çanta boşken her zaman 15 libre ağırlığındadır.\n\n**[Atmosfer]** İlk bakışta sıradan bir deri çuval gibi görünse de, elinizi içine daldırdığınızda beklediğinizden çok daha derine indiğini fark edersiniz. Fizik kurallarını hiçe sayan bir taşıma kolaylığı sunar.",
+        "effects": []
+    },
+    {
+        "name": "+1 Weapon",
+        "name_tr": "+1 Silah",
+        "rarity": "Uncommon",
+        "type": "Weapon",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Bu sihirli silahla yapılan saldırı ve hasar zarlarına +1 bonus kazanırsınız. Maddi olmayan varlıklara ve dirençli yaratıklara karşı 'büyülü' (magical) sayılır.\n\n**[Atmosfer]** Çeliği sanki kendi ışığını yayıyormuş gibi parlar ve savurulduğunda havada kendine özgü bir ıslık sesi çıkarır. Herhangi bir silahtan daha keskin ve dengelidir.",
+        "effects": [
+            {
+                "type": "attack_bonus",
+                "value": 1
+            },
+            {
+                "type": "damage_bonus",
+                "value": 1
+            }
+        ]
+    },
+    {
+        "name": "+1 Armor",
+        "name_tr": "+1 Zırh",
+        "rarity": "Rare",
+        "type": "Armor",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Bu zırhı giyerken Zırh Sınıfınıza (AC) +1 bonus kazanırsınız. Sihirli koruması sayesinde darbeleri saptırma yeteneği sıradan zırhlardan daha yüksektir.\n\n**[Atmosfer]** Üzerindeki rünler, bir saldırı yaklaştığında hafifçe parlayarak kullanıcıyı uyarır ve zırhın en zayıf noktasını bile bir kale duvarı kadar sağlam kılar.",
+        "effects": [
+            {
+                "type": "ac_bonus",
+                "value": 1
+            }
+        ]
+    },
+    {
+        "name": "Immovable Rod",
+        "name_tr": "Hareket Etmeyen Değnek",
+        "rarity": "Uncommon",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Bir eylem harcayarak üzerindeki düğmeye bastığınızda değnek havada sabitlenir. 8000 libre (yaklaşık 3.6 ton) ağırlığa kadar hiçbir güç onu hareket ettiremez. DC 30 Strength kontrolüyle 10 feet hareket ettirilebilir.\n\n**[Atmosfer]** Uzayda bir çapa gibi hareket eden bu demir çubuk, bir kapıyı kapatmak, bir köprü kurmak veya sadece şaşkınlık yaratmak için kullanılan mucizevi bir can simididir.",
+        "effects": []
+    },
+    {
+        "name": "Armblade",
+        "name_tr": "Kolluk Bıçağı",
+        "rarity": "Common",
+        "type": "Weapon",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Kolunuza takılan ve uyumlandığınız sürece ayrılmaz bir büyülü silahtır. Bir bonus eylem olarak bıçağı ön kolunuza çekebilir veya dışarı çıkarabilirsiniz. Bıçak dışarıdayken o elinizi başka amaçlar için kullanamazsınız.\n\n**[Atmosfer]** Savaşçının vücuduyla bütünleşmiş bu bıçak, genellikle rünlerle süslüdür ve çekildiğinde hafif bir metalik çıtırtı ile ortaya çıkar. Gizli bir suikast aracı veya bir onur simgesidir.",
+        "effects": [
+            {
+                "type": "weapon_damage",
+                "dice": "1d6",
+                "damageType": "Piercing",
+                "properties": [
+                    "Hidden",
+                    "Attached"
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Armor of Gleaming",
+        "name_tr": "Parıldayan Zırh",
+        "rarity": "Common",
+        "type": "Armor",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Bu büyülü zırh hiçbir zaman kirlenmez. Temizlik gerektirmez ve çevresel koşullardan bağımsız olarak her zaman parlak ve bakımlı görünür.\n\n**[Atmosfer]** İster en kanlı savaşların ortasında, ister en derin bataklıklarda olsun, bu zırh üzerindeki her türlü lekeyi kendiliğinden söküp atar. Sürgündeki bir soylunun veya her zaman kusursuz görünmek isteyen bir kahramanın gururudur.",
+        "effects": []
+    },
+    {
+        "name": "Band of Loyalty",
+        "name_tr": "Sadakat Yüzüğü",
+        "rarity": "Common",
+        "type": "Ring",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Bu yüzüğe uyumluyken can puanınız 0'a inerse, anında ölürsünüz. Bu, düşman eline geçmekten daha çok ölmeyi tercih edenler için bir son çare aracıdır.\n\n**[Atmosfer]** Sırlarını mezara götürmeye yeminli casusların taktığı bu sade metal halka, taşıyanın davasına olan sarsılmaz bağlılığının sessiz ve karanlık bir kanıtıdır.",
+        "effects": []
+    },
+    {
+        "name": "Bead of Nourishment",
+        "name_tr": "Beslenme Taneciği",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Bu süngerimsi ve tatsız jölemsi tanecik dilinizin üzerinde çözünür ve bir tam günlük rasyon kadar besin sağlar. Yolculuklarda ağırlıktan tasarruf etmek için idealdir.\n\n**[Atmosfer]** Bir tabağa sığmayacak kadar büyük bir ziyafetin özü, bu küçük ve gösterişsiz taneciğin içine hapsedilmiştir. Tadı olmasa da mideye verdiği doygunluk hissi gerçektir.",
+        "effects": []
+    },
+    {
+        "name": "Bead of Refreshment",
+        "name_tr": "Tazelik Taneciği",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Bu tanecik bir sıvı içinde çözünerek, bir pine (yaklaşık yarım litre) kadar olan sıvıyı taze, soğuk içme suyuna dönüştürür. Büyülü sıvılar veya zehirler üzerinde etkisi yoktur.\n\n**[Atmosfer]** En sıcak çöllerde veya en kirli su kaynaklarında bile, bir dağ pınarının ferahlığını cebinizde taşımanıza olanak tanıyan küçük bir mucize.",
+        "effects": []
+    },
+    {
+        "name": "Boots of False Tracks",
+        "name_tr": "Yanıltıcı İz Botları",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Sadece insansılar tarafından giyilebilir. Botları giyerken, kendi boyutunuzdaki başka bir insansı türüne ait izler (örneğin bir elf yerine bir ork izi) bırakmayı seçebilirsiniz.\n\n**[Atmosfer]** Takipçilerinizi şaşırtmak ve izinizi kaybettirmek için tasarlanmış bu botlar, bastığınız toprağı sihirli bir şekilde şekillendirerek sizi asla olmadığınız biri gibi gösterir.",
+        "effects": []
+    },
+    {
+        "name": "Bottle of Boundless Coffee",
+        "name_tr": "Sonsuz Kahve Şişesi",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Bu metal şişe her zaman taze ve sıcak kahve içerir. Kahveyi her içtiğinizde bir d20 atın; 1 gelirse, şişe bir saat boyunca kahve vermeyi reddeder. Şişeden dökülen kahve anında yok olur.\n\n**[Atmosfer]** Uzun nöbet geceleri veya dondurucu sabahlar için bir hayat kurtarıcı. Kahvenin kokusu bile yorgun bir maceracının zihnini canlandırmaya yeter.",
+        "effects": []
+    },
+    {
+        "name": "Breathing Bubble",
+        "name_tr": "Nefes Balonu",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Bir kask gibi kafaya takılan bu yarı saydam küre, 1 saatlik solunabilir hava sağlar. Harcanan hava her gün şafak vaktinde yenilenir.\n\n**[Atmosfer]** Su altında veya zehirli gaz bulutlarının ortasında bile, bu balonun içindeki taze hava sayesinde nefes almaya devam edebilirsiniz. Bir hava kabarcığı gibi hafif ve hayati.",
+        "effects": []
+    },
+    {
+        "name": "Candle of the Deep",
+        "name_tr": "Derinlik Mumu",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Bu mumun alevi suyun altına batırılsa bile sönmez. Normal bir muma göre daha uzun ömürlü ve dirençli bir ışık kaynağıdır.\n\n**[Atmosfer]** Deniz kızlarının saraylarında veya batık gemilerin kamaralarında kullanılan bu mum, suyun altında bile titreyen ama sönmeyen gizemli bir alev yayar.",
+        "effects": []
+    },
+    {
+        "name": "Cast-Off Armor",
+        "name_tr": "Atılabilir Zırh",
+        "rarity": "Common",
+        "type": "Armor",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Bu zırhı bir eylem (action) olarak anında üzerinizden çıkarabilirsiniz. Acil durumlarda veya boğulma tehlikesinde hayati önem taşır.\n\n**[Atmosfer]** Tek bir mandalın veya kayışın çekilmesiyle tüm plakaları yere dökülen bu zırh, hantal yapısından saniyeler içinde kurtulmak isteyenler için tasarlanmıştır.",
+        "effects": [
+            {
+                "type": "special_property",
+                "description": "Doff as an action"
+            }
+        ]
+    },
+    {
+        "name": "Charlatan's Die",
+        "name_tr": "Şarlatan Zarı",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Bu altı yüzlü zarı attığınızda, hangi sayının geleceğini zihinsel olarak kontrol edebilirsiniz.\n\n**[Atmosfer]** Kumarbazların ve dolandırıcıların gizli silahı. Bu zarla şans her zaman sizden yanadır, tabii hilenizi kimse fark etmediği sürece.",
+        "effects": []
+    },
+    {
+        "name": "Chest of Preserving",
+        "name_tr": "Koruma Sandığı",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** İçine konulan yiyecekler ve bozulabilir eşyalar, sandık içinde kaldıkları sürece tazeliğini korur ve çürümezler.\n\n**[Atmosfer]** Haftalarca süren bir yolculuğun ardından bile sanki daha yeni fırından çıkmış gibi taze ekmek yemek, bu büyülü sandığın sağladığı küçük ama paha biçilemez bir lükstür.",
+        "effects": []
+    },
+    {
+        "name": "Cleansing Stone",
+        "name_tr": "Temizlik Taşı",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Bu taşa dokunarak bir eylem harcadığınızda, üzerinizdeki ve giysilerinizdeki tüm kir ve pislik anında temizlenir.\n\n**[Atmosfer]** Üst düzey konaklarda ve soyluların evlerinde bulunan bu taş, gün boyu süren tozlu yolların izini saniyeler içinde silip atarak sizi her zaman sunuma hazır kılar.",
+        "effects": []
+    },
+    {
+        "name": "Cloak of Billowing",
+        "name_tr": "Dalgalanan Pelerin",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Bir pelerin olarak giyilir. Bir bonus eylem harcayarak pelerinin dramatik bir şekilde arkada dalgalanmasını sağlayabilirsiniz.\n\n**[Atmosfer]** Tam da en etkileyici sözlerinizi söylerken veya rüzgarsız bir günde gururla yürürken, bu pelerin size bir kahraman edası kazandırır.",
+        "effects": []
+    },
+    {
+        "name": "Cloak of Many Fashions",
+        "name_tr": "Bin Moda Pelerini",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Bir bonus eylem olarak pelerinin stilini, rengini ve kalitesini değiştirebilirsiniz. Ağırlığı değişmez ve her zaman bir pelerin olarak kalır.\n\n**[Atmosfer]** Bir baloda ipek bir pelerin, bir barda ise yırtık bir seyyah pelerini. Kimliğini gizlemek veya her zaman modaya uygun kalmak isteyenlerin vazgeçilmezidir.",
+        "effects": []
+    },
+    {
+        "name": "Clockwork Amulet",
+        "name_tr": "Saat Mekanizmalı Muska",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Bir saldırı zarı atmadan önce bu özelliği kullanarak zar atmayıp doğrudan 10 (base d20 roll) alabilirsiniz. Bu özellik şafak vaktinde yenilenir.\n\n**[Atmosfer]** Mechanus düzleminin mutlak düzeninden bir parça. Rastgeleliğe ve şansa yer bırakmayan, her şeyi önceden hesaplanmış bir saate bağlayan bakır bir muska.",
+        "effects": [
+            {
+                "type": "special_property",
+                "description": "Replace d20 with 10 once per day"
+            }
+        ]
+    },
+    {
+        "name": "Clothes of Mending",
+        "name_tr": "Onarım Giysileri",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Bu seyyah giysileri, günlük aşınma ve yıpranmaya karşı kendini sihirli bir şekilde onarır. Tamamen yok edilen parçalar onarılamaz.\n\n**[Atmosfer]** Dikenli çalıların arasından geçtiniz veya bir kılıç darbesi aldınız; bu giysiler hafifçe büzülerek ve dikilerek eski hallerine döner. Her zaman temiz ve yeni gibi.",
+        "effects": []
+    },
+    {
+        "name": "Coin of Delving",
+        "name_tr": "Derinlik Sikkesi",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** 5 feet yarıçapında loş ışık yayar. Yere düştüğünde çıkardığı melodi, ne kadar mesafeden (kaç feet) düştüğünü bir dinleyici tarafından anlaşılmasını sağlar.\n\n**[Atmosfer]** Karanlık bir kuyuya veya derin bir yarığa atılan bu bakır sikke, çıkardığı metalik melodiyle aşağıda sizi neyin (ve ne kadar derinde) beklediğini söyler.",
+        "effects": []
+    },
+    {
+        "name": "Cuddly Strixhaven Mascot",
+        "name_tr": "Sevimli Strixhaven Maskotu",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Bir eylem olarak omuzunuza veya kolunuza yapışmasını sağlayabilirsiniz. Korkmuş (frightened) durumundan kaçınmak için yapılacak kurtarma zarlarına bir kez avantaj sağlar (uzun rest ile yenilenir).\n\n**[Atmosfer]** Yumuşacık, sevimli bir peluş. En karanlık kabusların ve dehşet verici yaratıkların karşısında, bu maskotun verdiği sıcaklık size cesaret aşılar.",
+        "effects": [
+            {
+                "type": "save_advantage",
+                "condition": "Frightened (once/long rest)"
+            }
+        ]
+    },
+    {
+        "name": "Dark Shard Amulet",
+        "name_tr": "Karanlık Parça Muskası",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Warlock sınıfına özeldir. Bilmediğiniz bir 'cantrip'i Arcana testi (DC 10) başarılı olursa kullanmanıza izin verir. Uzun bir dinlenme ile yenilenir.\n\n**[Atmosfer]** Shadowfell'in karanlığından kopup gelmiş bir taş parçası. İçinde barındırdığı yasak sırlar, kullanıcısına bir anlık da olsa ham büyü gücünün anahtarını verir.",
+        "effects": []
+    },
+    {
+        "name": "Dread Helm",
+        "name_tr": "Dehşet Kaskı",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Bu ağır metal kaskı taktığınızda, gözleriniz sihirli ve ürkütücü bir kırmızı renkte parlamaya başlar.\n\n**[Atmosfer]** Miğferin vizöründen sızan o tekinsiz kırmızı ışık, karşınıza çıkan her yüreğe korku salan bir gölge gibi sizi takip eder.",
+        "effects": []
+    },
+    {
+        "name": "Earring of Message",
+        "name_tr": "Mesaj Küpesi",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Bu küpeyi takarken 'Message' büyüsünü istediğiniz zaman yapabilirsiniz. Bir casusun veya takım liderinin vazgeçilmez haberleşme aracıdır.\n\n**[Atmosfer]** Kulağınızdaki küçük bir takı, sanki birisi doğrudan zihninize fısıldıyormuş gibi, en karmaşık planların sessizce koordine edilmesini sağlar.",
+        "effects": [
+            {
+                "type": "spell_auto",
+                "spell": "Message"
+            }
+        ]
+    },
+    {
+        "name": "Enduring Spellbook",
+        "name_tr": "Dayanıklı Büyü Kitabı",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Bu büyü kitabı suya girmekle veya ateşle temas etmekle yok edilemez. Hatta bin yıl boyunca saklansa bile sayfaları çürümez.\n\n**[Atmosfer]** Bir büyücünün en değerli varlığı olan bilgi, bu mucizevi cilt sayesinde doğanın ve zamanın yıkıcı etkilerine karşı mutlak bir koruma altına alınmıştır.",
+        "effects": []
+    },
+    {
+        "name": "Ersatz Eye",
+        "name_tr": "Yapay Göz",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Kaybedilmiş bir gözün yerine geçer. Göz çukuruna yerleştirildiğinde normal bir göz gibi görmenizi sağlar. Uyumlanma (attunement) gerektirir.\n\n**[Atmosfer]** Püskürtme cam veya metalden yapılmış olsa da, bir kez yerine oturduğunda sanki her zaman oradaymış gibi çevreyi tüm netliğiyle görmenizi sağlayan bir protez şaheseri.",
+        "effects": []
+    },
+    {
+        "name": "Everbright Lantern",
+        "name_tr": "Sönmeyen Fener",
+        "rarity": "Common",
+        "type": "Adventuring Gear",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** İçinde bir 'Continual Flame' büyüsü barındırır. Yağ gerektirmez ve kapatılmadığı sürece sonsuza dek 20 feet parlak, 20 feet loş ışık yayar.\n\n**[Atmosfer]** Hiçbir masraf gerektirmeyen bu temiz ve parlak ışık, zindanların ebedi karanlığında yolunuzu aydınlatan en güvenilir müttefikinizdir.",
+        "effects": []
+    },
+    {
+        "name": "Feather Token",
+        "name_tr": "Tüy Yadigar",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Bir eylem olarak kullanıldığında yok olur ve dev bir tüy yatağı, bir ağaç veya bir kuş gibi (türüne göre) bir efekt yaratır.\n\n**[Atmosfer]** Avucunuzun içindeki bu küçük kuş tüyü, sihirli kelimeler söylendiğinde bir anda devasa bir yapıya veya bir doğa olayına dönüşerek imkansızı başarır.",
+        "effects": []
+    },
+    {
+        "name": "Glamerweave",
+        "name_tr": "İllüzyon Dokuması",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Zararsız illüzyon büyüsüyle aşılanmış giysilerdir. Bir bonus eylem olarak kumaş üzerinde hareketli bir desen yaratabilirsiniz. Nadir versiyonu Performans veya İkna testlerine 1d4 bonus sağlar.\n\n**[Atmosfer]** Üzerinde hayali kelebeklerin uçuştuğu bir şapka veya alevler içinde yanan bir gece elbisesi. Glamerweave, modayı büyüyle birleştiren bir zarafet sembolüdür.",
+        "effects": []
+    },
+    {
+        "name": "Hat of Vermin",
+        "name_tr": "Haşere Şapkası",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** 3 şarjı vardır. Bir eylem harcayarak şapkadan bir yarasa, kurbağa veya fare çağırabilirsiniz. Yaratık sizden kaçmaya çalışır, kontrolünüz altında değildir ve 1 saat sonra yok olur.\n\n**[Atmosfer]** Sihirbazların şapkadan tavşan çıkarma numarasının biraz daha 'vahşi' ve tahmin edilemez bir versiyonu. Şapkanın içinden aniden fırlayan bir fare, mükemmel bir dikkat dağıtıcı olabilir.",
+        "effects": []
+    },
+    {
+        "name": "Hat of Wizardry",
+        "name_tr": "Büyücülük Şapkası",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Sadece büyücüler (wizard) tarafından kullanılabilir. Bilmediğiniz bir 'cantrip'i Arcana testi (DC 10) başarılı olursa kullanmanıza izin verir. Ayrıca bir büyü odağı (focus) olarak kullanılabilir.\n\n**[Atmosfer]** Altın ay ve yıldızlarla süslü bu klasik koni şapka, bir büyücünün sadece tarzını değil, aynı zamanda ham büyü üzerindeki ustalığını da temsil eder.",
+        "effects": []
+    },
+    {
+        "name": "Heward's Handy Spice Pouch",
+        "name_tr": "Heward'ın Kullanışlı Baharat Kesesi",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** 10 şarjı vardır. Bir eylem harcayarak istediğiniz herhangi bir büyülü olmayan baharatı (tuz, karabiber, safran, kişniş vb.) bir tutam miktarında keseden çıkarabilirsiniz.\n\n**[Atmosfer]** Yolculuk sırasında yenen rasyonların tatsızlığından bıkanlar için Heward'ın bu küçük hediyesi, en sade yemeği bile bir ziyafete dönüştürebilir.",
+        "effects": []
+    },
+    {
+        "name": "Horn of Silent Alarm",
+        "name_tr": "Sessiz Alarm Borusu",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** 4 şarjı vardır. Boruyu çaldığınızda, 600 feet mesafedeki seçtiğiniz tek bir yaratık sesi duyar. Başka hiçbir varlık sesi duymaz.\n\n**[Atmosfer]** Düşman hatlarının arkasında sızarken veya sessizce nöbet tutarken, sadece müttefikinizin duyabileceği o gizli uyarı hayati bir önem taşıyabilir.",
+        "effects": []
+    },
+    {
+        "name": "Illuminator's Tattoo",
+        "name_tr": "Aydınlatıcı Dövmesi",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Parmak ucunuzla hiç bitmeyen bir mürekkeple yazmanızı sağlar. Ayrıca bir sayfaya dokunarak yazıyı sadece sizin ve seçtiğiniz birinin görebileceği şekilde 24 saatliğine görünmez yapabilirsiniz.\n\n**[Atmosfer]** Gizli mesajlar, yasak aşk mektupları veya sadece kalem bulamadığınızda; bu dövme vücudunuzun bir parçası olan sadık bir yazı aracıdır.",
+        "effects": []
+    },
+    {
+        "name": "Imbued Wood Focus",
+        "name_tr": "Güçlendirilmiş Ahşap Odak",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Bir büyü odağıdır. Ahşabın türüne göre (örneğin Fernandian meşesi - ateş), o türdeki hasar veren büyülerinize +1 hasar bonusu kazandırır.\n\n**[Atmosfer]** Diğer düzlemlerin enerjisiyle beslenmiş bir ağaçtan oyulmuş bu asa, içinden geçen büyüsel enerjiyi süzerek onu daha saf ve yıkıcı hale getirir.",
+        "effects": [
+            {
+                "type": "damage_bonus",
+                "value": 1,
+                "condition": "specific element"
+            }
+        ]
+    },
+    {
+        "name": "Instrument of Illusions",
+        "name_tr": "İllüzyon Enstrümanı",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Bu enstrümanı çalarken, 5 feet (ozanlar için 15 feet) yarıçapında zararsız illüzyon efektleri (ışıklar, kelebekler, kar taneleri) yaratabilirsiniz.\n\n**[Atmosfer]** Müziğin notaları havada görsel bir şölene dönüşür. Bir ozanın gösterisini sadece duyulabilir olmaktan çıkarıp unutulmaz bir deneyime dönüştürür.",
+        "effects": []
+    },
+    {
+        "name": "Instrument of Scribing",
+        "name_tr": "Yazı Enstrümanı",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** 3 şarjı vardır. Çalarken bir eylem harcayarak 30 feet mesafedeki bir yüzeye 6 kelimeye kadar (ozanlar için 13 kelime ve parıltı efekti) büyülü mesaj yazabilirsiniz.\n\n**[Atmosfer]** Havada asılı kalan parıltılı harflerle bir uyarı bırakmak veya bir binanın duvarına sanatsal bir imza atmak için sihirli bir yöntem.",
+        "effects": []
+    },
+    {
+        "name": "Keycharm",
+        "name_tr": "Anahtar Muska",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Alarm, Arcane Lock veya Glyph of Warding büyülerini bu muskaya bağlayabilirsiniz. Muskaya sahip olan kişi alarmı duyar veya engelleri tetiklemeden geçebilir.\n\n**[Atmosfer]** Kundarak Evi'nin ustaları tarafından üretilen bu anahtar, en karmaşık sihirli güvenlik sistemlerinin 'pasosu' gibidir.",
+        "effects": []
+    },
+    {
+        "name": "Lantern of Tracking",
+        "name_tr": "Takip Feneri",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Belirli bir yaratık türünü (örneğin ölümsüzler) tespit etmek için tasarlanmıştır. Bu yaratık türü 300 feet yakındaysa fenerin ışığı parlak yeşile döner.\n\n**[Atmosfer]** Karanlık ormanda ilerlerken fenerin aniden zümrüt yeşili bir ışıkla parlaması, avın (veya avcının) çok yakında olduğunun kalp atışlarını hızlandıran habercisidir.",
+        "effects": []
+    },
+    {
+        "name": "Lock of Trickery",
+        "name_tr": "Düzenbaz Kilidi",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Sıradan bir kilit gibi görünür ancak iç mekanizması hırsızları engellemek için sihirli bir şekilde değişir. Kilidi açma (thieve's tools) denemeleri dezavantajlıdır.\n\n**[Atmosfer]** En usta hırsızları bile terleten bu kilit, içinde yaşayan huysuz bir ruh varmış gibi maymuncuklarınızı geri püskürtür.",
+        "effects": []
+    },
+    {
+        "name": "Masque Charm",
+        "name_tr": "Maske Muskası",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Gümüş bir iğne şeklindedir. Bir eylem harcayarak 'Disguise Self' büyüsü yapabilirsiniz. Büyü 1 saat veya 6 saat (bu durumda muska yok olur) sürebilir.\n\n**[Atmosfer]** Tek bir dokunuşla yüzünüzü ve kıyafetlerinizi gizleyerek bir yabancıya dönüşmenizi sağlayan bu muska, gizli operasyonlar için paha biçilemezdir.",
+        "effects": [
+            {
+                "type": "spell_auto",
+                "spell": "Disguise Self"
+            }
+        ]
+    },
+    {
+        "name": "Masquerade Tattoo",
+        "name_tr": "Maskeli Balo Dövmesi",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** İstediğiniz renk ve desene dönüşebilen sihirli bir dövmedir. Günde bir kez 'Disguise Self' büyüsü yapmanıza olanak tanır. Uyumlanma gerektirir.\n\n**[Atmosfer]** Vücudunuzda hareket eden bir sanat eseri. Sadece şıklık için değil, aynı zamanda anında kılık değiştirmenizi sağlayan sihirli bir mürekkep tabakası.",
+        "effects": [
+            {
+                "type": "spell_auto",
+                "spell": "Disguise Self"
+            }
+        ]
+    },
+    {
+        "name": "Medal of Muscle",
+        "name_tr": "Kas Madalyası",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Madalyayı sıktığınızda 1 saat boyunca Strength testlerine ve kurtarma zarlarına avantaj kazanırsınız. Kullanıldıktan sonra tılsımı kaybolur.\n\n**[Atmosfer]** Güç yarışmalarının galiplerine verilen bu madalya, içindeki saf fiziksel iradeyi kullanıcısına aktararak imkansız yükleri bile kaldırmasını sağlar.",
+        "effects": [
+            {
+                "type": "check_advantage",
+                "stat": "Strength",
+                "duration": "1 hour"
+            },
+            {
+                "type": "save_advantage",
+                "stat": "Strength",
+                "duration": "1 hour"
+            }
+        ]
+    },
+    {
+        "name": "Medal of the Conch",
+        "name_tr": "Deniz Kabuğu Madalyası",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Madalyayı ovaladığınızda 1 saat boyunca yürüme hızınıza eşit bir yüzme hızı kazanırsınız. Kullanıldıktan sonra tılsımı kaybolur.\n\n**[Atmosfer]** Deniz kabuğuna benzer bu madalya, karadaki bir insanı adeta bir deniz yaratığına dönüştürerek suların altında zahmetsizce süzülmesini sağlar.",
+        "effects": [
+            {
+                "type": "movement_speed",
+                "mode": "Swim",
+                "value": "walking speed",
+                "duration": "1 hour"
+            }
+        ]
+    },
+    {
+        "name": "Medal of the Horizonback",
+        "name_tr": "Horizonback Madalyası",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Bir saldırı size çarpmak üzereyken tepki (reaction) vererek AC'nizi bir sonraki turun başına kadar 5 artırabilirsiniz. Kullanıldıktan sonra tılsımı kaybolur.\n\n**[Atmosfer]** Bir kaplumbağanın sert kabuğunu andıran bu madalya, kritik bir anda etrafınızda görünmez bir kalkan oluşturarak en ağır darbeleri bile saptırır.",
+        "effects": [
+            {
+                "type": "ac_bonus",
+                "value": 5,
+                "isReaction": true
+            }
+        ]
+    },
+    {
+        "name": "Medal of the Maze",
+        "name_tr": "Labirent Madalyası",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Madalyanın üzerindeki labirenti takip ettiğinizde 1 saat boyunca Wisdom testlerine avantaj kazanırsınız ve herhangi bir labirentin en kısa çıkış yolunu bilirsiniz.\n\n**[Atmosfer]** Zihninizin içindeki pusları dağıtan ve size en karmaşık yollarda bile rehberlik eden kadim bir yön bulma tılsımı.",
+        "effects": [
+            {
+                "type": "check_advantage",
+                "stat": "Wisdom",
+                "duration": "1 hour"
+            }
+        ]
+    },
+    {
+        "name": "Medal of the Meat Pie",
+        "name_tr": "Etli Börek Madalyası",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Madalyayı ağzınıza bastırdığınızda 2d4+2 geçici can puanı kazanırsınız. Kullanıldıktan sonra tılsımı kaybolur. Dokunulduğunda sıcaktır ve börek gibi kokar.\n\n**[Atmosfer]** Sadece manevi bir moral değil, aynı zamanda fiziksel bir dayanıklılık veren bu madalya, en zorlu anlarda size taze bir rızkın verdiği gücü aşılar.",
+        "effects": [
+            {
+                "type": "temp_hp",
+                "value": "2d4+2"
+            }
+        ]
+    },
+    {
+        "name": "Medal of the Wetlands",
+        "name_tr": "Sulak Alan Madalyası",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Madalyayı takip ettiğinizde 1 saat boyunca zorlu arazi (difficult terrain) sizi yavaşlatmaz. Kullanıldıktan sonra tılsımı kaybolur.\n\n**[Atmosfer]** Bataklıklarda veya sık ormanlarda sanki düz yolda yürüyormuşçasına hızlı ve çevik hareket etmenizi sağlayan doğa temalı bir madalya.",
+        "effects": [
+            {
+                "type": "special_property",
+                "description": "Ignore difficult terrain for 1 hour"
+            }
+        ]
+    },
+    {
+        "name": "Medal of Wit",
+        "name_tr": "Zeka Madalyası",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Madalyayı şakağınıza bastırdığınızda 1 saat boyunca Intelligence testlerine ve kurtarma zarlarına avantaj kazanırsınız. Kullanıldıktan sonra tılsımı kaybolur.\n\n**[Atmosfer]** Zihninizin üzerindeki perdeleri kaldırarak size anlık bir aydınlanma ve kıvrak bir zeka kazandıran, bilgece tasarlanmış bir ödül.",
+        "effects": [
+            {
+                "type": "check_advantage",
+                "stat": "Intelligence",
+                "duration": "1 hour"
+            },
+            {
+                "type": "save_advantage",
+                "stat": "Intelligence",
+                "duration": "1 hour"
+            }
+        ]
+    },
+    {
+        "name": "Mind Crystal",
+        "name_tr": "Zihin Kristali",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Bir büyüyü güçlendirmek için kullanılan tek kullanımlık bir kristaldir. Örneğin 'Subtle' versiyonu bir büyüyü el dili ve söz bileşenleri olmadan yapmanızı sağlar.\n\n**[Atmosfer]** İçinde kristalize olmuş büyüsel bir modifikasyon barındıran bu taş, en kritik büyünüzü yaparken size beklenmedik bir ustalık kazandırır.",
+        "effects": []
+    },
+    {
+        "name": "Moodmark Paint",
+        "name_tr": "Ruh Hali Boyası",
+        "rarity": "Common",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Yüzünüze uygulandığında 8 saat boyunca duygularınızı (mutluluk, üzüntü, öfke vb.) yansıtacak şekilde renk ve desen değiştirir.\n\n**[Atmosfer]** Düşüncelerinizi saklamanın imkansız olduğu, duygularınızın yüzünüzdeki geometrik desenlerle dışavurumu. Karanlık elflerin favori makyajı.",
+        "effects": []
+    }
+]

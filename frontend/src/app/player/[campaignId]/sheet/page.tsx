@@ -102,10 +102,17 @@ export default function PlayerSheet() {
     const [wizardCantripOptions, setWizardCantripOptions] = useState<any[]>([]);
     const [cantripToReplace, setCantripToReplace] = useState<string>("");
     const [newWizardCantrip, setNewWizardCantrip] = useState<string>("");
-    // cast slot picker
     const [castingSpell, setCastingSpell] = useState<string | null>(null);
     const [showLevelChart, setShowLevelChart] = useState(false);
     const [expandedAtkIdx, setExpandedAtkIdx] = useState<number | null>(null);
+
+    // Custom Resources
+    const [customResources, setCustomResources] = useState<any[]>([]);
+    const [showCustomResourceModal, setShowCustomResourceModal] = useState(false);
+    const [newResourceName, setNewResourceName] = useState("");
+    const [newResourceMax, setNewResourceMax] = useState(1);
+    const [newResourceRecharge, setNewResourceRecharge] = useState<'short' | 'long'>('long');
+    const [newResourceDesc, setNewResourceDesc] = useState("");
 
     const [spellDetails, setSpellDetails] = useState<Record<string, any>>({});
     const [expandedSpell, setExpandedSpell] = useState<string | null>(null);
@@ -283,6 +290,7 @@ export default function PlayerSheet() {
                 if (char.conditions) setConditions(char.conditions);
                 if (char.hitDiceUsed !== undefined) setHitDiceUsed(char.hitDiceUsed);
                 if (char.privateNotes) setPrivateNotes(char.privateNotes);
+                if (char.customResources) setCustomResources(char.customResources);
                 if (char.featSelections) {
                     setFeatStatSelections(char.featSelections.stats || {});
                     setFeatSpellSelections(char.featSelections.spells || {});
@@ -316,6 +324,15 @@ export default function PlayerSheet() {
         if (!characterRef.current) return;
         const currentMoney = characterRef.current.money || { cp: 0, sp: 0, ep: 0, gp: 0, pp: 0 };
         const newMoney = { ...currentMoney, [type]: Math.max(0, (currentMoney[type] || 0) + amount) };
+        const newChar = { ...characterRef.current, money: newMoney };
+        setCharacter(newChar);
+        await axios.put(`${API_URL}/api/characters/${characterRef.current._id}`, { money: newMoney }, { headers: { 'Authorization': `Bearer ${token}` } });
+    };
+
+    const setMoney = async (type: string, value: number) => {
+        if (!characterRef.current) return;
+        const currentMoney = characterRef.current.money || { cp: 0, sp: 0, ep: 0, gp: 0, pp: 0 };
+        const newMoney = { ...currentMoney, [type]: Math.max(0, value) };
         const newChar = { ...characterRef.current, money: newMoney };
         setCharacter(newChar);
         await axios.put(`${API_URL}/api/characters/${characterRef.current._id}`, { money: newMoney }, { headers: { 'Authorization': `Bearer ${token}` } });
@@ -379,6 +396,37 @@ export default function PlayerSheet() {
         } catch (e) {
             console.error('Toggle equip failed:', e);
         }
+    };
+
+    const addCustomResource = async () => {
+        if (!newResourceName.trim() || !characterRef.current) return;
+        const newRes = {
+            id: `cr-${Date.now()}`,
+            name: newResourceName,
+            max: newResourceMax,
+            recharge: newResourceRecharge,
+            desc: newResourceDesc
+        };
+        const updated = [...customResources, newRes];
+        setCustomResources(updated);
+        setNewResourceName(""); setNewResourceMax(1); setNewResourceDesc("");
+        setShowCustomResourceModal(false);
+        try {
+            await axios.put(`${API_URL}/api/characters/${characterRef.current._id}`, { customResources: updated }, { headers: { 'Authorization': `Bearer ${token}` } });
+        } catch (err) { console.error("Error adding custom resource:", err); }
+    };
+
+    const removeCustomResource = async (id: string) => {
+        if (!characterRef.current) return;
+        const updated = customResources.filter(r => r.id !== id);
+        setCustomResources(updated);
+        // Also clear used count if it exists
+        const newUsed = { ...resourcesUsed };
+        delete newUsed[id];
+        setResourcesUsed(newUsed);
+        try {
+            await axios.put(`${API_URL}/api/characters/${characterRef.current._id}`, { customResources: updated, resourcesUsed: newUsed }, { headers: { 'Authorization': `Bearer ${token}` } });
+        } catch (err) { console.error("Error removing custom resource:", err); }
     };
 
     // Empty line to clear the syntax error
@@ -460,6 +508,11 @@ export default function PlayerSheet() {
         const newResourcesUsed = { ...resourcesUsed };
         // Short rest: reset short-recharge resources, Warlock slots
         resources.forEach(r => { if (r.recharge === 'short') newResourcesUsed[r.key] = 0; });
+
+        // Also reset custom resources that recharge on short rest
+        customResources.forEach(cr => {
+            if (cr.recharge === 'short') newResourcesUsed[cr.id] = 0;
+        });
         // Also reset Warlock pact magic
         const newSlotsUsed = { ...spellSlotsUsed };
         if (clsName === 'Warlock') { Object.keys(newSlotsUsed).forEach(k => { newSlotsUsed[k] = 0; }); }
@@ -473,7 +526,9 @@ export default function PlayerSheet() {
             totalHeal += Math.max(1, Math.floor(Math.random() * hitDieMax) + 1 + conMod);
         }
 
-        const newHp = Math.min(char.maxHp, char.currentHp + totalHeal);
+        const currentHPVal = currentHp; // Use state value for guaranteed fresh local state
+        const maxHPVal = character?.maxHp || 10;
+        const newHp = Math.min(maxHPVal, currentHPVal + totalHeal);
         const newHitDiceUsed = hitDiceUsed + hitDiceToSpend;
 
         setResourcesUsed(newResourcesUsed);
@@ -540,6 +595,19 @@ export default function PlayerSheet() {
             (socket as any).off("shop_published", onShopPublished);
         };
     }, [socket]);
+
+    const handleDeleteCharacter = async () => {
+        if (!character) return;
+        if (!confirm(`"${character.name}" karakterini tamamen silmek istediğine emin misin? Bu işlem geri alınamaz.`)) return;
+        try {
+            await axios.delete(`${API_URL}/api/characters/${character._id}`, { headers: { 'Authorization': `Bearer ${token}` } });
+            localStorage.removeItem(`dnd_character_${campaignId}`);
+            router.push('/dashboard');
+        } catch (err) {
+            console.error(err);
+            alert("Karakter silinirken hata oluştu.");
+        }
+    };
 
     useEffect(() => {
         if (!whisperData || !character) return;
@@ -610,7 +678,20 @@ export default function PlayerSheet() {
             character.inventory.forEach((item: any) => {
                 if (item && item.isEquipped && item.effects && Array.isArray(item.effects)) {
                     item.effects.forEach((eff: any) => {
-                        if (eff && eff.type === type) {
+                        if (!eff) return;
+
+                        // Handle explicit types first
+                        if (subType === 'SPELL_ATTACK' && eff.type === 'spell_attack_bonus') {
+                            bonus += (eff.value || 0);
+                        } else if (subType === 'SPELL_DC' && eff.type === 'spell_dc_bonus') {
+                            bonus += (eff.value || 0);
+                        } else if (subType === 'SAVE' && eff.type === 'save_bonus') {
+                            bonus += (eff.value || 0);
+                        } else if (subType === 'SKILL' && eff.type === 'skill_bonus') {
+                            bonus += (eff.value || 0);
+                        }
+                        // Handle original nested object style
+                        else if (eff.type === type) {
                             if (subType) {
                                 if (eff.value && typeof eff.value === 'object' && eff.value[subType]) bonus += eff.value[subType];
                             } else {
@@ -642,11 +723,24 @@ export default function PlayerSheet() {
         }
         // Item Score bonuses
         if (statName && character?.inventory && Array.isArray(character.inventory)) {
+            const lowerStat = statName.toLowerCase();
+            const MAP: Record<string, string> = { 'str': 'strength', 'dex': 'dexterity', 'con': 'constitution', 'int': 'intelligence', 'wis': 'wisdom', 'cha': 'charisma' };
+            const fullStat = MAP[lowerStat] || lowerStat;
+
             character.inventory.forEach((item: any) => {
                 if (item && item.isEquipped && item.effects && Array.isArray(item.effects)) {
                     item.effects.forEach((eff: any) => {
-                        if (eff && eff.type === 'stat_bonus' && eff.value && typeof eff.value === 'object' && eff.value[statName]) bonus += eff.value[statName];
-                        if (eff && eff.type === 'stat_set' && eff.value && typeof eff.value === 'object' && eff.value[statName]) {
+                        if (!eff) return;
+                        // Enriched style
+                        if (eff.type === 'stat_bonus' && (eff.stat?.toLowerCase() === lowerStat || eff.stat?.toLowerCase() === fullStat)) {
+                            bonus += (eff.value || 0);
+                        }
+                        if (eff.type === 'stat_set' && (eff.stat?.toLowerCase() === lowerStat || eff.stat?.toLowerCase() === fullStat)) {
+                            setVal = Math.max(setVal || 0, eff.value || 0);
+                        }
+                        // Original style
+                        if (eff.type === 'stat_bonus' && eff.value && typeof eff.value === 'object' && eff.value[statName]) bonus += eff.value[statName];
+                        if (eff.type === 'stat_set' && eff.value && typeof eff.value === 'object' && eff.value[statName]) {
                             setVal = Math.max(setVal || 0, eff.value[statName]);
                         }
                     });
@@ -1012,6 +1106,20 @@ export default function PlayerSheet() {
             sub?.features?.filter((f: any) => level >= f.level).forEach((f: any) => checkText((f.desc_tr || "") + " " + (f.desc || ""), f.name));
         }
 
+        if (character?.inventory) {
+            character.inventory.forEach((item: any) => {
+                if (!item.isEquipped) return;
+                if (item.effects) {
+                    item.effects.forEach((eff: any) => {
+                        if (eff.type === 'resistance' && eff.value) res.push(`${eff.value} (${item.name})`);
+                        if (eff.type === 'immunity' && eff.value) imm.push(`${eff.value} (${item.name})`);
+                        if (eff.type === 'vulnerability' && eff.value) vuln.push(`${eff.value} (${item.name})`);
+                    });
+                }
+                checkText((item.note || "") + " " + (item.desc_tr || "") + " " + (item.desc || ""), item.name);
+            });
+        }
+
         return {
             res: Array.from(new Set(res)),
             imm: Array.from(new Set(imm)),
@@ -1159,6 +1267,9 @@ export default function PlayerSheet() {
                         <button onClick={handleLongRest} className="px-4 py-2 bg-indigo-900/80 hover:bg-indigo-700 text-indigo-100 font-black rounded-lg text-sm transition border border-indigo-500 shadow-[0_0_15px_rgba(79,70,229,0.3)] hover:scale-105 transform">
                             ⛺ Long Rest
                         </button>
+                        <button onClick={handleDeleteCharacter} className="ml-2 px-3 py-2 bg-red-900/40 hover:bg-red-700/60 text-red-300 font-bold rounded-lg text-xs transition border border-red-700/50 shadow-sm" title="Karakteri Sil">
+                            🗑️ Sil
+                        </button>
                     </div>
                 </div>
             </div>
@@ -1179,9 +1290,25 @@ export default function PlayerSheet() {
                             <div className={`h-full rounded-full transition-all ${hpPct <= 25 ? 'bg-red-500' : hpPct <= 50 ? 'bg-orange-400' : 'bg-green-500'}`} style={{ width: `${hpPct}%` }} />
                         </div>
                         {/* Direkt değer girişi */}
-                        <input type="number" value={hpInput} onChange={e => setHpInput(e.target.value)}
-                            onKeyDown={e => { if (e.key === 'Enter') { updateHp(Number(hpInput)); setHpInput(""); } }}
-                            placeholder="HP set…" className="w-20 px-2 py-1 bg-gray-700 border border-gray-600 rounded text-sm text-white text-center" />
+                        <input type="text" value={hpInput} onChange={e => setHpInput(e.target.value)}
+                            onKeyDown={e => {
+                                if (e.key === 'Enter') {
+                                    const val = hpInput.trim();
+                                    if (!val) return;
+                                    let delta = 0;
+                                    if (val.startsWith('+')) {
+                                        delta = parseInt(val.slice(1)) || 0;
+                                    } else if (val.startsWith('-')) {
+                                        delta = -(parseInt(val.slice(1)) || 0);
+                                    } else {
+                                        // Varsayılan olarak hasar (eksi)
+                                        delta = -(parseInt(val) || 0);
+                                    }
+                                    updateHp(currentHp + delta);
+                                    setHpInput("");
+                                }
+                            }}
+                            placeholder="± HP…" className="w-20 px-2 py-1 bg-gray-700 border border-gray-600 rounded text-sm text-white text-center" />
                     </div>
                     {/* AC */}
                     <div className="flex items-center gap-2">
@@ -1258,46 +1385,58 @@ export default function PlayerSheet() {
                 </div>
             </div>
 
-            {/* ── DEATH SAVES ── */}
+            {/* ── DEATH SAVES FULLSCREEN MODAL ── */}
             {currentHp <= 0 && (
-                <div className="bg-red-950/40 border-b border-red-900/50 px-6 py-4 animate-pulse-slow">
-                    <div className="max-w-7xl mx-auto flex items-center justify-between flex-wrap gap-4">
-                        <div className="flex items-center gap-3">
-                            <span className="text-4xl">☠️</span>
-                            <div>
-                                <h3 className="font-black text-red-500 text-base lg:text-lg uppercase tracking-widest">Ölümün Kıyısında!</h3>
-                                <p className="text-red-400 text-xs lg:text-sm font-bold">Ölüm Kurtarışları Zarları At (10+ Başarılı)</p>
+                <div className="fixed inset-0 bg-black/90 z-[100] backdrop-blur-md flex items-center justify-center p-4">
+                    <div className="bg-gray-900 border-2 border-red-700/60 rounded-3xl w-full max-w-lg p-8 shadow-[0_0_50px_rgba(185,28,28,0.4)] animate-in fade-in zoom-in duration-300">
+                        <div className="text-center mb-8">
+                            <div className="w-24 h-24 bg-red-900/40 rounded-full flex items-center justify-center text-5xl mx-auto mb-4 border-2 border-red-500/50 shadow-[0_0_20px_rgba(239,68,68,0.3)]">
+                                ☠️
                             </div>
+                            <h2 className="text-4xl font-black text-red-500 uppercase tracking-tighter mb-2">Ölümün Kıyısında!</h2>
+                            <p className="text-gray-400 font-bold">Ölüm Kurtarışları: 10+ Başarılı Olur</p>
                         </div>
-                        <div className="flex gap-8 bg-gray-900/50 p-3 rounded-xl border border-red-900/30 shadow-inner">
-                            <div className="flex flex-col items-center gap-2">
-                                <span className="text-green-400 font-black text-[10px] uppercase tracking-wider">Başarılar (Successes)</span>
-                                <div className="flex gap-3">
+
+                        <div className="space-y-10">
+                            {/* SUCCESSES */}
+                            <div className="space-y-4">
+                                <div className="flex justify-between items-center px-2">
+                                    <span className="text-green-400 font-black uppercase tracking-widest text-xs">Başarılar (Successes)</span>
+                                    <span className="text-gray-500 font-mono text-xs">{deathSaves.successes} / 3</span>
+                                </div>
+                                <div className="flex justify-center gap-6">
                                     {[1, 2, 3].map(i => (
                                         <button key={`s${i}`} onClick={() => updateDeathSaves('successes', deathSaves.successes === i ? i - 1 : i)}
-                                            className={`w-10 h-10 rounded-full border-[3px] flex items-center justify-center transition-all ${deathSaves.successes >= i ? 'bg-green-500 border-green-400 text-white font-black shadow-[0_0_15px_rgba(34,197,94,0.5)]' : 'bg-gray-800 border-gray-600 hover:border-green-500 cursor-pointer'}`}>
+                                            className={`w-14 h-14 rounded-2xl border-[3px] flex items-center justify-center transition-all duration-300 ${deathSaves.successes >= i ? 'bg-green-500 border-green-400 text-white font-black scale-110 shadow-[0_0_20px_rgba(34,197,94,0.6)]' : 'bg-gray-800 border-gray-700 hover:border-green-600 cursor-pointer hover:bg-gray-700'}`}>
                                             {deathSaves.successes >= i ? '✓' : ''}
                                         </button>
                                     ))}
                                 </div>
                             </div>
-                            <div className="w-px bg-red-900/30"></div>
-                            <div className="flex flex-col items-center gap-2">
-                                <span className="text-red-500 font-black text-[10px] uppercase tracking-wider">Başarısızlıklar (Failures)</span>
-                                <div className="flex gap-3">
+
+                            {/* FAILURES */}
+                            <div className="space-y-4">
+                                <div className="flex justify-between items-center px-2">
+                                    <span className="text-red-500 font-black uppercase tracking-widest text-xs">Başarısızlıklar (Failures)</span>
+                                    <span className="text-gray-500 font-mono text-xs">{deathSaves.failures} / 3</span>
+                                </div>
+                                <div className="flex justify-center gap-6">
                                     {[1, 2, 3].map(i => (
                                         <button key={`f${i}`} onClick={() => updateDeathSaves('failures', deathSaves.failures === i ? i - 1 : i)}
-                                            className={`w-10 h-10 rounded-full border-[3px] flex items-center justify-center transition-all ${deathSaves.failures >= i ? 'bg-red-600 border-red-500 text-white font-black shadow-[0_0_15px_rgba(239,68,68,0.5)]' : 'bg-gray-800 border-gray-600 hover:border-red-500 cursor-pointer'}`}>
-                                            {deathSaves.failures >= i ? '✗' : ''}
+                                            className={`w-14 h-14 rounded-2xl border-[3px] flex items-center justify-center transition-all duration-300 ${deathSaves.failures >= i ? 'bg-red-600 border-red-500 text-white font-black scale-110 shadow-[0_0_20px_rgba(185,28,28,0.6)]' : 'bg-gray-800 border-gray-700 hover:border-red-600 cursor-pointer hover:bg-gray-700'}`}>
+                                            {deathSaves.failures >= i ? '✕' : ''}
                                         </button>
                                     ))}
                                 </div>
                             </div>
                         </div>
+
+                        <div className="mt-12 pt-8 border-t border-gray-800 text-center">
+                            <p className="text-gray-500 text-xs italic">Eğer 3 başarıya ulaşırsan durumun stabilize olur, 3 başarısızlıkta karakterin ölür.</p>
+                        </div>
                     </div>
                 </div>
             )}
-
             {/* ── TABS ── */}
             <div className="max-w-7xl mx-auto px-4 pt-4">
                 <div className="flex gap-1 border-b border-gray-700 mb-5 overflow-x-auto pb-1 custom-scrollbar">
@@ -1740,12 +1879,18 @@ export default function PlayerSheet() {
                                 <div className="mt-3 space-y-1">
                                     <p className="text-gray-500 text-xs uppercase font-bold mb-2">Ability Checks</p>
                                     {Object.entries(stats).map(([s, v]: any) => {
-                                        const m = mod(v); const bonus = m + (false ? prof : 0);
+                                        const m = mod(v);
                                         return (
                                             <button key={s} onClick={() => {
-                                                const roll = Math.floor(Math.random() * 20) + 1 + Math.max(0, m);
-                                                if (socket) (socket as any).emit('roll_dice', { campaignId, playerName: character.name, rollResult: roll, type: `d20+${s}` });
-                                                showToast(`${s} Kontrolü`, `Sonuç: ${roll} (zar+mod)`, roll >= 20 ? 'bg-green-900 border-green-500 text-green-100' : 'bg-gray-800 border-gray-500 text-gray-100');
+                                                const roll = Math.floor(Math.random() * 20) + 1;
+                                                const total = roll + m;
+                                                if (socket) (socket as any).emit('roll_dice', {
+                                                    campaignId,
+                                                    playerName: character.name,
+                                                    rollResult: total,
+                                                    type: `${s} Kontrolü (d20${fmt(m)})`
+                                                });
+                                                showToast(`${s} Kontrolü`, `Zar: ${roll} ${fmt(m)} | Sonuç: ${total}`, total >= 20 ? 'bg-green-900 border-green-500 text-green-100' : 'bg-gray-800 border-gray-500 text-gray-100');
                                             }} className="w-full flex items-center justify-between px-3 py-1.5 bg-gray-700/50 hover:bg-gray-700 border border-gray-700 rounded text-xs transition">
                                                 <span className="font-bold text-gray-400">{s}</span>
                                                 <span className={`font-black ${m >= 0 ? 'text-green-400' : 'text-red-400'}`}>{fmt(m)}</span>
@@ -1768,23 +1913,49 @@ export default function PlayerSheet() {
                     const baseAttacks = CLASS_ATTACKS[clsName] || CLASS_ATTACKS['Fighter'];
                     const resources = [...(CLASS_RESOURCES[clsName] || [])];
 
+                    // Merge Custom Resources
+                    customResources.forEach((cr: any) => {
+                        resources.push({
+                            key: cr.id || `cr-${cr.name}`,
+                            name: cr.name,
+                            desc_tr: cr.desc || "",
+                            icon: "✨",
+                            recharge: cr.recharge || 'long',
+                            getMax: () => cr.max || 1
+                        });
+                    });
+
                     // Find equipped weapons from inventory
                     const equippedWeapons = (character.inventory || []).filter((it: any) => it.isEquipped && (it.type === 'weapon' || it.name.toLowerCase().match(/sword|axe|dagger|bow|staff|mace|hammer|spear|javelin/)));
 
                     // Map equipped weapons to attack objects
                     const mappedWeaponAttacks = equippedWeapons.map((w: any) => {
-                        const name = w.name.toLowerCase();
+                        const name = (w.name || "").toLowerCase();
                         const isFinesse = name.includes('dagger') || name.includes('rapier') || name.includes('shortsword') || name.includes('scimitar') || name.includes('whip') || name.includes('bow') || name.includes('crossbow');
                         const isRanged = name.includes('bow') || name.includes('crossbow') || name.includes('sling') || name.includes('dart');
 
                         const atkAbility = isRanged ? 'DEX' : (isFinesse ? (mods.DEX > mods.STR ? 'DEX' : 'STR') : 'STR');
-                        const damageMod = mods[atkAbility as keyof typeof mods];
-                        const toHit = prof + damageMod;
+                        const abilityMod = mods[atkAbility as keyof typeof mods];
+
+                        // Get weapon-specific bonus (e.g. +1 weapon)
+                        let weaponBonus = 0;
+                        if (w.effects && Array.isArray(w.effects)) {
+                            w.effects.forEach((eff: any) => {
+                                if (eff && eff.type === 'item_bonus' && typeof eff.value === 'number') weaponBonus += eff.value;
+                            });
+                        }
+
+                        // Global bonuses from other items/features
+                        const globalAtkBonus = (isRanged && character.fightingStyle === 'Archery') ? 2 : 0;
+                        const globalDmgBonus = getItemBonus('damage_bonus', isRanged ? 'ranged' : 'melee');
+
+                        const toHit = prof + abilityMod + weaponBonus + globalAtkBonus;
+                        const damageMod = abilityMod + weaponBonus + globalDmgBonus;
 
                         // Default damage values if not in note
                         let damage = "1d6";
                         if (name.includes('dagger')) damage = "1d4";
-                        else if (name.includes('greataxe') || name.includes('greatsword')) damage = "1d12"; // greatsword is 2d6 actually but simplifying for now
+                        else if (name.includes('greataxe') || name.includes('greatsword')) damage = "1d12";
                         else if (name.includes('shortsword') || name.includes('mace') || name.includes('handaxe')) damage = "1d6";
                         else if (name.includes('longsword') || name.includes('battleaxe') || name.includes('warhammer')) damage = "1d8";
                         else if (name.includes('rapier')) damage = "1d8";
@@ -2017,8 +2188,11 @@ export default function PlayerSheet() {
                                     {/* ── CLASS RESOURCES ── */}
                                     {resources.length > 0 && (
                                         <div className="bg-gray-800 rounded-xl border border-orange-800/40 overflow-hidden">
-                                            <div className="px-4 py-3 bg-orange-900/20 border-b border-orange-800/40">
+                                            <div className="px-4 py-3 bg-orange-900/20 border-b border-orange-800/40 flex justify-between items-center">
                                                 <h3 className="font-black text-orange-400 text-sm uppercase tracking-wide">⚡ Class Resources</h3>
+                                                <button onClick={() => setShowCustomResourceModal(true)} className="px-2 py-1 bg-orange-700 hover:bg-orange-600 text-white text-[10px] font-bold rounded transition border border-orange-500 shadow-sm">
+                                                    + Özel Kaynak
+                                                </button>
                                             </div>
                                             <div className="p-3 space-y-3">
                                                 {resources.map(res => {
@@ -2031,7 +2205,12 @@ export default function PlayerSheet() {
                                                             <div className="flex items-center gap-2 mb-2">
                                                                 <span className="text-xl">{res.icon}</span>
                                                                 <div className="flex-1">
-                                                                    <p className="font-black text-white text-sm">{res.name}</p>
+                                                                    <div className="flex items-center gap-2">
+                                                                        <p className="font-black text-white text-sm">{res.name}</p>
+                                                                        {res.key.startsWith('cr-') && (
+                                                                            <button onClick={() => removeCustomResource(res.key)} className="text-red-500 hover:text-red-400 text-[10px]">Sil</button>
+                                                                        )}
+                                                                    </div>
                                                                     <p className="text-gray-500 text-[10px]">{res.recharge === 'short' ? '⏳ Short Rest' : '🌙 Long Rest'}</p>
                                                                 </div>
                                                                 <div className="text-right">
@@ -2066,30 +2245,81 @@ export default function PlayerSheet() {
                             )}
 
                             {activeTab === "spells" && (
-                                <div className="space-y-5">
-                                    {/* ── SPELL SLOTS ── */}
-                                    {canCast && slotTotals.some(t => t > 0) && (
-                                        <div className="bg-gray-800 rounded-xl border border-blue-800/40 overflow-hidden">
-                                            <div className="px-4 py-3 bg-blue-900/20 border-b border-blue-800/40">
-                                                <h3 className="font-black text-blue-400 text-sm uppercase tracking-wide">
-                                                    🔮 Spell Slots {clsName === 'Warlock' ? '— Pact Magic (Short Rest)' : '— Long Rest'}
-                                                </h3>
+                                <div className="space-y-6 pb-20">
+                                    {/* ── SPELLS OVERVIEW CARD ── */}
+                                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                        <div className="bg-gradient-to-br from-indigo-900/40 to-blue-900/40 backdrop-blur-md rounded-2xl border border-blue-500/20 p-5 shadow-xl flex items-center justify-between border-l-4 border-l-blue-500 group hover:bg-indigo-900/50 transition-all duration-500">
+                                            <div>
+                                                <p className="text-[10px] font-black text-blue-400 uppercase tracking-widest mb-1">Casting Ability</p>
+                                                <h4 className="text-xl font-black text-white uppercase tracking-tight">{getSpellcastingAbility(clsName) || 'None'}</h4>
                                             </div>
-                                            <div className="p-4 flex flex-wrap gap-6">
+                                            <div className="w-12 h-12 bg-blue-500/10 rounded-xl flex items-center justify-center border border-blue-500/20 text-blue-400 group-hover:scale-110 transition-transform duration-500">
+                                                <span className="text-2xl">🧠</span>
+                                            </div>
+                                        </div>
+
+                                        <div className="bg-gradient-to-br from-purple-900/40 to-indigo-900/40 backdrop-blur-md rounded-2xl border border-purple-500/20 p-5 shadow-xl flex items-center justify-between border-l-4 border-l-purple-500 group hover:bg-purple-900/50 transition-all duration-500">
+                                            <div>
+                                                <p className="text-[10px] font-black text-purple-400 uppercase tracking-widest mb-1">Spell Save DC</p>
+                                                <h4 className="text-2xl font-black text-white font-mono">{8 + (getModifier(getSpellcastingAbility(clsName))) + (PB)}</h4>
+                                            </div>
+                                            <div className="w-12 h-12 bg-purple-500/10 rounded-xl flex items-center justify-center border border-purple-500/20 text-purple-400 group-hover:scale-110 transition-transform duration-500">
+                                                <span className="text-2xl">⚡</span>
+                                            </div>
+                                        </div>
+
+                                        <div className="bg-gradient-to-br from-cyan-900/40 to-blue-900/40 backdrop-blur-md rounded-2xl border border-cyan-500/20 p-5 shadow-xl flex items-center justify-between border-l-4 border-l-cyan-500 group hover:bg-cyan-900/50 transition-all duration-500">
+                                            <div>
+                                                <p className="text-[10px] font-black text-cyan-400 uppercase tracking-widest mb-1">Spell Attack</p>
+                                                <h4 className="text-2xl font-black text-white font-mono">+{getModifier(getSpellcastingAbility(clsName)) + (PB)}</h4>
+                                            </div>
+                                            <div className="w-12 h-12 bg-cyan-500/10 rounded-xl flex items-center justify-center border border-cyan-500/20 text-cyan-400 group-hover:scale-110 transition-transform duration-500">
+                                                <span className="text-2xl">🎯</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {/* ── PREMIUM SPELL SLOTS ── */}
+                                    {canCast && slotTotals.some(t => t > 0) && (
+                                        <div className="bg-gray-900/40 backdrop-blur-md rounded-2xl border border-blue-500/20 p-6 shadow-xl relative overflow-hidden group">
+                                            <div className="absolute top-0 right-0 p-8 bg-blue-500/5 blur-[100px] rounded-full -mr-16 -mt-16 group-hover:bg-blue-500/10 transition-colors duration-1000"></div>
+
+                                            <div className="flex items-center gap-3 mb-6 relative">
+                                                <div className="w-10 h-10 bg-blue-600/20 rounded-xl flex items-center justify-center border border-blue-500/30 text-blue-400">
+                                                    <span className="text-xl">🔮</span>
+                                                </div>
+                                                <div>
+                                                    <h3 className="font-black text-white text-base lg:text-lg uppercase tracking-wider">Spell Slots</h3>
+                                                    <p className="text-blue-400/60 text-[10px] font-black uppercase tracking-widest leading-none">
+                                                        {clsName === 'Warlock' ? 'Pact Magic — Short Rest' : 'Magical Energy — Long Rest'}
+                                                    </p>
+                                                </div>
+                                            </div>
+
+                                            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6 relative">
                                                 {slotTotals.map((total, idx) => {
                                                     if (total === 0) return null;
                                                     const slotLv = idx + 1;
                                                     const used = spellSlotsUsed[String(slotLv)] ?? 0;
                                                     const remaining = Math.max(0, total - used);
                                                     return (
-                                                        <div key={slotLv} className="flex flex-col items-center gap-1">
-                                                            <span className="text-gray-400 text-xs font-black">Level {slotLv}</span>
-                                                            <div className="flex gap-1">
+                                                        <div key={slotLv} className="bg-gray-800/40 rounded-xl p-3 border border-gray-700/50 flex flex-col items-center gap-3 group/slot hover:border-blue-500/40 transition-all duration-300">
+                                                            <span className="text-[10px] font-black text-gray-500 uppercase tracking-widest">Level {slotLv}</span>
+                                                            <div className="flex gap-2">
                                                                 {Array.from({ length: total }).map((_, i) => (
-                                                                    <div key={i} className={`w-5 h-5 rounded-full border-2 ${i < remaining ? 'bg-blue-500 border-blue-400' : 'bg-gray-700 border-gray-600'}`} />
+                                                                    <div
+                                                                        key={i}
+                                                                        className={`w-3.5 h-3.5 rounded-full border-2 transition-all duration-500 ${i < remaining
+                                                                            ? 'bg-blue-400 border-blue-300 shadow-[0_0_10px_rgba(96,165,250,0.6)] animate-pulse-slow'
+                                                                            : 'bg-gray-900 border-gray-700'
+                                                                            }`}
+                                                                    />
                                                                 ))}
                                                             </div>
-                                                            <span className={`text-sm font-black ${remaining > 0 ? 'text-blue-300' : 'text-red-400'}`}>{remaining}/{total}</span>
+                                                            <div className="bg-gray-900/60 px-2 py-0.5 rounded-lg border border-gray-700">
+                                                                <span className={`text-xs font-black font-mono ${remaining > 0 ? 'text-blue-300' : 'text-red-500/80'}`}>
+                                                                    {remaining} <span className="text-gray-600 mx-0.5">/</span> {total}
+                                                                </span>
+                                                            </div>
                                                         </div>
                                                     );
                                                 })}
@@ -2117,17 +2347,28 @@ export default function PlayerSheet() {
                                         const activeCategories = catOrder.filter(cat => groupedSpells[cat] && groupedSpells[cat].length > 0);
 
                                         return (
-                                            <div className="bg-gray-800 rounded-xl border border-purple-800/40 overflow-hidden">
-                                                <div className="px-4 py-3 bg-purple-900/20 border-b border-purple-800/40 flex items-center gap-3">
-                                                    <h3 className="font-black text-purple-400 text-sm uppercase tracking-wide">✨ Known Spells & Abilities</h3>
-                                                    <span className="px-2 py-0.5 bg-purple-900/50 border border-purple-700 text-purple-300 text-xs rounded-full font-bold">{actualSpells.length}</span>
+                                            <div className="bg-gray-900/40 backdrop-blur-sm rounded-2xl border border-purple-500/20 shadow-2xl overflow-hidden mt-8">
+                                                <div className="px-6 py-4 bg-gradient-to-r from-purple-900/40 to-blue-900/40 border-b border-purple-500/30 flex items-center justify-between">
+                                                    <div className="flex items-center gap-3">
+                                                        <div className="w-8 h-8 bg-purple-600/20 rounded-lg flex items-center justify-center border border-purple-500/30 text-purple-400">
+                                                            <span className="text-lg">✨</span>
+                                                        </div>
+                                                        <h3 className="font-black text-white text-base lg:text-lg uppercase tracking-wider">Spell Grimoire</h3>
+                                                    </div>
+                                                    <div className="bg-gray-950/60 px-3 py-1 rounded-full border border-purple-500/30">
+                                                        <span className="text-[10px] font-black text-purple-300 uppercase tracking-widest">{actualSpells.length} Known Spells</span>
+                                                    </div>
                                                 </div>
-                                                <div className="p-4 space-y-6">
+
+                                                <div className="p-6 space-y-12">
                                                     {activeCategories.map(cat => (
-                                                        <div key={cat} className="space-y-1 mb-8">
-                                                            <div className="flex items-center gap-3 mb-2 border-b border-gray-800 pb-2">
-                                                                <h4 className="font-extrabold text-orange-500 tracking-wider text-base">{cat}</h4>
-                                                                <div className="flex-1 flex justify-end">
+                                                        <div key={cat} className="space-y-4">
+                                                            <div className="flex items-center gap-4 group/header">
+                                                                <div className="h-px flex-1 bg-gradient-to-r from-transparent to-gray-800"></div>
+                                                                <h4 className="font-black text-orange-500 tracking-[0.2em] text-xs uppercase bg-gray-800/50 px-4 py-1.5 rounded-full border border-gray-700/50 group-hover:border-orange-500/30 transition-colors duration-300">{cat}</h4>
+                                                                <div className="h-px flex-1 bg-gradient-to-l from-transparent to-gray-800"></div>
+
+                                                                <div className="flex justify-end min-w-[100px]">
                                                                     {(() => {
                                                                         const levelMatch = cat.match(/Level (\d+)/);
                                                                         if (levelMatch) {
@@ -2135,10 +2376,11 @@ export default function PlayerSheet() {
                                                                             const total = slotTotals[slotLv - 1] ?? 0;
                                                                             const used = spellSlotsUsed[String(slotLv)] ?? 0;
                                                                             if (total > 0) {
+                                                                                const remaining = total - used;
                                                                                 return (
-                                                                                    <div className="flex gap-2 items-center">
+                                                                                    <div className="flex gap-1.5 items-center">
                                                                                         {Array.from({ length: total }).map((_, i) => (
-                                                                                            <div key={i} className={`w-5 h-5 border-2 rounded-sm transition ${i < (total - used) ? 'bg-gray-200 border-gray-200 shadow-[0_0_8px_rgba(255,255,255,0.8)]' : 'bg-transparent border-gray-600'}`}></div>
+                                                                                            <div key={i} className={`w-3.5 h-3.5 border rounded-sm transition-all duration-500 ${i < remaining ? 'bg-blue-400 border-blue-300 shadow-[0_0_8px_rgba(96,165,250,0.4)]' : 'bg-transparent border-gray-700 grayscale'}`}></div>
                                                                                         ))}
                                                                                     </div>
                                                                                 );
@@ -2148,110 +2390,175 @@ export default function PlayerSheet() {
                                                                     })()}
                                                                 </div>
                                                             </div>
-                                                            <div className="flex flex-col">
+                                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                                                 {groupedSpells[cat].map((sp: string, i: number) => {
                                                                     const isConc = CONCENTRATION_SPELLS.has(sp);
-                                                                    const isActiveCastTarget = castingSpell === sp;
                                                                     const isActiveConc = concentrationSpell === sp;
-
+                                                                    const isActiveCastTarget = castingSpell === sp;
                                                                     const details = spellDetails[sp];
+                                                                    const isExpanded = expandedSpell === sp;
                                                                     const hasValidSlotsForSpell = details?.level_int > 0 ? slotTotals.some((total, idx) => {
                                                                         const slotLv = idx + 1;
                                                                         return slotLv >= details.level_int && (total - (spellSlotsUsed[String(slotLv)] ?? 0) > 0);
                                                                     }) : true;
 
-                                                                    const isExpanded = expandedSpell === sp;
-
                                                                     return (
-                                                                        <div key={i} className={`transition border-b border-gray-800/40 hover:bg-gray-800/50 flex flex-col justify-center ${isActiveConc ? 'bg-blue-900/20' : ''}`}>
-                                                                            <div className="flex items-center justify-between p-2 cursor-pointer group" onClick={() => setExpandedSpell(isExpanded ? null : sp)}>
-                                                                                <div className="flex items-center gap-3">
-                                                                                    <span className="font-semibold text-gray-200 text-sm group-hover:text-white transition">{sp}</span>
-                                                                                    {details && (details.desc?.toLowerCase().includes('damage') || details.desc?.toLowerCase().includes('hasar') || details.desc?.includes('d4') || details.desc?.includes('d6') || details.desc?.includes('d8') || details.desc?.includes('d10') || details.desc?.includes('d12')) && <span className="text-[10px] bg-gray-800 px-1 py-0.5 rounded text-gray-400 border border-gray-700 shadow-sm leading-none flex items-center justify-center">🎲</span>}
-                                                                                    {isConc && <span className="text-[9px] px-1 bg-blue-900/60 border border-blue-700 text-blue-300 rounded font-bold whitespace-nowrap leading-none tracking-wider flex items-center justify-center">C</span>}
-                                                                                    {(() => {
-                                                                                        const featEntry = Object.entries(featSpellSelections).find(([fName, sNames]: any) => Array.isArray(sNames) && sNames.includes(sp));
-                                                                                        if (featEntry) return <span className="text-[9px] px-1 bg-amber-900/60 border border-amber-700 text-amber-300 rounded font-bold whitespace-nowrap leading-none tracking-wider flex items-center justify-center ml-1">FEAT: {featEntry[0]}</span>;
-                                                                                        return null;
-                                                                                    })()}
-                                                                                    {isActiveConc && <span className="text-[10px] text-blue-400 font-bold ml-1 animate-pulse">AKTİF</span>}
+                                                                        <div
+                                                                            key={i}
+                                                                            className={`group/card relative rounded-2xl transition-all duration-300 border ${isActiveConc
+                                                                                ? 'bg-blue-900/10 border-blue-500/40 shadow-[0_0_20px_rgba(59,130,246,0.1)]'
+                                                                                : 'bg-gray-800/30 border-gray-700/50 hover:border-purple-500/40 hover:bg-gray-800/50'
+                                                                                } ${isExpanded ? 'md:col-span-2' : ''}`}
+                                                                        >
+                                                                            <div
+                                                                                className="p-4 cursor-pointer flex items-center justify-between gap-4"
+                                                                                onClick={() => setExpandedSpell(isExpanded ? null : sp)}
+                                                                            >
+                                                                                <div className="flex flex-col gap-1 flex-1">
+                                                                                    <div className="flex items-center gap-2 flex-wrap">
+                                                                                        <span className="font-black text-white text-sm lg:text-base group-hover/card:text-purple-300 transition-colors uppercase tracking-tight">{sp}</span>
+                                                                                        {isConc && (
+                                                                                            <span className="text-[9px] px-1.5 py-0.5 bg-blue-500/10 border border-blue-500/30 text-blue-400 rounded-md font-black uppercase tracking-widest" title="Concentration">Conc</span>
+                                                                                        )}
+                                                                                        {isActiveConc && (
+                                                                                            <span className="text-[9px] px-1.5 py-0.5 bg-green-500/10 border border-green-500/30 text-green-400 rounded-md font-black uppercase tracking-widest animate-pulse">Active</span>
+                                                                                        )}
+                                                                                    </div>
+                                                                                    {details && (
+                                                                                        <div className="flex items-center gap-3 text-[10px] text-gray-500 font-bold uppercase tracking-wider">
+                                                                                            <span>{details.casting_time}</span>
+                                                                                            <span className="w-1 h-1 bg-gray-700 rounded-full"></span>
+                                                                                            <span>{details.range}</span>
+                                                                                        </div>
+                                                                                    )}
                                                                                 </div>
 
-                                                                                {!isExpanded && (
-                                                                                    <div className="opacity-0 group-hover:opacity-100 transition duration-200">
+                                                                                <div className="flex items-center gap-3">
+                                                                                    {!isExpanded && (
                                                                                         <button
                                                                                             onClick={(e) => { e.stopPropagation(); setCastingSpell(sp); }}
-                                                                                            className="py-1 px-3 bg-purple-700 hover:bg-purple-600 text-white text-[10px] font-bold rounded"
+                                                                                            className="px-3 py-1.5 bg-purple-600/10 hover:bg-purple-600 text-purple-400 hover:text-white border border-purple-500/20 hover:border-purple-500 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all duration-300 opacity-0 group-hover/card:opacity-100 transform translate-x-2 group-hover/card:translate-x-0"
                                                                                         >
-                                                                                            Kullan
+                                                                                            Cast
                                                                                         </button>
+                                                                                    )}
+                                                                                    <div className={`text-gray-600 transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`}>
+                                                                                        <span className="text-xs">▼</span>
                                                                                     </div>
-                                                                                )}
+                                                                                </div>
                                                                             </div>
 
                                                                             {/* EXPANDED DETAILS */}
                                                                             {isExpanded && (
-                                                                                <div className="px-3 pb-3 pt-1">
+                                                                                <div className="px-4 pb-4 pt-0 space-y-4 animate-in slide-in-from-top-2 duration-300">
                                                                                     {details && (
-                                                                                        <div className="mb-3 p-3 bg-gray-950/50 rounded border border-gray-800/80 text-xs text-gray-300">
-                                                                                            <div className="flex flex-wrap gap-x-3 gap-y-1 mb-2 pb-2 border-b border-gray-800 text-[10px] text-gray-400 font-bold">
-                                                                                                {details.level_int === 0 ? <span className="text-purple-400">Cantrip</span> : <span className="text-blue-400">Level {details.level_int}</span>}
-                                                                                                <span>⏱️ {details.casting_time}</span>
-                                                                                                <span>📏 {details.range}</span>
-                                                                                                <span>✨ {details.components}</span>
-                                                                                                <span>⏳ {details.duration}</span>
+                                                                                        <div className="space-y-3">
+                                                                                            {/* STATS BAR */}
+                                                                                            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                                                                                                <div className="bg-gray-900/60 p-2 rounded-xl border border-gray-800 flex flex-col items-center justify-center gap-1">
+                                                                                                    <span className="text-[9px] text-gray-500 font-black uppercase tracking-widest">Time</span>
+                                                                                                    <span className="text-[10px] text-purple-300 font-bold">{details.casting_time}</span>
+                                                                                                </div>
+                                                                                                <div className="bg-gray-900/60 p-2 rounded-xl border border-gray-800 flex flex-col items-center justify-center gap-1">
+                                                                                                    <span className="text-[9px] text-gray-500 font-black uppercase tracking-widest">Range</span>
+                                                                                                    <span className="text-[10px] text-blue-300 font-bold">{details.range}</span>
+                                                                                                </div>
+                                                                                                <div className="bg-gray-900/60 p-2 rounded-xl border border-gray-800 flex flex-col items-center justify-center gap-1">
+                                                                                                    <span className="text-[9px] text-gray-500 font-black uppercase tracking-widest">Comps</span>
+                                                                                                    <span className="text-[10px] text-orange-300 font-bold">{details.components}</span>
+                                                                                                </div>
+                                                                                                <div className="bg-gray-900/60 p-2 rounded-xl border border-gray-800 flex flex-col items-center justify-center gap-1">
+                                                                                                    <span className="text-[9px] text-gray-500 font-black uppercase tracking-widest">Duration</span>
+                                                                                                    <span className="text-[10px] text-green-300 font-bold">{details.duration}</span>
+                                                                                                </div>
                                                                                             </div>
-                                                                                            <p className="whitespace-pre-wrap leading-relaxed opacity-90">{details.desc_tr || details.desc}</p>
+
+                                                                                            {/* DESCRIPTION */}
+                                                                                            <div className="p-4 bg-gray-950/40 backdrop-blur-sm rounded-2xl border border-gray-800/80 shadow-inner group/desc relative overflow-hidden">
+                                                                                                <div className="absolute top-0 right-0 p-4 bg-purple-500/5 blur-[40px] rounded-full -mr-8 -mt-8 grayscale group-hover/desc:grayscale-0 transition-all duration-700"></div>
+                                                                                                <p className="text-xs text-gray-300 leading-relaxed relative whitespace-pre-wrap opacity-90">{details.desc_tr || details.desc}</p>
+                                                                                            </div>
                                                                                         </div>
                                                                                     )}
+
+                                                                                    {/* ACTIONS */}
                                                                                     {!isActiveCastTarget ? (
-                                                                                        <div className="flex flex-col sm:flex-row gap-2 mt-2">
-                                                                                            <button onClick={() => setCastingSpell(sp)} disabled={canCast && details?.level_int > 0 && !hasValidSlotsForSpell && !isConc}
-                                                                                                className="flex-1 py-2 bg-gray-800 hover:bg-purple-700 disabled:opacity-40 text-purple-300 hover:text-white text-xs font-bold rounded transition border border-gray-600 hover:border-purple-500">
-                                                                                                Büyüyü Kullan / Tetikle
+                                                                                        <div className="flex gap-2 pt-2">
+                                                                                            <button
+                                                                                                onClick={() => setCastingSpell(sp)}
+                                                                                                disabled={canCast && details?.level_int > 0 && !hasValidSlotsForSpell && !isConc}
+                                                                                                className="flex-1 py-3 bg-purple-600 hover:bg-purple-500 disabled:opacity-40 disabled:grayscale text-white text-xs font-black uppercase tracking-widest rounded-xl transition-all duration-300 shadow-lg shadow-purple-900/20 active:scale-[0.98]"
+                                                                                            >
+                                                                                                Cast This Spell
                                                                                             </button>
                                                                                             {(() => {
                                                                                                 const dice = extractDice(details?.desc_tr || details?.desc);
                                                                                                 if (!dice) return null;
                                                                                                 return (
-                                                                                                    <button onClick={() => handleRoll(sp, dice, 'Büyü')} className="px-4 py-2 bg-blue-900/50 hover:bg-blue-800 text-blue-300 hover:text-white border border-blue-700/50 rounded font-bold text-xs flex items-center justify-center transition">
-                                                                                                        🎲 Zar At
+                                                                                                    <button
+                                                                                                        onClick={() => handleRoll(sp, dice, 'Büyü')}
+                                                                                                        className="px-6 py-3 bg-gray-800 hover:bg-gray-700 text-purple-400 border border-purple-500/20 rounded-xl font-black text-xs transition-all duration-300 active:scale-[0.98]"
+                                                                                                    >
+                                                                                                        🎲 Roll
                                                                                                     </button>
                                                                                                 );
                                                                                             })()}
                                                                                         </div>
                                                                                     ) : (
-                                                                                        <div className="bg-gray-900 border border-gray-700 p-2 rounded mt-2">
+                                                                                        <div className="bg-gray-900/60 backdrop-blur-md border border-purple-500/30 p-4 rounded-2xl space-y-4 animate-in zoom-in-95 duration-200">
                                                                                             {isConc && concentrationSpell && concentrationSpell !== sp && (
-                                                                                                <p className="text-yellow-400 text-[10px] mb-1.5 bg-yellow-900/30 px-2 py-1 rounded">⚠️ <strong>{concentrationSpell}</strong> bozulacak!</p>
+                                                                                                <div className="bg-yellow-900/20 border border-yellow-500/30 px-3 py-2 rounded-xl flex items-center gap-2">
+                                                                                                    <span className="text-sm">⚠️</span>
+                                                                                                    <p className="text-yellow-400 text-[10px] font-bold uppercase tracking-tight">Warning: <strong>{concentrationSpell}</strong> will end!</p>
+                                                                                                </div>
                                                                                             )}
+
                                                                                             {canCast && details?.level_int > 0 ? (
-                                                                                                <>
-                                                                                                    <p className="text-gray-500 text-[10px] mb-1">Slot seç:</p>
-                                                                                                    <div className="flex gap-1 flex-wrap">
+                                                                                                <div className="space-y-3">
+                                                                                                    <p className="text-purple-400/60 text-[10px] font-black uppercase tracking-widest text-center">Select Slot Level</p>
+                                                                                                    <div className="flex gap-2 flex-wrap justify-center">
                                                                                                         {slotTotals.map((total, idx) => {
                                                                                                             if (total === 0) return null;
                                                                                                             const slotLv = idx + 1;
                                                                                                             if (slotLv < details.level_int) return null;
                                                                                                             const avail = total - (spellSlotsUsed[String(slotLv)] ?? 0);
                                                                                                             return (
-                                                                                                                <button key={slotLv} onClick={() => useSlot(slotLv, sp, isConc)}
+                                                                                                                <button
+                                                                                                                    key={slotLv}
+                                                                                                                    onClick={() => useSlot(slotLv, sp, isConc)}
                                                                                                                     disabled={avail <= 0}
-                                                                                                                    className={`px-3 py-1.5 rounded text-xs font-black transition border ${avail > 0 ? 'bg-purple-700 border-purple-500 text-white hover:bg-purple-600' : 'bg-gray-800 border-gray-700 text-gray-600 cursor-not-allowed'}`}>
-                                                                                                                    L{slotLv} ({avail})
+                                                                                                                    className={`min-w-[50px] py-2.5 rounded-xl text-xs font-black transition-all duration-300 border shadow-sm active:scale-95 ${avail > 0
+                                                                                                                        ? 'bg-purple-600 border-purple-400 text-white hover:bg-purple-500 shadow-purple-900/20'
+                                                                                                                        : 'bg-gray-800 border-gray-700 text-gray-600 grayscale cursor-not-allowed opacity-50'
+                                                                                                                        }`}
+                                                                                                                >
+                                                                                                                    L{slotLv}
+                                                                                                                    <div className="text-[8px] opacity-60">({avail})</div>
                                                                                                                 </button>
                                                                                                             );
                                                                                                         })}
-                                                                                                        <button onClick={() => setCastingSpell(null)} className="px-3 py-1.5 text-xs text-gray-400 bg-gray-800 border border-gray-700 rounded hover:bg-gray-700">İptal</button>
+                                                                                                        <button
+                                                                                                            onClick={() => setCastingSpell(null)}
+                                                                                                            className="px-4 py-2.5 text-xs font-black text-gray-500 bg-gray-800/50 border border-gray-700 rounded-xl hover:bg-gray-800 transition-colors uppercase tracking-widest"
+                                                                                                        >
+                                                                                                            Cancel
+                                                                                                        </button>
                                                                                                     </div>
-                                                                                                </>
+                                                                                                </div>
                                                                                             ) : (
-                                                                                                <div className="flex gap-1">
-                                                                                                    <button onClick={() => { setCastingSpell(null); showToast(`✨ ${sp}`, 'Kullanıldı!', 'bg-purple-900 border-purple-500 text-purple-100'); }}
-                                                                                                        className="flex-1 py-1.5 bg-purple-700 text-white text-xs font-bold rounded hover:bg-purple-600 border border-purple-600">
-                                                                                                        ✓ Onayla
+                                                                                                <div className="flex gap-2">
+                                                                                                    <button
+                                                                                                        onClick={() => { setCastingSpell(null); showToast(`✨ ${sp}`, 'Kullanıldı!', 'bg-purple-900 border-purple-500 text-purple-100'); }}
+                                                                                                        className="flex-1 py-3 bg-purple-600 text-white text-xs font-black uppercase tracking-widest rounded-xl hover:bg-purple-500 shadow-lg shadow-purple-900/20 transition-all active:scale-95"
+                                                                                                    >
+                                                                                                        ✓ Confirm Cast
                                                                                                     </button>
-                                                                                                    <button onClick={() => setCastingSpell(null)} className="px-3 py-1.5 text-xs text-gray-400 bg-gray-800 border border-gray-700 rounded hover:bg-gray-700">İptal</button>
+                                                                                                    <button
+                                                                                                        onClick={() => setCastingSpell(null)}
+                                                                                                        className="px-6 py-3 text-xs font-black text-gray-500 bg-gray-800/50 border border-gray-700 rounded-xl hover:bg-gray-800 transition-colors uppercase tracking-widest"
+                                                                                                    >
+                                                                                                        Cancel
+                                                                                                    </button>
                                                                                                 </div>
                                                                                             )}
                                                                                         </div>
@@ -2295,7 +2602,13 @@ export default function PlayerSheet() {
                                     return (
                                         <div key={coin.key} className={`rounded-xl border flex flex-col items-center justify-between p-2 overflow-hidden ${coin.bg} ${coin.border}`}>
                                             <span className={`font-black text-xs uppercase ${coin.color} mb-1`} title={coin.name}>{coin.label}</span>
-                                            <span className="text-2xl font-black text-white mb-2">{amount}</span>
+                                            <input
+                                                type="number"
+                                                value={amount}
+                                                min="0"
+                                                onChange={(e) => setMoney(coin.key, parseInt(e.target.value) || 0)}
+                                                className="w-full bg-transparent text-center text-2xl font-black text-white mb-2 focus:outline-none focus:ring-1 focus:ring-yellow-500/50 rounded"
+                                            />
                                             <div className="flex gap-1 w-full relative z-10">
                                                 <button onClick={() => updateMoney(coin.key, -1)} disabled={amount <= 0} className="flex-1 bg-red-900/60 hover:bg-red-800 disabled:opacity-30 rounded font-black text-white text-xs py-1 transition">-</button>
                                                 <button onClick={() => updateMoney(coin.key, 1)} className="flex-1 bg-green-900/60 hover:bg-green-800 rounded font-black text-white text-xs py-1 transition">+</button>
@@ -2324,7 +2637,7 @@ export default function PlayerSheet() {
                                                         <span className={`font-black text-sm ${item.isEquipped ? 'text-blue-400' : 'text-white'}`}>{item.name} {item.isEquipped && '🛡️'}</span>
                                                     </div>
                                                     <div className="flex gap-2">
-                                                        {(item.type === 'armor' || item.type === 'weapon' || item.type === 'shield' || item.name.toLowerCase().includes('shield')) && (
+                                                        {(item.type === 'armor' || item.type === 'weapon' || item.type === 'shield' || item.name?.toLowerCase().includes('shield') || (item.effects && item.effects.length > 0)) && (
                                                             <button
                                                                 onClick={() => toggleEquip(idx)}
                                                                 className={`text-[10px] px-2 py-1 rounded font-bold transition ${item.isEquipped
@@ -3408,6 +3721,47 @@ export default function PlayerSheet() {
                                         </div>
                                     </div>
                                 )}
+                            </div>
+                        </div>
+                    </div>
+                )
+            }
+            {/* ══ CUSTOM RESOURCE MODAL ══ */}
+            {
+                showCustomResourceModal && (
+                    <div className="fixed inset-0 bg-black/80 z-[110] flex items-center justify-center p-4">
+                        <div className="bg-gray-900 border border-orange-800/50 rounded-2xl max-w-md w-full p-6 shadow-2xl animate-in fade-in zoom-in duration-200">
+                            <h2 className="text-xl font-black text-orange-400 mb-4">Yeni Özel Kaynak</h2>
+                            <div className="space-y-4">
+                                <div>
+                                    <label className="block text-gray-400 text-[10px] font-bold uppercase mb-1">Kaynak Adı</label>
+                                    <input type="text" value={newResourceName} onChange={e => setNewResourceName(e.target.value)}
+                                        placeholder="Örn: Sorcery Points, Üstünlük Zarı..." className="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:border-orange-500" />
+                                </div>
+                                <div className="grid grid-cols-2 gap-4">
+                                    <div>
+                                        <label className="block text-gray-400 text-[10px] font-bold uppercase mb-1">Maksimum Kullanım</label>
+                                        <input type="number" value={newResourceMax} onChange={e => setNewResourceMax(parseInt(e.target.value) || 1)}
+                                            className="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white" />
+                                    </div>
+                                    <div>
+                                        <label className="block text-gray-400 text-[10px] font-bold uppercase mb-1">Yenilenme</label>
+                                        <select value={newResourceRecharge} onChange={e => setNewResourceRecharge(e.target.value as any)}
+                                            className="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white appearance-none">
+                                            <option value="long">Long Rest (Uzun)</option>
+                                            <option value="short">Short Rest (Kısa/Uzun)</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label className="block text-gray-400 text-[10px] font-bold uppercase mb-1">Açıklama</label>
+                                    <textarea value={newResourceDesc} onChange={e => setNewResourceDesc(e.target.value)}
+                                        placeholder="Özelliğin ne yaptığını kısaca yaz..." className="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white h-24 resize-none" />
+                                </div>
+                            </div>
+                            <div className="flex gap-3 mt-6">
+                                <button onClick={() => setShowCustomResourceModal(false)} className="flex-1 py-2 bg-gray-800 hover:bg-gray-700 text-gray-400 font-bold rounded-lg transition border border-gray-700">İptal</button>
+                                <button onClick={addCustomResource} disabled={!newResourceName.trim()} className="flex-1 py-2 bg-orange-700 hover:bg-orange-600 disabled:opacity-40 text-white font-black rounded-lg transition border border-orange-500 shadow-lg">Ekle</button>
                             </div>
                         </div>
                     </div>

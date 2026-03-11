@@ -1,0 +1,1421 @@
+[
+    {
+        "name": "Shard Solitaire",
+        "name_tr": "Shard Solitaire",
+        "rarity": "Legendary",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Bir bonus eylem olarak 30 fit (veya zorlama ile 60 fit) ışınlanma (teleport) sağlar. 6 şarjı vardır; mücevher türüne göre Banishment, Mirror Image gibi büyüleri cast edebilir (DC 16).\n\n**[Atmosfer]** İçinde dengesiz bir boyut yırtığı barındıran, yüzeyleri ışık saçan mistik damarlarla süslü efsanevi bir mücevherdir.",
+        "effects": []
+    },
+    {
+        "name": "Shield of the Blazing Dreadnought",
+        "name_tr": "Shield of the Blazing Dreadnought",
+        "rarity": "Legendary",
+        "type": "Armor",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** +2 AC bonusu sağlar. Bir bonus eylemle 1 dakika boyunca aktifleşir: Ateş bağışıklığı kazandırır ve bir eylemle körlük, büyülenme, sağırlık veya zehirlenme durumlarını bitirebilir. Ayrıca 3d6 vurma + 3d6 ateş hasarı veren bir Shield Bash saldırısı yapmanıza izin verir.\n\n**[Atmosfer]** Dev bir kule kalkanı formunda olan, içinden sürekli parıldayan lavlar akan ve ateş devlerinin sönmeyen sıcaklığını yansıtan demir bir kalkandır.",
+        "effects": [
+            {
+                "type": "ac_bonus",
+                "value": 2
+            }
+        ]
+    },
+    {
+        "name": "Shield of the Hidden Lord",
+        "name_tr": "Shield of the Hidden Lord",
+        "rarity": "Legendary",
+        "type": "Armor",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** +2 AC bonusu sağlar. Ateş hasarına karşı direnç (resistance) kazandırır. İçinde Gargauth adında bir Pit Fiend hapsolmuştur ve bilinçlidir; sahibini kurnazca manipüle ederek kötülüğe itmeye çalışır.\n\n**[Atmosfer]** Üzerindeki göksel motifler zamanla bozulmuş ve yerini ürkütücü şekilde hareket eden, fısıldayan bir iblis yüzüne bırakmış olan uğursuz bir kalkandır.",
+        "effects": [
+            {
+                "type": "ac_bonus",
+                "value": 2
+            },
+            {
+                "type": "resistance",
+                "value": "fire"
+            }
+        ]
+    },
+    {
+        "name": "Snicker-Snack",
+        "name_tr": "Snicker-Snack",
+        "rarity": "Legendary",
+        "type": "Weapon",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Vorpal Sword özellikli +3 bir büyük kılıçtır (greatsword). Kesme hasarı direncini yok sayar. Bir saldırıda 20 atarsanız hedefin kafasını koparabilir. Charisma bonusunuzu saldırı ve hasar için kullanabilirsiniz. Kötü ejderhalardan nefret eden bilinçli bir silahtır.\n\n**[Atmosfer]** Gümüş gibi parlayan, melodik bir sese sahip olan ve dokunduğu her şeyi kesip atan efsanevi bir vorpal kılıcıdır.",
+        "effects": [
+            {
+                "type": "attack_bonus",
+                "value": 3
+            },
+            {
+                "type": "damage_bonus",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "name": "Sovereign Glue",
+        "name_tr": "Sovereign Glue",
+        "rarity": "Legendary",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** İki nesneyi kalıcı olarak birbirine bağlar. Sadece Universal Solvent, Oil of Etherealness veya Wish büyüsüyle bozulabilir.\n\n**[Atmosfer]** Süt beyazı renginde, döküldüğü yerde evrenin en güçlü bağını kuran, sökülmesi neredeyse imkansız efsanevi bir yapıştırıcıdır.",
+        "effects": []
+    },
+    {
+        "name": "Spell Bottle",
+        "name_tr": "Spell Bottle",
+        "rarity": "Legendary",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** 5. seviyeye kadar bir büyüyü içinde saklayabilir. Bir reaksiyon kullanarak 60 fit içindeki bir büyü yapımını durdurup büyüyü şişeye hapsedebilir. İçindeki büyü daha sonra slot harcamadan cast edilebilir.\n\n**[Atmosfer]** İçinde mavi buharların dans ettiği, büyü enerjisini hapsedip daha sonra serbest bırakabilen kristal bir şişedir.",
+        "effects": []
+    },
+    {
+        "name": "Spell Gem",
+        "name_tr": "Spell Gem",
+        "rarity": "Legendary",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Bir büyüyü hapsedebilir ve daha sonra komponent harcamadan kullanmanızı sağlar. Nadirliğine göre büyü seviyesi değişir (Legendary: 9. seviye).\n\n**[Atmosfer]** Derin cüceler (deep gnomes) tarafından gizli yöntemlerle üretilen, içine büyü ışığı hapsedilmiş nadir bir mücevherdir.",
+        "effects": []
+    },
+    {
+        "name": "Spell Scroll",
+        "name_tr": "Spell Scroll",
+        "rarity": "Legendary",
+        "type": "Scroll",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Tek kullanımlık büyü parşömeni. Sınıf listenizdeyse kullanabilirsiniz. Yüksek seviyeli büyüler (8-9) için yetenek zarı gerektirir. Kullanıldıktan sonra toza dönüşür.\n\n**[Atmosfer]** Üzerinde mistik şifrelerle yazılmış bir büyünün mühürlendiği, kadim bilgileri taşıyan büyülü bir parşömen.",
+        "effects": []
+    },
+    {
+        "name": "Sphere Of Annihilation",
+        "name_tr": "Sphere Of Annihilation",
+        "rarity": "Legendary",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** 2 fit çapında karanlık bir deliktir. Temas ettiği her maddeyi (artifact hariç) anında yok eder. Dokunan yaratık 4d10 kuvvet (force) hasarı alır. Arcana zarıyla levite edilerek kontrol edilebilir.\n\n**[Atmosfer]** Multiverse içinde bir yırtık olan, maddeyi saniyeler içinde hiçliğe dönüştüren simsiyah, dehşet verici bir küredir.",
+        "effects": []
+    },
+    {
+        "name": "Spindle Of Fate",
+        "name_tr": "Spindle Of Fate",
+        "rarity": "Legendary",
+        "type": "Wand",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** 6 şarjı vardır. İnisiyatif zarına proficiency bonusu ekleyebilir/çıkarabilir, bir hedefi damgalayarak 1d6 ek hasar verebilir veya reaksiyonla bir zarın başarısızlığını başarıya (veya tersine) çevirebilir.\n\n**[Atmosfer]** Üzerine kırmızı iplik sarılmış bir iğne formunda olan, kaderin ipliklerini bükerek olayların gidişatını değiştirebilen mistik bir asadır.",
+        "effects": []
+    },
+    {
+        "name": "Staff of the Magi",
+        "name_tr": "Staff of the Magi",
+        "rarity": "Legendary",
+        "type": "Staff",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** +2 saldırı/hasar ve büyü saldırı bonusu verir. Büyülere karşı kurtarma zarlarında avantaj sağlar. 50 şarjı vardır, Fireball, Telekinesis, Plane Shift gibi onlarca güçlü büyüyü yapmanızı sağlar. Size atılan büyüleri emerek şarj kazanabilir.\n\n**[Atmosfer]** Büyü sanatının zirvesini temsil eden, içindeki muazzam enerjiyle evreni titreten efsanevi bir asadır.",
+        "effects": [
+            {
+                "type": "attack_bonus",
+                "value": 2
+            },
+            {
+                "type": "damage_bonus",
+                "value": 2
+            },
+            {
+                "type": "spell_atk_bonus",
+                "value": 2
+            },
+            {
+                "type": "stat_bonus",
+                "stat": "saves",
+                "value": "advantage",
+                "condition": "against spells"
+            }
+        ]
+    },
+    {
+        "name": "Stonebreaker's Breastplate",
+        "name_tr": "Stonebreaker's Breastplate",
+        "rarity": "Legendary",
+        "type": "Armor",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Ezici, delici ve kesici hasarlara karşı direnç (resistance) sağlar. Yere düşürülemez (prone immunity). Bir eylemle Wall of Stone büyüsünü cast edebilir.\n\n**[Atmosfer]** Marjinal granitten oyulmuş gibi görünen ama metal kadar hafif olan, üzerinde kadim taş rünü işlenmiş sarsılmaz bir göğüs zırhıdır.",
+        "effects": [
+            {
+                "type": "resistance",
+                "value": "bludgeoning_piercing_slashing"
+            }
+        ]
+    },
+    {
+        "name": "Stormgirdle",
+        "name_tr": "Stormgirdle",
+        "rarity": "Legendary",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Yıldırım ve gök gürültüsü hasarına karşı direnç verir. Güç (Strength) skorunuzu 21'e sabitler. Günde bir kez 1 dakika boyunca Storm Avatar moduna geçerek uçuş hızı ve ek hasarlar kazanmanızı sağlar.\n\n**[Atmosfer]** Üzerinde tanrı Kord'un sembolü bulunan, ejderha fildişi tokalı ve takan kişiye fırtınaların dehşet verici kuvvetini aşılayan efsanevi bir kemerdir.",
+        "effects": [
+            {
+                "type": "resistance",
+                "value": "lightning"
+            },
+            {
+                "type": "resistance",
+                "value": "thunder"
+            },
+            {
+                "type": "stat_set",
+                "stat": "strength",
+                "value": 21
+            }
+        ]
+    },
+    {
+        "name": "Sunsword",
+        "name_tr": "Sunsword",
+        "rarity": "Legendary",
+        "type": "Weapon",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Bir Sun Blade'in tüm özelliklerine sahiptir (+2 saldırı/hasar, 1d8 ışık hasarı, vampirlere karşı ölümcül). Bilinçlidir (sentient) ve tek amacı yaratıcısı Sergei'nin katili Strahd'dan intikam almaktır.\n\n**[Atmosfer]** Saf güneş ışığından bir bıçağa sahip olan, karanlığı söküp atan ve içindeki asil intikam ateşiyle parlayan efsanevi bir kılıçtır.",
+        "effects": [
+            {
+                "type": "attack_bonus",
+                "value": 2
+            },
+            {
+                "type": "damage_bonus",
+                "value": 2
+            },
+            {
+                "type": "extra_damage",
+                "value": "1d8",
+                "damage_type": "radiant"
+            }
+        ]
+    },
+    {
+        "name": "Sword of Answering",
+        "name_tr": "Sword of Answering",
+        "rarity": "Legendary",
+        "type": "Weapon",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** +3 saldırı ve hasar bonusu verir. Reaksiyon kullanarak size hasar veren birine anında avantajlı bir karşı saldırı yapmanızı sağlar. Bu saldırının hasarı tüm direnç ve bağışıklıkları yok sayar.\n\n**[Atmosfer]** Efsanevi Fragarach'ın (Son Söz) izinden giden, her haksızlığa ve darbeye saniyesinde cevap veren mutlak adalet sembolü bir kılıçtır.",
+        "effects": [
+            {
+                "type": "attack_bonus",
+                "value": 3
+            },
+            {
+                "type": "damage_bonus",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "name": "Sword of the Planes",
+        "name_tr": "Sword of the Planes",
+        "rarity": "Legendary",
+        "type": "Weapon",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** +3 saldırı ve hasar bonusu sağlar. Bir eylemle havayı keserek farklı bir düzleme (plane) açılan 1 dakikalık bir geçit (rift) oluşturabilir.\n\n**[Atmosfer]** Havayı gerçek anlamda kestiğinde ardında boyutlar arası ışıldayan bir yarık bırakan, evrenin sınırlarını zorlayan muazzam bir silahtır.",
+        "effects": [
+            {
+                "type": "attack_bonus",
+                "value": 3
+            },
+            {
+                "type": "damage_bonus",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "name": "Tablet of Reawakening",
+        "name_tr": "Tablet of Reawakening",
+        "rarity": "Legendary",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Bir eylemle True Resurrection büyüsünü cast ederek ölmüş birini tüm organları ve sağlığıyla geri getirir. Kullanıldığında tableti toza dönüşür.\n\n**[Atmosfer]** Rashemen cadıları tarafından Red Wizards'ın karanlık büyülerini bozmak için üretilmiş, içinde saf yaşam pınarı barındıran küçük bir taş tablettir.",
+        "effects": []
+    },
+    {
+        "name": "Talarith",
+        "name_tr": "Talarith",
+        "rarity": "Legendary",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Silah saldırılarınıza fazladan 1d6 kuvvet (force) hasarı ekler. Bir eylemle sahibinin tam bir kopyası olan ve emirlerini izleyen bir golem çağırabilir.\n\n**[Atmosfer]** Reigar sanatçıları tarafından üretilen, sahibine hem yıkıcı bir saldırı gücü hem de sadık bir spektral koruyucu bahşeden muazzam bir takıdır.",
+        "effects": [
+            {
+                "type": "extra_damage",
+                "value": "1d6",
+                "damage_type": "force"
+            }
+        ]
+    },
+    {
+        "name": "Talisman of Pure Good",
+        "name_tr": "Talisman of Pure Good",
+        "rarity": "Legendary",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** İyi (Good) karakterler için +2 büyü saldırı bonusu sağlar. 7 şarjı vardır; bir şarj harcayarak yerdeki kötü bir karakteri DC 20 Dexterity zarı atamazsa kalıcı olarak yok eden bir yarık açabilir.\n\n**[Atmosfer]** Saf iyiliğin ve ışığın sembolü olan, kötülüğü yeryüzünden silmek için parıldayan kutsal bir altın muskadır.",
+        "effects": [
+            {
+                "type": "spell_atk_bonus",
+                "value": 2,
+                "note": "Sadece İyi (Good) karakterler için"
+            }
+        ]
+    },
+    {
+        "name": "Talisman of the Sphere",
+        "name_tr": "Talisman of the Sphere",
+        "rarity": "Legendary",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Sphere of Annihilation kontrolü için yapılan Arcana zarlarında uzmanlık (proficiency bonusu iki kat sayılır) sağlar. Ayrıca küreyi çok daha uzun mesafelere hareket ettirebilirsiniz.\n\n**[Atmosfer]** Hiçlik küresini dizginlemek, yönlendirmek ve evrenin boşluğunu kontrol etmek için tasarlanmış antik ve gizemli bir tılsımdır.",
+        "effects": []
+    },
+    {
+        "name": "Talisman of Ultimate Evil",
+        "name_tr": "Talisman of Ultimate Evil",
+        "rarity": "Legendary",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Kötü (Evil) karakterler için +2 büyü saldırı bonusu sağlar. 6 şarjı vardır; bir şarj harcayarak yerdeki iyi bir karakteri DC 20 Dexterity zarı atamazsa kalıcı olarak yok eden alevli bir yarık açabilir.\n\n**[Atmosfer]** Mutlak kötülüğü ve çürümüşlüğü temsil eden, dokunan iyileri yakan ve kutsal olan her şeyi yutan uğursuz bir tılsımdır.",
+        "effects": [
+            {
+                "type": "spell_atk_bonus",
+                "value": 2,
+                "note": "Sadece Kötü (Evil) karakterler için"
+            }
+        ]
+    },
+    {
+        "name": "Telescopic Transporter",
+        "name_tr": "Telescopic Transporter",
+        "rarity": "Legendary",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** 1 saatlik hassas kalibrasyon sonrası DC 17 Arcana zarıyla sahibini ve yanındaki 8 kişiyi başka bir gezegene veya yıldıza ışınlayabilir. Hatalı zarlar felaketle sonuçlanabilir.\n\n**[Atmosfer]** Uzay boşluğunu, uzak sistemleri ve tanrıların asılı şehirlerini gözlemleyebilen, baktığı yere anında yolculuk sağlayan devasa bir gözlem teleskobudur.",
+        "effects": []
+    },
+    {
+        "name": "Tinderstrike",
+        "name_tr": "Tinderstrike",
+        "rarity": "Legendary",
+        "type": "Weapon",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** +2 saldırı ve hasar bonusu veren çakmaktaşı bir hançer. İsabet ettiğinde fazladan 2d6 ateş hasarı verir. Ateş hasarı direnci kazandırır ve sahibine sabırsızlık/risk alma temalı bir kusur (flaw) yükler.\n\n**[Atmosfer]** Sürekli el yakacak kadar sıcak olan, vurduğunda etrafa kıvılcımlar saçan ve içindeki saf kor ateşiyle düşmanlarını kavuran büyülü bir hançerdir.",
+        "effects": [
+            {
+                "type": "attack_bonus",
+                "value": 2
+            },
+            {
+                "type": "damage_bonus",
+                "value": 2
+            },
+            {
+                "type": "extra_damage",
+                "value": "2d6",
+                "damage_type": "fire"
+            },
+            {
+                "type": "resistance",
+                "value": "fire"
+            }
+        ]
+    },
+    {
+        "name": "Tome of the Stilled Tongue",
+        "name_tr": "Tome of the Stilled Tongue",
+        "rarity": "Legendary",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Büyü kitabı ve odağı olarak kullanılabilir. En güçlü özelliği: Bir bonus eylemle kitapta yazılı herhangi bir büyüyü slot harcamadan ve komponent kullanmadan cast edebilir. Vecna'nın gözetimi altındadır.\n\n**[Atmosfer]** Kapağına kurumuş bir insan dili iğnelenmiş, Vecna'nın fısıltılarını sayfaları arasında saklayan ve sahibine muazzam bir hız kazandıran tekinsiz bir büyü kitabıdır.",
+        "effects": []
+    },
+    {
+        "name": "Topaz Annihilator",
+        "name_tr": "Topaz Annihilator",
+        "rarity": "Legendary",
+        "type": "Weapon",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** 100/300 fit menzilli tüfek benzeri bir silahtır. 2d6 nekrotik hasar verir; bu hasarla canı 0'a inen her şey toza dönüşür. Ayrıca günde bir kez Disintegrate büyüsünü cast edebilir (DC 18).\n\n**[Atmosfer]** İçinde bir topaz ejderhasının parıldayan pulunu barındıran, ateşlendiğinde her şeyi hiçliğe gönderen nekrotik bir ışın saçan teknomistik bir silahtır.",
+        "effects": [
+            {
+                "type": "extra_damage",
+                "value": "2d6",
+                "damage_type": "necrotic",
+                "note": "Sadece bu silahla yapılan atışlar için"
+            }
+        ]
+    },
+    {
+        "name": "Universal Solvent",
+        "name_tr": "Universal Solvent",
+        "rarity": "Legendary",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Bir eylem olarak döküldüğünde her türlü yapıştırıcıyı (Sovereign Glue dahil) anında çözer.\n\n**[Atmosfer]** Alkol kokulu, süt renginde ve en güçlü büyülü bağları bile saniyeler içinde zayıf düşüren efsanevi bir solüsyondur.",
+        "effects": []
+    },
+    {
+        "name": "Verminshroud",
+        "name_tr": "Verminshroud",
+        "rarity": "Legendary",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Siçan derilerinden yapılmış bu pelerin, giyen kişiye böcekler ve kemirgenlerle konuşma (Speak with Animals) yeteneği verir. Uyanmış hallerinde böcek sürüsü çağırma ve zehir hasarı direnci sağlar.\n\n**[Atmosfer]** Blightshore'daki ölülerle beslenen farelerin derilerinden dikilmiş, üzerinde büyülü olarak korunmuş böcek cesetleri bulunan tekinsiz bir pelerindir.",
+        "effects": []
+    },
+    {
+        "name": "Vorpal Sword",
+        "name_tr": "Vorpal Sword",
+        "rarity": "Legendary",
+        "type": "Weapon",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** +3 saldırı ve hasar bonusu sağlar. Kesme (slashing) hasarı direncini yok sayar. Bir saldırıda 20 atarsanız hedefin kafasını koparabilir. Kafa koparma etkisi olmayan devasa yaratıklara fazladan 6d8 hasar verir.\n\n**[Atmosfer]** Işığı sanki içine hapsediyormuş gibi görünen ve kusursuz bir keskinliğe sahip olan, dokunduğu her şeyi parçalayan efsanevi bir kılıçtır.",
+        "effects": [
+            {
+                "type": "attack_bonus",
+                "value": 3
+            },
+            {
+                "type": "damage_bonus",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "name": "Wave",
+        "name_tr": "Wave",
+        "rarity": "Legendary",
+        "type": "Weapon",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** +3 saldırı/hasar bonusu veren bir üçlü mızraktır (trident). Kritik vuruşta hedefin maksimum canının yarısı kadar nekrotik hasar verir. Su altında nefes alma ve su canlılarını kontrol etme yetenekleri sağlar. Bilinçlidir (sentient).\n\n**[Atmosfer]** Üzerinde dalga, kabuk ve deniz canlıları kabartmaları bulunan, deniz tanrılarının kaotik gücünü taşıyan efsanevi bir mızraktır.",
+        "effects": [
+            {
+                "type": "attack_bonus",
+                "value": 3
+            },
+            {
+                "type": "damage_bonus",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "name": "Waythe",
+        "name_tr": "Waythe",
+        "rarity": "Legendary",
+        "type": "Weapon",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** +1 saldırı/hasar bonusu veren bir büyük kılıçtır (greatsword). Devlere fazladan 2d6 hasar verir ve onları yere düşürebilir (DC 15 Strength). Yakındaki düşmanları tespit etme yeteneği sağlar. Bilinçlidir (sentient).\n\n**[Atmosfer]** Özgürlüğe inanan, korumacı ve cesur bir bilince sahip, bulut devlerinden miras kalmış efsanevi bir silahtır.",
+        "effects": [
+            {
+                "type": "attack_bonus",
+                "value": 1
+            },
+            {
+                "type": "damage_bonus",
+                "value": 1
+            },
+            {
+                "type": "extra_damage",
+                "value": "2d6",
+                "damage_type": "slashing",
+                "condition": "against giants"
+            }
+        ]
+    },
+    {
+        "name": "Well of Many Worlds",
+        "name_tr": "Well of Many Worlds",
+        "rarity": "Legendary",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Bir eylem olarak yere serildiğinde başka bir dünyaya veya düzleme (plane) açılan iki yönlü bir portal oluşturur. Nereye açılacağı her kullanımda değişkenlik gösterebilir.\n\n**[Atmosfer]** İpek bir mendil gibi katlanabilen ama açıldığında sonsuzluğa giden parıldayan bir kapıya dönüşen simsiyah, gizemli bir kumaşır.",
+        "effects": []
+    },
+    {
+        "name": "Whelm",
+        "name_tr": "Whelm",
+        "rarity": "Legendary",
+        "type": "Weapon",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** +3 saldırı/hasar bonusu veren çekiç. Fırlatıldığında fazladan 1d8 (devlere 2d8) hasar vurur ve elinize geri döner. Bir şok dalgası yaratarak 60 fit içindekileri sersemletebilir (DC 15 Con). Gizli kapıları tespit eder. Bilinçlidir (sentient).\n\n**[Atmosfer]** Cüceler tarafından devleri ve goblinleri katletmek için dövülmüş, White Plume Mountain'ın derinliklerinde bulunan efsanevi bir savaş çekicidir.",
+        "effects": [
+            {
+                "type": "attack_bonus",
+                "value": 3
+            },
+            {
+                "type": "damage_bonus",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "name": "Windvane",
+        "name_tr": "Windvane",
+        "rarity": "Legendary",
+        "type": "Weapon",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** +2 saldırı/hasar bonusu veren, finesse özellikli gümüş bir mızraktır. İsabet ettiğinde fazladan 1d6 yıldırım (lightning) hasarı verir. Hava elementallerini kontrol edebilir ve hava düğümleri (air nodes) yaratabilir.\n\n**[Atmosfer]** Dokunulduğunda neredeyse ağırlıksızmış gibi hissedilen, içindeki rüzgar enerjisiyle ışıldayan ve sahibini değişken ruh hallerine sokan kadim bir mızraktır.",
+        "effects": [
+            {
+                "type": "attack_bonus",
+                "value": 2
+            },
+            {
+                "type": "damage_bonus",
+                "value": 2
+            },
+            {
+                "type": "extra_damage",
+                "value": "1d6",
+                "damage_type": "lightning"
+            }
+        ]
+    },
+    {
+        "name": "Witchlight Vane",
+        "name_tr": "Witchlight Vane",
+        "rarity": "Legendary",
+        "type": "Weapon",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** +3 saldırı/hasar bonusu veren bir gürz (mace) olarak kullanılır. İsabet ettiğinde fazladan 1d8 ışık (radiant) hasarı verir. Karnaval içindeki yaratıkların modunu hissedebilir. Bilinçlidir (sentient).\n\n**[Atmosfer]** Tepesinde kelebek kanatları bulunan, rengarenk cam detaylarla süslü ve Witchlight Karnavalı'nın neşesini korumak için tasarlanmış efsanevi bir asadır.",
+        "effects": [
+            {
+                "type": "attack_bonus",
+                "value": 3
+            },
+            {
+                "type": "damage_bonus",
+                "value": 3
+            },
+            {
+                "type": "extra_damage",
+                "value": "1d8",
+                "damage_type": "radiant"
+            }
+        ]
+    },
+    {
+        "name": "Witchlight Watch",
+        "name_tr": "Witchlight Watch",
+        "rarity": "Legendary",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Witchlight Karnavalı'nın tüm donanımını 1 saat içinde paketleyebilir veya açabilir. Zamanın hatasız geçişini takip etmenize olanak tanır.\n\n**[Atmosfer]** Üzerinde karnaval sahneleri işlenmiş, altın zincirli ve tik takları sadece sahibi tarafından duyulabilen efsanevi bir cep saatidir.",
+        "effects": []
+    },
+    {
+        "name": "Wreath of the Prism",
+        "name_tr": "Wreath of the Prism",
+        "rarity": "Legendary",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** 60 fit karanlık görüşü sağlar. Canavarları, ejderhaları veya yaratıkları kontrol etmek için Dominate Monster (DC 13) cast edebilir. Uyanmış hallerinde çok daha güçlü kontrol yetenekleri sağlar.\n\n**[Atmosfer]** Üzerinde Tiamat'ın beş rengini temsil eden mücevherler bulunan, altın dikenlerden örülmüş görkemli ve tahakküm edici bir taçtır.",
+        "effects": [
+            {
+                "type": "stat_bonus",
+                "stat": "darkvision",
+                "value": 60
+            }
+        ]
+    },
+    {
+        "name": "Ythryn Mythallar",
+        "name_tr": "Ythryn Mythallar",
+        "rarity": "Legendary",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** 600 fit ışık yayan 50 fitlik dev bir kristal küre. Kadim yüzen şehirleri havada tutmak ve büyüleri güçlendirmek için kullanılır. Dokunana muazzam hasar (180 radiant) verir.\n\n**[Atmosfer]** Netherese büyücüleri tarafından gökyüzü şehirlerini enerjilendirmek için üretilmiş, Arcanum Çağı'nın sönmeyen bir yıldızı anımsatan teknolojik harikasıdır.",
+        "effects": []
+    },
+    {
+        "name": "Adze of Annam",
+        "name_tr": "Adze of Annam",
+        "rarity": "Artifact",
+        "type": "Weapon",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** +3 greataxe. İsabet ettiğinde fazladan 3d12 kuvvet (force) hasarı verir. Nesnelere ve yapılara çift hasar verir. Move Earth veya Fabricate cast edebilir.\n\n**[Atmosfer]** Tüm Dünyaların Babası Annam tarafından dünyaları ve dağları şekillendirmek için kullanılan, devasa boyutlara sahip tanrısal bir yontma aletidir.",
+        "effects": [
+            {
+                "type": "attack_bonus",
+                "value": 3
+            },
+            {
+                "type": "damage_bonus",
+                "value": 3
+            },
+            {
+                "type": "extra_damage",
+                "value": "3d12",
+                "damage_type": "force"
+            }
+        ]
+    },
+    {
+        "name": "Akmon, Hammer of Purphoros",
+        "name_tr": "Akmon, Hammer of Purphoros",
+        "rarity": "Artifact",
+        "type": "Weapon",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** +3 warhammer. İsabet ettiğinde fazladan 3d10 ateş hasarı verir. Ateş direnci sağlar ve yorgunluğa (exhaustion) bağışıklık kazandırır. smith's tools yeteneğinde avantaj verir. Animate Objects, Heat Metal gibi büyüleri cast edebilir.\n\n**[Atmosfer]** Demir tanrısı Purphoros'un bizzat kullandığı, vurduğu yeri hem küle çevirebilen hem de yeniden şaheserler yaratabilen kutsal bir çekiçtir.",
+        "effects": [
+            {
+                "type": "attack_bonus",
+                "value": 3
+            },
+            {
+                "type": "damage_bonus",
+                "value": 3
+            },
+            {
+                "type": "extra_damage",
+                "value": "3d10",
+                "damage_type": "fire"
+            },
+            {
+                "type": "resistance",
+                "value": "fire"
+            },
+            {
+                "type": "immunity",
+                "value": "exhaustion"
+            }
+        ]
+    },
+    {
+        "name": "Axe of the Dwarvish Lords",
+        "name_tr": "Axe of the Dwarvish Lords",
+        "rarity": "Artifact",
+        "type": "Weapon",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** +3 balta. Aynı zamanda Belt of Dwarvenkind, Dwarven Thrower ve Sword of Sharpness özelliklerini taşır. Earth Elemental çağırabilir. Lanetlidir; cüce olmayanları zamanla fiziksel olarak bir cüceye dönüştürür.\n\n**[Atmosfer]** Kadim cüce krallıklarını birleştirmek için bizzat tanrı Moradin'in yardımıyla dövülmüş, hiyerarşinin ve gücün mutlak sembolüdür.",
+        "effects": [
+            {
+                "type": "attack_bonus",
+                "value": 3
+            },
+            {
+                "type": "damage_bonus",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "name": "Baba Yaga's Mortar and Pestle",
+        "name_tr": "Baba Yaga's Mortar and Pestle",
+        "rarity": "Artifact",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Havan eli +3 quarterstaff olarak kullanılır ve kuvvet hasarı vurur. Havan içine giren her şeyi toza çevirebilir. Muazzam mesafelere (1000 mil) bir saat içinde uçarak seyahat imkanı sağlar.\n\n**[Atmosfer]** Ölümsüz cadı Baba Yaga'nın düzlemler arası süzülmek, her türlü laneti kaynatmak ve en güçlü metalleri bile toz yapmak için kullandığı efsanevi gereçlerdir.",
+        "effects": [
+            {
+                "type": "attack_bonus",
+                "value": 3
+            },
+            {
+                "type": "damage_bonus",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "name": "Bigby's Beneficent Bracelet",
+        "name_tr": "Bigby's Beneficent Bracelet",
+        "rarity": "Artifact",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Mage Hand büyüsü kazandırır. Nesnelerin dokunulabilir spektral kopyalarını yaratabilir. Günde bir kez Bigby's Hand büyüsünü 9. seviye ve konsantrasyon gerektirmeden yapmanızı sağlar.\n\n**[Atmosfer]** Efsanevi büyücü Bigby tarafından saf altın ve paha biçilemez safirlerle işlenmiş, büyücünün iradesini fiziksel bir güce dönüştüren görkemli bir bilekliktir.",
+        "effects": []
+    },
+    {
+        "name": "Blade of Avernus",
+        "name_tr": "Blade of Avernus",
+        "rarity": "Artifact",
+        "type": "Weapon",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Vorpal Sword özelliklerini taşıyan +3 saldırı bonuslu kılıç. Alt seviye iblisleri (devils) DC 22 ile kontrol edebilir. Word of Recall cast ederek Cehennem'e dönmeyi sağlar.\n\n**[Atmosfer]** Cehennemin ilk katı Avernus'un efendisine ait olan, en güçlü günahkarların bile boynunu saniyeler içinde alan cehennem ateşiyle dövülmüş bir silahtır.",
+        "effects": [
+            {
+                "type": "attack_bonus",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "name": "Blade of Broken Mirrors",
+        "name_tr": "Blade of Broken Mirrors",
+        "rarity": "Artifact",
+        "type": "Weapon",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Lanetli ve bilinçli bir hançer. Kaos yaratmak için sahibine sürekli fikirler fısıldar. Işınlanma ve yanılsama (Mirror Image) gibi özellikler kazanarak sahibinin ruhuyla beraber gelişir.\n\n**[Atmosfer]** Tharizdun'un karanlık iradesiyle beslenen, labirent benzeri desenlerle kaplı ve sahibini yavaş yavaş düzene karşı bir nefretle dolduran parçalanmış bir hançerdir.",
+        "effects": []
+    },
+    {
+        "name": "Book of Exalted Deeds",
+        "name_tr": "Book of Exalted Deeds",
+        "rarity": "Artifact",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Sadece iyi (good) karakterler okuyabilir. Wisdom skorunu +2 artırır (max 24). Yapılan büyüleri bir üst seviye slotla yapılmış sayar. Parlayan bir aura (halo) sağlar ve iblislerin saldırılarını zorlaştırır.\n\n**[Atmosfer]** Evrendeki tüm erdem ve iyiliklerin özeti olan, sayfalarından yayılan ışıkla karanlığı eriten en kutsal el yazmasıdır.",
+        "effects": [
+            {
+                "type": "stat_bonus",
+                "stat": "wisdom",
+                "value": 2
+            }
+        ]
+    },
+    {
+        "name": "Book of Vile Darkness",
+        "name_tr": "Book of Vile Darkness",
+        "rarity": "Artifact",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Sadece kötü (evil) karakterler okuyabilir. Bir statı +2 artırırken diğerini -2 düşürür. Dominate Monster cast edebilir. Yüzde kalıcı bir işaret (mark of darkness) bırakarak ikna ve korkutma zarlarını güçlendirir.\n\n**[Atmosfer]** Vecna tarafından kaleme alınmış, içindeki her çizgi saf kötülük ve sapkınlık kokan, çevresindeki yaşamı solduran mutlak bir lanet kaynağıdır.",
+        "effects": []
+    },
+    {
+        "name": "Book of Vile Darkness (Variant)",
+        "name_tr": "Book of Vile Darkness (Variant)",
+        "rarity": "Artifact",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Orijinal kitapla benzer özelliklere sahiptir. Ek olarak: Circle of Death (DC 20) cast edebilir. Büyülenme ve korku bağışıklığı kazandırır. İçindeki kötü ruh tarafından ele geçirilme riski barındırır.\n\n**[Atmosfer]** Karanlık büyülerin en derin ve tehlikeli sırlarını içeren bu kopya, sahibine sınır tanımayan bir yıkım gücü ama aynı zamanda sonsuz bir lanet bahşeder.",
+        "effects": [
+            {
+                "type": "immunity",
+                "value": "charmed"
+            },
+            {
+                "type": "immunity",
+                "value": "frightened"
+            }
+        ]
+    },
+    {
+        "name": "Crook of Rao",
+        "name_tr": "Crook of Rao",
+        "rarity": "Artifact",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** 6 şarjı vardır. Aura of Life, Mass Cure Wounds gibi iyileştirme büyüleri cast eder. 1 mil içindeki tüm iblisleri 100 yıllığına kendi düzlemlerine sürebilir (absolute banishment). Son kullanıldığında patlayarak bir cehennem portalı açma riski vardır.\n\n**[Atmosfer]** Tanrı Rao tarafından yaratılmış, kötülüğe karşı mutlak bir sur olan ama asırlar boyu süren savaşlarda ağır yaralar almış kadim bir asadır.",
+        "effects": []
+    },
+    {
+        "name": "Crown of Lies",
+        "name_tr": "Crown of Lies",
+        "rarity": "Artifact",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Kusursuz bir kılık değiştirme sağlar; sesiniz, görüntünüz ve fiziksel hissiyatınız tamamen değişir. Söylediğiniz yalanlar hiçbir sihirli yöntemle yalan olarak tespit edilemez.\n\n**[Atmosfer]** Kas tarafından efendisi Vecna'yı aldatmak için giyilmiş, takan kişiyi karanlık güçlerin yardımıyla her türlü gölgenin arkasına saklayan aldatmaca tacıdır.",
+        "effects": []
+    },
+    {
+        "name": "Daoud's Wondrous Lantern",
+        "name_tr": "Daoud's Wondrous Lantern",
+        "rarity": "Artifact",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Paha biçilemez mücevherleri yakıt olarak kullanır. 60 fit içinde her türlü görünmezliği ve illüzyonu yok eden parlak bir ışık saçar. İçindeki lensleri değiştirerek yıkıcı ışınlar saçabilir.\n\n**[Atmosfer]** Kaderin ipliklerini çözmek için servetini yok eden bir bilgenin mirası olan, paha biçilemez taşları yakarak mutlak gerçeği gösteren altın bir fenerdir.",
+        "effects": []
+    },
+    {
+        "name": "Dekella, Bident of Thassa",
+        "name_tr": "Dekella, Bident of Thassa",
+        "rarity": "Artifact",
+        "type": "Weapon",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** +3 saldırı/hasar bonuslu üçlü mızraktır (trident). İsabet ettiğinde fazladan 2d10 soğuk (cold) hasarı verir. Denizi kontrol edebilir, fırtına dindirebilir veya yaratabilir. Dominate Monster (su canlıları) ve True Polymorph cast edebilir.\n\n**[Atmosfer]** Saf okyanus derinliklerinin buz gibi akıntılarıyla titreşen, Purphoros tarafından Thassa için dövülmüş ilahi bir silahtır.",
+        "effects": [
+            {
+                "type": "attack_bonus",
+                "value": 3
+            },
+            {
+                "type": "damage_bonus",
+                "value": 3
+            },
+            {
+                "type": "extra_damage",
+                "value": "2d10",
+                "damage_type": "cold"
+            }
+        ]
+    },
+    {
+        "name": "Demonomicon of Iggwilv",
+        "name_tr": "Demonomicon of Iggwilv",
+        "rarity": "Artifact",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** İblisler üzerine uzmanlık (Intelligence) zarları sağlar. Magic Circle, Planar Binding ve Summon Fiend gibi büyüleri cast edebilir. İblisleri kitabın boş sayfalarına hapsedebilir. Fiend'lere karşı büyü hasarını maksimize eder.\n\n**[Atmosfer]** Abyss'in sonsuz katmanlarını ve sakinlerini belgeleyen, okuyan herkesi karanlık sırlarla ve delilikle yüzleştiren evrendeki en uğursuz yazılı eserdir.",
+        "effects": []
+    },
+    {
+        "name": "Ephixis, Bow of Nyela",
+        "name_tr": "Ephixis, Bow of Nyela",
+        "rarity": "Artifact",
+        "type": "Weapon",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** +3 saldırı/hasar bonuslu kısa yay (shortbow). Uzun menzilde dezavantaj almaz. 19-20 kritik vurur. Dört mevsime bağlı dört özel oku vardır (Bahar, Yaz, Güz, Kış); her biri farklı doğaüstü etkiler yaratır.\n\n**[Atmosfer]** Tanrıça Nylea tarafından kullanılan, okları mevsimlerin dönüşünü haber veren ve doğanın vahşi gücünü taşıyan ilahi bir yaydır.",
+        "effects": [
+            {
+                "type": "attack_bonus",
+                "value": 3
+            },
+            {
+                "type": "damage_bonus",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "name": "Eye and Hand of Vecna",
+        "name_tr": "Eye and Hand of Vecna",
+        "rarity": "Artifact",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Göz: Çepersel görüş, True Sight ve birçok büyü sağlar. El: Strength skorunu 20 yapar, isabet ettiğinde fazladan 2d8 soğuk hasarı verir. İkisi birden takılırsa muazzam ek güçler ve Wish yeteneği kazanılır. Kullanmak için kendi göz ve elinizi feda etmeniz gerekir.\n\n**[Atmosfer]** Vecna'nın yok edilmesinden geriye kalan, sahibi olmak için kişinin kendi bedeninden vazgeçmesini gerektiren dehşet verici ve mutlak kudret sahibi kalıntılardır.",
+        "effects": [
+            {
+                "type": "stat_set",
+                "stat": "strength",
+                "value": 20
+            },
+            {
+                "type": "extra_damage",
+                "value": "2d8",
+                "damage_type": "cold"
+            }
+        ]
+    },
+    {
+        "name": "Grovelthrash",
+        "name_tr": "Grovelthrash",
+        "rarity": "Artifact",
+        "type": "Weapon",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Obsidian bir savaş çekicidir (warhammer). Gömülü bir ultroloth ruhu taşır. İsabet ettiğinde fazladan 1d6 (uyanmış halde 2d6) kuvvet (force) hasarı verir. Yere vurarak sarsıntı yaratabilir. Bilinçlidir (sentient).\n\n**[Atmosfer]** Torog tarafından dövülmüş, üzerinde acıyla çığlık atan yüzlerin bulunduğu ve her darbesinde kurbanının ruhunu sarsan kara bir çekicidir.",
+        "effects": [
+            {
+                "type": "extra_damage",
+                "value": "1d6",
+                "damage_type": "force"
+            }
+        ]
+    },
+    {
+        "name": "Helm of Perfect Potential",
+        "name_tr": "Helm of Perfect Potential",
+        "rarity": "Artifact",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Kandırmaca (Deception) ve Sezi (Insight) zarlarında avantaj sağlar. Bir bonus eylemle 4d6 elementer hasar (asit, soğuk, ateş, yıldırım veya gök gürültüsü) veren bir ışın atabilir. Wall of Fire, Tsunami gibi büyüleri cast edebilir.\n\n**[Atmosfer]** Alın kısmında Saf Kaos'tan bir parça barındıran, Annam tarafından kızı Diancastra için yapılmış bakır rengi görkemli ve kadim bir miğferdir.",
+        "effects": [
+            {
+                "type": "save_advantage",
+                "value": "deception"
+            },
+            {
+                "type": "save_advantage",
+                "value": "insight"
+            }
+        ]
+    },
+    {
+        "name": "Iggwilv's Cauldron",
+        "name_tr": "Iggwilv's Cauldron",
+        "rarity": "Artifact",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** İki formu vardır: Altın ve Demir. Altın formuyla bereketli büyüler, Demir formuyla ise korkunç lanetler ve yaratık çağırma yetenekleri kazanılır. Cadı coven'larını (hags) güçlendiren en güçlü araçtır.\n\n**[Atmosfer]** Arş-peri Baba Yaga ve kızı Iggwilv tarafından birlikte hazırlanan, efsanelere konu olan ve binlerce yıllık cadı büyüsünü barındıran devasa bir kazandır.",
+        "effects": []
+    },
+    {
+        "name": "Khrusor, Spear of Heliod",
+        "name_tr": "Khrusor, Spear of Heliod",
+        "rarity": "Artifact",
+        "type": "Weapon",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** +3 saldırı/hasar bonuslu mızrak. İsabet ettiğinde fazladan 2d8 ışık (radiant) hasarı verir. 30 fit parlak güneş ışığı yayar. Reaksiyonla hedefi kör edebilir. Daylight ve Sunbeam gibi ışık temalı büyüleri cast edebilir.\n\n**[Atmosfer]** Tanrı Heliod'un bizzat kullandığı, güneşin saf parıltısıyla dövülmüş ve karanlığı her darbesiyle paramparça eden kutsal bir mızraktır.",
+        "effects": [
+            {
+                "type": "attack_bonus",
+                "value": 3
+            },
+            {
+                "type": "damage_bonus",
+                "value": 3
+            },
+            {
+                "type": "extra_damage",
+                "value": "2d8",
+                "damage_type": "radiant"
+            }
+        ]
+    },
+    {
+        "name": "Lash of Shadows",
+        "name_tr": "Lash of Shadows",
+        "rarity": "Artifact",
+        "type": "Weapon",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Beş yılan başlı, snakeskin bir kırbaçtır (whip). İçinde bir marilith ruhu taşır. İsabet ettiğinde fazladan zehir hasarı verir ve hedefi yavaşlatabilir veya engelleyebilir. Bilinçlidir (sentient).\n\n**[Atmosfer]** Zehir tanrısı Zehir tarafından kutsanmış, her bir başı ayrı bir iradeyle hareket eden ve kurbanını saniyeler içinde felç eden ölümcül bir silahtır.",
+        "effects": []
+    },
+    {
+        "name": "Luba's Tarokka of Souls",
+        "name_tr": "Luba's Tarokka of Souls",
+        "rarity": "Artifact",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** 54 kartlık efsanevi bir destedir. Geleceği görme büyüleri sağlar. Twist of Fate yeteneğiyle kaderi değiştirip avantaj/dezavantaj verebilir. Ancak her kullanımda tutsak bir kötü ruhun serbest kalma riski vardır.\n\n**[Atmosfer]** Mother Luba tarafından en lanetli ruhları hapsetmek için kullanılan, her kartı bir efsaneyi ve kaçınılmaz bir kaderi barındıran mistik bir destedir.",
+        "effects": []
+    },
+    {
+        "name": "Mace of the Black Crown",
+        "name_tr": "Mace of the Black Crown",
+        "rarity": "Artifact",
+        "type": "Weapon",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Kara demirden yapılmış bir gürzdür (mace). Asmodeus'un lütfunu taşır ve içinde bir erinyes ruhu barındırır. İsabet ettiğinde fazladan ateş hasarı verir ve ölüleri (undead) korkutabilir. Bilinçlidir (sentient).\n\n**[Atmosfer]** Cehennemin mutlak otoritesini temsil eden, kurbanlarının ruhunu saniyeler içinde Asmodeus'un karanlığına adayan uğursuz bir silahtır.",
+        "effects": []
+    },
+    {
+        "name": "Mastix, Whip of Erebos",
+        "name_tr": "Mastix, Whip of Erebos",
+        "rarity": "Artifact",
+        "type": "Weapon",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** +3 saldırı/hasar bonuslu kırbaç. İsabet ettiğinde fazladan 2d8 nekrotik hasar verir ve verdiğiniz hasarın yarısı kadar can tazeler. Menzili 300 fite kadar uzayabilir. Circle of Death ve Dominate Monster cast edebilir.\n\n**[Atmosfer]** Ölüler tanrısı Erebos'un sonsuz bir gölge gibi uzanan, günahkarları kaçamayacakları bir ağ gibi saran efsanevi kırbacıdır.",
+        "effects": [
+            {
+                "type": "attack_bonus",
+                "value": 3
+            },
+            {
+                "type": "damage_bonus",
+                "value": 3
+            },
+            {
+                "type": "extra_damage",
+                "value": "2d8",
+                "damage_type": "radiant"
+            }
+        ]
+    },
+    {
+        "name": "Mighty Servant of Leuk-o",
+        "name_tr": "Mighty Servant of Leuk-o",
+        "rarity": "Artifact",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** 10 fit boyunda, içine iki pilotun binebileceği dev bir savaş makinesidir. Yapıları anında yıkan yıkıcı darbelere ve sarsılmaz bir defansa sahiptir. Kendi vahşi bilinci tarafından ele geçirilme riski barındırır.\n\n**[Atmosfer]** Simsiyah bilinmeyen bir alaşımdan yapılmış, dev bir böcek ile cüceyi andıran ve savaş meydanlarında adeta bir afet gibi hareket eden teknomistik bir devdir.",
+        "effects": []
+    },
+    {
+        "name": "Orb of Dragonkind",
+        "name_tr": "Orb of Dragonkind",
+        "rarity": "Artifact",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Ejderhaların özünü barındıran kristal küre. 40 mil içindeki tüm kötü ejderhaları kendine çağırabilir. Ejderhaları kontrol etmeyi sağlar ama kullanıcının iradesini (Charisma) zorlar; başarısızlık kullanıcının küre tarafından köleleştirilmesine yol açar.\n\n**[Atmosfer]** Krynn dünyasının en karanlık savaşlarında dövülmüş, içinde hapsolmuş öfkeli bir ejderha ruhunun sinsi fısıltılarını barındıran kadim bir yadigardır.",
+        "effects": []
+    },
+    {
+        "name": "Orrery Of The Wanderer",
+        "name_tr": "Orrery Of The Wanderer",
+        "rarity": "Artifact",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Altı büyük parçanın birleşimiyle çalışan muazzam bir saat mekanizmasıdır. Geleceği görme (AC bonusu) ve düzlemler arası seyahat (Gate, Teleport vb.) güçleri sağlar. Tamamlandığında sahibini kaotik bir keşif arzusuna iter.\n\n**[Atmosfer]** Düzlemlerin ve yıldızların mistik hareketlerini takip eden, evrenin işleyişini minyatür bir mekanizmaya hapseden büyüleyici ama bir o kadar da tehlikeli bir saattir.",
+        "effects": [
+            {
+                "type": "ac_bonus",
+                "value": 1
+            }
+        ]
+    },
+    {
+        "name": "Ring of Winter",
+        "name_tr": "Ring of Winter",
+        "rarity": "Artifact",
+        "type": "Ring",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Takanın yaşlanmasını durdurur ve soğuk hasarına bağışıklık kazandırır. 12 şarjı vardır; Bigby's Hand (buzdan), Cone of Cold ve Ice Storm gibi güçlü büyüleri cast edebilir. Bilinçli ve son derece kötüdür.\n\n**[Atmosfer]** Takanın parmağında asla erimeyen bir buz tabakasıyla kaplı olan, dünyayı dondurabilecek bir güce ve önlenemez bir yıkım arzusuna sahip efsanevi bir yüzüktür.",
+        "effects": [
+            {
+                "type": "immunity",
+                "value": "cold"
+            }
+        ]
+    },
+    {
+        "name": "Rod of Seven Parts",
+        "name_tr": "Rod of Seven Parts",
+        "rarity": "Artifact",
+        "type": "Rod",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Yedi parçanın birleşmesiyle tamamlanır. +3 quarterstaff olarak çalışır. Muazzam bir düzen (law) enerjisi yayar ve sahibini mutlak bir dürüstlük ve prensip koduna uymaya zorlar. Güçlü koruyucu büyüler sağlar.\n\n**[Atmosfer]** Mutlak kaosu durdurmak için Wind Dukes tarafından dövülmüş ve parçalara ayrılmış olan, düzenin evrendeki mutlak sembolü kadim bir asadır.",
+        "effects": [
+            {
+                "type": "attack_bonus",
+                "value": 3
+            },
+            {
+                "type": "damage_bonus",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "name": "Ruin's Wake",
+        "name_tr": "Ruin's Wake",
+        "rarity": "Artifact",
+        "type": "Weapon",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Altın bir ejderha kemiğinden oyulmuş mızrak. İçinde bir balor (Yarrowish) ruhu hapsolmuştur. İsabet ettiğinde fazladan 1d8 kuvvet (force) hasarı verir. Sadece kan dökmeyi ve şiddeti arzular. Bilinçlidir (sentient).\n\n**[Atmosfer]** Üzerinde Gruumsh adına yazılmış ilahilerin bulunduğu, düşmanlarının kemiklerini sarsan ve sahibini bir yıkım makinesine dönüştüren uğursuz bir silahtır.",
+        "effects": []
+    },
+    {
+        "name": "Ruinstone",
+        "name_tr": "Ruinstone",
+        "rarity": "Artifact",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Günde bir kez kullanıcının yaptığı bir eylemi veya fiyaskoyu geri almasını (rewind) sağlar. Ancak bu kullanımın bedeli olarak kullanıcının sevdiği biri gerçeklikten tamamen silinip yok olur.\n\n**[Atmosfer]** Avuç içi büyüklüğünde, kan kırmızısı parlayan bir kristal olan ve zamanı bükmek için değer verdiğiniz canları kurban eden dehşet verici bir artifacttir.",
+        "effects": []
+    },
+    {
+        "name": "Silken Spite",
+        "name_tr": "Silken Spite",
+        "rarity": "Artifact",
+        "type": "Weapon",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Örümcek ipeğinden yapılmış bir rapier. İçinde bir yochlol ruhu taşır. Zehir hasarı verir ve örümcekler üzerinde tam kontrol sağlar. Sahibini kimseye güvenmemeye ve en ufak hatada öldürmeye iter.\n\n**[Atmosfer]** Lolth'un lütfuyla kutsanmış, ucu örümcek şeklinde kesilmiş yakutlarla süslü ve kurbanını sinsice zehirleyen, ipek kadar hafif ama çelikten sert bir silahtır.",
+        "effects": []
+    },
+    {
+        "name": "Staff of the Forgotten One",
+        "name_tr": "Staff of the Forgotten One",
+        "rarity": "Artifact",
+        "type": "Staff",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Tepesinde unutulmuş bir archmage'in kafatası bulunan kemik asadır. Hedefi lanetleyerek can tazeleyememesini sağlar ve nekrotik hasara karşı dayanıklılığını yok eder. Sahibini bir NPC olarak ele geçirme riski vardır.\n\n**[Atmosfer]** Acererak tarafından yok edilmiş güçlü bir rakibinin ruhunu içinde hapseden, ölümün rünüyle işaretlenmiş ve etrafına soğuk bir korku yayan kadim bir asadır.",
+        "effects": []
+    },
+    {
+        "name": "Stone of Golorr",
+        "name_tr": "Stone of Golorr",
+        "rarity": "Artifact",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Aslında bir aboleth olan bu taş, sahibiyle telepatik olarak konuşur. Unutulmuş sırları Legend Lore büyüsüyle paylaşabilir. Sahibi taştan ayrıldığında taşla ilgili tüm anılarını kalıcı olarak unutabilir.\n\n**[Atmosfer]** Avuç içine sığan, yeşilimsi gri bir taş formunda sinsi ve ezici bir zihne sahip olan, kendini ölümsüz bir tanrı sanan kadim bir varlıktır.",
+        "effects": []
+    },
+    {
+        "name": "Sword of Kas",
+        "name_tr": "Sword of Kas",
+        "rarity": "Artifact",
+        "type": "Weapon",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** +3 saldırı/hasar bonuslu uzun kılıç (longsword). 19-20 kritik vurur ve ölüleri (undead) parçalar. Sahibinin inisiyatifine +1d10 ekler. Saldırı bonusunu AC'ye aktarabilir. Tek amacı Vecna'yı yok etmektir.\n\n**[Atmosfer]** Vecna'nın koruması Kas tarafından efendisine ihanet etmek için kullanılan, sadece taze kanla tatmin olan efsanevi ve karanlık bir silahtır.",
+        "effects": [
+            {
+                "type": "attack_bonus",
+                "value": 3
+            },
+            {
+                "type": "damage_bonus",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "name": "Sword of Zariel",
+        "name_tr": "Sword of Zariel",
+        "rarity": "Artifact",
+        "type": "Weapon",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** +3 saldırı/hasar bonuslu uzun kılıç. Sahibini göksel (celestial) bir forma sokarak uçuş, parıltı ve True Sight kazandırır. İsabet ettiğinde fazladan 2d8 ışık (radiant) hasarı verir. Saf iyilik için savaşır.\n\n**[Atmosfer]** Zariel'in düşüşünden önce dövülmüş, melek çeliğinden parıldayan ve içindeki saf ışık enerjisiyle karanlığı anında yok eden görkemli bir kılıçtır.",
+        "effects": [
+            {
+                "type": "attack_bonus",
+                "value": 3
+            },
+            {
+                "type": "damage_bonus",
+                "value": 3
+            },
+            {
+                "type": "extra_damage",
+                "value": "2d8",
+                "damage_type": "radiant"
+            }
+        ]
+    },
+    {
+        "name": "Teeth of Dahlver-Nar",
+        "name_tr": "Teeth of Dahlver-Nar",
+        "rarity": "Artifact",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Bir pouch içindeki çeşitli dişlerdir. Toprağa ekilirse (sow) müttefik yaratıklar çağırır; ağıza takılırsa (implant) sahibine muazzam stat bonusları ve büyüsel yetenekler kazandırır.\n\n**[Atmosfer]** Dahlver-Nar tarafından toplanmış, her biri bir kahramanın veya efsanevi canavarın ruhunu barındıran ve takıldığında sahibinin kaderini değiştiren mistik dişlerdir.",
+        "effects": []
+    },
+    {
+        "name": "The Bloody End",
+        "name_tr": "The Bloody End",
+        "rarity": "Artifact",
+        "type": "Weapon",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Adamantin bir sabah yıldızıdır (morningstar). İçinde bir pit fiend ruhu taşır. Korku yayar, düşmanı boyun eğmeye zorlar ve isabet ettiğinde yıkıcı darbe hasarı verir. Bilinçlidir (sentient).\n\n**[Atmosfer]** Tiranlık tanrısı Bane'in gücünü taşıyan, her darbesinde rakiplerini diz çökmeye zorlayan dehşet verici ve mutlak otorite sembolü bir silahtır.",
+        "effects": []
+    },
+    {
+        "name": "The Infernal Machine Of Lum The Mad",
+        "name_tr": "The Infernal Machine Of Lum The Mad",
+        "rarity": "Artifact",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** 5500 pound ağırlığında devasa bir kontrol panelidir. 120 farklı kol ve anahtarla; canavar çağırma, Wish büyüsü yapma ve gerçekliği bükme yeteneklerine sahiptir. Bilinmeyen güçleri keşfetmek felaketle sonuçlanabilir.\n\n**[Atmosfer]** Başka dünyalara ait bir aracın komuta merkezi olduğu düşünülen, Baron Lum tarafından dünyaları dize getirmek için kullanılan muazzam bir teknomistik cihazdır.",
+        "effects": []
+    },
+    {
+        "name": "Wand of Orcus",
+        "name_tr": "Wand of Orcus",
+        "rarity": "Artifact",
+        "type": "Wand",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** +3 saldırı/hasar bonuslu asadır (+3 AC sağlar). İsabet ettiğinde fazladan 2d12 nekrotik hasar verir. Yüzlerce iskelet ve zombi çağırabilir. Power Word Kill cast edebilir. Sahibini öldürüp zombi olarak geri getirebilir.\n\n**[Atmosfer]** Tepesinde Orcus tarafından katledilmiş bir kahramanın kafatası bulunan, demir kadar sert kemiklerden yapılmış ve yaşamı saniyeler içinde çürüten en uğursuz asadır.",
+        "effects": [
+            {
+                "type": "attack_bonus",
+                "value": 3
+            },
+            {
+                "type": "damage_bonus",
+                "value": 3
+            },
+            {
+                "type": "ac_bonus",
+                "value": 3
+            },
+            {
+                "type": "extra_damage",
+                "value": "2d12",
+                "damage_type": "necrotic"
+            }
+        ]
+    },
+    {
+        "name": "Will of the Talon",
+        "name_tr": "Will of the Talon",
+        "rarity": "Artifact",
+        "type": "Weapon",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Beş farklı ejderha renginde mücevherli altın bir kazmadır (war pick). İçinde bir bone devil ruhu taşır. Ejderha saldırılarını güçlendirir ve hiyerarşi kurmak için sahibini otoriter olmaya iter. Bilinçlidir (sentient).\n\n**[Atmosfer]** Tiamat'ın gücünü kanalize eden, zenginliğe olan açlığı artıran ve her vuruşunda bir ejderhanın kadim öfkesini hissettiren görkemli bir silahtır.",
+        "effects": []
+    },
+    {
+        "name": "Wyrmskull Throne",
+        "name_tr": "Wyrmskull Throne",
+        "rarity": "Artifact",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Obsidian bir tahttır ve üzerinde dört antik mavi ejderha kafatası bulunur. Havada asılı kalarak hareket eder. Korku yayabilir, ejderha çağırabilir veya yıkıcı mermiler fırlatabilir. Sadece uygun asaya sahip olanlarca kullanılabilir.\n\n**[Atmosfer]** Cüce tanrıları tarafından dövülmüş, üzerine mavi ejderhaların sönmeyen ruhları hapsedilmiş olan ve cüce imparatorluklarının mutlak otoritesini temsil eden devasa bir tahttır.",
+        "effects": []
+    },
+    {
+        "name": "Draakhorn",
+        "name_tr": "Draakhorn",
+        "rarity": "Unique",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Dev bir boru şeklinde uyarı aracıdır. 2000 mil içindeki tüm ejderhaları büyük tehlikeye karşı uyarabilir. Çalındığında önündeki 150 fitlik alandakilere 6d8 gök gürültüsü hasarı verir ve yere serer.\n\n**[Atmosfer]** Tiamat'ın eşi kadim kırmızı ejderha Ephelomon'un boynundan yapılmış, üzerinde mor alevlerle parlayan draconic rünler bulunan dehşet verici büyüklükte bir borudur.",
+        "effects": []
+    },
+    {
+        "name": "Gnomengarde Grenade",
+        "name_tr": "Gnomengarde Grenade",
+        "rarity": "Unique",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Bir bonus eylemle kurulur ve 120 fite kadar fırlatılabilir. Patladığında 60 fit içindekilere yıkıcı hasar verir veya onları etkisiz hale getirir. Boyutlar arası bir alana sokulursa anında patlar.\n\n**[Atmosfer]** Gnomengarde cüceleri tarafından tasarlanmış, pirinç ve kristal parçalardan oluşan ama patladığında bir fırtına kadar gürültü ve yıkım saçan küçük bir teknoloji harikasıdır.",
+        "effects": []
+    },
+    {
+        "name": "Mask of the Dragon Queen",
+        "name_tr": "Mask of the Dragon Queen",
+        "rarity": "Unique",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Beş ejderha maskesinin tek bir taçta birleşimidir. Sahibi beş maskenin de güçlerini (hasar emme, elemental direnç vb.) aynı anda kullanabilir. Günde beş kez Legendary Resistance yeteneği bahşeder.\n\n**[Atmosfer]** Tiamat'ı onurlandıran beş başlı bir taç formuna bürünen, takan kişiyi tanrısal bir ejderha heybetine ve mutlak bir korunmaya büründüren efsanevi bir eserdir.",
+        "effects": []
+    },
+    {
+        "name": "Crusader's Shortsword",
+        "name_tr": "Crusader's Shortsword",
+        "rarity": "Unique",
+        "type": "Weapon",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** +1 kısa kılıçtır (shortsword). 15 fit parlak ışık yayar. Crusader's Mantle büyüsünü günde bir kez cast edebilir. Kötülükle savaşmayı amaçlayan bilinçli ve iyi kalpli bir silahtır (sentient).\n\n**[Atmosfer]** Adalet ve erdem ruhuyla kutsanmış, sahibiyle duygusal bağ kuran ve karanlığın içinde her zaman parıldayan asil bir şövalye silahıdır.",
+        "effects": [
+            {
+                "type": "attack_bonus",
+                "value": 1
+            },
+            {
+                "type": "damage_bonus",
+                "value": 1
+            }
+        ]
+    },
+    {
+        "name": "Orcus Figurine",
+        "name_tr": "Orcus Figurine",
+        "rarity": "Unique",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Orcus'u tasvir eden küçük bir heykelciktir. Çirkin bir koku yayar. Etrafındaki ölüleri (undead) güçlendiren bir aura yayar ve yakındaki yaşam enerjisini emerek kullanıcıyı geçici olarak koruyabilir.\n\n**[Atmosfer]** Bir ogrenin taşlaşmış kalbinden oyulmuş, bakana bile soğuk ve ölümcül bir nefesi hissettiren dehşet verici derecede detaylı ve tekinsiz bir heykelciktir.",
+        "effects": []
+    },
+    {
+        "name": "Radiance",
+        "name_tr": "Radiance",
+        "rarity": "Unique",
+        "type": "Wand",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Bir el aynası formunda asadır (wand). Büyü saldırılarına +1 bonus sağlar. Karanlıkta loş bir ışık yayar. Günde bir kez Enhance Ability (sadece kullanıcıya) cast etmeyi sağlar.\n\n**[Atmosfer]** Altın çerçeveli, kusursuz bir yansımaya sahip olan ve sahibinin içindeki gizli potansiyeli ve güzelliği ortaya çıkaran büyüleyici bir aynadır.",
+        "effects": [
+            {
+                "type": "spell_atk_bonus",
+                "value": 1
+            }
+        ]
+    },
+    {
+        "name": "Shield of the Silver Dragon",
+        "name_tr": "Shield of the Silver Dragon",
+        "rarity": "Unique",
+        "type": "Armor",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** +2 kalkan. Sahibine inisiyatif zarlarında +2 bonus sağlar. Üzerinde Gümüş Ejderha Tarikatı'nın sembolü bulunur ve sahibini tehlikelere karşı fısıltılarla uyarır.\n\n**[Atmosfer]** Gümüşejderha Şövalyeleri tarafından bir onur nişanı olarak kullanılan, yaklaşan tehlikeleri sahibine önceden haber veren bilge ve koruyucu bir kalkandır.",
+        "effects": [
+            {
+                "type": "ac_bonus",
+                "value": 2
+            },
+            {
+                "type": "init_bonus",
+                "value": 2
+            }
+        ]
+    },
+    {
+        "name": "Stonky's Ring",
+        "name_tr": "Stonky's Ring",
+        "rarity": "Unique",
+        "type": "Ring",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Nesneler (objects) üzerinde sınırsız Telekinesis kullanmayı sağlar. Ayrıca Stonky'nin icadı olan \"skitterwidget\" mekanik yaratıklarını 30 fit mesafeden kontrol etme yeteneği bahşeder.\n\n**[Atmosfer]** Mucit Stonky'ye ait olan, metalleri ve cansız nesneleri havada adeta görünmez iplerle çekiyormuş gibi kontrol edebilen büyülü bir yüzüktür.",
+        "effects": []
+    },
+    {
+        "name": "Tearulai",
+        "name_tr": "Tearulai",
+        "rarity": "Unique",
+        "type": "Weapon",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** +3 uzun kılıç (longsword). Sword of Sharpness özelliklerini taşır (nesnelere full damage, kritik vuruşta kafa koparma). Fly, Polymorph ve Transport via Plants cast edebilir. Bilinçli ve iyidir.\n\n**[Atmosfer]** Zümrüt kırmızısı bir bıçağa sahip olan, sanat ve doğaya hayran bir zihne sahip olan ve en kalın zırhları bile kağıt gibi kesen görkemli, narin bir kılıçtır.",
+        "effects": [
+            {
+                "type": "attack_bonus",
+                "value": 3
+            },
+            {
+                "type": "damage_bonus",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "name": "Yester Hill Axe",
+        "name_tr": "Yester Hill Axe",
+        "rarity": "Unique",
+        "type": "Weapon",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Bitki tipi yaratıklara (ordinary veya creature) fazladan 1d8 kesme hasarı verir. İyi olmayan biri tarafından kullanıldığında her saldırıda sahibine 1 büyüle delici hasar verir.\n\n**[Atmosfer]** Yester Hill'deki druidler tarafından sapı yaprak ve sarmaşıklarla işlenmiş, doğayı kirletenleri cezalandırmak için tasarlanmış, hafif ama hırçın bir savaş baltasıdır.",
+        "effects": [
+            {
+                "type": "extra_damage",
+                "value": "1d8",
+                "damage_type": "slashing",
+                "condition": "against plants"
+            }
+        ]
+    },
+    {
+        "name": "Wraps Of Unarmed Prowess",
+        "name_tr": "Wraps Of Unarmed Prowess",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Silahsız saldırılarınızı (unarmed strikes) büyülü sayar. Nadirliğine göre saldırı ve hasar bonusu kazandırır (Very Rare: +3).\n\n**[Atmosfer]** Keşişlerin ve dövüş ustalarının ellerini birer çelik silah kadar sert ve etkili kılan, üzerine mistik rünler işlenmiş kadim kumaş sargılardır.",
+        "effects": [
+            {
+                "type": "attack_bonus",
+                "value": 3,
+                "note": "Sadece silahsız saldırılar için"
+            },
+            {
+                "type": "damage_bonus",
+                "value": 3,
+                "note": "Sadece silahsız saldırılar için"
+            }
+        ]
+    },
+    {
+        "name": "Wyrmreaver Gauntlets",
+        "name_tr": "Wyrmreaver Gauntlets",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Silahsız saldırılara fazladan 1d6 kuvvet (force) hasarı ekler. Bir elemente (asit, ateş, soğuk, yıldırım, zehir) karşı direnç kazandırır. Bonus eylemle rünleri aktif ederek 30 fit menzilli spektral yumruklarla saldırabilir ve rakipleri yere serebilirsiniz.\n\n**[Atmosfer]** Dev dövüşçülerin ejderhalara karşı savaşabilmesi için tasarlanmış, üzerinde parlayan ejderha rünü bulunan ağır ve görkemli metalik eldivenlerdir.",
+        "effects": [
+            {
+                "type": "extra_damage",
+                "value": "1d6",
+                "damage_type": "force"
+            }
+        ]
+    },
+    {
+        "name": "Apparatus of Kwalish",
+        "name_tr": "Apparatus of Kwalish",
+        "rarity": "Legendary",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** İki kişinin binebileceği dev bir metal varil formunda teknomistik araçtır. 10 kontrol koluyla (lever) ıstakoz gibi hareket eder, kıskaçlarıyla saldırır ve 900 fit derinliğe kadar basınca dayanabilir.\n\n**[Atmosfer]** Efsanevi mucit Kwalish tarafından tasarlanmış, suyun altında ve üstünde güvenle seyahat etmeyi sağlayan, devasa bir deniz canlısını andıran mühendislik harikasıdır.",
+        "effects": []
+    },
+    {
+        "name": "Armor, +1, +2, or +3",
+        "name_tr": "Büyülü Zırh (+1, +2, +3)",
+        "rarity": "Legendary",
+        "type": "Armor",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Zırhın nadirliğine bağlı olarak Zırh Sınıfı'na (AC) kalıcı bir bonus sağlar (+1: Nadir, +2: Çok Nadir, +3: Efsanevi).\n\n**[Atmosfer]** Dünyadaki en usta demirciler tarafından dövülmüş ve üzerine en güçlü koruyucu büyüler işlenmiş, takan kişiyi neredeyse her darbeden koruyan kusursuz bir zırh.",
+        "effects": [
+            {
+                "type": "ac_bonus",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "name": "Armor of Invulnerability",
+        "name_tr": "Armor of Invulnerability",
+        "rarity": "Legendary",
+        "type": "Armor",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Büyülü olmayan hasarlara karşı direnç (resistance) sağlar. Bir eylemle 10 dakika boyunca büyülü olmayan tüm hasarlara karşı tamamen bağışıklık kazandırır. Bu yetenek günde bir kez kullanılabilir.\n\n**[Atmosfer]** Giyen kişiyi sıradan silahlardan ve canavarlardan gelen darbelerden mutlak surette koruyan, üzerinde sarsılmazlık ve metanet rünleri parıldayan efsanevi bir zırh.",
+        "effects": [
+            {
+                "type": "resistance",
+                "value": "nonmagical_damage"
+            }
+        ]
+    },
+    {
+        "name": "Azuredge",
+        "name_tr": "Azuredge",
+        "rarity": "Legendary",
+        "type": "Weapon",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** +3 saldırı/hasar bonuslu savaş baltasıdır (battleaxe). Shield ve benzeri kuvvet bariyerlerini yok sayar. Fiend ve Undead'lere fazladan 2d6 ışık (radiant) hasarı verir. Fırlatıldığında elinize geri döner. Bilinçlidir (sentient).\n\n**[Atmosfer]** Waterdeep şehri korumak için Ahghairon tarafından dövülmüş, keskin tarafı derin mavi bir parıltıyla titreyen ve şehre mutlak sadakat duyanlar tarafından kullanılabilen bilge bir baltadır.",
+        "effects": [
+            {
+                "type": "attack_bonus",
+                "value": 3
+            },
+            {
+                "type": "damage_bonus",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "name": "Belashyrra's Beholder Crown",
+        "name_tr": "Belashyrra's Beholder Crown",
+        "rarity": "Legendary",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Beholder kafasını anımsatan simbiyotik bir taçtır. 120 fit mesafede hem büyülü hem normal karanlıkta görmeyi sağlar. Disintegrate, Fear, Telekinesis gibi Beholder göz ışını büyülerini cast edebilir. Sahibinden ancak lanet bozularak ayrılabilir.\n\n**[Atmosfer]** Daelkyr Belashyrra tarafından yaratılmış, takanın kafatasına ince kancalarla kök salan ve ona bir Beholder'ın dehşet verici ve mutlak bakışını veren tekinsiz bir taçtır.",
+        "effects": [
+            {
+                "type": "stat_bonus",
+                "stat": "darkvision",
+                "value": 120
+            }
+        ]
+    },
+    {
+        "name": "Belt of Giant Strength",
+        "name_tr": "Belt of Giant Strength",
+        "rarity": "Legendary",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Strength skorunu devin türüne göre sabitler (Stone/Frost: 23, Fire: 25, Cloud: 27, Storm: 29). Eğer mevcut gücünüz bu değerden yüksekse etkisi yoktur.\n\n**[Atmosfer]** Devlerin sarsılmaz kas gücünü ve ürkütücü heybetini takan kişiye aşılayan, üzerinde dev kabartmaları işlenmiş kalın ve ağır bir deri kemerdir.",
+        "effects": [
+            {
+                "type": "stat_set",
+                "stat": "strength",
+                "value": 23
+            }
+        ]
+    },
+    {
+        "name": "Black Crystal Tablet",
+        "name_tr": "Black Crystal Tablet",
+        "rarity": "Legendary",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Eyebite veya Gate (sadece Far Realm) cast etmeyi sağlar. Ancak her uzun dinlenme sonrası kullanıcı DC 20 Wisdom zarı atamazsa kalıcı bir deliliğe (madness) kapılabilir.\n\n**[Atmosfer]** Far Realm'in kaotik ve akıl almaz enerjisini barındıran, bakana bile zihninin derinliklerinde fısıltılar duyuran simsiyah ve pürüzsüz bir kristal tablettir.",
+        "effects": []
+    },
+    {
+        "name": "Blackrazor",
+        "name_tr": "Blackrazor",
+        "rarity": "Legendary",
+        "type": "Weapon",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** +3 saldırı/hasar bonuslu büyük kılıç (greatsword). Öldürdüğü kurbanın ruhunu yutar ve sahibine kurbanın canı kadar geçici can (temp HP) kazandırır. Undead'lere saldırırken sahibine hasar verir. Haste cast edebilir. Bilinçlidir (sentient).\n\n**[Atmosfer]** Gece gökyüzü gibi parlayıp sönen, ruhlara olan açlığı asla sönmeyen ve White Plume Mountain'ın en karanlık sırlarını sayfalarında taşıyan efsanevi bir kılıçtır.",
+        "effects": [
+            {
+                "type": "attack_bonus",
+                "value": 3
+            },
+            {
+                "type": "damage_bonus",
+                "value": 3
+            }
+        ]
+    }
+]

@@ -1,0 +1,259 @@
+[
+  {
+    "name": "Light Armor",
+    "category": "Armor",
+    "cost_raw": "1 minute",
+    "ac_raw": "1 minute",
+    "strength_raw": "",
+    "stealth_raw": "",
+    "weight_raw": "",
+    "source": "Wikidot",
+    "name_clean": "Light Armor"
+  },
+  {
+    "name": "Medium Armor",
+    "category": "Armor",
+    "cost_raw": "5 minutes",
+    "ac_raw": "1 minute",
+    "strength_raw": "",
+    "stealth_raw": "",
+    "weight_raw": "",
+    "source": "Wikidot",
+    "name_clean": "Medium Armor"
+  },
+  {
+    "name": "Heavy Armor",
+    "category": "Armor",
+    "cost_raw": "10 minutes",
+    "ac_raw": "5 minutes",
+    "strength_raw": "",
+    "stealth_raw": "",
+    "weight_raw": "",
+    "source": "Wikidot",
+    "name_clean": "Heavy Armor"
+  },
+  {
+    "name": "Rope\n* Rope, whether made of hemp or silk, has 2 hit points and can be burst with a DC 17 Strength check.\n- Hemp (50 ft)\n- Silk (50 feet)",
+    "category": "Adventuring Gear",
+    "cost_raw": "1 gp\n10 gp",
+    "weight_raw": "10 lb.\n5 lb.",
+    "source": "Wikidot/Adventuring-Gear",
+    "name_clean": "Rope"
+  },
+  {
+    "name": "Crystal",
+    "category": "Adventuring Gear",
+    "cost_raw": "10 gp",
+    "weight_raw": "1 lb.",
+    "source": "Wikidot/Adventuring-Gear",
+    "name_clean": "Crystal"
+  },
+  {
+    "name": "Orb",
+    "category": "Adventuring Gear",
+    "cost_raw": "20 gp",
+    "weight_raw": "3 lb.",
+    "source": "Wikidot/Adventuring-Gear",
+    "name_clean": "Orb"
+  },
+  {
+    "name": "Rod",
+    "category": "Adventuring Gear",
+    "cost_raw": "10 gp",
+    "weight_raw": "2 lb.",
+    "source": "Wikidot/Adventuring-Gear",
+    "name_clean": "Rod"
+  },
+  {
+    "name": "Staff",
+    "category": "Adventuring Gear",
+    "cost_raw": "5 gp",
+    "weight_raw": "4 lb.",
+    "source": "Wikidot/Adventuring-Gear",
+    "name_clean": "Staff"
+  },
+  {
+    "name": "Wand",
+    "category": "Adventuring Gear",
+    "cost_raw": "10 gp",
+    "weight_raw": "1 lb.",
+    "source": "Wikidot/Adventuring-Gear",
+    "name_clean": "Wand"
+  },
+  {
+    "name": "Wooden Staff",
+    "category": "Adventuring Gear",
+    "cost_raw": "5 gp",
+    "weight_raw": "4 lb.",
+    "source": "Wikidot/Adventuring-Gear",
+    "name_clean": "Wooden Staff"
+  },
+  {
+    "name": "Yew Wand",
+    "category": "Adventuring Gear",
+    "cost_raw": "10 gp",
+    "weight_raw": "1 lb.",
+    "source": "Wikidot/Adventuring-Gear",
+    "name_clean": "Yew Wand"
+  },
+  {
+    "name": "Amulet",
+    "category": "Adventuring Gear",
+    "cost_raw": "5 gp",
+    "weight_raw": "1 lb.",
+    "source": "Wikidot/Adventuring-Gear",
+    "name_clean": "Amulet"
+  },
+  {
+    "name": "Emblem",
+    "category": "Adventuring Gear",
+    "cost_raw": "5 gp",
+    "weight_raw": "-",
+    "source": "Wikidot/Adventuring-Gear",
+    "name_clean": "Emblem"
+  },
+  {
+    "name": "Reliquary",
+    "category": "Adventuring Gear",
+    "cost_raw": "5 gp",
+    "weight_raw": "2 lb.",
+    "source": "Wikidot/Adventuring-Gear",
+    "name_clean": "Reliquary"
+  },
+  {
+    "name": "Barrel",
+    "category": "Adventuring Gear",
+    "cost_raw": "2 gp",
+    "weight_raw": "40 gallons liquid, 4 cubic feet solid",
+    "source": "Wikidot/Adventuring-Gear",
+    "name_clean": "Barrel"
+  },
+  {
+    "name": "Basket",
+    "category": "Adventuring Gear",
+    "cost_raw": "4 sp",
+    "weight_raw": "2 cubic feet/40 pounds of gear",
+    "source": "Wikidot/Adventuring-Gear",
+    "name_clean": "Basket"
+  },
+  {
+    "name": "Bucket",
+    "category": "Adventuring Gear",
+    "cost_raw": "5 cp",
+    "weight_raw": "3 gallons liquid, 1/2 cubic foot solid",
+    "source": "Wikidot/Adventuring-Gear",
+    "name_clean": "Bucket"
+  },
+  {
+    "name": "Case, Crossbow Bolt",
+    "category": "Adventuring Gear",
+    "cost_raw": "1 gp",
+    "weight_raw": "20 crossbow bolts",
+    "source": "Wikidot/Adventuring-Gear",
+    "name_clean": "Case, Crossbow Bolt"
+  },
+  {
+    "name": "Case, Map/Scroll",
+    "category": "Adventuring Gear",
+    "cost_raw": "1 gp",
+    "weight_raw": "ten rolled-up sheets of paper or five rolled-up sheets of parchment",
+    "source": "Wikidot/Adventuring-Gear",
+    "name_clean": "Case, Map/Scroll"
+  },
+  {
+    "name": "Chest",
+    "category": "Adventuring Gear",
+    "cost_raw": "5 gp",
+    "weight_raw": "12 cubic feet/300 pounds of gear",
+    "source": "Wikidot/Adventuring-Gear",
+    "name_clean": "Chest"
+  },
+  {
+    "name": "Flask or Tankard",
+    "category": "Adventuring Gear",
+    "cost_raw": "2 cp",
+    "weight_raw": "1 pint liquid",
+    "source": "Wikidot/Adventuring-Gear",
+    "name_clean": "Flask or Tankard"
+  },
+  {
+    "name": "Glass Bottle",
+    "category": "Adventuring Gear",
+    "cost_raw": "2 gp",
+    "weight_raw": "1.5 pints liquid",
+    "source": "Wikidot/Adventuring-Gear",
+    "name_clean": "Glass Bottle"
+  },
+  {
+    "name": "Jug or Pitcher",
+    "category": "Adventuring Gear",
+    "cost_raw": "2 cp",
+    "weight_raw": "1 gallon liquid",
+    "source": "Wikidot/Adventuring-Gear",
+    "name_clean": "Jug or Pitcher"
+  },
+  {
+    "name": "Pot, iron",
+    "category": "Adventuring Gear",
+    "cost_raw": "2 gp",
+    "weight_raw": "1 gallon liquid",
+    "source": "Wikidot/Adventuring-Gear",
+    "name_clean": "Pot, iron"
+  },
+  {
+    "name": "Pouch\n* A cloth or leather pouch can hold up to 20 sling bullets or 50 blowgun needles, among other things. A compartmentalized pouch for holding spell components is called a component pouch.",
+    "category": "Adventuring Gear",
+    "cost_raw": "5 sp",
+    "weight_raw": "1/5 cubic foot/6 pounds of gear",
+    "source": "Wikidot/Adventuring-Gear",
+    "name_clean": "Pouch"
+  },
+  {
+    "name": "Quiver",
+    "category": "Adventuring Gear",
+    "cost_raw": "1 gp",
+    "weight_raw": "20 arrows",
+    "source": "Wikidot/Adventuring-Gear",
+    "name_clean": "Quiver"
+  },
+  {
+    "name": "Sack",
+    "category": "Adventuring Gear",
+    "cost_raw": "1 cp",
+    "weight_raw": "1 cubic foot/30 pounds of gear",
+    "source": "Wikidot/Adventuring-Gear",
+    "name_clean": "Sack"
+  },
+  {
+    "name": "Vial",
+    "category": "Adventuring Gear",
+    "cost_raw": "1 gp",
+    "weight_raw": "4 ounces liquid",
+    "source": "Wikidot/Adventuring-Gear",
+    "name_clean": "Vial"
+  },
+  {
+    "name": "Waterskin",
+    "category": "Adventuring Gear",
+    "cost_raw": "2 sp",
+    "weight_raw": "4 pints liquid",
+    "source": "Wikidot/Adventuring-Gear",
+    "name_clean": "Waterskin"
+  },
+  {
+    "name": "Fargab\n* These backpack-sized devices are created in pairs, with matching numbers engraved on them, and allow communication over a long distance using radio frequencies. While wearing a fargab, you can use an action to speak into the device's mouthpiece and send a short message of twenty-five words or less to another creature wearing the matched fargab while it is within 18 miles of you. The message emits from the speakers of the device and can be heard up to 10 feet awayfrom the device. If no creature is wearing the fargab, the speakers make static noises instead.",
+    "category": "Adventuring Gear",
+    "cost_raw": "-",
+    "weight_raw": "-",
+    "source": "Wikidot/Adventuring-Gear",
+    "name_clean": "Fargab"
+  },
+  {
+    "name": "Narycrash\n* This backpack-sized device holds a balloon-based parachute. If you fall while wearing this device, you can use your reaction to deploy the parachute. Once deployed, the parachute rapidly inflates, and you descend 60 feet per round and take no damage from falling. When you are 10 feet away from the ground, roll a d20. If you roll a 5 or less, the parachute gives out, and you begin to fall normally.",
+    "category": "Adventuring Gear",
+    "cost_raw": "-",
+    "weight_raw": "-",
+    "source": "Wikidot/Adventuring-Gear",
+    "name_clean": "Narycrash"
+  }
+]

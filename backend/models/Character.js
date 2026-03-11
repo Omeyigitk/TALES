@@ -45,6 +45,13 @@ const characterSchema = new mongoose.Schema({
         ac: Number,
         type: String,
         note: String
+    }],
+    customResources: [{
+        id: String,
+        name: String,
+        max: Number,
+        recharge: { type: String, enum: ['short', 'long'], default: 'long' },
+        desc: String
     }]
 }, { strict: false });
 

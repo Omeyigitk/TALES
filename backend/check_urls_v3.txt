@@ -1,0 +1,8 @@
+404: https://dnd5e.wikidot.com/magic-items:armor
+404: https://dnd5e.wikidot.com/magic-items:weapon
+404: https://dnd5e.wikidot.com/magic-items:staff
+404: https://dnd5e.wikidot.com/magic-items:wand
+404: https://dnd5e.wikidot.com/magic-items:ring
+404: https://dnd5e.wikidot.com/magic-items:potion
+404: https://dnd5e.wikidot.com/magic-items:rod
+404: https://dnd5e.wikidot.com/magic-items:scroll

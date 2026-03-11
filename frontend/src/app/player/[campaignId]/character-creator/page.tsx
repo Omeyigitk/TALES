@@ -108,6 +108,10 @@ const getSpellTags = (spell: any) => {
 };
 
 
+const SCHOOLS = ["all", "abjuration", "conjuration", "divination", "enchantment", "evocation", "illusion", "necromancy", "transmutation"];
+const SPELL_TYPES = ["all", "Damage", "Control", "Support", "Utility", "Defense"];
+const SPELLCASTING_CLASSES = ["Bard", "Cleric", "Druid", "Paladin", "Ranger", "Sorcerer", "Warlock", "Wizard", "Artificer"];
+
 export default function CharacterCreator() {
     const { campaignId } = useParams();
     const router = useRouter();
@@ -151,9 +155,6 @@ export default function CharacterCreator() {
     const [spellSchoolFilter, setSpellSchoolFilter] = useState("all");
     const [spellTypeFilter, setSpellTypeFilter] = useState("all");
     const [loadingSpells, setLoadingSpells] = useState(false);
-    const SCHOOLS = ["all", "abjuration", "conjuration", "divination", "enchantment", "evocation", "illusion", "necromancy", "transmutation"];
-    const SPELL_TYPES = ["all", "Damage", "Control", "Support", "Utility", "Defense"];
-    const SPELLCASTING_CLASSES = ["Bard", "Cleric", "Druid", "Paladin", "Ranger", "Sorcerer", "Warlock", "Wizard", "Artificer"];
     // Martial secimler
     const [selectedFightingStyle, setSelectedFightingStyle] = useState("");
     const [selectedExpertise, setSelectedExpertise] = useState<string[]>([]);
@@ -172,6 +173,7 @@ export default function CharacterCreator() {
     const [featSpellSelections, setFeatSpellSelections] = useState<Record<string, string[]>>({}); // Spells selected via feats: { 'Fey Touched': ['Hex'], 'Magic Initiate': ['Light', 'Mage Hand', 'Shield'] }
     const [featStatSelections, setFeatStatSelections] = useState<Record<string, string>>({}); // Stat picks from feats: { 'Fey Touched': 'INT' }
     const [featChoiceSelections, setFeatChoiceSelections] = useState<Record<string, Record<string, string[]>>>({}); // Generic choices: { 'Metamagic Adept': { 'Metamagic': ['Twinned', 'Subtle'] } }
+    const [sorcererMetamagics, setSorcererMetamagics] = useState<string[]>([]); // Sorcerer class metamagics
     const getRaceFeatCount = (race: any) => {
         if (!race) return 0;
         if (race.name?.includes('Variant Human') || race.name?.includes('Custom Lineage')) return 1;
@@ -376,6 +378,14 @@ export default function CharacterCreator() {
             const uniqueSpells = Array.from(new Map(allSpells.map(s => [s.name, s])).values());
 
             setAvailableSpells(uniqueSpells);
+
+            // Set initial tab to Cantrips (0) or level 1 spells
+            if (uniqueSpells.some(s => s.level_int === 0)) {
+                setActiveSpellTab(0);
+            } else if (uniqueSpells.length > 0) {
+                const lowest = Math.min(...uniqueSpells.map(s => s.level_int));
+                setActiveSpellTab(lowest);
+            }
         } catch (err) {
             console.error("Speller yuklenemedi:", err);
         } finally {
@@ -622,7 +632,10 @@ export default function CharacterCreator() {
                 isNpc: isNpc,
                 alignment: npcAlignment,
                 relationship: npcRelationship,
-                metamagicSelections: featChoiceSelections['Metamagic Adept']?.['Metamagic'] || [],
+                metamagicSelections: [
+                    ...(featChoiceSelections['Metamagic Adept']?.['Metamagic'] || []),
+                    ...sorcererMetamagics
+                ],
             };
 
             const res = await axios.post(`${API_URL}/api/characters`, payload, { headers: { 'Authorization': `Bearer ${token}` } });

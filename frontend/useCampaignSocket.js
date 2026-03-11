@@ -67,7 +67,13 @@ export function useCampaignSocket(campaignId, role, userId, token) {
 
         s.on("dice_rolled", (data) => {
             if (!data) return;
-            setDiceLogs(prev => [data, ...(Array.isArray(prev) ? prev : [])].slice(0, 15));
+            setDiceLogs(prev => [data, ...(Array.isArray(prev) ? prev : [])].slice(0, 30));
+        });
+
+        s.on("dice_history", (history) => {
+            if (Array.isArray(history)) {
+                setDiceLogs(history.reverse()); // Backend sends ascending, we want descending
+            }
         });
 
         s.on("dice_revealed", (payload) => {
@@ -114,9 +120,12 @@ export function useCampaignSocket(campaignId, role, userId, token) {
             s.off("dice_rolled");
             s.off("dice_revealed");
             s.off("whisper_received");
+            s.off("whisper_history");
             s.off("level_permission_updated");
             s.off("map_updated");
             s.off("token_moved");
+            s.off("party_sync");
+            s.off("dice_history");
             s.disconnect();
             _socket = null; // sonraki mount için sıfırla
         };

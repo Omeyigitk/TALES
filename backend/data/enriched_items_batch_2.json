@@ -1,0 +1,1478 @@
+[
+    {
+        "name": "Armor, +1, +2, or +3",
+        "name_tr": "Armor, +1, +2, or +3",
+        "rarity": "Very Rare",
+        "type": "Armor",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Bu büyülü zırhı giyerken Zırh Sınıfınıza (AC) nadirliğine göre bir bonus kazanırsınız (+1, +2 veya +3).\n\n**[Atmosfer]** Kusursuz işçilikle dövülmüş, üzerinde hafif koruyucu rünler barındıran bu zırh, sıradan örneklerinden çok daha dayanıklı ve hafiftir.",
+        "effects": [
+            {
+                "type": "ac_bonus",
+                "value": 1,
+                "note": "Zırhın nadirliğine göre bonus değişir (+1, +2 veya +3)"
+            }
+        ]
+    },
+    {
+        "name": "Armor of Invulnerability",
+        "name_tr": "Armor of Invulnerability",
+        "rarity": "Legendary",
+        "type": "Armor",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Bu zırhı giyerken büyülü olmayan saldırılardan gelen hasarlara karşı direnciniz (resistance) vardır. Ayrıca, bir eylem (action) kullanarak 10 dakika boyunca büyülü olmayan hasarlara karşı tamamen bağışıklık (immunity) kazanabilirsiniz. Bu özel eylem şafak vaktine kadar tekrar kullanılamaz.\n\n**[Atmosfer]** Efsanevi bir metalden dövülmüş olan bu zırh, sanki gelen darbeleri gerçeklikten siliyor gibi görünür. Üzerindeki yüzey o kadar pürüzsüzdür ki ışığı bile içine çeker.",
+        "effects": [
+            {
+                "type": "resistance",
+                "value": "nonmagical_bludgeoning_piercing_slashing"
+            }
+        ]
+    },
+    {
+        "name": "Azuredge",
+        "name_tr": "Azuredge",
+        "rarity": "Legendary",
+        "type": "Weapon",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Bu büyülü savaş baltasıyla yapılan saldırı ve hasar zarlarında +3 bonus kazanırsınız. Baltanın saldırılarına karşı 'Shield' büyüsü koruma sağlamaz. İblislere (fiends) veya hortlaklara (undead) vurduğunuzda fazladan 2d6 ışık (radiant) hasarı verir.\n\nFırlatma: Baltanın 3 şarjı vardır. Bir şarj harcayarak baltayı fırlatabilirsiniz (60/180 ft). Vursa da ıskalasa da baltanın sırasının sonunda elinize geri döner.\n\nIşık: Balta 30 fit yarıçapında parlak mavi ışık saçabilir.\n\n**[Atmosfer]** Waterdeep'i savunmak için dövülmüş olan Azuredge, mavi ejderha derisiyle kaplı sapı ve parıldayan gümüş başıyla adalet saçan, duyarlı (sentient) bir silahtır.",
+        "effects": [
+            {
+                "type": "attack_bonus",
+                "value": 3
+            },
+            {
+                "type": "damage_bonus",
+                "value": 3
+            },
+            {
+                "type": "extra_damage",
+                "value": "2d6",
+                "damage_type": "radiant",
+                "condition": "Fiends or Undead"
+            }
+        ]
+    },
+    {
+        "name": "Belashyrra's Beholder Crown",
+        "name_tr": "Belashyrra's Beholder Crown",
+        "rarity": "Legendary",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Bu tacı takarken 120 fit mesafeye kadar hem büyülü hem de büyülü olmayan karanlıkta normal şekilde görebilirsiniz. Taca uyum sağladığınızda kafatasınıza gömülür ve lanet kaldırma büyüsü (remove curse) dışında çıkarılamaz.\n\nBüyüler: Tacın 10 şarjı vardır ve şafakta 1d6+3 şarj kazanır. Bir eylem kullanarak şu büyüleri yapabilirsiniz (Save DC 16): Charm Person (1), Disintegrate (6), Fear (3), Finger of Death (7), Flesh to Stone (6), Hold Person (2), Ray of Enfeeblement (2), Sleep (1), Slow (3), Telekinesis (5).\n\n**[Atmosfer]** Koyu mor taştan oyulmuş, bir beholderın göz saplarını andıran on adet mücevherle süslenmiş uğursuz bir taçtır.",
+        "effects": [
+            {
+                "type": "spell_auto",
+                "value": "Charm Person",
+                "dc": 16
+            },
+            {
+                "type": "spell_auto",
+                "value": "Disintegrate",
+                "dc": 16
+            }
+        ]
+    },
+    {
+        "name": "Belt of Giant Strength",
+        "name_tr": "Belt of Giant Strength",
+        "rarity": "Legendary",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Bu kemeri taktığınızda Güç (Strength) skorunuz kemerin türüne göre sabit bir değere çıkar (Örn: Hill Giant için 21, Storm Giant için 29). Eğer mevcut Güç skorunuz zaten kemerin sağladığı değerden yüksekse kemerin bir etkisi olmaz.\n\n**[Atmosfer]** Devasa tokaları ve kaba derisiyle bu kemer, takan kişiye doğrudan bir devin ham kuvvetini aşılar.",
+        "effects": [
+            {
+                "type": "stat_set",
+                "stat": "strength",
+                "value": 21,
+                "note": "Kemerin türüne göre (Hill, Stone, Frost, Fire, Cloud, Storm) 21 ile 29 arası değişir"
+            }
+        ]
+    },
+    {
+        "name": "Black Crystal Tablet",
+        "name_tr": "Black Crystal Tablet",
+        "rarity": "Legendary",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Bu tablete uyum sağlayan her yaratık, bir sonraki uzun dinlenme (long rest) sonunda DC 20 Wisdom kurtarma zarı atmalıdır. Başarısız olursa rastgele bir uzun süreli delilik (long-term madness) kazanır.\n\nBir eylem olarak tableti kullanarak Eyebite veya Gate büyülerini yapabilirsiniz. Tableti bir kez kullandıktan sonra şafak vaktine kadar tekrar kullanamazsınız.\n\n**[Atmosfer]** Far Realm'den gelen kozmik dehşeti yansıtan, parıldayan simsiyah bir kristal plakadır.",
+        "effects": [
+            {
+                "type": "spell_auto",
+                "value": "Eyebite",
+                "dc": 20
+            },
+            {
+                "type": "spell_auto",
+                "value": "Gate"
+            }
+        ]
+    },
+    {
+        "name": "Blackrazor",
+        "name_tr": "Blackrazor",
+        "rarity": "Legendary",
+        "type": "Weapon",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Saldırı ve hasar zarlarında +3 bonus kazanırsınız. \n\nRuh Emme: Bu silahla bir yaratığın canını 0'a indirdiğinizde ruhunu emer (construct ve undead hariç). Ruh emildiğinde, yaratığın maksimum can puanı kadar geçici can (temporary HP) kazanırsınız. Bu canlar varken saldırı, kurtarma ve yetenek zarlarında avantajlı olursunuz.\n\nHortlak Karşıtı: Bir hortlağa vurduğunuzda siz 1d10 nekrotik hasar alırsınız, hedef ise 1d10 can yeniler.\n\n**[Atmosfer]** Gece gökyüzü gibi parlayan, obsidyen detaylı siyah kınına sahip, ruhsuz kalmış bir evrenin açlığını taşıyan efsanevi siyah kılıçtır.",
+        "effects": [
+            {
+                "type": "attack_bonus",
+                "value": 3
+            },
+            {
+                "type": "damage_bonus",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "name": "Blackstaff",
+        "name_tr": "Blackstaff",
+        "rarity": "Legendary",
+        "type": "Staff",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Staff of Power'ın tüm özelliklerine sahiptir. \n\nYürüyen Heykelleri Canlandır: Waterdeep şehrindeyken heykel canlandırmak için harcanan her şarj bir heykeli kontrol etmeyi sağlar.\n\nBüyü Çöz (Dispel Magic): Bir şarj harcayarak temas ettiğiniz hedefe Dispel Magic yapabilirsiniz.\n\nBüyü Emme: Bir büyücüye vurduğunuzda şarj harcayarak onun en yüksek seviye büyü slotunu harcatabilirsiniz.\n\n**[Atmosfer]** Waterdeep'in baş büyücüsünün güç sembolü olan bu asanın içinde eski Blackstaff sahiplerinin ruhları hapsolmuştur.",
+        "effects": [
+            {
+                "type": "attack_bonus",
+                "value": 2
+            },
+            {
+                "type": "damage_bonus",
+                "value": 2
+            },
+            {
+                "type": "ac_bonus",
+                "value": 2
+            }
+        ]
+    },
+    {
+        "name": "Blood Fury Tattoo",
+        "name_tr": "Blood Fury Tattoo",
+        "rarity": "Legendary",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Dövmenin 10 şarjı vardır ve şafakta yenilenir. \n\nKanlı Darbeler: Bir saldırıda isabet ettirdiğinizde bir şarj harcayarak fazladan 4d6 nekrotik hasar verebilirsiniz ve verdiğiniz nekrotik hasar kadar can yenilersiniz.\n\nÖfke Karşılığı: Size hasar veren bir yaratığa karşı reaksiyonunuzu ve bir şarjı harcayarak avantajlı bir yakın dövüş saldırısı yapabilirsiniz.\n\n**[Atmosfer]** Deriye işlendiğinde parlayan kan kırmızısı çizgilerle vahşi bir öfkeyi temsil eden büyülü bir dövmedir.",
+        "effects": [
+            {
+                "type": "extra_damage",
+                "value": "4d6",
+                "damage_type": "necrotic",
+                "note": "Harcandığında can yeniler"
+            }
+        ]
+    },
+    {
+        "name": "Bookmark",
+        "name_tr": "Bookmark",
+        "rarity": "Legendary",
+        "type": "Weapon",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Bu +3 hançerle saldırı ve hasar zarlarında +3 bonus kazanırsınız. \n\nBonus eylem olarak şu özelliklerden birini aktif edebilirsiniz: pusula olarak kullanmak, 15 fit ışık yaymak veya günde bir kez Dimension Door büyüsü yapmak.\n\n**[Atmosfer]** Artus Cimber'e ait olan bu kadim hançer, buz kadar soğuk ama güneş kadar parlaktır.",
+        "effects": [
+            {
+                "type": "attack_bonus",
+                "value": 3
+            },
+            {
+                "type": "damage_bonus",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "name": "Cloak of Invisibility",
+        "name_tr": "Cloak of Invisibility",
+        "rarity": "Legendary",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Bu pelerini giyerken başlığınızı eylem (action) olarak kapatarak görünmez (invisible) olabilirsiniz. Toplamda 2 saat boyunca görünmezlik sağlar. Harcanan süre 1 dakikalık dilimler halinde düşülür. Kullanılmadığı her 12 saatlik süre için 1 saatlik usage hakkı geri kazanılır.\n\n**[Atmosfer]** Işığı sanki etrafından akıtıyormuş gibi görünen, dokunulduğunda neredeyse yokmuş hissi veren efsanevi bir pelerindir.",
+        "effects": []
+    },
+    {
+        "name": "Crystal Ball",
+        "name_tr": "Crystal Ball",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Küreye dokunurken Scrying büyüsünü (Save DC 17) yapabilirsiniz. \n\nEfsanevi versiyonları (Mind Reading, Telepathy, True Seeing) ek özelliklere sahiptir: \n- Mind Reading: Scrying yaparken Detect Thoughts yapabilir.\n- Telepathy: 30 fit içindeki hedeflerle telepatik iletişim kurabilir ve Suggestion yapabilir.\n- True Seeing: Küre üzerinden 120 fit gerçek görüş (truesight) sağlar.\n\n**[Atmosfer]** İçinde dumanlı bulutların dans ettiği, uzak diyarları ve gizli sırları görebilen kristal bir küredir.",
+        "effects": [
+            {
+                "type": "spell_auto",
+                "value": "Scrying",
+                "dc": 17
+            }
+        ]
+    },
+    {
+        "name": "Cubic Gate",
+        "name_tr": "Cubic Gate",
+        "rarity": "Legendary",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Küpün altı yüzü de farklı bir varoluş düzlemine (plane of existence) bağlıdır. Bir eylem kullanarak Gate büyüsünü yapabilir veya iki kez basarak Plane Shift büyülerini yapabilirsiniz. Küpün 3 şarjı vardır ve şafakta 1d3 şarj yenilenir.\n\n**[Atmosfer]** Avuç içine sığan, her yüzünde farklı bir kozmik enerjinin rünleri bulunan gizemli bir küptür.",
+        "effects": [
+            {
+                "type": "spell_auto",
+                "value": "Gate"
+            },
+            {
+                "type": "spell_auto",
+                "value": "Plane Shift",
+                "dc": 17
+            }
+        ]
+    },
+    {
+        "name": "Danoth's Visor",
+        "name_tr": "Danoth's Visor",
+        "rarity": "Legendary",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Gözlükleri takarken 60 fit karanlık görüşü kazanırsınız. Intelligence (Investigation) ve Wisdom (Perception) zarlarında avantajınız olur.\n\nUyanmış (Awakened) ve Yücelmiş (Exalted) hallerinde görünmezliği görme, Truesight ve düşmanların zayıf noktalarını tespit etme gibi çok daha güçlü özellikler kazanır.\n\n**[Atmosfer]** Mithral çerçeveli, elmas lenslere sahip olan bu vizör, evoker Danoth Oro tarafından en sinsi düşmanları bile fark etmek için tasarlanmıştır.",
+        "effects": [
+            {
+                "type": "stat_bonus",
+                "stat": "perception",
+                "value": "advantage"
+            },
+            {
+                "type": "stat_bonus",
+                "stat": "investigation",
+                "value": "advantage"
+            }
+        ]
+    },
+    {
+        "name": "Dawnbringer",
+        "name_tr": "Dawnbringer",
+        "rarity": "Legendary",
+        "type": "Weapon",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Bir Sun Blade'in tüm özelliklerine sahiptir (+2 saldırı/hasar bonusu, 1d8 ışık hasarı). \n\nEk olarak: Bir eylemle Lesser Restoration büyüsünü yapabilir. Bu özellik şafakta yenilenir. Duyarlı bir silahtır (Sentient) ve kendi bilinci, korkuları vardır.\n\n**[Atmosfer]** Saf ışık saçan, karanlıktan korkan ve sahibini her daim korumaya çalışan, altın kabzalı efsanevi bir kılıçtır.",
+        "effects": [
+            {
+                "type": "attack_bonus",
+                "value": 2
+            },
+            {
+                "type": "damage_bonus",
+                "value": 2
+            },
+            {
+                "type": "extra_damage",
+                "value": "1d8",
+                "damage_type": "radiant"
+            }
+        ]
+    },
+    {
+        "name": "Deck Of Many More Things",
+        "name_tr": "Deck Of Many More Things",
+        "rarity": "Legendary",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Kart çekmeden önce kaç kart çekeceğinizi beyan etmelisiniz. Kartlar çekildikten sonra etkileri anında gerçekleşir. 44 adet ek kart içerir. Kökeni Deck of Many Things'e dayanır ancak daha geniş bir etki yelpazesine sahiptir. Kart çekmek karakterin kaderini kalıcı olarak değiştirebilir (stat artışı, hapsedilme, zenginlik, hatta ölüm).\n\n**[Atmosfer]** Her biri kaderin farklı bir ipliğini temsil eden, fildişi veya parşömen üzerine işlenmiş mistik kartlar galerisidir.",
+        "effects": []
+    },
+    {
+        "name": "Deck of Many Things",
+        "name_tr": "Deck of Many Things",
+        "rarity": "Legendary",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Kaç kart çekeceğinizi (genellikle 13 veya 22 kartlık bir destesidir) önceden söylemelisiniz. \n- Sun: 50.000 XP ve büyülü bir eşya kazandırır.\n- Moon: 1d3 kez Wish büyüsü yapma hakkı verir.\n- Void: Ruhunuzu bedeninizden ayırıp hapseder.\n- Skull: Bir Ölüm Avatarı ile dövüşmeye zorlar.\n\n**[Atmosfer]** D&D dünyasının en kaotik ve tehlikeli eşyalarından biri. Bir anlık cesaret sizi tanrısallaştırabilir veya sonsuza dek yok edebilir.",
+        "effects": []
+    },
+    {
+        "name": "Deck of Several Things",
+        "name_tr": "Deck of Several Things",
+        "rarity": "Legendary",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Deck of Many Things'in daha az tehlikeli ve belirli bir maceraya (Lost Laboratory of Kwalish) özgü versiyonudur. 22 karttan oluşur. Etkiler genellikle macera süresince kalıcıdır ancak kampanya geneline yayılmayabilir.\n\n**[Atmosfer]** Metalik kartlardan oluşan, Kwalish'in deneylerinin bir parçası olan teknomistik bir destedir.",
+        "effects": []
+    },
+    {
+        "name": "Defender",
+        "name_tr": "Defender",
+        "rarity": "Legendary",
+        "type": "Weapon",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Saldırı ve hasar zarlarında +3 bonus kazanırsınız. \n\nSavunma Transferi: Her tur yaptığınız ilk saldırıda, kılıcın +3 bonusunun bir kısmını veya tamamını Zırh Sınıfınıza (AC) aktarabilirsiniz. Örneğin; saldırı bonusunu +1'e düşürüp AC'nize +2 ekleyebilirsiniz. Bu bonus bir sonraki turunuzun başına kadar sürer.\n\n**[Atmosfer]** Sahibini korumak için tasarlanmış, gelen darbeleri ustalıkla savuşturan efsanevi bir kılıçtır.",
+        "effects": [
+            {
+                "type": "attack_bonus",
+                "value": 3
+            },
+            {
+                "type": "damage_bonus",
+                "value": 3
+            },
+            {
+                "type": "ac_bonus",
+                "value": 0,
+                "note": "Kullanıcı her tur saldırı bonusundan buraya aktarabilir"
+            }
+        ]
+    },
+    {
+        "name": "Dragon Mask",
+        "name_tr": "Dragon Mask",
+        "rarity": "Legendary",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Zırh giymiyorken AC'nize Charisma bonusunuzu ekleyebilirsiniz. Maskenin rengine uygun hasar tipine karşı direnç (veya zaten direnciz varsa bağışıklık) kazandırır. \n\nEk özellikler: Su altında nefes alma, 60 fit karanlık görüşü, maske rengine göre özel saldırı veya savunma yetenekleri.\n\n**[Atmosfer]** Bir ejderhanın yüzünü andıran, takan kişiye o ejderha türünün kadim gücünü bahşeden heybetli bir maskedir.",
+        "effects": [
+            {
+                "type": "ac_bonus",
+                "value": 0,
+                "note": "Zırhsızken Charisma bonusu eklenir"
+            }
+        ]
+    },
+    {
+        "name": "Dragon Vessel",
+        "name_tr": "Dragon Vessel",
+        "rarity": "Legendary",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Bu kap bir iksir şişesi veya boynuz olabilir. Bir bonus eylem olarak şişeyi şu sıvılardan biriyle doldurabilirsiniz: Potion of Healing, Potion of Fire Breath veya Mead. Oluşturulan iksir 24 saat içinde kullanılmalıdır. Bu özellik şafakta yenilenir.\n\n**[Atmosfer]** Ejderha pullarıyla bezenmiş, içindeki sıvıyı ejderha nefesiyle kutsayan kadim bir kaptır.",
+        "effects": []
+    },
+    {
+        "name": "Dragonlance",
+        "name_tr": "Dragonlance",
+        "rarity": "Legendary",
+        "type": "Weapon",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Saldırı ve hasar zarlarında +3 bonus kazanırsınız. Bir ejderhaya vurduğunuzda fazladan 3d6 kuvvet (force) hasarı verir. Ayrıca 30 fit yakındaki bir ejderha (binek gibi) reaksiyonunu kullanarak saldırı yapabilir.\n\n**[Atmosfer]** Krynn dünyasında Tanrı Paladine tarafından kutsanmış, ejderhalara karşı savaşmak için dövülmüş efsanevi bir mızraktır.",
+        "effects": [
+            {
+                "type": "attack_bonus",
+                "value": 3
+            },
+            {
+                "type": "damage_bonus",
+                "value": 3
+            },
+            {
+                "type": "extra_damage",
+                "value": "3d6",
+                "damage_type": "force",
+                "condition": "Dragon"
+            }
+        ]
+    },
+    {
+        "name": "Dragon's Wrath Weapon",
+        "name_tr": "Dragon's Wrath Weapon",
+        "rarity": "Legendary",
+        "type": "Weapon",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Bir ejderha hazinesinde bekleyerek o ejderhanın nefes enerjisini emmiş bir silahtır. \n- Ascendant (Legendary): Saldırı/hasar zarlarında +3 bonus, fazladan 3d6 hasar (nefes tipi). \n- Özel eylem: 60 fitlik bir konide 12d6 hasar veren nefes saldırısı (save DC 18).\n\n**[Atmosfer]** Üzerinde ejderha rünleri kazınmış, vurduğunda elementel bir öfke saçan yıkıcı bir silahtır.",
+        "effects": [
+            {
+                "type": "attack_bonus",
+                "value": 3
+            },
+            {
+                "type": "damage_bonus",
+                "value": 3
+            },
+            {
+                "type": "extra_damage",
+                "value": "3d6",
+                "damage_type": "elemental_based_on_dragon"
+            }
+        ]
+    },
+    {
+        "name": "Dragonstaff of Ahghairon",
+        "name_tr": "Dragonstaff of Ahghairon",
+        "rarity": "Legendary",
+        "type": "Staff",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Ejderhaların nefes ve büyülerine karşı avantajlı kurtarma zarı kazandırır. Dokunduğunuz bir ejderhanın Waterdeep'in ejderha kalkanından etkilenmemesini sağlar. 10 şarjı vardır ve Command büyüsü (Save DC 16) yapmak için harcanabilir.\n\n**[Atmosfer]** Waterdeep'i ejderhalardan koruyan kadim büyücü Ahghairon'un bizzat kullandığı, fildişinden oyulmuş efsanevi asadır.",
+        "effects": [
+            {
+                "type": "stat_bonus",
+                "stat": "saves",
+                "value": "advantage",
+                "condition": "against Dragon Breath/Spells"
+            }
+        ]
+    },
+    {
+        "name": "Dragon-Touched Focus",
+        "name_tr": "Dragon-Touched Focus",
+        "rarity": "Legendary",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** İnisiyatif (initiative) zarlarında avantaj sağlar. \n- Ascendant: 1. seviye veya daha yüksek bir büyü yaparken, o büyüyü 9. seviye slotuyla yapılmış gibi sayabilirsiniz (günde bir kez).\n- Ejderha türüne (Chromatic, Gem, Metallic) göre teleport, ek hasar veya avantaj gibi farklı özellikler kazanır.\n\n**[Atmosfer]** Ejderha pençesi veya kanadı şeklinde tasarlanmış, büyücünün gücünü ejderha ruhuyla birleştiren bir odaktır.",
+        "effects": [
+            {
+                "type": "initiative_bonus",
+                "value": "advantage"
+            }
+        ]
+    },
+    {
+        "name": "Drown",
+        "name_tr": "Drown",
+        "rarity": "Legendary",
+        "type": "Weapon",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Saldırı ve hasar zarlarında +1 bonus kazanırsınız. İsabet ettiğinde fazladan 1d8 soğuk (cold) hasarı verir. \n\nSu Uzmanlığı: Aquan dilini konuşabilir, soğuk hasarına direnç kazanırsınız ve bir su elementaline karşı Dominate Monster (Save DC 17) büyülerini yapabilirsiniz.\n\n**[Atmosfer]** Üzerinde bronz midyeler bulunan, tines'ın hemen altında deniz yeşili bir mücevher parıldayan bu üçlü mızrak, Kötü Suyun Prensesi Olhydra'nın kıvılcımını taşır.",
+        "effects": [
+            {
+                "type": "attack_bonus",
+                "value": 1
+            },
+            {
+                "type": "damage_bonus",
+                "value": 1
+            },
+            {
+                "type": "extra_damage",
+                "value": "1d8",
+                "damage_type": "cold"
+            },
+            {
+                "type": "resistance",
+                "value": "cold"
+            }
+        ]
+    },
+    {
+        "name": "Efreeti Chain",
+        "name_tr": "Efreeti Chain",
+        "rarity": "Legendary",
+        "type": "Armor",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Bu zırhı giyerken AC'nize +3 bonus kazanırsınız. Ateş hasarına karşı bağışıklık (immunity) kazandırır ve Primordial dilini anlamanızı sağlar. Ayrıca erimiş lavlar üzerinde sanki katı zemindeymiş gibi yürüyebilirsiniz.\n\n**[Atmosfer]** Altın ve pirinç detaylı, içinde sönmeyen bir kor taşıyan bu zincir zırh, Efreeti sultanlarının ihtişamını yansıtır.",
+        "effects": [
+            {
+                "type": "ac_bonus",
+                "value": 3
+            },
+            {
+                "type": "resistance",
+                "value": "fire_immunity"
+            }
+        ]
+    },
+    {
+        "name": "Euryale's Aegis",
+        "name_tr": "Euryale's Aegis",
+        "rarity": "Legendary",
+        "type": "Armor",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Bu kalkanı kullanırken zehir hasarına karşı direnç ve taşlaşma (petrified) durumuna karşı bağışıklık kazanırsınız. \n\nBonus eylem olarak kalkanın gözlerini parlatıp 30 fit içindeki bir hedefi taşlaştırabilirsiniz (DC 20 Constitution Save). Ayrıca Lesser Restoration, Locate Creature ve Transport Via Plants büyülerini cast edebilir.\n\n**[Atmosfer]** Üzerinde efsanevi medusa druid Euryale'nin kabartması bulunan parıldayan pirinç bir kalkandır.",
+        "effects": [
+            {
+                "type": "resistance",
+                "value": "poison"
+            },
+            {
+                "type": "resistance",
+                "value": "petrified_immunity"
+            }
+        ]
+    },
+    {
+        "name": "Fane-Eater",
+        "name_tr": "Fane-Eater",
+        "rarity": "Legendary",
+        "type": "Weapon",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Saldırı ve hasar zarlarında +3 bonus kazanırsınız. Bir saldırıda 20 (natural 20) attığınızda, hedef fazladan 2d8 nekrotik hasar alır ve siz verdiğiniz nekrotik hasar kadar can yenilersiniz.\n\n**[Atmosfer]** Arkhan the Cruel'a ait olan bu balta, düşmanlarının yaşam gücünü emerek kullanıcısını besleyen karanlık bir silahtır.",
+        "effects": [
+            {
+                "type": "attack_bonus",
+                "value": 3
+            },
+            {
+                "type": "damage_bonus",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "name": "Fate Dealer's Deck",
+        "name_tr": "Fate Dealer's Deck",
+        "rarity": "Legendary",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Bu desteyi büyü odağı (spellcasting focus) olarak kullanabilirsiniz; büyü saldırı zarlarına ve büyü savuşturma zorluk derecesine (DC) +3 bonus sağlar.\n\nBir eylem olarak bir kart çekip Hit Die (can zarı) harcayarak DC bonusunu ekleyebilir ve 30 fit içindeki bir hedefe o kadar ışık hasarı verebilir veya can yeniletebilirsiniz.\n\n**[Atmosfer]** Üzerinde düzlemlerin ve tanrıların kutsal sembolleri bulunan, sahibinin kaderine yön veren mistik bir destedir.",
+        "effects": [
+            {
+                "type": "spell_auto",
+                "value": "Spell Attack +3",
+                "dc": 3
+            }
+        ]
+    },
+    {
+        "name": "Figurine of Wondrous Power",
+        "name_tr": "Figurine of Wondrous Power",
+        "rarity": "Legendary",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Bu küçük heykelcikler, komut kelimesiyle gerçek bir yaratığa dönüşür. Her heykelciğin (Griffon, Mastiff, Nightmare, Gold Canary vb.) farklı bir kullanım süresi ve şarj yenilenme süresi vardır. Yaratık dostanedir ve komutlarınızı izler.\n\n**[Atmosfer]** Cebe sığacak kadar küçük olan bu mermer, obsidyen veya altın heykelcikler, içlerinde uyuyan kadim ruhları barındırır.",
+        "effects": []
+    },
+    {
+        "name": "Flail of Tiamat",
+        "name_tr": "Flail of Tiamat",
+        "rarity": "Legendary",
+        "type": "Weapon",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Saldırı ve hasar zarlarında +3 bonus kazanırsınız. İsabet ettiğinde hedef fazladan 5d4 elementel hasar (asit, soğuk, ateş, yıldırım veya zehir - siz seçersiniz) alır.\n\nGünde bir kez eylem kullanarak 90 fitlik bir konide 14d6 elementel hasar veren ejderha nefesi saldırısı yapabilirsiniz (Save DC 18).\n\n**[Atmosfer]** Tiamat'ın beş kafasını temsil eden beş parçalı bu gürz, kromatik ejderhaların birleşik gazabını taşır.",
+        "effects": [
+            {
+                "type": "attack_bonus",
+                "value": 3
+            },
+            {
+                "type": "damage_bonus",
+                "value": 3
+            },
+            {
+                "type": "extra_damage",
+                "value": "5d4",
+                "damage_type": "elemental_choice"
+            }
+        ]
+    },
+    {
+        "name": "Gloves of Soul Catching",
+        "name_tr": "Gloves of Soul Catching",
+        "rarity": "Legendary",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Bu eldivenleri takarken Constitution (Dayanıklılık) skorunuz 20 olur. \n\nSilahsız saldırı (unarmed strike) isabet ettirdiğinizde fazladan 2d10 kuvvet (force) hasarı verebilir ve bu kadar can yenileyebilirsiniz. Alternatif olarak can yenilemek yerine bir sonraki turunuzun sonuna kadar bir sonraki zarınızda avantaj kazanırsınız.\n\n**[Atmosfer]** Düşmanın yaşam enerjisini yakalayıp kullanıcısına aktaran, dokunulduğunda soğuk ve tekinsiz bir his veren eldivenlerdir.",
+        "effects": [
+            {
+                "type": "stat_set",
+                "stat": "constitution",
+                "value": 20
+            },
+            {
+                "type": "extra_damage",
+                "value": "2d10",
+                "damage_type": "force"
+            }
+        ]
+    },
+    {
+        "name": "Grimoire Infinitus",
+        "name_tr": "Grimoire Infinitus",
+        "rarity": "Legendary",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Bu büyü kitabı sonsuz sayfaya sahiptir. Kitabı büyü odağı olarak kullanırken hazırlayabileceğiniz büyü sayısı 1 artar. Kitap içinde Antimagic Field, Bigby's Hand, Foresight gibi onlarca güçlü büyü kayıtlıdır.\n\nUyanmış ve Yücelmiş formlarında büyü DC'sini artırma ve büyü slotu harcamadan büyü yapma gibi özellikler kazanır.\n\n**[Atmosfer]** Arcanum Çağı'ndan kalma, gümüş kaplı ve yaldızlı sayfalara sahip, içinde sınırsız bilgi barındıran efsanevi bir grimoiredır.",
+        "effects": []
+    },
+    {
+        "name": "Gurt's Greataxe",
+        "name_tr": "Gurt's Greataxe",
+        "rarity": "Legendary",
+        "type": "Weapon",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Saldırı ve hasar zarlarında +1 bonus kazanırsınız. Devler için tasarlandığı için 325 pound ağırlığındadır. 3d12 kesme (slashing) hasarı vurur; hedef insansı (human) ise fazladan 2d12 hasar verir. Günde bir kez cold hasarı veren Heat Metal (Save DC 13) yapabilir.\n\n**[Atmosfer]** Frost Giant lordu Gurt'a ait olan, dondurucu bir soğuk yayan ve devlere karşı kazanılan zaferin sembolü olan devasa bir baltadır.",
+        "effects": [
+            {
+                "type": "attack_bonus",
+                "value": 1
+            },
+            {
+                "type": "damage_bonus",
+                "value": 1
+            }
+        ]
+    },
+    {
+        "name": "Hammer of Thunderbolts",
+        "name_tr": "Hammer of Thunderbolts",
+        "rarity": "Legendary",
+        "type": "Weapon",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Saldırı ve hasar zarlarında +1 bonus kazanırsınız. Eğer bir Gauntlets of Ogre Power ve Belt of Giant Strength ile birlikte takılırsa: Güç (Strength) skorunuzu +4 artırır (max 30). Bir deve karşı 20 attığınızda dev DC 17 Con Save atamazsa anında ölür.\n\nFırlatılabilir ve vurduğunda 30 fit içindeki herkesi sağır edip sersemletebilir (Save DC 17).\n\n**[Atmosfer]** Gök gürültüsünün ham gücünü taşıyan, devleri dize getirmek için dövülmüş muazzam bir çekiçtir.",
+        "effects": [
+            {
+                "type": "attack_bonus",
+                "value": 1
+            },
+            {
+                "type": "damage_bonus",
+                "value": 1
+            },
+            {
+                "type": "stat_bonus",
+                "stat": "strength",
+                "value": 4
+            }
+        ]
+    },
+    {
+        "name": "Hammock of Worlds",
+        "name_tr": "Hammock of Worlds",
+        "rarity": "Legendary",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Sadece Green Doctors üyeleri tarafından kullanılabilir. Bir düz zemine serildiğinde Feywild veya Far Realm'e açılan iki yönlü bir portal oluşturur. Portal açıldıktan sonra 1d8 saat boyunca tekrar kullanılamaz.\n\n**[Atmosfer]** Ataguan desenleriyle işlenmiş, farklı dünyalara açılan mistik bir kapı görevi gören renkli bir hamaktır.",
+        "effects": []
+    },
+    {
+        "name": "Harp of Gilded Plenty",
+        "name_tr": "Harp of Gilded Plenty",
+        "rarity": "Legendary",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Karizma (Charisma) zarlarında 9 veya altı atarsanız 10 atmış sayılırsınız. 10 dakika çalarak Heroes' Feast büyüsünü yapabilir (1d10+10 günde bir). Ayrıca Calm Emotions büyüsünü günde 5 kez yapabilir (Save DC 19).\n\nKendi bilincine sahip (Sentient), kibirli ve dramatik bir müzik enstrümanıdır.\n\n**[Atmosfer]** Genç bir bulut devi kadını şeklinde oyulmuş, parıldayan altın bir liridir. Kendisiyle konuşabilir ve şarkı söyleyebilir.",
+        "effects": [
+            {
+                "type": "stat_bonus",
+                "stat": "charisma",
+                "value": "min_10"
+            }
+        ]
+    },
+    {
+        "name": "Hazirawn",
+        "name_tr": "Hazirawn",
+        "rarity": "Legendary",
+        "type": "Weapon",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Uyum sağlandığında saldırı ve hasar zarlarında +2 bonus, fazladan 2d6 nekrotik hasar verir. Nekrotik hasar alan hedefler 1 dakika boyunca can yenileyemez (Save DC 15 end). \n\nDetect Magic, Detect Evil and Good ve Detect Thoughts büyülerini (4 şarj) yapabilir. Duyarlı (Sentient) ve kötücül bir kılıçtır.\n\n**[Atmosfer]** Netherese kökenli karanlık bir kılıç olan Hazirawn, kullanıcısının kulaklarına yıkım ve ölüm fısıldayan uğursuz bir silahtır.",
+        "effects": [
+            {
+                "type": "attack_bonus",
+                "value": 2
+            },
+            {
+                "type": "damage_bonus",
+                "value": 2
+            },
+            {
+                "type": "extra_damage",
+                "value": "2d6",
+                "damage_type": "necrotic"
+            }
+        ]
+    },
+    {
+        "name": "Helm of Disjunction",
+        "name_tr": "Helm of Disjunction",
+        "rarity": "Legendary",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Bir eylem kullanarak 300 fit yarıçapında bir antimagic darbesi yayar. Etki alanındaki tüm iksir ve tomarlar yok olur, diğer büyülü eşyaların özellikleri 1 dakika boyunca bastırılır. Ayrıca devam eden tüm büyüler sona erer. 30 fit içindeki herkes Strength Save atamazsa yere düşer.\n\n**[Atmosfer]** Mordenkainen tarafından dövülmüş, büyü enerjisinin en saf halini bile parçalayabilen altın bir miğferdir.",
+        "effects": []
+    },
+    {
+        "name": "Helm of the Scavenger",
+        "name_tr": "Helm of the Scavenger",
+        "rarity": "Legendary",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Bir uzay gemisini (Spelljammer) kontrol etmek ve manevra yapmak için tasarlanmıştır. Uyum sağlayan kişi gemiyi zihniyle yönlendirir. Dezavantajı; uyumlu olduğunuz sürece kendi büyü slotlarınızı kullanamazsınız.\n\n**[Atmosfer]** Çarklar ve mistik rünlerle dolu süslü bir koltuktur, takımyıldızlar arasında seyahat etmeyi sağlayan bir teknoloji şaheseridir.",
+        "effects": []
+    },
+    {
+        "name": "Heretic",
+        "name_tr": "Heretic",
+        "rarity": "Legendary",
+        "type": "Weapon",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Saldırı ve hasar zarlarında +3 bonus kazanırsınız. \n\nİnanç Yıkımı: Bir şarj harcayarak hedefi sarmalayabilir (Paralyzed, Save DC 17 Con). Celestials bu zara dezavantajlı atar. \n\nFaith Hunter: Şarj harcayarak Detect Evil and Good, Fly veya True Seeing büyülerini yapabilir. Duyarlı (Sentient) ve tanrı tanımaz bir kılıçtır.\n\n**[Atmosfer]** İyi tanrıların hizmetkarlarını yok etmek için bir kült tarafından dövülmüş, kutsal olan her şeye tepeden bakan kibirli bir silahtır.",
+        "effects": [
+            {
+                "type": "attack_bonus",
+                "value": 3
+            },
+            {
+                "type": "damage_bonus",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "name": "Hide of the Feral Guardian",
+        "name_tr": "Hide of the Feral Guardian",
+        "rarity": "Legendary",
+        "type": "Armor",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Bu zırhı giyerken AC'nize +1 bonus kazanırsınız. Vahşi şekle (Wild Shape) girdiğinizde formunuzun AC'sine +1 ekler ve saldırılarına +1 bonus verir. \n\nUyanmış ve Yücelmiş hallerinde bu bonuslar +2 ve +3'e çıkar, ayrıca Guardian's Gaze gibi koruyucu yetenekler sağlar.\n\n**[Atmosfer]** Archdruidler için Melara tarafından kutsanmış, doğanın vahşi koruma gücünü taşıyan cilalı deri bir zırhtır.",
+        "effects": [
+            {
+                "type": "ac_bonus",
+                "value": 1
+            }
+        ]
+    },
+    {
+        "name": "Hither-Thither Staff",
+        "name_tr": "Hither-Thither Staff",
+        "rarity": "Legendary",
+        "type": "Staff",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Bu asanın 4 şarjı vardır. Bir şarj harcayarak 1500 fit mesafe içinde iki adet birbirine bağlı portal oluşturabilir. Portallardan geçen herhangi bir yaratık veya nesne anında diğer taraftan çıkar. Portallar 24 saat sürer.\n\n**[Atmosfer]** Başında parıldayan büyük bir mücevher bulunan, mekan ve zaman arasındaki sınırları büken efsanevi bir yürüyen bastondur.",
+        "effects": []
+    },
+    {
+        "name": "Holy Avenger",
+        "name_tr": "Holy Avenger",
+        "rarity": "Legendary",
+        "type": "Weapon",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Saldırı ve hasar zarlarında +3 bonus kazanırsınız. Bir iblis (fiend) veya hortlağa (undead) vurduğunuzda fazladan 2d10 ışık (radiant) hasarı verir.\n\nKutsal Aura: Kılıç çekiliyken 10 fit (17. seviye paladin için 30 fit) çevrenizde dostlarınıza büyü zarlarında avantaj sağlar.\n\n**[Atmosfer]** Paladinlerin en büyük arzusudur; kötülüğe karşı adaletin ve saflığın mutlak sembolü olan kutsal bir kılıçtır.",
+        "effects": [
+            {
+                "type": "attack_bonus",
+                "value": 3
+            },
+            {
+                "type": "damage_bonus",
+                "value": 3
+            },
+            {
+                "type": "extra_damage",
+                "value": "2d10",
+                "damage_type": "radiant",
+                "condition": "Fiends or Undead"
+            }
+        ]
+    },
+    {
+        "name": "Holy Symbol of Ravenkind",
+        "name_tr": "Holy Symbol of Ravenkind",
+        "rarity": "Legendary",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Vampirleri 1 dakika boyunca felç edebilir (Save DC 15). Turn Undead kullanırken hedeflere dezavantaj verir. Ayrıca 30 fit yarıçapında 10 dakika süren gerçek güneş ışığı yaratabilir.\n\n**[Atmosfer]** Barovia'nın vampirlerine karşı en güçlü silahtır; ortasında dev bir kristal bulunan güneş şeklinde platin bir muskadır.",
+        "effects": []
+    },
+    {
+        "name": "Horn of Beckoning Death",
+        "name_tr": "Horn of Beckoning Death",
+        "rarity": "Legendary",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Boynuzu çaldığınızda 30 fit çapında kırmızı bir duman bulutu oluşur. İçinde sırasını bitiren ve 9 veya daha az canı olan her yaratık anında ölür ve zombiye dönüşür. Zombiler Szass Tam'ın emirlerini izler. Yılda bir kez kullanılabilir.\n\n**[Atmosfer]** Küçük bir ejderha boynuzuna benzeyen, içinde cehennemden gelen bir ışık taşıyan tekinsiz bir nekromansi aracıdır.",
+        "effects": []
+    },
+    {
+        "name": "Horn of Valhalla",
+        "name_tr": "Horn of Valhalla",
+        "rarity": "Legendary",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Bu boynuzu çaldığınızda, Ysgard düzleminden savaşçı ruhlar (Berserker istatistiklerini kullanırlar) 60 fit yakınınızda belirir. Ruhlar 1 saat boyunca veya canları 0'a inene kadar kalır. Boynuz kullanıldıktan sonra 7 gün boyunca tekrar kullanılamaz. Gerekli şartları (zırh/silah uzmanlığı) karşılamayan biri çalarsa ruhlar saldırır; karşılıyorsa dostane olurlar.\n\n**[Atmosfer]** Gümüş, pirinç veya bronzdan yapılmış bu heybetli boru, kadim kahramanların ruhlarını savaş alanına çağırır.",
+        "effects": []
+    },
+    {
+        "name": "Icon of Ravenloft",
+        "name_tr": "Icon of Ravenloft",
+        "rarity": "Legendary",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** İkonun 30 fit yakınındaki yaratıklar Protection from Evil and Good büyüsü etkisindedir (fiends/undead karşı). \n\nÖzellikler: \n- Augury: Günde bir kez Augury büyüsü yapılabilir.\n- Bane of the Undead: Turn Undead DC'sini +2 artırır.\n- Cure Wounds: Günde bir kez 3d8+3 can yeniler.\n\n**[Atmosfer]** Barovia'nın en kutsal emanetlerinden biri olan, saf gümüşten yapılmış ve dua eden bir din adamını tasvir eden heykelciktir.",
+        "effects": [
+            {
+                "type": "spell_auto",
+                "value": "Protection from Evil and Good",
+                "note": "Always active within 30ft"
+            }
+        ]
+    },
+    {
+        "name": "Infernal Tack",
+        "name_tr": "Infernal Tack",
+        "rarity": "Legendary",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Bu set bir Nightmare'i (kabus atı) sahibine bağlar. Mahmuzları birbirine vurarak Nightmare'i 20 fit yakına çağırabilirsiniz. At 1 gün boyunca kalır ve emirlerinizi izler. At ölürse 24 saat sonra Cehennem'de yeniden canlanır.\n\n**[Atmosfer]** Cehennem metalinden dövülmüş, üzerinde acı çeken ruhların rünleri olan bir binicilik takımıdır.",
+        "effects": []
+    },
+    {
+        "name": "Infiltrator's Key",
+        "name_tr": "Infiltrator's Key",
+        "rarity": "Legendary",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Bir maymuncuk (thieves' tools) olarak kullanılır ve Dexterity (Sleight of Hand) zarlarına +2 bonus sağlar. Knock ve Pass without Trace büyülerini cast edebilir.\n\n**[Atmosfer]** Mithralden yapılmış, efsanevi hırsızların kanıyla dövülmüş, en karmaşık kilitleri bile fısıltıyla açabilen bir anahtardır.",
+        "effects": [
+            {
+                "type": "stat_bonus",
+                "stat": "sleight_of_hand",
+                "value": 2
+            }
+        ]
+    },
+    {
+        "name": "Instrument of the Bards",
+        "name_tr": "Instrument of the Bards",
+        "rarity": "Legendary",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Bir ozana (bard) uyum sağladığında Fly, Invisibility, Levitate ve Protection from Evil and Good büyülerini (günde birer kez) cast etmeyi sağlar. Enstrümanı çalarken yapılan Charm büyüleri hedefin kurtarma zarına dezavantaj verir.\n\n**[Atmosfer]** Efsanevi ozan kolejlerinin adını taşıyan (Ollamh, Cli, Doss vb.), her notası büyüyle örülmüş şaheser enstrümanlardır.",
+        "effects": []
+    },
+    {
+        "name": "Ioun Stone",
+        "name_tr": "Ioun Stone",
+        "rarity": "Legendary",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Havaya fırlatıldığında başınızın etrafında döner ve türüne göre bonus sağlar: \n- Mastery (Legendary): Proficiency bonusunuzu +1 artırır.\n- Protection (Rare): AC +1.\n- Strength/Agility/Ability Stones: İlgili skorunuzu +2 artırır (max 20).\n- Absorption: Size gelen büyüleri emebilir.\n\n**[Atmosfer]** Bilgi tanrısı Ioun'dan adını alan, farklı geometrik şekillerde parıldayan mistik taşlardır.",
+        "effects": [
+            {
+                "type": "ac_bonus",
+                "value": 1,
+                "note": "Protection taşı için"
+            }
+        ]
+    },
+    {
+        "name": "Iron Flask",
+        "name_tr": "Iron Flask",
+        "rarity": "Legendary",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Başka bir düzlemden gelen bir yaratığı şişenin içine hapsedebilirsiniz (DC 17 Wisdom Save). Şişe açıldığında içindeki yaratık 1 saat boyunca size dostane olur ve emirlerinizi izler. Şişe aynı anda sadece bir yaratık tutabilir.\n\n**[Atmosfer]** Pirinç tıpalı, üzerinde mühür rünleri bulunan ağır bir demir şişedir.",
+        "effects": []
+    },
+    {
+        "name": "Ironfang",
+        "name_tr": "Ironfang",
+        "rarity": "Legendary",
+        "type": "Weapon",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Saldırı ve hasar zarlarında +2 bonus kazanırsınız. İsabet ettiğinde fazladan 1d8 gök gürültüsü (thunder) hasarı verir. \n\nToprak Ustalığı: Terran dilini konuşabilir, asit direncine sahip olur, 60 fit tremorsense kazanır ve bir toprak elementaline karşı Dominate Monster (Save DC 17) yapabilirsiniz.\n\n**[Atmosfer]** Tek parça demirden dövülmüş, Ogremoch'un kıvılcımını taşıyan yıkıcı bir savaş kazmasıdır.",
+        "effects": [
+            {
+                "type": "attack_bonus",
+                "value": 2
+            },
+            {
+                "type": "damage_bonus",
+                "value": 2
+            },
+            {
+                "type": "extra_damage",
+                "value": "1d8",
+                "damage_type": "thunder"
+            },
+            {
+                "type": "resistance",
+                "value": "acid"
+            }
+        ]
+    },
+    {
+        "name": "Jester's Mask",
+        "name_tr": "Jester's Mask",
+        "rarity": "Legendary",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Charisma büyüleri için büyü saldırı ve DC'sine +3 bonus sağlar. \n\nÖzellikler: \n- Harika Kaçış: Bir darbe aldığınızda reaksiyonla hasarı yok sayıp 30 fit ışınlanabilirsiniz (Günde bir).\n- Topsy-Turvy: D20'de 1 attığınızda onu 20 sayabilirsiniz (Günde bir).\n\n**[Atmosfer]** İncilerle süslenmiş, rengarenk harlekin desenli büyülü bir maskedir.",
+        "effects": [
+            {
+                "type": "spell_auto",
+                "value": "Charisma Spell +3",
+                "dc": 3
+            }
+        ]
+    },
+    {
+        "name": "Jewel of Three Prayers",
+        "name_tr": "Jewel of Three Prayers",
+        "rarity": "Legendary",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Üç farklı tanrının (Sehanine, Avandra, Corellon) kutsamasını taşıyan bir kolye. Bulunduğunda 'Dormant' haldedir ve zamanla AC bonusu, reaksiyonla can basma ve teleport gibi özellikler kazanan 'Awakened' ve 'Exalted' hallerine evrilir.\n\n**[Atmosfer]** Altın bir zincire bağlı, üzerinde lapis lazuli ve zümrütler barındıran efsanevi bir yadigar.",
+        "effects": [
+            {
+                "type": "ac_bonus",
+                "value": 1,
+                "note": "Dormant halde +1 (Awakened +2, Exalted +3)"
+            }
+        ]
+    },
+    {
+        "name": "Korolnor Scepter",
+        "name_tr": "Korolnor Scepter",
+        "rarity": "Legendary",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** +3 büyülü gürz (club) olarak kullanılabilir (saldırı/hasar +3). Wyrmskull Throne'un tüm özelliklerini kontrol etmeyi sağlar. İçinde 10 şarj barındırır ve büyü etkisi yaratmak için kullanılabilir.\n\n**[Atmosfer]** Mithralden yapılmış, üzerinde yedi adet mavi mücevher bulunan kadim bir dwarf asasıdır.",
+        "effects": [
+            {
+                "type": "attack_bonus",
+                "value": 3
+            },
+            {
+                "type": "damage_bonus",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "name": "Longbow of the Healing Hearth",
+        "name_tr": "Longbow of the Healing Hearth",
+        "rarity": "Legendary",
+        "type": "Weapon",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Saldırı ve hasar zarlarında +3 bonus kazanırsınız. Kendi oklarını yaratabilir.\n\nÖzellikler:\n- Şifa Oku: Bir saldırı yerine 1 şarj harcayarak bir dostunuza can bastırabilirsiniz (Hit Die harcatarak).\n- Büyüler: Create Food and Water, Warding Bond, Guardian of Faith büyülerini cast edebilir.\n\n**[Atmosfer]** Fildişinden oyulmuş, üzerinde buğday başakları ve geyik boynuzları olan kutsal bir yaydır.",
+        "effects": [
+            {
+                "type": "attack_bonus",
+                "value": 3
+            },
+            {
+                "type": "damage_bonus",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "name": "Lost Crown of Besilmer",
+        "name_tr": "Lost Crown of Besilmer",
+        "rarity": "Legendary",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Giyerken Charisma (Persuasion) zarlarında avantaj sağlar. Günde bir kez dahi olsa bir yaratığa 'Halt' emri verip (Hold Person gibi) onu durdurabilir. Ayrıca deprem dalgası yaratarak çevresindekileri yere düşürebilir.\n\n**[Atmosfer]** Yedi altın dikene sahip, dwarf kraliyet simgesi olan görkemli bir savaş miğferi.",
+        "effects": [
+            {
+                "type": "stat_bonus",
+                "stat": "persuasion",
+                "value": "advantage"
+            }
+        ]
+    },
+    {
+        "name": "Luck Blade",
+        "name_tr": "Luck Blade",
+        "rarity": "Legendary",
+        "type": "Weapon",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Saldırı/hasar zarlarında ve tüm kurtarma zarlarında +1 bonus kazanırsınız. \n\nŞans: Günde bir kez beğenmediğiniz bir zarı (attack, ability, save) tekrar atabilirsiniz.\nWish: İçinde 1d4-1 şarj barındırabilir ve her şarj bir Wish büyüsü yapmanızı sağlar.\n\n**[Atmosfer]** Kaderin kendisi tarafından kutsanmış gibi görünen, sahibine her daim doğru yolu fısıldayan bir kılıçtır.",
+        "effects": [
+            {
+                "type": "attack_bonus",
+                "value": 1
+            },
+            {
+                "type": "damage_bonus",
+                "value": 1
+            },
+            {
+                "type": "stat_bonus",
+                "stat": "saves",
+                "value": 1
+            }
+        ]
+    },
+    {
+        "name": "Luxon Beacon",
+        "name_tr": "Luxon Beacon",
+        "rarity": "Legendary",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Dokunan kişiye bir 'Olasılık Parçası' (Fragment of Possibility) verir. Bu parça, bir zarda (attack, ability, save) ek bir d20 atıp seçmenizi sağlar (günde bir kez).\n\nRuh Tuzağı: Yakınında ölen consecution ritüeli yapmış kişilerin ruhlarını emerek onları reenkarne eder.\n\n**[Atmosfer]** Hafifçe parıldayan, dokunulduğunda titreyen on iki yüzlü mistik bir kristaldir.",
+        "effects": []
+    },
+    {
+        "name": "Matalotok",
+        "name_tr": "Matalotok",
+        "rarity": "Legendary",
+        "type": "Weapon",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Soğuk (cold) hasarına karşı bağışıklık (immunity) kazandırır. \n\nDondurucu Patlama: Her vuruşta 30 fit yarıçapında bir soğuk patlaması yayarak çevredeki her yaratığa 3d6 soğuk hasarı verir.\n\n**[Atmosfer]** Buz devlerinin tanrısı Thrym tarafından dövülmüş, her daim üzerinde dondurucu bir sis barındıran devasa bir çekiçtir.",
+        "effects": [
+            {
+                "type": "resistance",
+                "value": "cold_immunity"
+            }
+        ]
+    },
+    {
+        "name": "Moonblade",
+        "name_tr": "Moonblade",
+        "rarity": "Legendary",
+        "type": "Weapon",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Saldırı/hasar zarlarında en az +1 bonus kazandırır. Hizmet ettiği her sahip için yeni bir rün kazanır ve her rün; bonus hasar, kritik vuruş aralığı genişlemesi, büyü yapma veya savunma gibi ek bir özellik ekler.\n\nSentient: Elf değerlerini savunan bilge ve duyarlı bir kılıçtır.\n\n**[Atmosfer]** Elflerin asil evlerine ait, sadece layık olan elfler tarafından kuşanılabilecek efsanevi bir kılıç.",
+        "effects": [
+            {
+                "type": "attack_bonus",
+                "value": 1
+            },
+            {
+                "type": "damage_bonus",
+                "value": 1
+            }
+        ]
+    },
+    {
+        "name": "Murgaxor's Orb",
+        "name_tr": "Murgaxor's Orb",
+        "rarity": "Legendary",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Lanetli bir nesnedir. Dokunduğu kişileri lanetleyerek baş ağrısı çekmelerine ve zihinsel dirençlerinin düşmesine neden olur. Küre içindeki kötü ruh (Murgaxor), lanetli kişilere acı verebilir veya onları kontrol altına alabilir.\n\n**[Atmosfer]** İçinde yeşil sislerin döndüğü, tekinsiz bir büyücü ruhu barındıran cam bir küre.",
+        "effects": []
+    },
+    {
+        "name": "Nepenthe",
+        "name_tr": "Nepenthe",
+        "rarity": "Legendary",
+        "type": "Weapon",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Saldırı/hasar zarlarında +3 bonus kazanırsınız. İblis ve hortlaklara vurduğunda fazladan 2d10 ışık hasarı verir. \n\nAdalet Aurası: Çevresindeki dostlarına büyü direnci kazandırır. Ancak ruhu 'kötü' olan bu kılıç, durmadan birilerini idam etmek için sahibini dürter.\n\n**[Atmosfer]** Binlerce suçlunun başını kesmiş, 'adalet' adı altında kana susamış, siyah saplı uğursuz bir kılıç.",
+        "effects": [
+            {
+                "type": "attack_bonus",
+                "value": 3
+            },
+            {
+                "type": "damage_bonus",
+                "value": 3
+            },
+            {
+                "type": "extra_damage",
+                "value": "2d10",
+                "damage_type": "radiant",
+                "condition": "Fiends or Undead"
+            }
+        ]
+    },
+    {
+        "name": "Nether Scroll of Azumar",
+        "name_tr": "Nether Scroll of Azumar",
+        "rarity": "Legendary",
+        "type": "Scroll",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** 30 gün boyunca üzerinde çalışılıp DC 25 Arcana kontrolü başarılırsa; Intelligence skorunuzu +2 artırır ve emrinizde bir Stone Golem yaratır. Golem yaratıcısı ölene kadar ona hizmet eder.\n\n**[Atmosfer]** Netheril döneminden kalma, içinde kozmik sırları barındıran ve okuyucuyu delirtebilecek kadar güçlü bir parşömen.",
+        "effects": [
+            {
+                "type": "stat_bonus",
+                "stat": "intelligence",
+                "value": 2
+            }
+        ]
+    },
+    {
+        "name": "Nightbringer",
+        "name_tr": "Nightbringer",
+        "rarity": "Legendary",
+        "type": "Weapon",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** +3 büyülü gürz (mace). İsabet ettiğinde fazladan 4d4 ışık (radiant) hasarı verir. \n\nEjderha Kutsaması: Kötü bir sahip için korku/büyü bağışıklığı ve bir elemente karşı bağışıklık kazandırır. \nGece Örtüsü: Şarj harcayarak düşmanı kör edebilir.\n\n**[Atmosfer]** Ejderha Kraliçesi Tiamat tarafından kutsanmış, vurduğu yere karanlık enerji saçan simsiyah bir silahtır.",
+        "effects": [
+            {
+                "type": "attack_bonus",
+                "value": 3
+            },
+            {
+                "type": "damage_bonus",
+                "value": 3
+            },
+            {
+                "type": "extra_damage",
+                "value": "4d4",
+                "damage_type": "radiant"
+            }
+        ]
+    },
+    {
+        "name": "Nightfall Pearl",
+        "name_tr": "Nightfall Pearl",
+        "rarity": "Legendary",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** 10 dakika odaklanarak 10 mil yarıçapındaki alanı 24 saat boyunca 'gece' haline getirir. Gündüzü anında karanlığa boğar. Günde bir kez kullanılabilir.\n\n**[Atmosfer]** Simsiyah, dokunulduğunda buz gibi olan, güneşin ışığını yutan dev bir inci.",
+        "effects": []
+    },
+    {
+        "name": "Obsidian Flint Dragon Plate",
+        "name_tr": "Obsidian Flint Dragon Plate",
+        "rarity": "Legendary",
+        "type": "Armor",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** AC'ye +2 bonus kazandırır. Zehir (poison) hasarına karşı direnç (resistance) sağlar. Ayrıca grappled (meydana gelişi veya kurtulması) zarlarında avantaj kazandırır.\n\n**[Atmosfer]** Obsidyen pullardan yapılmış, bir ejderhanın sert derisini andıran son derece dayanıklı bir levha zırh.",
+        "effects": [
+            {
+                "type": "ac_bonus",
+                "value": 2
+            },
+            {
+                "type": "resistance",
+                "value": "poison"
+            }
+        ]
+    },
+    {
+        "name": "Orb of Skoraeus",
+        "name_tr": "Orb of Skoraeus",
+        "rarity": "Legendary",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Büyü odağı (focus) olarak kullanılabilir. \n\nÖzellikler: \n- Bol Malzeme: Şarj harcayarak büyülerin altın maliyetli materyallerini yok sayabilir.\n- Keskin Zihin: Konsantrasyon zarlarına +2 bonus sağlar.\n- İlahî Bakış: 120 fit mesafeye kadar büyülü karanlığı görebilir.\n\n**[Atmosfer]** İçinde kristal damarlar parlayan, taş devlerinin tanrısı Skoraeus'un bilgeliğini taşıyan ağır bir küre.",
+        "effects": [
+            {
+                "type": "stat_bonus",
+                "stat": "saves",
+                "value": 2,
+                "condition": "for Concentration"
+            }
+        ]
+    },
+    {
+        "name": "Orcsplitter",
+        "name_tr": "Orcsplitter",
+        "rarity": "Legendary",
+        "type": "Weapon",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Saldırı/hasar zarlarında +2 bonus kazandırır. Orklara karşı vurduğunda fazladan +1d8 hasar verir. Yakınınızdaki orkları saptayabilir.\n\nSentient: Ork düşmanı, dürüst ve ciddi bir ruha sahip kadim bir dwarf baltasıdır.\n\n**[Atmosfer]** Üzerinde ork rünleri kazınmış ama rünlerin ortasından bir çizgi geçirilmiş (ork öldüren), mütevazı ama ölümcül bir balta.",
+        "effects": [
+            {
+                "type": "attack_bonus",
+                "value": 2
+            },
+            {
+                "type": "damage_bonus",
+                "value": 2
+            }
+        ]
+    },
+    {
+        "name": "Plate Armor of Etherealness",
+        "name_tr": "Plate Armor of Etherealness",
+        "rarity": "Legendary",
+        "type": "Armor",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Bu zırhı giyerken eylem (action) kullanarak 10 dakika boyunca Etherealness büyüsü etkisi kazanırsınız. Bu sürede ruhani düzleme geçebilir ve nesnelerin içinden geçebilirsiniz. Bu özellik şafak vaktinde yenilenir.\n\n**[Atmosfer]** Hafifçe saydamlaşabilen, gümüşi bir parıltıya sahip, fiziksel sınırları aşabilen efsanevi bir levha zırhtır.",
+        "effects": [
+            {
+                "type": "spell_auto",
+                "value": "Etherealness"
+            }
+        ]
+    },
+    {
+        "name": "Platinum Scarf",
+        "name_tr": "Platinum Scarf",
+        "rarity": "Legendary",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Üzerinden bir pul kopararak şu etkileri yaratabilirsiniz (günde 3 pul): \n- Yaşam Nefesi: 10d4 can yeniler.\n- Platin Kalkan: +1 kalkan yaratır ve radiant hasarına bağışıklık verir.\n- Işık Çekici: 2d4 radiant hasarı veren büyülü bir hafif çekiç yaratır.\n\n**[Atmosfer]** Platin pullarla kaplı, Bahamut'un kutsamasını taşıyan görkemli bir atkıdır.",
+        "effects": []
+    },
+    {
+        "name": "Potion of Dragon's Majesty",
+        "name_tr": "Potion of Dragon's Majesty",
+        "rarity": "Legendary",
+        "type": "Potion",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Bu iksiri içtiğinizde 1 saat boyunca bir Yetişkin Ejderhaya (Adult Dragon - türü iksirdeki pula bağlıdır) dönüşürsünüz. Ejderhanın tüm istatistiklerini kullanırsınız ancak kendi kişiliğinizi ve dillerinizi korursunuz.\n\n**[Atmosfer]** İçinde tek bir ejderha pulu yüzen, sıvı altın gibi görünen, tanrısal bir güç barındıran iksirdir.",
+        "effects": []
+    },
+    {
+        "name": "Potion of Giant Size",
+        "name_tr": "Potion of Giant Size",
+        "rarity": "Legendary",
+        "type": "Potion",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** 24 saat boyunca 'Huge' boyutuna ulaşırsınız. Strength skorunuz 25 olur ve maksimum canınız iki katına çıkar. Silah hasarlarınızda normalin üç katı zar atarsınız (örneğin 1d8 yerine 3d8).\n\n**[Atmosfer]** Bir devin öfkesini ve heybetini damarlarınıza pompalayan, tatlı ama keskin kokulu tekinsiz bir karışımdır.",
+        "effects": [
+            {
+                "type": "stat_set",
+                "stat": "strength",
+                "value": 25
+            }
+        ]
+    },
+    {
+        "name": "Potion of Giant Strength",
+        "name_tr": "Potion of Giant Strength",
+        "rarity": "Legendary",
+        "type": "Potion",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** 1 saat boyunca Strength skorunuz devin türüne göre artar (Örn: Cloud Giant için 27, Storm Giant için 29). Skorunuz zaten daha yüksekse bir etkisi olmaz.\n\n**[Atmosfer]** İçinde bir dev tırnağı yüzen, kaba ve güçlü bir enerjisi olan şeffaf iksirdir.",
+        "effects": [
+            {
+                "type": "stat_set",
+                "stat": "strength",
+                "value": 29,
+                "note": "Devin türüne göre 21-29 arası değişir"
+            }
+        ]
+    },
+    {
+        "name": "Powered Armor",
+        "name_tr": "Powered Armor",
+        "rarity": "Legendary",
+        "type": "Armor",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Büyülü levha zırh (plate). İçindeki enerji hücrelerini kullanarak güç, uçma (fly), lazer saldırıları ve gelişmiş savunma özellikleri kazanabilir. Hücre yoksa kullanıcının canını (HP) emerek de çalışabilir.\n\n**[Atmosfer]** Kwalish tarafından tasarlanan, çarklar, tüpler ve kristallerle dolu teknomistik bir zırh şaheseridir.",
+        "effects": [
+            {
+                "type": "ac_bonus",
+                "value": 1
+            }
+        ]
+    },
+    {
+        "name": "Prehistoric Figurines of Wondrous Power",
+        "name_tr": "Prehistoric Figurines of Wondrous Power",
+        "rarity": "Legendary",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Bu heykeller devasa dinozorlara dönüşür: \n- Jasper T-Rex: 1 saat boyunca bir T-Rex yaratır. Kontrolü kaybetme riski vardır.\n- Carnelian Triceratops: 6 saatlik binek sağlar.\n\n**[Atmosfer]** Kaba oyulmuş, tarih öncesi yaratıkların vahşi ruhlarını hapseden büyük taş figürlerdir.",
+        "effects": []
+    },
+    {
+        "name": "Pyxis of Pandemonium",
+        "name_tr": "Pyxis of Pandemonium",
+        "rarity": "Legendary",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Kısa dinlenme (short rest) etkisi ve Bless kazandırır. Ancak açıldığında kaotik bir büyü tablosuna göre (DC 17) rastgele ve genellikle tehlikeli etkiler (veya ödüller) yaratır.\n\n**[Atmosfer]** Telepatik fısıltılar yayan, içinde kaosu barındıran süslü ahşap bir kutudur.",
+        "effects": []
+    },
+    {
+        "name": "Rakdos Riteknife",
+        "name_tr": "Rakdos Riteknife",
+        "rarity": "Legendary",
+        "type": "Weapon",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** +1 hançer. Öldürdüğü yaratıkların ruhlarını (max 5) hapseder. Her ruh saldırıya +1d4 nekrotik hasar ekler. Ruhları serbest bırakarak can yenileyebilir veya büyük bir imha saldırısı (Annihilation) yapabilirsiniz.\n\n**[Atmosfer]** Rakdos kültünün vahşetini yansıtan, testere dişli ağzıyla ruhları emen tekinsiz bir bıçaktır.",
+        "effects": [
+            {
+                "type": "attack_bonus",
+                "value": 1
+            },
+            {
+                "type": "damage_bonus",
+                "value": 1
+            }
+        ]
+    },
+    {
+        "name": "Reaper's Scream",
+        "name_tr": "Reaper's Scream",
+        "rarity": "Legendary",
+        "type": "Weapon",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** +2 sabah yıldızı (morningstar). Hasarı delicidir ancak nekrotik hasar verir. \n\nÖlüm Çığlığı: Bonus eylemle içindeki ruhların çığlığını salarak 60 fit içindeki yaratıkları sersemletebilir (stunned, Save DC 15).\n\n**[Atmosfer]** Shaft üzerinde ölüm rünü kazılı olan, soluk bir ışıkla parlayan uğursuz bir silahtır.",
+        "effects": [
+            {
+                "type": "attack_bonus",
+                "value": 2
+            },
+            {
+                "type": "damage_bonus",
+                "value": 2
+            }
+        ]
+    },
+    {
+        "name": "Red Wizard Blade",
+        "name_tr": "Red Wizard Blade",
+        "rarity": "Legendary",
+        "type": "Weapon",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** İsabet ettiğinde fazladan 3d12 nekrotik hasar veren büyülü bir hançer. Bu bıçakla ölen bir yaratık ancak tanrısal müdahale ile yeniden canlandırılabilir.\n\n**[Atmosfer]** Kızıl Büyücülerin (Red Wizards) karanlık sanatlarıyla Negative Plane'den güç alan, yaşamı anında söndüren bir silahtır.",
+        "effects": [
+            {
+                "type": "extra_damage",
+                "value": "3d12",
+                "damage_type": "necrotic"
+            }
+        ]
+    },
+    {
+        "name": "Ring of Djinni Summoning",
+        "name_tr": "Ring of Djinni Summoning",
+        "rarity": "Legendary",
+        "type": "Ring",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Bir eylemle Hava Düzlemi'nden özel bir Djinni çağırabilirsiniz. Djinni 1 saat boyunca size hizmet eder. Gittikten sonra 24 saat boyunca tekrar çağrılamaz.\n\n**[Atmosfer]** Havayı kontrol eden kadim varlıklarla bağ kuran, üzerinde fırtına motifleri olan bir yüzüktür.",
+        "effects": []
+    },
+    {
+        "name": "Ring of Elemental Command",
+        "name_tr": "Ring of Elemental Command",
+        "rarity": "Legendary",
+        "type": "Ring",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Dört elementten birine bağlıdır. O elementin yaratıklarına karşı avantaj sağlar. \n\nUyanış: Eğer o elementten bir canlı öldürülürse yüzük uyanır ve uçma, lav üzerinde yürüme veya su üzerinde durma gibi muazzam güçler kazanır (Spells: Dominate Monster, Wall of Fire/Ice vb.).\n\n**[Atmosfer]** Elementler üzerinde mutlak hakimiyet kuran, her biri farklı bir kozmik enerjiyi temsil eden efsanevi yüzüklerdir.",
+        "effects": []
+    },
+    {
+        "name": "Ring of Invisibility",
+        "name_tr": "Ring of Invisibility",
+        "rarity": "Legendary",
+        "type": "Ring",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** İstediğiniz zaman eylem kullanarak tamamen görünmez olabilirsiniz. Saldırı yapana veya büyü yapana kadar görünmez kalırsınız. Piller/şarj gerektirmez.\n\n**[Atmosfer]** Işığı parmağınızın etrafında büken, bakıldığında neredeyse yokmuş gibi duran şeffaf bir yüzüktür.",
+        "effects": []
+    },
+    {
+        "name": "Ring of Spell Turning",
+        "name_tr": "Ring of Spell Turning",
+        "rarity": "Legendary",
+        "type": "Ring",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Size direkt hedef alan büyülerin kurtarma zarlarında avantaj sağlar. Eğer zarda 20 atarsanız ve büyü 7. seviyeden düşükse, büyü size işlemeyip direkt büyücüye geri yansır.\n\n**[Atmosfer]** Büyü enerjisini saptıran aynalı yüzeyiyle bilinen, büyücülerin korkulu rüyası olan bir koruma yüzüğüdür.",
+        "effects": [
+            {
+                "type": "stat_bonus",
+                "stat": "saves",
+                "value": "advantage",
+                "condition": "against spells targeting only you"
+            }
+        ]
+    },
+    {
+        "name": "Ring of Three Wishes",
+        "name_tr": "Ring of Three Wishes",
+        "rarity": "Legendary",
+        "type": "Ring",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** İçinde 3 şarj barındırır. Her şarj bir Wish büyüsü yapmanızı sağlar. Şarjlar bittiğinde yüzük sıradan bir takı haline gelir.\n\n**[Atmosfer]** Gerçekliği değiştirebilecek kadar büyük bir gücü parmağınızda taşımanızı sağlayan, her dilediğinizde bir elması sönen muazzam bir eşyadır.",
+        "effects": []
+    },
+    {
+        "name": "Robe of the Archmagi",
+        "name_tr": "Robe of the Archmagi",
+        "rarity": "Legendary",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Zırh giymiyorken AC'niz 15 + Dexterity olur. Büyü saldırılarına ve büyü DC'nize +2 bonus kazandırır. Ayrıca büyülere karşı kurtarma zarlarında avantaj sağlar.\n\n**[Atmosfer]** Beyaz (iyi), Gri (nötr) veya Siyah (kötü) renklerde olan, gümüş rünlerle işlenmiş en güçlü büyücü kıyafetidir.",
+        "effects": [
+            {
+                "type": "ac_bonus",
+                "value": 0,
+                "note": "Base AC becomes 15+Dex"
+            },
+            {
+                "type": "spell_auto",
+                "value": "Spell Save DC +2",
+                "dc": 2
+            },
+            {
+                "type": "stat_bonus",
+                "stat": "saves",
+                "value": "advantage",
+                "condition": "against spells"
+            }
+        ]
+    },
+    {
+        "name": "Rod of Lordly Might",
+        "name_tr": "Rod of Lordly Might",
+        "rarity": "Legendary",
+        "type": "Rod",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** +3 büyülü gürz (mace). Üzerindeki 6 butonla şekil değiştirebilir: Flame Tongue kılıcı, +3 savaş baltası, +3 mızrak, tırmanma merdiveni (50ft), koçbaşı veya pusula olabilir. Ayrıca can emme, sersemletme ve korkutma özellikleri vardır.\n\n**[Atmosfer]** Bir asa içinde koca bir ordu envanterini barındıran, şekil değiştiren muazzam bir mühendislik ve büyü harikasıdır.",
+        "effects": [
+            {
+                "type": "attack_bonus",
+                "value": 3
+            },
+            {
+                "type": "damage_bonus",
+                "value": 3
+            }
+        ]
+    },
+    {
+        "name": "Rod of Resurrection",
+        "name_tr": "Rod of Resurrection",
+        "rarity": "Legendary",
+        "type": "Rod",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** 5 şarjı vardır. Heal (1 şarj) veya Resurrection (5 şarj) büyülerini cast edebilir. Şarjlar biterse asanın yok olma riski vardır.\n\n**[Atmosfer]** Saf ışıktan örülmüş, ölümün eşiğindeki ruhları geri çağırabilen kutsal bir asadır.",
+        "effects": []
+    },
+    {
+        "name": "Ruby Weave Gem",
+        "name_tr": "Ruby Weave Gem",
+        "rarity": "Legendary",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Büyü odağı olarak kullanılır ve büyülerin materyal maliyetlerini (500gp/şarj) yok sayabilir. En büyük özelliği: Her uzun dinlenme sonunda herhangi bir sınıftan (class) bir büyüyü öğrenip o gün boyunca kullanabilmenizi sağlar.\n\n**[Atmosfer]** Büyü ağının (The Weave) enerjisini damıtıp bir yakutun içine hapseden, sınırsız bilgi kaynağı bir mücevherdir.",
+        "effects": []
+    },
+    {
+        "name": "Ruinblade",
+        "name_tr": "Ruinblade",
+        "rarity": "Legendary",
+        "type": "Weapon",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** +2 büyülü silah. Hortlaklara (undead) fazladan 1d8 kuvvet hasarı verir. Blight ve Disintegrate büyülerini cast edebilir. Ancak lanetlidir; her 7 günde bir 1000gp değerinde nesneyi yok etmezseniz sahibiyle çatışmaya girer.\n\n**[Atmosfer]** Paslı ve harabe gibi görünen, dokunduğu her şeyi çürütmeye ve yok etmeye çalışan bilinçli (sentient) bir bıçaktır.",
+        "effects": [
+            {
+                "type": "attack_bonus",
+                "value": 2
+            },
+            {
+                "type": "damage_bonus",
+                "value": 2
+            }
+        ]
+    },
+    {
+        "name": "Scaled Ornament",
+        "name_tr": "Scaled Ornament",
+        "rarity": "Legendary",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Korku ve büyülenme etkilerine karşı bağışıklık kazandırır. \n\nAscendant (Legendary): AC'ye +1 bonus verir, ejderha nefesi hasarını emip cana çevirir ve uçma (flying) hızı kazandırarak sırtınızda spektral kanatlar çıkarır.\n\n**[Atmosfer]** Bir ejderhanın pulundan veya dişinden yapılmış, takan kişiye ejderhaların göksel gücünü aşılayan bir takıdır.",
+        "effects": [
+            {
+                "type": "ac_bonus",
+                "value": 1
+            }
+        ]
+    },
+    {
+        "name": "Scarab of Protection",
+        "name_tr": "Scarab of Protection",
+        "rarity": "Legendary",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Büyülere karşı kurtarma zarlarında avantaj sağlar. En büyük özelliği: Nekromansi büyülerine veya 'ölüm' etkilerine karşı 12 kez bağışıklık sağlar (şarj harcar). Şarjlar biterse toz olur.\n\n**[Atmosfer]** Üzerinde koruma rünleri olan, antik mezarlardan gelen kutsal bir bok böceği muskasıdır.",
+        "effects": [
+            {
+                "type": "stat_bonus",
+                "stat": "saves",
+                "value": "advantage",
+                "condition": "against spells"
+            }
+        ]
+    },
+    {
+        "name": "Scroll of Tarrasque Summoning",
+        "name_tr": "Scroll of Tarrasque Summoning",
+        "rarity": "Legendary",
+        "type": "Scroll",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Bu parşömeni okuduğunuzda 1 mil yakınınızda devasa bir Tarrasque belirir. Tarrasque size dahil herkese saldırır ve sadece öldüğünde yok olur.\n\n**[Atmosfer]** Dünyaları yok edebilecek kaosu serbest bırakan, kıyamet fermanı gibi görünen bir parşömendir.",
+        "effects": []
+    },
+    {
+        "name": "Scroll of the Comet",
+        "name_tr": "Scroll of the Comet",
+        "rarity": "Legendary",
+        "type": "Scroll",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Gökyüzünden bir kuyruklu yıldız düşürerek 500 fitlik bir alanı yerle bir eder. 30d10 kuvvet (force) hasarı verir (DC 20 Dexterity yarım). Tüm yapılar yok olur.\n\n**[Atmosfer]** Kozmik bir yıkımı yeryüzüne indiren, gökyüzünün öfkesini barındıran son derece tehlikeli bir silahtır.",
+        "effects": []
+    }
+]

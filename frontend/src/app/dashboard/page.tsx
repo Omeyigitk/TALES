@@ -85,6 +85,7 @@ export default function Dashboard() {
             });
             if (res.ok) {
                 setCampaignName("");
+                setError(""); // Clear error on success
                 fetchCampaigns();
             } else {
                 const data = await res.json();
@@ -92,6 +93,25 @@ export default function Dashboard() {
             }
         } catch (err) {
             setError("Bağlantı hatası");
+        }
+    };
+
+    const handleDeleteCampaign = async (id: string, name: string) => {
+        if (!confirm(`"${name}" kampanyasını ve içindeki TÜM verileri (karakterler, notlar vb.) silmek istediğine emin misin?`)) return;
+        try {
+            const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+            const res = await fetch(`${apiUrl}/api/campaigns/${id}`, {
+                method: 'DELETE',
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+            if (res.ok) {
+                fetchCampaigns();
+            } else {
+                const data = await res.json();
+                alert(data.error);
+            }
+        } catch (err) {
+            alert("Bağlantı hatası");
         }
     };
 
@@ -201,19 +221,29 @@ export default function Dashboard() {
                         ) : (
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 {campaigns.map(c => (
-                                    <button
-                                        key={c._id}
-                                        onClick={() => router.push(user.role === 'DM' ? `/dm/${c._id}/dashboard` : `/player/${c._id}/character-creator`)}
-                                        className="p-6 bg-gray-900 border border-gray-800 rounded-xl hover:border-red-500 transition-all text-left flex flex-col justify-between group"
-                                    >
-                                        <div>
-                                            <h3 className="text-xl font-bold group-hover:text-red-500 transition-colors uppercase tracking-tight">{c.name}</h3>
-                                            <p className="text-xs text-gray-500 font-mono mt-1 opacity-50">{c._id}</p>
-                                        </div>
-                                        <div className="mt-4 flex items-center text-xs font-bold text-gray-400 group-hover:text-white transition-colors">
-                                            MACERAYA DEVAM ET <span className="ml-2">&rarr;</span>
-                                        </div>
-                                    </button>
+                                    <div key={c._id} className="flex justify-between items-start group">
+                                        <button
+                                            onClick={() => router.push(user.role === 'DM' ? `/dm/${c._id}/dashboard` : `/player/${c._id}/sheet`)}
+                                            className="flex-1 p-6 bg-gray-900 border border-gray-800 rounded-xl hover:border-red-500 transition-all text-left flex flex-col justify-between"
+                                        >
+                                            <div>
+                                                <h3 className="text-xl font-bold group-hover:text-red-500 transition-colors uppercase tracking-tight">{c.name}</h3>
+                                                <p className="text-xs text-gray-500 font-mono mt-1 opacity-50">{c._id}</p>
+                                            </div>
+                                            <div className="mt-4 flex items-center text-xs font-bold text-gray-400 group-hover:text-white transition-colors">
+                                                MACERAYA DEVAM ET <span className="ml-2">&rarr;</span>
+                                            </div>
+                                        </button>
+                                        {user.role === 'DM' && (
+                                            <button
+                                                onClick={() => handleDeleteCampaign(c._id, c.name)}
+                                                className="ml-2 p-4 bg-gray-900 border border-gray-800 rounded-xl hover:border-red-600 hover:text-red-500 transition-all flex items-center justify-center text-xl"
+                                                title="Kampanyayı Sil"
+                                            >
+                                                🗑️
+                                            </button>
+                                        )}
+                                    </div>
                                 ))}
                             </div>
                         )}

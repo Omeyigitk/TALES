@@ -1,0 +1,1786 @@
+[
+    {
+        "name": "Robe of Summer",
+        "name_tr": "Robe of Summer",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "**[Mekanik Bilgiler]**\nBu giysiyi giyerken Soğuk (Cold) hasarına karşı direnç (resistance) kazanırsın. Ayrıca aşırı sıcak veya soğuk havalardan etkilenmezsin, vücudun her zaman ideal sıcaklıkta kalır.\n\n**[Atmosfer]**\nKırmızı, turuncu ve altın renklerinde zarif bir kumaştan dikilmiş, sahibine bitmeyen bir yaz mevsiminin ılımanlığını hissettiren büyülü bir cübbe.",
+        "effects": [
+            {
+                "type": "resistance",
+                "value": "cold"
+            },
+            {
+                "type": "temperature_regulation",
+                "value": "comfortable"
+            }
+        ]
+    },
+    {
+        "name": "Rod of Rulership",
+        "name_tr": "Rod of Rulership",
+        "rarity": "Rare",
+        "type": "Rod",
+        "description": "**[Mekanik Bilgiler]**\nAksiyonla 120 fit içindeki seçtiğin yaratıklara itaat emri verebilirsin (DC 15 Wisdom save). Başarısız olanlar 8 saat boyunca sana büyülenir (charmed) ve seni liderleri olarak görürler. Zarar görürlerse etki biter. Şafakta yenilenir.\n\n**[Atmosfer]**\nKudret ve otorite simgesi olan, havaya kaldırıldığında etrafındakilerin iradesini kıran ve onları diz çökmeye zorlayan görkemli bir asa.",
+        "effects": [
+            {
+                "type": "spell_grant",
+                "value": "Charmed (Dominion)",
+                "dc": 15,
+                "duration": "8 hours",
+                "charges": 1
+            }
+        ]
+    },
+    {
+        "name": "Rod of the Pact Keeper, +1, +2, +3",
+        "name_tr": "Rod of the Pact Keeper, +1, +2, +3",
+        "rarity": "Rare",
+        "type": "Rod",
+        "description": "**[Mekanik Bilgiler]**\nWarlock büyülerin için büyü saldırılarına ve zorluk derecesine (DC) +3 bonus kazandırır. Ayrıca aksiyonla günde bir kez 1 Warlock büyü slotunu geri kazanabilirsin.\n\n**[Atmosfer]**\nKaranlık bir hamidinin gücüyle dövülmüş, kullanıcısının mistik bağını güçlendiren ve ona tükenmez bir büyü enerjisi kaynağı sunan bir asa.",
+        "effects": [
+            {
+                "type": "spell_attack_bonus",
+                "value": 3
+            },
+            {
+                "type": "spell_dc_bonus",
+                "value": 3
+            },
+            {
+                "type": "restore_spell_slot",
+                "charges": 1
+            }
+        ]
+    },
+    {
+        "name": "Rod of the Vonindod",
+        "name_tr": "Rod of the Vonindod",
+        "rarity": "Rare",
+        "type": "Rod",
+        "description": "**[Mekanik Bilgiler]**\n10 yüke sahiptir. 1 yük harcayarak Locate Object büyüsünü atabilirsin. Özellikle adamantin nesneleri ararken menzili 10 mile çıkar.\n\n**[Atmosfer]**\nAteş devleri tarafından Vonindod parçalarını bulmak için tasarlanmış, adamantinden yapılma ağır ve rünlü bir arama asası.",
+        "effects": [
+            {
+                "type": "charges",
+                "value": 10
+            },
+            {
+                "type": "spell_grant",
+                "value": "Locate Object",
+                "cost": 1
+            },
+            {
+                "type": "special_range_vs_adamantine",
+                "value": "10 miles"
+            }
+        ]
+    },
+    {
+        "name": "Rogue's Mantle",
+        "name_tr": "Rogue's Mantle",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "**[Mekanik Bilgiler]**\n60 fit karanlık görüşü (darkvision) sağlar. Alacakaranlıkta veya karanlıkta bonus aksiyonla 30 fit ışınlanıp bir sonraki saldırına avantaj alabilirsin. Günde bir kez Antagonize büyüsü atabilirsin.\n\n**[Atmosfer]**\nGölgeleri üzerine çeken, giyenin adımlarını sessizleştiren ve onu bir gölge gibi ordan oraya taşıyan karanlık bir pelerin.",
+        "effects": [
+            {
+                "type": "darkvision",
+                "value": 60
+            },
+            {
+                "type": "shadow_step_teleport",
+                "value": 30
+            },
+            {
+                "type": "spell_grant",
+                "value": "Antagonize",
+                "dc": 15,
+                "charges": 1
+            }
+        ]
+    },
+    {
+        "name": "Rope of Entanglement",
+        "name_tr": "Rope of Entanglement",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "**[Mekanik Bilgiler]**\nAksiyonla 20 fit içindeki bir yaratığı yakalaması için emredilebilir (DC 15 Dexterity save). Başarısız olan yaratık engellenir (restrained). Kendini kurtarmak için DC 15 kontrolü yapılmalıdır.\n\n**[Atmosfer]**\nKendi iradesi varmış gibi yılan gibi kıvrılan ve düşmanın etrafını sıkıca sararak onu hareketsiz bırakan büyülü bir halat.",
+        "effects": [
+            {
+                "type": "entangle_attack",
+                "range": 20,
+                "dc": 15
+            }
+        ]
+    },
+    {
+        "name": "Ruinous Flail",
+        "name_tr": "Ruinous Flail",
+        "rarity": "Rare",
+        "type": "Weapon",
+        "description": "**[Mekanik Bilgiler]**\nSaldırı ve hasara +1 bonus verir. Nesnelere ve yapılara iki kat hasar verir. Vuruşta hedef DC 15 Constitution zarını geçemezse 1 dakika zehirlenir ve her tur 2d4 nekrotik hasar alır.\n\n**[Atmosfer]**\nKül grisi renginde, dokunulduğunda buz gibi soğuk olan ve her darbede yıkım getiren ağır bir gürz.",
+        "effects": [
+            {
+                "type": "attack_bonus",
+                "value": 1
+            },
+            {
+                "type": "damage_bonus",
+                "value": 1
+            },
+            {
+                "type": "siege_weapon",
+                "value": "double_damage_objects"
+            },
+            {
+                "type": "on_hit_poison_damage",
+                "value": "2d4",
+                "dc": 15
+            }
+        ]
+    },
+    {
+        "name": "Sage's Signet",
+        "name_tr": "Sage's Signet",
+        "rarity": "Rare",
+        "type": "Ring",
+        "description": "**[Mekanik Bilgiler]**\nGünde bir kez Augury büyüsü atabilirsin. Yüzüğün tipine göre Intelligence modifierını kullanarak ek büyüler kazandırır.\n\n**[Atmosfer]**\nÜzerinde derin bir bilgelik ve öngörü rünü barındıran, sahibine geleceğin sisli perdelerini aralayan altın bir mühür yüzüğü.",
+        "effects": [
+            {
+                "type": "spell_grant",
+                "value": "Augury",
+                "charges": 1
+            }
+        ]
+    },
+    {
+        "name": "Saint Markovia's Thighbone",
+        "name_tr": "Saint Markovia's Thighbone",
+        "rarity": "Rare",
+        "type": "Weapon",
+        "description": "**[Mekanik Bilgiler]**\nMace of Disruption özellikleri taşır. Vampirlere karşı çok etkilidir ancak bir savaştan sonra toza dönüşür.\n\n**[Atmosfer]**\nAzize Markovia'nın kutsallığıyla dolu, undead varlıklara karşı ilahi bir öfke besleyen ve vurduğu her darbeyle onları küle çeviren bir kemik yadigarı.",
+        "effects": [
+            {
+                "type": "mace_of_disruption_properties",
+                "value": true
+            }
+        ]
+    },
+    {
+        "name": "Scaled Ornament",
+        "name_tr": "Scaled Ornament",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "**[Mekanik Bilgiler]**\nAC'ye +1 bonus verir. Korkma ve büyülenme (charmed/frightened) durumlarına karşı bağışıklık kazandırır. 30 fit içindeki dostlarına da bu durumlara karşı avantaj sağlar.\n\n**[Atmosfer]**\nBir ejderhanın pulundan veya pençesinden yapılmış, taşıyana bir ejderhanın sarsılmaz iradesini ve zırhlı derisinin direncini bahşeden süs eşyası.",
+        "effects": [
+            {
+                "type": "ac_bonus",
+                "value": 1
+            },
+            {
+                "type": "immunity",
+                "value": "charmed"
+            },
+            {
+                "type": "immunity",
+                "value": "frightened"
+            }
+        ]
+    },
+    {
+        "name": "Scissors of Shadow Snipping",
+        "name_tr": "Scissors of Shadow Snipping",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "**[Mekanik Bilgiler]**\nAksiyonla 5 fit içindeki birinin gölgesini kesebilirsin (DC 15 Charisma save). Gölgesi kesilen kişi lanetlenir ve gölge ayrı bir varlık gibi hareket eder.\n\n**[Atmosfer]**\nGerçekliği yırtan bir ses çıkaran demir makaslar; ışığın ve bedenin arasındaki bağı koparıp gölgeleri özgür bırakan karanlık bir alet.",
+        "effects": [
+            {
+                "type": "sever_shadow",
+                "dc": 15,
+                "charges": 1
+            }
+        ]
+    },
+    {
+        "name": "Scorpion Armor",
+        "name_tr": "Scorpion Armor",
+        "rarity": "Rare",
+        "type": "Armor",
+        "description": "**[Mekanik Bilgiler]**\nDev bir akrebin kitininden yapılmış plaka zırhtır. Lanetlidir: Giyerken veya çıkarırken DC 15 Constitution zarını geçemezsen 10d10 + 45 zehir hasarı alırsın (geçersen yarısı).\n\n**[Atmosfer]**\nTehlikeli bir zarafete sahip, giyen kişiyi ölümcül bir savunmayla kuşatan ancak bedeli hayati olabilen egzotik bir zırh.",
+        "effects": [
+            {
+                "type": "base_ac",
+                "value": 18
+            },
+            {
+                "type": "curse",
+                "value": "lethal_poison_on_equip"
+            }
+        ]
+    },
+    {
+        "name": "Scroll of Protection",
+        "name_tr": "Scroll of Protection",
+        "rarity": "Rare",
+        "type": "Scroll",
+        "description": "**[Mekanik Bilgiler]**\nBelirli bir yaratık türüne karşı (Fiends, Undead vb.) 5 dakika süren, 5 fit yarıçapında görünmez bir bariyer oluşturur. Yaratıklar bu alanı geçemez veya içeridekilere etki edemez.\n\n**[Atmosfer]**\nÜzerinde koruyucu mühürler parıldayan, okunduğunda etrafını sarsılmaz bir kale gibi saran kutsal bir parşömen.",
+        "effects": [
+            {
+                "type": "protection_barrier",
+                "radius": 5,
+                "duration": "5 minutes"
+            }
+        ]
+    },
+    {
+        "name": "Serpent's Fang",
+        "name_tr": "Serpent's Fang",
+        "rarity": "Rare",
+        "type": "Weapon",
+        "description": "**[Mekanik Bilgiler]**\nBu büyülü kılıç vurduğu her hedefe ekstra 1d10 zehir hasarı verir. Kabzası her elin tutuşuna göre şekil değiştirir.\n\n**[Atmosfer]**\nDev bir yılanın dişinden oyulmuş, zehirli bir parlaklığa sahip ve her kesişinde kurbanının damarlarına ölümcül bir sızı sızdıran bir kılıç.",
+        "effects": [
+            {
+                "type": "extra_damage",
+                "value": "1d10",
+                "damage_type": "poison"
+            }
+        ]
+    },
+    {
+        "name": "Shadowfell Brand Tattoo",
+        "name_tr": "Shadowfell Brand Tattoo",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "**[Mekanik Bilgiler]**\n60 fit karanlık görüşü ve Gizlilik (Stealth) kontrollerinde avantaj kazandırır. Reaksiyonla aldığın hasarı bir kez yarıya indirebilirsin (gün batımında yenilenir).\n\n**[Atmosfer]**\nShadowfell'in kasvetli enerjisini taşıyan, derinin altında kıpırdayan bir gölge gibi görünen ve sahibini gizleyen mistik bir dövme.",
+        "effects": [
+            {
+                "type": "darkvision",
+                "value": 60
+            },
+            {
+                "type": "advantage",
+                "value": "stealth"
+            },
+            {
+                "type": "damage_reduction_reaction",
+                "charges": 1
+            }
+        ]
+    },
+    {
+        "name": "Shadowfell Shard",
+        "name_tr": "Shadowfell Shard",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "**[Mekanik Bilgiler]**\nBir Metamagic kullandığında hedefi lanetleyebilir ve bir sonraki turuna kadar seçtiğin bir statta dezavantaj almasını sağlayabilirsin.\n\n**[Atmosfer]**\nShadowfell'in umutsuzluğunu emmiş, soğuk ve cansız bir kristal parçası; büyünü düşmanın zihnini bulandıran bir lanete dönüştürür.",
+        "effects": [
+            {
+                "type": "metamagic_curse_effect",
+                "value": "disadvantage_on_stat"
+            }
+        ]
+    },
+    {
+        "name": "Shard of Xeluan",
+        "name_tr": "Shard of Xeluan",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "**[Mekanik Bilgiler]**\nBüyü saldırılarına +1 bonus ve Strength skoruna +4 bonus (maks 22) verir. Lanetlidir: 1 attığında rastgele bir talihsizlik başına gelir.\n\n**[Atmosfer]**\nUzak medeniyetlerin gücünü taşıyan obsidyen bir parça; taşıyana devasa bir güç verir ama karşılığında şansını yavaş yavaş tüketir.",
+        "effects": [
+            {
+                "type": "spell_attack_bonus",
+                "value": 1
+            },
+            {
+                "type": "stat_bonus",
+                "stat": "strength",
+                "value": 4
+            },
+            {
+                "type": "curse",
+                "value": "misfortune_on_one"
+            }
+        ]
+    },
+    {
+        "name": "Shield, +1, +2, +3",
+        "name_tr": "Shield, +1, +2, +3",
+        "rarity": "Rare",
+        "type": "Armor",
+        "description": "**[Mekanik Bilgiler]**\nZırh sınıfına (AC) nadirlik seviyesine göre (+1, +2 veya +3) bonus kazandırır. Bu, kalkanın normal +2 AC bonusuna eklenir.\n\n**[Atmosfer]**\nHiçbir darbenin sarsamadığı, en ağır saldırıları bile savuşturmak için mükemmel dengelenmiş efsanevi bir kalkan.",
+        "effects": [
+            {
+                "type": "ac_bonus",
+                "value": 2
+            }
+        ]
+    },
+    {
+        "name": "Shield of Far Sight",
+        "name_tr": "Shield of Far Sight",
+        "rarity": "Rare",
+        "type": "Armor",
+        "description": "**[Mekanik Bilgiler]**\nMental yeteneklere sahip bir yaratık tarafından (örneğin Mind Flayer) uzaktan gözetleme yapmak ve zihin patlaması (Mind Blast) saldırısı düzenlemek için kullanılabilir.\n\n**[Atmosfer]**\nÜzerinde canlı ve sürekli etrafı izleyen bir göz bulunan, sahibine değil de onu yapan efendiye hizmet eden ürkütücü bir savunma aracı.",
+        "effects": [
+            {
+                "type": "remote_viewing",
+                "value": "creator_perspective"
+            }
+        ]
+    },
+    {
+        "name": "Shield of Missile Attraction",
+        "name_tr": "Shield of Missile Attraction",
+        "rarity": "Rare",
+        "type": "Armor",
+        "description": "**[Mekanik Bilgiler]**\nMenzilli silah saldırılarına karşı direnç (resistance) sağlar. Lanetlidir: 10 fit içindeki bir müttefiğine yapılan menzilli saldırıları kendine çeker.\n\n**[Atmosfer]**\nHavada süzülen okları üzerine çekerken onları sönümleyen bir enerjiyle kaplı, ancak kullanıcısını mermi yağmurunun hedefi yapan fedakar bir kalkan.",
+        "effects": [
+            {
+                "type": "resistance",
+                "value": "ranged_attacks"
+            },
+            {
+                "type": "curse",
+                "value": "draw_missiles"
+            }
+        ]
+    },
+    {
+        "name": "Shrieking Greaves",
+        "name_tr": "Shrieking Greaves",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "**[Mekanik Bilgiler]**\n3 yüke sahiptir. Bonus aksiyonla hızını 30 fit artırabilir ve Dexterity zarlarında avantaj alabilirsin. Lanetlidir: Korkarsan (frightened) etrafındakilere kulak tırmalayıcı bir sesle zarar verirsin.\n\n**[Atmosfer]**\nÜzerindeki kafatası kabartmalarıyla her adımda rüzgarla bir çığlık atan, sahibine ürkütücü bir hız bahşeden ama zihnini korkuya açık bırakan tozluklar.",
+        "effects": [
+            {
+                "type": "charges",
+                "value": 3
+            },
+            {
+                "type": "speed_bonus",
+                "value": 30
+            },
+            {
+                "type": "curse",
+                "value": "sonic_scream_on_fear"
+            }
+        ]
+    },
+    {
+        "name": "Siren Song Lyre",
+        "name_tr": "Siren Song Lyre",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "**[Mekanik Bilgiler]**\nAksiyonla şu büyüleri atabilirsin: Animal Friendship, Charm Person, Enthrall, Suggestion (DC 13). Şafakta her büyü bir kez yenilenir.\n\n**[Atmosfer]**\nSirenlerin efsanevi şarkılarını telleri arasında saklayan, çalındığında dinleyenleri hayallere daldıran ve iradelerini yumuşatan büyülü bir lir.",
+        "effects": [
+            {
+                "type": "spell_grant",
+                "value": "Animal Friendship",
+                "dc": 13,
+                "charges": 1
+            },
+            {
+                "type": "spell_grant",
+                "value": "Charm Person",
+                "dc": 13,
+                "charges": 1
+            },
+            {
+                "type": "spell_grant",
+                "value": "Enthrall",
+                "dc": 13,
+                "charges": 1
+            },
+            {
+                "type": "spell_grant",
+                "value": "Suggestion",
+                "dc": 13,
+                "charges": 1
+            }
+        ]
+    },
+    {
+        "name": "Spell Gem",
+        "name_tr": "Spell Gem",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "**[Mekanik Bilgiler]**\nBir büyü saklayabilir ve aksiyonla atabilirsin. Sınıf listende olmayan büyüler için yetenek kontrolü gerekir. Nadirlik seviyesine göre saklayabileceği büyü seviyesi değişir.\n\n**[Atmosfer]**\nBüyücülerin enerji kristalize ettiği, parıltısında ham bir büyü formülü gizli olan ve serbest bırakılmayı bekleyen mistik bir mücevher.",
+        "effects": [
+            {
+                "type": "spell_storage",
+                "value": "one_spell"
+            }
+        ]
+    },
+    {
+        "name": "Spell Scroll",
+        "name_tr": "Spell Scroll",
+        "rarity": "Rare",
+        "type": "Scroll",
+        "description": "**[Mekanik Bilgiler]**\nBir büyünün kelimelerini barındırır. Sınıf listendeyse okuyup atabilirsin, kullanıldıktan sonra toza dönüşür. Seviyesine göre zorluk derecesi değişir.\n\n**[Atmosfer]**\nÜzerinde karmaşık rünlerin ve mühürlerin bulunduğu, içindeki büyünün gücüyle hafifçe titreyen kadim bir parşömen.",
+        "effects": [
+            {
+                "type": "on_use_cast_spell",
+                "value": "stored_spell"
+            }
+        ]
+    },
+    {
+        "name": "Spelljamming Helm",
+        "name_tr": "Spelljamming Helm",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "**[Mekanik Bilgiler]**\nBir gemiyi havada veya uzayda uçurmak için kullanılır. Attunement ve konsantrasyon gerektirir. Taşıyıcı geminin en az 1 ton ağırlığında olması gerekir.\n\n**[Atmosfer]**\nYıldızlar arasında seyahat etmek için tasarlanmış, kullanıcısının zihnini geminin gövdesine bağlayan görkemli bir kaptan koltuğu.",
+        "effects": [
+            {
+                "type": "vessel_propulsion",
+                "value": "space_flight"
+            }
+        ]
+    },
+    {
+        "name": "Spellwrought Tattoo",
+        "name_tr": "Spellwrought Tattoo",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "**[Mekanik Bilgiler]**\nÖzel bir iğneyle yapılan bu dövme, 5. seviyeye kadar tek bir büyüyü barındırır. Büyü atıldıktan sonra dövme silinir. Materyal bileşeni gerektirmez.\n\n**[Atmosfer]**\nDerinin üzerine işlenmiş, içinden mistik bir güç sızan ve büyü serbest bırakıldığında parlayarak havaya karışan büyülü bir mürekkep.",
+        "effects": [
+            {
+                "type": "spell_storage_cast",
+                "value": "up_to_5th_level"
+            }
+        ]
+    },
+    {
+        "name": "Spider Staff",
+        "name_tr": "Spider Staff",
+        "rarity": "Rare",
+        "type": "Staff",
+        "description": "**[Mekanik Bilgiler]**\nSaldırı vuruşlarında ekstra 1d6 zehir hasarı verir. 10 yüke sahiptir: Spider Climb (1 yük), Web (2 yük, DC 15) büyülerini atabilir.\n\n**[Atmosfer]**\nÜzerinde dev bir örümcek figürü bulunan, dokunulduğunda yapışkan bir his veren ve sahibine örümceklerin ustalığını bahşeden bir asa.",
+        "effects": [
+            {
+                "type": "extra_damage",
+                "value": "1d6",
+                "damage_type": "poison"
+            },
+            {
+                "type": "charges",
+                "value": 10
+            },
+            {
+                "type": "spell_grant",
+                "value": "Spider Climb",
+                "cost": 1
+            },
+            {
+                "type": "spell_grant",
+                "value": "Web",
+                "dc": 15,
+                "cost": 2
+            }
+        ]
+    },
+    {
+        "name": "Staff of Charming",
+        "name_tr": "Staff of Charming",
+        "rarity": "Rare",
+        "type": "Staff",
+        "description": "**[Mekanik Bilgiler]**\n10 yüke sahiptir: Charm Person, Command, Comprehend Languages (1 yük) büyülerini atabilir. Bir büyülenme (enchantment) etkisini yansıtma yeteneği vardır.\n\n**[Atmosfer]**\nKelamın gücünü artıran, sahibinin sesine hipnotik bir tını ekleyen ve düşmanların zihinlerini bir sis tabakası gibi kuşatan zarif bir asa.",
+        "effects": [
+            {
+                "type": "charges",
+                "value": 10
+            },
+            {
+                "type": "spell_grant",
+                "value": "Charm Person",
+                "cost": 1
+            },
+            {
+                "type": "spell_grant",
+                "value": "Command",
+                "cost": 1
+            },
+            {
+                "type": "spell_grant",
+                "value": "Comprehend Languages",
+                "cost": 1
+            },
+            {
+                "type": "reflect_enchantment",
+                "value": "reaction_on_success"
+            }
+        ]
+    },
+    {
+        "name": "Staff of Defense",
+        "name_tr": "Staff of Defense",
+        "rarity": "Rare",
+        "type": "Staff",
+        "description": "**[Mekanik Bilgiler]**\nAC'ye +1 bonus verir. 10 yüke sahiptir: Mage Armor (1 yük) veya Shield (2 yük) büyülerini atabilir.\n\n**[Atmosfer]**\nCamdan yapılmış gibi şeffaf görünen ancak meşe kadar dayanıklı olan, saldırıları görünmez bir kalkan gibi savuşturan mistik bir asa.",
+        "effects": [
+            {
+                "type": "ac_bonus",
+                "value": 1
+            },
+            {
+                "type": "charges",
+                "value": 10
+            },
+            {
+                "type": "spell_grant",
+                "value": "Mage Armor",
+                "cost": 1
+            },
+            {
+                "type": "spell_grant",
+                "value": "Shield",
+                "cost": 2
+            }
+        ]
+    },
+    {
+        "name": "Staff of Healing",
+        "name_tr": "Staff of Healing",
+        "rarity": "Rare",
+        "type": "Staff",
+        "description": "**[Mekanik Bilgiler]**\n10 yüke sahiptir: Cure Wounds (1-4 yük), Lesser Restoration (2 yük), Mass Cure Wounds (5 yük) büyülerini atabilir.\n\n**[Atmosfer]**\nYaşam enerjisiyle parlayan, en derin yaraları bile iyileştiren ve dokunduğu yere huzur getiren kutsal bir şifa asası.",
+        "effects": [
+            {
+                "type": "charges",
+                "value": 10
+            },
+            {
+                "type": "spell_grant",
+                "value": "Cure Wounds",
+                "max_level": 4
+            },
+            {
+                "type": "spell_grant",
+                "value": "Lesser Restoration",
+                "cost": 2
+            },
+            {
+                "type": "spell_grant",
+                "value": "Mass Cure Wounds",
+                "cost": 5
+            }
+        ]
+    },
+    {
+        "name": "Staff of Ruling",
+        "name_tr": "Staff of Ruling",
+        "rarity": "Rare",
+        "type": "Staff",
+        "description": "**[Mekanik Bilgiler]**\nFarklı etkiler üretir: Orb of Lightning (Elektrik küresi oluşturur), Staff to Snake (Asayı yılana çevirir), Thunderclap (DC 15 Constitution save, sersemletir).\n\n**[Atmosfer]**\nHükmetme hırsıyla dövülmüş, yıldırımın gücünü ve yılanın kurnazlığını taşıyan kudretli bir hükümdar asası.",
+        "effects": [
+            {
+                "type": "summon_effect",
+                "value": "Giant Poisonous Snake"
+            },
+            {
+                "type": "aoe_thunder_damage",
+                "value": "6d6_to_10d6",
+                "dc": 15
+            }
+        ]
+    },
+    {
+        "name": "Staff of Swarming Insects",
+        "name_tr": "Staff of Swarming Insects",
+        "rarity": "Rare",
+        "type": "Staff",
+        "description": "**[Mekanik Bilgiler]**\n10 yüke sahiptir: Giant Insect (4 yük), Insect Plague (5 yük) büyülerini atabilir. Ayrıca etrafında görüşü engelleyen zararsız böcek bulutu oluşturabilir.\n\n**[Atmosfer]**\nİçinde bitmek bilmeyen bir vızıltı barındıran, yüzlerce böceğin kontrolünü sahibine veren ve düşmanları bir haşere sürüsüyle boğan bir asa.",
+        "effects": [
+            {
+                "type": "charges",
+                "value": 10
+            },
+            {
+                "type": "spell_grant",
+                "value": "Giant Insect",
+                "cost": 4
+            },
+            {
+                "type": "spell_grant",
+                "value": "Insect Plague",
+                "cost": 5
+            },
+            {
+                "type": "obscure_area",
+                "radius": 30
+            }
+        ]
+    },
+    {
+        "name": "Staff of the Ivory Claw",
+        "name_tr": "Staff of the Ivory Claw",
+        "rarity": "Rare",
+        "type": "Staff",
+        "description": "**[Mekanik Bilgiler]**\nBüyü saldırı zarlarına +1 bonus verir. Büyüyle kritik vuruş yaptığında hedefe fazladan 3d6 radyant hasar verir.\n\n**[Atmosfer]**\nFildişinden oyulmuş bir ejderha pençesiyle taçlandırılmış, büyücünün yıkıcı gücünü ilahi bir parlaklıkla odaklayan bir asa.",
+        "effects": [
+            {
+                "type": "spell_attack_bonus",
+                "value": 1
+            },
+            {
+                "type": "extra_damage_on_crit",
+                "value": "3d6",
+                "damage_type": "radiant"
+            }
+        ]
+    },
+    {
+        "name": "Staff of the Rooted Hills",
+        "name_tr": "Staff of the Rooted Hills",
+        "rarity": "Rare",
+        "type": "Staff",
+        "description": "**[Mekanik Bilgiler]**\nSaldırı ve hasara +1 bonus verir. Vurduğun hedef DC 12 Strength savini geçemezse sarmaşıklarla engellenir (restrained). Hold Person veya Speak with Plants atabilir.\n\n**[Atmosfer]**\nEski bir tepenin köklerinden şekillenmiş, doğanın kaba kuvvetini ve tutucu gücünü taşıyan budaklı bir asa.",
+        "effects": [
+            {
+                "type": "attack_bonus",
+                "value": 1
+            },
+            {
+                "type": "damage_bonus",
+                "value": 1
+            },
+            {
+                "type": "on_hit_restrain",
+                "dc": 12
+            },
+            {
+                "type": "spell_grant",
+                "value": "Hold Person",
+                "dc": 12
+            }
+        ]
+    },
+    {
+        "name": "Staff of the Woodlands",
+        "name_tr": "Staff of the Woodlands",
+        "rarity": "Rare",
+        "type": "Staff",
+        "description": "**[Mekanik Bilgiler]**\nSaldırı, hasar ve büyü saldırılarına +2 bonus verir. 10 yüke sahiptir: Awaken, Wall of Thorns, Barkskin gibi çeşitli druid büyüleri atabilir. Bir ağaca dönüşebilir.\n\n**[Atmosfer]**\nOrmanın ruhuyla atan, yaprakları her daim taze kalan ve sahibine doğanın tüm ekosistemine hükmetme gücü veren efsanevi bir asa.",
+        "effects": [
+            {
+                "type": "attack_bonus",
+                "value": 2
+            },
+            {
+                "type": "spell_attack_bonus",
+                "value": 2
+            },
+            {
+                "type": "charges",
+                "value": 10
+            },
+            {
+                "type": "spell_grant",
+                "value": "Pass Without Trace",
+                "cost": 0
+            }
+        ]
+    },
+    {
+        "name": "Staff of Withering",
+        "name_tr": "Staff of Withering",
+        "rarity": "Rare",
+        "type": "Staff",
+        "description": "**[Mekanik Bilgiler]**\n3 yüke sahiptir. Vuruşta 1 yük harcayarak ekstra 2d10 nekrotik hasar verebilirsin. Hedef DC 15 Constitution savini geçemezse 1 saat boyunca Strength/Constitution zarlarında dezavantajlıdır.\n\n**[Atmosfer]**\nKurumuş bir daldan yapılmış gibi görünen, dokunduğu her şeyi çürüten ve yaşam gücünü bir kum saati gibi tüketen karanlık bir asa.",
+        "effects": [
+            {
+                "type": "charges",
+                "value": 3
+            },
+            {
+                "type": "extra_damage",
+                "value": "2d10",
+                "damage_type": "necrotic"
+            },
+            {
+                "type": "debuff",
+                "value": "disadvantage_str_con",
+                "dc": 15
+            }
+        ]
+    },
+    {
+        "name": "Starshot Crossbow",
+        "name_tr": "Starshot Crossbow",
+        "rarity": "Rare",
+        "type": "Weapon",
+        "description": "**[Mekanik Bilgiler]**\nLoading özelliğini yok sayar. Kendi büyülü mermilerini üretir. 3 yüke sahiptir: Can basma, ekstra 2d8 ateş hasarı veya görünmezlik özelliklerinden birini tetikleyebilir.\n\n**[Atmosfer]**\nÜzerinde takımyıldız işlemleri bulunan siyah tahtadan bir yay; her atışında havadan bir yıldız kaymışçasına ışık saçan bir mermi oluşturur.",
+        "effects": [
+            {
+                "type": "ignore_loading",
+                "value": true
+            },
+            {
+                "type": "auto_ammunition",
+                "value": "magic"
+            },
+            {
+                "type": "charges",
+                "value": 3
+            },
+            {
+                "type": "extra_damage",
+                "value": "2d8",
+                "damage_type": "fire"
+            }
+        ]
+    },
+    {
+        "name": "Stone of Controlling Earth Elementals",
+        "name_tr": "Stone of Controlling Earth Elementals",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "**[Mekanik Bilgiler]**\nYere değdiği sürece aksiyonla bir Earth Elemental çağırabilirsin (Conjure Elemental büyüsü gibi). Günde bir kez kullanılabilir.\n\n**[Atmosfer]**\nToprağın kalp atışlarını içinde barındıran ağır bir kaya parçası; yere vurulduğunda yer sarsılır ve devasa bir kaya yığını canlanarak emrine girer.",
+        "effects": [
+            {
+                "type": "summon_elemental",
+                "value": "Earth Elemental",
+                "charges": 1
+            }
+        ]
+    },
+    {
+        "name": "Stonespeaker Crystal",
+        "name_tr": "Stonespeaker Crystal",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "**[Mekanik Bilgiler]**\nInvestigation kontrollerinde avantaj sağlar. 10 yüke sahiptir: Speak with Animals/Dead/Plants büyülerini atabilir. Bazı büyülerin materyal bileşeni olarak kullanılabilir.\n\n**[Atmosfer]**\nTaş devleri tarafından Gravenhollow kütüphanelerinde dövülmüş, cansız nesnelerin fısıltılarını duymanı sağlayan berrak bir kuvars kristali.",
+        "effects": [
+            {
+                "type": "advantage",
+                "value": "investigation"
+            },
+            {
+                "type": "charges",
+                "value": 10
+            },
+            {
+                "type": "spell_grant",
+                "value": "Speak with Dead",
+                "cost": 4
+            }
+        ]
+    },
+    {
+        "name": "Sun Blade",
+        "name_tr": "Sun Blade",
+        "rarity": "Rare",
+        "type": "Weapon",
+        "description": "**[Mekanik Bilgiler]**\nSaldırı ve hasara +2 bonus verir. Radyant (radiant) hasar vurur. Undead varlıklara ekstra 1d8 hasar verir. 15 fit parlak, 15 fit loş güneş ışığı yayar.\n\n**[Atmosfer]**\nSadece bir kabzadan ibaret gibi görünen ancak çekildiğinde saf güneş ışığından bir namlu oluşturan, karanlığın baş düşmanı efsanevi bir kılıç.",
+        "effects": [
+            {
+                "type": "attack_bonus",
+                "value": 2
+            },
+            {
+                "type": "damage_bonus",
+                "value": 2
+            },
+            {
+                "type": "damage_type_override",
+                "value": "radiant"
+            },
+            {
+                "type": "extra_damage_vs_undead",
+                "value": "1d8",
+                "damage_type": "radiant"
+            },
+            {
+                "type": "light_source",
+                "value": "sunlight",
+                "radius": 15
+            }
+        ]
+    },
+    {
+        "name": "Sun Staff",
+        "name_tr": "Sun Staff",
+        "rarity": "Rare",
+        "type": "Staff",
+        "description": "**[Mekanik Bilgiler]**\nSaldırı ve hasara +1 bonus verir. Her vuruşta ekstra 1d8 ateş hasarı verir. Günde bir kez ateş veya radyant hasar veren büyülerin hasar zarlarını tekrar atabilirsin.\n\n**[Atmosfer]**\nİçinden güneş taşı damarları geçen, en karanlık zindanlarda bile öğle güneşinin parlaklığını koruyan ve dokunduğu her şeyi kavuran sıcak bir asa.",
+        "effects": [
+            {
+                "type": "attack_bonus",
+                "value": 1
+            },
+            {
+                "type": "extra_damage",
+                "value": "1d8",
+                "damage_type": "fire"
+            },
+            {
+                "type": "damage_reroll",
+                "value": "fire_radiant_spells"
+            }
+        ]
+    },
+    {
+        "name": "Sunforger",
+        "name_tr": "Sunforger",
+        "rarity": "Rare",
+        "type": "Weapon",
+        "description": "**[Mekanik Bilgiler]**\nSaldırı ve hasara +2 bonus verir. Aksiyonla 120 fite fırlatılabilir ve 20 fitlik bir patlama yaratarak 6d6 ateş hasarı verir (DC 15 Dexterity save).\n\n**[Atmosfer]**\nGüneşin çekirdeğinde dövülmüş gibi parlayan, fırlatıldığında bir meteor gibi patlayan ve sonra sahibinin eline geri dönen ağır bir balyoz.",
+        "effects": [
+            {
+                "type": "attack_bonus",
+                "value": 2
+            },
+            {
+                "type": "aoe_fire_damage",
+                "value": "6d6",
+                "dc": 15,
+                "range": 120,
+                "radius": 20
+            }
+        ]
+    },
+    {
+        "name": "Sword of Life Stealing",
+        "name_tr": "Sword of Life Stealing",
+        "rarity": "Rare",
+        "type": "Weapon",
+        "description": "**[Mekanik Bilgiler]**\n20 attığında (kritik) hedefe fazladan 10 nekrotik hasar verir ve sen de 10 geçici hit point kazanırsın. (Construct ve Undead üzerinde çalışmaz).\n\n**[Atmosfer]**\nNefes alan bir varlığın yaşam enerjisine susamış, kurbanının ruhundan bir parça koparıp sahibine can veren karanlık bir kılıç.",
+        "effects": [
+            {
+                "type": "lifesteal_on_crit",
+                "value": 10,
+                "damage_type": "necrotic"
+            },
+            {
+                "type": "temp_hp_on_crit",
+                "value": 10
+            }
+        ]
+    },
+    {
+        "name": "Sword of Wounding",
+        "name_tr": "Sword of Wounding",
+        "rarity": "Rare",
+        "type": "Weapon",
+        "description": "**[Mekanik Bilgiler]**\nBu kılıçla alınan hasar sadece dinlenmeyle iyileşebilir. Hedefi yaralarsın: Her tur başında 1d4 nekrotik hasar alır ve DC 15 Constitution savi ile durdurabilir.\n\n**[Atmosfer]**\nAsla kapanmayan yaralar açan, dokusu gerçekliği kanatan ve kurbanın içten içe erimesini sağlayan lanetli bir kılıç.",
+        "effects": [
+            {
+                "type": "prevent_regeneration",
+                "value": true
+            },
+            {
+                "type": "bleed_damage",
+                "value": "1d4",
+                "damage_type": "necrotic",
+                "dc": 15
+            }
+        ]
+    },
+    {
+        "name": "Teleportation Tablet",
+        "name_tr": "Teleportation Tablet",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "**[Mekanik Bilgiler]**\nÜzerinde bir ışınlanma çemberi rünü bulunur. Tableti kırdığında 30 fit içinde 1 tur süren ve belirli bir yere bağlanan bir ışınlanma kapısı açar.\n\n**[Atmosfer]**\nKadim bir büyücü tarafından killa işlenmiş tek kullanımlık bir anahtar; kırıldığında uzayı bükerek uzak diyarlara giden mavi bir kapı açar.",
+        "effects": [
+            {
+                "type": "on_break_teleport",
+                "value": "fixed_circle"
+            }
+        ]
+    },
+    {
+        "name": "Tentacle Rod",
+        "name_tr": "Tentacle Rod",
+        "rarity": "Rare",
+        "type": "Rod",
+        "description": "**[Mekanik Bilgiler]**\nÜç tentakül ile 15 fit içindeki hedefe saldırır (+9 bonus). Üçü de değerse hedef DC 15 Constitution savini geçemezse 1 dakika boyunca hızı düşer ve zayıflar.\n\n**[Atmosfer]**\nDrowlar tarafından karanlık derinliklerde tasarlanmış, vurduğunda vantuzlarıyla kurbanın hayatını emen ve onu sersemleten ürkütücü bir kamçı-asa.",
+        "effects": [
+            {
+                "type": "multi_attack",
+                "count": 3,
+                "bonus": 9,
+                "damage": "1d6"
+            },
+            {
+                "type": "debuff_on_triple_hit",
+                "dc": 15
+            }
+        ]
+    },
+    {
+        "name": "Two-Birds Sling",
+        "name_tr": "Two-Birds Sling",
+        "rarity": "Rare",
+        "type": "Weapon",
+        "description": "**[Mekanik Bilgiler]**\nSaldırı ve hasara +1 bonus verir. Bir hedefi vurduğunda mermi 10 fit içindeki ikinci bir hedefe sekebilir ve ona da saldırı yapabilirsin.\n\n**[Atmosfer]**\nAynı anda iki kuşu vurmak deyimini gerçeğe dönüştüren, atılan taşın düşmanlar arasında dans ederek ilerlediği akıllı bir sapan.",
+        "effects": [
+            {
+                "type": "attack_bonus",
+                "value": 1
+            },
+            {
+                "type": "ricochet_attack",
+                "value": "second_target_within_10ft"
+            }
+        ]
+    },
+    {
+        "name": "Ventilating Lungs",
+        "name_tr": "Ventilating Lungs",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "**[Mekanik Bilgiler]**\nKendi ciğerlerinin yerine geçer. Her ortamda (vakum dahil) nefes almanı sağlar. Zehirli gazlara karşı avantaj verir. Günde bir kez Gust of Wind atabilirsin.\n\n**[Atmosfer]**\nSavaş alanlarındaki zehirli dumanlara karşı tasarlanmış metalik ciğer modülleri; sahibine en kirli havada bile dağ havası solutur.",
+        "effects": [
+            {
+                "type": "breathe_anywhere",
+                "value": true
+            },
+            {
+                "type": "advantage",
+                "value": "saving_throws_vs_gas"
+            },
+            {
+                "type": "spell_grant",
+                "value": "Gust of Wind",
+                "dc": 15,
+                "charges": 1
+            }
+        ]
+    },
+    {
+        "name": "Vicious Weapon",
+        "name_tr": "Vicious Weapon",
+        "rarity": "Rare",
+        "type": "Weapon",
+        "description": "**[Mekanik Bilgiler]**\n20 attığında (kritik) hedefe fazladan 7 hasar verir.\n\n**[Atmosfer]**\nVahşi bir doğaya sahip, zırhın en zayıf noktasına kendiliğinden yönelen ve vurduğu her darbeyi daha yıkıcı kılan büyülü bir silah.",
+        "effects": [
+            {
+                "type": "extra_damage_on_crit",
+                "value": 7
+            }
+        ]
+    },
+    {
+        "name": "Voidwalker Armor",
+        "name_tr": "Voidwalker Armor",
+        "rarity": "Rare",
+        "type": "Armor",
+        "description": "**[Mekanik Bilgiler]**\nBonus aksiyonla 30 fit içinde bir projeksiyonunu oluşturabilir ve saldırılarını oradan yapabilirsin. Lanetlidir: Ruhun bedeninden ayrılıp başka bir düzleme hapsolabilir.\n\n**[Atmosfer]**\nBoşluğun karanlığıyla boyanmış, giyenin aynı anda iki yerde birden olmasını sağlayan ancak karşılığında ruhunu talep eden tehlikeli bir deri zırh.",
+        "effects": [
+            {
+                "type": "shadow_projection",
+                "value": 30,
+                "charges": 1
+            },
+            {
+                "type": "curse",
+                "value": "soul_trap_on_long_rest",
+                "dc": 11
+            }
+        ]
+    },
+    {
+        "name": "Mantle of Spell Resistance",
+        "name_tr": "Mantle of Spell Resistance",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "**[Mekanik Bilgiler]**\nBüyülere karşı yapılan kurtarma zarışarında (saving throws) avantaj sağlar.\n\n**[Atmosfer]**\nÜzerinde gümüşten rünler dokunmuş, büyü enerjisini emerek giyeni koruyan ağır bir pelerin.",
+        "effects": [
+            {
+                "type": "advantage",
+                "value": "saving_throws_vs_spells"
+            }
+        ]
+    },
+    {
+        "name": "Mimir",
+        "name_tr": "Mimir",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "**[Mekanik Bilgiler]**\nHavada süzülebilir. Düzlemler hakkında geniş bilgiye sahiptir. Günde bir kez Legend Lore büyüsü atabilir.\n\n**[Atmosfer]**\nÜzerinde düzlemsel rünler bulunan, süzülerek sahibine rehberlik eden metalik bir kafatası cihazı.",
+        "effects": [
+            {
+                "type": "spell_grant",
+                "value": "Legend Lore",
+                "charges": 1
+            },
+            {
+                "type": "planar_knowledge",
+                "value": true
+            }
+        ]
+    },
+    {
+        "name": "Mind Blade",
+        "name_tr": "Mind Blade",
+        "rarity": "Rare",
+        "type": "Weapon",
+        "description": "**[Mekanik Bilgiler]**\nZihin yüzenler (Mind Flayers) veya köleleri tarafından kullanıldığında vuruşlarda ekstra 2d6 psişik hasar verir.\n\n**[Atmosfer]**\nZihinsel bir bağla güçlendirilen, kurbanın sadece bedenini değil zihnini de parçalayan uğursuz bir kılıç.",
+        "effects": [
+            {
+                "type": "extra_damage_conditional",
+                "value": "2d6",
+                "damage_type": "psychic",
+                "condition": "wielded_by_mind_flayer_or_thrall"
+            }
+        ]
+    },
+    {
+        "name": "Mind Crystal",
+        "name_tr": "Mind Crystal",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "**[Mekanik Bilgiler]**\nTek kullanımlık kristal; büyü atarken metamagic etkilerinden birini (Quickened, Heightened vb.) büyüne eklemeni sağlar.\n\n**[Atmosfer]**\nİçinde kristalize olmuş saf büyü enerjisi barındıran, parçalandığında büyüne yeni bir form veren değerli bir mücevher.",
+        "effects": [
+            {
+                "type": "metamagic_infusion",
+                "value": "single_use"
+            }
+        ]
+    },
+    {
+        "name": "Mind Lash",
+        "name_tr": "Mind Lash",
+        "rarity": "Rare",
+        "type": "Weapon",
+        "description": "**[Mekanik Bilgiler]**\nEkstra 2d4 psişik hasar verir. Vurulan hedef DC 15 Wisdom savini geçemezse zihinsel zarlarında dezavantaj alır.\n\n**[Atmosfer]**\nDokunduğu yerden etle birlikte iradeyi de söküp alan, Mind Flayerların can yakan kamçısı.",
+        "effects": [
+            {
+                "type": "extra_damage",
+                "value": "2d4",
+                "damage_type": "psychic"
+            },
+            {
+                "type": "debuff_mental",
+                "dc": 15
+            }
+        ]
+    },
+    {
+        "name": "Mirror of the Past",
+        "name_tr": "Mirror of the Past",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "**[Mekanik Bilgiler]**\nAksiyonla bir nesne veya canlının geçmişine ait kesitler görebilirsin. Günde bir kez kullanılabilir.\n\n**[Atmosfer]**\nÜzerinde bakana değil, odaklandığı şeyin geçmişine dair vizyonlar gösteren platin bir el aynası.",
+        "effects": [
+            {
+                "type": "vision_past",
+                "charges": 1
+            }
+        ]
+    },
+    {
+        "name": "Mizzium Armor",
+        "name_tr": "Mizzium Armor",
+        "rarity": "Rare",
+        "type": "Armor",
+        "description": "**[Mekanik Bilgiler]**\nSana yapılan kritik vuruşlar normal vuruşa dönüşür. Yarı hasar almanı sağlayan Str/Con savlerini geçersen hiç hasar almazsın.\n\n**[Atmosfer]**\nIzzet dökümhanelerinde dövülmüş, mizzium alaşımlı saldırı sönümleyici teknolojik bir zırh.",
+        "effects": [
+            {
+                "type": "crit_negation",
+                "value": true
+            },
+            {
+                "type": "no_damage_on_save",
+                "saving_throws": [
+                    "strength",
+                    "constitution"
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Mizzium Mortar",
+        "name_tr": "Mizzium Mortar",
+        "rarity": "Rare",
+        "type": "Armor",
+        "description": "**[Mekanik Bilgiler]**\n4 yüke sahiptir: 30 fitlik konide 5d4 ateş hasarı veya 3 yükle 20 fitlik silindirde 5d8 ateş hasarı (DC 15 Dex) verebilir.\n\n**[Atmosfer]**\nUcu erimiş mizzium ile parlayan, düşmanların üzerine dökme bir lav seli boşaltan bir çeşit top.",
+        "effects": [
+            {
+                "type": "charges",
+                "value": 4
+            },
+            {
+                "type": "aoe_fire_damage",
+                "value": "5d4",
+                "dc": 15,
+                "cone": 30
+            },
+            {
+                "type": "aoe_fire_damage_burst",
+                "value": "5d8",
+                "dc": 15,
+                "radius": 20,
+                "cost": 3
+            }
+        ]
+    },
+    {
+        "name": "Molten Bronze Skin",
+        "name_tr": "Molten Bronze Skin",
+        "rarity": "Rare",
+        "type": "Armor",
+        "description": "**[Mekanik Bilgiler]**\nAteş hasarına direnç sağlar. Stealth kontrollerinde dezavantaj vermez. Kıyafet altına giyilebilir.\n\n**[Atmosfer]**\nDerine yapışan ve vücut hatlarını alan erimiş bronzdan bir tabaka; giyene metalik bir koruma ve ısıya karşı bağışıklık kazandırır.",
+        "effects": [
+            {
+                "type": "resistance",
+                "value": "fire"
+            },
+            {
+                "type": "no_stealth_disadvantage",
+                "value": true
+            }
+        ]
+    },
+    {
+        "name": "Moon Sickle",
+        "name_tr": "Moon Sickle",
+        "rarity": "Rare",
+        "type": "Weapon",
+        "description": "**[Mekanik Bilgiler]**\nSaldırı, hasar, büyü saldırısı ve büyü DC'sine bonus verir. Can basma büyüleri yaptığında +1d4 can daha verir.\n\n**[Atmosfer]**\nAy ışığıyla parlayan gümüş ağızlı bir orak; druidlerin ve korucuların kutsal bir güç odağıdır.",
+        "effects": [
+            {
+                "type": "attack_bonus",
+                "rarity_scaled": true
+            },
+            {
+                "type": "spell_dc_bonus",
+                "rarity_scaled": true
+            },
+            {
+                "type": "healing_bonus",
+                "value": "1d4"
+            }
+        ]
+    },
+    {
+        "name": "Necklace of Fireballs",
+        "name_tr": "Necklace of Fireballs",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "**[Mekanik Bilgiler]**\nBoncukları fırlatarak Fireball (seviye 3, DC 15) atabilirsin. Birden fazla boncuk aynı anda atılarak büyünün seviyesi artırılabilir.\n\n**[Atmosfer]**\nHer biri patlayıcı bir güce sahip, parlayan kızıl boncuklardan oluşan yıkıcı bir kolye.",
+        "effects": [
+            {
+                "type": "spell_grant_beads",
+                "value": "Fireball",
+                "level": 3,
+                "dc": 15
+            }
+        ]
+    },
+    {
+        "name": "Necklace of Prayer Beads",
+        "name_tr": "Necklace of Prayer Beads",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "**[Mekanik Bilgiler]**\nBless, Cure Wounds, Greater Restoration gibi dualar (büyüler) içerir. Bonus aksiyonla kullanılabilir. Her boncuk günde bir kez çalışır.\n\n**[Atmosfer]**\nİlahi güçle kutsanmış, her biri farklı bir mucizeyi içinde barındıran değerli taşlardan bir kolye.",
+        "effects": [
+            {
+                "type": "bonus_action_cast",
+                "spells": [
+                    "Bless",
+                    "Cure Wounds",
+                    "Lesser Restoration",
+                    "Greater Restoration",
+                    "Branding Smite",
+                    "Wind Walk"
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Needle of Mending",
+        "name_tr": "Needle of Mending",
+        "rarity": "Rare",
+        "type": "Weapon",
+        "description": "**[Mekanik Bilgiler]**\nDikiş iğnesi görünümündedir. Bonus aksiyonla +1 hançere dönüşür. Mending büyüsü atabilir.\n\n**[Atmosfer]**\nSıradan bir iğne gibi saklanabilen ancak komutla ölümcül bir silaha dönüşen ustaca gizlenmiş bir hançer.",
+        "effects": [
+            {
+                "type": "attack_bonus",
+                "value": 1
+            },
+            {
+                "type": "spell_grant",
+                "value": "Mending",
+                "cost": 0
+            }
+        ]
+    },
+    {
+        "name": "Oil of Etherealness",
+        "name_tr": "Oil of Etherealness",
+        "rarity": "Rare",
+        "type": "Potion",
+        "description": "**[Mekanik Bilgiler]**\nSürülmesi 10 dakika sürer. 1 saat boyunca Etherealness büyüsü etkisi verir (Ethereal düzleme geçiş).\n\n**[Atmosfer]**\nGri renkli, buharlaşan mistik bir yağ; vücuda sürüldüğünde kişiyi hayaletimsi bir forma sokarak duvarların içinden geçmesini sağlar.",
+        "effects": [
+            {
+                "type": "plane_shift_temporary",
+                "value": "Ethereal Plane",
+                "duration": "1_hour"
+            }
+        ]
+    },
+    {
+        "name": "Opal of the Ild Rune",
+        "name_tr": "Opal of the Ild Rune",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "**[Mekanik Bilgiler]**\nSoğuk hasarına direnç sağlar. Nesneleri tutuşturabilir. Gücünü bir silaha aktararak +1d6 ateş hasarı ekletebilir (opal yok olur).\n\n**[Atmosfer]**\nİçinde yanan bir rün hapsolmuş dev bir ateş opali; dokunulduğunda sıcaklık yayar ve ateşin kadim gücünü taşır.",
+        "effects": [
+            {
+                "type": "resistance",
+                "value": "cold"
+            },
+            {
+                "type": "ignite_object",
+                "range": 10
+            }
+        ]
+    },
+    {
+        "name": "Orb of the Stein Rune",
+        "name_tr": "Orb of the Stein Rune",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "**[Mekanik Bilgiler]**\nTaşlaşmaya karşı bağışıklık verir. İtilmeye karşı avantaj sağlar. Meld into Stone atabilir. Gücünü bir nesneye aktarabilir.\n\n**[Atmosfer]**\nÜzerinde kristal damarlı taş rünü bulunan ağır bir granit küre; sahibine dağlar kadar sarsılmaz bir irade ve dayanıklılık bahşeder.",
+        "effects": [
+            {
+                "type": "immunity",
+                "value": "petrified"
+            },
+            {
+                "type": "advantage",
+                "value": "shove_resistance"
+            },
+            {
+                "type": "spell_grant",
+                "value": "Meld into Stone",
+                "cost": "short_rest"
+            }
+        ]
+    },
+    {
+        "name": "Outer Essence Shard",
+        "name_tr": "Outer Essence Shard",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "**[Mekanik Bilgiler]**\nMetamagic kullandığında düzlemine göre (İyi, Kötü, Kaos, Düzen) ekstra etkiler tetikler (Can basma, hasar vb.).\n\n**[Atmosfer]**\nDış düzlemlerin özünü barındıran, büyücünün iradesiyle düzlemsel bir enerjiyi açığa çıkaran titreşen bir kristal parçası.",
+        "effects": [
+            {
+                "type": "metamagic_trigger",
+                "value": "planar_essence_effect"
+            }
+        ]
+    },
+    {
+        "name": "Pariah's Shield",
+        "name_tr": "Pariah's Shield",
+        "rarity": "Rare",
+        "type": "Armor",
+        "description": "**[Mekanik Bilgiler]**\nYakındaki her iki müttefik için +1 AC (maks +3) verir. Reaksiyonla yakındaki bir müttefikin aldığı hasarı sen üstlenebilirsin.\n\n**[Atmosfer]**\nBoros lejyonerlerinin fedakarlık sembolü olan, müttefikleri korumak için tasarlanmış ve hasarı emerek sahibine yönlendiren bir kalkan.",
+        "effects": [
+            {
+                "type": "ac_bonus_neighbor",
+                "max": 3
+            },
+            {
+                "type": "damage_interpose",
+                "value": "convert_to_force"
+            }
+        ]
+    },
+    {
+        "name": "Periapt of Proof against Poison",
+        "name_tr": "Periapt of Proof against Poison",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "**[Mekanik Bilgiler]**\nZehir hasarına ve zehirlenme (poisoned) durumuna karşı tam bağışıklık sağlar.\n\n**[Atmosfer]**\nÜzerinde siyah bir mücevher bulunan gümüş bir zincir; vücuda giren her türlü toksini anında nötralize eder.",
+        "effects": [
+            {
+                "type": "immunity",
+                "value": "poison"
+            },
+            {
+                "type": "immunity",
+                "value": "poisoned"
+            }
+        ]
+    },
+    {
+        "name": "Piwafwi of Fire Resistance",
+        "name_tr": "Piwafwi of Fire Resistance",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "**[Mekanik Bilgiler]**\nStealth kontrollerinde avantaj sağlar ve saptanmayı zorlaştırır. Ayrıca ateş hasarına direnç verir.\n\n**[Atmosfer]**\nDrow ustalığıyla dokunmuş, gölgelerle birleşmeyi sağlayan ve cehennem ateşine karşı koruma sunan mistik bir harmani.",
+        "effects": [
+            {
+                "type": "advantage",
+                "value": "stealth"
+            },
+            {
+                "type": "resistance",
+                "value": "fire"
+            }
+        ]
+    },
+    {
+        "name": "Planecaller's Codex",
+        "name_tr": "Planecaller's Codex",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "**[Mekanik Bilgiler]**\n3 yüke sahiptir. Çağırdığın yaratıklara (elemental, fey vb.) bonuslar verebilir veya Banishment DC'sini artırabilirsin.\n\n**[Atmosfer]**\nFiend derisiyle kaplı, Büyük Çark'ın sırlarını barındıran ve öteki dünyalardan varlıkları çağırma sanatında uzmanlaşmış bir büyü kitabı.",
+        "effects": [
+            {
+                "type": "charges",
+                "value": 3
+            },
+            {
+                "type": "summon_bonus",
+                "value": "advantage_damage_rolls"
+            }
+        ]
+    },
+    {
+        "name": "Portable Hole",
+        "name_tr": "Portable Hole",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "**[Mekanik Bilgiler]**\nYere serildiğinde 10 fit derinliğinde boyutlararası bir boşluk açar. Katlandığında ağırlığı yoktur. İçinde hava sınırlıdır.\n\n**[Atmosfer]**\nİpek kadar yumuşak siyah bir kumaş; açıldığında sonsuz bir kuyu gibi görünen gizli bir depolama alanı oluşturur.",
+        "effects": [
+            {
+                "type": "extradimensional_storage",
+                "depth": 10
+            }
+        ]
+    },
+    {
+        "name": "Potion of Aqueous Form",
+        "name_tr": "Potion of Aqueous Form",
+        "rarity": "Rare",
+        "type": "Potion",
+        "description": "**[Mekanik Bilgiler]**\n10 dakika boyunca su formuna dönüşürsün. Yüzme hızı kazandırır, dar boşluklardan geçebilirsin ve fiziksel saldırılara direnç kazanırsın.\n\n**[Atmosfer]**\nİçildiğinde bedeni bir su birikintisine çeviren, akışkan bir formda her türlü engeli aşmanı sağlayan berrak bir iksir.",
+        "effects": [
+            {
+                "type": "swim_speed",
+                "value": 30
+            },
+            {
+                "type": "resistance",
+                "value": "nonmagical_damage"
+            }
+        ]
+    },
+    {
+        "name": "Potion of Clairvoyance",
+        "name_tr": "Potion of Clairvoyance",
+        "rarity": "Rare",
+        "type": "Potion",
+        "description": "**[Mekanik Bilgiler]**\nİçildiğinde Clairvoyance büyüsü etkisi verir; uzak bir yeri görmeni veya duymanı sağlar.\n\n**[Atmosfer]**\nİçinde yüzen ve şişe açıldığında kaybolan bir gözbebeği bulunan sarımsı bir iksir; zihni uzak mesafelere taşır.",
+        "effects": [
+            {
+                "type": "spell_grant",
+                "value": "Clairvoyance"
+            }
+        ]
+    },
+    {
+        "name": "Potion of Diminution",
+        "name_tr": "Potion of Diminution",
+        "rarity": "Rare",
+        "type": "Potion",
+        "description": "**[Mekanik Bilgiler]**\n1d4 saat boyunca küçülürsün (Reduce etkisi). Strength zarlarında dezavantaj alırsın ama saklanmak kolaylaşır.\n\n**[Atmosfer]**\nSürekli daralıp genişleyen kırmızı bir damlacık barındıran bu iksir, içeni bir farenin boyutlarına kadar küçültür.",
+        "effects": [
+            {
+                "type": "size_change",
+                "value": "reduce"
+            }
+        ]
+    },
+    {
+        "name": "Potion of Gaseous Form",
+        "name_tr": "Potion of Gaseous Form",
+        "rarity": "Rare",
+        "type": "Potion",
+        "description": "**[Mekanik Bilgiler]**\n1 saat boyunca Gaseous Form büyüsü etkisi verir. Uçma hızı kazanırsın, dar yerlerden geçebilirsin ve hasar direnci alırsın.\n\n**[Atmosfer]**\nİçinde sis hareket ediyormuş gibi görünen bu iksir, bedeni bir duman bulutuna çevirerek yerçekimine meydan okumanı sağlar.",
+        "effects": [
+            {
+                "type": "spell_grant",
+                "value": "Gaseous Form",
+                "duration": "1_hour"
+            }
+        ]
+    },
+    {
+        "name": "Potion of Giant Strength",
+        "name_tr": "Potion of Giant Strength",
+        "rarity": "Rare",
+        "type": "Potion",
+        "description": "**[Mekanik Bilgiler]**\n1 saat boyunca gücünü (Strength) devasa seviyelere (devin türüne göre 21-29 arası) çıkarır.\n\n**[Atmosfer]**\nİçinde bir devin tırnak parçası yüzen bu bulanık iksir, damarlarında ham bir kuvvetin akmasını sağlar.",
+        "effects": [
+            {
+                "type": "stat_override",
+                "stat": "strength",
+                "value": "depends_on_giant_type"
+            }
+        ]
+    },
+    {
+        "name": "Potion of Healing",
+        "name_tr": "Potion of Healing",
+        "rarity": "Rare",
+        "type": "Potion",
+        "description": "**[Mekanik Bilgiler]**\nİçildiğinde nadirliğine göre (Nadir versiyonu 4d4 + 4 veya daha fazladır) can yeniler.\n\n**[Atmosfer]**\nSallandığında parlayan parlak kırmızı bir sıvı; içilir içilmez yaraları kapatır ve zindelik verir.",
+        "effects": [
+            {
+                "type": "healing",
+                "value": "4d4_plus_4"
+            }
+        ]
+    },
+    {
+        "name": "Potion of Heroism",
+        "name_tr": "Potion of Heroism",
+        "rarity": "Rare",
+        "type": "Potion",
+        "description": "**[Mekanik Bilgiler]**\n1 saat boyunca 10 geçici hit point (temp HP) sağlar ve Bless büyüsü etkisi (zarlara +1d4) verir.\n\n**[Atmosfer]**\nKaynıyormuş gibi fokurdayan mavi bir iksir; korkuyu defeder ve savaşçının içine kahramanca bir cesaret pompalar.",
+        "effects": [
+            {
+                "type": "temp_hp",
+                "value": 10
+            },
+            {
+                "type": "spell_grant",
+                "value": "Bless"
+            }
+        ]
+    },
+    {
+        "name": "Potion of Invulnerability",
+        "name_tr": "Potion of Invulnerability",
+        "rarity": "Rare",
+        "type": "Potion",
+        "description": "**[Mekanik Bilgiler]**\n1 dakika boyunca tüm hasar türlerine karşı direnç (resistance) sağlar.\n\n**[Atmosfer]**\nErimiş demir gibi yoğun ve metalik bir sıvı; bedeni kısa süreliğine sarsılmaz bir kale haline getirir.",
+        "effects": [
+            {
+                "type": "resistance",
+                "value": "all_damage",
+                "duration": "1_minute"
+            }
+        ]
+    },
+    {
+        "name": "Potion of Maximum Power",
+        "name_tr": "Potion of Maximum Power",
+        "rarity": "Rare",
+        "type": "Potion",
+        "description": "**[Mekanik Bilgiler]**\nİçtikten sonra atacağın ilk 4. seviye veya altı hasar büyüsü, zar atmaya gerek kalmadan maksimum hasar verir.\n\n**[Atmosfer]**\nŞekerli bir tadı olan mor parlak sıvı; büyücünün içindeki enerjiyi bir odak noktasına toplar ve patlama gücünü zirveye taşır.",
+        "effects": [
+            {
+                "type": "maximize_damage",
+                "max_level": 4
+            }
+        ]
+    },
+    {
+        "name": "Potion of Mind Control",
+        "name_tr": "Potion of Mind Control",
+        "rarity": "Rare",
+        "type": "Potion",
+        "description": "**[Mekanik Bilgiler]**\nİçildiğinde bir sonraki tur bir canlıya Dominate büyüsü (DC 15) atmanı sağlar. Etki 1 saat sürer ve konsantrasyon gerektirmez.\n\n**[Atmosfer]**\nZihni bulandıran ve başkalarının iradesini çalmanı sağlayan hipnotik bir karışım.",
+        "effects": [
+            {
+                "type": "spell_grant",
+                "value": "Dominate",
+                "dc": 15,
+                "no_concentration": true
+            }
+        ]
+    },
+    {
+        "name": "Potion of Mind Reading",
+        "name_tr": "Potion of Mind Reading",
+        "rarity": "Rare",
+        "type": "Potion",
+        "description": "**[Mekanik Bilgiler]**\nDetect Thoughts büyüsü (DC 13) etkisi verir. Başkalarının yüzeysel düşüncelerini okumanı sağlar.\n\n**[Atmosfer]**\nİçinde pembe bir bulut yüzen yoğun mor sıvı; içenin kulaklarında başkalarının fısıltılarını yankılatır.",
+        "effects": [
+            {
+                "type": "spell_grant",
+                "value": "Detect Thoughts",
+                "dc": 13
+            }
+        ]
+    },
+    {
+        "name": "Prehistoric Figurines of Wondrous Power",
+        "name_tr": "Prehistoric Figurines of Wondrous Power",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "**[Mekanik Bilgiler]**\nYere fırlatıldığında bir dinozora (Pteranodon, Triceratops vb.) dönüşür. Emrine itaat eder ve binek olarak kullanılabilir.\n\n**[Atmosfer]**\nKaba bir işçilikle yontulmuş taş heykelcikler; kadim dünyanın devlerini günümüze çağırır.",
+        "effects": [
+            {
+                "type": "summon_creature",
+                "value": "dinosaur_variants"
+            }
+        ]
+    },
+    {
+        "name": "Professor Orb",
+        "name_tr": "Professor Orb",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "**[Mekanik Bilgiler]**\nBilinçli bir eşyadır (Int 18). Dört farklı akademik konuda uzmanlık (+9 bonus) sağlar. Mage Hand atabilir.\n\n**[Atmosfer]**\nİçinde gümüş ışıklar dönen gri bir kuvars küre; ukala bir bilgin edasıyla sürekli bilgi verir ve sahibine hocalık taslar.",
+        "effects": [
+            {
+                "type": "sentient",
+                "int": 18
+            },
+            {
+                "type": "skill_bonus",
+                "value": 9,
+                "skills": [
+                    "academic_lore"
+                ]
+            }
+        ]
+    },
+    {
+        "name": "Protective Verses",
+        "name_tr": "Protective Verses",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "**[Mekanik Bilgiler]**\nKoruma büyüleri içeren bir büyü kitabıdır. 3 yüke sahiptir. Dispel Magic, Globe of Invulnerability gibi büyüleri destekler.\n\n**[Atmosfer]**\nGümüş ve demirle güçlendirilmiş, üzerinde koruyucu dualar kazınmış ağır bir ciltli kitap.",
+        "effects": [
+            {
+                "type": "charges",
+                "value": 3
+            },
+            {
+                "type": "spell_focus",
+                "value": "wizard"
+            }
+        ]
+    },
+    {
+        "name": "Quaal's Feather Token",
+        "name_tr": "Quaal's Feather Token",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "**[Mekanik Bilgiler]**\nTek kullanımlık tüy; türüne göre dev bir kuş, bir ağaç veya bir süzülen gemi çapası oluşturabilir.\n\n**[Atmosfer]**\nHavada süzülen sıradan bir kuş tüyü gibi görünür ancak havaya atıldığında büyüyle devasa bir nesneye dönüşür.",
+        "effects": [
+            {
+                "type": "summon_object_once",
+                "value": "variants"
+            }
+        ]
+    },
+    {
+        "name": "Reveler's Concertina",
+        "name_tr": "Reveler's Concertina",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "**[Mekanik Bilgiler]**\nBard büyü DC'sine +2 bonus verir. Günde bir kez Otto’s Irresistible Dance büyüsü atabilir.\n\n**[Atmosfer]**\nEğlence ve dans ruhuyla dolu, çalındığında en ciddi düşmanları bile dans ettiren büyülü bir akordiyon.",
+        "effects": [
+            {
+                "type": "spell_dc_bonus",
+                "value": 2
+            },
+            {
+                "type": "spell_grant",
+                "value": "Otto's Irresistible Dance",
+                "charges": 1
+            }
+        ]
+    },
+    {
+        "name": "Rhythm Maker's Drum",
+        "name_tr": "Rhythm Maker's Drum",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "**[Mekanik Bilgiler]**\nBüyü saldırılarına ve DC'sine +1-3 arası bonus verir. Aksiyonla bir Bardic Inspiration kullanımını geri kazanırsın.\n\n**[Atmosfer]**\nRitmiyle büyünün gücünü artıran ve ozanın ilhamını tazeleyen büyülü bir davul.",
+        "effects": [
+            {
+                "type": "spell_attack_bonus",
+                "rarity_scaled": true
+            },
+            {
+                "type": "restore_resource",
+                "value": "Bardic Inspiration",
+                "charges": 1
+            }
+        ]
+    },
+    {
+        "name": "Ring of Animal Influence",
+        "name_tr": "Ring of Animal Influence",
+        "rarity": "Rare",
+        "type": "Ring",
+        "description": "**[Mekanik Bilgiler]**\n3 yüke sahiptir. Animal Friendship, Fear (sadece hayvanlara), Speak with Animals büyülerini atabilir.\n\n**[Atmosfer]**\nÜzerinde bir kurt başı işlenmiş altın yüzük; doğadaki canlılarla bir bağ kurmanı ve onlara hükmetmeni sağlar.",
+        "effects": [
+            {
+                "type": "charges",
+                "value": 3
+            },
+            {
+                "type": "spell_grant",
+                "value": "Animal Friendship"
+            }
+        ]
+    },
+    {
+        "name": "Ring of Evasion",
+        "name_tr": "Ring of Evasion",
+        "rarity": "Rare",
+        "type": "Ring",
+        "description": "**[Mekanik Bilgiler]**\n3 yüke sahiptir. Başarısız olduğun bir Dex kurtarma zarında 1 yük harcayarak zarını otomatik başarıya çevirebilirsin.\n\n**[Atmosfer]**\nIşığı tuhaf bir şekilde kıran, giyenin reflexeslerini insanüstü bir seviyeye taşıyan kıvrak tasarımlı bir yüzük.",
+        "effects": [
+            {
+                "type": "charges",
+                "value": 3
+            },
+            {
+                "type": "auto_success_dex_save",
+                "cost": 1
+            }
+        ]
+    },
+    {
+        "name": "Ring of Feather Falling",
+        "name_tr": "Ring of Feather Falling",
+        "rarity": "Rare",
+        "type": "Ring",
+        "description": "**[Mekanik Bilgiler]**\nDüşerken Feather Fall etkisi sağlar: Yavaşça inersin ve düşme hasarı almazsın.\n\n**[Atmosfer]**\nTüy kadar hafif hissettiren, ayağının altından zemin kaydığında seni nazikçe havada tutan gümüş bir halka.",
+        "effects": [
+            {
+                "type": "feather_fall_constant",
+                "value": true
+            }
+        ]
+    },
+    {
+        "name": "Ring of Free Action",
+        "name_tr": "Ring of Free Action",
+        "rarity": "Rare",
+        "type": "Ring",
+        "description": "**[Mekanik Bilgiler]**\nZorlu arazi (difficult terrain) hareketini yavaşlatmaz. Paralize (paralyzed) veya engellenmiş (restrained) duruma büyüyle düşmezsin.\n\n**[Atmosfer]**\nÜzerinde hiçbir bağ tutmayan pürüzsüz bir yüzük; giyeni her türlü kısıtlamadan ve yavaşlatıcı etkiden korur.",
+        "effects": [
+            {
+                "type": "ignore_difficult_terrain",
+                "value": true
+            },
+            {
+                "type": "immunity",
+                "value": "paralyzed_restrained_magical"
+            }
+        ]
+    },
+    {
+        "name": "Ring of Protection",
+        "name_tr": "Ring of Protection",
+        "rarity": "Rare",
+        "type": "Ring",
+        "description": "**[Mekanik Bilgiler]**\nAC'ye ve tüm kurtarma zarışarına (saving throws) +1 bonus verir.\n\n**[Atmosfer]**\nEtrafında görünmez bir enerji kalkanı oluşturan, her türlü tehlikeye karşı koruyucu bir aura yayan sade ama kudretli bir yüzük.",
+        "effects": [
+            {
+                "type": "ac_bonus",
+                "value": 1
+            },
+            {
+                "type": "save_bonus",
+                "value": 1
+            }
+        ]
+    },
+    {
+        "name": "Ring of Resistance",
+        "name_tr": "Ring of Resistance",
+        "rarity": "Rare",
+        "type": "Ring",
+        "description": "**[Mekanik Bilgiler]**\nBelirli bir hasar türüne (Ateş, Soğuk, Elektrik vb.) karşı direnç (resistance) sağlar.\n\n**[Atmosfer]**\nÜzerindeki taşın rengine göre belirli bir elementin gazabını sönümleyen büyülü bir yüzük.",
+        "effects": [
+            {
+                "type": "resistance",
+                "value": "specified_type"
+            }
+        ]
+    },
+    {
+        "name": "Ring of Spell Storing",
+        "name_tr": "Ring of Spell Storing",
+        "rarity": "Rare",
+        "type": "Ring",
+        "description": "**[Mekanik Bilgiler]**\nİçine 5 seviyeye kadar büyü depolanabilir. Depolanan büyüler, orijinal atanın statlarını kullanarak giyen kişi tarafından atılabilir.\n\n**[Atmosfer]**\nİçinde mistik bir boşluk barındıran, büyücülerin enerjilerini sonradan kullanmak üzere içine hapsettiği bir yüzük.",
+        "effects": [
+            {
+                "type": "spell_storage",
+                "capacity": 5
+            }
+        ]
+    },
+    {
+        "name": "Ring of Temporal Salvation",
+        "name_tr": "Ring of Temporal Salvation",
+        "rarity": "Rare",
+        "type": "Ring",
+        "description": "**[Mekanik Bilgiler]**\nÖldüğünde yok olur ve seni 3d6+Con can ile yakındaki bir noktada canlandırır. Bir seviye yorgunluk (exhaustion) siler.\n\n**[Atmosfer]**\nZamanın akışını kısa süreliğine büken gri kristal bir yüzük; sahibine kaderin elinden kurtulması için son bir şans tanır.",
+        "effects": [
+            {
+                "type": "death_denial",
+                "value": "3d6_plus_con_hp"
+            }
+        ]
+    },
+    {
+        "name": "Ring of the Ram",
+        "name_tr": "Ring of the Ram",
+        "rarity": "Rare",
+        "type": "Ring",
+        "description": "**[Mekanik Bilgiler]**\n3 yüke sahiptir. Uzaktan bir koç başı saldırısı yapar. Vurduğu her yük için 2d10 kuvvet hasarı verir ve hedefi geri iter.\n\n**[Atmosfer]**\nSert bir koç boynuzu şeklindeki bu yüzük, yumruğunla birlikte devasa bir fiziksel gücü havadan fırlatmanı sağlar.",
+        "effects": [
+            {
+                "type": "charges",
+                "value": 3
+            },
+            {
+                "type": "ranged_spell_attack",
+                "damage": "2d10_per_charge",
+                "damage_type": "force",
+                "push": 5
+            }
+        ]
+    },
+    {
+        "name": "Ring of X-Ray Vision",
+        "name_tr": "Ring of X-Ray Vision",
+        "rarity": "Rare",
+        "type": "Ring",
+        "description": "**[Mekanik Bilgiler]**\n1 dakika boyunca katı nesnelerin arkasını (30 fit) görmeni sağlar. Tekrar kullanımda yorgunluk (exhaustion) riski taşır.\n\n**[Atmosfer]**\nGözleri bir şahininki kadar keskin kılan, duvarların ve zırhların ötesini görebilmen için ışığı büken bir yüzük.",
+        "effects": [
+            {
+                "type": "x-ray_vision",
+                "radius": 30
+            },
+            {
+                "type": "exhaustion_risk",
+                "dc": 15
+            }
+        ]
+    },
+    {
+        "name": "Robe of Eyes",
+        "name_tr": "Robe of Eyes",
+        "rarity": "Rare",
+        "type": "Wondrous Item",
+        "description": "**[Mekanik Bilgiler]**\nHer yöne bakmanı sağlar (360 derece görüş). Perception çekimlerinde avantaj verir. Gizlenenleri görebilirsin ama ışık karşısında kör olabilirsin.\n\n**[Atmosfer]**\nÜzeri onlarca canlı göz deseniyle kaplı bir cübbe; giyenin arkasını bile görmesini sağlayarak ona sarsılmaz bir farkındalık kazandırır.",
+        "effects": [
+            {
+                "type": "advantage",
+                "value": "perception"
+            },
+            {
+                "type": "all_around_vision",
+                "value": true
+            }
+        ]
+    }
+]

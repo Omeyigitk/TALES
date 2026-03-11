@@ -1,0 +1,281 @@
+[
+    {
+        "name": "Light Armor",
+        "name_tr": "Hafif Zırh",
+        "rarity": "Common",
+        "type": "Armor",
+        "category": "Zırh",
+        "description": "**[Mekanik Bilgiler]** Giyme süresi: 1 dakika. Çıkarma süresi: 1 dakika.\n\n**[Atmosfer]** Çevikliği engellemeyen, esnek malzemelerden yapılmış temel koruma kalkanı.",
+        "effects": []
+    },
+    {
+        "name": "Medium Armor",
+        "name_tr": "Orta Zırh",
+        "rarity": "Common",
+        "type": "Armor",
+        "category": "Zırh",
+        "description": "**[Mekanik Bilgiler]** Giyme süresi: 5 dakika. Çıkarma süresi: 1 dakika.\n\n**[Atmosfer]** Koruma ve hareketlilik arasında denge sağlayan standart askeri donanım.",
+        "effects": []
+    },
+    {
+        "name": "Heavy Armor",
+        "name_tr": "Ağır Zırh",
+        "rarity": "Common",
+        "type": "Armor",
+        "category": "Zırh",
+        "description": "**[Mekanik Bilgiler]** Giyme süresi: 10 dakika. Çıkarma süresi: 5 dakika.\n\n**[Atmosfer]** Savaş alanında en üst düzey koruma sağlayan, giyilmesi zaman alan ağır metal levhalar.",
+        "effects": []
+    },
+    {
+        "name": "Rope",
+        "name_tr": "Halat (Genel)",
+        "rarity": "Common",
+        "type": "Adventuring Gear",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Kendir veya ipek fark etmeksizin 2 canı (HP) vardır ve DC 17 Güç kontrolü ile koparılabilir.\n\n**[Atmosfer]** Bağlama, tırmanma ve çekme işleri için her maceracının ihtiyaç duyduğu temel araç.",
+        "effects": []
+    },
+    {
+        "name": "Crystal",
+        "name_tr": "Kristal (Mistik Odak)",
+        "rarity": "Common",
+        "type": "Spellcasting Focus",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Büyücü, Sorcerer veya Warlock'lar için mistik bir odak.\n\n**[Atmosfer]** Büyü enerjisini kanalize etmek için kullanılan, ışığı kıran şeffaf bir kristal.",
+        "effects": []
+    },
+    {
+        "name": "Orb",
+        "name_tr": "Küre (Mistik Odak)",
+        "rarity": "Common",
+        "type": "Spellcasting Focus",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Büyücü, Sorcerer veya Warlock'lar için mistik bir odak.\n\n**[Atmosfer]** Avuç içine tam oturan, içinde arcane güçlerin titreştiği pürüzsüz bir küre.",
+        "effects": []
+    },
+    {
+        "name": "Rod",
+        "name_tr": "Asa (Mistik Odak - Rod)",
+        "rarity": "Common",
+        "type": "Spellcasting Focus",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Büyücü, Sorcerer veya Warlock'lar için mistik bir odak.\n\n**[Atmosfer]** Kısa ama güçlü, büyü sözlerini fiziksel dünyaya aktaran metal bir çubuk.",
+        "effects": []
+    },
+    {
+        "name": "Staff",
+        "name_tr": "Asa (Mistik Odak - Staff)",
+        "rarity": "Common",
+        "type": "Spellcasting Focus",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Büyücü, Sorcerer veya Warlock'lar için mistik bir odak.\n\n**[Atmosfer]** Üzerinde rünler barındıran, büyücünün iradesini temsil eden uzun bir asa.",
+        "effects": []
+    },
+    {
+        "name": "Wand",
+        "name_tr": "Değnek (Mistik Odak)",
+        "rarity": "Common",
+        "type": "Spellcasting Focus",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Büyücü, Sorcerer veya Warlock'lar için mistik bir odak.\n\n**[Atmosfer]** İnce ve zarif, isabetli büyü yönlendirmesi için tasarlanmış sihirli bir değnek.",
+        "effects": []
+    },
+    {
+        "name": "Wooden Staff",
+        "name_tr": "Ahşap Asa (Druid Odağı)",
+        "rarity": "Common",
+        "type": "Druidic Focus",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Druid'ler tarafından kullanılan doğal bir odak.\n\n**[Atmosfer]** Doğanın kutsal enerjisini kanalize eden, yaşayan bir ağacın dalından oyulmuş asa.",
+        "effects": []
+    },
+    {
+        "name": "Yew Wand",
+        "name_tr": "Porsuk Değneği (Druid Odağı)",
+        "rarity": "Common",
+        "type": "Druidic Focus",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Druid'ler tarafından kullanılan doğal bir odak.\n\n**[Atmosfer]** Kadim bir porsuk ağacından yapılmış, mistik bir aura yayan sihirli değnek.",
+        "effects": []
+    },
+    {
+        "name": "Amulet",
+        "name_tr": "Muska (Kutsal Sembol)",
+        "rarity": "Common",
+        "type": "Holy Symbol",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Bir boyun zinciriyle giyilen kutsal bir sembol.\n\n**[Atmosfer]** Üzerinde bir tanrının amblemi bulunan, Cleric ve Paladin'lerin inancını temsil eden muska.",
+        "effects": []
+    },
+    {
+        "name": "Emblem",
+        "name_tr": "Amblem (Kutsal Sembol)",
+        "rarity": "Common",
+        "type": "Holy Symbol",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Genellikle bir kalkan üzerine perçinlenmiş veya dikilmiş kutsal bir sembol.\n\n**[Atmosfer]** Savaş meydanında inancı gösteren ve ilahi güçleri çağırmayı sağlayan görünür bir işaret.",
+        "effects": []
+    },
+    {
+        "name": "Reliquary",
+        "name_tr": "Röliker (Kutsal Sembol)",
+        "rarity": "Common",
+        "type": "Holy Symbol",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** İçinde bir kutsal emanet barındıran küçük, kapalı bir kap veya süs.\n\n**[Atmosfer]** Kadim bir azizin veya kutsal bir varlığın parçasını koruyan, ilahi enerjiyle dolu kap.",
+        "effects": []
+    },
+    {
+        "name": "Barrel",
+        "name_tr": "Fıçı",
+        "rarity": "Common",
+        "type": "Adventuring Gear",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Kapasite: 40 galon sıvı, 4 fit küp katı.\n\n**[Atmosfer]** İçeceklerin veya tahılların saklandığı, sağlam ahşap ve metal halkalardan oluşan büyük fıçı.",
+        "effects": []
+    },
+    {
+        "name": "Basket",
+        "name_tr": "Sepet",
+        "rarity": "Common",
+        "type": "Adventuring Gear",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Kapasite: 2 fit küp veya 40 libre eşya.\n\n**[Atmosfer]** Eşyaları taşımak için hasırdan veya ince ahşaptan örülmüş hafif kap.",
+        "effects": []
+    },
+    {
+        "name": "Bucket",
+        "name_tr": "Kova",
+        "rarity": "Common",
+        "type": "Adventuring Gear",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Kapasite: 3 galon sıvı veya yarım fit küp katı.\n\n**[Atmosfer]** Su taşımak veya genel kullanım için tasarlanmış saplı, silindirik kap.",
+        "effects": []
+    },
+    {
+        "name": "Case, Crossbow Bolt",
+        "name_tr": "Arbalet Oku Kutusu",
+        "rarity": "Common",
+        "type": "Adventuring Gear",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Kapasite: 20 adet arbalet oku.\n\n**[Atmosfer]** Okları nemden koruyan ve hızlı erişim sağlayan deri veya metal kutu.",
+        "effects": []
+    },
+    {
+        "name": "Case, Map/Scroll",
+        "name_tr": "Harita/Parşömen Kutusu",
+        "rarity": "Common",
+        "type": "Adventuring Gear",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Kapasite: 10 adet harita veya 5 adet parşömen.\n\n**[Atmosfer]** Değerli belgeleri buruşmaktan ve sudan koruyan silindirik kılıf.",
+        "effects": []
+    },
+    {
+        "name": "Chest",
+        "name_tr": "Sandık",
+        "rarity": "Common",
+        "type": "Adventuring Gear",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Kapasite: 12 fit küp veya 300 libre eşya.\n\n**[Atmosfer]** Hazineleri ve önemli ekipmanları saklamak için kullanılan kilitlenebilir sağlam sandık.",
+        "effects": []
+    },
+    {
+        "name": "Flask or Tankard",
+        "name_tr": "Matara veya Kupa",
+        "rarity": "Common",
+        "type": "Adventuring Gear",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Kapasite: 1 pint (yaklaşık yarım litre) sıvı.\n\n**[Atmosfer]** Maceracıların yol boyunca susuzluklarını giderdikleri basit içecek kabı.",
+        "effects": []
+    },
+    {
+        "name": "Glass Bottle",
+        "name_tr": "Cam Şişe",
+        "rarity": "Common",
+        "type": "Adventuring Gear",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Kapasite: 1.5 pint sıvı.\n\n**[Atmosfer]** İksirler veya kıymetli şaraplar için kullanılan şeffaf ama kırılgan cam kap.",
+        "effects": []
+    },
+    {
+        "name": "Jug or Pitcher",
+        "name_tr": "Testi veya Sürahi",
+        "rarity": "Common",
+        "type": "Adventuring Gear",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Kapasite: 1 galon sıvı.\n\n**[Atmosfer]** Masalarda veya mutfakta sıvı servis etmek için kullanılan kulplu testi.",
+        "effects": []
+    },
+    {
+        "name": "Pot, iron",
+        "name_tr": "Demir Tencere",
+        "rarity": "Common",
+        "type": "Adventuring Gear",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Kapasite: 1 galon sıvı.\n\n**[Atmosfer]** Kamp ateşinde yemek pişirmek için ideal, ağır ve dayanıklı metal tencere.",
+        "effects": []
+    },
+    {
+        "name": "Pouch",
+        "name_tr": "Kese",
+        "rarity": "Common",
+        "type": "Adventuring Gear",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Kapasite: 1/5 fit küp veya 6 libre eşya.\n\n**[Atmosfer]** Bozuk paraları, bileşenleri veya küçük değerli eşyaları saklamak için bele asılan deri kese.",
+        "effects": []
+    },
+    {
+        "name": "Quiver",
+        "name_tr": "Sadak",
+        "rarity": "Common",
+        "type": "Adventuring Gear",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Kapasite: 20 adet ok.\n\n**[Atmosfer]** Okçuların oklarını pratik bir şekilde sırtlarında taşımalarını sağlayan kılıf.",
+        "effects": []
+    },
+    {
+        "name": "Sack",
+        "name_tr": "Çuval",
+        "rarity": "Common",
+        "type": "Adventuring Gear",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Kapasite: 1 fit küp veya 30 libre eşya.\n\n**[Atmosfer]** Rastgele ganimetleri ve ağır olmayan eşyaları topluca taşımak için kullanılan bez torba.",
+        "effects": []
+    },
+    {
+        "name": "Vial",
+        "name_tr": "Şişecik (Vial)",
+        "rarity": "Common",
+        "type": "Adventuring Gear",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Kapasite: 4 oz. (yaklaşık 120 ml) sıvı.\n\n**[Atmosfer]** Simyasal karışımları veya zehirleri saklamak için kullanılan çok küçük cam şişe.",
+        "effects": []
+    },
+    {
+        "name": "Waterskin",
+        "name_tr": "Su Tulumu",
+        "rarity": "Common",
+        "type": "Adventuring Gear",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Kapasite: 4 pint sıvı.\n\n**[Atmosfer]** Uzun yolculuklarda suyun serin ve güvenli kalmasını sağlayan deri matara.",
+        "effects": []
+    },
+    {
+        "name": "Fargab",
+        "name_tr": "Fargab (Uzak İletişim Cihazı)",
+        "rarity": "Common",
+        "type": "Adventuring Gear",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Çiftler halinde çalışır. 18 mil mesafeye kadar 25 kelimeye kadar sesli mesaj gönderir.\n\n**[Atmosfer]** Radio frekanslarını kullanarak uzak mesafelerden iletişim kurmayı sağlayan teknolojik bir sırt çantası cihazı.",
+        "effects": []
+    },
+    {
+        "name": "Narycrash",
+        "name_tr": "Narycrash (Paraşüt Cihazı)",
+        "rarity": "Common",
+        "type": "Adventuring Gear",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Düşerken reaksiyon olarak açılabilir. Dakikada 60 fit hızla güvenli iniş sağlar. 10 fit kala d20 atılır; 5 veya altı gelirse sönerek normal düşüşe geçer.\n\n**[Atmosfer]** Balon temelli bir paraşüt mekanizması barındıran, yükseklerden düşmeyi engelleyen sırt çantası donanımı.",
+        "effects": []
+    }
+]

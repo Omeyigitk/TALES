@@ -1,0 +1,1156 @@
+[
+    {
+        "name": "Sanctum Amulet",
+        "name_tr": "Kutsal Sığınak Muskası",
+        "rarity": "Very Rare",
+        "type": "Wondrous Item",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Bu muskayı taktığınız sürece nekrotik (necrotic) hasara karşı direnç kazanırsınız. Ayrıca, Spare the Dying büyüsünü bir eylem veya bonus eylem olarak kullanabilirsiniz.\n\n**Rün Çağırma:** 60 fit yakınınızdaki bir yaratığın canı 0'a düştüğünde, tepkinizi (reaction) kullanarak muskanın rününü tetikleyebilirsiniz. Muska soluk bir ışıkla parlar ve yaratığın canı 0 yerine 1'de kalır. Bu özellik kullanıldıktan sonra şafak vaktine kadar tekrar kullanılamaz.\n\n**[Atmosfer]** Sedefli bir zincirin ucunda asılı duran siyah opak bir pandantif. Pandantifin arkasında kutsal bir rün işlenmiştir.",
+        "effects": [
+            {
+                "type": "resistance",
+                "value": "necrotic"
+            },
+            {
+                "type": "spell_auto",
+                "spellName": "Spare the Dying"
+            }
+        ]
+    },
+    {
+        "name": "Sapphire Buckler",
+        "name_tr": "Safir Kalkan",
+        "rarity": "Very Rare",
+        "type": "Armor",
+        "category": "Büyülü Eşya",
+        "description": "**[Mekanik Bilgiler]** Bu kalkanı kuşandığınızda psikolojik (psychic) ve gökgürültüsü (thunder) hasarına karşı direnç kazanırsınız. Ayrıca, 5 fit yakınınızdaki bir yaratıktan hasar aldığınızda, tepkinizi kullanarak o yaratığa 2d6 gökgürültüsü hasarı verebilirsiniz.\n\n**Tespit:** Bir eylem olarak, kalkanı kullanarak bir sonraki turunuzun sonuna kadar 1 mil yakınınızdaki Aberration (hilkat garibesi) türü yaratıkları tespit edebilirsiniz. Eğer menzil içinde bir Aberration varsa, kalkan düşük bir uğultu çıkarır ve siz de onların yönünü öğrenirsiniz. Bu özellik şafak vaktine kadar tekrar kullanılamaz.\n\n**[Atmosfer]** Siyah bir safir ejderhasının pulundan yapılmış kristal mavisi bir kalkan. Aberration'ların etkisini kökünden kazımak için tasarlanmıştır.",
+        "effects": [
+            {
+                "type": "ac_bonus",
+                "value": 2
+            },
+            {
+                "type": "resistance",
+                "value": "psychic"
+            },
+            {
+                "type": "resistance",
+                "value": "thunder"
+            }
+        ]
+    },
+    {
+        "name": "Spiked Armor",
+        "name_tr": "Çivili Zırh",
+        "rarity": "Common",
+        "type": "Armor",
+        "category": "Zırh",
+        "description": "**[Mekanik Bilgiler]** Bu zırh 14 + Çeviklik (Dex) modifiyenizi (maksimum +2) sağlar. Gizlilik (Stealth) kontrollerinde dezavantaj sağlar.\n\n**[Atmosfer]** Gövde ve uzuvlar boyunca yerleştirilmiş keskin metal çivilerle bezeli deri bir zırh. Genellikle savaşçılar tarafından yakın dövüşte ekstra savunma ve saldırı potansiyeli için kullanılır.",
+        "effects": [
+            {
+                "type": "ac_set",
+                "value": 14
+            }
+        ]
+    },
+    {
+        "name": "Halfplate",
+        "name_tr": "Yarım Plaka Zırh",
+        "rarity": "Common",
+        "type": "Armor",
+        "category": "Zırh",
+        "description": "**[Mekanik Bilgiler]** Bu zırh 15 + Çeviklik (Dex) modifiyenizi (maksimum +2) sağlar. Gizlilik (Stealth) kontrollerinde dezavantaj sağlar.\n\n**[Atmosfer]** Gövdenin çoğunu koruyan şekillendirilmiş metal plakalardan oluşur, ancak eklemler ve bacaklar daha hafif koruma altındadır. Plaka zırhın koruması ile orta zırhın hareketliliği arasında bir denge sunar.",
+        "effects": [
+            {
+                "type": "ac_set",
+                "value": 15
+            }
+        ]
+    },
+    {
+        "name": "Dart",
+        "name_tr": "Dart",
+        "rarity": "Common",
+        "type": "Weapon",
+        "category": "Silah",
+        "description": "**[Mekanik Bilgiler]** Hasar: 1d4 Delici (Piercing). Özellikler: Finesse, Thrown (menzil 20/60).\n\n**[Atmosfer]** Hızlı ve sessiz saldırılar için tasarlanmış küçük, dengeli fırlatma silahı.",
+        "effects": [
+            {
+                "type": "damage_dice",
+                "value": "1d4",
+                "damageType": "piercing"
+            },
+            {
+                "type": "property",
+                "value": "Finesse"
+            },
+            {
+                "type": "property",
+                "value": "Thrown"
+            }
+        ]
+    },
+    {
+        "name": "Sling",
+        "name_tr": "Sapan",
+        "rarity": "Common",
+        "type": "Weapon",
+        "category": "Silah",
+        "description": "**[Mekanik Bilgiler]** Hasar: 1d4 Ezici (Bludgeoning). Özellikler: Ammunition (menzil 30/120).\n\n**[Atmosfer]** Basit ama etkili bir menzilli silah, taş veya kurşun mermileri fırlatmak için kullanılır.",
+        "effects": [
+            {
+                "type": "damage_dice",
+                "value": "1d4",
+                "damageType": "bludgeoning"
+            },
+            {
+                "type": "property",
+                "value": "Ammunition"
+            }
+        ]
+    },
+    {
+        "name": "Lance",
+        "name_tr": "Süvari Mızrağı",
+        "rarity": "Common",
+        "type": "Weapon",
+        "category": "Silah",
+        "description": "**[Mekanik Bilgiler]** Hasar: 1d12 Delici (Piercing). Özellikler: Reach, Special (Binek üzerindeyken tek elle kullanılabilir, 5 fit yakındaki hedeflere saldırırken dezavantajlıdır).\n\n**[Atmosfer]** Genellikle atlı savaşçılar tarafından kullanılan uzun ve ağır bir mızrak.",
+        "effects": [
+            {
+                "type": "damage_dice",
+                "value": "1d12",
+                "damageType": "piercing"
+            },
+            {
+                "type": "property",
+                "value": "Reach"
+            },
+            {
+                "type": "property",
+                "value": "Special"
+            }
+        ]
+    },
+    {
+        "name": "Pike",
+        "name_tr": "Kargı",
+        "rarity": "Common",
+        "type": "Weapon",
+        "category": "Silah",
+        "description": "**[Mekanik Bilgiler]** Hasar: 1d10 Delici (Piercing). Özellikler: Heavy, Reach, Two-handed.\n\n**[Atmosfer]** Piyade birlikleri tarafından süvari hücumlarını durdurmak için kullanılan devasa bir mızrak çeşidi.",
+        "effects": [
+            {
+                "type": "damage_dice",
+                "value": "1d10",
+                "damageType": "piercing"
+            },
+            {
+                "type": "property",
+                "value": "Heavy"
+            },
+            {
+                "type": "property",
+                "value": "Reach"
+            },
+            {
+                "type": "property",
+                "value": "Two-handed"
+            }
+        ]
+    },
+    {
+        "name": "Scimitar",
+        "name_tr": "Pala",
+        "rarity": "Common",
+        "type": "Weapon",
+        "category": "Silah",
+        "description": "**[Mekanik Bilgiler]** Hasar: 1d6 Kesici (Slashing). Özellikler: Finesse, Light.\n\n**[Atmosfer]** Kavisli tek ağızlı bir kılıç, çeviklik gerektiren hızlı kesme hareketleri için idealdir.",
+        "effects": [
+            {
+                "type": "damage_dice",
+                "value": "1d6",
+                "damageType": "slashing"
+            },
+            {
+                "type": "property",
+                "value": "Finesse"
+            },
+            {
+                "type": "property",
+                "value": "Light"
+            }
+        ]
+    },
+    {
+        "name": "Trident",
+        "name_tr": "Üçlü Çatal",
+        "rarity": "Common",
+        "type": "Weapon",
+        "category": "Silah",
+        "description": "**[Mekanik Bilgiler]** Hasar: 1d6 Delici (Piercing). Özellikler: Thrown (menzil 20/60), Versatile (1d8).\n\n**[Atmosfer]** Deniz savaşçıları tarafından sıkça kullanılan, üç ucu bulunan mızrak benzeri bir silah.",
+        "effects": [
+            {
+                "type": "damage_dice",
+                "value": "1d6",
+                "damageType": "piercing"
+            },
+            {
+                "type": "property",
+                "value": "Thrown"
+            },
+            {
+                "type": "property",
+                "value": "Versatile",
+                "dice": "1d8"
+            }
+        ]
+    },
+    {
+        "name": "War pick",
+        "name_tr": "Savaş Kazması",
+        "rarity": "Common",
+        "type": "Weapon",
+        "category": "Silah",
+        "description": "**[Mekanik Bilgiler]** Hasar: 1d8 Delici (Piercing).\n\n**[Atmosfer]** Kalın zırhları delmek için tasarlanmış ağır ve sivri uçlu bir yakın dövüş silahı.",
+        "effects": [
+            {
+                "type": "damage_dice",
+                "value": "1d8",
+                "damageType": "piercing"
+            }
+        ]
+    },
+    {
+        "name": "Whip",
+        "name_tr": "Kamçı",
+        "rarity": "Common",
+        "type": "Weapon",
+        "category": "Silah",
+        "description": "**[Mekanik Bilgiler]** Hasar: 1d4 Kesici (Slashing). Özellikler: Finesse, Reach.\n\n**[Atmosfer]** Uzun ve esnek bir deri şerit, rakipleri uzaktan yaralamak veya şaşırtmak için kullanılır.",
+        "effects": [
+            {
+                "type": "damage_dice",
+                "value": "1d4",
+                "damageType": "slashing"
+            },
+            {
+                "type": "property",
+                "value": "Finesse"
+            },
+            {
+                "type": "property",
+                "value": "Reach"
+            }
+        ]
+    },
+    {
+        "name": "Blowgun",
+        "name_tr": "Üfleme Borusu",
+        "rarity": "Common",
+        "type": "Weapon",
+        "category": "Silah",
+        "description": "**[Mekanik Bilgiler]** Hasar: 1 Delici (Piercing). Özellikler: Ammunition (menzil 25/100), Loading.\n\n**[Atmosfer]** Küçük iğneler fırlatmak için kullanılan dar bir tüp, genellikle zehirli mühimmatla birlikte gizli suikastlar için tercih edilir.",
+        "effects": [
+            {
+                "type": "damage_static",
+                "value": 1,
+                "damageType": "piercing"
+            },
+            {
+                "type": "property",
+                "value": "Ammunition"
+            },
+            {
+                "type": "property",
+                "value": "Loading"
+            }
+        ]
+    },
+    {
+        "name": "Crossbow, hand",
+        "name_tr": "El Arbaleti",
+        "rarity": "Common",
+        "type": "Weapon",
+        "category": "Silah",
+        "description": "**[Mekanik Bilgiler]** Hasar: 1d6 Delici (Piercing). Özellikler: Ammunition (menzil 30/120), Light, Loading.\n\n**[Atmosfer]** Tek elle kullanılabilecek kadar küçük ve hafif, hassas mühendislik ürünü bir arbalet.",
+        "effects": [
+            {
+                "type": "damage_dice",
+                "value": "1d6",
+                "damageType": "piercing"
+            },
+            {
+                "type": "property",
+                "value": "Ammunition"
+            },
+            {
+                "type": "property",
+                "value": "Light"
+            },
+            {
+                "type": "property",
+                "value": "Loading"
+            }
+        ]
+    },
+    {
+        "name": "Net",
+        "name_tr": "Ağ",
+        "rarity": "Common",
+        "type": "Weapon",
+        "category": "Silah",
+        "description": "**[Mekanik Bilgiler]** Hasar: Yok. Özellikler: Special, Thrown (5/15). İsabet ederse hedefi kısıtlar (Restrained).\n\n**[Atmosfer]** Düşmanları yakalamak ve hareketlerini engellemek için kullanılan ağırlıklı fırlatma ağı.",
+        "effects": [
+            {
+                "type": "property",
+                "value": "Special"
+            },
+            {
+                "type": "property",
+                "value": "Thrown"
+            }
+        ]
+    },
+    {
+        "name": "Arrows (20)",
+        "name_tr": "Oklar (20)",
+        "rarity": "Common",
+        "type": "Ammunition",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Yaylar için kullanılan mühimmat paketi.\n\n**[Atmosfer]** Deri bir okluk içinde taşınan yirmi adet sivri uçlu ok.",
+        "effects": []
+    },
+    {
+        "name": "Blowgun needles (50)",
+        "name_tr": "Üfleme Borusu İğneleri (50)",
+        "rarity": "Common",
+        "type": "Ammunition",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Üfleme boruları için kullanılan mühimmat paketi.\n\n**[Atmosfer]** Küçük bir kutu içine yerleştirilmiş elli adet ince metal iğne.",
+        "effects": []
+    },
+    {
+        "name": "Crossbow bolts (20)",
+        "name_tr": "Arbalet Cıvataları (20)",
+        "rarity": "Common",
+        "type": "Ammunition",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Arbaletler için kullanılan mühimmat paketi.\n\n**[Atmosfer]** Arbaletler için özel olarak dengelenmiş yirmi adet kısa ve güçlü cıvata.",
+        "effects": []
+    },
+    {
+        "name": "Sling bullets (20)",
+        "name_tr": "Sapan Mermileri (20)",
+        "rarity": "Common",
+        "type": "Ammunition",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Sapanlar için kullanılan mühimmat paketi.\n\n**[Atmosfer]** Küçük bir kese içinde taşınan yirmi adet ağır metal bilye.",
+        "effects": []
+    },
+    {
+        "name": "Yklwa",
+        "name_tr": "Yklwa",
+        "rarity": "Common",
+        "type": "Weapon",
+        "category": "Silah",
+        "description": "**[Mekanik Bilgiler]** Hasar: 1d8 Delici (Piercing). Özellikler: Thrown (menzil 10/30). Tek elle kullanılır.\n\n**[Atmosfer]** Genellikle Chult kabileleri tarafından kullanılan, geniş uçlu, kısa saplı bir mızrak çeşidi.",
+        "effects": [
+            {
+                "type": "damage_dice",
+                "value": "1d8",
+                "damageType": "piercing"
+            },
+            {
+                "type": "property",
+                "value": "Thrown"
+            }
+        ]
+    },
+    {
+        "name": "Hoopak",
+        "name_tr": "Hoopak",
+        "rarity": "Common",
+        "type": "Weapon",
+        "category": "Silah",
+        "description": "**[Mekanik Bilgiler]** Hasar: 1d6 Delici (yakın dövüş) veya 1d4 Ezici (menzilli). Özellikler: Ammunition (menzil 40/160), Finesse, Special, Two-handed.\n\n**[Atmosfer]** Bir ucu sapan, diğer ucu sivri bir mızrak olan sağlam bir asa. Genellikle Kender'lar tarafından kullanılır.",
+        "effects": [
+            {
+                "type": "property",
+                "value": "Ammunition"
+            },
+            {
+                "type": "property",
+                "value": "Finesse"
+            },
+            {
+                "type": "property",
+                "value": "Special"
+            },
+            {
+                "type": "property",
+                "value": "Two-handed"
+            }
+        ]
+    },
+    {
+        "name": "Double-Bladed Scimitar",
+        "name_tr": "Çift Ağızlı Pala",
+        "rarity": "Common",
+        "type": "Weapon",
+        "category": "Silah",
+        "description": "**[Mekanik Bilgiler]** Hasar: 2d4 Kesici (Slashing). Özellikler: Special, Two-handed.\n\n**[Atmosfer]** İki ucu da keskin kavisli bir pala, ölümcül ve zarif saldırılar için tasarlanmış nadir bir silahtır.",
+        "effects": [
+            {
+                "type": "damage_dice",
+                "value": "2d4",
+                "damageType": "slashing"
+            },
+            {
+                "type": "property",
+                "value": "Special"
+            },
+            {
+                "type": "property",
+                "value": "Two-handed"
+            }
+        ]
+    },
+    {
+        "name": "Burglar's Pack",
+        "name_tr": "Hırsız Paketi",
+        "rarity": "Common",
+        "type": "Equipment Pack",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** İçindekiler: Sırt çantası, 1.000 bilye, 10 fit sicim, zil, 5 mum, levye, çekiç, 10 piton, kapüşonlu fener, 2 şişe yağ, 5 günlük rasyon, kav kutusu ve su tulumu. Ayrıca 50 fit kendir halat.\n\n**[Atmosfer]** Bir hırsızın veya gizlilik odaklı bir maceracının ihtiyacı olan tüm temel araçları içeren kapsamlı bir paket.",
+        "effects": []
+    },
+    {
+        "name": "Diplomat's Pack",
+        "name_tr": "Diplomat Paketi",
+        "rarity": "Common",
+        "type": "Equipment Pack",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** İçindekiler: Sandık, 2 harita/parşömen kutusu, bir set kaliteli kıyafet, mürekkep şişesi, mürekkep kalemi, lamba, 2 şişe yağ, 5 sayfa kağıt, parfüm şişesi, mühür mumu ve sabun.\n\n**[Atmosfer]** Saraylarda ve diplomatik görüşmelerde saygınlığını korumak isteyen bir elçinin sahip olması gereken eşyalar.",
+        "effects": []
+    },
+    {
+        "name": "Dungeoneer's Pack",
+        "name_tr": "Zindan Gezgini Paketi",
+        "rarity": "Common",
+        "type": "Equipment Pack",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** İçindekiler: Sırt çantası, levye, çekiç, 10 piton, 10 meşale, kav kutusu, 10 günlük rasyon ve su tulumu. Ayrıca 50 fit kendir halat.\n\n**[Atmosfer]** Karanlık zindanların derinliklerine inmek cesareti gösterenlerin hayatta kalması için gereken temel ekipmanlar.",
+        "effects": []
+    },
+    {
+        "name": "Entertainer's Pack",
+        "name_tr": "Gösterici Paketi",
+        "rarity": "Common",
+        "type": "Equipment Pack",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** İçindekiler: Sırt çantası, yatak, 2 kostüm, 5 mum, 5 günlük rasyon, su tulumu ve kılık değiştirme kiti.\n\n**[Atmosfer]** Ozanların ve sanatçıların performanslarını sergilerken ihtiyaç duydukları her şeyi barındıran taşınabilir bir set.",
+        "effects": []
+    },
+    {
+        "name": "Explorer's Pack",
+        "name_tr": "Kaşif Paketi",
+        "rarity": "Common",
+        "type": "Equipment Pack",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** İçindekiler: Sırt çantası, yatak, yemek kiti, kav kutusu, 10 meşale, 10 günlük rasyon ve su tulumu. Ayrıca 50 fit kendir halat.\n\n**[Atmosfer]** Vahşi doğanın bilinmezliğine doğru yola çıkan bir kaşif için olmazsa olmaz temel malzemeler.",
+        "effects": []
+    },
+    {
+        "name": "Priest's Pack",
+        "name_tr": "Rahip Paketi",
+        "rarity": "Common",
+        "type": "Equipment Pack",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** İçindekiler: Sırt çantası, battaniye, 10 mum, kav kutusu, sadaka kutusu, 2 blok tütsü, buhurdan, ayin kıyafetleri, 2 günlük rasyon ve su tulumu.\n\n**[Atmosfer]** İnancını yollara taşıyan bir din adamının kutsal görevlerini yerine getirmesi için gerekli araçlar.",
+        "effects": []
+    },
+    {
+        "name": "Scholar's Pack",
+        "name_tr": "Alim Paketi",
+        "rarity": "Common",
+        "type": "Equipment Pack",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** İçindekiler: Sırt çantası, bilgi kitabı, mürekkep şişesi, mürekkep kalemi, 10 sayfa parşömen, küçük kum torbası ve küçük bir bıçak.\n\n**[Atmosfer]** Kütüphanelerin tozlu rafları arasında değil, dünyanın yollarında bilgi arayan bir araştırmacının çantası.",
+        "effects": []
+    },
+    {
+        "name": "Abacus",
+        "name_tr": "Abaküs",
+        "rarity": "Common",
+        "type": "Adventuring Gear",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Sayım ve hesaplama yapmak için kullanılır.\n\n**[Atmosfer]** Ticaretle uğraşanların ve muhasebecilerin hızlıca matematiksel işlemler yapmasını sağlayan, boncuklu bir hesap aracı.",
+        "effects": []
+    },
+    {
+        "name": "Bell",
+        "name_tr": "Zil",
+        "rarity": "Common",
+        "type": "Adventuring Gear",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Çalındığında ses çıkarır.\n\n**[Atmosfer]** Genellikle tuzak kurmak veya birini uyarmak için kullanılan küçük metal bir çan.",
+        "effects": []
+    },
+    {
+        "name": "Blanket",
+        "name_tr": "Battaniye",
+        "rarity": "Common",
+        "type": "Adventuring Gear",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Sıcak tutar.\n\n**[Atmosfer]** Soğuk gecelerde maceracıların ısınmasını sağlayan yünlü veya kalın bir örtü.",
+        "effects": []
+    },
+    {
+        "name": "Block and Tackle",
+        "name_tr": "Palanga",
+        "rarity": "Common",
+        "type": "Adventuring Gear",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Bir makara sistemi. Normalde kaldırabileceğiniz ağırlığın dört katını kaldırmanıza olanak tanır.\n\n**[Atmosfer]** Halat ve makaralardan oluşan, ağır yükleri kaldırmak için tasarlanmış mekanik bir düzenek.",
+        "effects": []
+    },
+    {
+        "name": "Book",
+        "name_tr": "Kitap",
+        "rarity": "Common",
+        "type": "Adventuring Gear",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Bilgi içerir.\n\n**[Atmosfer]** İçinde şiirler, tarihi kayıtlar veya belirli bir uzmanlık alanına dair bilgiler barındıran, ciltli bir eser.",
+        "effects": []
+    },
+    {
+        "name": "Candle",
+        "name_tr": "Mum",
+        "rarity": "Common",
+        "type": "Adventuring Gear",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** 1 saat boyunca 5 fit yarıçapında parlak ışık ve ilave 5 fit loş ışık yayar.\n\n**[Atmosfer]** Aydınlatma için kullanılan basit balmumu mermisi.",
+        "effects": []
+    },
+    {
+        "name": "Chain (10 ft)",
+        "name_tr": "Zincir (10 fit)",
+        "rarity": "Common",
+        "type": "Adventuring Gear",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** 10 canı (HP) vardır. DC 20 Güç kontrolü ile kırılabilir.\n\n**[Atmosfer]** Nesneleri veya canlıları bağlamak için kullanılan sağlam, metal halkalardan oluşan zincir.",
+        "effects": []
+    },
+    {
+        "name": "Chalk (1 pc)",
+        "name_tr": "Tebeşir (1 adet)",
+        "rarity": "Common",
+        "type": "Adventuring Gear",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Yüzeylere yazı yazmak veya işaretleme yapmak için kullanılır.\n\n**[Atmosfer]** Yolunuzu bulmak için zeminlere işaretler bırakmanıza yarayan küçük bir kireç taşı parçası.",
+        "effects": []
+    },
+    {
+        "name": "Component Pouch",
+        "name_tr": "Bileşen Kesesi",
+        "rarity": "Common",
+        "type": "Adventuring Gear",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Büyü yapmak için gereken malzeme bileşenlerini barındırır.\n\n**[Atmosfer]** Büyücülerin büyü yaparken kullandıkları çeşitli tuhaf malzemelerin bölmeler halinde saklandığı deri bir bel kesesi.",
+        "effects": []
+    },
+    {
+        "name": "Fishing Tackle",
+        "name_tr": "Balıkçılık Takımı",
+        "rarity": "Common",
+        "type": "Adventuring Gear",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Balık tutmak için gerekli araçları içerir.\n\n**[Atmosfer]** Ahşap olta, ipek misina, mantar şamandıralar, çelik kancalar ve yapay yemlerden oluşan bir set.",
+        "effects": []
+    },
+    {
+        "name": "Grappling Hook",
+        "name_tr": "Kanca (Tırmanma)",
+        "rarity": "Common",
+        "type": "Adventuring Gear",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Tırmanmak için halatla birlikte kullanılır.\n\n**[Atmosfer]** Bir yere tutturulmak üzere tasarlanmış, üç ucu bulunan ağır metal kanca.",
+        "effects": []
+    },
+    {
+        "name": "Hammer",
+        "name_tr": "Çekiç",
+        "rarity": "Common",
+        "type": "Adventuring Gear",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Çivi çakmak veya nesneleri kırmak için kullanılır.\n\n**[Atmosfer]** Bir maceracının çantasında bulunması gereken en temel el aletlerinden biri.",
+        "effects": []
+    },
+    {
+        "name": "Hourglass",
+        "name_tr": "Kum Saati",
+        "rarity": "Common",
+        "type": "Adventuring Gear",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Zamanı ölçmek için kullanılır.\n\n**[Atmosfer]** İnce kumun süzüldüğü, zamanın geçişini sessizce takip eden cam bir düzenek.",
+        "effects": []
+    },
+    {
+        "name": "Ink (1 oz)",
+        "name_tr": "Mürekkep (1 oz)",
+        "rarity": "Common",
+        "type": "Adventuring Gear",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Yazım işlemleri için kullanılır.\n\n**[Atmosfer]** Bir ozanın şiirlerini veya bir büyücünün formüllerini kağıda dökmesini sağlayan koyu renkli sıvı.",
+        "effects": []
+    },
+    {
+        "name": "Ink Pen",
+        "name_tr": "Mürekkep Kalemi",
+        "rarity": "Common",
+        "type": "Adventuring Gear",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Mürekkeple yazmak için kullanılır.\n\n**[Atmosfer]** Hassas yazımlar için tasarlanmış, mürekkebe batırılarak kullanılan bir kalem.",
+        "effects": []
+    },
+    {
+        "name": "Ladder (10 ft)",
+        "name_tr": "Merdiven (10 fit)",
+        "rarity": "Common",
+        "type": "Adventuring Gear",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Yüksek yerlere ulaşmak için kullanılır.\n\n**[Atmosfer]** Hafif ama dayanıklı, 10 fit uzunluğunda ahşap bir merdiven.",
+        "effects": []
+    },
+    {
+        "name": "Lock",
+        "name_tr": "Kilit",
+        "rarity": "Common",
+        "type": "Adventuring Gear",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Eşyaları veya kapıları güvenceye almak için kullanılır. DC 15 Dexterity kontrolü (Thieves' Tools ile) gerektirir.\n\n**[Atmosfer]** Değerli eşyalarınızı meraklı gözlerden ve hırsızlardan korumak için tasarlanmış sağlam bir metal kilit.",
+        "effects": []
+    },
+    {
+        "name": "Magnifying Glass",
+        "name_tr": "Büyüteç",
+        "rarity": "Common",
+        "type": "Adventuring Gear",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Küçük nesneleri incelemek için kullanılır. İnceleme (Investigation) kontrollerinde avantaj sağlayabilir.\n\n**[Atmosfer]** En küçük ayrıntıları bile gün yüzüne çıkaran, hassas kesimli bir mercek.",
+        "effects": []
+    },
+    {
+        "name": "Manacles",
+        "name_tr": "Kelepçe",
+        "rarity": "Common",
+        "type": "Adventuring Gear",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Canlıları bağlamak için kullanılır. Kurtulmak için DC 20 Dexterity veya Strength kontrolü gerekir.\n\n**[Atmosfer]** Esirleri kontrol altında tutmak için kullanılan ağır metal bileklikler.",
+        "effects": []
+    },
+    {
+        "name": "Mess Kit",
+        "name_tr": "Yemek Kiti",
+        "rarity": "Common",
+        "type": "Adventuring Gear",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Yemek pişirmek ve yemek için gerekli kapları içerir.\n\n**[Atmosfer]** Birbirine geçen bir tava, tabak ve bardaktan oluşan, kamp ateşinde pratik yemek hazırlama seti.",
+        "effects": []
+    },
+    {
+        "name": "Miner's Pick",
+        "name_tr": "Madenci Kazması",
+        "rarity": "Common",
+        "type": "Adventuring Gear",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Kazı yapmak veya sert yüzeyleri kırmak için kullanılır.\n\n**[Atmosfer]** Kayaları parçalamak ve değerli madenleri çıkarmak için kullanılan ağır, çift uçlu bir el aleti.",
+        "effects": []
+    },
+    {
+        "name": "Paper (1 sheet)",
+        "name_tr": "Kağıt (1 sayfa)",
+        "rarity": "Common",
+        "type": "Adventuring Gear",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Yazı yazmak için kullanılır.\n\n**[Atmosfer]** Not almak veya mektup yazmak için uygun, temiz bir kağıt yaprağı.",
+        "effects": []
+    },
+    {
+        "name": "Parchment (1 sheet)",
+        "name_tr": "Parşömen (1 sayfa)",
+        "rarity": "Common",
+        "type": "Adventuring Gear",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Yazı yazmak için kullanılır, kağıttan daha dayanıklıdır.\n\n**[Atmosfer]** Hayvan derisinden hazırlanan, uzun ömürlü ve kaliteli bir yazı yüzeyi.",
+        "effects": []
+    },
+    {
+        "name": "Perfume (vial)",
+        "name_tr": "Parfüm (şişe)",
+        "rarity": "Common",
+        "type": "Adventuring Gear",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Koku vermek için kullanılır.\n\n**[Atmosfer]** Hoş bir koku yayan, zarif küçük bir cam şişe içindeki esans.",
+        "effects": []
+    },
+    {
+        "name": "Piton",
+        "name_tr": "Piton (Çivili Destek)",
+        "rarity": "Common",
+        "type": "Adventuring Gear",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Tırmanırken halatı sabitlemek için kayalara çakılır.\n\n**[Atmosfer]** Tırmanış yapan bir maceracının güvenliğini sağlayan metal bir destek çivisi.",
+        "effects": []
+    },
+    {
+        "name": "Pole (10 ft)",
+        "name_tr": "Sırık (10 fit)",
+        "rarity": "Common",
+        "type": "Adventuring Gear",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Tuzakları kontrol etmek veya engelleri aşmak için kullanılır.\n\n**[Atmosfer]** Zemini yoklamak veya güvenli bir mesafeden bir şeyi itmek için kullanılan uzun, esnek bir sırık.",
+        "effects": []
+    },
+    {
+        "name": "Ram, Portable",
+        "name_tr": "Portatif Koçbaşı",
+        "rarity": "Common",
+        "type": "Adventuring Gear",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Kapıları kırmak için kullanılır. Güç (Strength) kontrollerine +4 bonus verir.\n\n**[Atmosfer]** Kapalı kapıları zorla açmak için tasarlanmış, iki kişi tarafından da kullanılabilen ağır metal bir gövde.",
+        "effects": []
+    },
+    {
+        "name": "Rations (1 day)",
+        "name_tr": "Rasyon (1 günlük)",
+        "rarity": "Common",
+        "type": "Adventuring Gear",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Bir günlük gıda ihtiyacını karşılar.\n\n**[Atmosfer]** Kurutulmuş et, meyve ve bisküviden oluşan, uzun yolculuklar için dayanıklı yiyecek paketi.",
+        "effects": []
+    },
+    {
+        "name": "Rope, Hemp (50 ft)",
+        "name_tr": "Kendir Halat (50 fit)",
+        "rarity": "Common",
+        "type": "Adventuring Gear",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** 2 canı (HP) vardır. DC 17 Güç kontrolü ile koparılabilir.\n\n**[Atmosfer]** Her maceracının çantasında bulunması gereken, dayanıklı ve kaba bir kendir halat.",
+        "effects": []
+    },
+    {
+        "name": "Rope, Silk (50 ft)",
+        "name_tr": "İpek Halat (50 fit)",
+        "rarity": "Common",
+        "type": "Adventuring Gear",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** 2 canı (HP) vardır. DC 17 Güç kontrolü ile koparılabilir. Kendir halattan daha hafiftir.\n\n**[Atmosfer]** Daha ince, daha hafif ve tırmanış için daha ideal olan kaliteli bir ipek halat.",
+        "effects": []
+    },
+    {
+        "name": "Sealing Wax",
+        "name_tr": "Mühür Mumu",
+        "rarity": "Common",
+        "type": "Adventuring Gear",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Mektupları mühürlemek için kullanılır.\n\n**[Atmosfer]** Önemli yazışmaların gizliliğini korumak için kullanılan kırmızımsı bir mühür çubuğu.",
+        "effects": []
+    },
+    {
+        "name": "Shovel",
+        "name_tr": "Kürek",
+        "rarity": "Common",
+        "type": "Adventuring Gear",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Kazı yapmak için kullanılır.\n\n**[Atmosfer]** Toprağı kazmak veya bir şeyi gömmek için kullanılan sağlam bir kürek.",
+        "effects": []
+    },
+    {
+        "name": "Signal Whistle",
+        "name_tr": "İşaret Düdüğü",
+        "rarity": "Common",
+        "type": "Adventuring Gear",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Uzak mesafelere sesli işaret göndermek için kullanılır.\n\n**[Atmosfer]** Tiz bir ses çıkaran küçük bir metal veya kemik düdük.",
+        "effects": []
+    },
+    {
+        "name": "Signet Ring",
+        "name_tr": "Mühür Yüzüğü",
+        "rarity": "Common",
+        "type": "Adventuring Gear",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Mühür basmak için kullanılır.\n\n**[Atmosfer]** Üzerinde bir hanedan veya kurumun amblemi bulunan şık bir yüzük.",
+        "effects": []
+    },
+    {
+        "name": "Sledgehammer",
+        "name_tr": "Balyoz",
+        "rarity": "Common",
+        "type": "Adventuring Gear",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Ağır yıkım ve kırma işleri için kullanılır.\n\n**[Atmosfer]** Sert engelleri parçalamak için tasarlanmış devasa ve ağır bir balyoz.",
+        "effects": []
+    },
+    {
+        "name": "Spellbook",
+        "name_tr": "Büyü Kitabı",
+        "rarity": "Common",
+        "type": "Adventuring Gear",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Büyücülerin büyülerini kaydettiği kitaptır. 100 boş sayfa içerir.\n\n**[Atmosfer]** Deri ciltli, içinde arcane sırların saklandığı değerli bir büyü kitabı.",
+        "effects": []
+    },
+    {
+        "name": "Spikes, Iron (10)",
+        "name_tr": "Demir Çiviler (10)",
+        "rarity": "Common",
+        "type": "Adventuring Gear",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Kapıları sabitlemek veya destek oluşturmak için kullanılır.\n\n**[Atmosfer]** Genellikle kapı altına sıkıştırılan veya duvara çakılan on adet ağır demir kanca.",
+        "effects": []
+    },
+    {
+        "name": "Spyglass",
+        "name_tr": "Dürbün",
+        "rarity": "Common",
+        "type": "Adventuring Gear",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Uzaktaki nesneleri iki kat daha yakın gösterir.\n\n**[Atmosfer]** Pirinçten yapılmış, uzaklardaki tehlikeleri veya detayları görmek için kullanılan değerli bir optik araç.",
+        "effects": []
+    },
+    {
+        "name": "Tent, Two-person",
+        "name_tr": "Çadır (İki kişilik)",
+        "rarity": "Common",
+        "type": "Adventuring Gear",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** İki kişinin barınmasını sağlar.\n\n**[Atmosfer]** Vahşi doğada kamp kurarken yağmurdan ve rüzgardan korunmanızı sağlayan taşınabilir barınak.",
+        "effects": []
+    },
+    {
+        "name": "Whetstone",
+        "name_tr": "Bileği Taşı",
+        "rarity": "Common",
+        "type": "Adventuring Gear",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Silahları keskinleştirmek için kullanılır.\n\n**[Atmosfer]** Kılıç ve baltaların ağzını düzeltmek için kullanılan pürüzlü bir taş.",
+        "effects": []
+    },
+    {
+        "name": "Acid (vial)",
+        "name_tr": "Asit (şişe)",
+        "rarity": "Common",
+        "type": "Adventuring Gear",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Bir eylem olarak fırlatılabilir (20 fit menzil). İsabet ederse 2d6 asit hasarı verir.\n\n**[Atmosfer]** Cam bir şişe içinde çalkalanan, temas ettiği her şeyi eriten aşındırıcı yeşilimsi sıvı.",
+        "effects": [
+            {
+                "type": "damage_dice",
+                "value": "2d6",
+                "damageType": "acid"
+            }
+        ]
+    },
+    {
+        "name": "Alchemist's Fire (flask)",
+        "name_tr": "Simyacı Ateşi (matara)",
+        "rarity": "Common",
+        "type": "Adventuring Gear",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Bir eylem olarak fırlatılabilir (20 fit menzil). İsabet ederse hedef her tur başında 1d4 ateş hasarı alır. Kurtulmak için DC 10 Dexterity kontrolü gerekir.\n\n**[Atmosfer]** Hava ile temas ettiğinde anında alev alan, yapışkan ve yanıcı bir simyasal karışım.",
+        "effects": [
+            {
+                "type": "damage_dice",
+                "value": "1d4",
+                "damageType": "fire"
+            }
+        ]
+    },
+    {
+        "name": "Antitoxin (vial)",
+        "name_tr": "Panzehir (şişe)",
+        "rarity": "Common",
+        "type": "Adventuring Gear",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** İçildiğinde 1 saat boyunca zehire karşı kurtarma atışlarında avantaj sağlar.\n\n**[Atmosfer]** Çeşitli zehirlerin etkisini nötralize eden, şifalı bitki özlerinden yapılmış acı bir iksir.",
+        "effects": []
+    },
+    {
+        "name": "Ball Bearings (bag of 1,000)",
+        "name_tr": "Bilyeler (1.000 adet)",
+        "rarity": "Common",
+        "type": "Adventuring Gear",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Bir eylem olarak 10x10 fitlik bir alana saçılabilir. Alandan geçenler DC 10 Dexterity atışında başarısız olurlarsa yere düşerler (Prone).\n\n**[Atmosfer]** Takipçileri yavaşlatmak veya düşmanları dengesiz bırakmak için kullanılan küçük metal bilyeler.",
+        "effects": []
+    },
+    {
+        "name": "Caltrops (bag of 20)",
+        "name_tr": "Dikenler (20 adet)",
+        "rarity": "Common",
+        "type": "Adventuring Gear",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** 5 fitlik bir alana saçılabilir. Girenler DC 15 Dexterity atışında başarısız olurlarsa 1 delici hasar alırlar ve hızları 10 fit azalır.\n\n**[Atmosfer]** Her zaman bir ucu yukarı bakacak şekilde tasarlanmış, dört uçlu metal engeller.",
+        "effects": []
+    },
+    {
+        "name": "Climber's Kit",
+        "name_tr": "Tırmanma Kiti",
+        "rarity": "Common",
+        "type": "Adventuring Gear",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Tırmanırken kendinizi sabitlemenizi sağlar. Düştüğünüzde en fazla 25 fit düşersiniz.\n\n**[Atmosfer]** Özel pitonlar, eldivenler, bot uçları ve bir tırmanma kemerinden oluşan tam teşekküllü tırmanış seti.",
+        "effects": []
+    },
+    {
+        "name": "Crowbar",
+        "name_tr": "Levye",
+        "rarity": "Common",
+        "type": "Adventuring Gear",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Manivela gücü gereken Güç (Strength) kontrollerinde avantaj sağlar.\n\n**[Atmosfer]** Kapıları veya sandıkları zorla açmak için kullanılan sağlam demir çubuk.",
+        "effects": []
+    },
+    {
+        "name": "Healer's Kit",
+        "name_tr": "Şifacı Kiti",
+        "rarity": "Common",
+        "type": "Adventuring Gear",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** 10 kullanım hakkı vardır. Bir eylem olarak 0 canı olan bir canlıyı sabitlemek (stabilize) için kullanılır.\n\n**[Atmosfer]** Sargı bezleri, merhemler ve bandajlardan oluşan temel tıbbi müdahale çantası.",
+        "effects": []
+    },
+    {
+        "name": "Holy Water (flask)",
+        "name_tr": "Kutsal Su (matara)",
+        "rarity": "Common",
+        "type": "Adventuring Gear",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Bir eylem olarak fırlatılabilir (20 fit menzil). Eğer hedef bir Fiend veya Undead ise 2d6 kutsal (radiant) hasar verir.\n\n**[Atmosfer]** Bir din adamı tarafından kutsanmış, kötülüğe karşı koruyucu güç taşıyan berrak su.",
+        "effects": [
+            {
+                "type": "damage_dice",
+                "value": "2d6",
+                "damageType": "radiant"
+            }
+        ]
+    },
+    {
+        "name": "Hunting Trap",
+        "name_tr": "Av Tuzağı",
+        "rarity": "Common",
+        "type": "Adventuring Gear",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Bir eylem olarak kurulur. Üzerine basanlar DC 13 Dexterity atışında başarısız olurlarsa 1d4 delici hasar alırlar ve hareket edemezler.\n\n**[Atmosfer]** Ortasında basınç plakası bulunan, avı yakalamak için tasarlanmış dişli metal kapan.",
+        "effects": [
+            {
+                "type": "damage_dice",
+                "value": "1d4",
+                "damageType": "piercing"
+            }
+        ]
+    },
+    {
+        "name": "Lamp",
+        "name_tr": "Lamba",
+        "rarity": "Common",
+        "type": "Adventuring Gear",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** 15 fit yarıçapında parlak ışık ve ilave 30 fit loş ışık yayar. 1 şişe yağ ile 6 saat yanar.\n\n**[Atmosfer]** Yağ ile çalışan, etrafı aydınlatmak için kullanılan metal veya seramik lamba.",
+        "effects": []
+    },
+    {
+        "name": "Lantern - Bullseye",
+        "name_tr": "Odaklı Fener (Bullseye)",
+        "rarity": "Common",
+        "type": "Adventuring Gear",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** 60 fitlik bir koni şeklinde parlak ışık ve ilave 60 fit loş ışık yayar. 1 şişe yağ ile 6 saat yanar.\n\n**[Atmosfer]** Işığı belirli bir yöne odaklayan mercekli ve kapaklı bir fener.",
+        "effects": []
+    },
+    {
+        "name": "Lantern - Hooded",
+        "name_tr": "Kapüşonlu Fener",
+        "rarity": "Common",
+        "type": "Adventuring Gear",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** 30 fit yarıçapında parlak ışık ve ilave 30 fit loş ışık yayar. Bir eylem olarak kapağı indirilerek ışık 5 fit yarıçapında loş ışığa düşürülebilir.\n\n**[Atmosfer]** Maceracıların en çok tercih ettiği, ışık seviyesi ayarlanabilen dayanıklı bir fener.",
+        "effects": []
+    },
+    {
+        "name": "Oil (flask)",
+        "name_tr": "Yağ (matara)",
+        "rarity": "Common",
+        "type": "Adventuring Gear",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Bir hedefe fırlatılabilir veya yere dökülebilir. Ateşle temas ettiğinde yanarak 5 ateş hasarı verir.\n\n**[Atmosfer]** Fenerleri doldurmak veya yanıcı tuzaklar hazırlamak için kullanılan bir matara dolusu yağ.",
+        "effects": []
+    },
+    {
+        "name": "Poison, basic (vial)",
+        "name_tr": "Temel Zehir (şişe)",
+        "rarity": "Common",
+        "type": "Adventuring Gear",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Silahlara sürülebilir. Darbe alan rakip DC 10 Constitution atışında başarısız olursa 1d4 zehir hasarı alır.\n\n**[Atmosfer]** Silahların ucuna sürülerek ölümcüllüğünü artıran, koyu renkli ve zehirli bir sıvı.",
+        "effects": [
+            {
+                "type": "damage_dice",
+                "value": "1d4",
+                "damageType": "poison"
+            }
+        ]
+    },
+    {
+        "name": "Potion of Healing (common)",
+        "name_tr": "İyileştirme İksiri (Yaygın)",
+        "rarity": "Common",
+        "type": "Potion",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** İçildiğinde veya birine içirildiğinde 2d4 + 2 can (HP) yeniler.\n\n**[Atmosfer]** İçinde parıldayan kırmızı bir sıvı olan, yaraları anında kapatan sihirli bir iksir.",
+        "effects": [
+            {
+                "type": "healing",
+                "value": "2d4+2"
+            }
+        ]
+    },
+    {
+        "name": "Tinderbox",
+        "name_tr": "Kav Kutusu",
+        "rarity": "Common",
+        "type": "Adventuring Gear",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Ateş yakmak için kullanılır. Meşale yakmak bir eylem sürer.\n\n**[Atmosfer]** İçinde çakmak taşı, çelik ve kolay tutuşan malzemeler bulunan, kamp ateşi yakmak için gerekli kutu.",
+        "effects": []
+    },
+    {
+        "name": "Torch",
+        "name_tr": "Meşale",
+        "rarity": "Common",
+        "type": "Adventuring Gear",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** 1 saat boyunca 20 fit parlak ve 20 fit loş ışık yayar. Meşale ile yapılan saldırılar 1 ateş hasarı verir.\n\n**[Atmosfer]** Karanlık koridorları aydınlatmak için kullanılan, ucu yanıcı maddeye batırılmış ahşap sopa.",
+        "effects": []
+    },
+    {
+        "name": "Common Clothes",
+        "name_tr": "Sıradan Kıyafetler",
+        "rarity": "Common",
+        "type": "Adventuring Gear",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Standart giyim.\n\n**[Atmosfer]** Köylülerin ve orta sınıf vatandaşların giydiği, gösterişsiz ama kullanışlı kıyafetler.",
+        "effects": []
+    },
+    {
+        "name": "Costume",
+        "name_tr": "Kostüm",
+        "rarity": "Common",
+        "type": "Adventuring Gear",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Gösteri veya kılık değiştirme için kullanılır.\n\n**[Atmosfer]** Belirli bir karakteri veya mesleği taklit etmek için tasarlanmış renkli ve süslü kıyafetler.",
+        "effects": []
+    },
+    {
+        "name": "Fine Clothes",
+        "name_tr": "Kaliteli Kıyafetler",
+        "rarity": "Common",
+        "type": "Adventuring Gear",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Soylular ve zenginler arasında kabul görmek için gereklidir.\n\n**[Atmosfer]** İpek, kadife ve değerli işlemelerle süslenmiş, yüksek statü göstergesi olan kıyafetler.",
+        "effects": []
+    },
+    {
+        "name": "Robes",
+        "name_tr": "Cübbe",
+        "rarity": "Common",
+        "type": "Adventuring Gear",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Büyücüler ve din adamları tarafından tercih edilir.\n\n**[Atmosfer]** Vücudu bolca örten, mistik bir hava katan uzun ve rahat giysi.",
+        "effects": []
+    },
+    {
+        "name": "Traveler's Clothes",
+        "name_tr": "Yolcu Kıyafetleri",
+        "rarity": "Common",
+        "type": "Adventuring Gear",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Uzun yolculuklar için dayanıklıdır.\n\n**[Atmosfer]** Toza, rüzgara ve zorlu doğa koşullarına dayanacak şekilde tasarlanmış sağlam kıyafetler.",
+        "effects": []
+    },
+    {
+        "name": "Focus, Crystal",
+        "name_tr": "Kristal Odak",
+        "rarity": "Common",
+        "type": "Spellcasting Focus",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Arcane (mistik) büyücülerin büyü bileşeni olarak kullandığı odaktır.\n\n**[Atmosfer]** İçinde sihirli enerjilerin döndüğü, ışığı kıran saf bir kristal parçası.",
+        "effects": []
+    },
+    {
+        "name": "Focus, Orb",
+        "name_tr": "Küre Odak",
+        "rarity": "Common",
+        "type": "Spellcasting Focus",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Sorcerer, Warlock veya Wizard'lar için büyü odağıdır.\n\n**[Atmosfer]** Avuç içine sığan, pürüzsüz ve karanlık bir cam küre.",
+        "effects": []
+    },
+    {
+        "name": "Focus, Rod",
+        "name_tr": "Asa Odak (Rod)",
+        "rarity": "Common",
+        "type": "Spellcasting Focus",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Büyü yapmak için kullanılan kısa bir asadır.\n\n**[Atmosfer]** Değerli metallerden veya kemikten yapılmış, büyü enerjisini kanalize eden kısa bir çubuk.",
+        "effects": []
+    },
+    {
+        "name": "Focus, Staff",
+        "name_tr": "Asa Odak (Staff)",
+        "rarity": "Common",
+        "type": "Spellcasting Focus",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Uzun bir büyü odağıdır, bazen yürüyüş asası olarak da kullanılabilir.\n\n**[Atmosfer]** Üzerinde rünler kazınmış, ucu parlayan kadim bir ahşap asa.",
+        "effects": []
+    },
+    {
+        "name": "Focus, Wand",
+        "name_tr": "Değnek Odak (Wand)",
+        "rarity": "Common",
+        "type": "Spellcasting Focus",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Hassas büyü yönlendirmesi için kullanılan ince bir değnektir.\n\n**[Atmosfer]** Nadir ağaçlardan oyulmuş, ucunda ufak bir mücevher barındırabilen zarif bir değnek.",
+        "effects": []
+    },
+    {
+        "name": "Sprig of Mistletoe",
+        "name_tr": "Ökseotu Dalı",
+        "rarity": "Common",
+        "type": "Druidic Focus",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Druid'ler tarafından büyü odağı olarak kullanılır.\n\n**[Atmosfer]** Doğanın kutsal enerjisini taşıyan, taze koparılmış bir ökseotu dalı.",
+        "effects": []
+    },
+    {
+        "name": "Totem",
+        "name_tr": "Totem",
+        "rarity": "Common",
+        "type": "Druidic Focus",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Doğal güçleri kanalize etmek için kullanılan bir odaktır.\n\n**[Atmosfer]** Hayvan kemiklerinden, dişlerinden veya kutsal ahşaptan oyulmuş mistik bir totem.",
+        "effects": []
+    },
+    {
+        "name": "Amulet (Holy Symbol)",
+        "name_tr": "Muska (Kutsal Sembol)",
+        "rarity": "Common",
+        "type": "Holy Symbol",
+        "category": "Eşya",
+        "description": "**[Mekanik Bilgiler]** Cleric ve Paladin'ler için kutsal sembol niteliğindedir.\n\n**[Atmosfer]** Bir boyun zincirine asılmış, bir tanrının veya dini inancın kutsal amblemini taşıyan madalyon.",
+        "effects": []
+    }
+]

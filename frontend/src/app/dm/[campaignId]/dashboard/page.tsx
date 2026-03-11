@@ -105,15 +105,33 @@ export default function DMDashboard() {
     const [mapData, setMapData] = useState<{
         bgUrl: string,
         gridSize: number,
+        mapZoom: number,
         showGrid: boolean,
         tokens: any[]
     }>({
         bgUrl: '',
         gridSize: 50,
+        mapZoom: 100,
         showGrid: true,
         tokens: []
     });
     const [isDraggingToken, setIsDraggingToken] = useState<string | null>(null);
+
+    const addTokenToMap = (name: string, type: 'player' | 'monster', color: string = '#3b82f6', entityId?: string) => {
+        const newToken = {
+            id: `${type}-${entityId || 'custom'}-${Date.now()}`,
+            name,
+            type,
+            color,
+            x: 100,
+            y: 100,
+            entityId
+        };
+        const newMap = { ...mapData, tokens: [...(mapData.tokens || []), newToken] };
+        setMapData(newMap);
+        socket?.emit('update_map', { campaignId, mapData: newMap });
+        showToast("Token Eklendi", `${name} haritaya eklendi.`, "bg-blue-900 border-blue-500 text-blue-100");
+    };
 
     // Pet / Companion States
     const [isPetModalOpen, setIsPetModalOpen] = useState(false);
@@ -149,6 +167,31 @@ export default function DMDashboard() {
             showToast("Başarılı", "Şifre güncellendi", "bg-green-900 border-green-500 text-green-100");
         } catch (error) {
             showToast("Hata", "Şifre sıfırlanamadı", "bg-red-900 border-red-500 text-red-100");
+        }
+    };
+
+    const handleRenameUser = async (targetUserId: string, oldName: string) => {
+        const newName = prompt(`"${oldName}" kullanıcısının yeni adını girin:`, oldName);
+        if (!newName || newName === oldName) return;
+
+        try {
+            await axios.put(`${API_URL}/api/admin/users/${targetUserId}`, { newUsername: newName }, { headers: { 'Authorization': `Bearer ${token}` } });
+            setAllUsers(allUsers.map(u => u._id === targetUserId ? { ...u, username: newName } : u));
+            showToast("Başarılı", "Kullanıcı adı güncellendi", "bg-green-900 border-green-500 text-green-100");
+        } catch (error: any) {
+            alert("Hata: " + (error.response?.data?.error || "Kullanıcı adı değiştirilemedi"));
+        }
+    };
+
+    const handleDeleteUser = async (targetUserId: string, username: string) => {
+        if (!confirm(`"${username}" kullanıcısını tamamen silmek istediğine emin misin? Bu işlem geri alınamaz!`)) return;
+
+        try {
+            await axios.delete(`${API_URL}/api/admin/users/${targetUserId}`, { headers: { 'Authorization': `Bearer ${token}` } });
+            setAllUsers(allUsers.filter(u => u._id !== targetUserId));
+            showToast("Başarılı", "Kullanıcı silindi", "bg-red-900 border-red-500 text-red-100");
+        } catch (error: any) {
+            alert("Hata: " + (error.response?.data?.error || "Kullanıcı silinemedi"));
         }
     };
 
@@ -381,11 +424,23 @@ export default function DMDashboard() {
         }
     };
     const deleteNpc = async (id: string) => {
+        if (!confirm("Bu NPC'yi silmek istediğine emin misin?")) return;
         try {
             await axios.delete(`${API_URL}/api/npcs/${id}`, { headers: { 'Authorization': `Bearer ${token}` } });
             setNpcs(npcs.filter(n => n._id !== id));
         } catch (error) {
             console.error("NPC Silinemedi:", error);
+        }
+    };
+
+    const deleteCharacter = async (id: string, name: string) => {
+        if (!confirm(`"${name}" karakterini silmek istediğine emin misin? Bu işlem geri alınamaz.`)) return;
+        try {
+            await axios.delete(`${API_URL}/api/characters/${id}`, { headers: { 'Authorization': `Bearer ${token}` } });
+            showToast("Karakter Silindi", `"${name}" karakteri başarıyla silindi. Sayfayı yenileyebilirsiniz.`, "bg-red-900 border-red-500 text-red-100");
+        } catch (error) {
+            console.error("Karakter Silinemedi:", error);
+            alert("Karakter silinirken bir hata oluştu.");
         }
     };
 
@@ -612,6 +667,16 @@ export default function DMDashboard() {
                         <span>📂 Oyunu Yükle (Import)</span>
                         <input type="file" accept=".json" onChange={handleImportCampaign} className="hidden" />
                     </label>
+
+                    {user?.username === 'SystemAdmin' && (
+                        <button
+                            onClick={fetchAllUsers}
+                            className="bg-red-950/60 hover:bg-red-800/80 text-red-200 text-xs font-black py-1.5 px-3 rounded-lg border border-red-500/50 shadow-[0_0_10px_rgba(239,68,68,0.2)] transition-all flex items-center gap-1"
+                            title="Tüm kullanıcıları yönet (Rename/Delete/Reset)"
+                        >
+                            👥 Kullanıcı Yönetimi
+                        </button>
+                    )}
                 </div>
 
 
@@ -629,9 +694,9 @@ export default function DMDashboard() {
                                 activeCombatants.map((monster, index) => (
                                     <div
                                         key={monster.id}
-                                        className={`bg-gray-800 rounded-lg border-l-4 shadow-md group cursor-pointer transition-all hover:bg-gray-700 ${monster._isLeveledNpc
+                                        className={`bg-gray-800 rounded-lg border-l-4 shadow-md group cursor-pointer transition-all hover:bg-gray-700 ${monster.currentHp <= 0 ? 'opacity-50 grayscale contrast-75 border-gray-600' : (monster._isLeveledNpc
                                             ? monster._relationship === 'Dost' ? 'border-emerald-500' : monster._relationship === 'Düşman' ? 'border-red-500' : 'border-yellow-500'
-                                            : 'border-red-500'
+                                            : 'border-red-500')
                                             }`}
                                         onClick={() => setExpandedCombatantId(expandedCombatantId === monster.id ? null : monster.id)}
                                     >
@@ -658,11 +723,24 @@ export default function DMDashboard() {
                                                 <div className="text-right mr-4">
                                                     <div className="text-[10px] text-gray-500 font-bold uppercase tracking-wider mb-1">Hit Points</div>
                                                     <div className="font-mono text-xl">
-                                                        <span className={monster.currentHp <= monster.maxHp / 3 ? "text-red-500 font-bold" : "text-green-400 font-bold"}>{monster.currentHp}</span>
-                                                        <span className="text-gray-500"> / {monster.maxHp}</span>
+                                                        {monster.currentHp <= 0 ? (
+                                                            <span className="text-gray-400 font-black animate-pulse">💀 ÖLDÜ</span>
+                                                        ) : (
+                                                            <>
+                                                                <span className={monster.currentHp <= monster.maxHp / 3 ? "text-red-500 font-bold" : "text-green-400 font-bold"}>{monster.currentHp}</span>
+                                                                <span className="text-gray-500"> / {monster.maxHp}</span>
+                                                            </>
+                                                        )}
                                                     </div>
                                                 </div>
                                                 <div className="flex space-x-2">
+                                                    <button
+                                                        onClick={() => addTokenToMap(monster.name, 'monster', '#ef4444', monster.id)}
+                                                        className="w-8 h-8 bg-gray-700 hover:bg-blue-600 rounded text-blue-200 hover:text-white font-bold transition-all flex items-center justify-center border border-gray-600"
+                                                        title="Haritaya Ekle"
+                                                    >
+                                                        🗺️
+                                                    </button>
                                                     <button onClick={() => updateMonsterHp(monster.id, monster.currentHp - 1)} className="w-8 h-8 bg-red-900/50 hover:bg-red-700 rounded text-red-200 font-bold transition-colors">-1</button>
                                                     <button onClick={() => updateMonsterHp(monster.id, monster.currentHp - 5)} className="w-8 h-8 bg-red-900/80 hover:bg-red-700 rounded text-red-200 font-bold transition-colors">-5</button>
                                                     <button onClick={() => updateMonsterHp(monster.id, Math.min(monster.maxHp, monster.currentHp + 1))} className="w-8 h-8 bg-green-900/50 hover:bg-green-700 rounded text-green-200 font-bold transition-colors">+1</button>
@@ -883,7 +961,7 @@ export default function DMDashboard() {
                                                             <div className="font-bold text-gray-200 text-lg group-hover:text-purple-400 transition-colors">{monster.name || "Bilinmeyen Yaratık"}</div>
                                                             <div className="text-sm text-gray-400">{monster.type || "Bilinmeyen Tür"} • Challenge Rating: <span className="text-yellow-500 font-bold">{monster.challenge || "?"}</span></div>
                                                         </div>
-                                                        <div className="flex items-center space-x-6">
+                                                        <div className="flex items-center space-x-3">
                                                             <div className="text-right">
                                                                 <div className="text-sm font-bold text-green-400">
                                                                     {typeof monster.hp === 'object' ? (monster.hp.average || '10') : (monster.hp || '10').toString().split(' ')[0]} HP
@@ -892,6 +970,16 @@ export default function DMDashboard() {
                                                                     {typeof monster.ac === 'object' ? (monster.ac.base || '10') : (monster.ac || '10').toString().split(' ')[0]} AC
                                                                 </div>
                                                             </div>
+                                                            <button
+                                                                onClick={(e) => {
+                                                                    e.stopPropagation();
+                                                                    addTokenToMap(monster.name, 'monster', '#ef4444', monster._id);
+                                                                }}
+                                                                className="bg-red-600/20 hover:bg-red-600 text-red-500 hover:text-white w-10 h-10 rounded-full flex items-center justify-center shadow-lg transition-all border border-red-500/30"
+                                                                title="Haritaya Token Ekle"
+                                                            >
+                                                                🗺️
+                                                            </button>
                                                             <button
                                                                 onClick={(e) => addMonsterToEncounter(e, monster)}
                                                                 className="bg-purple-600 hover:bg-purple-500 text-white w-10 h-10 rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-transform"
@@ -1588,7 +1676,7 @@ export default function DMDashboard() {
                                                             : 'bg-gray-900/50 border-gray-800 hover:border-gray-700 hover:bg-gray-800/80'}`}
                                                 >
                                                     <div>
-                                                        <h4 className="font-bold text-white group-hover:text-blue-400 transition-colors uppercase tracking-tight">{item.name_tr || item.name}</h4>
+                                                        <h4 className="font-bold text-white group-hover:text-blue-400 transition-colors uppercase tracking-tight">{item.name || item.name_tr}</h4>
                                                         <div className="flex gap-2 mt-1">
                                                             <span className="text-[10px] font-black uppercase text-gray-500">{item.type || item.category || 'Eşya'}</span>
                                                             <span className={`text-[10px] font-black uppercase ${(item.rarity || '').toLowerCase().includes('legendary') ? 'text-orange-500' :
@@ -1613,8 +1701,7 @@ export default function DMDashboard() {
                                             <div className="animate-fade-in-up">
                                                 <div className="flex justify-between items-start mb-8">
                                                     <div>
-                                                        <h3 className="text-4xl font-black text-white uppercase tracking-tighter leading-none mb-2">{selectedItem.name_tr || selectedItem.name}</h3>
-                                                        <h4 className="text-xl font-bold text-gray-500 italic lowercase">{selectedItem.name !== selectedItem.name_tr ? selectedItem.name : ''}</h4>
+                                                        <h3 className="text-4xl font-black text-white uppercase tracking-tighter leading-none mb-2">{selectedItem.name || selectedItem.name_tr}</h3>
                                                     </div>
                                                     <div className="flex flex-col items-end gap-2">
                                                         <span className={`px-4 py-1.5 rounded-full text-xs font-black uppercase border-2 shadow-sm ${(selectedItem.rarity || '').toLowerCase().includes('legendary') ? 'bg-orange-600/20 border-orange-500 text-orange-400' :
@@ -1770,6 +1857,7 @@ export default function DMDashboard() {
                                                             <button onClick={() => openEditCharModal(stats.id)} className="bg-gray-700 hover:bg-gray-600 text-white p-2 rounded-xl transition-all shadow-lg" title="Düzenle">⚙️</button>
                                                             <button onClick={() => { setTargetPetPlayerId(stats.id); setIsPetModalOpen(true); }} className="bg-yellow-600 hover:bg-yellow-500 text-white p-2 rounded-xl transition-all shadow-lg" title="Pet Ver">🐾</button>
                                                             <button onClick={() => setWhisperPlayerName(charId)} className="bg-purple-600 hover:bg-purple-500 text-white p-2 rounded-xl transition-all shadow-lg" title="Fısılda">💬</button>
+                                                            <button onClick={() => deleteCharacter(stats.id, charId)} className="bg-red-800 hover:bg-red-700 text-white p-2 rounded-xl transition-all shadow-lg" title="Karakteri Sil">🗑️</button>
                                                         </div>
                                                     </div>
 
@@ -1832,26 +1920,51 @@ export default function DMDashboard() {
                 {/* Grid Map Modalı */}
                 {
                     isMapOpen && (
-                        <div className="fixed inset-0 bg-black/90 z-[70] flex flex-col p-4 backdrop-blur-md animate-fade-in overflow-hidden">
-                            {/* Map Header */}
-                            <div className="flex justify-between items-center mb-4 bg-gray-900/80 p-4 rounded-xl border border-gray-700">
-                                <div className="flex items-center gap-6">
-                                    <h2 className="text-2xl font-black text-white flex items-center gap-2">
-                                        <span className="text-3xl">🗺️</span> Stratejik Harita Paneli
+                        <div className="fixed inset-0 bg-[#020617]/95 z-[70] flex flex-col p-4 backdrop-blur-xl animate-fade-in overflow-hidden">
+                            {/* Map Header & Controls */}
+                            <div className="flex flex-col gap-4 mb-6 bg-slate-900/50 p-6 rounded-3xl border border-slate-700/50 shadow-2xl backdrop-blur-md relative overflow-hidden group">
+                                <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 to-purple-500/5 opacity-50"></div>
+
+                                <div className="flex justify-between items-center relative z-10">
+                                    <h2 className="text-3xl font-black text-white flex items-center gap-3 tracking-tighter italic">
+                                        <span className="bg-gradient-to-br from-blue-500 to-indigo-600 w-12 h-12 rounded-xl flex items-center justify-center shadow-lg shadow-blue-900/40 not-italic">🗺️</span>
+                                        Stratejik Harita Paneli
                                     </h2>
                                     <div className="flex items-center gap-3">
+                                        <button
+                                            onClick={() => {
+                                                const newMap = { ...mapData, tokens: [] };
+                                                setMapData(newMap);
+                                                socket?.emit('update_map', { campaignId, mapData: newMap });
+                                            }}
+                                            className="bg-slate-800 hover:bg-red-600/20 text-slate-400 hover:text-red-400 font-bold py-2.5 px-6 rounded-xl transition-all border border-slate-700 hover:border-red-500/50 text-sm uppercase tracking-widest"
+                                        >
+                                            🧹 Temizle
+                                        </button>
+                                        <button
+                                            onClick={() => setIsMapOpen(false)}
+                                            className="bg-red-600 hover:bg-red-500 text-white w-12 h-12 rounded-xl font-black flex items-center justify-center shadow-lg shadow-red-900/40 transition-all hover:scale-110 active:scale-95"
+                                        >
+                                            ✕
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div className="flex flex-wrap items-center gap-6 relative z-10 border-t border-slate-800/50 pt-4">
+                                    {/* URL Input */}
+                                    <div className="flex-1 min-w-[300px] relative">
                                         <input
                                             type="text"
-                                            placeholder="Harita URL (JPG/PNG)"
+                                            placeholder="Harita URL (JPG/PNG)..."
                                             value={mapData.bgUrl}
                                             onChange={(e) => {
                                                 const newMap = { ...mapData, bgUrl: e.target.value };
                                                 setMapData(newMap);
                                                 socket?.emit('update_map', { campaignId, mapData: newMap });
                                             }}
-                                            className="bg-gray-950 border border-gray-700 rounded-lg px-4 py-2 text-sm w-80 outline-none focus:border-red-500 transition-colors"
+                                            className="w-full bg-slate-950/80 border border-slate-700 rounded-2xl px-5 py-3 text-sm text-blue-100 outline-none focus:border-blue-500 transition-all focus:ring-4 focus:ring-blue-500/10 placeholder-slate-600 shadow-inner"
                                         />
-                                        <div className="relative group">
+                                        <div className="absolute right-2 top-1/2 -translate-y-1/2">
                                             <input
                                                 type="file"
                                                 accept="image/*"
@@ -1860,16 +1973,11 @@ export default function DMDashboard() {
                                                 onChange={async (e) => {
                                                     const file = e.target.files?.[0];
                                                     if (!file) return;
-
                                                     const formData = new FormData();
                                                     formData.append('map', file);
-
                                                     try {
                                                         const res = await axios.post(`${API_URL}/api/campaigns/${campaignId}/map-upload`, formData, {
-                                                            headers: {
-                                                                'Authorization': `Bearer ${token}`,
-                                                                'Content-Type': 'multipart/form-data'
-                                                            }
+                                                            headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'multipart/form-data' }
                                                         });
                                                         if (res.data.success) {
                                                             const newMap = { ...mapData, bgUrl: res.data.url };
@@ -1877,90 +1985,96 @@ export default function DMDashboard() {
                                                             showToast("Harita Yüklendi", "Yeni harita başarıyla yüklendi.", "bg-green-900 border-green-500 text-green-100");
                                                         }
                                                     } catch (err) {
-                                                        console.error("Map upload failed:", err);
                                                         showToast("Hata", "Harita yüklenemedi.", "bg-red-900 border-red-500 text-red-100");
                                                     }
                                                 }}
                                             />
-                                            <label
-                                                htmlFor="map-upload-input"
-                                                className="bg-gray-800 hover:bg-gray-700 border border-gray-600 rounded-lg px-4 py-2 text-sm font-bold cursor-pointer transition-all flex items-center gap-2 whitespace-nowrap"
-                                            >
-                                                📁 Dosya Yükle
+                                            <label htmlFor="map-upload-input" className="bg-blue-600 hover:bg-blue-500 text-white text-xs font-black px-4 py-2 rounded-xl cursor-pointer transition-all uppercase tracking-tighter">
+                                                Dosya Yükle
                                             </label>
                                         </div>
-                                        <label className="flex items-center gap-2 text-xs font-bold text-gray-400 cursor-pointer">
-                                            <input
-                                                type="checkbox"
-                                                checked={mapData.showGrid}
-                                                onChange={(e) => {
-                                                    const newMap = { ...mapData, showGrid: e.target.checked };
-                                                    setMapData(newMap);
-                                                    socket?.emit('update_map', { campaignId, mapData: newMap });
-                                                }}
-                                                className="w-4 h-4 rounded border-gray-700 bg-gray-950"
-                                            />
-                                            <span>Izgarayı Göster</span>
-                                        </label>
-                                        <div className="flex items-center gap-2">
-                                            <span className="text-[10px] uppercase font-black text-gray-500">Boyut:</span>
-                                            <input
-                                                type="range"
-                                                min="20"
-                                                max="200"
-                                                value={mapData.gridSize}
-                                                onChange={(e) => {
-                                                    const newMap = { ...mapData, gridSize: parseInt(e.target.value) };
-                                                    setMapData(newMap);
-                                                    socket?.emit('update_map', { campaignId, mapData: newMap });
-                                                }}
-                                                className="w-24 accent-red-600"
-                                            />
-                                        </div>
                                     </div>
-                                </div>
-                                <div className="flex items-center gap-3">
+
+                                    {/* Grid Toggle */}
+                                    <label className="flex items-center gap-3 text-sm font-black text-slate-300 cursor-pointer hover:text-white transition-colors">
+                                        <div className={`w-12 h-6 rounded-full p-1 transition-colors duration-300 ${mapData.showGrid ? 'bg-blue-500 shadow-[0_0_15px_rgba(59,130,246,0.3)]' : 'bg-slate-700'}`}>
+                                            <div className={`w-4 h-4 bg-white rounded-full transition-transform duration-300 ${mapData.showGrid ? 'translate-x-6' : 'translate-x-0'}`}></div>
+                                        </div>
+                                        <input
+                                            type="checkbox"
+                                            className="hidden"
+                                            checked={mapData.showGrid}
+                                            onChange={(e) => {
+                                                const newMap = { ...mapData, showGrid: e.target.checked };
+                                                setMapData(newMap);
+                                                socket?.emit('update_map', { campaignId, mapData: newMap });
+                                            }}
+                                        />
+                                        <span>IZGARA</span>
+                                    </label>
+
+                                    {/* Grid Size Slider */}
+                                    <div className="flex flex-col gap-1 min-w-[120px]">
+                                        <div className="flex justify-between text-[10px] font-black text-slate-500 uppercase tracking-widest">
+                                            <span>Izgara Boyutu</span>
+                                            <span className="text-blue-400">{mapData.gridSize}px</span>
+                                        </div>
+                                        <input
+                                            type="range"
+                                            min="10"
+                                            max="150"
+                                            value={mapData.gridSize}
+                                            onChange={(e) => {
+                                                const newMap = { ...mapData, gridSize: parseInt(e.target.value) };
+                                                setMapData(newMap);
+                                                socket?.emit('update_map', { campaignId, mapData: newMap });
+                                            }}
+                                            className="w-full accent-blue-500 h-1.5 bg-slate-800 rounded-lg"
+                                        />
+                                    </div>
+
+                                    {/* Zoom Slider */}
+                                    <div className="flex flex-col gap-1 min-w-[120px]">
+                                        <div className="flex justify-between text-[10px] font-black text-slate-500 uppercase tracking-widest">
+                                            <span>Harita Ölçeği</span>
+                                            <span className="text-purple-400">%{mapData.mapZoom || 100}</span>
+                                        </div>
+                                        <input
+                                            type="range"
+                                            min="10"
+                                            max="300"
+                                            value={mapData.mapZoom || 100}
+                                            onChange={(e) => {
+                                                const newMap = { ...mapData, mapZoom: parseInt(e.target.value) };
+                                                setMapData(newMap);
+                                                socket?.emit('update_map', { campaignId, mapData: newMap });
+                                            }}
+                                            className="w-full accent-purple-500 h-1.5 bg-slate-800 rounded-lg"
+                                        />
+                                    </div>
+
                                     <button
                                         onClick={() => {
-                                            const newTokens: any[] = [];
                                             (partyStats ? Object.entries(partyStats) : []).forEach(([id, stats]: [any, any]) => {
                                                 if (!stats || typeof stats !== 'object') return;
-                                                newTokens.push({
-                                                    id: `player-${id}-${Date.now()}`,
-                                                    name: stats.name || 'Oyuncu',
-                                                    x: 100,
-                                                    y: 100,
-                                                    color: '#3b82f6',
-                                                    type: 'player',
-                                                    entityId: stats.characterId || id
-                                                });
+                                                const charName = stats.name || 'Oyuncu';
+                                                // Prevent duplicates by checking name
+                                                if (!(mapData.tokens || []).find(t => t && t.name === charName && t.type === 'player')) {
+                                                    addTokenToMap(charName, 'player', '#3b82f6', stats.characterId || id);
+                                                }
                                             });
-                                            const newMap = { ...mapData, tokens: [...(mapData.tokens || []), ...newTokens.filter(nt => !(mapData.tokens || []).find(t => t && t.id === nt.id))] };
-                                            setMapData(newMap);
-                                            socket?.emit('update_map', { campaignId, mapData: newMap });
                                         }}
-                                        className="bg-blue-600 hover:bg-blue-500 text-white font-bold py-2 px-4 rounded-lg shadow-lg transition-all text-sm"
+                                        className="bg-indigo-600 hover:bg-indigo-500 text-white font-black py-2.5 px-6 rounded-xl shadow-lg shadow-indigo-900/40 transition-all text-xs uppercase tracking-widest"
                                     >
-                                        Oyuncuları Ekle
+                                        👥 Oyuncuları Getir
                                     </button>
-                                    <button
-                                        onClick={() => {
-                                            const newMap = { ...mapData, tokens: [] };
-                                            setMapData(newMap);
-                                            socket?.emit('update_map', { campaignId, mapData: newMap });
-                                        }}
-                                        className="bg-gray-700 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-lg transition-all text-sm"
-                                    >
-                                        Temizle
-                                    </button>
-                                    <button onClick={() => setIsMapOpen(false)} className="bg-red-600 hover:bg-red-500 text-white w-10 h-10 rounded-lg font-black flex items-center justify-center shadow-lg transition-all">✕</button>
                                 </div>
                             </div>
 
                             {/* Map Content Area */}
                             <div
                                 id="map-container"
-                                className="flex-1 bg-gray-950 rounded-2xl border-4 border-gray-800 overflow-auto relative custom-scrollbar shadow-inner"
+                                className="flex-1 bg-[#020617] rounded-[2.5rem] border-8 border-slate-900 overflow-auto relative custom-scrollbar shadow-[inset_0_20px_50px_rgba(0,0,0,0.8)]"
                                 onDragOver={(e) => e.preventDefault()}
                                 onDrop={(e) => {
                                     e.preventDefault();
@@ -1970,8 +2084,11 @@ export default function DMDashboard() {
                                     if (!container) return;
 
                                     const rect = container.getBoundingClientRect();
-                                    const x = e.clientX - rect.left + container.scrollLeft;
-                                    const y = e.clientY - rect.top + container.scrollTop;
+                                    const zoom = (mapData.mapZoom || 100) / 100;
+
+                                    // Adjust coordinate for zoom
+                                    const x = (e.clientX - rect.left + container.scrollLeft) / zoom;
+                                    const y = (e.clientY - rect.top + container.scrollTop) / zoom;
 
                                     const newTokens = (mapData.tokens || []).map(t =>
                                         t && t.id === isDraggingToken ? { ...t, x, y } : t
@@ -1980,78 +2097,91 @@ export default function DMDashboard() {
                                     const newMap = { ...mapData, tokens: newTokens };
                                     setMapData(newMap);
                                     socket?.emit('move_token', { campaignId, tokenId: isDraggingToken, x, y });
-                                    socket?.emit('update_map', { campaignId, mapData: newMap }); // Save final pos
+                                    socket?.emit('update_map', { campaignId, mapData: newMap });
                                     setIsDraggingToken(null);
                                 }}
                             >
-                                {/* Background Image */}
-                                {mapData.bgUrl && (
-                                    <img
-                                        src={mapData.bgUrl}
-                                        alt="Map"
-                                        className="max-w-none origin-top-left"
-                                        style={{ pointerEvents: 'none' }}
-                                    />
-                                )}
+                                <div
+                                    className="origin-top-left relative p-20"
+                                    style={{
+                                        transform: `scale(${(mapData.mapZoom || 100) / 100})`,
+                                        width: 'max-content',
+                                        height: 'max-content'
+                                    }}
+                                >
+                                    {/* Background Image */}
+                                    {mapData.bgUrl && (
+                                        <img
+                                            src={mapData.bgUrl}
+                                            alt="Map"
+                                            className="max-w-none shadow-[0_0_100px_rgba(0,0,0,0.5)]"
+                                            style={{ pointerEvents: 'none' }}
+                                        />
+                                    )}
 
-                                {/* Grid Overlay */}
-                                {mapData.showGrid && (
-                                    <div
-                                        className="absolute inset-0 pointer-events-none"
-                                        style={{
-                                            backgroundImage: 'linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px)',
-                                            backgroundSize: `${mapData.gridSize}px ${mapData.gridSize}px`,
-                                            width: mapData.bgUrl ? '100%' : 'auto', // Adjust width based on image presence
-                                            height: mapData.bgUrl ? '100%' : 'auto', // Adjust height based on image presence
-                                            minWidth: mapData.bgUrl ? 'auto' : '100%',
-                                            minHeight: mapData.bgUrl ? 'auto' : '100%',
-                                        }}
-                                    />
-                                )}
-
-                                {/* Tokens */}
-                                {(mapData?.tokens || []).map((token) => (
-                                    token && (
+                                    {/* Grid Overlay */}
+                                    {mapData.showGrid && (
                                         <div
-                                            key={token.id}
-                                            draggable
-                                            onDragStart={() => setIsDraggingToken(token.id)}
-                                            className="absolute w-12 h-12 rounded-full border-2 border-white shadow-lg flex items-center justify-center text-[10px] font-black cursor-move select-none group"
+                                            className="absolute inset-0 pointer-events-none"
                                             style={{
-                                                left: (token.x || 0) - 24,
-                                                top: (token.y || 0) - 24,
-                                                backgroundColor: token.color || '#ef4444',
-                                                zIndex: 10
+                                                backgroundImage: 'linear-gradient(to right, rgba(148,163,184,0.15) 1px, transparent 1px), linear-gradient(to bottom, rgba(148,163,184,0.15) 1px, transparent 1px)',
+                                                backgroundSize: `${mapData.gridSize}px ${mapData.gridSize}px`,
+                                                width: '100%',
+                                                height: '100%',
+                                                left: 0,
+                                                top: 0
                                             }}
-                                        >
-                                            <div className="absolute -top-6 left-1/2 -translate-x-1/2 bg-black/80 px-2 py-0.5 rounded text-white opacity-0 group-hover:opacity-100 whitespace-nowrap transition-opacity">
-                                                {token.name || '??'}
-                                            </div>
-                                            <div className="text-white text-center leading-tight uppercase">
-                                                {(token.name || '??').substring(0, 2)}
-                                            </div>
-                                            <button
-                                                onClick={(e) => {
-                                                    e.stopPropagation();
-                                                    const newTokens = mapData.tokens.filter(t => t && t.id !== token.id);
-                                                    const newMap = { ...mapData, tokens: newTokens };
-                                                    setMapData(newMap);
-                                                    socket?.emit('update_map', { campaignId, mapData: newMap });
-                                                }}
-                                                className="absolute -bottom-2 -right-2 bg-red-600 w-5 h-5 rounded-full flex items-center justify-center text-[8px] opacity-0 group-hover:opacity-100 hover:scale-110 transition-all border border-black"
-                                            >
-                                                ✕
-                                            </button>
-                                        </div>
-                                    )
-                                ))}
+                                        />
+                                    )}
 
-                                {!mapData.bgUrl && (
-                                    <div className="absolute inset-0 flex items-center justify-center text-gray-700 flex-col gap-4">
-                                        <span className="text-8xl">🖼️</span>
-                                        <p className="text-xl font-bold">Harita yüklenmedi. Yukarıdaki kutuya bir resim URL'si yapıştırın.</p>
-                                    </div>
-                                )}
+                                    {/* Tokens */}
+                                    {(mapData?.tokens || []).map((token) => (
+                                        token && (
+                                            <div
+                                                key={token.id}
+                                                draggable
+                                                onDragStart={() => setIsDraggingToken(token.id)}
+                                                className="absolute w-12 h-12 rounded-full border-2 border-white/80 shadow-[0_8px_20px_rgba(0,0,0,0.5)] flex items-center justify-center text-[11px] font-black cursor-grab active:cursor-grabbing select-none group transition-shadow"
+                                                style={{
+                                                    left: (token.x || 0) - 24,
+                                                    top: (token.y || 0) - 24,
+                                                    backgroundColor: token.color || '#ef4444',
+                                                    boxShadow: `0 0 15px ${token.color || '#ef4444'}44, 0 8px 30px rgba(0,0,0,0.6)`,
+                                                    zIndex: 10
+                                                }}
+                                            >
+                                                <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-slate-900 border border-slate-700 px-3 py-1 rounded-full text-white text-[10px] opacity-0 group-hover:opacity-100 whitespace-nowrap transition-all shadow-xl backdrop-blur-md">
+                                                    {token.name || '??'}
+                                                </div>
+                                                <div className="text-white text-center leading-tight uppercase tracking-tighter drop-shadow-md">
+                                                    {(token.name || '??').substring(0, 2)}
+                                                </div>
+                                                <button
+                                                    onClick={(e) => {
+                                                        e.stopPropagation();
+                                                        const newTokens = mapData.tokens.filter(t => t && t.id !== token.id);
+                                                        const newMap = { ...mapData, tokens: newTokens };
+                                                        setMapData(newMap);
+                                                        socket?.emit('update_map', { campaignId, mapData: newMap });
+                                                    }}
+                                                    className="absolute -top-1 -right-1 bg-red-600 w-6 h-6 rounded-full flex items-center justify-center text-[10px] opacity-0 group-hover:opacity-100 hover:scale-125 transition-all border border-white/30 text-white shadow-lg"
+                                                >
+                                                    ✕
+                                                </button>
+                                            </div>
+                                        )
+                                    ))}
+
+                                    {!mapData.bgUrl && (
+                                        <div className="absolute inset-0 flex items-center justify-center text-slate-800 flex-col gap-6 p-20 min-h-[600px] min-w-[800px]">
+                                            <div className="w-32 h-32 bg-slate-900 rounded-full flex items-center justify-center text-6xl shadow-inner border border-slate-800">🗺️</div>
+                                            <div className="text-center space-y-2">
+                                                <p className="text-2xl font-black text-slate-600 uppercase tracking-widest">Harita Hazır Değil</p>
+                                                <p className="text-slate-700 font-bold">Yukarıya bir görsel URL'si yapıştırın veya dosya yükleyin.</p>
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
                             </div>
                         </div>
                     )
@@ -2123,28 +2253,78 @@ export default function DMDashboard() {
 
                 {/* --- USER MANAGEMENT MODAL --- */}
                 {
-                    isUserManagementOpen && (
-                        <div className="fixed inset-0 bg-black/90 z-[100] flex items-center justify-center p-8 backdrop-blur-sm animate-fade-in text-white">
-                            <div className="bg-gray-900 border-4 border-blue-900 rounded-lg p-6 w-full max-w-2xl h-[70vh] flex flex-col relative shadow-[10px_10px_0px_#1e3a8a]">
-                                <button onClick={() => setIsUserManagementOpen(false)} className="absolute top-4 right-4 text-gray-400 hover:text-red-500 font-bold text-2xl">✕</button>
-                                <h2 className="text-3xl font-black text-blue-500 mb-6 border-b-2 border-blue-900 pb-2 uppercase tracking-tighter">👥 Kullanıcı Yönetimi</h2>
-                                <div className="flex-1 overflow-y-auto space-y-2 pr-2">
+                    isUserManagementOpen && user?.username === 'SystemAdmin' && (
+                        <div className="fixed inset-0 bg-black/95 z-[100] flex items-center justify-center p-8 backdrop-blur-md animate-fade-in text-white">
+                            <div className="bg-gray-900 border-2 border-blue-600 rounded-3xl w-full max-w-3xl h-[80vh] flex flex-col relative shadow-[0_0_50px_rgba(30,58,138,0.5)] overflow-hidden">
+                                {/* Header */}
+                                <div className="bg-blue-950/40 p-6 border-b border-blue-800/50 flex justify-between items-center">
+                                    <div className="flex items-center gap-4">
+                                        <div className="w-12 h-12 bg-blue-600 rounded-2xl flex items-center justify-center text-2xl shadow-lg">👥</div>
+                                        <div>
+                                            <h2 className="text-2xl font-black text-blue-400 uppercase tracking-tighter">Sistem Kullanıcı Yönetimi</h2>
+                                            <p className="text-blue-200/60 text-xs font-bold uppercase tracking-widest">Tüm kullanıcılar ve yetkiler</p>
+                                        </div>
+                                    </div>
+                                    <button onClick={() => setIsUserManagementOpen(false)} className="w-10 h-10 rounded-full hover:bg-white/10 flex items-center justify-center text-gray-400 hover:text-white transition-all text-2xl">✕</button>
+                                </div>
+
+                                {/* Summary */}
+                                <div className="p-4 bg-gray-950/40 border-b border-gray-800">
+                                    <div className="flex items-center justify-between px-4">
+                                        <span className="text-xs font-black text-gray-500 uppercase tracking-widest">Kayıtlı Kullanıcı Sayısı: {allUsers.length}</span>
+                                        <span className="text-[10px] text-blue-500/60 font-bold italic">Sadece SystemAdmin Yetkisidir</span>
+                                    </div>
+                                </div>
+
+                                {/* User List */}
+                                <div className="flex-1 overflow-y-auto p-4 space-y-3 custom-scrollbar">
                                     {(allUsers || []).map(u => (
                                         u && (
-                                            <div key={u._id} className="bg-gray-800 p-4 rounded-lg flex items-center justify-between border border-gray-700 hover:border-blue-500 transition-colors">
-                                                <div>
-                                                    <div className="text-white font-bold text-lg">{u.username}</div>
-                                                    <div className="text-xs font-black uppercase tracking-widest text-gray-500">{u.role}</div>
+                                            <div key={u._id} className="bg-gray-800/40 border border-gray-700/50 rounded-2xl p-4 flex items-center justify-between group hover:border-blue-500/50 hover:bg-gray-800/60 transition-all shadow-sm">
+                                                <div className="flex items-center gap-4">
+                                                    <div className={`w-10 h-10 rounded-xl flex items-center justify-center font-black text-sm border ${u.role === 'DM' ? 'bg-red-950/40 border-red-900/50 text-red-400' : 'bg-green-950/40 border-green-900/50 text-green-400'}`}>
+                                                        {u.role?.[0] || 'P'}
+                                                    </div>
+                                                    <div>
+                                                        <div className="text-white font-black text-lg flex items-center gap-2">
+                                                            {u.username}
+                                                            {u.username === 'SystemAdmin' && <span className="text-[9px] bg-blue-600 text-white px-1.5 py-0.5 rounded-full">ANA HESAP</span>}
+                                                        </div>
+                                                        <div className="text-[10px] font-black uppercase tracking-widest text-gray-500">{u.role} · ID: {u._id.slice(-6)}</div>
+                                                    </div>
                                                 </div>
-                                                <button
-                                                    onClick={() => handleResetPassword(u._id, u.username)}
-                                                    className="bg-blue-700 hover:bg-blue-600 text-white text-xs font-bold py-2 px-4 rounded-lg transition-all"
-                                                >
-                                                    Şifreyi Sıfırla
-                                                </button>
+
+                                                <div className="flex items-center gap-2">
+                                                    {u.username !== 'SystemAdmin' && (
+                                                        <>
+                                                            <button
+                                                                onClick={() => handleRenameUser(u._id, u.username)}
+                                                                className="bg-gray-700 hover:bg-blue-900/40 text-gray-300 hover:text-blue-400 text-[11px] font-black py-2 px-3 rounded-xl border border-gray-600 hover:border-blue-500/50 transition-all uppercase tracking-wider"
+                                                            >
+                                                                İsim
+                                                            </button>
+                                                            <button
+                                                                onClick={() => handleResetPassword(u._id, u.username)}
+                                                                className="bg-gray-700 hover:bg-yellow-900/40 text-gray-300 hover:text-yellow-400 text-[11px] font-black py-2 px-3 rounded-xl border border-gray-600 hover:border-yellow-500/50 transition-all uppercase tracking-wider"
+                                                            >
+                                                                Şifre
+                                                            </button>
+                                                            <button
+                                                                onClick={() => handleDeleteUser(u._id, u.username)}
+                                                                className="bg-gray-700 hover:bg-red-900/40 text-gray-300 hover:text-red-400 text-[11px] font-black py-2 px-3 rounded-xl border border-gray-600 hover:border-red-500/50 transition-all uppercase tracking-wider"
+                                                            >
+                                                                Sil
+                                                            </button>
+                                                        </>
+                                                    )}
+                                                </div>
                                             </div>
                                         )
                                     ))}
+                                </div>
+
+                                <div className="p-4 bg-gray-950 border-t border-gray-800 text-center">
+                                    <p className="text-[10px] text-gray-600 font-bold uppercase tracking-widest italic">Kritik sistem değişiklikleri gerçek zamanlı kaydedilir.</p>
                                 </div>
                             </div>
                         </div>

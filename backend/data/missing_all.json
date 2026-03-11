@@ -1,0 +1,921 @@
+[
+  {
+    "name": "Sanctum Amulet",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:sanctum-amulet",
+    "rarity": "Very Rare",
+    "type": "Wondrous Item",
+    "description": "A black opal pendant hangs at the base of this pearlescent chain. The sacred rune is inscribed on the back of the pendant.\n\nWhile wearing this item, you have resistance to necrotic damage. Additionally, you can cast the Spare the Dying cantrip using either an action or a bonus action.\n\nInvoking the Rune. When a creature you can see within 60 feet of you is reduced to 0 hit points as a result of taking damage, you can use your reaction to invoke the item’s rune, causing the pendant to flash with pale light. The creature then instead drops to 1 hit point.\n\nOnce the rune has been invoked, it can’t be invoked again until the next dawn."
+  },
+  {
+    "name": "Sapphire Buckler",
+    "link": "https://dnd5e.wikidot.com/wondrous-items:sapphire-buckler",
+    "rarity": "Very Rare",
+    "type": "Armor",
+    "description": "This crystalline blue shield is fashioned from a sapphire dragon’s scale and is created to aid in rooting out the influence of Aberrations. While wielding the shield, you have resistance to psychic and thunder damage. Also, when you take damage from a creature that is within 5 feet of you, you can use your reaction to deal 2d6 thunder damage to that creature.\n\nAs an action, you can use the shield to help you locate Aberrations until the end of your next turn. If any Aberrations are within 1 mile of you, the shield emits a low humming tone for a moment, and you know the direction of all Aberrations within that range. Once this property is used, it can’t be used again until the next dawn."
+  },
+  {
+    "name": "Spiked Armor",
+    "category": "Armor",
+    "cost_raw": "14 + Dex modifier (max 2)",
+    "ac_raw": "-",
+    "strength_raw": "Disadvantage",
+    "stealth_raw": "45 lb.",
+    "weight_raw": "75 gp",
+    "source": "Wikidot"
+  },
+  {
+    "name": "Halfplate",
+    "category": "Armor",
+    "cost_raw": "15 + Dex modifier (max 2)",
+    "ac_raw": "-",
+    "strength_raw": "Disadvantage",
+    "stealth_raw": "40 lb.",
+    "weight_raw": "750 gp",
+    "source": "Wikidot"
+  },
+  {
+    "name": "Light Armor",
+    "category": "Armor",
+    "cost_raw": "1 minute",
+    "ac_raw": "1 minute",
+    "strength_raw": "",
+    "stealth_raw": "",
+    "weight_raw": "",
+    "source": "Wikidot"
+  },
+  {
+    "name": "Medium Armor",
+    "category": "Armor",
+    "cost_raw": "5 minutes",
+    "ac_raw": "1 minute",
+    "strength_raw": "",
+    "stealth_raw": "",
+    "weight_raw": "",
+    "source": "Wikidot"
+  },
+  {
+    "name": "Heavy Armor",
+    "category": "Armor",
+    "cost_raw": "10 minutes",
+    "ac_raw": "5 minutes",
+    "strength_raw": "",
+    "stealth_raw": "",
+    "weight_raw": "",
+    "source": "Wikidot"
+  },
+  {
+    "name": "Dart",
+    "category": "Weapon",
+    "cost_raw": "5 cp",
+    "damage_raw": "1d4 piercing",
+    "weight_raw": "1/4 lb.",
+    "properties_raw": "Finesse, thrown (20/60)",
+    "source": "Wikidot"
+  },
+  {
+    "name": "Sling",
+    "category": "Weapon",
+    "cost_raw": "1 sp",
+    "damage_raw": "1d4 bludgeoning",
+    "weight_raw": "—",
+    "properties_raw": "Ammunition, range (30/120)",
+    "source": "Wikidot"
+  },
+  {
+    "name": "Lance",
+    "category": "Weapon",
+    "cost_raw": "10 gp",
+    "damage_raw": "1d12 piercing",
+    "weight_raw": "6 lb.",
+    "properties_raw": "Reach, special",
+    "source": "Wikidot"
+  },
+  {
+    "name": "Pike",
+    "category": "Weapon",
+    "cost_raw": "5 gp",
+    "damage_raw": "1d10 piercing",
+    "weight_raw": "18 lb.",
+    "properties_raw": "Heavy, reach, two-handed",
+    "source": "Wikidot"
+  },
+  {
+    "name": "Scimitar",
+    "category": "Weapon",
+    "cost_raw": "25 gp",
+    "damage_raw": "1d6 slashing",
+    "weight_raw": "3 lb.",
+    "properties_raw": "Finesse, light",
+    "source": "Wikidot"
+  },
+  {
+    "name": "Trident",
+    "category": "Weapon",
+    "cost_raw": "5 gp",
+    "damage_raw": "1d6 piercing",
+    "weight_raw": "4 lb.",
+    "properties_raw": "Thrown (20/60), versatile (1d8)",
+    "source": "Wikidot"
+  },
+  {
+    "name": "War pick",
+    "category": "Weapon",
+    "cost_raw": "5 gp",
+    "damage_raw": "1d8 piercing",
+    "weight_raw": "2 lb.",
+    "properties_raw": "—",
+    "source": "Wikidot"
+  },
+  {
+    "name": "Whip",
+    "category": "Weapon",
+    "cost_raw": "2 gp",
+    "damage_raw": "1d4 slashing",
+    "weight_raw": "3 lb.",
+    "properties_raw": "Finesse, reach",
+    "source": "Wikidot"
+  },
+  {
+    "name": "Blowgun",
+    "category": "Weapon",
+    "cost_raw": "10 gp",
+    "damage_raw": "1 piercing",
+    "weight_raw": "1 lb.",
+    "properties_raw": "Ammunition, range (25/100), loading",
+    "source": "Wikidot"
+  },
+  {
+    "name": "Crossbow, hand",
+    "category": "Weapon",
+    "cost_raw": "75 gp",
+    "damage_raw": "1d6 piercing",
+    "weight_raw": "3 lb.",
+    "properties_raw": "Ammunition, range (30/120), light, loading",
+    "source": "Wikidot"
+  },
+  {
+    "name": "Net",
+    "category": "Weapon",
+    "cost_raw": "1 gp",
+    "damage_raw": "—",
+    "weight_raw": "3 lb.",
+    "properties_raw": "Special, thrown (5/15)",
+    "source": "Wikidot"
+  },
+  {
+    "name": "Arrows (20)",
+    "category": "Weapon",
+    "cost_raw": "1 gp",
+    "damage_raw": "1 lb.",
+    "weight_raw": "",
+    "properties_raw": "",
+    "source": "Wikidot"
+  },
+  {
+    "name": "Blowgun needles (50)",
+    "category": "Weapon",
+    "cost_raw": "1 gp",
+    "damage_raw": "1 lb.",
+    "weight_raw": "",
+    "properties_raw": "",
+    "source": "Wikidot"
+  },
+  {
+    "name": "Crossbow bolts (20)",
+    "category": "Weapon",
+    "cost_raw": "1 gp",
+    "damage_raw": "1½ lb.",
+    "weight_raw": "",
+    "properties_raw": "",
+    "source": "Wikidot"
+  },
+  {
+    "name": "Sling bullets (20)",
+    "category": "Weapon",
+    "cost_raw": "4 cp",
+    "damage_raw": "1½ lb.",
+    "weight_raw": "",
+    "properties_raw": "",
+    "source": "Wikidot"
+  },
+  {
+    "name": "Yklwa",
+    "category": "Weapon",
+    "cost_raw": "1 gp",
+    "damage_raw": "1d8 Piercing",
+    "weight_raw": "3 lb.",
+    "properties_raw": "Thrown (10/30)",
+    "source": "Wikidot"
+  },
+  {
+    "name": "Hoopak\n* A hoopak is a sturdy stick with a sling at one end and a pointed tip at the other.",
+    "category": "Weapon",
+    "cost_raw": "1 gp",
+    "damage_raw": "1d6 piercing (melee) or 1d4 bludgeoning (ranged)",
+    "weight_raw": "2 lb.",
+    "properties_raw": "Ammunition (range 40/160), finesse, special, two-handed",
+    "source": "Wikidot"
+  },
+  {
+    "name": "Double-Bladed Scimitar",
+    "category": "Weapon",
+    "cost_raw": "100 gp",
+    "damage_raw": "2d4 Slashing",
+    "weight_raw": "6 lb.",
+    "properties_raw": "Special, two-handed",
+    "source": "Wikidot"
+  },
+  {
+    "name": "Burglar's Pack",
+    "category": "Adventuring Gear",
+    "cost_raw": "16 gp",
+    "weight_raw": "Backpack, a bag of 1,000 ball bearings, 10 feet of string, a bell, 5 candles, a crowbar, a hammer, 10 pitons, a hooded lantern, 2 flasks of oil, 5 days rations, a tinderbox and a waterskin. The pack also has 50 feet of hempen rope strapped to the side of it.",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Diplomat's Pack",
+    "category": "Adventuring Gear",
+    "cost_raw": "39 gp",
+    "weight_raw": "Chest, 2 cases for maps and scrolls, a set of fine clothes, a bottle of ink, an ink pen, a lamp, 2 flasks of oil, 5 sheets of paper, a vial of perfume, sealing wax, and soap.",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Dungeoneer's Pack",
+    "category": "Adventuring Gear",
+    "cost_raw": "12 gp",
+    "weight_raw": "Backpack, a crowbar, a hammer, 10 pitons, 10 torches, a tinderbox, 10 days of rations, and a waterskin. The pack also has 50 feet of hempen rope strapped to the side of it.",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Entertainer's Pack",
+    "category": "Adventuring Gear",
+    "cost_raw": "40 gp",
+    "weight_raw": "Backpack, a bedroll, 2 costumes, 5 candles, 5 days of rations, a waterskin, and a disguise kit.",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Explorer's Pack",
+    "category": "Adventuring Gear",
+    "cost_raw": "10 gp",
+    "weight_raw": "Backpack, a bedroll, a mess kit, a tinderbox, 10 torches, 10 days of rations, and a waterskin. The pack also has 50 feet of hempen rope strapped to the side of it.",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Priest's Pack",
+    "category": "Adventuring Gear",
+    "cost_raw": "19 gp",
+    "weight_raw": "Backpack, a blanket, 10 candles, a tinderbox, an alms box, 2 blocks of incense, a censer, vestments, 2 days of rations, and a waterskin.",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Scholar's Pack",
+    "category": "Adventuring Gear",
+    "cost_raw": "40 gp",
+    "weight_raw": "Backpack, a book of lore, a bottle of ink, an ink pen, 10 sheets of parchment, a little bag of sand, and a small knife.",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Abacus",
+    "category": "Adventuring Gear",
+    "cost_raw": "2 gp",
+    "weight_raw": "2 lb.",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Bell",
+    "category": "Adventuring Gear",
+    "cost_raw": "1 gp",
+    "weight_raw": "-",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Blanket",
+    "category": "Adventuring Gear",
+    "cost_raw": "5 sp",
+    "weight_raw": "3 lb.",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Block and Tackle\n* A set of pulleys with a cable threaded through them and a hook to attach to objects, a block and tackle allows you to hoist up to four times the weight you can normally lift.",
+    "category": "Adventuring Gear",
+    "cost_raw": "1 gp",
+    "weight_raw": "5 lb.",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Book\n* A book might contain poetry, historical accounts, information pertaining to a particular field of lore, diagrams and notes on gnomish contraptions, or just about anything else that can be represented sing text or pictures. A book of spells is a spellbook.",
+    "category": "Adventuring Gear",
+    "cost_raw": "25 gp",
+    "weight_raw": "5 lb.",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Candle\n* For 1 hour, a candle sheds bright light in a 5-foot radius and dim light for another 5 feet.",
+    "category": "Adventuring Gear",
+    "cost_raw": "1 cp",
+    "weight_raw": "-",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Chain (10 ft)\n* A chain has 10 hit points. It can be burst with a successful DC 20 Strength check.",
+    "category": "Adventuring Gear",
+    "cost_raw": "5 gp",
+    "weight_raw": "10 lb.",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Chalk (1 pc)",
+    "category": "Adventuring Gear",
+    "cost_raw": "1 cp",
+    "weight_raw": "-",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Component Pouch\n* A component pouch is a small, watertight leather belt pouch that has compartments to hold all the material components and other special items you need to cast your spells, except for those components that have a specific cost (as indicated in a spell's description).",
+    "category": "Adventuring Gear",
+    "cost_raw": "25 gp",
+    "weight_raw": "2 lb.",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Fishing Tackle\n* This kit includes a wooden rod, silken line, corkwood bobbers, steel hooks, lead sinkers, velvet lures, and narrow netting.",
+    "category": "Adventuring Gear",
+    "cost_raw": "1 gp",
+    "weight_raw": "4 lb.",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Grappling Hook",
+    "category": "Adventuring Gear",
+    "cost_raw": "2 gp",
+    "weight_raw": "4 lb.",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Hammer",
+    "category": "Adventuring Gear",
+    "cost_raw": "1 gp",
+    "weight_raw": "3 lb.",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Hourglass",
+    "category": "Adventuring Gear",
+    "cost_raw": "25 gp",
+    "weight_raw": "1 lb.",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Ink (1 oz)",
+    "category": "Adventuring Gear",
+    "cost_raw": "10 gp",
+    "weight_raw": "-",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Ink Pen",
+    "category": "Adventuring Gear",
+    "cost_raw": "2 cp",
+    "weight_raw": "-",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Ladder (10 ft)",
+    "category": "Adventuring Gear",
+    "cost_raw": "1 sp",
+    "weight_raw": "25 lb.",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Lock\n* A key is provided with the lock. Without the key, a creature proficient with thieves' tools can pick this lock with a successful DC 15 Dexterity check. Your DM may decide that better locks are available for higher prices.",
+    "category": "Adventuring Gear",
+    "cost_raw": "10 gp",
+    "weight_raw": "1 lb.",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Magnifying Glass\n* This lens allows a closer look at small objects. It is also useful as a substitute or flint and steel when starting fires. Lighting a fire with a magnifying glass requires light as bright as sunlight to focus, tinder to ignite, and about 5 minutes for the fire to ignite. A magnifying glass grants advantage on any ability check made to appraise or inspect an item that is small or highly detailed.",
+    "category": "Adventuring Gear",
+    "cost_raw": "100 gp",
+    "weight_raw": "-",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Manacles\n* These metal restraints can bind a Small or Medium creature. Escaping the manacles requires a successful DC 20 Dexterity check. Breaking them requires a successful DC 20 Strength check. Each set of manacles comes with one key. Without the key, a creature proficient with thieves’ tools can pick the manacles’ lock with a successful DC 15 Dexterity check. Manacles have 15 hit points.",
+    "category": "Adventuring Gear",
+    "cost_raw": "2 gp",
+    "weight_raw": "6 lb.",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Mess Kit\n* This tin box contains a cup and simple cutlery. The box clamps together, and one side can be used as a cooking pan and the other as a plate or shallow bowl.",
+    "category": "Adventuring Gear",
+    "cost_raw": "2 sp",
+    "weight_raw": "1 lb.",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Miner's Pick",
+    "category": "Adventuring Gear",
+    "cost_raw": "2 gp",
+    "weight_raw": "10 lb.",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Paper (1 sheet)",
+    "category": "Adventuring Gear",
+    "cost_raw": "2 sp",
+    "weight_raw": "-",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Parchment (1 sheet)",
+    "category": "Adventuring Gear",
+    "cost_raw": "1 sp",
+    "weight_raw": "-",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Perfume (vial)",
+    "category": "Adventuring Gear",
+    "cost_raw": "5 gp",
+    "weight_raw": "-",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Piton",
+    "category": "Adventuring Gear",
+    "cost_raw": "5 cp",
+    "weight_raw": "0.25 lb.",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Pole (10 ft)",
+    "category": "Adventuring Gear",
+    "cost_raw": "5 cp",
+    "weight_raw": "7 lb.",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Ram, Portable\n* You can use a portable ram to break down doors. When doing so, you gain a +4 bonus on the Strength check. One other character can help you use the ram, giving you advantage on this check.",
+    "category": "Adventuring Gear",
+    "cost_raw": "4 gp",
+    "weight_raw": "35 lb.",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Rations (1 day)\n* Rations consist of dry foods suitable for extended travel, including jerky, dried fruit, hardtack, and nuts.",
+    "category": "Adventuring Gear",
+    "cost_raw": "5 sp",
+    "weight_raw": "2 lb.",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Rope\n* Rope, whether made of hemp or silk, has 2 hit points and can be burst with a DC 17 Strength check.\n- Hemp (50 ft)\n- Silk (50 feet)",
+    "category": "Adventuring Gear",
+    "cost_raw": "1 gp\n10 gp",
+    "weight_raw": "10 lb.\n5 lb.",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Sealing Wax",
+    "category": "Adventuring Gear",
+    "cost_raw": "5 sp",
+    "weight_raw": "-",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Shovel",
+    "category": "Adventuring Gear",
+    "cost_raw": "2 gp",
+    "weight_raw": "5 lb.",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Signal Whistle",
+    "category": "Adventuring Gear",
+    "cost_raw": "5 cp",
+    "weight_raw": "-",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Signet Ring",
+    "category": "Adventuring Gear",
+    "cost_raw": "5 gp",
+    "weight_raw": "-",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Sledgehammer",
+    "category": "Adventuring Gear",
+    "cost_raw": "2 gp",
+    "weight_raw": "10 lb.",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Spellbook\n* Essential for wizards, a spellbook is a leather-bound tome with 100 blank vellum pages suitable for recording spells.",
+    "category": "Adventuring Gear",
+    "cost_raw": "50 gp",
+    "weight_raw": "3 lb.",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Spikes, Iron (10)",
+    "category": "Adventuring Gear",
+    "cost_raw": "1 gp",
+    "weight_raw": "5 lb.",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Spyglass\n* Objects viewed through a spyglass are magnified to twice their size.",
+    "category": "Adventuring Gear",
+    "cost_raw": "1000 gp",
+    "weight_raw": "1 lb.",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Tent, Two-person",
+    "category": "Adventuring Gear",
+    "cost_raw": "2 gp",
+    "weight_raw": "20 lbs.",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Whetstone",
+    "category": "Adventuring Gear",
+    "cost_raw": "1 cp",
+    "weight_raw": "1 lb.",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Acid (vial)\n* As an action, you can splash the contents of this vial onto a creature within 5 feet of you or throw the vial up to 20 feet, shattering it on impact. In either case, make a ranged attack against a creature or object, treating the acid as an improvised weapon. On a hit, the target takes 2d6 acid damage.",
+    "category": "Adventuring Gear",
+    "cost_raw": "25 gp",
+    "weight_raw": "1 lb.",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Alchemist's Fire (flask)\n* This sticky, adhesive fluid ignites when exposed to air. As an action, you can throw this flask up to 20 feet, shattering it on impact. Make a ranged attack against a creature or object, treating the alchemist's fire as an improvised weapon. On a hit, the target takes 1d4 fire damage at the start of each of its turns. A creature can end this damage by using its action to make a DC 10 Dexterity check to extinguish the flames.",
+    "category": "Adventuring Gear",
+    "cost_raw": "50 gp",
+    "weight_raw": "1 lb.",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Antitoxin (vial)\n* A creature that drinks this vial of liquid gains advantage on saving throws against poison for 1 hour. It confers no benefits to undead or constructs.",
+    "category": "Adventuring Gear",
+    "cost_raw": "50 gp",
+    "weight_raw": "-",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Ball Bearings (bag of 1,000)\n* As an action, you can spill these tiny balls from their pouch to cover a level area 10 feet square. A creature moving across the covered area must succeed on a DC 10 Dexterity saving throw or fall prone. A creature moving through the area at half speed doesn't need to make the saving throw.",
+    "category": "Adventuring Gear",
+    "cost_raw": "1 gp",
+    "weight_raw": "2 lb.",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Caltrops (bag of 20)\n* As an action, you can spread a single bag of caltrops to cover a 5-foot-square area. Any creature that enters the area must succeed on a DC 15 Dexterity saving throw or stop moving and take 1 piercing damage. Until the creature regains at least 1 hit point, its walking speed is reduced by 10 feet. A creature moving through the area at half speed doesn't need to make the saving throw.",
+    "category": "Adventuring Gear",
+    "cost_raw": "1 gp",
+    "weight_raw": "2 lb.",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Climber's Kit\n* A climber's kit includes special pitons, boot tips, gloves, and a harness. You can use the climber's kit as an action to anchor yourself; when you do, you can't fall more than 25 feet from the point where you anchored yourself, and you can't climb more than 25 feet away from that point without undoing the anchor.",
+    "category": "Adventuring Gear",
+    "cost_raw": "25 gp",
+    "weight_raw": "12 lb.",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Crowbar\n* Using a crowbar grants advantage to Strength checks where the crowbar's leverage can be applied.",
+    "category": "Adventuring Gear",
+    "cost_raw": "2 gp",
+    "weight_raw": "5 lb.",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Healer's Kit\n* This kit is a leather pouch containing bandages, salves, and splints. The kit has ten uses. As an action, you can expend one use of the kit to stabilize a creature that has 0 hit points, without needing to make a Wisdom (Medicine) check.",
+    "category": "Adventuring Gear",
+    "cost_raw": "5 gp",
+    "weight_raw": "3 lb.",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Holy Water (flask)\n* As an action, you can splash the contents of this flask onto a creature within 5 feet of you or throw it up to 20 feet, shattering it on impact. In either case, make a ranged attack against a target creature, treating the holy water as an improvised weapon. If the target is a fiend or undead, it takes 2d6 radiant damage.\n* A cleric or paladin may create holy water by performing a special ritual. The ritual takes 1 hour to perform, uses 25 gp worth of powdered silver, and requires the caster to expend a 1st-level spell slot.",
+    "category": "Adventuring Gear",
+    "cost_raw": "25 gp",
+    "weight_raw": "1 lb.",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Hunting Trap\n* When you use your action to set it, this trap forms a saw-toothed steel ring that snaps shut when a creature steps on a pressure plate in the center. The trap is affixed by a heavy chain to an immobile object, such as a tree or a spike driven into the ground. A creature that steps on the plate must succeed on a DC 13 Dexterity saving throw or take 1d4 piercing damage and stop moving. Thereafter, until the creature breaks free of the trap, its movement is limited by the length of chain (typically 3 feet long). A creature can use its action to make a DC 13 Strength check, freeing itself or another creature within its reach on a success. Each failed check deals 1 piercing damage to the trapped creature.",
+    "category": "Adventuring Gear",
+    "cost_raw": "5 gp",
+    "weight_raw": "25 lb.",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Lamp\n* A lamp casts bright light in a 15-foot radius and dim light for an additional 30 feet. Once lit, it burns for 6 hours on a flask (1 pint) of oil.",
+    "category": "Adventuring Gear",
+    "cost_raw": "5 sp",
+    "weight_raw": "1 lb.",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Lantern - Bullseye\n* A bullseye lantern casts bright light in a 60-foot cone and dim light for an additional 60 feet. Once lit, it burns for 6 hours on a flask (1 pint) of oil.",
+    "category": "Adventuring Gear",
+    "cost_raw": "10 gp",
+    "weight_raw": "2 lb.",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Lantern - Hooded\n* A hooded lantern casts bright light in a 30-foot radius and dim light for an additional 30 feet. Once lit, it burns for 6 hours on a flask (1 pint) of oil. As an action, you can lower the hood, reducing the light to dim light in a 5-foot radius.",
+    "category": "Adventuring Gear",
+    "cost_raw": "5 gp",
+    "weight_raw": "2 lb.",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Oil (flask)\n* Oil usually comes in a clay flask that holds 1 pint. As an action, you can splash the oil in this flask onto a creature within 5 feet of you or throw it up to 20 feet, shattering it on impact. Make a ranged attack against a target creature or object, treating the oil as an improvised weapon. On a hit, the target is covered in oil. If the target takes any fire damage before the oil dries (after 1 minute), the target takes an additional 5 fire damage from the burning oil. You can also pour a flask of oil on the ground to cover a 5-foot-square area, provided that the surface is level. If lit, the oil burns for 2 rounds and deals 5 fire damage to any creature that enters the area or ends its turn in the area. A creature can take this damage only once per turn.",
+    "category": "Adventuring Gear",
+    "cost_raw": "1 sp",
+    "weight_raw": "1 lb.",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Poison, basic (vial)\n* You can use the poison in this vial to coat one slashing or piercing weapon or up to three pieces of ammunition. Applying the poison takes an action. A creature hit by the poisoned weapon or ammunition must make a DC 10 Constitution saving throw or take 1d4 poison damage. Once applied, the poison retains potency for 1 minute before drying.",
+    "category": "Adventuring Gear",
+    "cost_raw": "100 gp",
+    "weight_raw": "-",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Potion of Healing (common)",
+    "category": "Adventuring Gear",
+    "cost_raw": "50 gp",
+    "weight_raw": "0.5 lb.",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Tinderbox\n* This small container holds flint, fire steel, an tinder (usually dry cloth soaked in light oil) used to kindle a fire. Using it to light a torch — or anything else with abundant, exposed fuel — takes an action. Lighting any other fire takes 1 minutes.",
+    "category": "Adventuring Gear",
+    "cost_raw": "5 sp",
+    "weight_raw": "1 lb.",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Torch\n* A torch burns for 1 hour, providing bright light in a 20-foot radius and dim light for an additional 20 feet. If you make a melee attack with a burning torch and hit, it deals 1 fire damage.",
+    "category": "Adventuring Gear",
+    "cost_raw": "1 cp",
+    "weight_raw": "1 lb.",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Common Clothes",
+    "category": "Adventuring Gear",
+    "cost_raw": "5 sp",
+    "weight_raw": "3 lb.",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Costume",
+    "category": "Adventuring Gear",
+    "cost_raw": "5 gp",
+    "weight_raw": "4 lb.",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Fine Clothes",
+    "category": "Adventuring Gear",
+    "cost_raw": "15 gp",
+    "weight_raw": "6 lb.",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Robes",
+    "category": "Adventuring Gear",
+    "cost_raw": "1 gp",
+    "weight_raw": "4 lb.",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Traveler's Clothes",
+    "category": "Adventuring Gear",
+    "cost_raw": "2 gp",
+    "weight_raw": "4 lb.",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Crystal",
+    "category": "Adventuring Gear",
+    "cost_raw": "10 gp",
+    "weight_raw": "1 lb.",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Orb",
+    "category": "Adventuring Gear",
+    "cost_raw": "20 gp",
+    "weight_raw": "3 lb.",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Rod",
+    "category": "Adventuring Gear",
+    "cost_raw": "10 gp",
+    "weight_raw": "2 lb.",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Staff",
+    "category": "Adventuring Gear",
+    "cost_raw": "5 gp",
+    "weight_raw": "4 lb.",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Wand",
+    "category": "Adventuring Gear",
+    "cost_raw": "10 gp",
+    "weight_raw": "1 lb.",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Sprig of Mistletoe",
+    "category": "Adventuring Gear",
+    "cost_raw": "1 gp",
+    "weight_raw": "-",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Totem",
+    "category": "Adventuring Gear",
+    "cost_raw": "1 gp",
+    "weight_raw": "-",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Wooden Staff",
+    "category": "Adventuring Gear",
+    "cost_raw": "5 gp",
+    "weight_raw": "4 lb.",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Yew Wand",
+    "category": "Adventuring Gear",
+    "cost_raw": "10 gp",
+    "weight_raw": "1 lb.",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Amulet",
+    "category": "Adventuring Gear",
+    "cost_raw": "5 gp",
+    "weight_raw": "1 lb.",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Emblem",
+    "category": "Adventuring Gear",
+    "cost_raw": "5 gp",
+    "weight_raw": "-",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Reliquary",
+    "category": "Adventuring Gear",
+    "cost_raw": "5 gp",
+    "weight_raw": "2 lb.",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Backpack*\n* You can also strap items, such as a bedroll or a coil of rope, to the outside of a backpack.",
+    "category": "Adventuring Gear",
+    "cost_raw": "2 gp",
+    "weight_raw": "1 cubic foot/30 pounds of gear",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Barrel",
+    "category": "Adventuring Gear",
+    "cost_raw": "2 gp",
+    "weight_raw": "40 gallons liquid, 4 cubic feet solid",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Basket",
+    "category": "Adventuring Gear",
+    "cost_raw": "4 sp",
+    "weight_raw": "2 cubic feet/40 pounds of gear",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Bucket",
+    "category": "Adventuring Gear",
+    "cost_raw": "5 cp",
+    "weight_raw": "3 gallons liquid, 1/2 cubic foot solid",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Case, Crossbow Bolt",
+    "category": "Adventuring Gear",
+    "cost_raw": "1 gp",
+    "weight_raw": "20 crossbow bolts",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Case, Map/Scroll",
+    "category": "Adventuring Gear",
+    "cost_raw": "1 gp",
+    "weight_raw": "ten rolled-up sheets of paper or five rolled-up sheets of parchment",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Chest",
+    "category": "Adventuring Gear",
+    "cost_raw": "5 gp",
+    "weight_raw": "12 cubic feet/300 pounds of gear",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Flask or Tankard",
+    "category": "Adventuring Gear",
+    "cost_raw": "2 cp",
+    "weight_raw": "1 pint liquid",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Glass Bottle",
+    "category": "Adventuring Gear",
+    "cost_raw": "2 gp",
+    "weight_raw": "1.5 pints liquid",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Jug or Pitcher",
+    "category": "Adventuring Gear",
+    "cost_raw": "2 cp",
+    "weight_raw": "1 gallon liquid",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Pot, iron",
+    "category": "Adventuring Gear",
+    "cost_raw": "2 gp",
+    "weight_raw": "1 gallon liquid",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Pouch\n* A cloth or leather pouch can hold up to 20 sling bullets or 50 blowgun needles, among other things. A compartmentalized pouch for holding spell components is called a component pouch.",
+    "category": "Adventuring Gear",
+    "cost_raw": "5 sp",
+    "weight_raw": "1/5 cubic foot/6 pounds of gear",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Quiver",
+    "category": "Adventuring Gear",
+    "cost_raw": "1 gp",
+    "weight_raw": "20 arrows",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Sack",
+    "category": "Adventuring Gear",
+    "cost_raw": "1 cp",
+    "weight_raw": "1 cubic foot/30 pounds of gear",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Vial",
+    "category": "Adventuring Gear",
+    "cost_raw": "1 gp",
+    "weight_raw": "4 ounces liquid",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Waterskin",
+    "category": "Adventuring Gear",
+    "cost_raw": "2 sp",
+    "weight_raw": "4 pints liquid",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Fargab\n* These backpack-sized devices are created in pairs, with matching numbers engraved on them, and allow communication over a long distance using radio frequencies. While wearing a fargab, you can use an action to speak into the device's mouthpiece and send a short message of twenty-five words or less to another creature wearing the matched fargab while it is within 18 miles of you. The message emits from the speakers of the device and can be heard up to 10 feet awayfrom the device. If no creature is wearing the fargab, the speakers make static noises instead.",
+    "category": "Adventuring Gear",
+    "cost_raw": "-",
+    "weight_raw": "-",
+    "source": "Wikidot/Adventuring-Gear"
+  },
+  {
+    "name": "Narycrash\n* This backpack-sized device holds a balloon-based parachute. If you fall while wearing this device, you can use your reaction to deploy the parachute. Once deployed, the parachute rapidly inflates, and you descend 60 feet per round and take no damage from falling. When you are 10 feet away from the ground, roll a d20. If you roll a 5 or less, the parachute gives out, and you begin to fall normally.",
+    "category": "Adventuring Gear",
+    "cost_raw": "-",
+    "weight_raw": "-",
+    "source": "Wikidot/Adventuring-Gear"
+  }
+]
