@@ -218,7 +218,7 @@ app.post('/api/admin/seed', authenticate, async (req, res) => {
 
     if (finalItems.length > 0) {
       // Chunking to avoid timeouts on large inserts
-      const chunkSize = 100;
+      const chunkSize = 25;
       for (let i = 0; i < finalItems.length; i += chunkSize) {
         const chunk = finalItems.slice(i, i + chunkSize);
         await Item.insertMany(chunk, { ordered: false }).catch(e => console.error('Partial item insert error:', e.message));

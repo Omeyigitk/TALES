@@ -1715,27 +1715,35 @@ export default function DMDashboard() {
                                                     </div>
                                                 </div>
 
-                                                <div className="grid grid-cols-3 gap-4 mb-8">
-                                                    <div className="bg-gray-900/80 border border-gray-800 p-4 rounded-xl flex flex-col items-center justify-center">
-                                                        <span className="text-xs text-gray-500 font-bold uppercase mb-1">Ağırlık</span>
-                                                        <span className="text-xl font-black text-white">
-                                                            {typeof selectedItem.weight === 'object' ? selectedItem.weight.quantity : (selectedItem.weight || '-')}
-                                                            <span className="text-xs opacity-50 ml-1">lb</span>
-                                                        </span>
+                                                {(selectedItem.weight || selectedItem.cost || selectedItem.damage) && (
+                                                    <div className="grid grid-cols-3 gap-4 mb-8">
+                                                        {selectedItem.weight ? (
+                                                            <div className="bg-gray-900/80 border border-gray-800 p-4 rounded-xl flex flex-col items-center justify-center">
+                                                                <span className="text-xs text-gray-500 font-bold uppercase mb-1">Ağırlık</span>
+                                                                <span className="text-xl font-black text-white">
+                                                                    {typeof selectedItem.weight === 'object' ? selectedItem.weight.quantity : selectedItem.weight}
+                                                                    <span className="text-xs opacity-50 ml-1">lb</span>
+                                                                </span>
+                                                            </div>
+                                                        ) : <div className="hidden"></div>}
+                                                        {selectedItem.cost ? (
+                                                            <div className="bg-gray-900/80 border border-gray-800 p-4 rounded-xl flex flex-col items-center justify-center">
+                                                                <span className="text-xs text-gray-500 font-bold uppercase mb-1">Maliyet</span>
+                                                                <span className="text-xl font-black text-yellow-500">
+                                                                    {typeof selectedItem.cost === 'object' ? `${selectedItem.cost.quantity} ${selectedItem.cost.unit}` : selectedItem.cost}
+                                                                </span>
+                                                            </div>
+                                                        ) : <div className="hidden"></div>}
+                                                        {selectedItem.damage ? (
+                                                            <div className="bg-gray-900/80 border border-gray-800 p-4 rounded-xl flex flex-col items-center justify-center">
+                                                                <span className="text-xs text-gray-500 font-bold uppercase mb-1">Hasar/Etki</span>
+                                                                <span className="text-xl font-black text-red-500">
+                                                                    {selectedItem.damage?.damage_dice || selectedItem.damage?.dice || selectedItem.damage}
+                                                                </span>
+                                                            </div>
+                                                        ) : <div className="hidden"></div>}
                                                     </div>
-                                                    <div className="bg-gray-900/80 border border-gray-800 p-4 rounded-xl flex flex-col items-center justify-center">
-                                                        <span className="text-xs text-gray-500 font-bold uppercase mb-1">Maliyet</span>
-                                                        <span className="text-xl font-black text-yellow-500">
-                                                            {typeof selectedItem.cost === 'object' ? `${selectedItem.cost.quantity} ${selectedItem.cost.unit}` : (selectedItem.cost || '-')}
-                                                        </span>
-                                                    </div>
-                                                    <div className="bg-gray-900/80 border border-gray-800 p-4 rounded-xl flex flex-col items-center justify-center">
-                                                        <span className="text-xs text-gray-500 font-bold uppercase mb-1">Hasar/Etki</span>
-                                                        <span className="text-xl font-black text-red-500">
-                                                            {selectedItem.damage?.damage_dice || selectedItem.damage?.dice || selectedItem.damage || '-'}
-                                                        </span>
-                                                    </div>
-                                                </div>
+                                                )}
 
                                                 <div className="bg-gray-900/80 border-l-4 border-blue-600 p-6 rounded-r-xl mb-8 font-serif leading-relaxed text-gray-200">
                                                     <h5 className="font-sans text-xs font-black text-blue-500 uppercase tracking-widest mb-4">Açıklama & Özellikler</h5>
