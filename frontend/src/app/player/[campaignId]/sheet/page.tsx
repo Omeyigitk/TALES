@@ -633,6 +633,22 @@ export default function PlayerSheet() {
         return () => (socket as any).off('media_shared', onMedia);
     }, [socket, campaignId]);
 
+    const getSpellcastingAbility = (className: string) => {
+        const map: any = {
+            'Wizard': 'INT', 'Mage': 'INT', 'Druid': 'WIS', 'Cleric': 'WIS', 'Ranger': 'WIS',
+            'Büyücü': 'INT', 'Ruhban': 'WIS', 'Kolcu': 'WIS',
+            'Bard': 'CHA', 'Ozan': 'CHA', 'Paladin': 'CHA', 'Sorcerer': 'CHA', 'Warlock': 'CHA',
+            'Artificer': 'INT', 'Şövalye': 'CHA', 'Büyücü/Sorcerer': 'CHA'
+        };
+        return map[className] || 'INT';
+    };
+
+    const getModifier = (statName: string) => {
+        if (!stats) return 0;
+        const val = stats[statName] || 10;
+        return Math.floor((val - 10) / 2);
+    };
+
     const updateHp = (newHp: number) => {
         const clamped = Math.max(0, Math.min(character.maxHp, newHp));
         setCurrentHp(clamped);
@@ -2261,7 +2277,7 @@ export default function PlayerSheet() {
                                         <div className="bg-gradient-to-br from-purple-900/40 to-indigo-900/40 backdrop-blur-md rounded-2xl border border-purple-500/20 p-5 shadow-xl flex items-center justify-between border-l-4 border-l-purple-500 group hover:bg-purple-900/50 transition-all duration-500">
                                             <div>
                                                 <p className="text-[10px] font-black text-purple-400 uppercase tracking-widest mb-1">Spell Save DC</p>
-                                                <h4 className="text-2xl font-black text-white font-mono">{8 + (getModifier(getSpellcastingAbility(clsName))) + (PB)}</h4>
+                                                <h4 className="text-2xl font-black text-white font-mono">{8 + (getModifier(getSpellcastingAbility(clsName))) + (prof)}</h4>
                                             </div>
                                             <div className="w-12 h-12 bg-purple-500/10 rounded-xl flex items-center justify-center border border-purple-500/20 text-purple-400 group-hover:scale-110 transition-transform duration-500">
                                                 <span className="text-2xl">⚡</span>
@@ -2271,7 +2287,7 @@ export default function PlayerSheet() {
                                         <div className="bg-gradient-to-br from-cyan-900/40 to-blue-900/40 backdrop-blur-md rounded-2xl border border-cyan-500/20 p-5 shadow-xl flex items-center justify-between border-l-4 border-l-cyan-500 group hover:bg-cyan-900/50 transition-all duration-500">
                                             <div>
                                                 <p className="text-[10px] font-black text-cyan-400 uppercase tracking-widest mb-1">Spell Attack</p>
-                                                <h4 className="text-2xl font-black text-white font-mono">+{getModifier(getSpellcastingAbility(clsName)) + (PB)}</h4>
+                                                <h4 className="text-2xl font-black text-white font-mono">+{getModifier(getSpellcastingAbility(clsName)) + (prof)}</h4>
                                             </div>
                                             <div className="w-12 h-12 bg-cyan-500/10 rounded-xl flex items-center justify-center border border-cyan-500/20 text-cyan-400 group-hover:scale-110 transition-transform duration-500">
                                                 <span className="text-2xl">🎯</span>
