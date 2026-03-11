@@ -202,11 +202,22 @@ app.post('/api/admin/seed', authenticate, async (req, res) => {
       const items = JSON.parse(fs.readFileSync(path.join(dataPath, file), 'utf8'));
       for (const itemData of items) {
         const existing = itemMap.get(itemData.name) || {};
+        
+        let newDesc = itemData.description || existing.description;
+        let newDescTr = itemData.description_tr || existing.description_tr;
+        
+        // Enriched files often put the translated rich text straight into 'description'
+        if (itemData.description && (itemData.description.includes('**[') || itemData.description.includes('Mekanik Bilgiler') || itemData.description.includes('Atmosfer'))) {
+            newDescTr = itemData.description;
+        }
+
         itemMap.set(itemData.name, {
           ...existing,
           ...itemData,
-          name_tr: itemData.name, // Reverted to English name as per user correction
-          category: itemData.category || 'Büyülü Eşya'
+          name_tr: itemData.name_tr || existing.name_tr || itemData.name,
+          description: newDesc,
+          description_tr: newDescTr,
+          category: itemData.category || existing.category || 'Büyülü Eşya'
         });
       }
     }
@@ -450,6 +461,12 @@ app.delete('/api/characters/:id', authenticate, async (req, res) => {
   try {
     const character = await Character.findById(req.params.id);
     if (!character) return res.status(404).json({ error: 'Karakter bulunamadı' });
+
+    // For NPC characters, allow DMs to delete directly
+    if (character.isNpc && req.user.role === 'DM') {
+      await Character.findByIdAndDelete(req.params.id);
+      return res.json({ success: true, message: 'NPC başarıyla silindi' });
+    }
 
     const campaign = await Campaign.findById(character.campaignId);
     if (!campaign) return res.status(404).json({ error: 'Kampanya bulunamadı' });

@@ -1,0 +1,147 @@
+[
+  {
+    "cost": {
+      "quantity": 1,
+      "unit": "sp"
+    },
+    "damage": {
+      "dice": "1d4",
+      "type": "Bludgeoning"
+    },
+    "_id": "69b0e0a358fed6bb06d9e92d",
+    "name": "Club",
+    "name_tr": "Club",
+    "category": "Eşya",
+    "subcategory": "Simple Melee Weapons",
+    "weight": 2,
+    "properties": [
+      "Light"
+    ],
+    "rarity": "Uncommon",
+    "source": "SRD",
+    "type": "Simple Melee Weapons",
+    "effects": [],
+    "__v": 0,
+    "createdAt": "2026-03-11T03:25:23.746Z",
+    "updatedAt": "2026-03-11T03:25:23.746Z"
+  },
+  {
+    "cost": {
+      "quantity": 2,
+      "unit": "gp"
+    },
+    "damage": {
+      "dice": "1d4",
+      "type": "Piercing"
+    },
+    "range": {
+      "normal": 20,
+      "long": 60
+    },
+    "_id": "69b0e0a358fed6bb06d9e92e",
+    "name": "Dagger",
+    "name_tr": "Dagger",
+    "category": "Eşya",
+    "subcategory": "Simple Melee Weapons",
+    "weight": 1,
+    "properties": [
+      "Finesse",
+      "Light",
+      "Thrown"
+    ],
+    "rarity": "Uncommon",
+    "source": "SRD",
+    "type": "Simple Melee Weapons",
+    "effects": [],
+    "__v": 0,
+    "createdAt": "2026-03-11T03:25:23.747Z",
+    "updatedAt": "2026-03-11T03:25:23.747Z"
+  },
+  {
+    "cost": {
+      "quantity": 2,
+      "unit": "sp"
+    },
+    "damage": {
+      "dice": "1d8",
+      "type": "Bludgeoning"
+    },
+    "_id": "69b0e0a358fed6bb06d9e92f",
+    "name": "Greatclub",
+    "name_tr": "Greatclub",
+    "category": "Eşya",
+    "subcategory": "Simple Melee Weapons",
+    "weight": 10,
+    "properties": [
+      "Two-handed"
+    ],
+    "rarity": "Uncommon",
+    "source": "SRD",
+    "type": "Simple Melee Weapons",
+    "effects": [],
+    "__v": 0,
+    "createdAt": "2026-03-11T03:25:23.747Z",
+    "updatedAt": "2026-03-11T03:25:23.747Z"
+  },
+  {
+    "cost": {
+      "quantity": 5,
+      "unit": "gp"
+    },
+    "damage": {
+      "dice": "1d6",
+      "type": "Slashing"
+    },
+    "range": {
+      "normal": 20,
+      "long": 60
+    },
+    "_id": "69b0e0a358fed6bb06d9e930",
+    "name": "Handaxe",
+    "name_tr": "Handaxe",
+    "category": "Eşya",
+    "subcategory": "Simple Melee Weapons",
+    "weight": 2,
+    "properties": [
+      "Light",
+      "Thrown"
+    ],
+    "rarity": "Uncommon",
+    "source": "SRD",
+    "type": "Simple Melee Weapons",
+    "effects": [],
+    "__v": 0,
+    "createdAt": "2026-03-11T03:25:23.747Z",
+    "updatedAt": "2026-03-11T03:25:23.747Z"
+  },
+  {
+    "cost": {
+      "quantity": 5,
+      "unit": "sp"
+    },
+    "damage": {
+      "dice": "1d6",
+      "type": "Piercing"
+    },
+    "range": {
+      "normal": 30,
+      "long": 120
+    },
+    "_id": "69b0e0a358fed6bb06d9e931",
+    "name": "Javelin",
+    "name_tr": "Javelin",
+    "category": "Eşya",
+    "subcategory": "Simple Melee Weapons",
+    "weight": 2,
+    "properties": [
+      "Thrown"
+    ],
+    "rarity": "Uncommon",
+    "source": "SRD",
+    "type": "Simple Melee Weapons",
+    "effects": [],
+    "__v": 0,
+    "createdAt": "2026-03-11T03:25:23.747Z",
+    "updatedAt": "2026-03-11T03:25:23.747Z"
+  }
+]

@@ -721,12 +721,12 @@ export default function PlayerSheet() {
         return bonus;
     };
 
-    const mod = (v: number, statName?: string) => {
+    const getEffectiveScore = (statName: string, baseValue: number) => {
         let bonus = 0;
         let setVal: number | null = null;
-
+        
         // Feat bonuses
-        if (statName && character?.feats && Array.isArray(character.feats)) {
+        if (character?.feats && Array.isArray(character.feats)) {
             character.feats.forEach((fName: string) => {
                 const fData = (libFeats || []).find(x => x && x.name === fName);
                 if (fData && fData.effects && Array.isArray(fData.effects)) {
@@ -737,8 +737,9 @@ export default function PlayerSheet() {
                 }
             });
         }
+        
         // Item Score bonuses
-        if (statName && character?.inventory && Array.isArray(character.inventory)) {
+        if (character?.inventory && Array.isArray(character.inventory)) {
             const lowerStat = statName.toLowerCase();
             const MAP: Record<string, string> = { 'str': 'strength', 'dex': 'dexterity', 'con': 'constitution', 'int': 'intelligence', 'wis': 'wisdom', 'cha': 'charisma' };
             const fullStat = MAP[lowerStat] || lowerStat;
@@ -764,7 +765,12 @@ export default function PlayerSheet() {
             });
         }
 
-        const score = setVal !== null ? Math.max(v + bonus, setVal) : v + bonus;
+        return setVal !== null ? Math.max(baseValue + bonus, setVal) : baseValue + bonus;
+    };
+
+    const mod = (v: number, statName?: string) => {
+        if (!statName) return Math.floor((v - 10) / 2); // For untargeted uses like generic hitdice constitution mod where statName is missing
+        const score = getEffectiveScore(statName, v);
         return Math.floor((score - 10) / 2);
     };
     const fmt = (n: number) => (n >= 0 ? `+${n}` : String(n));
@@ -1486,13 +1492,17 @@ export default function PlayerSheet() {
                                     <h3 className="font-black text-gray-300 uppercase text-xs tracking-widest">Ability Scores</h3>
                                 </div>
                                 <div className="grid grid-cols-3 gap-px bg-gray-700">
-                                    {Object.entries(stats).map(([s, v]: any) => (
-                                        <div key={s} className="bg-gray-800 p-3 text-center">
-                                            <div className="text-[10px] font-black text-gray-500 uppercase tracking-widest mb-0.5">{s}</div>
-                                            <div className="text-2xl font-black text-white">{v}</div>
-                                            <div className={`text-sm font-black ${mod(v) >= 0 ? 'text-green-400' : 'text-red-400'}`}>{fmt(mod(v))}</div>
-                                        </div>
-                                    ))}
+                                    {Object.entries(stats).map(([s, v]: any) => {
+                                        const effective = getEffectiveScore(s, v);
+                                        const isBoosted = effective > v;
+                                        return (
+                                            <div key={s} className="bg-gray-800 p-3 text-center">
+                                                <div className={`text-[10px] font-black uppercase tracking-widest mb-0.5 ${isBoosted ? 'text-blue-400' : 'text-gray-500'}`}>{s}</div>
+                                                <div className={`text-2xl font-black ${isBoosted ? 'text-blue-300 drop-shadow-[0_0_8px_rgba(96,165,250,0.5)]' : 'text-white'}`}>{effective}</div>
+                                                <div className={`text-sm font-black ${mod(v, s) >= 0 ? 'text-green-400' : 'text-red-400'}`}>{fmt(mod(v, s))}</div>
+                                            </div>
+                                        );
+                                    })}
                                 </div>
                             </div>
 
@@ -3677,6 +3687,7 @@ export default function PlayerSheet() {
                                             id="map-img"
                                             src={mapData.bgUrl}
                                             alt="Harita"
+                                            draggable={false}
                                             className="block pointer-events-auto select-none rounded shadow-2xl"
                                             style={{ minWidth: '1000px' }} // Ensure some size if small image
                                         />

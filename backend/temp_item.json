@@ -1,0 +1,16 @@
+{
+  "_id": "69b0e0a358fed6bb06d9eb34",
+  "name": "Amethyst Lodestone",
+  "name_tr": "Ametist Mıknatıs Taşı",
+  "category": "Büyülü Eşya",
+  "description": "Infused with dragon magic, it grants flight, gravity manipulation, and Strength saving throw advantage.",
+  "description_tr": "Yerçekimini bükerek uçmanızı ve rakiplerinizi fırlatmanızı sağlayan ejderha gücü taşı.",
+  "properties": [],
+  "rarity": "Very Rare",
+  "link": "https://dnd5e.wikidot.com/wondrous-items:amethyst-lodestone",
+  "type": "Wondrous Item",
+  "effects": [],
+  "__v": 0,
+  "createdAt": "2026-03-11T03:25:23.771Z",
+  "updatedAt": "2026-03-11T03:25:23.771Z"
+}

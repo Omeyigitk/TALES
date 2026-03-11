@@ -100,6 +100,9 @@ export default function DMDashboard() {
     const [isEditCharModalOpen, setIsEditCharModalOpen] = useState(false);
     const [editingCharData, setEditingCharData] = useState<any>(null);
 
+    // NPC Sheet View State
+    const [viewingNpcSheetData, setViewingNpcSheetData] = useState<any>(null);
+
     // Grid Map States
     const [isMapOpen, setIsMapOpen] = useState(false);
     const [mapData, setMapData] = useState<{
@@ -116,6 +119,9 @@ export default function DMDashboard() {
         tokens: []
     });
     const [isDraggingToken, setIsDraggingToken] = useState<string | null>(null);
+    const [mapOffset, setMapOffset] = useState({ x: 0, y: 0 });
+    const [isPanning, setIsPanning] = useState(false);
+    const [panStart, setPanStart] = useState({ x: 0, y: 0 });
 
     const addTokenToMap = (name: string, type: 'player' | 'monster', color: string = '#3b82f6', entityId?: string) => {
         const newToken = {
@@ -321,7 +327,7 @@ export default function DMDashboard() {
 
     // HP Güncellemesi ve Senkronizasyon
     const updateMonsterHp = (id: string, newHp: number) => {
-        const updated = activeCombatants.map(c => c.id === id ? { ...c, currentHp: newHp } : c);
+        const updated = activeCombatants.map(c => c.id === id ? { ...c, currentHp: Math.max(0, newHp) } : c);
         setActiveCombatants(updated);
         syncEncounter(updated);
     };
@@ -698,7 +704,15 @@ export default function DMDashboard() {
                                             ? monster._relationship === 'Dost' ? 'border-emerald-500' : monster._relationship === 'Düşman' ? 'border-red-500' : 'border-yellow-500'
                                             : 'border-red-500')
                                             }`}
-                                        onClick={() => setExpandedCombatantId(expandedCombatantId === monster.id ? null : monster.id)}
+                                        onClick={() => {
+                                            if (monster._isLeveledNpc) {
+                                                axios.get(`${API_URL}/api/characters/${monster._npcId}`, { headers: { 'Authorization': `Bearer ${token}` } })
+                                                    .then(res => setViewingNpcSheetData(res.data))
+                                                    .catch(err => console.error("Sheet Error:", err));
+                                            } else {
+                                                setExpandedCombatantId(expandedCombatantId === monster.id ? null : monster.id);
+                                            }
+                                        }}
                                     >
                                         <div className="p-4 flex justify-between items-center">
                                             <div className="flex items-center space-x-4">
@@ -1329,7 +1343,7 @@ export default function DMDashboard() {
                                                                     </div>
                                                                     <div className="flex items-center gap-1">
                                                                         <button onClick={() => openEditCharModal(lnpc._id)} className="bg-gray-700 hover:bg-gray-600 text-white p-1.5 rounded-lg transition-all" title="Düzenle">⚙️</button>
-                                                                        <button onClick={async () => { if (confirm(`${lnpc.name} silinecek, emin misin?`)) { await axios.delete(`${API_URL}/api/characters/${lnpc._id}`); setLeveledNpcs(leveledNpcs.filter((n: any) => n._id !== lnpc._id)); } }} className="bg-red-900/50 hover:bg-red-600 text-white p-1.5 rounded-lg transition-all" title="Sil">✕</button>
+                                                                        <button onClick={async () => { if (confirm(`${lnpc.name} silinecek, emin misin?`)) { await axios.delete(`${API_URL}/api/characters/${lnpc._id}`, { headers: { 'Authorization': `Bearer ${token}` } }); setLeveledNpcs(leveledNpcs.filter((n: any) => n._id !== lnpc._id)); } }} className="bg-red-900/50 hover:bg-red-600 text-white p-1.5 rounded-lg transition-all" title="Sil">✕</button>
                                                                     </div>
                                                                 </div>
 
@@ -1345,6 +1359,43 @@ export default function DMDashboard() {
                                                                         </button>
                                                                     ))}
                                                                 </div>
+
+                                                                {/* Stats Summary */}
+                                                                <div className="flex flex-wrap gap-2 mb-3 text-xs">
+                                                                    {lnpc.maxHp > 0 && <span className="bg-gray-900/60 border border-gray-700 px-2 py-0.5 rounded font-bold text-red-400">❤️ {lnpc.maxHp} HP</span>}
+                                                                    {lnpc.ac > 0 && <span className="bg-gray-900/60 border border-gray-700 px-2 py-0.5 rounded font-bold text-cyan-400">🛡 {lnpc.ac} AC</span>}
+                                                                    {lnpc.stats && Object.entries(lnpc.stats).map(([stat, val]: any) => (
+                                                                        <span key={stat} className="bg-gray-900/60 border border-gray-700 px-1.5 py-0.5 rounded font-bold text-gray-300 text-[10px]">
+                                                                            {stat} {val} ({val >= 10 ? '+' : ''}{Math.floor((val - 10) / 2)})
+                                                                        </span>
+                                                                    ))}
+                                                                </div>
+
+                                                                {/* Known Spells */}
+                                                                {lnpc.knownSpells && lnpc.knownSpells.length > 0 && (
+                                                                    <div className="mb-3">
+                                                                        <div className="text-[10px] font-black text-violet-400 uppercase tracking-widest mb-1.5">✨ Bilinen Büyüler</div>
+                                                                        <div className="flex flex-wrap gap-1">
+                                                                            {lnpc.knownSpells.map((spellName: string) => (
+                                                                                <span key={spellName} className="text-[10px] bg-violet-900/30 border border-violet-700/50 text-violet-300 px-1.5 py-0.5 rounded font-bold">
+                                                                                    {spellName}
+                                                                                </span>
+                                                                            ))}
+                                                                        </div>
+                                                                    </div>
+                                                                )}
+                                                                {lnpc.preparedSpells && lnpc.preparedSpells.length > 0 && (
+                                                                    <div className="mb-3">
+                                                                        <div className="text-[10px] font-black text-blue-400 uppercase tracking-widest mb-1.5">📖 Hazırlanmış Büyüler</div>
+                                                                        <div className="flex flex-wrap gap-1">
+                                                                            {lnpc.preparedSpells.map((spellName: string) => (
+                                                                                <span key={spellName} className="text-[10px] bg-blue-900/30 border border-blue-700/50 text-blue-300 px-1.5 py-0.5 rounded font-bold">
+                                                                                    {spellName}
+                                                                                </span>
+                                                                            ))}
+                                                                        </div>
+                                                                    </div>
+                                                                )}
 
                                                                 {/* Add to combat button */}
                                                                 <button onClick={addNpcToEncounter}
@@ -2082,7 +2133,28 @@ export default function DMDashboard() {
                             {/* Map Content Area */}
                             <div
                                 id="map-container"
-                                className="flex-1 bg-[#020617] rounded-[2.5rem] border-8 border-slate-900 overflow-auto relative custom-scrollbar shadow-[inset_0_20px_50px_rgba(0,0,0,0.8)]"
+                                className="flex-1 bg-[#020617] rounded-[2.5rem] border-8 border-slate-900 relative overflow-hidden shadow-[inset_0_20px_50px_rgba(0,0,0,0.8)] cursor-grab active:cursor-grabbing"
+                                onMouseDown={(e) => {
+                                    const target = e.target as HTMLElement;
+                                    if (target.id === 'map-container' || target.id === 'grid-overlay' || target.id === 'map-img') {
+                                        setIsPanning(true);
+                                        setPanStart({ x: e.clientX - mapOffset.x, y: e.clientY - mapOffset.y });
+                                    }
+                                }}
+                                onMouseMove={(e) => {
+                                    if (isPanning) {
+                                        setMapOffset({ x: e.clientX - panStart.x, y: e.clientY - panStart.y });
+                                    }
+                                }}
+                                onMouseUp={() => setIsPanning(false)}
+                                onMouseLeave={() => setIsPanning(false)}
+                                onWheel={(e) => {
+                                    const delta = e.deltaY > 0 ? -5 : 5;
+                                    const newZoom = Math.min(Math.max(10, (mapData.mapZoom || 100) + delta), 300);
+                                    const newMap = { ...mapData, mapZoom: newZoom };
+                                    setMapData(newMap);
+                                    socket?.emit('update_map', { campaignId, mapData: newMap });
+                                }}
                                 onDragOver={(e) => e.preventDefault()}
                                 onDrop={(e) => {
                                     e.preventDefault();
@@ -2094,9 +2166,9 @@ export default function DMDashboard() {
                                     const rect = container.getBoundingClientRect();
                                     const zoom = (mapData.mapZoom || 100) / 100;
 
-                                    // Adjust coordinate for zoom
-                                    const x = (e.clientX - rect.left + container.scrollLeft) / zoom;
-                                    const y = (e.clientY - rect.top + container.scrollTop) / zoom;
+                                    // Adjust coordinate for zoom & offset
+                                    const x = (e.clientX - rect.left - mapOffset.x) / zoom;
+                                    const y = (e.clientY - rect.top - mapOffset.y) / zoom;
 
                                     const newTokens = (mapData.tokens || []).map(t =>
                                         t && t.id === isDraggingToken ? { ...t, x, y } : t
@@ -2110,27 +2182,27 @@ export default function DMDashboard() {
                                 }}
                             >
                                 <div
-                                    className="origin-top-left relative p-20"
+                                    className="origin-top-left absolute transition-transform duration-75 ease-out"
                                     style={{
-                                        transform: `scale(${(mapData.mapZoom || 100) / 100})`,
-                                        width: 'max-content',
-                                        height: 'max-content'
+                                        transform: `translate(${mapOffset.x}px, ${mapOffset.y}px) scale(${(mapData.mapZoom || 100) / 100})`,
                                     }}
                                 >
                                     {/* Background Image */}
                                     {mapData.bgUrl && (
                                         <img
+                                            id="map-img"
                                             src={mapData.bgUrl}
                                             alt="Map"
-                                            className="max-w-none shadow-[0_0_100px_rgba(0,0,0,0.5)]"
-                                            style={{ pointerEvents: 'none' }}
+                                            draggable={false}
+                                            className="max-w-none shadow-[0_0_100px_rgba(0,0,0,0.5)] select-none pointer-events-auto"
                                         />
                                     )}
 
                                     {/* Grid Overlay */}
                                     {mapData.showGrid && (
                                         <div
-                                            className="absolute inset-0 pointer-events-none"
+                                            id="grid-overlay"
+                                            className="absolute inset-0 pointer-events-auto"
                                             style={{
                                                 backgroundImage: 'linear-gradient(to right, rgba(148,163,184,0.15) 1px, transparent 1px), linear-gradient(to bottom, rgba(148,163,184,0.15) 1px, transparent 1px)',
                                                 backgroundSize: `${mapData.gridSize}px ${mapData.gridSize}px`,
@@ -2338,6 +2410,127 @@ export default function DMDashboard() {
                         </div>
                     )
                 }
+                {/* --- NPC SHEET MODAL (Combat Tracker Viewer) --- */}
+                {
+                    viewingNpcSheetData && (
+                        <div className="fixed inset-0 bg-black/80 z-[80] flex items-center justify-center p-4 backdrop-blur-sm animate-fade-in text-white" onClick={() => setViewingNpcSheetData(null)}>
+                            <div className="bg-gray-900 border border-gray-700 rounded-3xl w-full max-w-4xl max-h-[90vh] flex flex-col shadow-2xl overflow-hidden relative" onClick={e => e.stopPropagation()}>
+                                <div className="bg-gradient-to-r from-gray-800 to-gray-900 p-6 border-b border-gray-700 flex justify-between items-center relative">
+                                    <div className="absolute top-0 right-0 w-40 h-40 bg-purple-500/10 rounded-full blur-3xl -mr-10 -mt-10 pointer-events-none"></div>
+                                    <div>
+                                        <h2 className="text-3xl font-black text-white flex items-center gap-3 tracking-wide z-10 relative">
+                                            {viewingNpcSheetData.name}
+                                        </h2>
+                                        <div className="text-sm font-bold text-gray-400 uppercase tracking-widest mt-1">
+                                            Seviye {viewingNpcSheetData.level} {viewingNpcSheetData.raceRef?.name || viewingNpcSheetData.race} {viewingNpcSheetData.classRef?.name || viewingNpcSheetData.class}
+                                        </div>
+                                    </div>
+                                    <button onClick={() => setViewingNpcSheetData(null)} className="text-gray-500 hover:text-red-500 font-bold text-3xl transition-colors z-10">&times;</button>
+                                </div>
+
+                                <div className="p-6 overflow-y-auto flex-1 custom-scrollbar space-y-8">
+                                    {/* Stats Grid */}
+                                    <div className="grid grid-cols-6 gap-2 bg-gray-950/50 p-4 rounded-2xl border border-gray-800">
+                                        {['STR', 'DEX', 'CON', 'INT', 'WIS', 'CHA'].map(stat => (
+                                            <div key={stat} className="text-center bg-gray-900 border border-gray-700 rounded-xl p-2 shadow-inner">
+                                                <div className="text-[10px] font-black text-gray-500 uppercase tracking-widest mb-1">{stat}</div>
+                                                <div className="text-xl font-bold text-yellow-500">{viewingNpcSheetData.stats?.[stat] || 10}</div>
+                                                <div className="text-xs text-gray-400 font-mono mt-0.5">
+                                                    {(viewingNpcSheetData.stats?.[stat] ? Math.floor((viewingNpcSheetData.stats[stat] - 10) / 2) : 0) >= 0 ? '+' : ''}
+                                                    {viewingNpcSheetData.stats?.[stat] ? Math.floor((viewingNpcSheetData.stats[stat] - 10) / 2) : 0}
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+
+                                    {/* Combat Block */}
+                                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                                        <div className="bg-gray-800/50 border border-gray-700 rounded-2xl p-4 text-center">
+                                            <div className="text-[10px] text-gray-500 font-black uppercase tracking-widest">HP</div>
+                                            <div className="text-2xl font-black text-green-500 mt-1">{viewingNpcSheetData.maxHp}</div>
+                                        </div>
+                                        <div className="bg-gray-800/50 border border-gray-700 rounded-2xl p-4 text-center">
+                                            <div className="text-[10px] text-gray-500 font-black uppercase tracking-widest">AC</div>
+                                            <div className="text-2xl font-black text-blue-500 mt-1">{viewingNpcSheetData.ac}</div>
+                                        </div>
+                                        <div className="bg-gray-800/50 border border-gray-700 rounded-2xl p-4 text-center">
+                                            <div className="text-[10px] text-gray-500 font-black uppercase tracking-widest">Speed</div>
+                                            <div className="text-2xl font-black text-gray-300 mt-1">{viewingNpcSheetData.speed}</div>
+                                        </div>
+                                        <div className="bg-gray-800/50 border border-gray-700 rounded-2xl p-4 text-center">
+                                            <div className="text-[10px] text-gray-500 font-black uppercase tracking-widest">Proficiency</div>
+                                            <div className="text-2xl font-black text-purple-500 mt-1">+{Math.ceil(viewingNpcSheetData.level / 4) + 1}</div>
+                                        </div>
+                                    </div>
+
+                                    <div className="grid md:grid-cols-2 gap-8">
+                                        {/* Left Col: Features */}
+                                        <div className="space-y-6">
+                                            <div>
+                                                <h3 className="text-lg font-black text-red-400 uppercase tracking-widest border-b border-red-900/50 pb-2 mb-3">Sınıf Özellikleri</h3>
+                                                {viewingNpcSheetData.classFeatures?.length > 0 ? (
+                                                    <ul className="space-y-3">
+                                                        {viewingNpcSheetData.classFeatures.map((f: any, i: number) => (
+                                                            <li key={i} className="bg-gray-800/40 p-3 rounded-xl border border-gray-700/50">
+                                                                <div className="font-bold text-gray-200">{f.name}</div>
+                                                                <div className="text-xs text-gray-400 mt-1">{f.desc}</div>
+                                                            </li>
+                                                        ))}
+                                                    </ul>
+                                                ) : <div className="text-gray-500 italic text-sm">Özellik bulunmuyor.</div>}
+                                            </div>
+
+                                            <div>
+                                                <h3 className="text-lg font-black text-yellow-400 uppercase tracking-widest border-b border-yellow-900/50 pb-2 mb-3">Irk Özellikleri</h3>
+                                                {viewingNpcSheetData.raceFeatures?.length > 0 ? (
+                                                    <ul className="space-y-3">
+                                                        {viewingNpcSheetData.raceFeatures.map((f: any, i: number) => (
+                                                            <li key={i} className="bg-gray-800/40 p-3 rounded-xl border border-gray-700/50">
+                                                                <div className="font-bold text-gray-200">{f.name}</div>
+                                                                <div className="text-xs text-gray-400 mt-1">{f.desc}</div>
+                                                            </li>
+                                                        ))}
+                                                    </ul>
+                                                ) : <div className="text-gray-500 italic text-sm">Katman özelliği bulunmuyor.</div>}
+                                            </div>
+                                        </div>
+
+                                        {/* Right Col: Spells & Items */}
+                                        <div className="space-y-6">
+                                            <div>
+                                                <h3 className="text-lg font-black text-purple-400 uppercase tracking-widest border-b border-purple-900/50 pb-2 mb-3">Büyüler</h3>
+                                                {viewingNpcSheetData.spells?.length > 0 ? (
+                                                    <div className="flex flex-wrap gap-2">
+                                                        {viewingNpcSheetData.spells.map((s: any, i: number) => (
+                                                            <div key={i} className="bg-purple-900/30 text-purple-300 px-3 py-1.5 rounded-lg border border-purple-500/30 text-xs font-bold shadow-sm">
+                                                                {s.name} <span className="opacity-50 ml-1">Lvl {s.level || 0}</span>
+                                                            </div>
+                                                        ))}
+                                                    </div>
+                                                ) : <div className="text-gray-500 italic text-sm">Büyü bilmiyor.</div>}
+                                            </div>
+
+                                            <div>
+                                                <h3 className="text-lg font-black text-blue-400 uppercase tracking-widest border-b border-blue-900/50 pb-2 mb-3">Envanter</h3>
+                                                {viewingNpcSheetData.inventory?.length > 0 ? (
+                                                    <ul className="space-y-2">
+                                                        {viewingNpcSheetData.inventory.map((item: any, i: number) => (
+                                                            <li key={i} className="bg-gray-800/40 p-2 rounded-xl flex items-center justify-between border border-gray-700/50">
+                                                                <span className="font-bold text-sm text-gray-300">{item.name}</span>
+                                                                <span className="text-xs bg-gray-900 px-2 py-0.5 rounded text-gray-400 border border-gray-700">x{item.quantity || 1}</span>
+                                                            </li>
+                                                        ))}
+                                                    </ul>
+                                                ) : <div className="text-gray-500 italic text-sm">Envanteri boş.</div>}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    )
+                }
+
             </div>
         </div >
     );
