@@ -135,7 +135,9 @@ app.post('/api/admin/seed', authenticate, async (req, res) => {
     const itemMap = new Map();
 
     // Translation helpers (re-defined or imported if lost in context)
+    const validEnums = ['Weapon', 'Armor', 'Adventuring Gear', 'Tools', 'Mounts and Vehicles', 'Magic Item', 'Ammunition', 'Equipment', 'Staff', 'Wondrous Item', 'Holy Symbol', 'Silah', 'Zırh', 'Eşya', 'Büyülü Eşya', 'Araçlar', 'Binek ve Araçlar'];
     const safeTranslateCategory = (cat) => {
+      if (!cat) return 'Eşya';
       const map = {
         'Weapon': 'Silah',
         'Armor': 'Zırh',
@@ -144,8 +146,15 @@ app.post('/api/admin/seed', authenticate, async (req, res) => {
         'Mounts and Vehicles': 'Binek ve Araçlar',
         'Magic Item': 'Büyülü Eşya'
       };
-      return map[cat] || cat;
+      const translated = map[cat] || cat;
+      if (validEnums.includes(translated)) return translated;
+      if (validEnums.includes(cat)) return cat;
+      return 'Eşya';
     };
+
+    const validRarities = ['Common', 'Uncommon', 'Rare', 'Very Rare', 'Legendary', 'Artifact', 'Varies', 'Unique', 'None'];
+    const safeRarity = (r) => validRarities.includes(r) ? r : 'Uncommon';
+
 
     // SRD Items
     if (fs.existsSync(path.join(dataPath, 'items.json'))) {
@@ -153,10 +162,10 @@ app.post('/api/admin/seed', authenticate, async (req, res) => {
       for (const item of srdItems) {
         itemMap.set(item.name, {
           ...item,
-          name_tr: item.name_tr || item.name, // Use Turkish name if available
-          category: safeTranslateCategory(item.category),
-          rarity: item.rarity || 'Common',
-          type: item.subcategory || item.category
+          name_tr: item.name_tr || item.name,
+          category: safeTranslateCategory(item.equipment_category ? (item.equipment_category.name || item.equipment_category) : 'Adventuring Gear'),
+          rarity: safeRarity(item.rarity),
+          type: item.subcategory || item.equipment_category || 'Wondrous Item'
         });
       }
     }
@@ -167,13 +176,22 @@ app.post('/api/admin/seed', authenticate, async (req, res) => {
       if (file.startsWith('enriched_')) continue; // Skip enriched here
       const items = JSON.parse(fs.readFileSync(path.join(dataPath, file), 'utf8'));
       for (const itemData of items) {
-        const existing = itemMap.get(itemData.name) || {};
-        itemMap.set(itemData.name, {
+        const name = itemData.name;
+        const existing = itemMap.get(name) || {};
+        const safeCat = itemData.equipment_category || existing.category || 'Adventuring Gear';
+        itemMap.set(name, {
           ...existing,
           ...itemData,
-          category: 'Büyülü Eşya', // Ensure it fits enum
-          rarity: itemData.rarity || existing.rarity || 'Uncommon',
-          type: itemData.type || existing.type || 'Wondrous Item'
+          name: name,
+          name_tr: itemData.name_tr || existing.name_tr || name,
+          description: itemData.original_desc || existing.description || '',
+          description_tr: itemData.desc_tr || existing.description_tr || '',
+          category: safeTranslateCategory(safeCat),
+          cost: itemData.cost || existing.cost || { quantity: 0, unit: 'gp' },
+          weight: itemData.weight !== undefined ? itemData.weight : existing.weight,
+          rarity: safeRarity(itemData.rarity || existing.rarity),
+          type: itemData.type || existing.type || 'Wondrous Item',
+          effects: itemData.effects || existing.effects || []
         });
       }
     }
