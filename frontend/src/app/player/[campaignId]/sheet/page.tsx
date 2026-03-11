@@ -1456,6 +1456,24 @@ export default function PlayerSheet() {
                                 </button>
                             ))}
                         </div>
+                        
+                        {/* Selected Class Features Display */}
+                        {mcPickedClassId && (() => {
+                            const c = allClasses.find((x: any) => x._id === mcPickedClassId);
+                            if(!c) return null;
+                            const feats = CLASS_FEATURES[c.name]?.[1] || [];
+                            return (
+                                <div className="mb-4 bg-violet-900/20 border border-violet-800/50 rounded-xl p-3 max-h-48 overflow-y-auto">
+                                    <h3 className="text-violet-300 font-black text-sm mb-2">⚔️ {c.name} 1. Seviye Özellikleri</h3>
+                                    {feats.length > 0 ? feats.map((f: any, i: number) => (
+                                        <div key={i} className="mb-2 last:mb-0">
+                                            <div className="text-violet-200 text-xs font-bold">{f.name}</div>
+                                            <div className="text-gray-400 text-[10px] leading-tight">{f.desc_tr}</div>
+                                        </div>
+                                    )) : <div className="text-gray-500 text-xs italic">Özel bir yetenek yok.</div>}
+                                </div>
+                            );
+                        })()}
 
                         <button
                             onClick={addMulticlass}
@@ -1577,6 +1595,33 @@ export default function PlayerSheet() {
                                 }
                             }}
                             placeholder="± HP…" className="w-20 px-2 py-1 bg-gray-700 border border-gray-600 rounded text-sm text-white text-center" />
+                    </div>
+                    {/* Hit Dice */}
+                    <div className="flex items-center gap-2 cursor-pointer hover:bg-gray-700 p-1 -m-1 rounded transition" onClick={handleShortRest} title="Kısa Dinlenme (Can Zarı Harca)">
+                        <span className="text-gray-400 text-sm font-bold">🎲 HD</span>
+                        <span className="text-2xl font-black text-pink-400">
+                            {(() => {
+                                const mcs = character.multiclasses || [];
+                                const mainLv = character.level - mcs.reduce((acc: number, mc: any) => acc + (mc.level || 1), 0);
+                                const diceMap = new Map<string, number>();
+                                const addDice = (hd: string, lv: number) => diceMap.set(hd, (diceMap.get(hd) || 0) + lv);
+                                
+                                addDice(character.classRef?.hit_die || 'd8', mainLv);
+                                mcs.forEach((mc: any) => {
+                                    const hd = allClasses.find((c: any) => c._id === (mc.classRef?._id || mc.classRef) || c.name === mc.className)?.hit_die || 'd8';
+                                    addDice(hd, mc.level || 1);
+                                });
+                                
+                                let totalMax = 0;
+                                let desc: string[] = [];
+                                Array.from(diceMap.entries()).forEach(([hd, count]) => {
+                                    totalMax += count;
+                                    desc.push(`${count}${hd}`);
+                                });
+                                const remaining = Math.max(0, totalMax - hitDiceUsed);
+                                return <span title={`Zarlar: ${desc.join(' + ')}`}>{remaining} <span className="text-gray-500 text-lg">/ {totalMax}</span></span>;
+                            })()}
+                        </span>
                     </div>
                     {/* AC */}
                     <div className="flex items-center gap-2">
@@ -1869,6 +1914,48 @@ export default function PlayerSheet() {
                                                     </div>
                                                 );
                                             })}
+                                        </div>
+                                    </div>
+                                );
+                            })()}
+
+                            {/* Ana ve Multiclass Özellikleri (Seviyeye Göre Kazanılanlar) */}
+                            {(() => {
+                                const features: any[] = [];
+                                const addFeats = (clsName: string, maxLv: number) => {
+                                    if (!clsName) return;
+                                    for (let l = 1; l <= maxLv; l++) {
+                                        const feats = CLASS_FEATURES[clsName]?.[l];
+                                        if (feats) {
+                                            feats.forEach((f: any) => features.push({ ...f, clsName, level: l }));
+                                        }
+                                    }
+                                };
+                                const mcs = character.multiclasses || [];
+                                const mainLv = character.level - mcs.reduce((acc: number, mc: any) => acc + (mc.level || 1), 0);
+                                addFeats(character.classRef?.name, mainLv);
+                                mcs.forEach((mc: any) => addFeats(mc.className, mc.level || 1));
+                                
+                                if (features.length === 0) return null;
+                                
+                                return (
+                                    <div className="bg-gray-800 rounded-xl border border-blue-800/50 overflow-hidden mb-4">
+                                        <div className="px-4 py-3 bg-blue-900/30 border-b border-blue-800/50 flex items-center gap-2">
+                                            <span className="text-blue-400 text-lg">⚔️</span>
+                                            <h3 className="font-black text-blue-300">Sınıf Özellikleri</h3>
+                                        </div>
+                                        <div className="p-4 space-y-3">
+                                            {features.map((f, i) => (
+                                                <div key={i} className="p-3 rounded-lg border border-gray-700 bg-gray-900/50">
+                                                    <div className="flex items-center gap-2 mb-1">
+                                                        <span className="text-[10px] px-1.5 py-0.5 rounded font-bold bg-blue-900/50 text-blue-300">
+                                                            {f.clsName} (Sv.{f.level})
+                                                        </span>
+                                                        <span className="text-sm font-black text-gray-200">{f.name}</span>
+                                                    </div>
+                                                    <p className="text-xs leading-relaxed text-gray-400">{f.desc_tr || f.desc}</p>
+                                                </div>
+                                            ))}
                                         </div>
                                     </div>
                                 );
@@ -2418,8 +2505,16 @@ export default function PlayerSheet() {
                                                             <span className="text-gray-600 text-xs ml-auto">{expanded ? '▲' : '▼'}</span>
                                                         </div>
                                                         <div className="flex gap-4 text-xs mt-1 flex-wrap">
-                                                            {atk.toHit && <span className="text-green-400">To Hit: <span className="font-black">{atk.toHit}</span></span>}
-                                                            <span className="text-yellow-300">Hasar: <span className="font-black">{atk.damage}</span></span>
+                                                            {atk.toHit && (
+                                                                <span className="flex items-center gap-1 text-green-400 bg-green-900/30 px-2 py-0.5 rounded border border-green-800/50">
+                                                                    <span>🎯 İsabet:</span>
+                                                                    <span className="font-black text-sm">1d20 {atk.toHit.startsWith('-') ? atk.toHit : (atk.toHit.startsWith('+') ? atk.toHit : `+${atk.toHit}`)}</span>
+                                                                </span>
+                                                            )}
+                                                            <span className="flex items-center gap-1 text-yellow-300 bg-yellow-900/30 px-2 py-0.5 rounded border border-yellow-800/50">
+                                                                <span>🩸 Hasar:</span>
+                                                                <span className="font-black text-sm">{atk.damage}</span>
+                                                            </span>
                                                         </div>
                                                         {expanded && (
                                                             <div className="mt-2 text-gray-300 text-xs leading-relaxed border-t border-gray-700 pt-2">
@@ -3338,12 +3433,33 @@ export default function PlayerSheet() {
 
                             <div className="bg-gray-800 border border-gray-700 rounded-xl p-4 mb-5 flex flex-col items-center">
                                 <span className="text-gray-400 text-xs font-bold uppercase mb-2">Harcanacak Zar Sayısı</span>
-                                <div className="flex items-center gap-4">
+                                <div className="flex items-center gap-4 mb-2">
                                     <button onClick={() => setHitDiceToSpend(Math.max(0, hitDiceToSpend - 1))} className="w-10 h-10 rounded bg-gray-700 hover:bg-gray-600 font-black text-xl text-white flex items-center justify-center">-</button>
                                     <div className="text-3xl font-black text-green-400">{hitDiceToSpend} <span className="text-sm text-gray-400 font-normal">/ {level - hitDiceUsed} Kaldı</span></div>
                                     <button onClick={() => setHitDiceToSpend(Math.min(level - hitDiceUsed, hitDiceToSpend + 1))} className="w-10 h-10 rounded bg-gray-700 hover:bg-gray-600 font-black text-xl text-white flex items-center justify-center">+</button>
                                 </div>
-                                <p className="text-gray-500 text-xs mt-3">Her zar başına <span className="font-bold text-gray-300">1{character.classRef?.hit_die || 'd8'} + {mod(character.stats?.CON ?? 10)}</span> HP kazanırsınız.</p>
+                                {(() => {
+                                    const mcs = character.multiclasses || [];
+                                    const mainLv = character.level - mcs.reduce((acc: number, mc: any) => acc + (mc.level || 1), 0);
+                                    const diceMap = new Map<string, number>();
+                                    const addDice = (hd: string, lv: number) => diceMap.set(hd, (diceMap.get(hd) || 0) + lv);
+                                    
+                                    addDice(character.classRef?.hit_die || 'd8', mainLv);
+                                    mcs.forEach((mc: any) => {
+                                        const hd = allClasses.find((c: any) => c._id === (mc.classRef?._id || mc.classRef) || c.name === mc.className)?.hit_die || 'd8';
+                                        addDice(hd, mc.level || 1);
+                                    });
+                                    let desc: string[] = [];
+                                    Array.from(diceMap.entries()).forEach(([hd, count]) => {
+                                        desc.push(`${count}${hd}`);
+                                    });
+                                    return (
+                                        <div className="text-center">
+                                            <p className="text-pink-300 text-[10px] font-bold uppercase mb-1">Mevcut Zar Havuzu: {desc.join(' + ')}</p>
+                                            <p className="text-gray-500 text-xs">Her zar başına ortalama <span className="font-bold text-gray-300">1 zar + {mod(character.stats?.CON ?? 10)}</span> HP kazanırsınız.</p>
+                                        </div>
+                                    );
+                                })()}
                             </div>
 
                             <div className="flex gap-3">
