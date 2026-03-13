@@ -10,6 +10,7 @@ const characterSchema = new mongoose.Schema({
     level: { type: Number, default: 1 },
     subclass: { type: String, default: "" },
     subrace: { type: String, default: "" },
+    inspiration: { type: Boolean, default: false },
     fightingStyle: { type: String, default: "" },
 
     expertise: [String],

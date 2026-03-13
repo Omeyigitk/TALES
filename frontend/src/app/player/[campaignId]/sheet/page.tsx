@@ -42,6 +42,39 @@ const SAVING_THROWS = ["STR", "DEX", "CON", "INT", "WIS", "CHA"];
 // Proficiency bonusu hesapla
 const profBonus = (level: number) => Math.ceil(1 + level / 4);
 
+const fmt = (n: number) => (n >= 0 ? `+${n}` : String(n));
+
+// Helper to evaluate attack strings like "STR+Prof" or "DEX+Prof"
+const evalAtk = (str: string, abilityMods: any, prof: number) => {
+    if (!str) return 0;
+    if (!isNaN(Number(str))) return Number(str);
+    
+    // Clean string (uppercase, remove spaces)
+    let calc = str.toUpperCase().replace(/\s/g, '');
+    
+    // Replace ability abbreviations with their values
+    const abilities = ["STR", "DEX", "CON", "INT", "WIS", "CHA"];
+    abilities.forEach(ab => {
+        const modValue = abilityMods[ab] || 0;
+        calc = calc.replace(new RegExp(ab, 'g'), (modValue >= 0 ? '+' : '') + modValue);
+    });
+    
+    // Replace PROF
+    calc = calc.replace(/PROF/g, (prof >= 0 ? '+' : '') + prof);
+    
+    // Evaluate the expression safely
+    try {
+        // Remove any characters that aren't numbers, +, -, *, /, or ( )
+        calc = calc.replace(/[^0-9+\-*/()]/g, '');
+        // eslint-disable-next-line no-new-func
+        return new Function(`return ${calc}`)();
+    } catch (e) {
+        console.error("EvalAtk error for string:", str, "calc:", calc, e);
+        const fallback = parseInt(str);
+        return isNaN(fallback) ? 0 : fallback;
+    }
+};
+
 // Class → saving throw proficiencies (SRD)
 const CLASS_SAVES: Record<string, string[]> = {
     Fighter: ["STR", "CON"], Barbarian: ["STR", "CON"], Paladin: ["WIS", "CHA"],
@@ -51,9 +84,58 @@ const CLASS_SAVES: Record<string, string[]> = {
     Artificer: ["CON", "INT"],
 };
 
-// Class → skill proficiencies (simplified, treat as empty — actual skills come from background/choices)
-// For now we show all skills, proficiency is implied by class.
-// A simpler approach: mark skills where the ability mod is positive with a dot.
+// ─── Spell Categories & Tags ────────────────────────────────────────────────
+const SCHOOLS = ["all", "abjuration", "conjuration", "divination", "enchantment", "evocation", "illusion", "necromancy", "transmutation"];
+const SPELL_TYPES = ["all", "Damage", "Control", "Support", "Utility", "Defense"];
+
+const getSpellTags = (spell: any) => {
+    const tags: string[] = [];
+    const desc = (spell.desc || "").toLowerCase();
+    const school = (spell.school || "").toLowerCase();
+
+    // Damage
+    if (desc.includes("damage") || desc.includes("hasar") || desc.includes("hit") || desc.includes("attack") ||
+        desc.includes("vuruş") || desc.includes("darbe") || desc.includes("patlama") ||
+        /\d+d\d+/.test(desc) || school === "evocation") {
+        tags.push("Damage");
+    }
+    // Control
+    if (desc.includes("frightened") || desc.includes("charmed") || desc.includes("restrained") ||
+        desc.includes("paralyzed") || desc.includes("stunned") || desc.includes("incapacitated") ||
+        desc.includes("prone") || desc.includes("blinded") || desc.includes("deafened") ||
+        desc.includes("difficult terrain") || desc.includes("slow") ||
+        desc.includes("korkmuş") || desc.includes("büyülenmiş") || desc.includes("engellenmiş") ||
+        desc.includes("sersemlemiş") || desc.includes("kör") || desc.includes("hareket edemez") ||
+        desc.includes("disadvantage") || desc.includes("dezavantaj")) {
+        tags.push("Control");
+    }
+    // Support
+    if (desc.includes("heal") || desc.includes("restore") || desc.includes("temporary hp") ||
+        desc.includes("bonus") || desc.includes("advantage") || desc.includes("bless") ||
+        desc.includes("iyileştir") || desc.includes("can ver") || desc.includes("avantaj") ||
+        desc.includes("ekle") || desc.includes("zar") || desc.includes("check") || 
+        desc.includes("kurtarma") || desc.includes("atış") || desc.includes("destek")) {
+        tags.push("Support");
+    }
+    // Defense
+    if (desc.includes("ac ") || desc.includes("shield") || desc.includes("resistance") ||
+        desc.includes("immune") || desc.includes("absorb") || desc.includes("kalkan") ||
+        desc.includes("direnç") || desc.includes("bağışıklık") || desc.includes("zırh") || 
+        school === "abjuration") {
+        tags.push("Defense");
+    }
+    // Utility
+    if (desc.includes("detect") || desc.includes("identify") || desc.includes("teleport") ||
+        desc.includes("create") || desc.includes("scry") || desc.includes("invisible") ||
+        desc.includes("fly") || desc.includes("breathe") || desc.includes("bul") || 
+        desc.includes("tanı") || desc.includes("ışınlan") || desc.includes("yarat") || 
+        desc.includes("görünmez") || desc.includes("uç") || desc.includes("nefes") || 
+        desc.includes("okuma") || school === "divination" || school === "transmutation") {
+        tags.push("Utility");
+    }
+
+    return tags.length > 0 ? tags : ["Utility"];
+};
 
 export default function PlayerSheet() {
     const { campaignId } = useParams();
@@ -71,11 +153,15 @@ export default function PlayerSheet() {
         }
     }, [user, authLoading]);
     const [currentHp, setCurrentHp] = useState(0);
-    const [activeTab, setActiveTab] = useState<"main" | "attacks" | "inventory" | "story" | "spells" | "party">("main");
+    const [activeTab, setActiveTab] = useState<"main" | "attacks" | "inventory" | "story" | "spells" | "party" | "world">("main");
     const [selectedSkill, setSelectedSkill] = useState<typeof SKILLS[0] | null>(null);
 
     // ── Socket & DM Permission ──────────────────────────────────────────────
-    const { dmLevelPermission, socket, whisperData, whisperHistory, partyStats, diceLogs, mapData } = useCampaignSocket(campaignId, 'Player', user?.username || 'Player', token);
+    const { 
+        dmLevelPermission, socket, whisperData, whisperHistory, 
+        partyStats, diceLogs, mapData, partyGold, quests, factions, 
+        sessionNotes, fogOfWar 
+    } = useCampaignSocket(campaignId, 'Player', user?.username || 'Player', token);
     const [showDmPopup, setShowDmPopup] = useState(false);
     const [levelPermEnabled, setLevelPermEnabled] = useState(false);
 
@@ -140,16 +226,6 @@ export default function PlayerSheet() {
         }
     }, [character?.spells]);
 
-    // Watch for whispers
-    useEffect(() => {
-        const wData = whisperData as any;
-        if (wData && wData.targetName === character?.name) {
-            showToast(`🤫 Fısıltı: ${wData.senderName || 'Birisi'}`, wData.message, 'bg-purple-900 border-purple-500 text-purple-100');
-        }
-    }, [whisperData, character?.name]);
-
-    // Ref for always-fresh character (fixes stale closure in level-up)
-    const characterRef = useRef<any>(null);
 
     // Level Up — multi-step modal state
     type LevelUpStep = "preview" | "subclass" | "asi";
@@ -199,6 +275,12 @@ export default function PlayerSheet() {
 
     // Dynamic Shop
     const [shopData, setShopData] = useState<{ isOpen: boolean, items: any[] }>({ isOpen: false, items: [] });
+    const [allSpells, setAllSpells] = useState<any[]>([]);
+    const [showSpellPicker, setShowSpellPicker] = useState(false);
+    const [spellSearch, setSpellSearch] = useState("");
+    const [spellLevelFilter, setSpellLevelFilter] = useState<string>("all");
+    const [spellSchoolFilter, setSpellSchoolFilter] = useState<string>("all");
+    const [spellTypeFilter, setSpellTypeFilter] = useState<string>("all");
     const [privateNotes, setPrivateNotes] = useState("");
     const [isSavingPrivateNotes, setIsSavingPrivateNotes] = useState(false);
 
@@ -215,6 +297,168 @@ export default function PlayerSheet() {
     const [whisperMessage, setWhisperMessage] = useState("");
     const [whisperTarget, setWhisperTarget] = useState("DM");
     const chatEndRef = useRef<HTMLDivElement>(null);
+    const characterRef = useRef<any>(null);
+
+    // ─── DERIVED VARIABLES (Must be defined before helpers) ──────────────────
+    const stats = character?.stats || {};
+    const level = character?.level || 1;
+    const prof = character ? profBonus(level) : 2;
+    const cls = character?.classRef?.name || '';
+    const clsName = cls; // Alias for consistency
+    const mcs = character?.multiclasses || [];
+    const mainLv = (character?.level || 1) - mcs.reduce((a: number, c: any) => a + (c.level || 0), 0);
+    const mcList = mcs.map((mc: any) => ({ className: mc.className, level: mc.level || 1 }));
+    const lv = level; 
+    
+    const { merged: slotTotals, warlockPact } = character ? getMulticlassSpellSlots(clsName, mainLv, mcList) : { merged: new Array(9).fill(0), warlockPact: null };
+    if (warlockPact && slotTotals[warlockPact.level - 1] !== undefined) {
+        slotTotals[warlockPact.level - 1] += warlockPact.count;
+    }
+    const canCast = isSpellcaster(clsName) || mcs.some((mc: any) => isSpellcaster(mc.className));
+
+    const saves = character ? (CLASS_SAVES[cls] || []).concat(character.additionalSaves || []) : [];
+    const spells = character?.spells || [];
+    const actualFeats = character ? [...(character.feats || []), ...(character.raceBonusFeats || [])] : [];
+    const itemSpells = character ? (character.inventory || []).filter((it: any) => it.isEquipped && it.type === 'spell' && it.spellName).map((it: any) => it.spellName) : [];
+    const actualSpells = Array.from(new Set([...spells, ...itemSpells]));
+    const hpPct = (character && character.maxHp) ? Math.round((currentHp / character.maxHp) * 100) : 0;
+
+    const baseAttacks = character ? [...(CLASS_ATTACKS[clsName] || (mcs.length === 0 ? CLASS_ATTACKS['Fighter'] : []))] : [];
+    const resources = character ? [...(CLASS_RESOURCES[clsName] || [])] : [];
+    if (character) {
+        mcs.forEach((mc: any) => {
+            if (CLASS_ATTACKS[mc.className]) baseAttacks.push(...CLASS_ATTACKS[mc.className]);
+            if (CLASS_RESOURCES[mc.className]) resources.push(...CLASS_RESOURCES[mc.className]);
+        });
+        customResources.forEach((cr: any) => {
+            resources.push({
+                key: cr.id || `cr-${cr.name}`,
+                name: cr.name,
+                desc_tr: cr.desc || "",
+                icon: "✨",
+                recharge: cr.recharge || 'long',
+                getMax: () => cr.max || 1
+            });
+        });
+    }
+
+    const getAutoDefenses = () => {
+        if (!character) return { res: [], imm: [], vuln: [] };
+        const res = [...(character.resistances || [])];
+        const imm = [...(character.immunities || [])];
+        const vuln = [...(character.vulnerabilities || [])];
+
+        const checkText = (text: string, source: string) => {
+            if (!text) return;
+            const lower = text.toLowerCase();
+            if (lower.includes('direncin') || lower.includes('dirençli') || lower.includes('direnç') || lower.includes('resistance')) {
+                if (lower.includes('poison') || lower.includes('zehir')) res.push(`Zehir (${source})`);
+                if (lower.includes('fire') || lower.includes('ateş')) res.push(`Ateş (${source})`);
+                if (lower.includes('cold') || lower.includes('soğuk')) res.push(`Soğuk (${source})`);
+                if (lower.includes('lightning') || lower.includes('şimşek') || lower.includes('yıldırım')) res.push(`Şimşek (${source})`);
+                if (lower.includes('acid') || lower.includes('asit')) res.push(`Asit (${source})`);
+                if (lower.includes('necrotic') || lower.includes('nekrotik')) res.push(`Nekrotik (${source})`);
+                if (lower.includes('radiant') || lower.includes('parıltı')) res.push(`Parıltı (${source})`);
+                if (lower.includes('bludgeoning') || lower.includes('künt') || lower.includes('fiziksel')) res.push(`Fiziksel (${source})`);
+                if (lower.includes('piercing') || lower.includes('delici')) res.push(`Delici (${source})`);
+                if (lower.includes('slashing') || lower.includes('kesici')) res.push(`Kesici (${source})`);
+            }
+            if (lower.includes('bağışıklı') || lower.includes('immunity')) {
+                if (lower.includes('poison') || lower.includes('zehir')) imm.push(`Zehir (${source})`);
+                if (lower.includes('disease') || lower.includes('hastalık')) imm.push(`Hastalık (${source})`);
+                if (lower.includes('charm') || lower.includes('cazibe')) imm.push(`Cazibe (${source})`);
+                if (lower.includes('frightened') || lower.includes('frighten') || lower.includes('korkutulma')) imm.push(`Korku (${source})`);
+            }
+        };
+
+        character.raceRef?.traits?.forEach((t: any) => checkText((t.desc_tr || "") + " " + (t.desc || ""), t.name));
+        if (character.subclass && character.classRef?.subclasses) {
+            const sub = character.classRef.subclasses.find((s: any) => s.name === character.subclass);
+            sub?.features?.filter((f: any) => level >= f.level).forEach((f: any) => checkText((f.desc_tr || "") + " " + (f.desc || ""), f.name));
+        }
+
+        if (character?.inventory) {
+            character.inventory.forEach((item: any) => {
+                if (!item.isEquipped) return;
+                if (item.effects) {
+                    item.effects.forEach((eff: any) => {
+                        if (eff.type === 'resistance' && eff.value) res.push(`${eff.value} (${item.name})`);
+                        if (eff.type === 'immunity' && eff.value) imm.push(`${eff.value} (${item.name})`);
+                        if (eff.type === 'vulnerability' && eff.value) vuln.push(`${eff.value} (${item.name})`);
+                    });
+                }
+                checkText((item.note || "") + " " + (item.desc_tr || "") + " " + (item.desc || ""), item.name);
+            });
+        }
+
+        return {
+            res: Array.from(new Set(res)),
+            imm: Array.from(new Set(imm)),
+            vuln: Array.from(new Set(vuln)),
+        };
+    };
+
+    const autoDefenses = character ? getAutoDefenses() : { res: [], imm: [], vuln: [] };
+
+    // ── Helper Logic (Moved to top for scope safety) ──
+    const getEffectiveScore = (statName: string, baseValue: number) => {
+        let bonus = 0;
+        let setVal: number | null = null;
+        if (character?.feats && Array.isArray(character.feats)) {
+            character.feats.forEach((fName: string) => {
+                const fData = (libFeats || []).find(x => x && x.name === fName);
+                if (fData && fData.effects && Array.isArray(fData.effects)) {
+                    fData.effects.forEach((eff: any) => {
+                        if (eff && eff.type === 'stat_bonus' && eff.value && typeof eff.value === 'object' && eff.value[statName]) bonus += eff.value[statName];
+                        if (eff && eff.type === 'stat_choice' && character.featSelections?.stats?.[fName] === statName) bonus += eff.value;
+                    });
+                }
+            });
+        }
+        if (character?.inventory && Array.isArray(character.inventory)) {
+            const lowerStat = statName.toLowerCase();
+            const MAP: Record<string, string> = { 'str': 'strength', 'dex': 'dexterity', 'con': 'constitution', 'int': 'intelligence', 'wis': 'wisdom', 'cha': 'charisma' };
+            const fullStat = MAP[lowerStat] || lowerStat;
+            character.inventory.forEach((item: any) => {
+                if (item && item.isEquipped && item.effects && Array.isArray(item.effects)) {
+                    item.effects.forEach((eff: any) => {
+                        if (!eff) return;
+                        if (eff.type === 'stat_bonus') {
+                            if (eff.value && typeof eff.value === 'object' && eff.value[statName]) bonus += eff.value[statName];
+                        }
+                        if (eff.type === 'set_stat' && eff.stat === fullStat) {
+                            if (setVal === null || (eff.value || 0) > setVal) setVal = eff.value || 0;
+                        }
+                    });
+                }
+            });
+        }
+        if (setVal !== null && setVal > (baseValue + bonus)) return setVal;
+        return baseValue + bonus;
+    };
+
+    const mod = (v: number, statName?: string) => {
+        if (!statName) return Math.floor((v - 10) / 2);
+        const score = getEffectiveScore(statName, v);
+        return Math.floor((score - 10) / 2);
+    };
+
+    const extractDice = (dmgStr: string) => {
+        if (!dmgStr) return null;
+        const match = dmgStr.match(/(\d+)d(\d+)([+\-]\d+)?/i);
+        if (!match) return null;
+        return { count: parseInt(match[1]), sides: parseInt(match[2]), bonus: match[3] ? parseInt(match[3]) : 0 };
+    };
+
+    const mods = {
+        STR: mod(stats.STR || 10, 'STR'),
+        DEX: mod(stats.DEX || 10, 'DEX'),
+        CON: mod(stats.CON || 10, 'CON'),
+        INT: mod(stats.INT || 10, 'INT'),
+        WIS: mod(stats.WIS || 10, 'WIS'),
+        CHA: mod(stats.CHA || 10, 'CHA')
+    };
+
 
     useEffect(() => {
         if (isWhisperModalOpen) {
@@ -273,14 +517,11 @@ export default function PlayerSheet() {
                         const res = await axios.get(`${API_URL}/api/characters/${charId}`, { headers: { 'Authorization': `Bearer ${token}` } });
                         char = res.data;
                     } catch {
-                        // local storage ID gave 404 or error
                         char = null;
                     }
                 }
-
                 if (!char) {
                     try {
-                        // Fallback to campaign lookup
                         const res = await axios.get(`${API_URL}/api/characters/byCampaign/${campaignId}`, { headers: { 'Authorization': `Bearer ${token}` } });
                         char = res.data;
                         if (char?._id) localStorage.setItem(`dnd_character_${campaignId}`, char._id);
@@ -314,13 +555,20 @@ export default function PlayerSheet() {
             }
         };
         fetchChar();
-    }, [campaignId, router]);
+    }, [campaignId, router, token]);
 
+    useEffect(() => {
+        const fetchAllSpells = async () => {
+            try {
+                const res = await axios.get(`${API_URL}/api/spells`, { headers: { 'Authorization': `Bearer ${token}` } });
+                setAllSpells(res.data);
+            } catch (err) { console.error("Spells fetch error:", err); }
+        };
+        if (token) fetchAllSpells();
+    }, [token]);
 
-    // Keep ref in sync with state
     useEffect(() => { characterRef.current = character; }, [character]);
 
-    // ── Persist combat fields to DB ──────────────────────────────────────────
     const saveCombatState = async (updates: Record<string, any>) => {
         if (!characterRef.current?._id || !token) return;
         try {
@@ -452,8 +700,6 @@ export default function PlayerSheet() {
             if (!finalSpells.includes(newWizardCantrip)) finalSpells.push(newWizardCantrip);
         }
 
-        const clsName = char.classRef?.name || '';
-        const resources = CLASS_RESOURCES[clsName] || [];
         const newSlotsUsed: Record<string, number> = {};
         const newResourcesUsed: Record<string, number> = {};
         resources.forEach(r => { newResourcesUsed[r.key] = 0; });
@@ -486,7 +732,6 @@ export default function PlayerSheet() {
     const handleLongRest = async () => {
         const char = characterRef.current;
         if (!char) return;
-        const clsName = char.classRef?.name || '';
 
         // Tasha's Wizard Cantrip Formulas Check
         const hasCantripFormulas = clsName === 'Wizard' && char.level >= 3;
@@ -513,8 +758,6 @@ export default function PlayerSheet() {
     const confirmShortRest = async () => {
         const char = characterRef.current;
         if (!char) return;
-        const clsName = char.classRef?.name || '';
-        const resources = CLASS_RESOURCES[clsName] || [];
         const newResourcesUsed = { ...resourcesUsed };
         // Short rest: reset short-recharge resources, Warlock slots
         resources.forEach(r => { if (r.recharge === 'short') newResourcesUsed[r.key] = 0; });
@@ -731,59 +974,85 @@ export default function PlayerSheet() {
         return bonus;
     };
 
-    const getEffectiveScore = (statName: string, baseValue: number) => {
-        let bonus = 0;
-        let setVal: number | null = null;
-        
-        // Feat bonuses
-        if (character?.feats && Array.isArray(character.feats)) {
-            character.feats.forEach((fName: string) => {
-                const fData = (libFeats || []).find(x => x && x.name === fName);
-                if (fData && fData.effects && Array.isArray(fData.effects)) {
-                    fData.effects.forEach((eff: any) => {
-                        if (eff && eff.type === 'stat_bonus' && eff.value && typeof eff.value === 'object' && eff.value[statName]) bonus += eff.value[statName];
-                        if (eff && eff.type === 'stat_choice' && character.featSelections?.stats?.[fName] === statName) bonus += eff.value;
-                    });
-                }
-            });
-        }
-        
-        // Item Score bonuses
-        if (character?.inventory && Array.isArray(character.inventory)) {
-            const lowerStat = statName.toLowerCase();
-            const MAP: Record<string, string> = { 'str': 'strength', 'dex': 'dexterity', 'con': 'constitution', 'int': 'intelligence', 'wis': 'wisdom', 'cha': 'charisma' };
-            const fullStat = MAP[lowerStat] || lowerStat;
 
-            character.inventory.forEach((item: any) => {
-                if (item && item.isEquipped && item.effects && Array.isArray(item.effects)) {
-                    item.effects.forEach((eff: any) => {
-                        if (!eff) return;
-                        // Enriched style
-                        if (eff.type === 'stat_bonus' && (eff.stat?.toLowerCase() === lowerStat || eff.stat?.toLowerCase() === fullStat)) {
-                            bonus += (eff.value || 0);
-                        }
-                        if (eff.type === 'stat_set' && (eff.stat?.toLowerCase() === lowerStat || eff.stat?.toLowerCase() === fullStat)) {
-                            setVal = Math.max(setVal || 0, eff.value || 0);
-                        }
-                        // Original style
-                        if (eff.type === 'stat_bonus' && eff.value && typeof eff.value === 'object' && eff.value[statName]) bonus += eff.value[statName];
-                        if (eff.type === 'stat_set' && eff.value && typeof eff.value === 'object' && eff.value[statName]) {
-                            setVal = Math.max(setVal || 0, eff.value[statName]);
-                        }
-                    });
-                }
-            });
+    const useSlot = async (level: number) => {
+        const used = spellSlotsUsed[String(level)] ?? 0;
+        const total = slotTotals[level - 1] ?? 0;
+        if (used >= total) {
+            showToast("Yetersiz Büyü Slotu", `${level}. Seviye slotunuz kalmadı.`, "bg-red-900 border-red-500 text-red-100");
+            return false;
         }
-
-        return setVal !== null ? Math.max(baseValue + bonus, setVal) : baseValue + bonus;
+        const newUsed = { ...spellSlotsUsed, [String(level)]: used + 1 };
+        setSpellSlotsUsed(newUsed);
+        await saveCombatState({ spellSlotsUsed: newUsed });
+        return true;
     };
 
-    const mod = (v: number, statName?: string) => {
-        if (!statName) return Math.floor((v - 10) / 2); // For untargeted uses like generic hitdice constitution mod where statName is missing
-        const score = getEffectiveScore(statName, v);
-        return Math.floor((score - 10) / 2);
+    const useResource = async (key: string, amount: number = 1) => {
+        const res = resources.find(r => r.key === key);
+        if (!res) return false;
+        const maxVal = res.getMax(lv, mods);
+        const used = resourcesUsed[key] ?? 0;
+        if (used + amount > maxVal) {
+            showToast("Yetersiz Kaynak", `${res.name} için kullanım hakkınız yok.`, "bg-red-900 border-red-500 text-red-100");
+            return false;
+        }
+        const newUsed = { ...resourcesUsed, [key]: used + amount };
+        setResourcesUsed(newUsed);
+        await saveCombatState({ resourcesUsed: newUsed });
+        return true;
     };
-    const fmt = (n: number) => (n >= 0 ? `+${n}` : String(n));
+
+    const dropConcentration = async () => {
+        setConcentrationSpell('');
+        await saveCombatState({ concentrationSpell: '' });
+    };
+
+    const toggleSpell = async (spellName: string) => {
+        if (!characterRef.current) return;
+        const oldSpells = characterRef.current.spells || [];
+        let newSpells;
+        if (oldSpells.includes(spellName)) {
+            newSpells = oldSpells.filter((s: string) => s !== spellName);
+        } else {
+            newSpells = [...oldSpells, spellName];
+        }
+        const newChar = { ...characterRef.current, spells: newSpells };
+        setCharacter(newChar);
+        characterRef.current = newChar;
+        try {
+            await axios.put(`${API_URL}/api/characters/${character._id}`, { spells: newSpells }, { headers: { 'Authorization': `Bearer ${token}` } });
+            showToast(newSpells.includes(spellName) ? 'Büyü Öğrenildi' : 'Büyü Unutuldu', `${spellName} güncellendi.`, 'bg-blue-900 border-blue-500 text-blue-100');
+        } catch (err) {
+            console.error("Spell update error:", err);
+            const rollbackChar = { ...characterRef.current, spells: oldSpells };
+            setCharacter(rollbackChar);
+            characterRef.current = rollbackChar;
+            showToast('Hata', 'Büyü güncellenirken bir hata oluştu.', 'bg-red-900 border-red-500 text-red-100');
+        }
+    };
+
+    const handleRoll = async (name: string, dice: any, typeLabel: string, cost?: { key: string, amount: number, name: string }) => {
+        if (cost) {
+            const success = await useResource(cost.key, cost.amount);
+            if (!success) return; 
+        }
+        let total = 0;
+        for (let i = 0; i < dice.count; i++) {
+            total += Math.floor(Math.random() * dice.sides) + 1;
+        }
+        total += dice.bonus;
+        const formula = `${dice.count}d${dice.sides}${dice.bonus ? `+${dice.bonus}` : ''}`;
+        if (socket && character) {
+            (socket as any).emit('roll_dice', {
+                campaignId,
+                playerName: character.name,
+                rollResult: total,
+                type: `${name} ${typeLabel} (${formula})`
+            });
+        }
+        showToast(`🎲 ${name} - ${formula}`, cost ? `${cost.amount} ${cost.name} harcandı! Sonuç: ${total}` : `${typeLabel} Sonucu: ${total}`, 'bg-purple-900 border-purple-500 text-purple-100');
+    };
 
     const startLevelUp = () => {
         // Use characterRef for always-fresh data (fixes consecutive level-up bug)
@@ -793,7 +1062,6 @@ export default function PlayerSheet() {
         if (!cls || typeof cls !== 'object') { alert('Sınıf bilgisi yüklenemedi, sayfayı yenileyin.'); return; }
         const newLv = char.level + 1;
         if (newLv > 20) return; // Max level 20
-        const clsName = cls.name as string;
         // Use fallback hit_die if missing
         const hitDie = (cls.hit_die || 'd8') as string;
         const hitDieMax = parseInt(hitDie.replace('d', '')) || 8;
@@ -958,7 +1226,6 @@ export default function PlayerSheet() {
         if (!char) return;
         if ((char.level || 1) >= 20) { alert('Karakter zaten maksimum seviyeye ulaştı (20).'); return; }
 
-        const mcs: any[] = char.multiclasses || [];
         const mc = mcs[mcIndex];
         if (!mc) return;
 
@@ -1080,7 +1347,6 @@ export default function PlayerSheet() {
                 payload.level = (character.level || 1) + 1;
                 payload.maxHp = newMaxHp;
             } else if (lvModal.mcAction === 'levelup') {
-                const mcs = character.multiclasses || [];
                 const updatedMcs = mcs.map((m: any, i: number) => 
                     i === lvModal.mcData.mcIndex 
                     ? { ...m, level: lvModal.newLv, subclass: lvSubclassChoice ? lvSubclassChoice.name : (m.subclass || '') } 
@@ -1119,38 +1385,7 @@ export default function PlayerSheet() {
         finally { setIsLevelingUp(false); }
     };
 
-    if (loading || !character) return (
-        <div className="min-h-screen bg-gray-950 text-white flex items-center justify-center text-2xl">
-            ⚔️ Karakter Yükleniyor...
-        </div>
-    );
-
-    const stats = character.stats || {};
-    const level = character.level || 1;
-    const prof = profBonus(level);
-    const cls = character.classRef?.name || "";
-    const saves = CLASS_SAVES[cls] || [];
-    const spells: string[] = character.spells || [];
-    const featSelsSpells = Object.values(featSpellSelections).flat().filter(Boolean) as string[];
-    const baseSpells = Array.from(new Set([...spells.filter(s => !s.startsWith("Feat: ")), ...featSelsSpells]));
-    const featsFromSpells = spells.filter(s => s.startsWith("Feat: ")).map(f => f.replace("Feat: ", ""));
-    const actualFeats = Array.from(new Set([...(character.feats || []), ...featsFromSpells, ...(character.raceBonusFeats || []), ...Object.keys(featSpellSelections), ...Object.keys(featStatSelections), ...Object.keys(featChoiceSelections)]));
-
-    const itemSpells: string[] = [];
-    if (character?.inventory) {
-        character.inventory.forEach((item: any) => {
-            if (item.isEquipped && item.effects) {
-                item.effects.forEach((eff: any) => {
-                    if (eff.type === 'spell_auto' && eff.spellName) {
-                        itemSpells.push(eff.spellName);
-                    }
-                });
-            }
-        });
-    }
-
-    const actualSpells = Array.from(new Set([...baseSpells, ...itemSpells]));
-    const hpPct = Math.round((currentHp / character.maxHp) * 100);
+    const hpPctOldAvoidClash = character ? Math.round((currentHp / character.maxHp) * 100) : 0;
 
     // ─── Skill bonus hesapla ─────────────────────────────────────────────────
     const getSkillMod = (skill: typeof SKILLS[0]) => {
@@ -1254,68 +1489,39 @@ export default function PlayerSheet() {
         return 0;
     };
 
-    const getAutoDefenses = () => {
-        const res = [...(character.resistances || [])];
-        const imm = [...(character.immunities || [])];
-        const vuln = [...(character.vulnerabilities || [])];
 
-        const checkText = (text: string, source: string) => {
-            if (!text) return;
-            const lower = text.toLowerCase();
-            if (lower.includes('direncin') || lower.includes('dirençli') || lower.includes('direnç') || lower.includes('resistance')) {
-                if (lower.includes('poison') || lower.includes('zehir')) res.push(`Zehir (${source})`);
-                if (lower.includes('fire') || lower.includes('ateş')) res.push(`Ateş (${source})`);
-                if (lower.includes('cold') || lower.includes('soğuk')) res.push(`Soğuk (${source})`);
-                if (lower.includes('lightning') || lower.includes('şimşek') || lower.includes('yıldırım')) res.push(`Şimşek (${source})`);
-                if (lower.includes('acid') || lower.includes('asit')) res.push(`Asit (${source})`);
-                if (lower.includes('necrotic') || lower.includes('nekrotik')) res.push(`Nekrotik (${source})`);
-                if (lower.includes('radiant') || lower.includes('parıltı')) res.push(`Parıltı (${source})`);
-                if (lower.includes('bludgeoning') || lower.includes('künt') || lower.includes('fiziksel')) res.push(`Fiziksel (${source})`);
-                if (lower.includes('piercing') || lower.includes('delici')) res.push(`Delici (${source})`);
-                if (lower.includes('slashing') || lower.includes('kesici')) res.push(`Kesici (${source})`);
-            }
-            if (lower.includes('bağışıklı') || lower.includes('immunity')) {
-                if (lower.includes('poison') || lower.includes('zehir')) imm.push(`Zehir (${source})`);
-                if (lower.includes('disease') || lower.includes('hastalık')) imm.push(`Hastalık (${source})`);
-                if (lower.includes('charm') || lower.includes('cazibe')) imm.push(`Cazibe (${source})`);
-                if (lower.includes('frightened') || lower.includes('frighten') || lower.includes('korkutulma')) imm.push(`Korku (${source})`);
-            }
-        };
+    if (loading) {
+        return (
+            <div className="min-h-screen bg-gray-950 flex flex-col items-center justify-center text-white gap-4">
+                <div className="w-16 h-16 border-4 border-red-600 border-t-transparent rounded-full animate-spin"></div>
+                <p className="text-xl font-black tracking-widest uppercase animate-pulse">Karakter Yükleniyor...</p>
+            </div>
+        );
+    }
 
-        character.raceRef?.traits?.forEach((t: any) => checkText((t.desc_tr || "") + " " + (t.desc || ""), t.name));
-        if (character.subclass && character.classRef?.subclasses) {
-            const sub = character.classRef.subclasses.find((s: any) => s.name === character.subclass);
-            sub?.features?.filter((f: any) => level >= f.level).forEach((f: any) => checkText((f.desc_tr || "") + " " + (f.desc || ""), f.name));
-        }
-
-        if (character?.inventory) {
-            character.inventory.forEach((item: any) => {
-                if (!item.isEquipped) return;
-                if (item.effects) {
-                    item.effects.forEach((eff: any) => {
-                        if (eff.type === 'resistance' && eff.value) res.push(`${eff.value} (${item.name})`);
-                        if (eff.type === 'immunity' && eff.value) imm.push(`${eff.value} (${item.name})`);
-                        if (eff.type === 'vulnerability' && eff.value) vuln.push(`${eff.value} (${item.name})`);
-                    });
-                }
-                checkText((item.note || "") + " " + (item.desc_tr || "") + " " + (item.desc || ""), item.name);
-            });
-        }
-
-        return {
-            res: Array.from(new Set(res)),
-            imm: Array.from(new Set(imm)),
-            vuln: Array.from(new Set(vuln)),
-        };
-    };
-    const autoDefenses = getAutoDefenses();
+    if (!character) {
+        return (
+            <div className="min-h-screen bg-gray-950 flex flex-col items-center justify-center text-white gap-6 p-4 text-center">
+                <div className="text-6xl">🚫</div>
+                <div>
+                    <h1 className="text-3xl font-black mb-2">Karakter Bulunamadı</h1>
+                    <p className="text-gray-400">Bu kampanya için henüz bir karakterin yok veya yüklenirken bir hata oluştu.</p>
+                </div>
+                <button 
+                    onClick={() => router.push(`/player/${campaignId}/character-creator`)}
+                    className="px-8 py-3 bg-red-700 hover:bg-red-600 text-white font-black rounded-xl transition shadow-lg border border-red-500"
+                >
+                    Yeni Karakter Oluştur
+                </button>
+            </div>
+        );
+    }
 
     return (
         <div className="min-h-screen bg-gray-950 text-white font-sans">
 
             {/* ══ LEVEL CHART MODAL ══ */}
             {showLevelChart && (() => {
-                const clsName = character.classRef?.name || '';
                 const aLevels = ASI_LEVELS[clsName] ?? [4, 8, 12, 16, 19];
                 const slotcaster = isSpellcaster(clsName);
                 // max slot levels for this class
@@ -1524,6 +1730,12 @@ export default function PlayerSheet() {
                                 <div className="px-3 font-black text-gray-300 text-xs flex items-center bg-gray-800">Sv.{level}</div>
                                 <button onClick={handleLevelUpClick} disabled={isLevelingUp} title="Seviye Atla" className="px-2.5 bg-gradient-to-r from-yellow-700 to-yellow-500 hover:from-yellow-400 hover:to-yellow-300 text-yellow-950 font-black text-[10px] transition h-full flex items-center justify-center shadow-[inset_0_1px_2px_rgba(255,255,255,0.4)] disabled:opacity-30">▲</button>
                             </div>
+                            {/* Inspiration Badge */}
+                            {character.inspiration && (
+                                <div className="flex items-center bg-yellow-400 text-yellow-950 px-2 py-0.5 rounded-full text-[10px] font-black uppercase tracking-tighter shadow-[0_0_10px_rgba(250,204,21,0.5)] animate-bounce h-5">
+                                    ⚡ INSPIRATION
+                                </div>
+                            )}
                         </div>
                         <p className="text-gray-400 text-sm mt-0.5">
                             {character.raceRef?.name}{character.subrace ? ` (${character.subrace})` : ''} ·{' '}
@@ -1569,6 +1781,10 @@ export default function PlayerSheet() {
                     </div>
                     {/* REST BUTTONS MOVED TO FAR RIGHT */}
                     <div className="flex items-center gap-2 pl-3 ml-1 border-l border-gray-700">
+                        <div className="flex items-center gap-2 bg-yellow-950/30 border border-yellow-700/50 px-3 py-1.5 rounded-xl">
+                            <span className="text-yellow-500 text-xs font-black uppercase tracking-widest">Parti Altını</span>
+                            <span className="text-white font-black text-lg">{partyGold} <span className="text-yellow-500 text-sm">gp</span></span>
+                        </div>
                         <button onClick={() => setIsWhisperModalOpen(true)} className="px-3 py-2 bg-purple-950/40 hover:bg-purple-900/60 text-purple-300 font-bold rounded-lg text-xs transition border border-purple-700/50 shadow-sm">
                             🤫 DM'e Fısılda
                         </button>
@@ -1626,7 +1842,6 @@ export default function PlayerSheet() {
                         <span className="text-gray-400 text-sm font-bold">🎲 HD</span>
                         <span className="text-2xl font-black text-pink-400">
                             {(() => {
-                                const mcs = character.multiclasses || [];
                                 const mainLv = character.level - mcs.reduce((acc: number, mc: any) => acc + (mc.level || 1), 0);
                                 const diceMap = new Map<string, number>();
                                 const addDice = (hd: string, lv: number) => diceMap.set(hd, (diceMap.get(hd) || 0) + lv);
@@ -1784,6 +1999,7 @@ export default function PlayerSheet() {
                         ["spells", "✨ Büyüler"],
                         ["inventory", "🎒 Envanter"],
                         ["story", "📜 Hikaye"],
+                        ["world", "🌍 Dünya / Görevler"],
                         ["party", "🛡️ Parti / Oda"]
                     ] as const).map(([tab, label]) => {
                         if (tab === "spells" && actualSpells.length === 0 && !isSpellcaster(character.classRef?.name || '')) return null;
@@ -1956,7 +2172,6 @@ export default function PlayerSheet() {
                                         }
                                     }
                                 };
-                                const mcs = character.multiclasses || [];
                                 const mainLv = character.level - mcs.reduce((acc: number, mc: any) => acc + (mc.level || 1), 0);
                                 addFeats(character.classRef?.name, mainLv);
                                 mcs.forEach((mc: any) => addFeats(mc.className, mc.level || 1));
@@ -2283,7 +2498,7 @@ export default function PlayerSheet() {
                                 <div className="mt-3 space-y-1">
                                     <p className="text-gray-500 text-xs uppercase font-bold mb-2">Ability Checks</p>
                                     {Object.entries(stats).map(([s, v]: any) => {
-                                        const m = mod(v);
+                                        const m = mod(v as number, s);
                                         return (
                                             <button key={s} onClick={() => {
                                                 const roll = Math.floor(Math.random() * 20) + 1;
@@ -2309,37 +2524,6 @@ export default function PlayerSheet() {
 
                 {/* ══════════ TAB: ATTACKS & SPELLS ══════════ */}
                 {(activeTab === "attacks" || activeTab === "spells") && (() => {
-                    const clsName = character.classRef?.name || '';
-                    const mcs = character.multiclasses || [];
-                    const mainLv = character.level - mcs.reduce((a: number, c: any) => a + (c.level || 1), 0);
-                    const mcList = mcs.map((mc: any) => ({ className: mc.className, level: mc.level || 1 }));
-                    const lv = character.level;
-                    const { merged: slotTotals, warlockPact } = getMulticlassSpellSlots(clsName, mainLv, mcList);
-                    if (warlockPact) {
-                        slotTotals[warlockPact.level - 1] += warlockPact.count;
-                    }
-                    const canCast = isSpellcaster(clsName) || mcs.some((mc: any) => isSpellcaster(mc.className));
-                    const mods = { CHA: mod(stats.CHA || 10), WIS: mod(stats.WIS || 10), INT: mod(stats.INT || 10), STR: mod(stats.STR || 10), DEX: mod(stats.DEX || 10), CON: mod(stats.CON || 10) };
-                    
-                    const baseAttacks = [...(CLASS_ATTACKS[clsName] || (mcs.length === 0 ? CLASS_ATTACKS['Fighter'] : []))];
-                    const resources = [...(CLASS_RESOURCES[clsName] || [])];
-                    mcs.forEach((mc: any) => {
-                        if (CLASS_ATTACKS[mc.className]) baseAttacks.push(...CLASS_ATTACKS[mc.className]);
-                        if (CLASS_RESOURCES[mc.className]) resources.push(...CLASS_RESOURCES[mc.className]);
-                    });
-
-                    // Merge Custom Resources
-                    customResources.forEach((cr: any) => {
-                        resources.push({
-                            key: cr.id || `cr-${cr.name}`,
-                            name: cr.name,
-                            desc_tr: cr.desc || "",
-                            icon: "✨",
-                            recharge: cr.recharge || 'long',
-                            getMax: () => cr.max || 1
-                        });
-                    });
-
                     // Find equipped weapons from inventory
                     const equippedWeapons = (character.inventory || []).filter((it: any) => it.isEquipped && (it.type === 'weapon' || it.name.toLowerCase().match(/sword|axe|dagger|bow|staff|mace|hammer|spear|javelin/)));
 
@@ -2393,127 +2577,26 @@ export default function PlayerSheet() {
                         };
                     });
 
-                    const attacks = [...baseAttacks, ...mappedWeaponAttacks];
-
-                    // Dinamik Kaynaklar (Özellik Büyüleri & Sınıf Özellikleri)
-                    const addFeatRes = (fSearch: string, key: string, name: string, desc: string, icon: string, recharge: 'short' | 'long', max: number | ((lv: number) => number)) => {
-                        if (actualFeats.some(f => f.includes(fSearch))) {
-                            resources.push({ key, name, desc_tr: desc, icon, recharge, getMax: typeof max === 'number' ? () => max : max });
-                        }
-                    };
-                    const pb = (lv: number) => Math.ceil(lv / 4) + 1;
-
-                    addFeatRes('Fey Touched', 'feat_fey_touched', 'Misty Step & 1lvl Spell (Fey Touched)', 'Uzun Dinlenmede 1\'er kez bedava kullanım.', '✨', 'long', 1);
-                    addFeatRes('Shadow Touched', 'feat_shadow_touched', 'Invisibility & 1lvl Spell (Shadow Touched)', 'Uzun Dinlenmede 1\'er kez bedava.', '🌑', 'long', 1);
-                    addFeatRes('Lucky', 'feat_lucky', 'Lucky Points', 'Zar atışlarında d20 atıp seçmek için.', '🍀', 'long', 3);
-                    addFeatRes('Metamagic Adept', 'feat_metamagic_adept', 'Sorcery Points (Metamagic Adept)', 'Metamagic yetenekleri için kullanılır.', '🔮', 'long', 2);
-                    addFeatRes('Boon of Fate', 'boon_of_fate', 'Boon of Fate', 'Zarlara d10 ekle/çıkar (PB defa).', '⚖️', 'long', pb);
-                    addFeatRes('Magic Initiate', 'feat_magic_initiate', '1. Seviye Büyü (Magic Initiate)', 'Slot harcamadan 1 kez.', '✨', 'long', 1);
-                    addFeatRes('Telepathic', 'feat_telepathic', 'Detect Thoughts (Telepathic)', 'Slot harcamadan 1 kez.', '🧠', 'long', 1);
-                    addFeatRes('Arcanist', 'feat_arcanist', 'Detect Magic & Identify (Arcanist)', 'Slot harcamadan birer kez.', '🔮', 'long', 1);
-                    addFeatRes('Fade Away', 'feat_fade_away', 'Fade Away (Invisibility)', 'Reaksiyonla görünmezlik.', '🌫️', 'short', 1);
-                    addFeatRes('Fey Teleportation', 'feat_fey_teleport', 'Misty Step (Fey Teleportation)', 'Slot harcamadan 1 kez.', '✨', 'short', 1);
-                    addFeatRes('Flash Recall', 'feat_flash_recall', 'Flash Recall', 'Hazırladığın büyüyü değiştir.', '🔄', 'short', 1);
-                    addFeatRes('Gift of the Chromatic Dragon', 'feat_chromatic_infusion', 'Chromatic Infusion', 'Silaha +1d4 element hasarı.', '🐉', 'long', 1);
-                    addFeatRes('Gift of the Chromatic Dragon', 'feat_chromatic_resist', 'Reactive Resistance', 'Hasar direnci sağla (PB kez).', '🛡️', 'long', pb);
-                    addFeatRes('Gift of the Gem Dragon', 'feat_gem_dragon', 'Telekinetic Reprisal', 'Hasar vereni psionik olarak it (PB kez).', '🔮', 'long', pb);
-                    addFeatRes('Gift of the Metallic Dragon', 'feat_metallic_wings', 'Protective Wings', 'Müttefik AC\'sine ekle (PB kez).', '🛡️', 'long', pb);
-                    addFeatRes('Gift of the Metallic Dragon', 'feat_metallic_cure', 'Cure Wounds (Metallic Dragon)', '1 kez ücretsiz Cure Wounds.', '❤️', 'long', 1);
-                    addFeatRes('Wood Elf Magic', 'feat_wood_elf_magic', 'Wood Elf Magic (Büyüler)', 'Longstrider/Pass Without Trace 1\'er kez.', '🍃', 'long', 1);
-                    addFeatRes('Boon of Recovery', 'boon_recovery', 'Boon of Recovery', '1 HP ile hayatta kal.', '❤️‍🔥', 'long', 1);
-                    addFeatRes('Boon of Spell Recall', 'boon_spell_recall', 'Spell Recall', 'Harcanmış bir slotu geri kazan.', '✨', 'long', 1);
-                    addFeatRes('Divinely Favored', 'feat_divinely_favored', '1. Seviye Büyü (Divinely Favored)', 'Slot harcamadan 1 kez.', '✝️', 'long', 1);
-                    addFeatRes('Crafter', 'feat_crafter', 'Create Small Item (Crafter)', 'Ücretsiz küçük eşya üret.', '🛠️', 'long', 1);
-                    addFeatRes('Inspiring Leader', 'feat_inspiring_leader', 'Inspiring Leader', '10dk konuşma ile geçici HP ver.', '🗣️', 'short', 1);
-                    addFeatRes('Chef', 'feat_chef', 'Treats (Chef)', 'Özel atıştırmalıklar üret (PB kez).', '🍲', 'long', pb);
-                    addFeatRes('Healer', 'feat_healer', 'Healer Stabilize', 'Healer Kit ile ekstra iyileştirme.', '⚕️', 'short', 1);
-
-                    if (actualFeats.some(f => f.includes('Martial Adept') || f.includes('Superior Technique'))) {
-                        if (clsName !== 'Fighter' || (clsName === 'Fighter' && character.subclass !== 'Battle Master')) {
-                            resources.push({ key: 'feat_martial_adept', name: 'Superiority Dice (1d6)', desc_tr: 'Manevralar için kullanılır.', icon: '⚔️', recharge: 'short', getMax: () => 1 });
-                        }
-                    }
-
-                    if (character.raceRef?.name === 'Tiefling' && level >= 3) {
-                        resources.push({ key: 'tiefling_hellish_rebuke', name: 'Hellish Rebuke', desc_tr: 'Uzun Dinlenmede 1 kez 2. seviye Hellish Rebuke atabilirsin.', icon: '🔥', recharge: 'long', getMax: () => 1 });
-                    }
-                    if (character.raceRef?.name === 'Tiefling' && level >= 5) {
-                        resources.push({ key: 'tiefling_darkness', name: 'Darkness', desc_tr: 'Uzun Dinlenmede 1 kez Darkness atabilirsin.', icon: '🌑', recharge: 'long', getMax: () => 1 });
-                    }
-                    if (character.raceRef?.name?.includes('Elf') && character.subrace === 'Drow (Dark Elf)' && level >= 3) {
-                        resources.push({ key: 'drow_faerie_fire', name: 'Faerie Fire', desc_tr: 'Uzun Dinlenmede 1 kez Faerie Fire atabilirsin.', icon: '✨', recharge: 'long', getMax: () => 1 });
-                    }
-                    if (character.raceRef?.name?.includes('Elf') && character.subrace === 'Drow (Dark Elf)' && level >= 5) {
-                        resources.push({ key: 'drow_darkness', name: 'Darkness', desc_tr: 'Uzun Dinlenmede 1 kez Darkness atabilirsin.', icon: '🌑', recharge: 'long', getMax: () => 1 });
-                    }
-                    if (character.subclass === 'The Hexblade') {
-                        resources.push({ key: 'hexblades_curse', name: 'Hexblade\'s Curse', desc_tr: 'Kısa/uzun dinlenme başına 1 hedefe lanet (Extra hasar/Kritik artışı).', icon: '💀', recharge: 'short', getMax: () => 1 });
-                    }
-
-                    const useSlot = async (slotLv: number, spellName: string, isConc: boolean) => {
-                        const key = String(slotLv);
-                        const used = spellSlotsUsed[key] ?? 0;
-                        const total = slotTotals[slotLv - 1] ?? 0;
-                        if (total <= 0 || used >= total) return;
-                        const newUsed = { ...spellSlotsUsed, [key]: used + 1 };
-                        const newConc = isConc ? spellName : concentrationSpell;
-                        setSpellSlotsUsed(newUsed);
-                        if (isConc) setConcentrationSpell(spellName);
-                        setCastingSpell(null);
-                        await saveCombatState({ spellSlotsUsed: newUsed, concentrationSpell: newConc });
-                        showToast(`\u2728 ${spellName}`, `${slotLv}. seviye slot harcand\u0131${isConc ? ' \ud83d\udd35 Konsantre' : ''}.`, 'bg-blue-900 border-blue-500 text-blue-100');
-                    };
-
-                    const useResource = async (key: string, amount: number = 1) => {
-                        const res = resources.find(r => r.key === key);
-                        if (!res) return false;
-                        const maxVal = res.getMax(lv, mods);
-                        const used = resourcesUsed[key] ?? 0;
-                        if (used + amount > maxVal) {
-                            showToast("Yetersiz Kaynak", `${res.name} için kullanım hakkınız yok.`, "bg-red-900 border-red-500 text-red-100");
-                            return false;
-                        }
-                        const newUsed = { ...resourcesUsed, [key]: used + amount };
-                        setResourcesUsed(newUsed);
-                        await saveCombatState({ resourcesUsed: newUsed });
-                        return true;
-                    };
-
-                    const dropConcentration = async () => {
-                        setConcentrationSpell('');
-                        await saveCombatState({ concentrationSpell: '' });
-                    };
-
-                    const extractDice = (text: string) => {
-                        if (!text) return null;
-                        const match = text.match(/(\d+)d(\d+)(?:\s*\+\s*(\d+))?/i);
-                        if (match) {
-                            return { count: parseInt(match[1]), sides: parseInt(match[2]), bonus: match[3] ? parseInt(match[3]) : 0 };
-                        }
-                        return null;
-                    };
-
-                    const handleRoll = async (name: string, dice: any, typeLabel: string, cost?: { key: string, amount: number, name: string }) => {
-                        if (cost) {
-                            const success = await useResource(cost.key, cost.amount);
-                            if (!success) return; // Kaynak yoksa zarı da atma!
-                        }
-                        let total = 0;
-                        for (let i = 0; i < dice.count; i++) {
-                            total += Math.floor(Math.random() * dice.sides) + 1;
-                        }
-                        total += dice.bonus;
-                        const formula = `${dice.count}d${dice.sides}${dice.bonus ? `+${dice.bonus}` : ''}`;
-                        if (socket && character) {
-                            (socket as any).emit('roll_dice', {
-                                campaignId,
-                                playerName: character.name,
-                                rollResult: total,
-                                type: `${name} ${typeLabel} (${formula})`
-                            });
-                        }
-                        showToast(`🎲 ${name} - ${formula}`, cost ? `${cost.amount} ${cost.name} harcandı! Sonuç: ${total}` : `${typeLabel} Sonucu: ${total}`, 'bg-purple-900 border-purple-500 text-purple-100');
-                    };
+                    const attacks = [
+                        ...baseAttacks.map(atk => ({
+                            ...atk,
+                            toHit: atk.toHit ? fmt(evalAtk(atk.toHit, mods, prof)) : undefined,
+                            damage: atk.damage.includes('+') || atk.damage.includes('-') 
+                                ? atk.damage.replace(/(STR|DEX|CON|INT|WIS|CHA|Prof)/g, (m) => {
+                                    if (m === 'Prof') return String(prof);
+                                    return String(mods[m as keyof typeof mods]);
+                                  })
+                                : (atk.damage.match(/^[0-9d+\s-]+$/) ? atk.damage : (() => {
+                                    // Handle cases like "1+STR"
+                                    const parts = atk.damage.split(' ');
+                                    const dice = parts[0];
+                                    const type = parts.slice(1).join(' ');
+                                    const val = evalAtk(dice, mods, prof);
+                                    return isNaN(Number(dice)) ? `${val} ${type}` : atk.damage;
+                                  })())
+                        })), 
+                        ...mappedWeaponAttacks
+                    ];
 
                     return (
                         <div className="pb-8 space-y-5">
@@ -2548,52 +2631,108 @@ export default function PlayerSheet() {
                                         <div className="p-3 space-y-2">
                                             {attacks.map((atk, i) => {
                                                 const expanded = expandedAtkIdx === i;
+                                                const dice = extractDice(atk.damage);
                                                 return (
                                                     <div key={i}
-                                                        className={`p-3 rounded-xl border cursor-pointer transition ${expanded ? 'border-white/30' : ''} ${atk.type === 'heal' ? 'border-green-800/50 bg-green-900/10' : atk.type === 'special' ? 'border-orange-800/40 bg-orange-900/10' : atk.type === 'save' ? 'border-yellow-800/40 bg-yellow-900/10' : 'border-gray-700 bg-gray-900/60'}`}
+                                                        className={`group/atk relative rounded-2xl transition-all duration-300 border backdrop-blur-md overflow-hidden ${expanded ? 'border-white/30 bg-white/10 shadow-[0_0_25px_rgba(255,255,255,0.05)]' : 'border-white/5 bg-white/5 hover:bg-white/10 hover:border-white/20 hover:scale-[1.01] shadow-sm'}`}
                                                         onClick={() => setExpandedAtkIdx(expanded ? null : i)}>
-                                                        <div className="flex items-center gap-2 mb-1">
-                                                            <span className="text-xs px-2 py-0.5 rounded font-bold bg-gray-700 text-gray-400 uppercase">
-                                                                {atk.type === 'melee' ? '⚔️' : atk.type === 'ranged' ? '🏹' : atk.type === 'save' ? '⚡' : atk.type === 'heal' ? '❤️' : '✨'} {atk.type}
-                                                            </span>
-                                                            <span className="font-black text-white text-sm">{atk.name}</span>
-                                                            {atk.range && <span className="text-gray-500 text-xs ml-auto">{atk.range}</span>}
-                                                            <span className="text-gray-600 text-xs ml-auto">{expanded ? '▲' : '▼'}</span>
-                                                        </div>
-                                                        <div className="flex gap-4 text-xs mt-1 flex-wrap">
-                                                            {atk.toHit && <span className="text-green-400">To Hit: <span className="font-black">{atk.toHit}</span></span>}
-                                                            <span className="text-yellow-300">Hasar: <span className="font-black">{atk.damage}</span></span>
-                                                        </div>
-                                                        {expanded && (
-                                                            <div className="mt-2 text-gray-300 text-xs leading-relaxed border-t border-gray-700 pt-2">
-                                                                <p className="mb-2">{atk.desc_tr}</p>
+                                                        
+                                                        {/* Glow effect on hover */}
+                                                        <div className="absolute inset-0 bg-gradient-to-r from-red-500/0 via-red-500/0 to-red-500/0 group-hover/atk:via-red-500/5 transition-all duration-700 pointer-events-none"></div>
+
+                                                        <div className="p-4 relative">
+                                                            <div className="flex items-start justify-between gap-4">
+                                                                <div className="flex-1 flex flex-col gap-1.5">
+                                                                    <div className="flex items-center gap-2">
+                                                                        <span className={`text-[10px] px-2 py-0.5 rounded-full font-black uppercase tracking-widest border ${
+                                                                            atk.type === 'melee' ? 'bg-red-500/10 border-red-500/30 text-red-400' : 
+                                                                            atk.type === 'ranged' ? 'bg-blue-500/10 border-blue-500/30 text-blue-400' : 
+                                                                            atk.type === 'save' ? 'bg-yellow-500/10 border-yellow-500/30 text-yellow-400' : 
+                                                                            atk.type === 'heal' ? 'bg-green-500/10 border-green-500/30 text-green-400' : 
+                                                                            'bg-purple-500/10 border-purple-500/30 text-purple-400'
+                                                                        }`}>
+                                                                            {atk.type === 'melee' ? '⚔️ Melee' : atk.type === 'ranged' ? '🏹 Ranged' : atk.type === 'save' ? '⚡ Save' : atk.type === 'heal' ? '❤️ Heal' : '✨ Special'}
+                                                                        </span>
+                                                                        <h4 className="font-black text-white text-base tracking-tight group-hover/atk:text-red-300 transition-colors uppercase">{atk.name}</h4>
+                                                                    </div>
+                                                                    
+                                                                    <div className="flex gap-4 text-xs font-bold items-center ml-1">
+                                                                        {atk.toHit && (
+                                                                            <div className="flex flex-col">
+                                                                                <span className="text-[9px] text-gray-500 uppercase tracking-widest">To Hit</span>
+                                                                                <span className="text-emerald-400 font-black">{atk.toHit}</span>
+                                                                            </div>
+                                                                        )}
+                                                                        <div className="flex flex-col">
+                                                                            <span className="text-[9px] text-gray-500 uppercase tracking-widest">{atk.type === 'heal' ? 'Heal' : 'Damage'}</span>
+                                                                            <span className="text-orange-400 font-black">{atk.damage}</span>
+                                                                        </div>
+                                                                        {atk.range && (
+                                                                            <div className="flex flex-col">
+                                                                                <span className="text-[9px] text-gray-500 uppercase tracking-widest">Range</span>
+                                                                                <span className="text-gray-400 font-black">{atk.range}</span>
+                                                                            </div>
+                                                                        )}
+                                                                    </div>
+                                                                </div>
+
+                                                                {/* Persistent Roll Buttons */}
                                                                 <div className="flex gap-2">
                                                                     {atk.toHit && (
-                                                                        <button onClick={(e) => { e.stopPropagation(); handleRoll(atk.name, { count: 1, sides: 20, bonus: parseInt(atk.toHit) }, 'Saldırı', atk.resourceCost); }} className="px-3 py-1.5 bg-green-900/40 hover:bg-green-800 text-green-300 border border-green-700 rounded text-xs transition flex items-center gap-1 font-bold">
-                                                                            ⚔️ Saldır
+                                                                        <button 
+                                                                            onClick={(e) => { 
+                                                                                e.stopPropagation(); 
+                                                                                handleRoll(atk.name, { count: 1, sides: 20, bonus: evalAtk(atk.toHit || "0", mods, prof) }, 'Saldırı', atk.resourceCost); 
+                                                                            }} 
+                                                                            className="w-10 h-10 flex items-center justify-center bg-emerald-600/20 hover:bg-emerald-500 text-emerald-400 hover:text-white border border-emerald-500/30 rounded-xl transition-all duration-300 active:scale-90 shadow-lg shadow-emerald-900/10"
+                                                                            title="Attack Roll"
+                                                                        >
+                                                                            <span className="text-xl">⚔️</span>
                                                                         </button>
                                                                     )}
-                                                                    {atk.damage && atk.damage !== '—' && (() => {
-                                                                        const dice = extractDice(atk.damage);
-                                                                        if (!dice) return null;
-                                                                        return (
-                                                                            <button onClick={(e) => { e.stopPropagation(); handleRoll(atk.name, dice, 'Hasar', atk.resourceCost); }} className="px-3 py-1.5 bg-yellow-900/40 hover:bg-yellow-800 text-yellow-300 border border-yellow-700 rounded text-xs transition flex items-center gap-1 font-bold">
-                                                                                🩸 Hasar
-                                                                            </button>
-                                                                        );
-                                                                    })()}
-                                                                    {atk.resourceCost && (!atk.toHit && (!atk.damage || atk.damage === '—')) && (
-                                                                        <button onClick={async (e) => {
-                                                                            e.stopPropagation();
-                                                                            const success = await useResource(atk.resourceCost!.key, atk.resourceCost!.amount);
-                                                                            if (success) showToast(`✨ ${atk.name}`, `${atk.resourceCost!.amount} ${atk.resourceCost!.name} harcandı ve özellik kullanıldı.`, 'bg-orange-900 border-orange-500 text-orange-100');
-                                                                        }} className="px-3 py-1.5 bg-orange-900/40 hover:bg-orange-800 text-orange-300 border border-orange-700 rounded text-xs transition flex items-center gap-1 font-bold">
-                                                                            ✨ Harca ve Kullan ({atk.resourceCost!.amount})
+                                                                    {dice && (
+                                                                        <button 
+                                                                            onClick={(e) => { 
+                                                                                e.stopPropagation(); 
+                                                                                handleRoll(atk.name, dice, 'Hasar', atk.resourceCost); 
+                                                                            }} 
+                                                                            className="w-10 h-10 flex items-center justify-center bg-orange-600/20 hover:bg-orange-500 text-orange-400 hover:text-white border border-orange-500/30 rounded-xl transition-all duration-300 active:scale-90 shadow-lg shadow-orange-900/10"
+                                                                            title="Damage Roll"
+                                                                        >
+                                                                            <span className="text-xl">🩸</span>
+                                                                        </button>
+                                                                    )}
+                                                                    {!atk.toHit && !dice && atk.resourceCost && (
+                                                                        <button 
+                                                                            onClick={async (e) => {
+                                                                                e.stopPropagation();
+                                                                                const success = await useResource(atk.resourceCost!.key, atk.resourceCost!.amount);
+                                                                                if (success) showToast(`✨ ${atk.name}`, `${atk.resourceCost!.amount} ${atk.resourceCost!.name} harcandı!`, 'bg-orange-900 border-orange-500 text-orange-100');
+                                                                            }} 
+                                                                            className="w-10 h-10 flex items-center justify-center bg-purple-600/20 hover:bg-purple-500 text-purple-400 hover:text-white border border-purple-500/30 rounded-xl transition-all duration-300 active:scale-90 shadow-lg shadow-purple-900/10"
+                                                                            title="Use Feature"
+                                                                        >
+                                                                            <span className="text-xl">✨</span>
                                                                         </button>
                                                                     )}
                                                                 </div>
                                                             </div>
-                                                        )}
+
+                                                            {/* EXPANDED SECTION */}
+                                                            {expanded && (
+                                                                <div className="mt-4 pt-4 border-t border-white/5 animate-in slide-in-from-top-2 duration-300">
+                                                                    <p className="text-gray-300 text-xs leading-relaxed whitespace-pre-wrap italic opacity-80 mb-3">{atk.desc_tr}</p>
+                                                                    {atk.resourceCost && (
+                                                                        <div className="flex items-center gap-2 text-[10px] font-black text-orange-400/80 uppercase tracking-widest bg-orange-500/5 px-3 py-1.5 rounded-lg border border-orange-500/20 w-fit">
+                                                                            <span>⚡ Cost: {atk.resourceCost.amount}x {atk.resourceCost.name}</span>
+                                                                        </div>
+                                                                    )}
+                                                                </div>
+                                                            )}
+                                                            
+                                                            {/* Indicator */}
+                                                            <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-8 h-1 bg-white/5 rounded-full group-hover/atk:bg-white/10 transition-colors"></div>
+                                                        </div>
                                                     </div>
                                                 );
                                             })}
@@ -2769,6 +2908,12 @@ export default function PlayerSheet() {
                                                             <span className="text-lg">✨</span>
                                                         </div>
                                                         <h3 className="font-black text-white text-base lg:text-lg uppercase tracking-wider">Spell Grimoire</h3>
+                                                        <button 
+                                                            onClick={() => setShowSpellPicker(true)}
+                                                            className="ml-4 px-3 py-1 bg-purple-600 hover:bg-purple-500 text-white text-[10px] font-black rounded-lg transition border border-purple-400 shadow-sm uppercase tracking-widest"
+                                                        >
+                                                            Manage Spells
+                                                        </button>
                                                     </div>
                                                     <div className="bg-gray-950/60 px-3 py-1 rounded-full border border-purple-500/30">
                                                         <span className="text-[10px] font-black text-purple-300 uppercase tracking-widest">{actualSpells.length} Known Spells</span>
@@ -3216,6 +3361,156 @@ export default function PlayerSheet() {
                     </div>
                 )}
 
+                {/* ══════════ TAB: WORLD ══════════ */}
+                {activeTab === "world" && (
+                    <div className="pb-8 space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
+                        <div className="bg-white/5 backdrop-blur-xl rounded-2xl border border-white/10 p-8 shadow-2xl relative overflow-hidden group">
+                            <div className="absolute top-0 right-0 p-12 bg-emerald-500/5 blur-[100px] rounded-full -mr-16 -mt-16 group-hover:bg-emerald-500/10 transition-colors duration-1000"></div>
+                            <div className="relative">
+                                <hgroup className="flex flex-col gap-1">
+                                    <h2 className="text-3xl font-black text-white flex items-center gap-3 tracking-tight">
+                                        <span className="text-emerald-400 drop-shadow-[0_0_15px_rgba(52,211,153,0.3)]">🌍</span> Dünya Bilgileri
+                                    </h2>
+                                    <p className="text-gray-400 text-sm font-medium opacity-80 max-w-2xl">DM tarafından paylaşılan aktif görevler, tanışılan gruplar ve seans notları.</p>
+                                </hgroup>
+                            </div>
+                        </div>
+
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                            {/* Quests */}
+                            <div className="space-y-6">
+                                <div className="flex items-center justify-between border-b border-white/5 pb-2">
+                                    <h3 className="text-lg font-black text-emerald-400 flex items-center gap-2 uppercase tracking-widest">
+                                        <span className="text-xl">📜</span> Görevler
+                                    </h3>
+                                    <span className="text-[10px] font-black text-gray-500 uppercase tracking-widest bg-white/5 px-3 py-1 rounded-full border border-white/5">{quests.length} AKTİF</span>
+                                </div>
+                                <div className="space-y-4">
+                                    {quests.length === 0 ? (
+                                        <div className="bg-white/5 backdrop-blur-md border border-white/5 rounded-2xl p-12 text-center group">
+                                            <div className="w-16 h-16 bg-gray-900/40 rounded-full flex items-center justify-center mx-auto mb-4 border border-white/5 group-hover:scale-110 transition-transform duration-500">
+                                                <span className="text-2xl grayscale opacity-30 italic">?</span>
+                                            </div>
+                                            <p className="text-gray-500 italic font-medium">Henüz bir görev tanımlanmadı.</p>
+                                        </div>
+                                    ) : (
+                                        quests.map((q: any) => (
+                                            <div key={q._id} className={`group/quest relative bg-white/5 backdrop-blur-md border rounded-2xl overflow-hidden transition-all duration-300 ${q.status === 'completed' ? 'opacity-50 grayscale border-white/5 scale-95 hover:grayscale-0 hover:opacity-100 hover:scale-100' : 'border-emerald-500/20 hover:border-emerald-500/40 shadow-lg shadow-emerald-900/5 hover:-translate-y-1'}`}>
+                                                <div className="px-5 py-4 bg-white/5 border-b border-white/5 flex justify-between items-center relative overflow-hidden">
+                                                    <div className="absolute inset-0 bg-gradient-to-r from-emerald-500/0 via-emerald-500/0 to-emerald-500/0 group-hover/quest:via-emerald-500/5 transition-all duration-1000"></div>
+                                                    <span className="font-black text-white text-sm tracking-tight relative uppercase">{q.title}</span>
+                                                    <span className={`text-[9px] font-black px-3 py-1 rounded-full uppercase tracking-widest relative ${q.status === 'completed' ? 'bg-gray-800 text-gray-400' : 'bg-emerald-500 text-white shadow-[0_0_15px_rgba(16,185,129,0.3)]'}`}>
+                                                        {q.status === 'completed' ? 'TAMAMLANDI' : 'AKTİF'}
+                                                    </span>
+                                                </div>
+                                                <div className="p-5 relative">
+                                                    <p className="text-gray-300 text-xs leading-relaxed mb-4 font-medium opacity-80">{q.description}</p>
+                                                    {q.rewards && (
+                                                        <div className="bg-emerald-500/5 border border-emerald-500/20 p-3 rounded-xl flex items-center gap-3">
+                                                            <span className="text-lg">🎁</span>
+                                                            <div className="flex flex-col">
+                                                                <span className="text-[9px] text-emerald-400 font-black uppercase tracking-widest opacity-60">Ödüller</span>
+                                                                <span className="text-emerald-300 text-[11px] font-bold">{q.rewards}</span>
+                                                            </div>
+                                                        </div>
+                                                    )}
+                                                </div>
+                                            </div>
+                                        ))
+                                    )}
+                                </div>
+                            </div>
+
+                            {/* Factions */}
+                            <div className="space-y-6">
+                                <div className="flex items-center justify-between border-b border-white/5 pb-2">
+                                    <h3 className="text-lg font-black text-blue-400 flex items-center gap-2 uppercase tracking-widest">
+                                        <span className="text-xl">🛡️</span> Gruplar & İtibarlar
+                                    </h3>
+                                    <span className="text-[10px] font-black text-gray-500 uppercase tracking-widest bg-white/5 px-3 py-1 rounded-full border border-white/5">{factions.length} KEŞFEDİLDİ</span>
+                                </div>
+                                <div className="space-y-4">
+                                    {factions.length === 0 ? (
+                                        <div className="bg-white/5 backdrop-blur-md border border-white/5 rounded-2xl p-12 text-center group">
+                                            <div className="w-16 h-16 bg-gray-900/40 rounded-full flex items-center justify-center mx-auto mb-4 border border-white/5 group-hover:scale-110 transition-transform duration-500">
+                                                <span className="text-2xl grayscale opacity-30">🛡️</span>
+                                            </div>
+                                            <p className="text-gray-500 italic font-medium">Henüz bir grup keşfedilmedi.</p>
+                                        </div>
+                                    ) : (
+                                        factions.map((f: any) => (
+                                            <div key={f._id} className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 hover:border-blue-500/30 transition-all duration-300 shadow-xl group/faction">
+                                                <div className="flex items-center gap-3 mb-2">
+                                                    <div className="w-10 h-10 bg-blue-500/10 rounded-xl flex items-center justify-center border border-blue-500/20 text-blue-400 group-hover/faction:scale-110 transition-transform duration-500">
+                                                        <span className="text-xl">🛡️</span>
+                                                    </div>
+                                                    <h4 className="font-black text-white text-base uppercase tracking-tight">{f.name}</h4>
+                                                </div>
+                                                <p className="text-gray-400 text-[11px] leading-relaxed mb-4 italic font-medium opacity-70 group-hover/faction:opacity-100 transition-opacity">{f.description}</p>
+                                                <div className="space-y-3">
+                                                    {f.reputations?.map((rep: any) => (
+                                                        <div key={rep.characterId} className="bg-gray-950/40 p-3 rounded-xl border border-white/5 hover:border-blue-500/20 transition-all">
+                                                            <div className="flex items-center justify-between mb-2">
+                                                                <span className="text-[10px] font-black text-gray-400 uppercase tracking-widest">{rep.characterName}</span>
+                                                                <span className={`text-[11px] font-black min-w-[20px] text-right ${rep.score >= 0 ? 'text-blue-400' : 'text-red-400'}`}>
+                                                                    {rep.score > 0 ? `+${rep.score}` : rep.score}
+                                                                </span>
+                                                            </div>
+                                                            <div className="relative h-2 bg-gray-800 rounded-full overflow-hidden border border-white/5 shadow-inner">
+                                                                <div className="absolute inset-y-0 left-1/2 w-px bg-white/10 z-10"></div>
+                                                                <div 
+                                                                    className={`absolute inset-y-0 transition-all duration-1000 ease-out shadow-[0_0_10px_rgba(59,130,246,0.3)] ${rep.score >= 0 ? 'bg-gradient-to-r from-blue-600 to-blue-400 left-1/2 rounded-r-full' : 'bg-gradient-to-l from-red-600 to-red-400 right-1/2 rounded-l-full'}`} 
+                                                                    style={{ width: `${Math.min(Math.abs(rep.score), 50)}%` }} 
+                                                                />
+                                                            </div>
+                                                        </div>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        ))
+                                    )}
+                                </div>
+                            </div>
+
+                            {/* Session Notes */}
+                            <div className="lg:col-span-2 space-y-6 pt-4">
+                                <div className="flex items-center justify-between border-b border-white/5 pb-2">
+                                    <h3 className="text-lg font-black text-purple-400 flex items-center gap-2 uppercase tracking-widest">
+                                        <span className="text-xl">📝</span> Seans Özetleri & Notlar
+                                    </h3>
+                                    <span className="text-[10px] font-black text-gray-500 uppercase tracking-widest bg-white/5 px-3 py-1 rounded-full border border-white/5">{sessionNotes.length} GİRDİ</span>
+                                </div>
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    {sessionNotes.length === 0 ? (
+                                        <div className="col-span-full bg-white/5 backdrop-blur-md border border-white/5 rounded-2xl p-16 text-center group">
+                                            <div className="w-16 h-16 bg-gray-900/40 rounded-full flex items-center justify-center mx-auto mb-4 border border-white/5 group-hover:scale-110 transition-transform duration-500">
+                                                <span className="text-2xl grayscale opacity-30">📝</span>
+                                            </div>
+                                            <p className="text-gray-500 italic font-medium">Henüz bir not paylaşılmadı.</p>
+                                        </div>
+                                    ) : (
+                                        sessionNotes.map((n: any) => (
+                                            <div key={n._id} className="group/note relative bg-white/5 backdrop-blur-md border border-white/5 rounded-2xl p-6 hover:border-purple-500/30 transition-all duration-300 shadow-xl overflow-hidden">
+                                                <div className="absolute top-0 right-0 p-8 bg-purple-500/5 blur-[50px] rounded-full -mr-16 -mt-16 group-hover/note:bg-purple-500/10 transition-colors"></div>
+                                                <div className="relative">
+                                                    <div className="flex justify-between items-center mb-4 border-b border-white/5 pb-3">
+                                                        <div className="flex flex-col">
+                                                            <span className="text-[10px] text-purple-400 font-black uppercase tracking-widest">{n.authorName}</span>
+                                                            <span className="text-[9px] text-gray-500 font-bold">{new Date(n.createdAt).toLocaleDateString()}</span>
+                                                        </div>
+                                                        <span className="text-lg grayscale opacity-30 group-hover/note:grayscale-0 group-hover/note:opacity-100 transition-all duration-500">✍️</span>
+                                                    </div>
+                                                    <p className="text-gray-300 text-xs leading-relaxed whitespace-pre-wrap flex-1 font-medium opacity-80 group-hover/note:opacity-100 transition-opacity">{n.content}</p>
+                                                </div>
+                                            </div>
+                                        ))
+                                    )}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )}
+
                 {/* ══════════ TAB: PARTY ══════════ */}
                 {activeTab === "party" && (
                     <div className="pb-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -3487,7 +3782,6 @@ export default function PlayerSheet() {
                                     <button onClick={() => setHitDiceToSpend(Math.min(level - hitDiceUsed, hitDiceToSpend + 1))} className="w-10 h-10 rounded bg-gray-700 hover:bg-gray-600 font-black text-xl text-white flex items-center justify-center">+</button>
                                 </div>
                                 {(() => {
-                                    const mcs = character.multiclasses || [];
                                     const mainLv = character.level - mcs.reduce((acc: number, mc: any) => acc + (mc.level || 1), 0);
                                     const diceMap = new Map<string, number>();
                                     const addDice = (hd: string, lv: number) => diceMap.set(hd, (diceMap.get(hd) || 0) + lv);
@@ -4124,6 +4418,24 @@ export default function PlayerSheet() {
                                         />
                                     )}
 
+                                    {/* Fog of War Overlays (Player View) */}
+                                    {(fogOfWar as string[]).map(coord => {
+                                        const [gx, gy] = coord.split(',').map(Number);
+                                        return (
+                                            <div 
+                                                key={coord}
+                                                className="absolute bg-gray-950 transition-opacity duration-300"
+                                                style={{
+                                                    left: gx * mapData.gridSize,
+                                                    top: gy * mapData.gridSize,
+                                                    width: mapData.gridSize,
+                                                    height: mapData.gridSize,
+                                                    zIndex: 15
+                                                }}
+                                            />
+                                        );
+                                    })}
+
                                     {/* Tokens */}
                                     {mapData.tokens.map((token: any) => (
                                         <div
@@ -4211,6 +4523,192 @@ export default function PlayerSheet() {
                     </div>
                 )
             }
-        </div >
+            {/* ── SPELL SELECTION MODAL ── */}
+            {showSpellPicker && (
+                <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[110] flex items-center justify-center p-4 transition-all animate-fade-in" onClick={() => { setShowSpellPicker(false); setSpellSearch(""); setSpellLevelFilter("all"); setSpellSchoolFilter("all"); setSpellTypeFilter("all"); }}>
+                    <div className="bg-gray-900 border border-purple-500/30 rounded-3xl w-full max-w-5xl h-[90vh] overflow-hidden flex flex-col shadow-[0_0_50px_rgba(168,85,247,0.15)] animate-in zoom-in-95 duration-200" onClick={e => e.stopPropagation()}>
+                        <div className="p-6 border-b border-purple-500/20 bg-gradient-to-r from-purple-900/40 via-blue-900/30 to-purple-900/40 flex flex-col gap-4">
+                            <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+                                <div className="flex items-center gap-4">
+                                    <div className="w-12 h-12 bg-purple-600 rounded-2xl flex items-center justify-center text-2xl shadow-lg shadow-purple-600/20">✨</div>
+                                    <div>
+                                        <h2 className="text-2xl font-black text-white uppercase tracking-wider leading-none">Manage Spells</h2>
+                                        <p className="text-purple-400 text-[10px] font-bold uppercase tracking-[0.2em] mt-1.5 opacity-80">Sync spells for all your classes</p>
+                                    </div>
+                                </div>
+                                
+                                <div className="flex flex-1 max-w-2xl w-full gap-2">
+                                    <div className="relative flex-1 group">
+                                        <span className="absolute left-4 top-1/2 -translate-y-1/2 text-purple-400 group-focus-within:text-purple-300 transition-colors">🔍</span>
+                                        <input 
+                                            type="text" 
+                                            placeholder="Büyü ara..." 
+                                            value={spellSearch}
+                                            onChange={(e) => setSpellSearch(e.target.value)}
+                                            className="w-full bg-gray-950/50 border border-purple-500/20 focus:border-purple-500/60 rounded-2xl py-3 pl-12 pr-4 text-sm text-white placeholder-purple-900/50 font-bold outline-none transition-all focus:bg-gray-950"
+                                        />
+                                    </div>
+                                    <select 
+                                        className="bg-gray-950/50 border border-purple-500/20 focus:border-purple-500/60 rounded-2xl px-4 py-3 text-sm text-purple-300 font-bold outline-none transition-all cursor-pointer hover:bg-gray-950"
+                                        value={spellLevelFilter}
+                                        onChange={(e) => setSpellLevelFilter(e.target.value)}
+                                    >
+                                        <option value="all">Tüm Seviyeler</option>
+                                        <option value="0">Cantrips</option>
+                                        <option value="1">Level 1</option>
+                                        <option value="2">Level 2</option>
+                                        <option value="3">Level 3</option>
+                                        <option value="4">Level 4</option>
+                                        <option value="5">Level 5</option>
+                                        <option value="6">Level 6</option>
+                                        <option value="7">Level 7</option>
+                                        <option value="8">Level 8</option>
+                                        <option value="9">Level 9</option>
+                                    </select>
+                                    <select 
+                                        className="bg-gray-950/50 border border-purple-500/20 focus:border-purple-500/60 rounded-2xl px-4 py-3 text-sm text-purple-300 font-bold outline-none transition-all cursor-pointer hover:bg-gray-950"
+                                        value={spellSchoolFilter}
+                                        onChange={(e) => setSpellSchoolFilter(e.target.value)}
+                                    >
+                                        {SCHOOLS.map(s => <option key={s} value={s}>{s === "all" ? "Okul: Hepsi" : s.charAt(0).toUpperCase() + s.slice(1)}</option>)}
+                                    </select>
+                                </div>
+
+                                <button onClick={() => { setShowSpellPicker(false); setSpellSearch(""); setSpellLevelFilter("all"); setSpellSchoolFilter("all"); setSpellTypeFilter("all"); }} className="w-10 h-10 rounded-xl bg-gray-800 hover:bg-red-600/20 hover:text-red-400 text-gray-400 flex items-center justify-center transition-all border border-gray-700 hover:border-red-500/50">✕</button>
+                            </div>
+
+                            <div className="flex flex-wrap gap-2 w-full max-w-2xl px-4 py-2 bg-black/20 rounded-2xl border border-white/5">
+                                <span className="text-[9px] text-purple-500 font-black uppercase tracking-widest self-center mr-2">Categories:</span>
+                                {SPELL_TYPES.map(type => (
+                                    <button
+                                        key={type}
+                                        onClick={() => setSpellTypeFilter(type)}
+                                        className={`px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest transition-all border ${spellTypeFilter === type
+                                            ? 'bg-purple-600 text-white border-purple-400 shadow-[0_0_15px_rgba(168,85,247,0.3)]'
+                                            : 'bg-gray-800/50 text-gray-400 border-gray-700/50 hover:border-purple-500/50'
+                                            }`}
+                                    >
+                                        {type === 'all' ? 'HEPSİ' : type}
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+                        
+                        <div className="flex-1 overflow-auto p-8 space-y-8 bg-gray-950/20 custom-scrollbar">
+                            {(() => {
+                                if (!character) return null;
+                                const charClasses = [
+                                    character.classRef?.name,
+                                    ...(character.multiclasses || []).map((mc: any) => mc.className)
+                                ].filter(Boolean);
+                                
+                                const filteredByClass = allSpells.filter(sp => {
+                                    if (!sp.classes || !Array.isArray(sp.classes)) return false;
+                                    const normalizedCharClasses = charClasses.map(c => String(c).toLowerCase());
+                                    return sp.classes.some((c: string) => normalizedCharClasses.includes(c.toLowerCase()));
+                                });
+
+                                const filteredBySearch = filteredByClass.filter(sp => {
+                                    const nameMatch = sp.name.toLowerCase().includes(spellSearch.toLowerCase());
+                                    const trMatch = (sp.name_tr || "").toLowerCase().includes(spellSearch.toLowerCase());
+                                    const levelMatch = spellLevelFilter === "all" || String(sp.level_int ?? 0) === spellLevelFilter;
+                                    const matchSchool = spellSchoolFilter === "all" || (sp.school || "").toLowerCase() === spellSchoolFilter.toLowerCase();
+                                    const tags = getSpellTags(sp);
+                                    const matchType = spellTypeFilter === "all" || tags.includes(spellTypeFilter);
+                                    return (nameMatch || trMatch) && levelMatch && matchSchool && matchType;
+                                });
+                                
+                                const grouped: Record<string, any[]> = {};
+                                const levels = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+                                levels.forEach(lv => grouped[lv] = []);
+                                
+                                filteredBySearch.forEach(sp => {
+                                    const lv = sp.level_int ?? 0;
+                                    if (grouped[lv]) grouped[lv].push(sp);
+                                });
+                                
+                                let hasResults = false;
+                                const content = levels.map(lv => {
+                                    if (grouped[lv].length === 0) return null;
+                                    hasResults = true;
+                                    return (
+                                        <div key={lv} className="space-y-4">
+                                            <div className="flex items-center gap-4">
+                                                <h3 className="text-orange-500 font-black text-[10px] uppercase tracking-[0.3em] whitespace-nowrap">
+                                                    {lv === 0 ? "Cantrips" : `Level ${lv} Spells`}
+                                                </h3>
+                                                <div className="h-px bg-gradient-to-r from-orange-500/30 to-transparent flex-1"></div>
+                                            </div>
+                                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
+                                                {grouped[lv].sort((a,b) => a.name.localeCompare(b.name)).map((sp: any) => {
+                                                    const isKnown = (character.spells || []).includes(sp.name);
+                                                    return (
+                                                        <button
+                                                            key={sp._id || sp.name}
+                                                            onClick={() => toggleSpell(sp.name)}
+                                                            className={`p-4 rounded-2xl border text-left transition-all duration-300 group relative overflow-hidden ${
+                                                                isKnown 
+                                                                ? 'bg-purple-600/10 border-purple-500 shadow-[0_0_20px_rgba(168,85,247,0.1)]' 
+                                                                : 'bg-gray-800/20 border-gray-700/50 hover:bg-gray-800 hover:border-purple-500/40 hover:scale-[1.02]'
+                                                            }`}
+                                                        >
+                                                            {isKnown && <div className="absolute top-0 right-0 w-16 h-16 bg-purple-500 opacity-5 -mr-8 -mt-8 rotate-45"></div>}
+                                                            <div className="flex items-center justify-between gap-3 relative z-10">
+                                                                <div className="flex flex-col min-w-0">
+                                                                    <span className={`text-xs font-black uppercase tracking-tight truncate ${isKnown ? 'text-purple-300' : 'text-gray-300 group-hover:text-white'}`}>
+                                                                        {sp.name_tr || sp.name}
+                                                                    </span>
+                                                                    {sp.name_tr && <span className="text-[10px] text-gray-500 font-bold truncate opacity-60 italic">{sp.name}</span>}
+                                                                </div>
+                                                                {isKnown ? (
+                                                                    <div className="shrink-0 w-6 h-6 rounded-full bg-purple-500 flex items-center justify-center text-white text-xs shadow-lg shadow-purple-500/40">✓</div>
+                                                                ) : (
+                                                                    <div className="shrink-0 w-6 h-6 rounded-full border-2 border-gray-700 flex items-center justify-center text-gray-500 text-xs transition-colors group-hover:border-purple-500 group-hover:text-purple-400">+</div>
+                                                                )}
+                                                            </div>
+                                                        </button>
+                                                    );
+                                                })}
+                                            </div>
+                                        </div>
+                                    );
+                                });
+
+                                if (!hasResults) {
+                                    return (
+                                        <div className="h-full flex flex-col items-center justify-center py-20 opacity-30">
+                                            <div className="text-8xl mb-6">🔮</div>
+                                            <p className="text-xl font-black uppercase tracking-widest text-center">Büyü bulunamadı</p>
+                                            <p className="text-xs text-gray-400 mt-2 font-bold uppercase">Arama terimini veya filtreyi değiştirin</p>
+                                        </div>
+                                    );
+                                }
+                                return content;
+                            })()}
+                        </div>
+                        
+                        <div className="p-8 border-t border-white/5 bg-gray-950 flex flex-col sm:flex-row justify-between items-center gap-6">
+                            <div className="flex items-center gap-4">
+                                <div className="flex flex-col">
+                                    <span className="text-[10px] text-gray-500 font-black uppercase tracking-widest opacity-60">Library Size</span>
+                                    <span className="text-sm font-black text-purple-400">{allSpells.length} Spells</span>
+                                </div>
+                                <div className="w-px h-8 bg-gray-800"></div>
+                                <div className="flex flex-col">
+                                    <span className="text-[10px] text-gray-500 font-black uppercase tracking-widest opacity-60">Selected</span>
+                                    <span className="text-sm font-black text-green-400">{character?.spells?.length || 0} Known</span>
+                                </div>
+                            </div>
+                            <button 
+                                onClick={() => { setShowSpellPicker(false); setSpellSearch(""); setSpellLevelFilter("all"); setSpellSchoolFilter("all"); setSpellTypeFilter("all"); }} 
+                                className="px-12 py-4 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 text-white text-xs font-black uppercase tracking-[0.2em] rounded-2xl transition-all shadow-xl shadow-purple-900/40 hover:scale-[1.05] active:scale-95"
+                            >
+                                Done & Close
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
+        </div>
     );
 }

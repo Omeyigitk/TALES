@@ -1,0 +1,19 @@
+﻿DB'deki tum class degerleri: [
+  '',          'Anti-Paladin',
+  'Artificer', 'Bard',
+  'Cleric',    'Druid',
+  'Herald',    'Paladin',
+  'Ranger',    'Ritual Caster',
+  'Sorcerer',  'Sorceror',
+  'Warlock',   'Wizard'
+]
+
+--- ISTATISTIK ---
+Toplam spell: 1124
+classes field yok: 0
+classes bos array: 0
+Wizard (toplam): 776
+Wizard (level<=1): 166
+Wizard cantrip (level 0): 49
+
+Ornek Wizard Lv1 spell: Adjust Position | classes: [ 'Bard', 'Cleric', 'Warlock', 'Wizard' ]

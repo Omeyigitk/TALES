@@ -35,6 +35,9 @@ const User = require('./models/User');
 const Feat = require('./models/Feat');
 const Whisper = require('./models/Whisper');
 const DiceRoll = require('./models/DiceRoll');
+const Quest = require('./models/Quest');
+const SessionNote = require('./models/SessionNote');
+const Faction = require('./models/Faction');
 
 const app = express();
 app.use(cors({
@@ -83,6 +86,84 @@ const authenticate = (req, res, next) => {
     next();
   });
 };
+
+// ---- NEW FEATURES API ROUTES ----
+
+// Quest Routes
+app.get('/api/quests/:campaignId', authenticate, async (req, res) => {
+  try {
+    const quests = await Quest.find({ campaignId: req.params.campaignId });
+    res.json(quests);
+  } catch (err) { res.status(500).json({ error: err.message }); }
+});
+
+app.post('/api/quests', authenticate, async (req, res) => {
+  try {
+    const quest = new Quest(req.body);
+    await quest.save();
+    res.status(201).json(quest);
+  } catch (err) { res.status(500).json({ error: err.message }); }
+});
+
+app.put('/api/quests/:id', authenticate, async (req, res) => {
+  try {
+    const quest = await Quest.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    res.json(quest);
+  } catch (err) { res.status(500).json({ error: err.message }); }
+});
+
+app.delete('/api/quests/:id', authenticate, async (req, res) => {
+  try {
+    await Quest.findByIdAndDelete(req.params.id);
+    res.json({ message: 'Görev silindi' });
+  } catch (err) { res.status(500).json({ error: err.message }); }
+});
+
+// Session Note Routes
+app.get('/api/session-notes/:campaignId', authenticate, async (req, res) => {
+  try {
+    const notes = await SessionNote.find({ campaignId: req.params.campaignId }).sort({ createdAt: -1 });
+    res.json(notes);
+  } catch (err) { res.status(500).json({ error: err.message }); }
+});
+
+app.post('/api/session-notes', authenticate, async (req, res) => {
+  try {
+    const note = new SessionNote(req.body);
+    await note.save();
+    res.status(201).json(note);
+  } catch (err) { res.status(500).json({ error: err.message }); }
+});
+
+// Faction Routes
+app.get('/api/factions/:campaignId', authenticate, async (req, res) => {
+  try {
+    const factions = await Faction.find({ campaignId: req.params.campaignId });
+    res.json(factions);
+  } catch (err) { res.status(500).json({ error: err.message }); }
+});
+
+app.post('/api/factions', authenticate, async (req, res) => {
+  try {
+    const faction = new Faction(req.body);
+    await faction.save();
+    res.status(201).json(faction);
+  } catch (err) { res.status(500).json({ error: err.message }); }
+});
+
+app.put('/api/factions/:id', authenticate, async (req, res) => {
+  try {
+    const faction = await Faction.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    res.json(faction);
+  } catch (err) { res.status(500).json({ error: err.message }); }
+});
+
+app.delete('/api/factions/:id', authenticate, async (req, res) => {
+  try {
+    await Faction.findByIdAndDelete(req.params.id);
+    res.json({ message: 'Fraksiyon silindi' });
+  } catch (err) { res.status(500).json({ error: err.message }); }
+});
 
 // ---- AUTH ENDPOINT'LERI ----
 
@@ -500,7 +581,8 @@ app.get('/api/spells', async (req, res) => {
   try {
     const query = {};
     if (req.query.class) {
-      query.classes = req.query.class; // MongoDB array contains match
+      // Case-insensitive class search
+      query.classes = { $regex: new RegExp(`^${req.query.class}$`, 'i') };
     }
     if (req.query.max_level) {
       query.level_int = { $lte: parseInt(req.query.max_level) };
@@ -897,7 +979,26 @@ io.on('connection', (socket) => {
         socket.emit('map_updated', campaign.mapData);
       }
 
-      // Send initial party stats
+      const diceHistory = await DiceRoll.find({ campaignId }).sort({ createdAt: -1 }).limit(30);
+      socket.emit('dice_history', diceHistory.reverse());
+
+      // Send Party Gold
+      socket.emit('party_gold_updated', campaign.partyGold || 0);
+
+      // Send Fog of War
+      socket.emit('fog_updated', campaign.fogOfWar || []);
+
+      // Send initial data for new features
+      const quests = await Quest.find({ campaignId });
+      socket.emit('quests_sync', quests);
+
+      const factions = await Faction.find({ campaignId });
+      socket.emit('factions_sync', factions);
+
+      const sessionNotes = await SessionNote.find({ campaignId }).sort({ createdAt: -1 });
+      socket.emit('session_notes_sync', sessionNotes);
+
+      // Add inspiration to party sync
       const characters = await Character.find({ campaignId, isNpc: false });
       const statsMap = {};
       characters.forEach(c => {
@@ -907,14 +1008,12 @@ io.on('connection', (socket) => {
           subclass: c.subclass,
           currentHp: c.currentHp,
           maxHp: c.maxHp,
-          conditions: c.conditions || []
+          conditions: c.conditions || [],
+          inspiration: c.inspiration || false,
+          spellSlotsUsed: c.spellSlotsUsed || {}
         };
       });
       socket.emit('party_sync', statsMap);
-
-      // Send dice history
-      const diceHistory = await DiceRoll.find({ campaignId }).sort({ createdAt: -1 }).limit(30);
-      socket.emit('dice_history', diceHistory.reverse());
 
       // Send whisper history
       const userCharacter = await Character.findOne({ campaignId, userId: socket.user.id });
@@ -1044,6 +1143,34 @@ io.on('connection', (socket) => {
     } catch (err) {
       console.error(err);
     }
+  });
+
+  socket.on('update_party_gold', async ({ campaignId, gold }) => {
+    try {
+      await Campaign.findByIdAndUpdate(campaignId, { partyGold: gold });
+      io.to(campaignId).emit('party_gold_updated', gold);
+    } catch (err) { console.error(err); }
+  });
+
+  socket.on('update_fog', async ({ campaignId, fogOfWar }) => {
+    try {
+      await Campaign.findByIdAndUpdate(campaignId, { fogOfWar });
+      io.to(campaignId).emit('fog_updated', fogOfWar);
+    } catch (err) { console.error(err); }
+  });
+
+  socket.on('toggle_inspiration', async ({ campaignId, characterId, value }) => {
+    try {
+      const updatedChar = await Character.findByIdAndUpdate(characterId, { inspiration: value }, { new: true });
+      if (updatedChar) {
+        io.to(campaignId).emit('character_stat_updated', {
+          characterId,
+          name: updatedChar.name,
+          stat: 'inspiration',
+          value
+        });
+      }
+    } catch (err) { console.error(err); }
   });
 
   socket.on('move_token', ({ campaignId, tokenId, x, y }) => {

@@ -74,6 +74,7 @@ const getSpellTags = (spell: any) => {
 
     // Damage
     if (desc.includes("damage") || desc.includes("hasar") || desc.includes("hit") || desc.includes("attack") ||
+        desc.includes("vuruş") || desc.includes("darbe") || desc.includes("patlama") ||
         /\d+d\d+/.test(desc) || school === "evocation") {
         tags.push("Damage");
     }
@@ -82,25 +83,33 @@ const getSpellTags = (spell: any) => {
         desc.includes("paralyzed") || desc.includes("stunned") || desc.includes("incapacitated") ||
         desc.includes("prone") || desc.includes("blinded") || desc.includes("deafened") ||
         desc.includes("difficult terrain") || desc.includes("slow") ||
-        desc.includes("korkmuş") || desc.includes("büyülenmiş") || desc.includes("engellenmiş")) {
+        desc.includes("korkmuş") || desc.includes("büyülenmiş") || desc.includes("engellenmiş") ||
+        desc.includes("sersemlemiş") || desc.includes("kör") || desc.includes("hareket edemez") ||
+        desc.includes("disadvantage") || desc.includes("dezavantaj")) {
         tags.push("Control");
     }
     // Support
     if (desc.includes("heal") || desc.includes("restore") || desc.includes("temporary hp") ||
         desc.includes("bonus") || desc.includes("advantage") || desc.includes("bless") ||
-        desc.includes("iyileştir") || desc.includes("can ver") || desc.includes("avantaj")) {
+        desc.includes("iyileştir") || desc.includes("can ver") || desc.includes("avantaj") ||
+        desc.includes("ekle") || desc.includes("zar") || desc.includes("check") || 
+        desc.includes("kurtarma") || desc.includes("atış") || desc.includes("destek")) {
         tags.push("Support");
     }
     // Defense
     if (desc.includes("ac ") || desc.includes("shield") || desc.includes("resistance") ||
         desc.includes("immune") || desc.includes("absorb") || desc.includes("kalkan") ||
-        desc.includes("direnç") || desc.includes("bağışıklık") || school === "abjuration") {
+        desc.includes("direnç") || desc.includes("bağışıklık") || desc.includes("zırh") || 
+        school === "abjuration") {
         tags.push("Defense");
     }
     // Utility
     if (desc.includes("detect") || desc.includes("identify") || desc.includes("teleport") ||
         desc.includes("create") || desc.includes("scry") || desc.includes("invisible") ||
-        desc.includes("fly") || desc.includes("breathe") || school === "divination" || school === "transmutation") {
+        desc.includes("fly") || desc.includes("breathe") || desc.includes("bul") || 
+        desc.includes("tanı") || desc.includes("ışınlan") || desc.includes("yarat") || 
+        desc.includes("görünmez") || desc.includes("uç") || desc.includes("nefes") || 
+        desc.includes("okuma") || school === "divination" || school === "transmutation") {
         tags.push("Utility");
     }
 
@@ -1750,7 +1759,7 @@ export default function CharacterCreator() {
 
                     const filterSpell = (spell: any) => {
                         const matchSearch = !spellSearch || spell.name.toLowerCase().includes(spellSearch.toLowerCase());
-                        const matchSchool = spellSchoolFilter === "all" || spell.school === spellSchoolFilter;
+                        const matchSchool = spellSchoolFilter === "all" || (spell.school || "").toLowerCase() === spellSchoolFilter.toLowerCase();
                         const tags = getSpellTags(spell);
                         const matchType = spellTypeFilter === "all" || tags.includes(spellTypeFilter);
                         return matchSearch && matchSchool && matchType;

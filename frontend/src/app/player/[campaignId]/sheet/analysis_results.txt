@@ -1,0 +1,30 @@
+Total Lines: 4646
+Final brace balance: 0
+
+Target Declarations found:
+Line 252: const stats = character?.stats || {};
+Line 253: const level = character?.level || 1;
+Line 254: const prof = character ? profBonus(level) : 2;
+Line 256: const clsName = cls; // Alias for consistency
+Line 257: const mcs = character?.multiclasses || [];
+Line 266: const canCast = isSpellcaster(clsName) || mcs.some((mc: any) => isSpellcaster(mc.className));
+Line 276: const getEffectiveScore = (statName: string, baseValue: number) => {
+Line 312: const mod = (v: number, statName?: string) => {
+Line 318: const extractDice = (dmgStr: string) => {
+Line 325: const mods = {
+Line 334: const baseAttacks = character ? (CLASS_ATTACKS[cls] || []).filter((atk: any) => level >= (atk.level || 1)) : [];
+Line 335: const resources = character ? (CLASS_RESOURCES[cls] || []).concat(customResources) : [];
+Line 577: const clsName = char.classRef?.name || '';
+Line 578: const resources = CLASS_RESOURCES[clsName] || [];
+Line 611: const clsName = char.classRef?.name || '';
+Line 638: const clsName = char.classRef?.name || '';
+Line 639: const resources = CLASS_RESOURCES[clsName] || [];
+Line 856: const baseAttacks = character ? [...(CLASS_ATTACKS[clsName] || (mcs.length === 0 ? CLASS_ATTACKS['Fighter'] : []))] : [];
+Line 857: const resources = character ? [...(CLASS_RESOURCES[clsName] || [])] : [];
+Line 964: const clsName = cls.name as string;
+Line 1129: const mcs: any[] = char.multiclasses || [];
+Line 1251: const mcs = character.multiclasses || [];
+Line 1482: const clsName = character.classRef?.name || '';
+Line 1803: const mcs = character.multiclasses || [];
+Line 2134: const mcs = character.multiclasses || [];
+Line 3745: const mcs = character.multiclasses || [];

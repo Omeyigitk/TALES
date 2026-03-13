@@ -28,6 +28,11 @@ export function useCampaignSocket(campaignId, role, userId, token) {
     const [whisperHistory, setWhisperHistory] = useState([]);
     const [dmLevelPermission, setDmLevelPermission] = useState(false);
     const [mapData, setMapData] = useState({ bgUrl: '', gridSize: 50, showGrid: true, tokens: [] });
+    const [partyGold, setPartyGold] = useState(0);
+    const [fogOfWar, setFogOfWar] = useState([]);
+    const [quests, setQuests] = useState([]);
+    const [factions, setFactions] = useState([]);
+    const [sessionNotes, setSessionNotes] = useState([]);
     /** @type {[import('socket.io-client').Socket | null, Function]} */
     const [socket, setSocket] = useState(/** @type {any} */(null));
 
@@ -114,6 +119,12 @@ export function useCampaignSocket(campaignId, role, userId, token) {
             });
         });
 
+        s.on("party_gold_updated", (gold) => setPartyGold(gold));
+        s.on("fog_updated", (fog) => setFogOfWar(fog || []));
+        s.on("quests_sync", (data) => setQuests(data || []));
+        s.on("factions_sync", (data) => setFactions(data || []));
+        s.on("session_notes_sync", (data) => setSessionNotes(data || []));
+
         return () => {
             s.off("character_stat_updated");
             s.off("encounter_updated");
@@ -126,10 +137,19 @@ export function useCampaignSocket(campaignId, role, userId, token) {
             s.off("token_moved");
             s.off("party_sync");
             s.off("dice_history");
+            s.off("party_gold_updated");
+            s.off("fog_updated");
+            s.off("quests_sync");
+            s.off("factions_sync");
+            s.off("session_notes_sync");
             s.disconnect();
             _socket = null; // sonraki mount için sıfırla
         };
     }, [campaignId, role, userId, token]);
 
-    return { encounterStatus, partyStats, diceLogs, whisperData, whisperHistory, socket, dmLevelPermission, mapData };
+    return { 
+        encounterStatus, partyStats, diceLogs, whisperData, whisperHistory, 
+        socket, dmLevelPermission, mapData, partyGold, fogOfWar, 
+        quests, factions, sessionNotes 
+    };
 }

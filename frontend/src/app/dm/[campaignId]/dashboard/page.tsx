@@ -9,6 +9,14 @@ import { useRouter } from "next/navigation";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
 
+const MAP_TEMPLATES = [
+    { name: 'Seç...', url: '' },
+    { name: 'Taverna', url: 'https://images.squarespace-cdn.com/content/v1/593e9232c534a5697e06a378/1566495638202-VUPY5M056T298C7SCSG5/Tavern_Grid.jpg' },
+    { name: 'Zindan Koridoru', url: 'https://i.pinimg.com/originals/91/92/72/919272338abd8e4ba7dbd5a08316279f.jpg' },
+    { name: 'Orman Yolu', url: 'https://i.pinimg.com/736x/8f/30/1c/8f301cc9388f8d6614144463690d5656.jpg' },
+    { name: 'Şehir Meydanı', url: 'https://2minutetabletop.com/wp-content/uploads/2021/05/Town-Square-Night-No-Props-44x32-Grid.jpg' },
+];
+
 export default function DMDashboard() {
     const { campaignId } = useParams();
     const { user, token, loading: authLoading } = useAuth();
@@ -24,7 +32,10 @@ export default function DMDashboard() {
     }, [user, authLoading]);
 
     // Odaya DM rolüyle katıl
-    const { partyStats, diceLogs, socket, dmLevelPermission, whisperData, whisperHistory } = useCampaignSocket(campaignId, 'DM', 'DM', token);
+    const { 
+        partyStats, diceLogs, socket, dmLevelPermission, whisperData, whisperHistory,
+        partyGold, fogOfWar, quests, factions, sessionNotes 
+    } = useCampaignSocket(campaignId, 'DM', 'DM', token);
 
     // Toast Notification System
     const [toast, setToast] = useState<{ show: boolean, title: string, message: string, color: string }>({ show: false, title: '', message: '', color: '' });
@@ -102,6 +113,11 @@ export default function DMDashboard() {
 
     // NPC Sheet View State
     const [viewingNpcSheetData, setViewingNpcSheetData] = useState<any>(null);
+
+    // New Features Modals
+    const [isQuestMenuOpen, setIsQuestMenuOpen] = useState(false);
+    const [isFactionMenuOpen, setIsFactionMenuOpen] = useState(false);
+    const [isSessionNoteMenuOpen, setIsSessionNoteMenuOpen] = useState(false);
 
     // Grid Map States
     const [isMapOpen, setIsMapOpen] = useState(false);
@@ -1902,21 +1918,32 @@ export default function DMDashboard() {
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                         {Object.entries(partyStats || {}).map(([charId, stats]: any) => {
                                             if (!stats || typeof stats !== 'object') return null;
+                                            const characterId = stats.characterId || stats.id || charId;
+                                            const charName = stats.name || charId;
                                             return (
-                                                <div key={stats.id || charId} className="bg-gray-800/50 rounded-2xl p-5 border border-gray-700 shadow-xl space-y-4 hover:border-yellow-500/30 transition-all">
+                                                <div key={characterId} className="bg-gray-800/50 rounded-2xl p-5 border border-gray-700 shadow-xl space-y-4 hover:border-yellow-500/30 transition-all">
                                                     <div className="flex justify-between items-start">
                                                         <div>
-                                                            <div className="font-black text-white text-xl">{charId}</div>
+                                                            <div className="font-black text-white text-xl">{charName}</div>
                                                             <div className="text-xs text-gray-400 mt-1 uppercase tracking-widest font-bold">
                                                                 <span className="text-yellow-500">Sviye {stats.level || 1}</span>
                                                                 {stats.subclass && <span className="text-purple-400 ml-2">— {stats.subclass}</span>}
                                                             </div>
                                                         </div>
                                                         <div className="flex space-x-2">
-                                                            <button onClick={() => openEditCharModal(stats.id)} className="bg-gray-700 hover:bg-gray-600 text-white p-2 rounded-xl transition-all shadow-lg" title="Düzenle">⚙️</button>
-                                                            <button onClick={() => { setTargetPetPlayerId(stats.id); setIsPetModalOpen(true); }} className="bg-yellow-600 hover:bg-yellow-500 text-white p-2 rounded-xl transition-all shadow-lg" title="Pet Ver">🐾</button>
+                                                            <button 
+                                                                onClick={() => {
+                                                                    if (socket) socket.emit('toggle_inspiration', { campaignId, characterId: stats.characterId || stats.id, value: !stats.inspiration });
+                                                                }} 
+                                                                className={`p-2 rounded-xl transition-all shadow-lg font-black ${stats.inspiration ? 'bg-yellow-500 text-yellow-950 shadow-yellow-500/50' : 'bg-gray-700 text-gray-400 hover:bg-gray-600'}`}
+                                                                title="Inspiration Ver/Al"
+                                                            >
+                                                                ⚡
+                                                            </button>
+                                                            <button onClick={() => openEditCharModal(stats.characterId || stats.id)} className="bg-gray-700 hover:bg-gray-600 text-white p-2 rounded-xl transition-all shadow-lg" title="Düzenle">⚙️</button>
+                                                            <button onClick={() => { setTargetPetPlayerId(stats.characterId || stats.id); setIsPetModalOpen(true); }} className="bg-yellow-600 hover:bg-yellow-500 text-white p-2 rounded-xl transition-all shadow-lg" title="Pet Ver">🐾</button>
                                                             <button onClick={() => setWhisperPlayerName(charId)} className="bg-purple-600 hover:bg-purple-500 text-white p-2 rounded-xl transition-all shadow-lg" title="Fısılda">💬</button>
-                                                            <button onClick={() => deleteCharacter(stats.id, charId)} className="bg-red-800 hover:bg-red-700 text-white p-2 rounded-xl transition-all shadow-lg" title="Karakteri Sil">🗑️</button>
+                                                            <button onClick={() => deleteCharacter(stats.characterId || stats.id, charId)} className="bg-red-800 hover:bg-red-700 text-white p-2 rounded-xl transition-all shadow-lg" title="Karakteri Sil">🗑️</button>
                                                         </div>
                                                     </div>
 
@@ -1928,12 +1955,27 @@ export default function DMDashboard() {
                                                             </span>
                                                         </div>
                                                         <div className="w-full bg-gray-950 rounded-full h-3 overflow-hidden border border-gray-800 shadow-inner">
-                                                            <div
+                                                        <div
                                                                 className={`h-full rounded-full transition-all duration-500 ${((stats.currentHp || 0) / (stats.maxHp || 1)) > 0.5 ? 'bg-gradient-to-r from-green-600 to-green-400' : ((stats.currentHp || 0) / (stats.maxHp || 1)) > 0.25 ? 'bg-gradient-to-r from-yellow-600 to-yellow-400' : 'bg-gradient-to-r from-red-700 to-red-500 animate-pulse'}`}
                                                                 style={{ width: `${Math.max(0, Math.min(100, ((stats.currentHp || 0) / (stats.maxHp || 1)) * 100))}%` }}
                                                             />
                                                         </div>
                                                     </div>
+
+                                                    {/* Spell Slots Usage */}
+                                                    {stats.spellSlotsUsed && Object.keys(stats.spellSlotsUsed).length > 0 && (
+                                                        <div className="bg-indigo-950/20 p-3 rounded-xl border border-indigo-900/30">
+                                                            <div className="text-[10px] text-indigo-400 font-bold uppercase tracking-widest mb-2">Harcanan Büyü Slotları</div>
+                                                            <div className="flex flex-wrap gap-2">
+                                                                {Object.entries(stats.spellSlotsUsed).map(([level, used]: any) => (
+                                                                    <div key={level} className="flex items-center gap-1.5 bg-indigo-900/40 px-2 py-1 rounded-lg border border-indigo-700/50">
+                                                                        <span className="text-[10px] text-indigo-300 font-bold">{level}. Seviye:</span>
+                                                                        <span className="text-sm font-black text-white">{used}</span>
+                                                                    </div>
+                                                                ))}
+                                                            </div>
+                                                        </div>
+                                                    )}
 
                                                     <div className="flex flex-wrap gap-2 pt-2 border-t border-gray-700/50">
                                                         <select
@@ -1942,7 +1984,7 @@ export default function DMDashboard() {
                                                             className="bg-gray-950 text-gray-400 border border-gray-700 rounded-lg text-xs px-3 py-1.5 outline-none hover:border-yellow-500 transition-all cursor-pointer"
                                                         >
                                                             <option value="" disabled>+ Durum Ekle</option>
-                                                            {['Kör', 'Büyülenmiş', 'Sağır', 'Korkmuş', 'Görünmez', 'Yerde', 'Zehirli', 'Baygın', 'Taşlaşmış'].map(c => (
+                                                            {['Kör', 'Büyülenmiş', 'Sağır', 'Korkmuş', 'Görünmez', 'Yerde', 'Zehirli', 'Baygın', 'Taşlaşmış', 'Kısıtlı', 'Paralize', 'Engellenmiş', 'Şaşırmış', 'Bitkinlik 1', 'Bitkinlik 2', 'Bitkinlik 3', 'Bitkinlik 4', 'Bitkinlik 5'].map(c => (
                                                                 <option key={c} value={c}>{c}</option>
                                                             ))}
                                                         </select>
@@ -1964,152 +2006,163 @@ export default function DMDashboard() {
                         </div>
                     )
                 }
-
-                {/* --- TOAST NOTIFICATION --- */}
-                {
-                    toast.show && (
-                        <div className={`fixed bottom-8 right-8 z-[300] p-4 rounded-2xl border-2 shadow-2xl animate-slide-up max-w-sm ${toast.color}`}>
-                            <div className="flex flex-col">
-                                <h4 className="font-black text-lg mb-1">{toast.title}</h4>
-                                <p className="text-sm font-medium opacity-90">{toast.message}</p>
-                            </div>
-                        </div>
-                    )
-                }
                 {/* Grid Map Modalı */}
                 {
                     isMapOpen && (
-                        <div className="fixed inset-0 bg-[#020617]/95 z-[70] flex flex-col p-4 backdrop-blur-xl animate-fade-in overflow-hidden">
+                        <div className="fixed inset-0 bg-[#020617]/98 z-[150] flex flex-col p-6 backdrop-blur-2xl animate-fade-in overflow-hidden">
                             {/* Map Header & Controls */}
-                            <div className="flex flex-col gap-4 mb-6 bg-slate-900/50 p-6 rounded-3xl border border-slate-700/50 shadow-2xl backdrop-blur-md relative overflow-hidden group">
-                                <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 to-purple-500/5 opacity-50"></div>
-
+                            <div className="flex flex-col gap-6 mb-8 bg-slate-900/40 p-8 rounded-[2rem] border border-slate-700/40 shadow-2xl backdrop-blur-xl relative overflow-hidden group">
+                                <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-transparent to-purple-500/10 opacity-30"></div>
+                                
                                 <div className="flex justify-between items-center relative z-10">
-                                    <h2 className="text-3xl font-black text-white flex items-center gap-3 tracking-tighter italic">
-                                        <span className="bg-gradient-to-br from-blue-500 to-indigo-600 w-12 h-12 rounded-xl flex items-center justify-center shadow-lg shadow-blue-900/40 not-italic">🗺️</span>
-                                        Stratejik Harita Paneli
-                                    </h2>
-                                    <div className="flex items-center gap-3">
+                                    <div className="flex items-center gap-4">
+                                        <div className="bg-gradient-to-br from-indigo-500 to-purple-600 w-14 h-14 rounded-2xl flex items-center justify-center shadow-2xl shadow-indigo-900/40 transform group-hover:rotate-6 transition-transform">
+                                            <span className="text-2xl">🗺️</span>
+                                        </div>
+                                        <div>
+                                            <h2 className="text-3xl font-black text-white tracking-tighter uppercase italic">Stratejik Harita Paneli</h2>
+                                            <p className="text-slate-400 text-xs font-bold tracking-widest uppercase mt-0.5">Savaş Alanı ve Görüş Yönetimi</p>
+                                        </div>
+                                    </div>
+                                    <div className="flex items-center gap-4">
+                                        <div className="flex bg-slate-950/50 p-1.5 rounded-2xl border border-slate-800/50 mr-4">
+                                            <button
+                                                onClick={() => {
+                                                    const confirmAll = window.confirm("Tüm haritayı GİZLEMEK istediğine emin misin?");
+                                                    if (!confirmAll) return;
+                                                    
+                                                    // Generate a large grid (e.g., 50x50) to hide everything
+                                                    const fullFog = [];
+                                                    for (let x = 0; x < 50; x++) {
+                                                        for (let y = 0; y < 50; y++) {
+                                                            fullFog.push(`${x},${y}`);
+                                                        }
+                                                    }
+                                                    socket?.emit('update_fog', { campaignId, fogOfWar: fullFog });
+                                                    showToast("Sis Yayılıyor", "Tüm alanlar gizlendi.", "bg-slate-900 border-slate-500 text-white");
+                                                }}
+                                                className="px-4 py-2 text-[10px] font-black uppercase text-slate-400 hover:text-white hover:bg-slate-800 rounded-xl transition-all"
+                                                title="Tüm haritayı sisle kapla"
+                                            >
+                                                🌑 Hepsini Gizle
+                                            </button>
+                                            <button
+                                                onClick={() => {
+                                                    if (window.confirm("Tüm haritayı AÇMAK istediğine emin misin?")) {
+                                                        socket?.emit('update_fog', { campaignId, fogOfWar: [] });
+                                                        showToast("Sis Dağıldı", "Tüm harita oyunculara açıldı.", "bg-blue-900 border-blue-500 text-white");
+                                                    }
+                                                }}
+                                                className="px-4 py-2 text-[10px] font-black uppercase text-slate-400 hover:text-white hover:bg-slate-800 rounded-xl transition-all"
+                                                title="Sisi tamamen kaldır"
+                                            >
+                                                ☀️ Hepsini Aç
+                                            </button>
+                                        </div>
+
                                         <button
                                             onClick={() => {
-                                                const newMap = { ...mapData, tokens: [] };
-                                                setMapData(newMap);
-                                                socket?.emit('update_map', { campaignId, mapData: newMap });
+                                                if (window.confirm("Tüm tokenları haritadan silmek istediğine emin misin?")) {
+                                                    const newMap = { ...mapData, tokens: [] };
+                                                    setMapData(newMap);
+                                                    socket?.emit('update_map', { campaignId, mapData: newMap });
+                                                }
                                             }}
-                                            className="bg-slate-800 hover:bg-red-600/20 text-slate-400 hover:text-red-400 font-bold py-2.5 px-6 rounded-xl transition-all border border-slate-700 hover:border-red-500/50 text-sm uppercase tracking-widest"
+                                            className="bg-slate-800 hover:bg-red-950/40 text-slate-400 hover:text-red-400 font-black py-3 px-6 rounded-2xl transition-all border border-slate-700 hover:border-red-900/50 text-xs uppercase tracking-widest"
                                         >
                                             🧹 Temizle
                                         </button>
                                         <button
                                             onClick={() => setIsMapOpen(false)}
-                                            className="bg-red-600 hover:bg-red-500 text-white w-12 h-12 rounded-xl font-black flex items-center justify-center shadow-lg shadow-red-900/40 transition-all hover:scale-110 active:scale-95"
+                                            className="bg-red-600 hover:bg-red-500 text-white w-14 h-14 rounded-2xl font-black flex items-center justify-center shadow-xl shadow-red-900/40 transition-all hover:scale-105 active:scale-95 group/close"
                                         >
-                                            ✕
+                                            <span className="text-xl group-hover:rotate-180 transition-transform duration-500">✕</span>
                                         </button>
                                     </div>
                                 </div>
 
-                                <div className="flex flex-wrap items-center gap-6 relative z-10 border-t border-slate-800/50 pt-4">
-                                    {/* URL Input */}
-                                    <div className="flex-1 min-w-[300px] relative">
-                                        <input
-                                            type="text"
-                                            placeholder="Harita URL (JPG/PNG)..."
-                                            value={mapData.bgUrl}
-                                            onChange={(e) => {
-                                                const newMap = { ...mapData, bgUrl: e.target.value };
-                                                setMapData(newMap);
-                                                socket?.emit('update_map', { campaignId, mapData: newMap });
-                                            }}
-                                            className="w-full bg-slate-950/80 border border-slate-700 rounded-2xl px-5 py-3 text-sm text-blue-100 outline-none focus:border-blue-500 transition-all focus:ring-4 focus:ring-blue-500/10 placeholder-slate-600 shadow-inner"
-                                        />
-                                        <div className="absolute right-2 top-1/2 -translate-y-1/2">
+                                <div className="flex flex-wrap items-center gap-8 relative z-10 border-t border-slate-800/40 pt-6">
+                                    {/* URL Input Group */}
+                                    <div className="flex-1 min-w-[320px] flex gap-3">
+                                        <div className="relative flex-1">
+                                            <div className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500">🖼️</div>
                                             <input
-                                                type="file"
-                                                accept="image/*"
-                                                id="map-upload-input"
+                                                type="text"
+                                                placeholder="Harita URL (JPG/PNG)..."
+                                                value={mapData.bgUrl}
+                                                onChange={(e) => {
+                                                    const newMap = { ...mapData, bgUrl: e.target.value };
+                                                    setMapData(newMap);
+                                                    socket?.emit('update_map', { campaignId, mapData: newMap });
+                                                }}
+                                                className="w-full bg-slate-950/60 border border-slate-700/50 rounded-2xl pl-12 pr-5 py-4 text-sm text-blue-100 outline-none focus:border-blue-500/50 transition-all focus:ring-4 focus:ring-blue-500/10 placeholder-slate-600 shadow-inner"
+                                            />
+                                        </div>
+                                        <select 
+                                            onChange={(e) => {
+                                                const url = e.target.value;
+                                                if (url) {
+                                                    const newMap = { ...mapData, bgUrl: url };
+                                                    setMapData(newMap);
+                                                    socket?.emit('update_map', { campaignId, mapData: newMap });
+                                                }
+                                            }}
+                                            className="bg-slate-950/60 border border-slate-700/50 rounded-2xl px-4 py-4 text-[10px] text-slate-400 outline-none focus:border-blue-500/50 transition-all font-black uppercase tracking-widest cursor-pointer"
+                                        >
+                                            {MAP_TEMPLATES.map(t => <option key={t.url} value={t.url}>{t.name}</option>)}
+                                        </select>
+                                    </div>
+
+                                    {/* Visual Toggles & Sliders */}
+                                    <div className="flex items-center gap-10">
+                                        <label className="flex items-center gap-4 text-xs font-black text-slate-400 cursor-pointer group/toggle">
+                                            <span className="group-hover/toggle:text-white transition-colors uppercase tracking-widest">Izgara</span>
+                                            <div className={`w-14 h-7 rounded-full p-1 transition-all duration-300 ${mapData.showGrid ? 'bg-indigo-600 shadow-[0_0_20px_rgba(79,70,229,0.4)]' : 'bg-slate-800 border border-slate-700'}`}>
+                                                <div className={`w-5 h-5 bg-white rounded-full shadow-lg transition-transform duration-300 ${mapData.showGrid ? 'translate-x-7' : 'translate-x-0'}`}></div>
+                                            </div>
+                                            <input
+                                                type="checkbox"
                                                 className="hidden"
-                                                onChange={async (e) => {
-                                                    const file = e.target.files?.[0];
-                                                    if (!file) return;
-                                                    const formData = new FormData();
-                                                    formData.append('map', file);
-                                                    try {
-                                                        const res = await axios.post(`${API_URL}/api/campaigns/${campaignId}/map-upload`, formData, {
-                                                            headers: { 'Authorization': `Bearer ${token}`, 'Content-Type': 'multipart/form-data' }
-                                                        });
-                                                        if (res.data.success) {
-                                                            const newMap = { ...mapData, bgUrl: res.data.url };
-                                                            setMapData(newMap);
-                                                            showToast("Harita Yüklendi", "Yeni harita başarıyla yüklendi.", "bg-green-900 border-green-500 text-green-100");
-                                                        }
-                                                    } catch (err) {
-                                                        showToast("Hata", "Harita yüklenemedi.", "bg-red-900 border-red-500 text-red-100");
-                                                    }
+                                                checked={mapData.showGrid}
+                                                onChange={(e) => {
+                                                    const newMap = { ...mapData, showGrid: e.target.checked };
+                                                    setMapData(newMap);
+                                                    socket?.emit('update_map', { campaignId, mapData: newMap });
                                                 }}
                                             />
-                                            <label htmlFor="map-upload-input" className="bg-blue-600 hover:bg-blue-500 text-white text-xs font-black px-4 py-2 rounded-xl cursor-pointer transition-all uppercase tracking-tighter">
-                                                Dosya Yükle
-                                            </label>
-                                        </div>
-                                    </div>
+                                        </label>
 
-                                    {/* Grid Toggle */}
-                                    <label className="flex items-center gap-3 text-sm font-black text-slate-300 cursor-pointer hover:text-white transition-colors">
-                                        <div className={`w-12 h-6 rounded-full p-1 transition-colors duration-300 ${mapData.showGrid ? 'bg-blue-500 shadow-[0_0_15px_rgba(59,130,246,0.3)]' : 'bg-slate-700'}`}>
-                                            <div className={`w-4 h-4 bg-white rounded-full transition-transform duration-300 ${mapData.showGrid ? 'translate-x-6' : 'translate-x-0'}`}></div>
+                                        <div className="flex flex-col gap-2 min-w-[140px]">
+                                            <div className="flex justify-between text-[10px] font-black text-slate-500 uppercase tracking-[0.2em]">
+                                                <span>Grid</span>
+                                                <span className="text-blue-400">%{mapData.gridSize}</span>
+                                            </div>
+                                            <input
+                                                type="range" min="10" max="150" value={mapData.gridSize}
+                                                onChange={(e) => {
+                                                    const newMap = { ...mapData, gridSize: parseInt(e.target.value) };
+                                                    setMapData(newMap);
+                                                    socket?.emit('update_map', { campaignId, mapData: newMap });
+                                                }}
+                                                className="w-full accent-blue-500 h-1 bg-slate-800 rounded-lg appearance-none cursor-pointer"
+                                            />
                                         </div>
-                                        <input
-                                            type="checkbox"
-                                            className="hidden"
-                                            checked={mapData.showGrid}
-                                            onChange={(e) => {
-                                                const newMap = { ...mapData, showGrid: e.target.checked };
-                                                setMapData(newMap);
-                                                socket?.emit('update_map', { campaignId, mapData: newMap });
-                                            }}
-                                        />
-                                        <span>IZGARA</span>
-                                    </label>
 
-                                    {/* Grid Size Slider */}
-                                    <div className="flex flex-col gap-1 min-w-[120px]">
-                                        <div className="flex justify-between text-[10px] font-black text-slate-500 uppercase tracking-widest">
-                                            <span>Izgara Boyutu</span>
-                                            <span className="text-blue-400">{mapData.gridSize}px</span>
+                                        <div className="flex flex-col gap-2 min-w-[140px]">
+                                            <div className="flex justify-between text-[10px] font-black text-slate-500 uppercase tracking-[0.2em]">
+                                                <span>Zoom</span>
+                                                <span className="text-purple-400">%{mapData.mapZoom || 100}</span>
+                                            </div>
+                                            <input
+                                                type="range" min="10" max="300" value={mapData.mapZoom || 100}
+                                                onChange={(e) => {
+                                                    const newMap = { ...mapData, mapZoom: parseInt(e.target.value) };
+                                                    setMapData(newMap);
+                                                    socket?.emit('update_map', { campaignId, mapData: newMap });
+                                                }}
+                                                className="w-full accent-purple-500 h-1 bg-slate-800 rounded-lg appearance-none cursor-pointer"
+                                            />
                                         </div>
-                                        <input
-                                            type="range"
-                                            min="10"
-                                            max="150"
-                                            value={mapData.gridSize}
-                                            onChange={(e) => {
-                                                const newMap = { ...mapData, gridSize: parseInt(e.target.value) };
-                                                setMapData(newMap);
-                                                socket?.emit('update_map', { campaignId, mapData: newMap });
-                                            }}
-                                            className="w-full accent-blue-500 h-1.5 bg-slate-800 rounded-lg"
-                                        />
-                                    </div>
-
-                                    {/* Zoom Slider */}
-                                    <div className="flex flex-col gap-1 min-w-[120px]">
-                                        <div className="flex justify-between text-[10px] font-black text-slate-500 uppercase tracking-widest">
-                                            <span>Harita Ölçeği</span>
-                                            <span className="text-purple-400">%{mapData.mapZoom || 100}</span>
-                                        </div>
-                                        <input
-                                            type="range"
-                                            min="10"
-                                            max="300"
-                                            value={mapData.mapZoom || 100}
-                                            onChange={(e) => {
-                                                const newMap = { ...mapData, mapZoom: parseInt(e.target.value) };
-                                                setMapData(newMap);
-                                                socket?.emit('update_map', { campaignId, mapData: newMap });
-                                            }}
-                                            className="w-full accent-purple-500 h-1.5 bg-slate-800 rounded-lg"
-                                        />
                                     </div>
 
                                     <button
@@ -2117,13 +2170,12 @@ export default function DMDashboard() {
                                             (partyStats ? Object.entries(partyStats) : []).forEach(([id, stats]: [any, any]) => {
                                                 if (!stats || typeof stats !== 'object') return;
                                                 const charName = stats.name || 'Oyuncu';
-                                                // Prevent duplicates by checking name
                                                 if (!(mapData.tokens || []).find(t => t && t.name === charName && t.type === 'player')) {
                                                     addTokenToMap(charName, 'player', '#3b82f6', stats.characterId || id);
                                                 }
                                             });
                                         }}
-                                        className="bg-indigo-600 hover:bg-indigo-500 text-white font-black py-2.5 px-6 rounded-xl shadow-lg shadow-indigo-900/40 transition-all text-xs uppercase tracking-widest"
+                                        className="bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-500 hover:to-indigo-600 text-white font-black py-4 px-8 rounded-[1.25rem] shadow-xl shadow-blue-900/30 transition-all text-xs uppercase tracking-widest active:scale-95"
                                     >
                                         👥 Oyuncuları Getir
                                     </button>
@@ -2133,7 +2185,7 @@ export default function DMDashboard() {
                             {/* Map Content Area */}
                             <div
                                 id="map-container"
-                                className="flex-1 bg-[#020617] rounded-[2.5rem] border-8 border-slate-900 relative overflow-hidden shadow-[inset_0_20px_50px_rgba(0,0,0,0.8)] cursor-grab active:cursor-grabbing"
+                                className="flex-1 bg-[#020617] rounded-[3rem] border-[12px] border-slate-900/80 relative overflow-hidden shadow-[inset_0_40px_100px_rgba(0,0,0,0.9)] cursor-grab active:cursor-grabbing group/map"
                                 onMouseDown={(e) => {
                                     const target = e.target as HTMLElement;
                                     if (target.id === 'map-container' || target.id === 'grid-overlay' || target.id === 'map-img') {
@@ -2149,7 +2201,7 @@ export default function DMDashboard() {
                                 onMouseUp={() => setIsPanning(false)}
                                 onMouseLeave={() => setIsPanning(false)}
                                 onWheel={(e) => {
-                                    const delta = e.deltaY > 0 ? -5 : 5;
+                                    const delta = e.deltaY > 0 ? -10 : 10;
                                     const newZoom = Math.min(Math.max(10, (mapData.mapZoom || 100) + delta), 300);
                                     const newMap = { ...mapData, mapZoom: newZoom };
                                     setMapData(newMap);
@@ -2159,21 +2211,13 @@ export default function DMDashboard() {
                                 onDrop={(e) => {
                                     e.preventDefault();
                                     if (!isDraggingToken) return;
-
                                     const container = document.getElementById('map-container');
                                     if (!container) return;
-
                                     const rect = container.getBoundingClientRect();
                                     const zoom = (mapData.mapZoom || 100) / 100;
-
-                                    // Adjust coordinate for zoom & offset
                                     const x = (e.clientX - rect.left - mapOffset.x) / zoom;
                                     const y = (e.clientY - rect.top - mapOffset.y) / zoom;
-
-                                    const newTokens = (mapData.tokens || []).map(t =>
-                                        t && t.id === isDraggingToken ? { ...t, x, y } : t
-                                    );
-
+                                    const newTokens = (mapData.tokens || []).map(t => t && t.id === isDraggingToken ? { ...t, x, y } : t);
                                     const newMap = { ...mapData, tokens: newTokens };
                                     setMapData(newMap);
                                     socket?.emit('move_token', { campaignId, tokenId: isDraggingToken, x, y });
@@ -2181,8 +2225,13 @@ export default function DMDashboard() {
                                     setIsDraggingToken(null);
                                 }}
                             >
+                                {/* DM Help Hint */}
+                                <div className="absolute top-6 left-1/2 -translate-x-1/2 z-[200] bg-black/60 backdrop-blur-md px-6 py-2 rounded-full border border-white/10 text-[10px] font-black text-slate-400 uppercase tracking-widest opacity-0 group-hover/map:opacity-100 transition-opacity pointer-events-none">
+                                    🐭 Sağ tık: Sisi Kaldır/Ekle | 🖱️ Orta tuş/Sürükle: Kaydır | 🎡 Tekerlek: Zoom
+                                </div>
+
                                 <div
-                                    className="origin-top-left absolute transition-transform duration-75 ease-out"
+                                    className="origin-top-left absolute transition-transform duration-100 ease-out"
                                     style={{
                                         transform: `translate(${mapOffset.x}px, ${mapOffset.y}px) scale(${(mapData.mapZoom || 100) / 100})`,
                                     }}
@@ -2194,7 +2243,7 @@ export default function DMDashboard() {
                                             src={mapData.bgUrl}
                                             alt="Map"
                                             draggable={false}
-                                            className="max-w-none shadow-[0_0_100px_rgba(0,0,0,0.5)] select-none pointer-events-auto"
+                                            className="max-w-none shadow-[0_0_150px_rgba(0,0,0,0.8)] select-none pointer-events-auto rounded-lg"
                                         />
                                     )}
 
@@ -2202,16 +2251,51 @@ export default function DMDashboard() {
                                     {mapData.showGrid && (
                                         <div
                                             id="grid-overlay"
+                                            onContextMenu={(e) => {
+                                                e.preventDefault();
+                                                const target = e.currentTarget;
+                                                const rect = target.getBoundingClientRect();
+                                                const scale = (mapData.mapZoom || 100) / 100;
+                                                const x = (e.clientX - rect.left) / scale;
+                                                const y = (e.clientY - rect.top) / scale;
+                                                const gridX = Math.floor(x / mapData.gridSize);
+                                                const gridY = Math.floor(y / mapData.gridSize);
+                                                const coord = `${gridX},${gridY}`;
+                                                const newFog = (fogOfWar as string[]).includes(coord) 
+                                                    ? (fogOfWar as string[]).filter(c => c !== coord) 
+                                                    : [...(fogOfWar as string[]), coord];
+                                                socket?.emit('update_fog', { campaignId, fogOfWar: newFog });
+                                            }}
                                             className="absolute inset-0 pointer-events-auto"
                                             style={{
-                                                backgroundImage: 'linear-gradient(to right, rgba(148,163,184,0.15) 1px, transparent 1px), linear-gradient(to bottom, rgba(148,163,184,0.15) 1px, transparent 1px)',
+                                                backgroundImage: 'linear-gradient(to right, rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.05) 1px, transparent 1px)',
                                                 backgroundSize: `${mapData.gridSize}px ${mapData.gridSize}px`,
                                                 width: '100%',
                                                 height: '100%',
                                                 left: 0,
                                                 top: 0
                                             }}
-                                        />
+                                        >
+                                            {/* DM View of Fog (Semi-transparent) */}
+                                            {(fogOfWar as string[]).map(coord => {
+                                                const [gx, gy] = coord.split(',').map(Number);
+                                                return (
+                                                    <div 
+                                                        key={coord}
+                                                        className="absolute bg-red-950/20 backdrop-blur-[1px] border border-red-500/10 pointer-events-none flex items-center justify-center overflow-hidden"
+                                                        style={{
+                                                            left: gx * mapData.gridSize,
+                                                            top: gy * mapData.gridSize,
+                                                            width: mapData.gridSize,
+                                                            height: mapData.gridSize
+                                                        }}
+                                                    >
+                                                        <div className="absolute inset-0 bg-[radial-gradient(circle,rgba(239,68,68,0.1)_0%,transparent_70%)]"></div>
+                                                        <span className="text-[8px] font-black text-red-500/40 rotate-45 pointer-events-none select-none uppercase">Gizli</span>
+                                                    </div>
+                                                );
+                                            })}
+                                        </div>
                                     )}
 
                                     {/* Tokens */}
@@ -2221,19 +2305,23 @@ export default function DMDashboard() {
                                                 key={token.id}
                                                 draggable
                                                 onDragStart={() => setIsDraggingToken(token.id)}
-                                                className="absolute w-12 h-12 rounded-full border-2 border-white/80 shadow-[0_8px_20px_rgba(0,0,0,0.5)] flex items-center justify-center text-[11px] font-black cursor-grab active:cursor-grabbing select-none group transition-shadow"
+                                                className="absolute w-14 h-14 rounded-full border-[3px] border-white/90 shadow-[0_15px_35px_rgba(0,0,0,0.7)] flex items-center justify-center text-[11px] font-black cursor-grab active:cursor-grabbing select-none group transition-all hover:scale-110 active:scale-125"
                                                 style={{
-                                                    left: (token.x || 0) - 24,
-                                                    top: (token.y || 0) - 24,
+                                                    left: (token.x || 0) - 28,
+                                                    top: (token.y || 0) - 28,
                                                     backgroundColor: token.color || '#ef4444',
-                                                    boxShadow: `0 0 15px ${token.color || '#ef4444'}44, 0 8px 30px rgba(0,0,0,0.6)`,
-                                                    zIndex: 10
+                                                    boxShadow: `0 0 25px ${token.color || '#ef4444'}66, 0 10px 40px rgba(0,0,0,0.8), inset 0 0 10px rgba(0,0,0,0.3)`,
+                                                    zIndex: 50
                                                 }}
                                             >
-                                                <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-slate-900 border border-slate-700 px-3 py-1 rounded-full text-white text-[10px] opacity-0 group-hover:opacity-100 whitespace-nowrap transition-all shadow-xl backdrop-blur-md">
+                                                {/* Token Glow Effect */}
+                                                <div className="absolute inset-0 rounded-full animate-pulse opacity-40 blur-md pointer-events-none" style={{ backgroundColor: token.color }}></div>
+                                                
+                                                <div className="absolute -top-10 left-1/2 -translate-x-1/2 bg-slate-950 border border-slate-700 px-4 py-1.5 rounded-xl text-white text-[10px] font-bold opacity-0 group-hover:opacity-100 whitespace-nowrap transition-all shadow-2xl backdrop-blur-xl scale-90 group-hover:scale-100 group-hover:-translate-y-1">
                                                     {token.name || '??'}
+                                                    <div className="absolute bottom-[-4px] left-1/2 -translate-x-1/2 w-2 h-2 bg-slate-950 border-r border-b border-slate-700 rotate-45"></div>
                                                 </div>
-                                                <div className="text-white text-center leading-tight uppercase tracking-tighter drop-shadow-md">
+                                                <div className="text-white text-center leading-none uppercase tracking-tighter drop-shadow-2xl z-10 text-xs">
                                                     {(token.name || '??').substring(0, 2)}
                                                 </div>
                                                 <button
@@ -2244,7 +2332,7 @@ export default function DMDashboard() {
                                                         setMapData(newMap);
                                                         socket?.emit('update_map', { campaignId, mapData: newMap });
                                                     }}
-                                                    className="absolute -top-1 -right-1 bg-red-600 w-6 h-6 rounded-full flex items-center justify-center text-[10px] opacity-0 group-hover:opacity-100 hover:scale-125 transition-all border border-white/30 text-white shadow-lg"
+                                                    className="absolute -top-2 -right-2 bg-red-600 hover:bg-red-500 w-7 h-7 rounded-full flex items-center justify-center text-[10px] opacity-0 group-hover:opacity-100 hover:rotate-90 transition-all border-2 border-white/50 text-white shadow-[0_4px_15px_rgba(239,68,68,0.5)] z-20"
                                                 >
                                                     ✕
                                                 </button>
@@ -2253,11 +2341,14 @@ export default function DMDashboard() {
                                     ))}
 
                                     {!mapData.bgUrl && (
-                                        <div className="absolute inset-0 flex items-center justify-center text-slate-800 flex-col gap-6 p-20 min-h-[600px] min-w-[800px]">
-                                            <div className="w-32 h-32 bg-slate-900 rounded-full flex items-center justify-center text-6xl shadow-inner border border-slate-800">🗺️</div>
-                                            <div className="text-center space-y-2">
-                                                <p className="text-2xl font-black text-slate-600 uppercase tracking-widest">Harita Hazır Değil</p>
-                                                <p className="text-slate-700 font-bold">Yukarıya bir görsel URL'si yapıştırın veya dosya yükleyin.</p>
+                                        <div className="absolute inset-0 flex items-center justify-center text-slate-800 flex-col gap-10 p-20 min-h-[800px] min-w-[1200px]">
+                                            <div className="relative">
+                                                <div className="absolute inset-0 bg-blue-500/20 blur-[80px] rounded-full"></div>
+                                                <div className="w-40 h-40 bg-slate-900/80 rounded-[2.5rem] flex items-center justify-center text-7xl shadow-2xl border border-slate-800 relative z-10 animate-bounce">🗺️</div>
+                                            </div>
+                                            <div className="text-center space-y-4 max-w-md relative z-10">
+                                                <p className="text-4xl font-black text-white/50 uppercase tracking-[0.3em] italic">Harita Bekleniyor</p>
+                                                <p className="text-slate-500 font-bold leading-relaxed text-sm">Üst panelden bir şablon seçin, URL yapıştırın veya kendi savaş haritanızı yükleyerek macerayı başlatın.</p>
                                             </div>
                                         </div>
                                     )}
@@ -2530,6 +2621,206 @@ export default function DMDashboard() {
                         </div>
                     )
                 }
+
+                {/* --- QUEST TRACKER MODAL --- */}
+                {isQuestMenuOpen && (
+                    <div className="fixed inset-0 bg-black/70 z-[100] flex items-center justify-center p-4 backdrop-blur-sm animate-fade-in" onClick={() => setIsQuestMenuOpen(false)}>
+                        <div className="bg-gray-900 border border-emerald-900/50 rounded-3xl w-full max-w-4xl h-[80vh] flex flex-col shadow-2xl overflow-hidden" onClick={e => e.stopPropagation()}>
+                            <div className="bg-emerald-950/20 p-6 border-b border-emerald-900/30 flex justify-between items-center">
+                                <h2 className="text-3xl font-black text-emerald-400 flex items-center gap-3">📜 Görev Takibi</h2>
+                                <button onClick={() => setIsQuestMenuOpen(false)} className="text-gray-500 hover:text-white text-3xl font-black">&times;</button>
+                            </div>
+                            <div className="p-6 overflow-y-auto flex-1 space-y-6 custom-scrollbar">
+                                {/* New Quest Form */}
+                                <div className="bg-gray-950/50 border border-emerald-900/20 p-6 rounded-2xl space-y-4">
+                                    <h3 className="text-emerald-500 font-bold uppercase tracking-widest text-xs">Yeni Görev Ekle</h3>
+                                    <div className="grid md:grid-cols-2 gap-4">
+                                        <input id="q-title" type="text" placeholder="Görev Başlığı" className="bg-gray-900 border border-gray-800 rounded-xl px-4 py-2 text-white outline-none focus:border-emerald-500" />
+                                        <input id="q-rewards" type="text" placeholder="Ödüller (XP, GP, Eşya...)" className="bg-gray-900 border border-gray-800 rounded-xl px-4 py-2 text-white outline-none focus:border-emerald-500" />
+                                    </div>
+                                    <textarea id="q-desc" placeholder="Görev Açıklaması" className="w-full bg-gray-900 border border-gray-800 rounded-xl px-4 py-2 text-white outline-none focus:border-emerald-500 h-24"></textarea>
+                                    <button onClick={async () => {
+                                        const title = (document.getElementById('q-title') as HTMLInputElement).value;
+                                        const desc = (document.getElementById('q-desc') as HTMLTextAreaElement).value;
+                                        const rewards = (document.getElementById('q-rewards') as HTMLInputElement).value;
+                                        if (!title) return alert("Başlık gerekli!");
+                                        
+                                        try {
+                                            const res = await axios.post(`${API_URL}/api/quests`, { campaignId, title, description: desc, rewards }, { headers: { 'Authorization': `Bearer ${token}` } });
+                                            if (socket) socket.emit('join_campaign', { campaignId, role, userId: user?.id }); // Trigger a sync
+                                            showToast("Başarılı", "Görev eklendi", "bg-emerald-900 border-emerald-500 text-emerald-100");
+                                            (document.getElementById('q-title') as HTMLInputElement).value = "";
+                                            (document.getElementById('q-desc') as HTMLTextAreaElement).value = "";
+                                            (document.getElementById('q-rewards') as HTMLInputElement).value = "";
+                                        } catch (err) { console.error(err); }
+                                    }} className="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-black py-3 rounded-xl transition shadow-lg">GÖREVİ YAYINLA</button>
+                                </div>
+
+                                {/* Active Quests */}
+                                <div className="grid gap-4">
+                                    {quests.map((q: any) => (
+                                        <div key={q._id} className={`p-5 rounded-2xl border ${q.status === 'active' ? 'bg-gray-800/40 border-emerald-900/30' : 'bg-gray-950/80 border-gray-800 opacity-60'}`}>
+                                            <div className="flex justify-between items-start mb-2">
+                                                <h4 className="text-xl font-black text-white">{q.title}</h4>
+                                                <div className="flex gap-2">
+                                                    {q.status === 'active' && (
+                                                        <>
+                                                            <button onClick={async () => {
+                                                                await axios.put(`${API_URL}/api/quests/${q._id}`, { status: 'completed' }, { headers: { 'Authorization': `Bearer ${token}` } });
+                                                                socket?.emit('join_campaign', { campaignId, role, userId: user?.id });
+                                                            }} className="bg-emerald-600 text-white px-3 py-1 rounded-lg text-[10px] font-black uppercase">Tamamlandı</button>
+                                                            <button onClick={async () => {
+                                                                await axios.put(`${API_URL}/api/quests/${q._id}`, { status: 'failed' }, { headers: { 'Authorization': `Bearer ${token}` } });
+                                                                socket?.emit('join_campaign', { campaignId, role, userId: user?.id });
+                                                            }} className="bg-red-600 text-white px-3 py-1 rounded-lg text-[10px] font-black uppercase">Başarısız</button>
+                                                        </>
+                                                    )}
+                                                    <button onClick={async () => {
+                                                        if (!confirm("Silmek istediğine emin misin?")) return;
+                                                        await axios.delete(`${API_URL}/api/quests/${q._id}`, { headers: { 'Authorization': `Bearer ${token}` } });
+                                                        socket?.emit('join_campaign', { campaignId, role, userId: user?.id });
+                                                    }} className="text-gray-500 hover:text-red-500">🗑️</button>
+                                                </div>
+                                            </div>
+                                            <p className="text-gray-400 text-sm mb-3">{q.description}</p>
+                                            {q.rewards && <div className="text-[10px] text-emerald-400 font-bold uppercase tracking-widest">🎁 Ödül: {q.rewards}</div>}
+                                            <div className={`text-[10px] mt-2 font-black uppercase tracking-tighter ${q.status === 'active' ? 'text-emerald-500' : q.status === 'completed' ? 'text-blue-500' : 'text-red-500'}`}>{q.status}</div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )}
+
+                {/* --- SESSION NOTES MODAL --- */}
+                {isSessionNoteMenuOpen && (
+                    <div className="fixed inset-0 bg-black/70 z-[100] flex items-center justify-center p-4 backdrop-blur-sm animate-fade-in" onClick={() => setIsSessionNoteMenuOpen(false)}>
+                        <div className="bg-gray-900 border border-amber-900/50 rounded-3xl w-full max-w-4xl h-[80vh] flex flex-col shadow-2xl overflow-hidden" onClick={e => e.stopPropagation()}>
+                            <div className="bg-amber-950/20 p-6 border-b border-amber-900/30 flex justify-between items-center">
+                                <h2 className="text-3xl font-black text-amber-400 flex items-center gap-3">✍️ Oturum Notları</h2>
+                                <button onClick={() => setIsSessionNoteMenuOpen(false)} className="text-gray-500 hover:text-white text-3xl font-black">&times;</button>
+                            </div>
+                            <div className="p-6 overflow-y-auto flex-1 space-y-6 custom-scrollbar">
+                                <div className="bg-gray-950/50 border border-amber-900/20 p-6 rounded-2xl space-y-4">
+                                    <textarea id="sn-content" placeholder="Oturumda ne oldu? Önemli olayları not et..." className="w-full bg-gray-900 border border-gray-800 rounded-xl px-4 py-2 text-white outline-none focus:border-amber-500 h-32"></textarea>
+                                    <button onClick={async () => {
+                                        const content = (document.getElementById('sn-content') as HTMLTextAreaElement).value;
+                                        if (!content) return alert("İçerik gerekli!");
+                                        
+                                        try {
+                                            await axios.post(`${API_URL}/api/session-notes`, { campaignId, authorName: 'DM', content }, { headers: { 'Authorization': `Bearer ${token}` } });
+                                            socket?.emit('join_campaign', { campaignId, role, userId: user?.id });
+                                            (document.getElementById('sn-content') as HTMLTextAreaElement).value = "";
+                                            showToast("Başarılı", "Not kaydedildi", "bg-amber-900 border-amber-500 text-amber-100");
+                                        } catch (err) { console.error(err); }
+                                    }} className="w-full bg-amber-600 hover:bg-amber-500 text-white font-black py-3 rounded-xl transition shadow-lg">NOTU KAYDET</button>
+                                </div>
+
+                                <div className="space-y-4">
+                                    {sessionNotes.map((sn: any) => (
+                                        <div key={sn._id} className="bg-gray-800/30 border border-gray-700/50 p-5 rounded-2xl">
+                                            <div className="flex justify-between items-center mb-3">
+                                                <div className="text-[10px] text-amber-500 font-bold uppercase tracking-widest">{new Date(sn.createdAt).toLocaleDateString('tr-TR')} · {sn.authorName}</div>
+                                            </div>
+                                            <p className="text-gray-200 whitespace-pre-wrap leading-relaxed">{sn.content}</p>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )}
+
+                {/* --- FACTION TRACKER MODAL --- */}
+                {isFactionMenuOpen && (
+                    <div className="fixed inset-0 bg-black/70 z-[100] flex items-center justify-center p-4 backdrop-blur-sm animate-fade-in" onClick={() => setIsFactionMenuOpen(false)}>
+                        <div className="bg-gray-900 border border-indigo-900/50 rounded-3xl w-full max-w-4xl h-[80vh] flex flex-col shadow-2xl overflow-hidden" onClick={e => e.stopPropagation()}>
+                            <div className="bg-indigo-950/20 p-6 border-b border-indigo-900/30 flex justify-between items-center">
+                                <h2 className="text-3xl font-black text-indigo-400 flex items-center gap-3">🚩 Fraksiyonlar & İtibar</h2>
+                                <button onClick={() => setIsFactionMenuOpen(false)} className="text-gray-400 hover:text-white text-3xl font-black">&times;</button>
+                            </div>
+                            <div className="p-6 overflow-y-auto flex-1 space-y-6 custom-scrollbar">
+                                {/* Add Faction */}
+                                <div className="bg-gray-950/50 border border-indigo-900/20 p-6 rounded-2xl space-y-4">
+                                    <h3 className="text-indigo-500 font-bold uppercase tracking-widest text-xs">Yeni Fraksiyon Ekle</h3>
+                                    <input id="f-name" type="text" placeholder="Fraksiyon Adı (örn. Harpers, Zhentarim)" className="w-full bg-gray-900 border border-gray-800 rounded-xl px-4 py-2 text-white outline-none focus:border-indigo-500" />
+                                    <textarea id="f-desc" placeholder="Fraksiyon hakkında kısa bilgi..." className="w-full bg-gray-900 border border-gray-800 rounded-xl px-4 py-2 text-white outline-none focus:border-indigo-500 h-20"></textarea>
+                                    <button onClick={async () => {
+                                        const name = (document.getElementById('f-name') as HTMLInputElement).value;
+                                        const desc = (document.getElementById('f-desc') as HTMLTextAreaElement).value;
+                                        if (!name) return alert("İsim gerekli!");
+                                        
+                                        try {
+                                            await axios.post(`${API_URL}/api/factions`, { campaignId, name, description: desc }, { headers: { 'Authorization': `Bearer ${token}` } });
+                                            socket?.emit('join_campaign', { campaignId, role, userId: user?.id });
+                                            (document.getElementById('f-name') as HTMLInputElement).value = "";
+                                            (document.getElementById('f-desc') as HTMLTextAreaElement).value = "";
+                                            showToast("Başarılı", "Fraksiyon eklendi", "bg-indigo-900 border-indigo-500 text-indigo-100");
+                                        } catch (err) { console.error(err); }
+                                    }} className="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-black py-3 rounded-xl transition shadow-lg">FRAKSİYON OLUŞTUR</button>
+                                </div>
+
+                                {/* Faction List */}
+                                <div className="grid gap-4">
+                                    {factions.map((f: any) => (
+                                        <div key={f._id} className="bg-gray-800/40 border border-indigo-900/20 p-5 rounded-2xl">
+                                            <div className="flex justify-between items-start mb-2">
+                                                <div>
+                                                    <h4 className="text-xl font-black text-white">{f.name}</h4>
+                                                    <p className="text-gray-400 text-sm">{f.description}</p>
+                                                </div>
+                                                <button onClick={async () => {
+                                                    if (!confirm("Fraksiyonu silmek istediğine emin misin?")) return;
+                                                    await axios.delete(`${API_URL}/api/factions/${f._id}`, { headers: { 'Authorization': `Bearer ${token}` } });
+                                                    socket?.emit('join_campaign', { campaignId, role, userId: user?.id });
+                                                }} className="text-gray-500 hover:text-red-500">🗑️</button>
+                                            </div>
+                                            
+                                            {/* Reputation List */}
+                                            <div className="mt-4 pt-4 border-t border-gray-700/50 space-y-3">
+                                                <div className="text-[10px] text-gray-500 font-bold uppercase tracking-widest">Karakter İtibarları</div>
+                                                {Object.entries(partyStats || {}).map(([name, ps]: any) => {
+                                                    if (!ps) return null;
+                                                    const rep = (f.reputations || []).find((r: any) => r.characterId === ps.characterId);
+                                                    const currentScore = rep ? rep.score : 0;
+                                                    
+                                                    return (
+                                                        <div key={ps.characterId} className="flex items-center justify-between bg-gray-900/50 p-2 rounded-lg">
+                                                            <span className="text-sm font-bold text-gray-300">{name}</span>
+                                                            <div className="flex items-center gap-3">
+                                                                <span className={`font-black ${currentScore >= 0 ? 'text-green-400' : 'text-red-400'}`}>{currentScore}</span>
+                                                                <div className="flex gap-1">
+                                                                    <button onClick={async () => {
+                                                                        const newReps = [...(f.reputations || [])];
+                                                                        const idx = newReps.findIndex(r => r.characterId === ps.characterId);
+                                                                        if (idx >= 0) newReps[idx].score += 1;
+                                                                        else newReps.push({ characterId: ps.characterId, characterName: name, score: 1 });
+                                                                        await axios.put(`${API_URL}/api/factions/${f._id}`, { reputations: newReps }, { headers: { 'Authorization': `Bearer ${token}` } });
+                                                                        socket?.emit('join_campaign', { campaignId, role, userId: user?.id });
+                                                                    }} className="w-6 h-6 bg-green-900/40 text-green-300 rounded flex items-center justify-center text-xs border border-green-700/50">+</button>
+                                                                    <button onClick={async () => {
+                                                                        const newReps = [...(f.reputations || [])];
+                                                                        const idx = newReps.findIndex(r => r.characterId === ps.characterId);
+                                                                        if (idx >= 0) newReps[idx].score -= 1;
+                                                                        else newReps.push({ characterId: ps.characterId, characterName: name, score: -1 });
+                                                                        await axios.put(`${API_URL}/api/factions/${f._id}`, { reputations: newReps }, { headers: { 'Authorization': `Bearer ${token}` } });
+                                                                        socket?.emit('join_campaign', { campaignId, role, userId: user?.id });
+                                                                    }} className="w-6 h-6 bg-red-900/40 text-red-300 rounded flex items-center justify-center text-xs border border-red-700/50">-</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    );
+                                                })}
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                )}
+
 
             </div>
         </div >
