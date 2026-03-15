@@ -21,6 +21,8 @@ const characterSchema = new mongoose.Schema({
     currentHp: Number,
     ac: Number,
     spells: [String],
+    pinnedSpells: [String],
+    spellSlots: { type: Map, of: Number },
     feats: [String],
     featSelections: { type: mongoose.Schema.Types.Mixed, default: {} }, // { "Fey Touched": { stat: "INT", spell: "Hex" } }
     inventory: [mongoose.Schema.Types.Mixed],

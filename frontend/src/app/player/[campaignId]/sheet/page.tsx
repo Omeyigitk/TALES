@@ -52,25 +52,45 @@ const evalAtk = (str: string, abilityMods: any, prof: number) => {
     // Clean string (uppercase, remove spaces)
     let calc = str.toUpperCase().replace(/\s/g, '');
     
+    // Replace choice patterns like "STR/DEX" with the maximum value
+    const abilityNames = ["STR", "DEX", "CON", "INT", "WIS", "CHA"];
+    for (let i = 0; i < abilityNames.length; i++) {
+        for (let j = 0; j < abilityNames.length; j++) {
+            const pattern = `${abilityNames[i]}/${abilityNames[j]}`;
+            if (calc.includes(pattern)) {
+                const val = Math.max(abilityMods[abilityNames[i]] || 0, abilityMods[abilityNames[j]] || 0);
+                calc = calc.replace(new RegExp(pattern, 'g'), String(val));
+            }
+        }
+    }
+
     // Replace ability abbreviations with their values
     const abilities = ["STR", "DEX", "CON", "INT", "WIS", "CHA"];
     abilities.forEach(ab => {
         const modValue = abilityMods[ab] || 0;
-        calc = calc.replace(new RegExp(ab, 'g'), (modValue >= 0 ? '+' : '') + modValue);
+        calc = calc.replace(new RegExp(ab, 'g'), String(modValue));
     });
     
-    // Replace PROF
-    calc = calc.replace(/PROF/g, (prof >= 0 ? '+' : '') + prof);
+    // Replace PROF and SV/LEVEL
+    calc = calc.replace(/PROF/g, String(prof));
+    calc = calc.replace(/(SV|LEVEL)/g, String(abilityMods.LEVEL || abilityMods.lv || 1));
     
     // Evaluate the expression safely
     try {
+        // Replace any remaining double operators or leading pluses
+        calc = calc.replace(/\+\+/g, '+').replace(/\+-/g, '-').replace(/-\+/g, '-').replace(/--/g, '+');
+        if (calc.startsWith('+')) calc = calc.slice(1);
+        
         // Remove any characters that aren't numbers, +, -, *, /, or ( )
-        calc = calc.replace(/[^0-9+\-*/()]/g, '');
+        calc = calc.replace(/[^0-9+\-*/().]/g, '');
+        // If the resulting string is empty or just operators, return 0
+        if (!calc || /^[^0-9(]+$/.test(calc)) return 0;
         // eslint-disable-next-line no-new-func
-        return new Function(`return ${calc}`)();
+        const result = new Function(`return ${calc}`)();
+        return typeof result === 'number' ? Math.floor(result) : 0;
     } catch (e) {
         console.error("EvalAtk error for string:", str, "calc:", calc, e);
-        const fallback = parseInt(str);
+        const fallback = parseInt(str.replace(/[^0-9-]/g, ''));
         return isNaN(fallback) ? 0 : fallback;
     }
 };
@@ -258,9 +278,11 @@ const PlayerSheet = () => {
     const [isDraggingToken, setIsDraggingToken] = useState<string | null>(null);
     const [showFeatsUI, setShowFeatsUI] = useState(true);
     const [expandedFeat, setExpandedFeat] = useState<string | null>(null);
+    const [expandedAtkIdx, setExpandedAtkIdx] = useState<number | null>(null);
     const [showDiceLogUI, setShowDiceLogUI] = useState(true);
     const [confirmShortRest, setConfirmShortRest] = useState(false);
     const [buyShopItem, setBuyShopItem] = useState<any>(null);
+    const [pinnedSpells, setPinnedSpells] = useState<string[]>(character?.pinnedSpells || []);
     const chatEndRef = useRef<HTMLDivElement>(null);
 
 
@@ -350,6 +372,7 @@ const PlayerSheet = () => {
                 setConditions(res.data.conditions || []);
                 setHitDiceUsed(res.data.hitDiceUsed || 0);
                 setDeathSaves(res.data.deathSaves || { successes: 0, failures: 0 });
+                setPinnedSpells(res.data.pinnedSpells || []);
                 setLoading(false);
             } catch (err) {
                 console.error("Fetch error:", err);
@@ -429,6 +452,20 @@ const PlayerSheet = () => {
         };
         if (token) fetchMeta();
     }, [token]);
+    
+    const togglePinSpell = async (spellName: string) => {
+        if (!character) return;
+        const isPinned = pinnedSpells.includes(spellName);
+        const newPinned = isPinned 
+            ? pinnedSpells.filter(s => s !== spellName)
+            : [...pinnedSpells, spellName];
+        
+        setPinnedSpells(newPinned);
+        try {
+            await axios.put(`${API_URL}/api/characters/${character._id}`, { pinnedSpells: newPinned }, { headers: { 'Authorization': `Bearer ${token}` } });
+            showToast(isPinned ? "Unpinned" : "Pinned", `${spellName} ${isPinned ? 'removed from' : 'added to'} actions.`, "bg-blue-900 border-blue-500 text-blue-100");
+        } catch (e) { console.error(e); }
+    };
 
     const updatePetHp = async (petId: string, newHp: number) => {
         if (!characterRef.current) return;
@@ -2345,23 +2382,38 @@ const PlayerSheet = () => {
                     });
 
                     const allAttacks = [
-                        ...baseAttacks.map(atk => ({
-                            ...atk,
-                            toHit: atk.toHit ? fmt(evalAtk(atk.toHit, mods, prof)) : undefined,
-                            damage: atk.damage.includes('+') || atk.damage.includes('-') 
-                                ? atk.damage.replace(/(STR|DEX|CON|INT|WIS|CHA|Prof)/g, (m) => {
-                                    if (m === 'Prof') return String(prof);
-                                    return String(mods[m as keyof typeof mods]);
-                                  })
-                                : (atk.damage.match(/^[0-9d+\s-]+$/) ? atk.damage : (() => {
-                                    // Handle cases like "1+STR"
-                                    const parts = atk.damage.split(' ');
-                                    const dice = parts[0];
-                                    const type = parts.slice(1).join(' ');
-                                    const val = evalAtk(dice, mods, prof);
-                                    return isNaN(Number(dice)) ? `${val} ${type}` : atk.damage;
-                                  })())
-                        })), 
+                        ...(baseAttacks || []).map(atk => {
+                            if (!atk) return null;
+                            let processedDamage = atk.damage || "";
+                            
+                            // If damage contains variable tokens, replace them
+                            if (processedDamage.match(/(STR|DEX|CON|INT|WIS|CHA|Prof|Sv|Level)/i)) {
+                                processedDamage = processedDamage.replace(/(STR|DEX|CON|INT|WIS|CHA|Prof|Sv|Level)/gi, (m) => {
+                                    const up = m.toUpperCase();
+                                    if (up === 'PROF') return String(prof || 0);
+                                    if (up === 'SV' || up === 'LEVEL') return String(character.level || 1);
+                                    return String(mods[up as keyof typeof mods] || 0);
+                                });
+                            }
+                            
+                            // Support for X/Y choice in damage as well
+                            if (processedDamage.includes('/')) {
+                                processedDamage = processedDamage.replace(/([A-Z]{3})\/([A-Z]{3})/gi, (m, a, b) => {
+                                    const valA = mods[a.toUpperCase() as keyof typeof mods] || 0;
+                                    const valB = mods[b.toUpperCase() as keyof typeof mods] || 0;
+                                    return String(Math.max(valA, valB));
+                                });
+                            }
+                            
+                            // Handle ceiling/floor symbols if any level-based math is left
+                            processedDamage = processedDamage.replace(/⌈/g, '').replace(/⌉/g, '').replace(/⌊/g, '').replace(/⌋/g, '');
+
+                            return {
+                                ...atk,
+                                toHit: atk.toHit ? fmt(evalAtk(atk.toHit, mods, prof)) : undefined,
+                                damage: processedDamage
+                            };
+                        }).filter(Boolean), 
                         ...mappedWeaponAttacks
                     ];
 
@@ -2380,24 +2432,131 @@ const PlayerSheet = () => {
                             )}
 
                             {activeTab === "attacks" && (
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    {allAttacks.map((atk, idx) => (
-                                        <div key={idx} className="bg-gray-800 rounded-xl border border-gray-700 p-4 hover:border-gray-500 transition-all flex items-center justify-between group shadow-lg">
-                                            <div className="flex-1">
-                                                <h4 className="font-black text-white text-sm uppercase tracking-tight group-hover:text-red-400 transition-colors">{atk.name}</h4>
-                                                <div className="flex gap-3 mt-1 items-center">
-                                                    <span className="text-[10px] bg-red-900/40 text-red-300 font-black px-2 py-0.5 rounded border border-red-500/30">BONUS: {fmt(atk.bonus)}</span>
-                                                    <span className="text-[10px] bg-gray-900/60 text-gray-400 font-bold px-2 py-0.5 rounded border border-white/5 uppercase">{atk.damage} {atk.type}</span>
-                                                </div>
-                                            </div>
-                                            <button 
-                                                onClick={() => handleRoll(atk.name, { count: 1, sides: 20, bonus: atk.bonus }, 'Atak')}
-                                                className="bg-red-700 hover:bg-red-600 text-white w-10 h-10 rounded-lg flex items-center justify-center font-black shadow-lg shadow-red-900/20 active:scale-95 transition-all"
-                                            >
-                                                🎲
-                                            </button>
+                                <div className="space-y-6">
+                                    {/* ── ATTACKS SECTION ── */}
+                                    <div className="bg-gray-800 rounded-xl border border-red-800/40 overflow-hidden shadow-2xl">
+                                        <div className="px-5 py-3 bg-red-900/20 border-b border-red-800/40 flex items-center justify-between">
+                                            <h3 className="font-black text-red-400 text-sm uppercase tracking-widest flex items-center gap-2">
+                                                <span className="text-lg">⚔️</span> Attacks — {clsName}
+                                            </h3>
+                                            <span className="text-[10px] bg-red-900/40 text-red-300 font-bold px-2 py-0.5 rounded border border-red-500/30 uppercase tracking-tighter">{allAttacks.length} Actions</span>
                                         </div>
-                                    ))}
+                                        <div className="p-3 space-y-2">
+                                            {allAttacks.map((atk, i) => {
+                                                const expanded = expandedAtkIdx === i;
+                                                return (
+                                                    <div key={i} className={`rounded-xl transition-all duration-300 border ${expanded ? 'bg-gray-900/60 border-red-500/40 shadow-inner' : 'bg-gray-800/40 border-gray-700/50 hover:border-gray-600'}`}>
+                                                        <div 
+                                                            className="px-4 py-3 cursor-pointer flex items-center justify-between gap-4"
+                                                            onClick={() => setExpandedAtkIdx(expanded ? null : i)}
+                                                        >
+                                                            <div className="flex-1">
+                                                                <div className="flex items-center gap-3">
+                                                                    <span className="font-black text-white text-sm uppercase tracking-tight group-hover:text-red-400 transition-colors">{atk.name}</span>
+                                                                    <div className="flex gap-2">
+                                                                        <span className="text-[9px] bg-red-900/30 text-red-400 font-black px-1.5 py-0.5 rounded border border-red-500/20">{atk.toHit} TO HIT</span>
+                                                                        <span className="text-[9px] bg-gray-900/60 text-gray-400 font-bold px-1.5 py-0.5 rounded border border-white/5 uppercase">{atk.damage}</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div className="flex items-center gap-3">
+                                                                <button 
+                                                                    onClick={(e) => { e.stopPropagation(); handleRoll(atk.name, { count: 1, sides: 20, bonus: atk.bonus }, 'Atak'); }}
+                                                                    className="w-8 h-8 bg-red-700/10 hover:bg-red-600 text-red-500 hover:text-white border border-red-500/20 hover:border-red-500 rounded-lg flex items-center justify-center transition-all duration-300 active:scale-90"
+                                                                >
+                                                                    🎲
+                                                                </button>
+                                                                <div className={`text-gray-600 transition-transform duration-300 ${expanded ? 'rotate-180' : ''}`}>
+                                                                    <span className="text-xs">▼</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        {expanded && (
+                                                            <div className="px-4 pb-4 pt-1 animate-in slide-in-from-top-2 duration-300">
+                                                                <div className="p-3 bg-gray-950/40 rounded-xl border border-gray-800 text-[11px] text-gray-400 italic leading-relaxed">
+                                                                    {atk.desc_tr || atk.desc || "No additional description available."}
+                                                                </div>
+                                                                <div className="mt-3 flex gap-2">
+                                                                    <button 
+                                                                        onClick={() => handleRoll(atk.name, { count: 1, sides: 20, bonus: atk.bonus }, 'Atak')}
+                                                                        className="flex-1 py-2 bg-red-700 hover:bg-red-600 text-white text-[10px] font-black uppercase tracking-widest rounded-lg transition-all active:scale-95"
+                                                                    >
+                                                                        Saldırı Atışı (Roll To Hit)
+                                                                    </button>
+                                                                    {(() => {
+                                                                        const dice = extractDice(atk.damage);
+                                                                        if (!dice) return null;
+                                                                        return (
+                                                                            <button 
+                                                                                onClick={() => handleRoll(atk.name, dice, 'Hasar')}
+                                                                                className="flex-1 py-2 bg-gray-800 hover:bg-gray-700 text-red-400 border border-red-500/20 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all active:scale-95"
+                                                                            >
+                                                                                Hasar Atışı (Roll Damage)
+                                                                            </button>
+                                                                        );
+                                                                    })()}
+                                                                </div>
+                                                            </div>
+                                                        )}
+                                                    </div>
+                                                );
+                                            })}
+                                        </div>
+                                    </div>
+
+                                    {/* ── ACTION SPELLS SECTION ── */}
+                                    {pinnedSpells.length > 0 && (
+                                        <div className="bg-gray-800 rounded-xl border border-blue-800/40 overflow-hidden shadow-2xl mt-4">
+                                            <div className="px-5 py-3 bg-blue-900/20 border-b border-blue-800/40 flex items-center justify-between">
+                                                <h3 className="font-black text-blue-400 text-sm uppercase tracking-widest flex items-center gap-2">
+                                                    <span className="text-lg">✨</span> Büyüler (Actions)
+                                                </h3>
+                                                <span className="text-[10px] bg-blue-900/40 text-blue-300 font-bold px-2 py-0.5 rounded border border-blue-500/30 uppercase tracking-tighter">Pinned</span>
+                                            </div>
+                                            <div className="p-3 space-y-2">
+                                                {pinnedSpells.map((sp, i) => {
+                                                    const details = spellDetails[sp];
+                                                    const expanded = expandedSpell === sp;
+                                                    return (
+                                                        <div key={i} className={`rounded-xl transition-all duration-300 border ${expanded ? 'bg-gray-900/60 border-blue-500/40 shadow-inner' : 'bg-gray-800/40 border-gray-700/50 hover:border-gray-600'}`}>
+                                                            <div 
+                                                                className="px-4 py-3 cursor-pointer flex items-center justify-between gap-4"
+                                                                onClick={() => setExpandedSpell(expanded ? null : sp)}
+                                                            >
+                                                                <div className="flex-1">
+                                                                    <div className="flex items-center gap-3">
+                                                                        <span className="font-black text-white text-sm uppercase tracking-tight group-hover:text-blue-300 transition-colors">
+                                                                            {typeof sp === 'string' ? sp : (String((sp as any)?.name || sp || 'Unknown Spell'))}
+                                                                        </span>
+                                                                        <div className="flex gap-2">
+                                                                            {details && <span className="text-[9px] bg-blue-900/30 text-blue-400 font-black px-1.5 py-0.5 rounded border border-blue-500/20">LEVEL {details.level_int === 0 ? 'CANTRIP' : details.level_int}</span>}
+                                                                            {details && <span className="text-[9px] bg-gray-900/60 text-gray-400 font-bold px-1.5 py-0.5 rounded border border-white/5 uppercase">{details.casting_time}</span>}
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div className="flex items-center gap-3">
+                                                                    <div className={`text-gray-600 transition-transform duration-300 ${expanded ? 'rotate-180' : ''}`}>
+                                                                        <span className="text-xs">▼</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            {expanded && (
+                                                                <div className="px-4 pb-4 pt-1 animate-in slide-in-from-top-2 duration-300">
+                                                                    <p className="text-[11px] text-gray-400 mb-3">{details?.desc_tr || details?.desc || 'Loading...'}</p>
+                                                                    <button 
+                                                                        onClick={() => setCastingSpell(sp)}
+                                                                        className="w-full py-2 bg-blue-700 hover:bg-blue-600 text-white text-[10px] font-black uppercase tracking-widest rounded-lg transition-all active:scale-95"
+                                                                    >
+                                                                        Cast Spell
+                                                                    </button>
+                                                                </div>
+                                                            )}
+                                                        </div>
+                                                    );
+                                                })}
+                                            </div>
+                                        </div>
+                                    )}
                                 </div>
                             )}
 
@@ -2660,12 +2819,21 @@ const PlayerSheet = () => {
 
                                                                                 <div className="flex items-center gap-3">
                                                                                     {!isExpanded && (
-                                                                                        <button
-                                                                                            onClick={(e) => { e.stopPropagation(); setCastingSpell(sp); }}
-                                                                                            className="px-3 py-1.5 bg-purple-600/10 hover:bg-purple-600 text-purple-400 hover:text-white border border-purple-500/20 hover:border-purple-500 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all duration-300 opacity-0 group-hover/card:opacity-100 transform translate-x-2 group-hover/card:translate-x-0"
-                                                                                        >
-                                                                                            Cast
-                                                                                        </button>
+                                                                                        <div className="flex items-center gap-2 opacity-0 group-hover/card:opacity-100 transition-all duration-300 transform translate-x-2 group-hover/card:translate-x-0">
+                                                                                            <button
+                                                                                                onClick={(e) => { e.stopPropagation(); togglePinSpell(sp); }}
+                                                                                                className={`p-1.5 rounded-lg border transition-all duration-300 ${pinnedSpells.includes(sp) ? 'bg-blue-600 border-blue-500 text-white' : 'bg-gray-800 border-gray-700 text-gray-500 hover:text-blue-400'}`}
+                                                                                                title={pinnedSpells.includes(sp) ? "Unpin from Actions" : "Pin to Actions"}
+                                                                                            >
+                                                                                                <span className="text-sm">{pinnedSpells.includes(sp) ? '📍' : '📌'}</span>
+                                                                                            </button>
+                                                                                            <button
+                                                                                                onClick={(e) => { e.stopPropagation(); setCastingSpell(sp); }}
+                                                                                                className="px-3 py-1.5 bg-purple-600/10 hover:bg-purple-600 text-purple-400 hover:text-white border border-purple-500/20 hover:border-purple-500 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all duration-300"
+                                                                                            >
+                                                                                                Cast
+                                                                                            </button>
+                                                                                        </div>
                                                                                     )}
                                                                                     <div className={`text-gray-600 transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`}>
                                                                                         <span className="text-xs">▼</span>
