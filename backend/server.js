@@ -611,6 +611,26 @@ app.post('/api/spells/batch', authenticate, async (req, res) => {
   }
 });
 
+// DEBUG: Veritabanı istatistikleri ve temizlik
+app.get('/api/debug/db-stats', async (req, res) => {
+  try {
+    const spellCount = await Spell.countDocuments();
+    const classCount = await Class.countDocuments();
+    const charCount = await Character.countDocuments();
+    const uniqueSpellClasses = await Spell.distinct('classes');
+    res.json({ spellCount, classCount, charCount, uniqueSpellClasses });
+  } catch (err) { res.status(500).json({ error: err.message }); }
+});
+
+app.post('/api/debug/fix-typos', async (req, res) => {
+  try {
+    const spellRes = await Spell.updateMany({ classes: "Sorceror" }, { $set: { "classes.$": "Sorcerer" } });
+    const classRes = await Class.updateMany({ name: "Sorceror" }, { $set: { name: "Sorcerer" } });
+    const charRes = await Character.updateMany({ subclass: /Sorceror/i }, { $set: { subclass: "Sorcerer" } });
+    res.json({ spellRes, classRes, charRes });
+  } catch (err) { res.status(500).json({ error: err.message }); }
+});
+
 app.get('/api/feats', async (req, res) => {
   try {
     const feats = await Feat.find({}).sort({ name: 1 });
