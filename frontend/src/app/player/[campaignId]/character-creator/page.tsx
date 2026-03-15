@@ -152,7 +152,7 @@ export default function CharacterCreator() {
     const [selectedCantrips, setSelectedCantrips] = useState<string[]>([]);
     const [selectedLeveledSpells, setSelectedLeveledSpells] = useState<string[]>([]);
     const [spellSearch, setSpellSearch] = useState("");
-    const [spellLevelFilter, setSpellLevelFilter] = useState<number | "all">("all");
+    const [spellLevelFilter, setSpellLevelFilter] = useState<string>("all");
     const [spellSchoolFilter, setSpellSchoolFilter] = useState("all");
     const [spellTypeFilter, setSpellTypeFilter] = useState("all");
     const [loadingSpells, setLoadingSpells] = useState(false);

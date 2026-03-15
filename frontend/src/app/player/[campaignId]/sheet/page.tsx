@@ -177,7 +177,7 @@ const PlayerSheet = () => {
     const [shopItems, setShopItems] = useState<any[]>([]);
     const [isShopPublished, setIsShopPublished] = useState(false);
     const [gallerySearch, setGallerySearch] = useState("");
-    const [galleryFilter, setGalleryFilter] = useState<number | 'all'>('all');
+    const [galleryFilter, setGalleryFilter] = useState<string>('all');
     const [actualSpells, setActualSpells] = useState<any[]>([]);
     const [libFeats, setLibFeats] = useState<any[]>([]);
     const [allClasses, setAllClasses] = useState<any[]>([]);
@@ -202,7 +202,7 @@ const PlayerSheet = () => {
 
     // Filter States
     const [spellSearchModal, setSpellSearchModal] = useState("");
-    const [spellLevelFilter, setSpellLevelFilter] = useState<number | 'all'>('all');
+    const [spellLevelFilter, setSpellLevelFilter] = useState<string>('all');
     const [spellSchoolFilter, setSpellSchoolFilter] = useState('all');
     const [spellTypeFilter, setSpellTypeFilter] = useState('all');
     const [spellSearch, setSpellSearch] = useState("");
@@ -1339,7 +1339,7 @@ const PlayerSheet = () => {
                                                     <td className="px-3 py-2">
                                                         <div className="flex flex-wrap gap-1">
                                                             {isASI && <span className="text-[10px] bg-yellow-700/60 border border-yellow-600 text-yellow-300 px-1.5 py-0.5 rounded font-bold">ASI/Feat</span>}
-                                                            {feats.map((f: ClassFeature, fi: number) => (
+                                                            {feats.map((f: any, fi: number) => (
                                                                 <span key={fi} className="text-[10px] bg-gray-800 border border-gray-600 text-gray-200 px-1.5 py-0.5 rounded">{f.name}</span>
                                                             ))}
                                                             {feats.length === 0 && !isASI && <span className="text-gray-700 text-xs">—</span>}
@@ -3281,7 +3281,7 @@ const PlayerSheet = () => {
                                 ].map(cat => (
                                     <button
                                         key={cat.id}
-                                        onClick={() => setGalleryFilter(cat.id as any)}
+                                        onClick={() => setGalleryFilter(cat.id)}
                                         className={`px-4 py-2 rounded-xl text-xs font-black transition-all flex items-center gap-2 ${galleryFilter === cat.id ? 'bg-purple-600 text-white shadow-lg' : 'text-gray-400 hover:bg-gray-700'}`}
                                     >
                                         <span>{cat.icon}</span> {cat.label}
