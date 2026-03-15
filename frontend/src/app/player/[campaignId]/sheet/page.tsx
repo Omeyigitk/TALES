@@ -5,7 +5,7 @@ import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { useAuth } from "@/context/AuthContext";
 import { useCampaignSocket } from "../../../../../useCampaignSocket";
-import { ASI_LEVELS, CLASS_FEATURES, type Feat } from "../levelup_data";
+import { ASI_LEVELS, CLASS_FEATURES, type Feat, type ClassFeature } from "../levelup_data";
 import { ALL_FEATS } from "../feats_data";
 import { ALL_BACKGROUNDS } from "../background_data";
 import { getFeatRequirements } from "../../feat_utils";
