@@ -31,7 +31,7 @@ const SpellCard = ({ spell, isCantrip, limits, isSelected, limitReached, schoolC
                 </div>
                 <div className="flex flex-wrap gap-1 mb-1.5">
                     <span className={`text-[10px] px-1.5 py-0.5 rounded border font-semibold ${schoolClass}`}>{spell.school}</span>
-                    {spell.concentration && <span className="text-[10px] px-1.5 py-0.5 rounded border bg-purple-50 text-purple-600 border-purple-300">Konsantrasyon</span>}
+                    {spell.concentration && <span className="text-[10px] px-1.5 py-0.5 rounded border bg-purple-50 text-purple-600 border-purple-300">Concentration</span>}
                     {spell.ritual && <span className="text-[10px] px-1.5 py-0.5 rounded border bg-amber-50 text-amber-600 border-amber-300">Ritual</span>}
                 </div>
                 <p className={`text-gray-600 text-xs leading-relaxed ${expanded ? "" : "line-clamp-2"}`}>{spell.desc}</p>
@@ -50,7 +50,7 @@ const SpellCard = ({ spell, isCantrip, limits, isSelected, limitReached, schoolC
                 onClick={(e) => { e.stopPropagation(); setExpanded(!expanded); }}
                 className="text-[10px] text-blue-600 bg-blue-50/50 hover:bg-blue-100/50 py-1 rounded-b-lg border-x-2 border-b-2 border-blue-100 transition-colors font-bold uppercase tracking-widest"
             >
-                {expanded ? "KÜÇÜLT ▲" : "DETAYLARI GÖR ▼"}
+                {expanded ? "SHRINK ▲" : "VIEW DETAILS ▼"}
             </button>
         </div>
     );
@@ -73,8 +73,7 @@ const getSpellTags = (spell: any) => {
     const school = (spell.school || "").toLowerCase();
 
     // Damage
-    if (desc.includes("damage") || desc.includes("hasar") || desc.includes("hit") || desc.includes("attack") ||
-        desc.includes("vuruş") || desc.includes("darbe") || desc.includes("patlama") ||
+    if (desc.includes("damage") || desc.includes("hit") || desc.includes("attack") ||
         /\d+d\d+/.test(desc) || school === "evocation") {
         tags.push("Damage");
     }
@@ -83,33 +82,26 @@ const getSpellTags = (spell: any) => {
         desc.includes("paralyzed") || desc.includes("stunned") || desc.includes("incapacitated") ||
         desc.includes("prone") || desc.includes("blinded") || desc.includes("deafened") ||
         desc.includes("difficult terrain") || desc.includes("slow") ||
-        desc.includes("korkmuş") || desc.includes("büyülenmiş") || desc.includes("engellenmiş") ||
-        desc.includes("sersemlemiş") || desc.includes("kör") || desc.includes("hareket edemez") ||
-        desc.includes("disadvantage") || desc.includes("dezavantaj")) {
+        desc.includes("disadvantage")) {
         tags.push("Control");
     }
     // Support
     if (desc.includes("heal") || desc.includes("restore") || desc.includes("temporary hp") ||
         desc.includes("bonus") || desc.includes("advantage") || desc.includes("bless") ||
-        desc.includes("iyileştir") || desc.includes("can ver") || desc.includes("avantaj") ||
-        desc.includes("ekle") || desc.includes("zar") || desc.includes("check") || 
-        desc.includes("kurtarma") || desc.includes("atış") || desc.includes("destek")) {
+        desc.includes("check") || desc.includes("saving throw")) {
         tags.push("Support");
     }
     // Defense
     if (desc.includes("ac ") || desc.includes("shield") || desc.includes("resistance") ||
-        desc.includes("immune") || desc.includes("absorb") || desc.includes("kalkan") ||
-        desc.includes("direnç") || desc.includes("bağışıklık") || desc.includes("zırh") || 
+        desc.includes("immune") || desc.includes("absorb") || 
         school === "abjuration") {
         tags.push("Defense");
     }
     // Utility
     if (desc.includes("detect") || desc.includes("identify") || desc.includes("teleport") ||
         desc.includes("create") || desc.includes("scry") || desc.includes("invisible") ||
-        desc.includes("fly") || desc.includes("breathe") || desc.includes("bul") || 
-        desc.includes("tanı") || desc.includes("ışınlan") || desc.includes("yarat") || 
-        desc.includes("görünmez") || desc.includes("uç") || desc.includes("nefes") || 
-        desc.includes("okuma") || school === "divination" || school === "transmutation") {
+        desc.includes("fly") || desc.includes("breathe") || 
+        school === "divination" || school === "transmutation") {
         tags.push("Utility");
     }
 
@@ -143,7 +135,7 @@ export default function CharacterCreator() {
     const [castingSpell, setCastingSpell] = useState<string | null>(null);
 
     // Race UI Tabs
-    const [activeRaceTab, setActiveRaceTab] = useState<"Temel" | "Egzotik" | "Soylar">("Temel");
+    const [activeRaceTab, setActiveRaceTab] = useState<"Basic" | "Exotic" | "Lineages">("Basic");
     const CORE_RACES = ["Dwarf", "Elf", "Halfling", "Human", "Variant Human", "Dragonborn", "Gnome", "Half-Elf", "Half-Orc", "Tiefling"];
     const EXOTIC_RACES = ["Aasimar", "Tabaxi", "Genasi", "Goliath", "Satyr", "Kenku", "Changeling", "Plasmoid", "Goblin"];
     const LINEAGES = ["Dhampir", "Reborn", "Hexblood"];
@@ -276,7 +268,7 @@ export default function CharacterCreator() {
     const [selectedBackground, setSelectedBackground] = useState<any>(null);
     const [selectedSubrace, setSelectedSubrace] = useState<any>(null);
     // NPC-specific state
-    const [npcRelationship, setNpcRelationship] = useState<'Dost' | 'Nötr' | 'Düşman'>('Nötr');
+    const [npcRelationship, setNpcRelationship] = useState<'Friendly' | 'Neutral' | 'Hostile'>('Neutral');
     const [npcAlignment, setNpcAlignment] = useState('True Neutral');
     const NPC_ALIGNMENTS = [
         'Lawful Good', 'Neutral Good', 'Chaotic Good',
@@ -286,7 +278,7 @@ export default function CharacterCreator() {
     const [stats, setStats] = useState({
         STR: 8, DEX: 8, CON: 8, INT: 8, WIS: 8, CHA: 8
     });
-    const [statMethod, setStatMethod] = useState<"standard" | "pointbuy">("standard");
+    const [statMethod, setStatMethod] = useState<"standard" | "pointbuy" | "rolling">("standard");
     const STANDARD_VALUES = [15, 14, 13, 12, 10, 8];
     const [assignedValues, setAssignedValues] = useState<{ [stat: string]: number | null }>({
         STR: null, DEX: null, CON: null, INT: null, WIS: null, CHA: null
@@ -364,6 +356,38 @@ export default function CharacterCreator() {
         }
         fetchData();
     }, []);
+
+    // 4d6 drop lowest roll helper
+    const roll4d6DropLowest = () => {
+        const results = [];
+        for (let i = 0; i < 6; i++) {
+            const rolls = [
+                Math.floor(Math.random() * 6) + 1,
+                Math.floor(Math.random() * 6) + 1,
+                Math.floor(Math.random() * 6) + 1,
+                Math.floor(Math.random() * 6) + 1
+            ];
+            rolls.sort((a, b) => b - a); // sort numerically descending
+            const sum = rolls[0] + rolls[1] + rolls[2]; // sum top 3
+            results.push(sum);
+        }
+        return results;
+    };
+
+    const handleStatRoll = () => {
+        const rolledValues = roll4d6DropLowest();
+        // Automatically assign them in order for simplicity, user can rearrange? 
+        // Or just set the 'stats' state directly.
+        setStats({
+            STR: rolledValues[0],
+            DEX: rolledValues[1],
+            CON: rolledValues[2],
+            INT: rolledValues[3],
+            WIS: rolledValues[4],
+            CHA: rolledValues[5]
+        });
+        setStatMethod('rolling');
+    };
 
     // Step 5'e gecilince sinifa ait buyuleri getir
     const fetchSpells = async () => {
@@ -656,14 +680,14 @@ export default function CharacterCreator() {
             }
         } catch (error) {
             console.error(error);
-            alert("Karakter kaydedilemedi!");
+            alert("Could not save character!");
         }
     };
 
     const calculateModifier = (stat: number) => Math.floor((stat - 10) / 2);
 
 
-    if (!hasMounted) return <div className="min-h-screen bg-gray-900 flex items-center justify-center text-white">Yükleniyor...</div>;
+    if (!hasMounted) return <div className="min-h-screen bg-gray-900 flex items-center justify-center text-white">Loading...</div>;
 
     return (
         <div className="min-h-screen bg-gray-900 text-gray-100 p-8 font-sans">
@@ -745,17 +769,17 @@ export default function CharacterCreator() {
                 {/* Başlık ve İlerleme Çubuğu */}
                 <div className="text-center">
                     <h1 className="text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-yellow-500 mb-4">
-                        Kahraman Yarat
+                        Create Hero
                     </h1>
                     <div className="flex justify-center flex-wrap gap-x-3 gap-y-1 text-sm font-semibold">
-                        <span className={step >= 1 ? "text-yellow-400" : "text-gray-500"}>1. Temel</span> &rsaquo;
-                        <span className={step >= 2 ? "text-yellow-400" : "text-gray-500"}>2. Irk</span> &rsaquo;
-                        <span className={step >= 2.5 ? "text-yellow-400" : "text-gray-500"}>2.5 Alt Irk</span> &rsaquo;
-                        <span className={step >= 3 ? "text-yellow-400" : "text-gray-500"}>3. Sinif</span> &rsaquo;
-                        <span className={step >= 3.5 ? "text-yellow-400" : "text-gray-500"}>4. Alt Sinif</span> &rsaquo;
-                        <span className={step >= 3.6 ? "text-yellow-400" : "text-gray-500"}>5. Geçmiş</span> &rsaquo;
-                        <span className={step >= 4 ? "text-yellow-400" : "text-gray-500"}>6. Statlar</span> &rsaquo;
-                        <span className={step >= 5 ? "text-yellow-400" : "text-gray-500"}>7. Buyuler</span>
+                        <span className={step >= 1 ? "text-yellow-400" : "text-gray-500"}>1. Basics</span> &rsaquo;
+                        <span className={step >= 2 ? "text-yellow-400" : "text-gray-500"}>2. Race</span> &rsaquo;
+                        <span className={step >= 2.5 ? "text-yellow-400" : "text-gray-500"}>2.5 Subrace</span> &rsaquo;
+                        <span className={step >= 3 ? "text-yellow-400" : "text-gray-500"}>3. Class</span> &rsaquo;
+                        <span className={step >= 3.5 ? "text-yellow-400" : "text-gray-500"}>4. Subclass</span> &rsaquo;
+                        <span className={step >= 3.6 ? "text-yellow-400" : "text-gray-500"}>5. Background</span> &rsaquo;
+                        <span className={step >= 4 ? "text-yellow-400" : "text-gray-500"}>6. Stats</span> &rsaquo;
+                        <span className={step >= 5 ? "text-yellow-400" : "text-gray-500"}>7. Spells</span>
                     </div>
                 </div>
 
@@ -763,17 +787,17 @@ export default function CharacterCreator() {
                 {step === 1 && (
                     <div className="bg-gray-800 p-8 rounded-xl shadow-2xl border border-gray-700 animate-fade-in">
                         <h2 className="text-3xl font-bold mb-6 text-white border-b border-gray-700 pb-2">
-                            {isNpc ? '🤝 Seviyeli NPC Oluştur' : 'Karakterin Adı ve Seviyesi'}
+                            {isNpc ? '🤝 Create Leveled NPC' : 'Character Name and Level'}
                         </h2>
                         <input
                             type="text"
-                            placeholder={isNpc ? 'NPC Adı...' : 'Efsanevi İsmin...'}
+                            placeholder={isNpc ? 'NPC Name...' : 'Your Legendary Name...'}
                             value={charName}
                             onChange={(e) => setCharName(e.target.value)}
                             className="w-full bg-gray-900 text-white text-2xl p-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500 mb-6"
                         />
                         <div className="flex items-center gap-4 bg-gray-900 p-4 rounded-lg border border-gray-700 mb-4">
-                            <span className="text-xl font-bold text-gray-300">Başlangıç Seviyesi:</span>
+                            <span className="text-xl font-bold text-gray-300">Starting Level:</span>
                             <input
                                 type="range"
                                 min="1"
@@ -784,27 +808,27 @@ export default function CharacterCreator() {
                             />
                             <span className="text-3xl font-black text-red-500 w-12 text-center">{selectedLevel}</span>
                         </div>
-                        <p className="text-gray-500 text-xs mt-2 italic">* Seçtiğiniz seviyeye göre alt sınıf ve büyü seçenekleri açılacaktır.</p>
+                        <p className="text-gray-500 text-xs mt-2 italic">* Subclass and spell options will unlock based on the level you choose.</p>
 
                         {/* NPC-only: Relationship & Alignment */}
                         {isNpc && (
                             <div className="mt-6 space-y-5">
                                 {/* Relationship */}
                                 <div>
-                                    <label className="block text-sm font-bold text-gray-400 uppercase tracking-wider mb-3">İlişki / Tutum</label>
+                                    <label className="block text-sm font-bold text-gray-400 uppercase tracking-wider mb-3">Relationship / Attitude</label>
                                     <div className="grid grid-cols-3 gap-3">
-                                        {(['Dost', 'Nötr', 'Düşman'] as const).map((rel) => {
+                                        {(['Friendly', 'Neutral', 'Hostile'] as const).map((rel) => {
                                             const colors = {
-                                                Dost: npcRelationship === 'Dost' ? 'border-emerald-500 bg-emerald-900/40 text-emerald-300' : 'border-gray-700 bg-gray-900 text-gray-400 hover:border-emerald-700',
-                                                Nötr: npcRelationship === 'Nötr' ? 'border-yellow-500 bg-yellow-900/40 text-yellow-300' : 'border-gray-700 bg-gray-900 text-gray-400 hover:border-yellow-700',
-                                                Düşman: npcRelationship === 'Düşman' ? 'border-red-500 bg-red-900/40 text-red-300' : 'border-gray-700 bg-gray-900 text-gray-400 hover:border-red-700',
+                                                Friendly: npcRelationship === 'Friendly' ? 'border-emerald-500 bg-emerald-900/40 text-emerald-300' : 'border-gray-700 bg-gray-900 text-gray-400 hover:border-emerald-700',
+                                                Neutral: npcRelationship === 'Neutral' ? 'border-yellow-500 bg-yellow-900/40 text-yellow-300' : 'border-gray-700 bg-gray-900 text-gray-400 hover:border-yellow-700',
+                                                Hostile: npcRelationship === 'Hostile' ? 'border-red-500 bg-red-900/40 text-red-300' : 'border-gray-700 bg-gray-900 text-gray-400 hover:border-red-700',
                                             };
-                                            const icons = { Dost: '🟩', Nötr: '🟨', Düşman: '🟥' };
+                                            const icons = { Friendly: '🟩', Neutral: '🟨', Hostile: '🟥' };
                                             return (
                                                 <button key={rel} onClick={() => setNpcRelationship(rel)}
-                                                    className={`p-4 rounded-xl border-2 font-bold transition-all text-center ${colors[rel]}`}>
-                                                    <div className="text-2xl mb-1">{icons[rel]}</div>
-                                                    {rel}
+                                                    className={`p-3 rounded-xl border-2 font-black transition-all flex flex-col items-center gap-1 ${colors[rel]}`}>
+                                                    <span className="text-xl">{icons[rel]}</span>
+                                                    <span className="text-[10px] uppercase tracking-widest">{rel}</span>
                                                 </button>
                                             );
                                         })}
@@ -813,7 +837,7 @@ export default function CharacterCreator() {
 
                                 {/* D&D Alignment Grid */}
                                 <div>
-                                    <label className="block text-sm font-bold text-gray-400 uppercase tracking-wider mb-3">Hizalama (Alignment)</label>
+                                    <label className="block text-sm font-bold text-gray-400 uppercase tracking-wider mb-3">Alignment</label>
                                     <div className="grid grid-cols-3 gap-2">
                                         {NPC_ALIGNMENTS.map((al) => (
                                             <button key={al} onClick={() => setNpcAlignment(al)}
@@ -831,35 +855,35 @@ export default function CharacterCreator() {
 
                         <div className="mt-8 flex justify-end">
                             <button onClick={() => setStep(2)} disabled={!charName} className="px-8 py-3 bg-red-600 hover:bg-red-700 rounded-lg text-lg font-bold transition-colors disabled:opacity-50">
-                                Ileri
+                                Next
                             </button>
                         </div>
                     </div>
                 )}
 
-                {/* Step 2: Irk Seçimi */}
+                {/* Step 2: Race Selection */}
                 {step === 2 && (
                     <div className="bg-gray-800 p-8 rounded-xl shadow-2xl border border-gray-700 animate-fade-in">
                         <div className="flex items-center justify-between border-b border-gray-700 pb-2 mb-6">
-                            <h2 className="text-3xl font-bold text-white">Irk Seçimi</h2>
-                            {selectedRace && <span className="text-sm bg-yellow-900/40 text-yellow-300 px-3 py-1 rounded-full border border-yellow-700 font-bold">Seçilen: {selectedRace.name}</span>}
+                            <h2 className="text-3xl font-bold text-white">Race Selection</h2>
+                            {selectedRace && <span className="text-sm bg-yellow-900/40 text-yellow-300 px-3 py-1 rounded-full border border-yellow-700 font-bold">Selected: {selectedRace.name}</span>}
                         </div>
 
                         {/* Race Tabs */}
                         <div className="flex gap-2 border-b border-gray-700/50 pb-4 mb-6 overflow-x-auto scrollbar-thin scrollbar-thumb-gray-600">
-                            {(["Temel", "Egzotik", "Soylar"] as const).map(tab => (
+                            {(["Basic", "Exotic", "Lineages"] as const).map(tab => (
                                 <button key={tab}
                                     onClick={() => setActiveRaceTab(tab)}
                                     className={`px-5 py-2.5 rounded-xl font-black shrink-0 transition-all ${activeRaceTab === tab ? 'bg-gradient-to-r from-yellow-600 to-yellow-500 text-gray-900 shadow-[0_0_15px_rgba(234,179,8,0.4)] translate-y-[-2px]' : 'bg-gray-800 border border-gray-700 text-gray-400 hover:bg-gray-700 hover:text-white'}`}>
-                                    {tab === "Temel" ? "🛡️ Temel Irklar" : tab === "Egzotik" ? "✨ Egzotik Irklar" : "🩸 Soylar & Lanetler"}
+                                    {tab === "Basic" ? "🛡️ Basic Races" : tab === "Exotic" ? "✨ Exotic Races" : "🩸 Lineages"}
                                 </button>
                             ))}
                         </div>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 min-h-[400px]">
                             {races.filter(r => {
-                                if (activeRaceTab === "Temel") return CORE_RACES.includes(r.name);
-                                if (activeRaceTab === "Egzotik") return EXOTIC_RACES.includes(r.name);
+                                if (activeRaceTab === "Basic") return CORE_RACES.includes(r.name);
+                                if (activeRaceTab === "Exotic") return EXOTIC_RACES.includes(r.name);
                                 return LINEAGES.includes(r.name);
                             }).map((race) => (
                                 <div
@@ -871,7 +895,7 @@ export default function CharacterCreator() {
                                         <h3 className={`text-2xl font-black ${selectedRace?._id === race._id ? 'text-yellow-400' : 'text-gray-100'}`}>{race.name}</h3>
                                         {race.subraces?.length > 0 && (
                                             <span className="text-[10px] px-2.5 py-1 rounded-full bg-purple-900/40 text-purple-300 border border-purple-700/50 font-black tracking-wider uppercase">
-                                                {race.subraces.length} Alt Tür
+                                                {race.subraces.length} Subrace
                                             </span>
                                         )}
                                     </div>
@@ -880,7 +904,7 @@ export default function CharacterCreator() {
                                     <div className="bg-gray-950/50 rounded-lg p-3 border border-gray-800 mb-4">
                                         <div className="text-xs text-gray-300 flex items-center gap-2">
                                             <span className="text-red-400 font-black uppercase tracking-widest text-[10px]">Stat Bonus:</span>
-                                            <span className="font-semibold">{race.ability_bonuses?.map((b: any) => `+${b.bonus} ${b.ability.substring(0, 3)}`).join(" VEYA ") || "Yok"}</span>
+                                            <span className="font-semibold">{race.ability_bonuses?.map((b: any) => `+${b.bonus} ${b.ability.substring(0, 3)}`).join(" OR ") || "None"}</span>
                                         </div>
                                     </div>
 
@@ -888,7 +912,7 @@ export default function CharacterCreator() {
                                         <div className="mt-auto border-t border-gray-700/50 pt-4 animate-fade-in">
                                             <p className="text-[10px] font-black text-yellow-600 uppercase tracking-widest mb-3 flex items-center gap-2">
                                                 <span className="w-2 h-2 rounded-full bg-yellow-500"></span>
-                                                Öne Çıkan Özellikler
+                                                Race Traits
                                             </p>
                                             <div className="space-y-2.5">
                                                 {race.traits.map((trait: any, ti: number) => (
@@ -904,22 +928,22 @@ export default function CharacterCreator() {
                             ))}
                         </div>
                         <div className="mt-8 flex justify-between">
-                            <button onClick={() => setStep(1)} className="px-8 py-3 bg-gray-600 hover:bg-gray-500 rounded-lg text-lg font-bold transition-colors">Geri</button>
+                            <button onClick={() => setStep(1)} className="px-8 py-3 bg-gray-600 hover:bg-gray-500 rounded-lg text-lg font-bold transition-colors">Back</button>
                             <button
                                 onClick={() => selectedRace?.subraces?.length > 0 ? setStep(2.5) : setStep(3)}
                                 disabled={!selectedRace}
                                 className="px-8 py-3 bg-red-600 hover:bg-red-700 rounded-lg text-lg font-bold transition-colors disabled:opacity-50"
-                            >İleri</button>
+                            >Next</button>
                         </div>
                     </div>
                 )}
 
-                {/* Step 2.5: Alt Irk (Subrace) Seçimi */}
+                {/* Step 2.5: Subrace Selection */}
                 {step === 2.5 && selectedRace && (
                     <div className="bg-gray-800 p-8 rounded-xl shadow-2xl border border-gray-700 animate-fade-in">
-                        <h2 className="text-3xl font-bold mb-2 text-white border-b border-gray-700 pb-2">Alt Irk Seçimi</h2>
+                        <h2 className="text-3xl font-bold mb-2 text-white border-b border-gray-700 pb-2">Subrace Selection</h2>
                         <p className="text-gray-400 mb-6">
-                            <span className="text-yellow-400 font-bold">{selectedRace.name}</span> ırkının alt türünü seç.
+                            Choose a subrace for <span className="text-yellow-400 font-bold">{selectedRace.name}</span>.
                         </p>
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             {selectedRace.subraces.map((sub: any, idx: number) => (
@@ -1215,7 +1239,7 @@ export default function CharacterCreator() {
                             <button onClick={() => {
                                 if (selectedClass?.subclass_unlock_level === 1) setStep(3.5);
                                 else setStep(3);
-                            }} className="px-8 py-3 bg-gray-600 hover:bg-gray-500 rounded-lg text-lg font-bold transition-colors">Geri</button>
+                            }} className="px-8 py-3 bg-gray-600 hover:bg-gray-500 rounded-lg text-lg font-bold transition-colors">Back</button>
                             <button
                                 onClick={() => setStep(4)}
                                 disabled={!selectedBackground || (() => {
@@ -1226,7 +1250,7 @@ export default function CharacterCreator() {
                                 })()}
                                 className="px-10 py-3 bg-gradient-to-r from-red-600 to-red-800 hover:from-red-500 hover:to-red-700 disabled:opacity-40 disabled:cursor-not-allowed rounded-lg text-lg font-bold shadow-[0_0_15px_rgba(239,68,68,0.3)] transition-all"
                             >
-                                İleri: Statlar
+                                Next: Stats
                             </button>
                         </div>
                     </div>
@@ -1235,8 +1259,8 @@ export default function CharacterCreator() {
                 {/* Step 4: Stat Dagitimi */}
                 {step === 4 && (
                     <div className="bg-gray-800 p-8 rounded-xl shadow-2xl border border-gray-700 animate-fade-in">
-                        <h2 className="text-3xl font-bold mb-2 text-white">Yetenek Puanları (Stats)</h2>
-                        <p className="text-gray-400 mb-4">Irkından gelen bonuslar başlangıç puanının üstüne otomatik eklenir.</p>
+                        <h2 className="text-3xl font-bold mb-2 text-white">Ability Scores (Stats)</h2>
+                        <p className="text-gray-400 mb-4">Bonuses from your race are automatically added to your base scores.</p>
 
                         {/* --- ANY STAT SELECTION (Race/Subrace) --- */}
                         {(() => {
@@ -1249,7 +1273,7 @@ export default function CharacterCreator() {
                             return (
                                 <div className="mb-8 p-6 bg-yellow-900/10 border border-yellow-700/50 rounded-xl">
                                     <h3 className="text-sm font-black text-yellow-500 uppercase tracking-widest mb-4 flex items-center gap-2">
-                                        ✨ Irksal Esnek Puan Seçimi
+                                        ✨ Racial Flexible Bonus Selection
                                         <span className="text-[10px] bg-yellow-900 border border-yellow-700 px-2 py-0.5 rounded text-yellow-300 font-bold font-mono">
                                             {Object.keys(raceStatPicks).length} / {anyBonuses.length}
                                         </span>
@@ -1257,19 +1281,19 @@ export default function CharacterCreator() {
                                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                         {anyBonuses.map((b, idx) => (
                                             <div key={`any-${idx}`}>
-                                                <label className="block text-[10px] text-gray-400 font-bold mb-1.5 uppercase">+{b.bonus} Bonus Puanı</label>
+                                                <label className="block text-[10px] text-gray-400 font-bold mb-1.5 uppercase">+{b.bonus} Bonus Point</label>
                                                 <select
                                                     value={raceStatPicks[`any-${idx}`] || ''}
                                                     onChange={(e) => setRaceStatPicks(prev => ({ ...prev, [`any-${idx}`]: e.target.value }))}
                                                     className="w-full bg-gray-900 border border-gray-700 text-white rounded-lg p-2.5 text-sm font-bold focus:border-yellow-500"
                                                 >
-                                                    <option value="">-- Stat Seç --</option>
+                                                    <option value="">-- Select Stat --</option>
                                                     {['STR', 'DEX', 'CON', 'INT', 'WIS', 'CHA'].map(s => {
                                                         const isPicked = Object.entries(raceStatPicks).some(([k, v]) => k !== `any-${idx}` && v === s);
                                                         const hasBaseBonus = selectedRace?.ability_bonuses?.some((rb: any) => rb.ability.toUpperCase().startsWith(s) && rb.ability !== 'Any') || selectedSubrace?.ability_bonuses?.some((sb: any) => sb.ability.toUpperCase().startsWith(s) && sb.ability !== 'Any');
                                                         return (
                                                             <option key={s} value={s} disabled={isPicked || hasBaseBonus}>
-                                                                {s}{(isPicked || hasBaseBonus) ? ' (Atanamaz)' : ''}
+                                                                {s}{(isPicked || hasBaseBonus) ? ' (Unavailable)' : ''}
                                                             </option>
                                                         );
                                                     })}
@@ -1277,12 +1301,12 @@ export default function CharacterCreator() {
                                             </div>
                                         ))}
                                     </div>
-                                    <p className="mt-3 text-[10px] text-gray-500 italic">* Aynı statı birden fazla kez seçemezsiniz (isteğe bağlı kural değilse).</p>
+                                    <p className="mt-3 text-[10px] text-gray-500 italic">* You cannot select the same stat multiple times unless optional rules allow it.</p>
                                 </div>
                             );
                         })()}
 
-                        {/* Yöntem Seçimi */}
+                        {/* Method Selection */}
                         <div className="flex space-x-3 mb-6 pb-5 border-b border-gray-700">
                             <button
                                 onClick={() => {
@@ -1294,7 +1318,7 @@ export default function CharacterCreator() {
                                     : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
                                     }`}
                             >
-                                🎲 Standart Dizi
+                                🎲 Standard Array
                             </button>
                             <button
                                 onClick={() => {
@@ -1306,7 +1330,16 @@ export default function CharacterCreator() {
                                     : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
                                     }`}
                             >
-                                💰 Nokta Alımı (Point Buy)
+                                💰 Point Buy
+                            </button>
+                            <button
+                                onClick={handleStatRoll}
+                                className={`px-5 py-2 rounded-lg font-bold transition-all ${statMethod === 'rolling'
+                                    ? 'bg-green-600 text-white shadow-lg'
+                                    : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+                                    }`}
+                            >
+                                🎲 Roll Stats (4d6)
                             </button>
                         </div>
 
@@ -1315,7 +1348,7 @@ export default function CharacterCreator() {
                             <div>
                                 <div className="flex flex-wrap gap-2 mb-6">
                                     <p className="w-full text-sm text-gray-400 mb-1">
-                                        Aşağıdaki değerlerden her birini sadece <span className="text-yellow-400 font-bold">bir kezine</span> bir stat’a atayabilirsin:
+                                        Assign each of the following values to exactly <span className="text-yellow-400 font-bold">one</span> stat:
                                     </p>
                                     {STANDARD_VALUES.map(val => {
                                         const isUsed = Object.values(assignedValues).includes(val);
@@ -1374,7 +1407,7 @@ export default function CharacterCreator() {
                                                     }}
                                                     className="w-full bg-gray-700 border border-gray-600 rounded-lg py-1.5 px-2 text-white text-sm focus:outline-none focus:border-yellow-500"
                                                 >
-                                                    <option value="">-- Seç --</option>
+                                                    <option value="">-- Select --</option>
                                                     {STANDARD_VALUES.filter(v => !Object.values(assignedValues).includes(v) || assignedValues[stat] === v).map(v => (
                                                         <option key={v} value={v}>{v}</option>
                                                     ))}
@@ -1385,24 +1418,83 @@ export default function CharacterCreator() {
                                 </div>
                                 <p className={`mt-4 text-sm font-bold ${Object.values(assignedValues).every(v => v !== null) ? 'text-green-400' : 'text-yellow-400'
                                     }`}>
-                                    {Object.values(assignedValues).filter(v => v !== null).length} / 6 stat atandı
-                                    {Object.values(assignedValues).every(v => v !== null) && ' ✓ Hepsi tamam!'}
+                                    {Object.values(assignedValues).filter(v => v !== null).length} / 6 stats assigned
+                                    {Object.values(assignedValues).every(v => v !== null) && ' ✓ All set!'}
                                 </p>
+                            </div>
+                        )}
+
+                        {/* --- ROLLING DISPLAY --- */}
+                        {statMethod === 'rolling' && (
+                            <div className="animate-fade-in">
+                                <div className="flex items-center justify-between mb-6 px-4 py-3 bg-green-900/20 border border-green-700 rounded-xl">
+                                    <span className="text-gray-300 font-semibold">Rolled Stats (4d6 Drop Lowest)</span>
+                                    <button 
+                                        onClick={handleStatRoll}
+                                        className="text-xs bg-green-600 hover:bg-green-500 text-white px-3 py-1 rounded-lg font-bold transition-all"
+                                    >
+                                        🔄 Re-roll
+                                    </button>
+                                </div>
+                                <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
+                                    {(Object.keys(stats) as Array<keyof typeof stats>).map((stat) => {
+                                        // Bonus calculation (Base + Subrace + Any Picks)
+                                        let bonus = 0;
+                                        selectedRace?.ability_bonuses?.forEach((b: any) => {
+                                            if (b.ability.toUpperCase().startsWith(stat) && b.ability !== 'Any') bonus += b.bonus;
+                                        });
+                                        selectedSubrace?.ability_bonuses?.forEach((b: any) => {
+                                            if (b.ability.toUpperCase().startsWith(stat) && b.ability !== 'Any') bonus += b.bonus;
+                                        });
+                                        const localAnyBonuses = [
+                                            ...(selectedRace?.ability_bonuses?.filter((b: any) => b.ability === 'Any') || []),
+                                            ...(selectedSubrace?.ability_bonuses?.filter((b: any) => b.ability === 'Any') || [])
+                                        ];
+                                        Object.entries(raceStatPicks).forEach(([key, pickedStat]) => {
+                                            if (pickedStat === stat) {
+                                                const idx = parseInt(key.replace('any-', ''));
+                                                const actualBonus = localAnyBonuses[idx]?.bonus || 1;
+                                                bonus += actualBonus;
+                                            }
+                                        });
+
+                                        Object.values(featStatSelections).forEach(pickedStat => {
+                                            if (pickedStat === stat) bonus += 1;
+                                        });
+
+                                        const baseVal = stats[stat];
+                                        const finalVal = baseVal + bonus;
+                                        const mod = Math.floor((finalVal - 10) / 2);
+                                        const isPrimary = selectedClass?.primary_ability?.includes(stat === 'STR' ? 'Strength' : stat === 'DEX' ? 'Dexterity' : stat === 'CON' ? 'Constitution' : stat === 'INT' ? 'Intelligence' : stat === 'WIS' ? 'Wisdom' : 'Charisma');
+                                        
+                                        return (
+                                            <div key={stat} className={`bg-gray-900 rounded-xl p-5 text-center border-2 transition-all ${isPrimary ? 'border-yellow-500 shadow-[0_0_15px_rgba(234,179,8,0.1)]' : 'border-gray-700'}`}>
+                                                <h3 className="text-lg font-bold text-gray-400 mb-1">{stat}</h3>
+                                                {isPrimary && <span className="text-[10px] bg-yellow-900/50 text-yellow-500 border border-yellow-700/50 px-2 py-0.5 rounded uppercase tracking-widest font-black">Primary</span>}
+                                                <div className="text-5xl font-black text-white my-4">{finalVal}</div>
+                                                <div className={`text-lg font-bold px-3 py-1 rounded-lg inline-block ${mod >= 0 ? 'bg-green-900/30 text-green-400' : 'bg-red-900/30 text-red-400'}`}>
+                                                    {mod >= 0 ? `+${mod}` : mod}
+                                                </div>
+                                                <p className="mt-4 text-[10px] text-gray-500 font-medium">Base: {baseVal} | Bonus: +{bonus}</p>
+                                            </div>
+                                        );
+                                    })}
+                                </div>
                             </div>
                         )}
 
                         {/* --- POINT BUY --- */}
                         {statMethod === 'pointbuy' && (
-                            <div>
+                            <div className="animate-fade-in">
                                 <div className={`flex items-center justify-between mb-4 px-4 py-3 rounded-xl border ${pointsLeft === 0 ? 'bg-green-900/30 border-green-700' :
                                     pointsLeft < 0 ? 'bg-red-900/30 border-red-700' :
                                         'bg-blue-900/20 border-blue-800'
                                     }`}>
-                                    <span className="text-gray-300 font-semibold">Kalan Puan</span>
+                                    <span className="text-gray-300 font-semibold">Points Left</span>
                                     <span className={`text-2xl font-black ${pointsLeft < 0 ? 'text-red-400' : pointsLeft === 0 ? 'text-green-400' : 'text-blue-400'
                                         }`}>{pointsLeft} / {POINT_BUY_BUDGET}</span>
                                 </div>
-                                <p className="text-xs text-gray-500 mb-5">Her stat en az 8, en fazla 15 olabilir. 13–15 arası artışlar daha pahalıdır.</p>
+                                <p className="text-xs text-gray-500 mb-5">Each score must be at least 8 and at most 15. Increases between 13–15 are more expensive.</p>
                                 <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
                                     {(Object.keys(stats) as Array<keyof typeof stats>).map((stat) => {
                                         // Bonus calculation (Base + Subrace + Any Picks)
@@ -1450,7 +1542,7 @@ export default function CharacterCreator() {
                                                         onClick={() => setStats(prev => ({ ...prev, [stat]: prev[stat] - 1 }))}
                                                         className="w-9 h-9 bg-gray-700 hover:bg-gray-600 disabled:opacity-30 disabled:cursor-not-allowed rounded text-lg font-bold transition-colors"
                                                     >-</button>
-                                                    <span className="text-xs text-gray-400 font-mono">{baseVal} (Maliyet: {POINT_BUY_COST[baseVal] ?? '?'})</span>
+                                                    <span className="text-xs text-gray-400 font-mono">{baseVal} (Cost: {POINT_BUY_COST[baseVal] ?? '?'})</span>
                                                     <button
                                                         disabled={!canIncrease}
                                                         onClick={() => setStats(prev => ({ ...prev, [stat]: prev[stat] + 1 }))}
@@ -1467,7 +1559,7 @@ export default function CharacterCreator() {
                         <div className="mt-12 flex justify-between pt-6 border-t border-gray-700">
                             <button onClick={() => {
                                 setStep(3.6);
-                            }} className="px-8 py-3 bg-gray-600 hover:bg-gray-500 rounded-lg text-lg font-bold transition-colors">Geri</button>
+                            }} className="px-8 py-3 bg-gray-600 hover:bg-gray-500 rounded-lg text-lg font-bold transition-colors">Back</button>
                             <button
                                 onClick={() => {
                                     const asiLevelMap = ASI_LEVELS[selectedClass?.name ?? ""] ?? [4, 8, 12, 16, 19];
@@ -1498,7 +1590,7 @@ export default function CharacterCreator() {
                                 }
                                 className="px-10 py-3 bg-gradient-to-r from-red-600 to-red-800 hover:from-red-500 hover:to-red-700 disabled:opacity-40 disabled:cursor-not-allowed rounded-lg text-lg font-bold shadow-[0_0_20px_rgba(239,68,68,0.4)] transition-all hover:scale-105"
                             >
-                                Ileri
+                                Next
                             </button>
                         </div>
                     </div>
@@ -1508,8 +1600,8 @@ export default function CharacterCreator() {
                 {step === 4.5 && (
                     <div className="max-w-3xl mx-auto animate-fadeIn mt-10">
                         <div className="text-center mb-8">
-                            <h2 className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-yellow-600 drop-shadow-sm uppercase tracking-wider mb-2">Feat & ASI Seçimi</h2>
-                            <p className="text-gray-400 text-lg">Seviyenizden dolayı {asiSelections.length} adet yetenek artışı (ASI) veya Feat seçme hakkınız var.</p>
+                            <h2 className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-yellow-600 drop-shadow-sm uppercase tracking-wider mb-2">Feat & ASI Selection</h2>
+                            <p className="text-gray-400 text-lg">Due to your level, you have {asiSelections.length} Ability Score Improvements (ASI) or Feat selections.</p>
                         </div>
 
                         <div className="space-y-6">
@@ -1519,9 +1611,9 @@ export default function CharacterCreator() {
                                     <div className="flex justify-between items-center mb-4">
                                         <h3 className="font-black text-yellow-500 tracking-widest text-sm uppercase flex items-center gap-2">
                                             <span className="bg-yellow-600 text-white w-6 h-6 rounded-full flex items-center justify-center text-xs">{idx + 1}</span>
-                                            Seviye ASI / Feat
+                                            Level ASI / Feat
                                         </h3>
-                                        <span className="text-[10px] bg-gray-700 text-gray-400 px-2 py-0.5 rounded border border-gray-600 font-bold uppercase tracking-tighter">Sınıf Özelliği</span>
+                                        <span className="text-[10px] bg-gray-700 text-gray-400 px-2 py-0.5 rounded border border-gray-600 font-bold uppercase tracking-tighter">Class Feature</span>
                                     </div>
                                     <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-4">
                                         {(['stat2', 'stat11', 'feat'] as const).map(t => (
@@ -1530,7 +1622,7 @@ export default function CharacterCreator() {
                                                 newAsi[idx] = { ...newAsi[idx], type: t, stat1: 'STR', stat2: 'DEX', featName: '' };
                                                 setAsiSelections(newAsi);
                                             }} className={`px-4 py-3 border-2 rounded-xl text-sm font-bold transition-all ${asi.type === t ? 'border-yellow-500 bg-yellow-900/30 text-yellow-400' : 'border-gray-600 bg-gray-900 text-gray-400 hover:border-gray-500 hover:text-gray-200'}`}>
-                                                {t === 'stat2' ? '+2 Bir Stata' : t === 'stat11' ? '+1 İki Stata' : 'Feat Seç'}
+                                                {t === 'stat2' ? '+2 to One Stat' : t === 'stat11' ? '+1 to Two Stats' : 'Select Feat'}
                                             </button>
                                         ))}
                                     </div>
@@ -1538,7 +1630,7 @@ export default function CharacterCreator() {
                                     <div className="p-4 bg-gray-900/80 rounded-lg border border-gray-700">
                                         {asi.type === 'stat2' && (
                                             <div>
-                                                <label className="block text-xs text-gray-400 font-bold mb-2 uppercase">Hangi yeteneğe +2 eklensin?</label>
+                                                <label className="block text-xs text-gray-400 font-bold mb-2 uppercase">Which ability should get +2?</label>
                                                 <select value={asi.stat1} onChange={e => {
                                                     const newAsi = [...asiSelections];
                                                     newAsi[idx] = { ...newAsi[idx], stat1: e.target.value };
@@ -1551,7 +1643,7 @@ export default function CharacterCreator() {
                                         {asi.type === 'stat11' && (
                                             <div className="grid grid-cols-2 gap-4">
                                                 <div>
-                                                    <label className="block text-xs text-gray-400 font-bold mb-2 uppercase">1. Yetenek (+1)</label>
+                                                    <label className="block text-xs text-gray-400 font-bold mb-2 uppercase">1st Ability (+1)</label>
                                                     <select value={asi.stat1} onChange={e => {
                                                         const newAsi = [...asiSelections];
                                                         newAsi[idx] = { ...newAsi[idx], stat1: e.target.value };
@@ -1561,7 +1653,7 @@ export default function CharacterCreator() {
                                                     </select>
                                                 </div>
                                                 <div>
-                                                    <label className="block text-xs text-gray-400 font-bold mb-2 uppercase">2. Yetenek (+1)</label>
+                                                    <label className="block text-xs text-gray-400 font-bold mb-2 uppercase">2nd Ability (+1)</label>
                                                     <select value={asi.stat2} onChange={e => {
                                                         const newAsi = [...asiSelections];
                                                         newAsi[idx] = { ...newAsi[idx], stat2: e.target.value };
@@ -1569,19 +1661,19 @@ export default function CharacterCreator() {
                                                     }} className="w-full bg-gray-950 border border-gray-700 text-white rounded p-2 outline-none focus:border-yellow-500 font-bold">
                                                         {Object.keys(stats).map(s => <option key={s} value={s}>{s}</option>)}
                                                     </select>
-                                                    {asi.stat1 === asi.stat2 && <span className="text-red-400 text-[10px] mt-1 block">Aynı statı iki kez seçemezsiniz (bunun yerine +2 seçeneğini kullanın).</span>}
+                                                    {asi.stat1 === asi.stat2 && <span className="text-red-400 text-[10px] mt-1 block">You cannot select the same stat twice (use +2 option instead).</span>}
                                                 </div>
                                             </div>
                                         )}
                                         {asi.type === 'feat' && (
                                             <div>
-                                                <label className="block text-xs text-gray-400 font-bold mb-2 uppercase">Feat Seçin</label>
+                                                <label className="block text-xs text-gray-400 font-bold mb-2 uppercase">Select Feat</label>
                                                 <button
                                                     onClick={() => { setShowFeatPicker(idx); setFeatSearch(''); setFeatCategoryFilter('All'); setExpandedFeat(null); }}
                                                     className="w-full flex items-center justify-between px-4 py-3 bg-gray-900 border border-yellow-700/50 rounded-xl text-sm font-bold transition-all hover:border-yellow-500 hover:bg-yellow-900/10"
                                                 >
                                                     <span className={asi.featName ? 'text-yellow-300' : 'text-gray-500'}>
-                                                        {asi.featName || '📖 Feat seçmek için tıkla...'}
+                                                        {asi.featName || '📖 Click to select a feat...'}
                                                     </span>
                                                     <span className="text-gray-500 text-xs">▼ {libFeats.length} feat</span>
                                                 </button>
@@ -1591,7 +1683,7 @@ export default function CharacterCreator() {
                                                     return (
                                                         <div className="mt-2 p-3 bg-yellow-900/10 border border-yellow-800/40 rounded-lg">
                                                             <p className="text-xs text-gray-300 leading-relaxed">{f.desc_tr}</p>
-                                                            {f.prereq && <p className="text-yellow-600 text-[10px] mt-1 font-bold">Önkoşul: {f.prereq}</p>}
+                                                            {f.prereq && <p className="text-yellow-600 text-[10px] mt-1 font-bold">Prerequisite: {f.prereq}</p>}
                                                             {/* Feat Selection Area (Spells & Stats & Choices) */}
                                                             {(() => {
                                                                 const reqs = getFeatRequirements(asi.featName as string, libFeats);
@@ -1650,20 +1742,20 @@ export default function CharacterCreator() {
                                         <div className="flex justify-between items-center mb-4">
                                             <h3 className="font-black text-rose-500 tracking-widest text-sm uppercase flex items-center gap-2">
                                                 <span className="bg-rose-600 text-white w-6 h-6 rounded-full flex items-center justify-center text-xs">★</span>
-                                                Irk Bonus Feat
+                                                Race Bonus Feat
                                             </h3>
-                                            <span className="text-[10px] bg-rose-900/40 text-rose-300 px-2 py-0.5 rounded border border-rose-700 font-bold uppercase tracking-tighter">{selectedRace?.name} Mirası</span>
+                                            <span className="text-[10px] bg-rose-900/40 text-rose-300 px-2 py-0.5 rounded border border-rose-700 font-bold uppercase tracking-tighter">{selectedRace?.name} Legacy</span>
                                         </div>
-                                        <p className="text-xs text-gray-400 mb-4">{selectedRace!.name}, 1. seviyede ücretsiz bir Feat kazanır.</p>
+                                        <p className="text-xs text-gray-400 mb-4">{selectedRace!.name} gains a free feat at level 1.</p>
 
                                         <div className="p-4 bg-gray-900/80 rounded-lg border border-gray-700">
-                                            <label className="block text-xs text-gray-400 font-bold mb-2 uppercase">Bonus Feat Seçin</label>
+                                            <label className="block text-xs text-gray-400 font-bold mb-2 uppercase">Select Bonus Feat</label>
                                             <button
                                                 onClick={() => { setRaceBonusFeat(i); setFeatSearch(''); setFeatCategoryFilter('All'); setExpandedFeat(null); }}
                                                 className="w-full flex items-center justify-between px-4 py-3 bg-gray-900 border border-rose-700/50 rounded-xl text-sm font-bold transition-all hover:border-rose-500 hover:bg-rose-900/10"
                                             >
                                                 <span className={raceFeatStore[i] ? 'text-rose-300' : 'text-gray-500'}>
-                                                    {raceFeatStore[i] || '📖 Ücretsiz feat seç...'}
+                                                    {raceFeatStore[i] || '📖 Select free feat...'}
                                                 </span>
                                                 <span className="text-gray-500 text-xs">▼ {ALL_FEATS.length} feat</span>
                                             </button>
@@ -1673,7 +1765,7 @@ export default function CharacterCreator() {
                                                 return (
                                                     <div className="mt-2 p-3 bg-rose-900/10 border border-rose-800/40 rounded-lg">
                                                         <p className="text-xs text-gray-300 leading-relaxed">{f.desc_tr}</p>
-                                                        {f.prereq && <p className="text-rose-600 text-[10px] mt-1 font-bold">Önkoşul: {f.prereq}</p>}
+                                                        {f.prereq && <p className="text-rose-600 text-[10px] mt-1 font-bold">Prerequisite: {f.prereq}</p>}
                                                         {/* Feat Selection Area (Spells & Stats & Choices) */}
                                                         {(() => {
                                                             const reqs = getFeatRequirements(raceFeatStore[i], libFeats);
@@ -1728,7 +1820,7 @@ export default function CharacterCreator() {
                         </div>
 
                         <div className="mt-12 flex justify-between pt-6 border-t border-gray-700">
-                            <button onClick={() => setStep(4)} className="px-8 py-3 bg-gray-600 hover:bg-gray-500 rounded-lg text-lg font-bold transition-colors">Geri</button>
+                            <button onClick={() => setStep(4)} className="px-8 py-3 bg-gray-600 hover:bg-gray-500 rounded-lg text-lg font-bold transition-colors">Back</button>
                             <button onClick={() => {
                                 // Validation
                                 const invalid = asiSelections.some(asi =>
@@ -1738,13 +1830,13 @@ export default function CharacterCreator() {
                                 const raceFeatCount = getRaceFeatCount(selectedRace);
                                 const raceInvalid = Array.from({ length: raceFeatCount }).some((_, i) => !raceFeatStore[i]);
 
-                                if (invalid) return alert("Lütfen ASI seçimlerinizi geçerli şekilde tamamlayın (aynı statı iki kez seçmeyin veya Feat adını boş bırakmayın).");
-                                if (raceInvalid) return alert("Lütfen ırkınızdan gelen bonus feat seçimini tamamlayın.");
+                                if (invalid) return alert("Please complete your ASI selections validly (do not select the same stat twice or leave the Feat name empty).");
+                                if (raceInvalid) return alert("Please complete your race bonus feat selection.");
 
-                                setStep(5);
                                 fetchSpells();
+                                setStep(5);
                             }} className="px-10 py-3 bg-gradient-to-r from-red-600 to-red-800 hover:from-red-500 hover:to-red-700 rounded-lg text-lg font-bold shadow-[0_0_20px_rgba(239,68,68,0.4)] transition-all hover:scale-105">
-                                Ileri: Son Adım
+                                Next: Final Step
                             </button>
                         </div>
                     </div>
@@ -1768,26 +1860,26 @@ export default function CharacterCreator() {
 
                     return (
                         <div className="bg-gray-800 p-8 rounded-xl shadow-2xl border border-gray-700 animate-fade-in">
-                            <h2 className="text-3xl font-bold mb-1 text-white">Büyü Seçimi</h2>
+                            <h2 className="text-3xl font-bold mb-1 text-white">Spell Selection</h2>
                             <p className="text-gray-400 text-sm mb-4">
-                                {selectedClass?.name} sınıfına ait büyüler.
-                                {!isSpellcaster && <span className="ml-2 text-yellow-400 font-semibold">(Bu sınıf büyücü değildir — atlayabilirsin)</span>}
+                                Spells for <span className="text-yellow-400 font-bold">{selectedClass?.name}</span>.
+                                {!isSpellcaster && <span className="ml-2 text-yellow-400 font-semibold">(This class is not a spellcaster — you can skip)</span>}
                             </p>
 
                             <div className="space-y-3 mb-5 p-4 bg-gray-900 rounded-xl border border-gray-700">
                                 <div className="flex flex-wrap gap-2">
                                     <input
-                                        type="text" placeholder="Büyü ara..."
+                                        type="text" placeholder="Search spells..."
                                         value={spellSearch} onChange={e => setSpellSearch(e.target.value)}
                                         className="flex-1 min-w-[160px] bg-gray-800 text-white px-3 py-2 rounded-lg border border-gray-600 focus:outline-none focus:border-blue-500 text-sm"
                                     />
                                     <select value={spellSchoolFilter} onChange={e => setSpellSchoolFilter(e.target.value)}
                                         className="bg-gray-800 text-white px-3 py-2 rounded-lg border border-gray-600 text-sm focus:outline-none focus:border-blue-500">
-                                        {SCHOOLS.map(s => <option key={s} value={s}>{s === "all" ? "Tüm Okullar" : s.charAt(0).toUpperCase() + s.slice(1)}</option>)}
+                                        {SCHOOLS.map(s => <option key={s} value={s}>{s === "all" ? "All Schools" : s.charAt(0).toUpperCase() + s.slice(1)}</option>)}
                                     </select>
                                 </div>
                                 <div className="flex flex-wrap gap-2 pt-2 border-t border-gray-800">
-                                    <span className="text-[10px] text-gray-500 font-bold uppercase self-center mr-2">Kategori:</span>
+                                    <span className="text-[10px] text-gray-500 font-bold uppercase self-center mr-2">Category:</span>
                                     {SPELL_TYPES.map(type => (
                                         <button
                                             key={type}
@@ -1797,14 +1889,14 @@ export default function CharacterCreator() {
                                                 : 'bg-gray-800 text-gray-400 border-gray-700 hover:border-gray-500'
                                                 }`}
                                         >
-                                            {type === 'all' ? 'HEPSİ' : type}
+                                            {type === 'all' ? 'ALL' : type}
                                         </button>
                                     ))}
                                 </div>
                             </div>
 
                             {loadingSpells ? (
-                                <div className="text-center text-gray-400 py-12 text-xl">✨ Büyüler yükleniyor...</div>
+                                <div className="text-center text-gray-400 py-12 text-xl">✨ Loading spells...</div>
                             ) : (
                                 <div className="space-y-6">
                                     {/* TABS HEADER */}
@@ -1814,7 +1906,7 @@ export default function CharacterCreator() {
                                                 onClick={() => setActiveSpellTab(0)}
                                                 className={`px-4 py-2 rounded-lg font-bold shrink-0 transition-all ${activeSpellTab === 0 ? 'bg-yellow-600 text-gray-900 shadow-[0_0_10px_rgba(202,138,4,0.5)]' : 'bg-gray-800 text-gray-400 hover:bg-gray-700'}`}
                                             >
-                                                Kantripler {selectedCantrips.length > 0 && <span className="text-xs bg-black/30 text-white px-1.5 py-0.5 rounded ml-1">{selectedCantrips.length}/{limits.cantrips}</span>}
+                                                Cantrips {selectedCantrips.length > 0 && <span className="text-xs bg-black/30 text-white px-1.5 py-0.5 rounded ml-1">{selectedCantrips.length}/{limits.cantrips}</span>}
                                             </button>
                                         )}
                                         {limits.spells > 0 && Array.from(new Set(leveled.map(s => s.level_int))).sort((a, b) => a - b).map(lvl => {
@@ -1825,7 +1917,7 @@ export default function CharacterCreator() {
                                                     onClick={() => setActiveSpellTab(lvl)}
                                                     className={`px-4 py-2 rounded-lg font-bold shrink-0 transition-all ${activeSpellTab === lvl ? 'bg-blue-600 text-white shadow-[0_0_10px_rgba(37,99,235,0.5)]' : 'bg-gray-800 text-gray-400 hover:bg-gray-700'}`}
                                                 >
-                                                    Seviye {lvl} {pickedAtLvl > 0 && <span className="text-xs bg-black/30 px-1.5 py-0.5 rounded ml-1">{pickedAtLvl}</span>}
+                                                    Level {lvl} {pickedAtLvl > 0 && <span className="text-xs bg-black/30 px-1.5 py-0.5 rounded ml-1">{pickedAtLvl}</span>}
                                                 </button>
                                             )
                                         })}
@@ -1835,17 +1927,17 @@ export default function CharacterCreator() {
                                     <div className="flex flex-wrap items-center gap-6 bg-gray-900/80 p-4 rounded-xl border border-gray-700 shadow-inner mb-6">
                                         {limits.cantrips > 0 && (
                                             <div>
-                                                <span className="text-yellow-500 uppercase font-black tracking-widest text-[10px] block mb-1">Cantrip Hakkı</span>
+                                                <span className="text-yellow-500 uppercase font-black tracking-widest text-[10px] block mb-1">Cantrip Limit</span>
                                                 <span className={`text-lg font-bold ${selectedCantrips.length >= limits.cantrips ? 'text-green-400' : 'text-gray-300'}`}>
-                                                    {selectedCantrips.length} <span className="text-gray-500 text-sm">/ {limits.cantrips} Seçildi</span>
+                                                    {selectedCantrips.length} <span className="text-gray-500 text-sm">/ {limits.cantrips} Selected</span>
                                                 </span>
                                             </div>
                                         )}
                                         {limits.spells > 0 && (
                                             <div className={`${limits.cantrips > 0 ? 'border-l border-gray-700 pl-6' : ''}`}>
-                                                <span className="text-blue-500 uppercase font-black tracking-widest text-[10px] block mb-1">Büyü Hakkı (Svl 1+)</span>
+                                                <span className="text-blue-500 uppercase font-black tracking-widest text-[10px] block mb-1">Spell Limit (Lvl 1+)</span>
                                                 <span className={`text-lg font-bold ${selectedLeveledSpells.length >= limits.spells ? 'text-green-400' : 'text-gray-300'}`}>
-                                                    {selectedLeveledSpells.length} <span className="text-gray-500 text-sm">/ {limits.spells} Seçildi</span>
+                                                    {selectedLeveledSpells.length} <span className="text-gray-500 text-sm">/ {limits.spells} Selected</span>
                                                 </span>
                                             </div>
                                         )}
@@ -1866,7 +1958,7 @@ export default function CharacterCreator() {
                                                         />
                                                     );
                                                 })}
-                                                {cantrips.filter(filterSpell).length === 0 && <p className="text-gray-400 italic text-sm col-span-1 md:col-span-2 lg:col-span-3 text-center py-8 bg-gray-900/50 rounded-xl border border-gray-800">Seçtiğiniz filtrelere uygun cantrip bulunamadı.</p>}
+                                                {cantrips.filter(filterSpell).length === 0 && <p className="text-gray-400 italic text-sm col-span-1 md:col-span-2 lg:col-span-3 text-center py-8 bg-gray-900/50 rounded-xl border border-gray-800">No cantrips found matching your filters.</p>}
                                             </div>
                                         </div>
                                     )}
@@ -1887,13 +1979,13 @@ export default function CharacterCreator() {
                                                             />
                                                         );
                                                     })}
-                                                    {spellsAtLvl.length === 0 && <p className="text-gray-400 italic text-sm col-span-1 md:col-span-2 lg:col-span-3 text-center py-8 bg-gray-900/50 rounded-xl border border-gray-800">Seçtiğiniz filtrelere uygun Seviye {activeSpellTab} büyüsü bulunamadı.</p>}
+                                                    {spellsAtLvl.length === 0 && <p className="text-gray-400 italic text-sm col-span-1 md:col-span-2 lg:col-span-3 text-center py-8 bg-gray-900/50 rounded-xl border border-gray-800">No Level {activeSpellTab} spells found matching your filters.</p>}
                                                 </div>
                                             </div>
                                         );
                                     })()}
 
-                                    {/* SINIF VE IRK ÖZELLİKLERİ */}
+                                    {/* CLASS AND RACE FEATURES */}
                                     {(() => {
                                         const styles = FIGHTING_STYLES[selectedClass?.name ?? ""] ?? [];
                                         const autoFeatures = CLASS_AUTO_FEATURES[selectedClass?.name ?? ""] ?? [];
@@ -1904,9 +1996,9 @@ export default function CharacterCreator() {
                                                 {styles.length > 0 && (
                                                     <div>
                                                         <div className="flex items-center justify-between mb-3">
-                                                            <h3 className="text-lg font-black text-orange-400 uppercase tracking-wide">⚔️ Savas Stili (Fighting Style)</h3>
+                                                            <h3 className="text-lg font-black text-orange-400 uppercase tracking-wide">⚔️ Fighting Style</h3>
                                                             <span className={`px-3 py-1 rounded-full text-sm font-black border ${selectedFightingStyle ? 'bg-green-900 text-green-300 border-green-700' : 'bg-gray-700 text-gray-300 border-gray-600'}`}>
-                                                                {selectedFightingStyle ? "✓ Secildi" : "1 tane sec"}
+                                                                {selectedFightingStyle ? "✓ Selected" : "Select one"}
                                                             </span>
                                                         </div>
                                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
@@ -1941,12 +2033,12 @@ export default function CharacterCreator() {
                                                     return (
                                                         <div className="mb-5">
                                                             <div className="flex items-center justify-between mb-3">
-                                                                <h3 className="text-lg font-black text-purple-400 uppercase tracking-wide">🎓 Sınıf Beceri Uzmanlıkları</h3>
+                                                                <h3 className="text-lg font-black text-purple-400 uppercase tracking-wide">🎓 Class Skill Proficiencies</h3>
                                                                 <span className={`px-3 py-1 rounded-full text-sm font-black border ${picked.length >= canPick ? 'bg-purple-900 text-purple-300 border-purple-700' : 'bg-gray-700 text-gray-300 border-gray-600'
                                                                     }`}>{picked.length} / {canPick}</span>
                                                             </div>
                                                             {bgSkills.length > 0 && (
-                                                                <p className="text-xs text-gray-400 mb-2">🎒 Background&apos;dan otomatik: <span className="text-yellow-400 font-bold">{bgSkills.join(', ')}</span></p>
+                                                                <p className="text-xs text-gray-400 mb-2">🎒 Automatic from Background: <span className="text-yellow-400 font-bold">{bgSkills.join(', ')}</span></p>
                                                             )}
                                                             <div className="flex flex-wrap gap-2">
                                                                 {skills.map((skill: string) => {
@@ -1979,7 +2071,7 @@ export default function CharacterCreator() {
                                                 {isRogue && (
                                                     <div>
                                                         <div className="flex items-center justify-between mb-3">
-                                                            <h3 className="text-lg font-black text-green-400 uppercase tracking-wide">🎯 Expertise (2 beceri sec)</h3>
+                                                            <h3 className="text-lg font-black text-green-400 uppercase tracking-wide">🎯 Expertise (Select 2 skills)</h3>
                                                             <span className={`px-3 py-1 rounded-full text-sm font-black border ${selectedExpertise.length >= 2 ? 'bg-green-900 text-green-300 border-green-700' : 'bg-gray-700 text-gray-300 border-gray-600'}`}>
                                                                 {selectedExpertise.length} / 2
                                                             </span>
@@ -2014,10 +2106,10 @@ export default function CharacterCreator() {
                                                     return (
                                                         <div className="mb-4">
                                                             <div className="flex items-center justify-between mb-2">
-                                                                <h3 className="text-lg font-black text-teal-400 uppercase tracking-wide">🌟 {selectedRace!.name} Ekstra Beceriler</h3>
+                                                                <h3 className="text-lg font-black text-teal-400 uppercase tracking-wide">🌟 {selectedRace!.name} Extra Skills</h3>
                                                                 <span className={`px-3 py-1 rounded-full text-sm font-black border ${raceExtraSkills.length >= needed ? 'bg-teal-900 text-teal-300 border-teal-700' : 'bg-gray-700 text-gray-300 border-gray-600'}`}>{raceExtraSkills.length} / {needed}</span>
                                                             </div>
-                                                            <p className="text-xs text-gray-400 mb-2">Half-Elf, herhangi 2 beceri listesinden proficiency kazanır.</p>
+                                                            <p className="text-xs text-gray-400 mb-2">Half-Elf gains proficiency in any 2 skills of your choice.</p>
                                                             <div className="flex flex-wrap gap-2">
                                                                 {ALL_SKILLS.map(skill => {
                                                                     const isSel = raceExtraSkills.includes(skill);
@@ -2040,10 +2132,10 @@ export default function CharacterCreator() {
                                                     return (
                                                         <div>
                                                             <div className="flex items-center justify-between mb-3">
-                                                                <h3 className="text-lg font-black text-green-400 uppercase tracking-wide">🎭 Expertise ({needed} beceri)</h3>
+                                                                <h3 className="text-lg font-black text-green-400 uppercase tracking-wide">🎭 Expertise ({needed} skills)</h3>
                                                                 <span className={`px-3 py-1 rounded-full text-sm font-black border ${bardExpertise.length >= needed ? 'bg-green-900 text-green-300 border-green-700' : 'bg-gray-700 text-gray-300 border-gray-600'}`}>{bardExpertise.length} / {needed}</span>
                                                             </div>
-                                                            <p className="text-xs text-gray-400 mb-2">Bard, seçilen becerilerde Proficiency bonusu ikiye katlanır (Expertise).</p>
+                                                            <p className="text-xs text-gray-400 mb-2">Your proficiency bonus is doubled for any ability check you make that uses either of the chosen proficiencies.</p>
                                                             <div className="flex flex-wrap gap-2">
                                                                 {ALL_SKILLS.map(skill => {
                                                                     const isSel = bardExpertise.includes(skill);
@@ -2069,7 +2161,7 @@ export default function CharacterCreator() {
                                                                 <h3 className="text-lg font-black text-violet-400 uppercase tracking-wide">👁️ Eldritch Invocations</h3>
                                                                 <span className={`px-3 py-1 rounded-full text-sm font-black border ${warlockInvocations.length >= invocCount ? 'bg-violet-900 text-violet-300 border-violet-700' : 'bg-gray-700 text-gray-300 border-gray-600'}`}>{warlockInvocations.length} / {invocCount}</span>
                                                             </div>
-                                                            <p className="text-xs text-gray-400 mb-2">Patronundan güç hediyeleri — {invocCount} Invocation seç.</p>
+                                                            <p className="text-xs text-gray-400 mb-2">Fragments of forbidden knowledge that imbue you with an abiding magical ability. Select {invocCount} invocations.</p>
                                                             <div className="flex flex-wrap gap-2 max-h-40 overflow-y-auto">
                                                                 {INVOCATIONS.map(inv => {
                                                                     const isSel = warlockInvocations.includes(inv);
@@ -2089,13 +2181,13 @@ export default function CharacterCreator() {
                                                 {selectedClass?.name === 'Warlock' && selectedLevel >= 3 && (
                                                     <div>
                                                         <h3 className="text-lg font-black text-violet-400 uppercase tracking-wide mb-3">🔮 Pact Boon</h3>
-                                                        <p className="text-xs text-gray-400 mb-2">Patronunun sana verdiği bağ hediyesi.</p>
+                                                        <p className="text-xs text-gray-400 mb-2">A gift of a pact from your patron.</p>
                                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                                                             {[
-                                                                { name: 'Pact of the Blade', desc: 'Bonus eylemle bir silah çağırabilirsin. Bu silahla CHA kullanabilirsin. Savaş silahınla saldırılarda Eldritch Invocation keşiflerini uygulayabilirsin.' },
-                                                                { name: 'Pact of the Chain', desc: 'Find Familiar büyüsünü öğren ve özel Familiar türleri (Imp, Quasit, Pseudodragon, Sprite) seçebilirsin.' },
-                                                                { name: 'Pact of the Tome', desc: 'Herhangi 3 cantrip öğrenen bir kitap kazanırsın (tüm büyü listelerinden seçilebilir).' },
-                                                                { name: 'Pact of the Talisman', desc: 'Bir muska takar, kazıyan yetenek zarı başarısız olduğunda d4 ekler.' },
+                                                                { name: 'Pact of the Blade', desc: 'You can use your action to create a pact weapon in your empty hand. You can choose the form that this melee weapon takes each time you create it.' },
+                                                                { name: 'Pact of the Chain', desc: 'You learn the Find Familiar spell and can cast it as a ritual. When you cast the spell, you can choose one of the special forms: imp, quasit, pseudodragon, or sprite.' },
+                                                                { name: 'Pact of the Tome', desc: 'Your patron gives you a grimoire called a Book of Shadows. When you gain this feature, choose three cantrips from any class\'s spell list.' },
+                                                                { name: 'Pact of the Talisman', desc: 'Your patron lends you a mystic talisman. When the wearer fails an ability check, they can add a d4 to the roll.' },
                                                             ].map(p => (
                                                                 <div key={p.name} onClick={() => setWarlockPact(prev => prev === p.name ? '' : p.name)}
                                                                     className={`cursor-pointer p-3 rounded-lg border-2 transition-all ${warlockPact === p.name ? 'border-violet-500 bg-violet-900/20' : 'border-gray-700 bg-gray-900/50 hover:border-violet-700'}`}>
@@ -2117,7 +2209,7 @@ export default function CharacterCreator() {
                                                                 <h3 className="text-lg font-black text-amber-400 uppercase tracking-wide">⚔️ Battle Master Maneuvers</h3>
                                                                 <span className={`px-3 py-1 rounded-full text-sm font-black border ${bmManeuvers.length >= manCount ? 'bg-amber-900 text-amber-300 border-amber-700' : 'bg-gray-700 text-gray-300 border-gray-600'}`}>{bmManeuvers.length} / {manCount}</span>
                                                             </div>
-                                                            <p className="text-xs text-gray-400 mb-3">Taktiksel Superiority Dice kullanan özel kombo hareketler. {manCount} maneuver seç.</p>
+                                                            <p className="text-xs text-gray-400 mb-3">Selection of maneuvers that are fueled by superiority dice. Select {manCount} maneuvers.</p>
                                                             <div className="flex flex-wrap gap-2">
                                                                 {MANEUVERS.map(m => {
                                                                     const isSel = bmManeuvers.includes(m);
@@ -2138,8 +2230,8 @@ export default function CharacterCreator() {
                                                     const styles = FIGHTING_STYLES['Fighter'] ?? [];
                                                     return (
                                                         <div>
-                                                            <h3 className="text-lg font-black text-orange-400 uppercase tracking-wide mb-3">⚔️ Champion: Ek Savaş Stili</h3>
-                                                            <p className="text-xs text-gray-400 mb-3">Seviye 10 Champion özelliği: İkinci bir Fighting Style kazanırsın.</p>
+                                                            <h3 className="text-lg font-black text-orange-400 uppercase tracking-wide mb-3">⚔️ Champion: Additional Fighting Style</h3>
+                                                            <p className="text-xs text-gray-400 mb-3">At 10th level, you can choose a second option from the Fighting Style feature.</p>
                                                             <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                                                                 {styles.filter(s => s.name !== selectedFightingStyle).map(style => (
                                                                     <div key={style.name} onClick={() => setChampionExtraStyle(prev => prev === style.name ? '' : style.name)}
@@ -2156,15 +2248,15 @@ export default function CharacterCreator() {
                                                 {/* ── HEXBLADE: AUTO PROFICIENCIES (info card) ── */}
                                                 {selectedSubclass?.name === 'Hexblade' && (
                                                     <div className="p-3 rounded-lg border border-violet-700/50 bg-violet-900/10">
-                                                        <p className="font-black text-violet-300 text-sm mb-1">⚔️ Hexblade: Otomatik Özellikler</p>
-                                                        <p className="text-gray-400 text-xs">Medium Armor, Kalkan ve Martial Weapon proficiency otomatik olarak eklendi. Karizma ile silah saldırıları yapabilirsin (Hex Warrior).</p>
+                                                        <p className="font-black text-violet-300 text-sm mb-1">⚔️ Hexblade: Automatic Features</p>
+                                                        <p className="text-gray-400 text-xs">You gain proficiency with medium armor, shields, and martial weapons. You can use Charisma for your weapon attacks (Hex Warrior).</p>
                                                     </div>
                                                 )}
 
                                                 {/* Otomatik sinif ozellikleri */}
                                                 {autoFeatures.length > 0 && (
                                                     <div>
-                                                        <h3 className="text-lg font-black text-gray-300 uppercase tracking-wide mb-3">📋 Otomatik Sinif Ozellikleri</h3>
+                                                        <h3 className="text-lg font-black text-gray-300 uppercase tracking-wide mb-3">📋 Automatic Class Features</h3>
                                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                                                             {autoFeatures.map(f => (
                                                                 <div key={f.name} className="p-3 rounded-lg border border-gray-600 bg-gray-900/60">
@@ -2173,7 +2265,7 @@ export default function CharacterCreator() {
                                                                 </div>
                                                             ))}
                                                         </div>
-                                                        <p className="text-gray-500 text-xs mt-2 italic">Bu ozellikler karakter sayfanda otomatik olarak gözükecek.</p>
+                                                        <p className="text-gray-500 text-xs mt-2 italic">These features will be automatically displayed on your character sheet.</p>
                                                     </div>
                                                 )}
                                             </div>
@@ -2189,9 +2281,9 @@ export default function CharacterCreator() {
                                     const raceFeatCount = getRaceFeatCount(selectedRace);
                                     const hasRaceFeat = raceFeatCount > 0;
                                     setStep((asiCount > 0 || hasRaceFeat) ? 4.5 : 4);
-                                }} className="px-8 py-3 bg-gray-600 hover:bg-gray-500 rounded-lg text-lg font-bold transition-colors">Geri</button>
+                                }} className="px-8 py-3 bg-gray-600 hover:bg-gray-500 rounded-lg text-lg font-bold transition-colors">Back</button>
                                 <button onClick={handleSave} className="px-10 py-3 bg-gradient-to-r from-red-600 to-red-800 hover:from-red-500 hover:to-red-700 rounded-lg text-lg font-bold shadow-[0_0_20px_rgba(239,68,68,0.4)] transition-all hover:scale-105">
-                                    ✨ Karakteri Yarat
+                                    ✨ Create Character
                                 </button>
                             </div>
                         </div>
@@ -2234,8 +2326,8 @@ export default function CharacterCreator() {
                                 {/* Header */}
                                 <div className="px-6 py-4 bg-gradient-to-r from-yellow-900/40 to-gray-900 border-b border-yellow-800/30 flex items-center justify-between shrink-0">
                                     <div>
-                                        <h2 className="text-xl font-black text-yellow-400">📖 Feat Seç</h2>
-                                        <p className="text-gray-400 text-xs">{ALL_FEATS.length} resmi feat — birine tıkla ve açıklamasını oku, seç</p>
+                                        <h2 className="text-xl font-black text-yellow-400">📖 Select Feat</h2>
+                                        <p className="text-gray-400 text-xs">{ALL_FEATS.length} official feats — click one to read description and select</p>
                                     </div>
                                     <button onClick={closeModal} className="text-gray-400 hover:text-white text-2xl leading-none">✕</button>
                                 </div>
@@ -2246,7 +2338,7 @@ export default function CharacterCreator() {
                                         autoFocus
                                         value={featSearch}
                                         onChange={e => setFeatSearch(e.target.value)}
-                                        placeholder="🔍 Feat adı veya açıklama ara..."
+                                        placeholder="🔍 Search feat name or description..."
                                         className="w-full bg-gray-800 border border-gray-700 text-white rounded-lg px-4 py-2 text-sm outline-none focus:border-yellow-500"
                                     />
                                     <div className="flex flex-wrap gap-1.5">
@@ -2260,14 +2352,14 @@ export default function CharacterCreator() {
                                                     }`}
                                             >{cat}</button>
                                         ))}
-                                        <span className="ml-auto text-gray-600 text-xs self-center">{filtered.length} sonuç</span>
+                                        <span className="ml-auto text-gray-600 text-xs self-center">{filtered.length} results</span>
                                     </div>
                                 </div>
 
                                 {/* Feat List */}
                                 <div className="overflow-y-auto flex-1 p-3 space-y-1.5">
                                     {filtered.length === 0 && (
-                                        <p className="text-center text-gray-500 py-8">Sonuç bulunamadı…</p>
+                                        <p className="text-center text-gray-500 py-8">No results found…</p>
                                     )}
                                     {filtered.map(feat => {
                                         const isExpanded = expandedFeat === feat.name;
@@ -2298,7 +2390,7 @@ export default function CharacterCreator() {
                                                                                 'text-gray-400 border-gray-600 bg-gray-800'
                                                                 }`}>{feat.category}</span>
                                                             {feat.prereq && <span className="text-[10px] text-yellow-600 font-bold">⚠ {feat.prereq}</span>}
-                                                            {isSelected && <span className="text-[10px] text-yellow-400 font-black">✓ SEÇİLDİ</span>}
+                                                            {isSelected && <span className="text-[10px] text-yellow-400 font-black">✓ SELECTED</span>}
                                                         </div>
                                                         {!isExpanded && (
                                                             <p className="text-gray-500 text-[11px] truncate mt-0.5">{feat.desc_tr}</p>
@@ -2319,7 +2411,7 @@ export default function CharacterCreator() {
                                                                 : 'bg-gray-700 text-gray-200 hover:bg-yellow-700 hover:text-white'
                                                                 }`}
                                                         >
-                                                            {isSelected ? '✓ Bu feat seçili — değiştirmek için başkasına tıkla' : `✨ "${feat.name}" seç`}
+                                                            {isSelected ? '✓ This feat is selected — click another to change' : `✨ Select "${feat.name}"`}
                                                         </button>
                                                     </div>
                                                 )}

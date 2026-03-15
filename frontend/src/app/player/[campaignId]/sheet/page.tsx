@@ -94,8 +94,7 @@ const getSpellTags = (spell: any) => {
     const school = (spell.school || "").toLowerCase();
 
     // Damage
-    if (desc.includes("damage") || desc.includes("hasar") || desc.includes("hit") || desc.includes("attack") ||
-        desc.includes("vuruş") || desc.includes("darbe") || desc.includes("patlama") ||
+    if (desc.includes("damage") || desc.includes("hit") || desc.includes("attack") ||
         /\d+d\d+/.test(desc) || school === "evocation") {
         tags.push("Damage");
     }
@@ -104,352 +103,166 @@ const getSpellTags = (spell: any) => {
         desc.includes("paralyzed") || desc.includes("stunned") || desc.includes("incapacitated") ||
         desc.includes("prone") || desc.includes("blinded") || desc.includes("deafened") ||
         desc.includes("difficult terrain") || desc.includes("slow") ||
-        desc.includes("korkmuş") || desc.includes("büyülenmiş") || desc.includes("engellenmiş") ||
-        desc.includes("sersemlemiş") || desc.includes("kör") || desc.includes("hareket edemez") ||
-        desc.includes("disadvantage") || desc.includes("dezavantaj")) {
+        desc.includes("disadvantage")) {
         tags.push("Control");
     }
     // Support
     if (desc.includes("heal") || desc.includes("restore") || desc.includes("temporary hp") ||
         desc.includes("bonus") || desc.includes("advantage") || desc.includes("bless") ||
-        desc.includes("iyileştir") || desc.includes("can ver") || desc.includes("avantaj") ||
-        desc.includes("ekle") || desc.includes("zar") || desc.includes("check") || 
-        desc.includes("kurtarma") || desc.includes("atış") || desc.includes("destek")) {
+        desc.includes("check") || desc.includes("saving throw")) {
         tags.push("Support");
     }
     // Defense
     if (desc.includes("ac ") || desc.includes("shield") || desc.includes("resistance") ||
-        desc.includes("immune") || desc.includes("absorb") || desc.includes("kalkan") ||
-        desc.includes("direnç") || desc.includes("bağışıklık") || desc.includes("zırh") || 
+        desc.includes("immune") || desc.includes("absorb") || 
         school === "abjuration") {
         tags.push("Defense");
     }
     // Utility
     if (desc.includes("detect") || desc.includes("identify") || desc.includes("teleport") ||
         desc.includes("create") || desc.includes("scry") || desc.includes("invisible") ||
-        desc.includes("fly") || desc.includes("breathe") || desc.includes("bul") || 
-        desc.includes("tanı") || desc.includes("ışınlan") || desc.includes("yarat") || 
-        desc.includes("görünmez") || desc.includes("uç") || desc.includes("nefes") || 
-        desc.includes("okuma") || school === "divination" || school === "transmutation") {
+        desc.includes("fly") || desc.includes("breathe") || 
+        school === "divination" || school === "transmutation") {
         tags.push("Utility");
     }
 
     return tags.length > 0 ? tags : ["Utility"];
 };
 
-export default function PlayerSheet() {
+const PlayerSheet = () => {
     const { campaignId } = useParams();
     const router = useRouter();
-    const role = 'Player';
-
     const { user, token, loading: authLoading } = useAuth();
+
     const [character, setCharacter] = useState<any>(null);
     const [loading, setLoading] = useState(true);
+    const characterRef = useRef<any>(null);
+    const [hasMounted, setHasMounted] = useState(false);
 
-    // Redirect if not logged in
-    useEffect(() => {
-        if (!authLoading && !user) {
-            router.push('/');
-        }
-    }, [user, authLoading]);
-    const [currentHp, setCurrentHp] = useState(0);
-    const [activeTab, setActiveTab] = useState<"main" | "attacks" | "inventory" | "story" | "spells" | "party" | "world">("main");
-    const [selectedSkill, setSelectedSkill] = useState<typeof SKILLS[0] | null>(null);
-
-    // ── Socket & DM Permission ──────────────────────────────────────────────
+    // Socket Connection
     const { 
-        dmLevelPermission, socket, whisperData, whisperHistory, 
-        partyStats, diceLogs, mapData, partyGold, quests, factions, 
-        sessionNotes, fogOfWar 
-    } = useCampaignSocket(campaignId, 'Player', user?.username || 'Player', token);
-    const [showDmPopup, setShowDmPopup] = useState(false);
-    const [levelPermEnabled, setLevelPermEnabled] = useState(false);
+        socket, partyStats, diceLogs, dmLevelPermission, whisperData, whisperHistory,
+        partyGold, fogOfWar, quests, factions, sessionNotes 
+    } = useCampaignSocket(campaignId, 'Player', character?.name, token);
 
-    // ── Combat State ────────────────────────────────────────────────────────
-    const [deathSaves, setDeathSaves] = useState<{ successes: number, failures: number }>({ successes: 0, failures: 0 });
-    const [conditions, setConditions] = useState<string[]>([]);
-    const [hitDiceUsed, setHitDiceUsed] = useState(0);
-
-    // Yeni Modal ve Durum stateleri
-    const [expandedFeat, setExpandedFeat] = useState<string | null>(null);
-
-    // Short Rest & Hit Dice
-    const [showHitDiceModal, setShowHitDiceModal] = useState(false);
-    const [hitDiceToSpend, setHitDiceToSpend] = useState(0);
-    // spellSlotsUsed: { "1": 2, "2": 1, ... } (used counts per slot level)
-    const [spellSlotsUsed, setSpellSlotsUsed] = useState<Record<string, number>>({});
-    // resourcesUsed: { rage: 1, ki: 3, ... }
-    const [resourcesUsed, setResourcesUsed] = useState<Record<string, number>>({});
-    // concentrationSpell: name of currently concentrated spell, or ""
-    const [concentrationSpell, setConcentrationSpell] = useState("");
-
-    // Long Rest Class Feature Modal
-    const [showLongRestModal, setShowLongRestModal] = useState(false);
-    const [wizardCantripOptions, setWizardCantripOptions] = useState<any[]>([]);
-    const [cantripToReplace, setCantripToReplace] = useState<string>("");
-    const [newWizardCantrip, setNewWizardCantrip] = useState<string>("");
-    const [castingSpell, setCastingSpell] = useState<string | null>(null);
-    const [showLevelChart, setShowLevelChart] = useState(false);
-    const [expandedAtkIdx, setExpandedAtkIdx] = useState<number | null>(null);
-
-    // Custom Resources
-    const [customResources, setCustomResources] = useState<any[]>([]);
-    const [showCustomResourceModal, setShowCustomResourceModal] = useState(false);
-    const [newResourceName, setNewResourceName] = useState("");
-    const [newResourceMax, setNewResourceMax] = useState(1);
-    const [newResourceRecharge, setNewResourceRecharge] = useState<'short' | 'long'>('long');
-    const [newResourceDesc, setNewResourceDesc] = useState("");
-
-    const [spellDetails, setSpellDetails] = useState<Record<string, any>>({});
-    const [expandedSpell, setExpandedSpell] = useState<string | null>(null);
-    const [libFeats, setLibFeats] = useState<any[]>([]);
-
-    useEffect(() => {
-        const fetchFeats = async () => {
-            try {
-                const res = await axios.get(`${API_URL}/api/feats`, { headers: { 'Authorization': `Bearer ${token}` } });
-                setLibFeats(res.data);
-            } catch (err) { console.error("Feat fetch error:", err); }
-        };
-        fetchFeats();
-    }, [token]);
-
-    useEffect(() => {
-        if (character?.spells?.length > 0) {
-            axios.get(`${API_URL}/api/spells?names=${encodeURIComponent(character.spells.join(','))}`, { headers: { 'Authorization': `Bearer ${token}` } })
-                .then(res => {
-                    const details: Record<string, any> = {};
-                    res.data.forEach((s: any) => details[s.name] = s);
-                    setSpellDetails(details);
-                })
-                .catch(err => console.error("Spell details fetch error:", err instanceof Error ? err.message : String(err)));
-        }
-    }, [character?.spells]);
-
-
-    // Level Up — multi-step modal state
-    type LevelUpStep = "preview" | "subclass" | "asi";
-    const [lvModal, setLvModal] = useState<{ open: boolean; step: LevelUpStep; newLv: number; hpGained: number; classFeats: any[]; subFeats: any[]; needSubclass: boolean; needASI: boolean; mcAction?: 'add' | 'levelup'; mcData?: any } | null>(null);
-    const [showClassFeatsUI, setShowClassFeatsUI] = useState(true);
-    const [showFeatsUI, setShowFeatsUI] = useState(true);
-    const [showDiceLogUI, setShowDiceLogUI] = useState(true);
-    const [lvSubclassChoice, setLvSubclassChoice] = useState<any>(null);
-    // ASI/Feat
-    const [lvChoice, setLvChoice] = useState<"asi" | "feat">("asi");
-    const [asiPicks, setAsiPicks] = useState<{ stat: string; amount: number }[]>([]);
-    const [featPick, setFeatPick] = useState<Feat | null>(null);
-    const [featSearch, setFeatSearch] = useState("");
-    const [featStatSelections, setFeatStatSelections] = useState<Record<string, string>>({});
-    const [featSpellSelections, setFeatSpellSelections] = useState<Record<string, string[]>>({});
-    const [featChoiceSelections, setFeatChoiceSelections] = useState<Record<string, Record<string, string[]>>>({}); // { "Metamagic Adept": { "Metamagic": ["Twinned", "Subtle"] } }
-    const [isLevelingUp, setIsLevelingUp] = useState(false);
-
-    // Multiclass state
-    const [showLevelChoiceModal, setShowLevelChoiceModal] = useState(false); // choose: same class or multiclass
-    const [showMulticlassPickModal, setShowMulticlassPickModal] = useState(false);
-    const [mcPickedClassId, setMcPickedClassId] = useState<string>('');
-    const [allClasses, setAllClasses] = useState<any[]>([]);
-    const [isAddingMulticlass, setIsAddingMulticlass] = useState(false);
-
-    // Backstory
-    const [backstory, setBackstory] = useState("");
-    const [isSavingStory, setIsSavingStory] = useState(false);
-
-    // Toast
-    const [toast, setToast] = useState<{ title: string; msg: string; color: string } | null>(null);
-    const showToast = (title: string, msg: string, color: string) => {
-        setToast({ title, msg, color });
-        setTimeout(() => setToast(null), 5000);
+    // Toast Notification System
+    const [toast, setToast] = useState<{ show: boolean, title: string, message: string, color: string }>({ show: false, title: '', message: '', color: '' });
+    const showToast = (title: string, message: string, color: string) => {
+        setToast({ show: true, title, message, color });
+        setTimeout(() => setToast(prev => ({ ...prev, show: false })), 5000);
     };
 
-    // Gallery
-    const [gallery, setGallery] = useState<any[]>([]);
+    // UI & Tab States
+    const [activeTab, setActiveTab] = useState('combat');
+    const [isPrivateNotesOpen, setIsPrivateNotesOpen] = useState(false);
+    const [isSavingPrivateNotes, setIsSavingPrivateNotes] = useState(false);
+    const [privateNotes, setPrivateNotes] = useState("");
+    const [whisperTarget, setWhisperTarget] = useState('DM');
+    const [whisperMessage, setWhisperMessage] = useState("");
+    const [isWhisperModalOpen, setIsWhisperModalOpen] = useState(false);
+
+    // Modal & Selection States
     const [isGalleryOpen, setIsGalleryOpen] = useState(false);
+    const [isShopModalOpen, setIsShopModalOpen] = useState(false);
+    const [isSpellModalOpen, setIsSpellModalOpen] = useState(false);
+    const [showLongRestModal, setShowLongRestModal] = useState(false);
+    const [showLevelChart, setShowLevelChart] = useState(false);
+    const [showSpellPicker, setShowSpellPicker] = useState(false);
+    const [showAsiFeatModal, setShowAsiFeatModal] = useState(false);
+    const [castingSpell, setCastingSpell] = useState<any>(null);
+    const [selectedSpell, setSelectedSpell] = useState<any>(null);
+
+    // Data States
+    const [gallery, setGallery] = useState<any[]>([]);
+    const [shopItems, setShopItems] = useState<any[]>([]);
+    const [isShopPublished, setIsShopPublished] = useState(false);
+    const [actualSpells, setActualSpells] = useState<any[]>([]);
+    const [libFeats, setLibFeats] = useState<any[]>([]);
+    const [allClasses, setAllClasses] = useState<any[]>([]);
+    const [asiPicks, setAsiPicks] = useState<any[]>([]);
+    const [concentrationSpell, setConcentrationSpell] = useState<string | null>(null);
+    const [spellDetails, setSpellDetails] = useState<Record<string, any>>({});
+
+    // Feature States
+    const [newResourceName, setNewResourceName] = useState("");
+    const [newResourceValue, setNewResourceValue] = useState(1);
+    const [spellSlotsUsed, setSpellSlotsUsed] = useState<Record<string, number>>({});
+    const [resourcesUsed, setResourcesUsed] = useState<Record<string, number>>({});
+    const [cantripToReplace, setCantripToReplace] = useState<string | null>(null);
+    const [leveledSpellsToReplace, setLeveledSpellsToReplace] = useState<string[]>([]);
+    
+    // Gallery/Image Viewer State
     const [selectedImage, setSelectedImage] = useState<string | null>(null);
-    const [gallerySearch, setGallerySearch] = useState("");
-    const [galleryFilter, setGalleryFilter] = useState<'all' | 'image' | 'link'>('all');
     const [imgZoom, setImgZoom] = useState(1);
     const [imgOffset, setImgOffset] = useState({ x: 0, y: 0 });
     const [isImgPanning, setIsImgPanning] = useState(false);
     const [imgPanStart, setImgPanStart] = useState({ x: 0, y: 0 });
 
-    // Dynamic Shop
-    const [shopData, setShopData] = useState<{ isOpen: boolean, items: any[] }>({ isOpen: false, items: [] });
-    const [allSpells, setAllSpells] = useState<any[]>([]);
-    const [showSpellPicker, setShowSpellPicker] = useState(false);
+    // Filter States
+    const [spellSearchModal, setSpellSearchModal] = useState("");
+    const [spellLevelFilter, setSpellLevelFilter] = useState<number | 'all'>('all');
+    const [spellSchoolFilter, setSpellSchoolFilter] = useState('all');
+    const [spellTypeFilter, setSpellTypeFilter] = useState('all');
     const [spellSearch, setSpellSearch] = useState("");
-    const [spellLevelFilter, setSpellLevelFilter] = useState<string>("all");
-    const [spellSchoolFilter, setSpellSchoolFilter] = useState<string>("all");
-    const [spellTypeFilter, setSpellTypeFilter] = useState<string>("all");
-    const [privateNotes, setPrivateNotes] = useState("");
-    const [isSavingPrivateNotes, setIsSavingPrivateNotes] = useState(false);
+    const [selectedSkill, setSelectedSkill] = useState<any>(null);
+    const [showClassFeatsUI, setShowClassFeatsUI] = useState(true);
+    const [saves, setSaves] = useState<string[]>(character?.classRef?.saving_throws || []);
 
-    // Grid Map State
+    // Missing Global States
+    const [currentHp, setCurrentHp] = useState(character?.currentHp || 0);
+    const [hpInput, setHpInput] = useState("");
+    const [conditions, setConditions] = useState<string[]>(character?.conditions || []);
+    const [hitDiceUsed, setHitDiceUsed] = useState(character?.hitDiceUsed || 0);
+    const [deathSaves, setDeathSaves] = useState(character?.deathSaves || { successes: 0, failures: 0 });
+    const [expandedSpell, setExpandedSpell] = useState<string | null>(null);
+    const [lvModal, setLvModal] = useState<any>(null);
+    const [isLevelingUp, setIsLevelingUp] = useState(false);
+    const [showLevelChoiceModal, setShowLevelChoiceModal] = useState(false);
+    const [showDmPopup, setShowDmPopup] = useState(false);
+    const [mcPickedClassId, setMcPickedClassId] = useState<string | null>(null);
+    const [showMulticlassPickModal, setShowMulticlassPickModal] = useState(false);
+    const [isAddingMulticlass, setIsAddingMulticlass] = useState(false);
+    const [lvSubclassChoice, setLvSubclassChoice] = useState<any>(null);
+    const [lvChoice, setLvChoice] = useState<'asi' | 'feat'>('asi');
+    const [featPick, setFeatPick] = useState<any>(null);
+    const [featSearch, setFeatSearch] = useState("");
+    const [featStatSelections, setFeatStatSelections] = useState<Record<string, any>>({});
+    const [featSpellSelections, setFeatSpellSelections] = useState<Record<string, any[]>>({});
+    const [featChoiceSelections, setFeatChoiceSelections] = useState<Record<string, any>>({});
     const [isMapOpen, setIsMapOpen] = useState(false);
-    const [isDraggingToken, setIsDraggingToken] = useState<string | null>(null);
-    const [mapZoom, setMapZoom] = useState(1);
-    const [mapOffset, setMapOffset] = useState({ x: 0, y: 0 });
-    const [isPanning, setIsPanning] = useState(false);
-    const [panStart, setPanStart] = useState({ x: 0, y: 0 });
+    const [isSavingStory, setIsSavingStory] = useState(false);
+    const [allSpells, setAllSpells] = useState<any[]>([]);
+    const [newItemName, setNewItemName] = useState("");
+    const [newItemQty, setNewItemQty] = useState(1);
+    const [isAddingItem, setIsAddingItem] = useState(false);
+    const [showCustomResourceModal, setShowCustomResourceModal] = useState(false);
+    const [newResourceMax, setNewResourceMax] = useState(1);
+    const [newResourceDesc, setNewResourceDesc] = useState("");
+    const [newResourceRecharge, setNewResourceRecharge] = useState<'short' | 'long'>('long');
+    const [showClassFeatsUI, setShowClassFeatsUI] = useState(true);
 
-    // Whisper UI
-    const [isWhisperModalOpen, setIsWhisperModalOpen] = useState(false);
-    const [whisperMessage, setWhisperMessage] = useState("");
-    const [whisperTarget, setWhisperTarget] = useState("DM");
-    const chatEndRef = useRef<HTMLDivElement>(null);
-    const characterRef = useRef<any>(null);
+    // Helper: Modifiers
+    const mod = (score: number, statName: string) => {
+        let val = Math.floor((score - 10) / 2);
+        // Add item bonuses if applicable
+        if (character) {
+            (character.inventory || []).filter((it: any) => it.isEquipped && it.effects).forEach((it: any) => {
+                it.effects.forEach((eff: any) => {
+                    if (eff.type === 'stat_bonus' && eff.stat === statName) val += eff.value;
+                });
+            });
+        }
+        return val;
+    };
 
-    // ─── DERIVED VARIABLES (Must be defined before helpers) ──────────────────
+    const extractDice = (str: string) => {
+        if (!str) return null;
+        const match = str.match(/\d+d\d+([+-]\d+)?/i);
+        return match ? match[0] : null;
+    };
+
+    // Derived Values
     const stats = character?.stats || {};
-    const level = character?.level || 1;
-    const prof = character ? profBonus(level) : 2;
-    const cls = character?.classRef?.name || '';
-    const clsName = cls; // Alias for consistency
-    const mcs = character?.multiclasses || [];
-    const mainLv = (character?.level || 1) - mcs.reduce((a: number, c: any) => a + (c.level || 0), 0);
-    const mcList = mcs.map((mc: any) => ({ className: mc.className, level: mc.level || 1 }));
-    const lv = level; 
-    
-    const { merged: slotTotals, warlockPact } = character ? getMulticlassSpellSlots(clsName, mainLv, mcList) : { merged: new Array(9).fill(0), warlockPact: null };
-    if (warlockPact && slotTotals[warlockPact.level - 1] !== undefined) {
-        slotTotals[warlockPact.level - 1] += warlockPact.count;
-    }
-    const canCast = isSpellcaster(clsName) || mcs.some((mc: any) => isSpellcaster(mc.className));
-
-    const saves = character ? (CLASS_SAVES[cls] || []).concat(character.additionalSaves || []) : [];
-    const spells = character?.spells || [];
-    const actualFeats = character ? [...(character.feats || []), ...(character.raceBonusFeats || [])] : [];
-    const itemSpells = character ? (character.inventory || []).filter((it: any) => it.isEquipped && it.type === 'spell' && it.spellName).map((it: any) => it.spellName) : [];
-    const actualSpells = Array.from(new Set([...spells, ...itemSpells]));
-    const hpPct = (character && character.maxHp) ? Math.round((currentHp / character.maxHp) * 100) : 0;
-
-    const baseAttacks = character ? [...(CLASS_ATTACKS[clsName] || (mcs.length === 0 ? CLASS_ATTACKS['Fighter'] : []))] : [];
-    const resources = character ? [...(CLASS_RESOURCES[clsName] || [])] : [];
-    if (character) {
-        mcs.forEach((mc: any) => {
-            if (CLASS_ATTACKS[mc.className]) baseAttacks.push(...CLASS_ATTACKS[mc.className]);
-            if (CLASS_RESOURCES[mc.className]) resources.push(...CLASS_RESOURCES[mc.className]);
-        });
-        customResources.forEach((cr: any) => {
-            resources.push({
-                key: cr.id || `cr-${cr.name}`,
-                name: cr.name,
-                desc_tr: cr.desc || "",
-                icon: "✨",
-                recharge: cr.recharge || 'long',
-                getMax: () => cr.max || 1
-            });
-        });
-    }
-
-    const getAutoDefenses = () => {
-        if (!character) return { res: [], imm: [], vuln: [] };
-        const res = [...(character.resistances || [])];
-        const imm = [...(character.immunities || [])];
-        const vuln = [...(character.vulnerabilities || [])];
-
-        const checkText = (text: string, source: string) => {
-            if (!text) return;
-            const lower = text.toLowerCase();
-            if (lower.includes('direncin') || lower.includes('dirençli') || lower.includes('direnç') || lower.includes('resistance')) {
-                if (lower.includes('poison') || lower.includes('zehir')) res.push(`Zehir (${source})`);
-                if (lower.includes('fire') || lower.includes('ateş')) res.push(`Ateş (${source})`);
-                if (lower.includes('cold') || lower.includes('soğuk')) res.push(`Soğuk (${source})`);
-                if (lower.includes('lightning') || lower.includes('şimşek') || lower.includes('yıldırım')) res.push(`Şimşek (${source})`);
-                if (lower.includes('acid') || lower.includes('asit')) res.push(`Asit (${source})`);
-                if (lower.includes('necrotic') || lower.includes('nekrotik')) res.push(`Nekrotik (${source})`);
-                if (lower.includes('radiant') || lower.includes('parıltı')) res.push(`Parıltı (${source})`);
-                if (lower.includes('bludgeoning') || lower.includes('künt') || lower.includes('fiziksel')) res.push(`Fiziksel (${source})`);
-                if (lower.includes('piercing') || lower.includes('delici')) res.push(`Delici (${source})`);
-                if (lower.includes('slashing') || lower.includes('kesici')) res.push(`Kesici (${source})`);
-            }
-            if (lower.includes('bağışıklı') || lower.includes('immunity')) {
-                if (lower.includes('poison') || lower.includes('zehir')) imm.push(`Zehir (${source})`);
-                if (lower.includes('disease') || lower.includes('hastalık')) imm.push(`Hastalık (${source})`);
-                if (lower.includes('charm') || lower.includes('cazibe')) imm.push(`Cazibe (${source})`);
-                if (lower.includes('frightened') || lower.includes('frighten') || lower.includes('korkutulma')) imm.push(`Korku (${source})`);
-            }
-        };
-
-        character.raceRef?.traits?.forEach((t: any) => checkText((t.desc_tr || "") + " " + (t.desc || ""), t.name));
-        if (character.subclass && character.classRef?.subclasses) {
-            const sub = character.classRef.subclasses.find((s: any) => s.name === character.subclass);
-            sub?.features?.filter((f: any) => level >= f.level).forEach((f: any) => checkText((f.desc_tr || "") + " " + (f.desc || ""), f.name));
-        }
-
-        if (character?.inventory) {
-            character.inventory.forEach((item: any) => {
-                if (!item.isEquipped) return;
-                if (item.effects) {
-                    item.effects.forEach((eff: any) => {
-                        if (eff.type === 'resistance' && eff.value) res.push(`${eff.value} (${item.name})`);
-                        if (eff.type === 'immunity' && eff.value) imm.push(`${eff.value} (${item.name})`);
-                        if (eff.type === 'vulnerability' && eff.value) vuln.push(`${eff.value} (${item.name})`);
-                    });
-                }
-                checkText((item.note || "") + " " + (item.desc_tr || "") + " " + (item.desc || ""), item.name);
-            });
-        }
-
-        return {
-            res: Array.from(new Set(res)),
-            imm: Array.from(new Set(imm)),
-            vuln: Array.from(new Set(vuln)),
-        };
-    };
-
-    const autoDefenses = character ? getAutoDefenses() : { res: [], imm: [], vuln: [] };
-
-    // ── Helper Logic (Moved to top for scope safety) ──
-    const getEffectiveScore = (statName: string, baseValue: number) => {
-        let bonus = 0;
-        let setVal: number | null = null;
-        if (character?.feats && Array.isArray(character.feats)) {
-            character.feats.forEach((fName: string) => {
-                const fData = (libFeats || []).find(x => x && x.name === fName);
-                if (fData && fData.effects && Array.isArray(fData.effects)) {
-                    fData.effects.forEach((eff: any) => {
-                        if (eff && eff.type === 'stat_bonus' && eff.value && typeof eff.value === 'object' && eff.value[statName]) bonus += eff.value[statName];
-                        if (eff && eff.type === 'stat_choice' && character.featSelections?.stats?.[fName] === statName) bonus += eff.value;
-                    });
-                }
-            });
-        }
-        if (character?.inventory && Array.isArray(character.inventory)) {
-            const lowerStat = statName.toLowerCase();
-            const MAP: Record<string, string> = { 'str': 'strength', 'dex': 'dexterity', 'con': 'constitution', 'int': 'intelligence', 'wis': 'wisdom', 'cha': 'charisma' };
-            const fullStat = MAP[lowerStat] || lowerStat;
-            character.inventory.forEach((item: any) => {
-                if (item && item.isEquipped && item.effects && Array.isArray(item.effects)) {
-                    item.effects.forEach((eff: any) => {
-                        if (!eff) return;
-                        if (eff.type === 'stat_bonus') {
-                            if (eff.value && typeof eff.value === 'object' && eff.value[statName]) bonus += eff.value[statName];
-                        }
-                        if (eff.type === 'set_stat' && eff.stat === fullStat) {
-                            if (setVal === null || (eff.value || 0) > setVal) setVal = eff.value || 0;
-                        }
-                    });
-                }
-            });
-        }
-        if (setVal !== null && setVal > (baseValue + bonus)) return setVal;
-        return baseValue + bonus;
-    };
-
-    const mod = (v: number, statName?: string) => {
-        if (!statName) return Math.floor((v - 10) / 2);
-        const score = getEffectiveScore(statName, v);
-        return Math.floor((score - 10) / 2);
-    };
-
-    const extractDice = (dmgStr: string) => {
-        if (!dmgStr) return null;
-        const match = dmgStr.match(/(\d+)d(\d+)([+\-]\d+)?/i);
-        if (!match) return null;
-        return { count: parseInt(match[1]), sides: parseInt(match[2]), bonus: match[3] ? parseInt(match[3]) : 0 };
-    };
-
     const mods = {
         STR: mod(stats.STR || 10, 'STR'),
         DEX: mod(stats.DEX || 10, 'DEX'),
@@ -458,356 +271,120 @@ export default function PlayerSheet() {
         WIS: mod(stats.WIS || 10, 'WIS'),
         CHA: mod(stats.CHA || 10, 'CHA')
     };
+    const lv = character?.level || 1;
+    const prof = profBonus(lv);
+    const clsName = character?.classRef?.name || '';
+    const mcs = character?.multiclasses || [];
+    const canCast = isSpellcaster(clsName) || mcs.some((mc: any) => isSpellcaster(mc.className));
 
+    // Spell Slots & Resources
+    const { merged: slotTotals, warlockPact } = getMulticlassSpellSlots(clsName, lv, mcs);
+    const resources = CLASS_RESOURCES[clsName] || [];
+    const baseAttacks = CLASS_ATTACKS[clsName] || [];
 
-    useEffect(() => {
-        if (isWhisperModalOpen) {
-            chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
-        }
-    }, [isWhisperModalOpen, whisperHistory]);
-
-    const buyShopItem = async (item: any) => {
-        if (!character) return;
-        const cost = item.price;
-        const currentGold = character.money?.gp || 0;
-        if (currentGold < cost) {
-            showToast('Yetersiz Bakiye', `Bu eşyayı (${cost} GP) almak için yeterli altının yok!`, 'bg-red-800 border-red-500 text-red-100');
-            return;
-        }
-
-        const newMoney = { ...character.money, gp: currentGold - cost };
-        const newInventory = [...(character.inventory || []), {
-            ...item, // Spread all item data (armor_class, effects, etc.)
-            id: `item-${Date.now()}`,
-            isEquipped: false,
-            notes: item.note || 'Dükkandan satın alındı.'
-        }];
-
+    // Save Logic
+    const saveCombatState = async (updates: any) => {
+        if (!character?._id) return;
         try {
-            await axios.put(`${API_URL}/api/characters/${character._id}`, { money: newMoney, inventory: newInventory }, { headers: { 'Authorization': `Bearer ${token}` } });
-            setCharacter({ ...character, money: newMoney, inventory: newInventory });
-            showToast('Satın Alındı', `${item.name} envanterine eklendi. (-${cost} GP)`, 'bg-green-800 border-green-500 text-green-100');
-
-            if (socket) {
-                (socket as any).emit('update_character_stat', { campaignId, characterId: character._id, stat: 'money', value: newMoney });
-                (socket as any).emit('update_character_stat', { campaignId, characterId: character._id, stat: 'inventory', value: newInventory });
-            }
-        } catch (e) {
-            console.error("Satın alma hatası", e);
-            showToast('Hata', 'Satın alma işlemi başarısız oldu.', 'bg-red-800 border-red-500 text-red-100');
-        }
+            await axios.put(`${API_URL}/api/characters/${character._id}`, updates, { headers: { 'Authorization': `Bearer ${token}` } });
+        } catch (e) { console.error("Save failure:", e); }
     };
 
-    // HP input
-    const [hpInput, setHpInput] = useState("");
-
-    // Inventory
-    const [newItemName, setNewItemName] = useState("");
-    const [newItemQty, setNewItemQty] = useState(1);
-    const [newItemNote, setNewItemNote] = useState("");
-
+    // Effects
     useEffect(() => {
+        setHasMounted(true);
+        if (!campaignId || !token) return;
         const fetchChar = async () => {
-            setLoading(true);
-            try {
-                let char = null;
+             try {
                 const charId = localStorage.getItem(`dnd_character_${campaignId}`);
-                if (charId) {
-                    try {
-                        const res = await axios.get(`${API_URL}/api/characters/${charId}`, { headers: { 'Authorization': `Bearer ${token}` } });
-                        char = res.data;
-                    } catch {
-                        char = null;
-                    }
+                if (!charId) {
+                    router.push(`/player/${campaignId}/character-creator`);
+                    return;
                 }
-                if (!char) {
-                    try {
-                        const res = await axios.get(`${API_URL}/api/characters/byCampaign/${campaignId}`, { headers: { 'Authorization': `Bearer ${token}` } });
-                        char = res.data;
-                        if (char?._id) localStorage.setItem(`dnd_character_${campaignId}`, char._id);
-                    } catch {
-                        router.push(`/player/${campaignId}/character-creator`);
-                        return;
-                    }
-                }
-                setCharacter(char);
-                characterRef.current = char;
-                setCurrentHp(char.currentHp ?? char.maxHp ?? 0);
-                setBackstory(char.backstory || '');
-                if (char.spellSlotsUsed) setSpellSlotsUsed(char.spellSlotsUsed);
-                if (char.resourcesUsed) setResourcesUsed(char.resourcesUsed);
-                if (char.concentrationSpell) setConcentrationSpell(char.concentrationSpell);
-                if (char.deathSaves) setDeathSaves(char.deathSaves);
-                if (char.conditions) setConditions(char.conditions);
-                if (char.hitDiceUsed !== undefined) setHitDiceUsed(char.hitDiceUsed);
-                if (char.privateNotes) setPrivateNotes(char.privateNotes);
-                if (char.customResources) setCustomResources(char.customResources);
-                if (char.featSelections) {
-                    setFeatStatSelections(char.featSelections.stats || {});
-                    setFeatSpellSelections(char.featSelections.spells || {});
-                    setFeatChoiceSelections(char.featSelections.choices || {});
-                }
+                const res = await axios.get(`${API_URL}/api/characters/${charId}`, { headers: { 'Authorization': `Bearer ${token}` } });
+                setCharacter(res.data);
+                characterRef.current = res.data;
+                setPrivateNotes(res.data.privateNotes || "");
+                setSpellSlotsUsed(res.data.spellSlotsUsed || {});
+                setResourcesUsed(res.data.resourcesUsed || {});
+                setConcentrationSpell(res.data.concentrationSpell || null);
+                setLoading(false);
             } catch (err) {
-                console.error('Character fetch error:', err);
-                router.push(`/player/${campaignId}/character-creator`);
-            } finally {
+                console.error("Fetch error:", err);
                 setLoading(false);
             }
         };
         fetchChar();
-    }, [campaignId, router, token]);
+    }, [campaignId, token, router]);
+
+    useEffect(() => {
+        const fetchSpells = async () => {
+            if (!character?.spells || character.spells.length === 0) return;
+            try {
+                const res = await axios.post(`${API_URL}/api/spells/batch`, { names: character.spells }, { headers: { 'Authorization': `Bearer ${token}` } });
+                const details: any = {};
+                res.data.forEach((s: any) => details[s.name] = s);
+                setSpellDetails(details);
+                setActualSpells(res.data);
+            } catch (e) { }
+        };
+        if (token) fetchSpells();
+    }, [character?.spells, token]);
 
     useEffect(() => {
         const fetchAllSpells = async () => {
             try {
                 const res = await axios.get(`${API_URL}/api/spells`, { headers: { 'Authorization': `Bearer ${token}` } });
                 setAllSpells(res.data);
-            } catch (err) { console.error("Spells fetch error:", err); }
+            } catch (e) { }
         };
         if (token) fetchAllSpells();
     }, [token]);
 
-    useEffect(() => { characterRef.current = character; }, [character]);
-
-    const saveCombatState = async (updates: Record<string, any>) => {
-        if (!characterRef.current?._id || !token) return;
-        try {
-            const res = await axios.put(`${API_URL}/api/characters/${characterRef.current._id}`, updates, { headers: { 'Authorization': `Bearer ${token}` } });
-            setCharacter(res.data);
-        } catch (err) { console.error('Guncelleme hatasi:', err); }
-    };
-
-    // ── Inventory & Money Functions ──────────────────────────────────────────
-    const updateMoney = async (type: string, amount: number) => {
-        if (!characterRef.current) return;
-        const currentMoney = characterRef.current.money || { cp: 0, sp: 0, ep: 0, gp: 0, pp: 0 };
-        const newMoney = { ...currentMoney, [type]: Math.max(0, (currentMoney[type] || 0) + amount) };
-        const newChar = { ...characterRef.current, money: newMoney };
-        setCharacter(newChar);
-        await axios.put(`${API_URL}/api/characters/${characterRef.current._id}`, { money: newMoney }, { headers: { 'Authorization': `Bearer ${token}` } });
-    };
-
-    const setMoney = async (type: string, value: number) => {
-        if (!characterRef.current) return;
-        const currentMoney = characterRef.current.money || { cp: 0, sp: 0, ep: 0, gp: 0, pp: 0 };
-        const newMoney = { ...currentMoney, [type]: Math.max(0, value) };
-        const newChar = { ...characterRef.current, money: newMoney };
-        setCharacter(newChar);
-        await axios.put(`${API_URL}/api/characters/${characterRef.current._id}`, { money: newMoney }, { headers: { 'Authorization': `Bearer ${token}` } });
-    };
-
-    const addItem = async () => {
-        if (!newItemName.trim() || !characterRef.current) return;
-
-        let itemData: any = { name: newItemName, qty: newItemQty, note: newItemNote, type: "gear" };
-
-        // Try to fetch full item data from DB if it exists
-        try {
-            const res = await axios.get(`${API_URL}/api/items/${encodeURIComponent(newItemName)}`, { headers: { 'Authorization': `Bearer ${token}` } });
-            if (res.data) {
-                itemData = { ...res.data, ...itemData }; // Merge DB data with manual input
+    useEffect(() => {
+        if (!socket || !character) return;
+        
+        const onCharUpdated = (data: any) => {
+            if (data.characterId === character._id || data.characterId === character.name) {
+                setCharacter((prev: any) => {
+                    if (!prev) return prev;
+                    const next = { ...prev, [data.stat]: data.value };
+                    characterRef.current = next;
+                    return next;
+                });
             }
-        } catch (e) {
-            console.log("Item not found in DB, adding as custom item.");
-        }
-
-        const newInv = [...(characterRef.current.inventory || []), itemData];
-        const newChar = { ...characterRef.current, inventory: newInv };
-        setCharacter(newChar);
-        setNewItemName(""); setNewItemQty(1); setNewItemNote("");
-        await axios.put(`${API_URL}/api/characters/${characterRef.current._id}`, { inventory: newInv }, { headers: { 'Authorization': `Bearer ${token}` } });
-    };
-
-    const removeItem = async (index: number) => {
-        if (!characterRef.current || !characterRef.current.inventory) return;
-        const newInv = characterRef.current.inventory.filter((_: any, i: number) => i !== index);
-        const newChar = { ...characterRef.current, inventory: newInv };
-        setCharacter(newChar);
-        characterRef.current = newChar;
-        await axios.put(`${API_URL}/api/characters/${characterRef.current._id}`, { inventory: newInv }, { headers: { 'Authorization': `Bearer ${token}` } });
-    };
-
-    const toggleEquip = async (index: number) => {
-        if (!characterRef.current) return;
-        const newInv = [...(characterRef.current.inventory || [])];
-        const item = newInv[index];
-        if (!item) return;
-
-        // Toggle equipped state
-        item.isEquipped = !item.isEquipped;
-
-        // If it's armor, unequip other armor (except shields)
-        if (item.isEquipped && item.type === 'armor' && !item.name.toLowerCase().includes('shield')) {
-            newInv.forEach((it, i) => {
-                if (i !== index && it.type === 'armor' && !it.name.toLowerCase().includes('shield')) {
-                    it.isEquipped = false;
-                }
-            });
-        }
-
-        const newChar = { ...characterRef.current, inventory: newInv };
-        setCharacter(newChar);
-        characterRef.current = newChar;
-
-        try {
-            await axios.put(`${API_URL}/api/characters/${characterRef.current._id}`, { inventory: newInv }, { headers: { 'Authorization': `Bearer ${token}` } });
-        } catch (e) {
-            console.error('Toggle equip failed:', e);
-        }
-    };
-
-    const addCustomResource = async () => {
-        if (!newResourceName.trim() || !characterRef.current) return;
-        const newRes = {
-            id: `cr-${Date.now()}`,
-            name: newResourceName,
-            max: newResourceMax,
-            recharge: newResourceRecharge,
-            desc: newResourceDesc
         };
-        const updated = [...customResources, newRes];
-        setCustomResources(updated);
-        setNewResourceName(""); setNewResourceMax(1); setNewResourceDesc("");
-        setShowCustomResourceModal(false);
-        try {
-            await axios.put(`${API_URL}/api/characters/${characterRef.current._id}`, { customResources: updated }, { headers: { 'Authorization': `Bearer ${token}` } });
-        } catch (err) { console.error("Error adding custom resource:", err); }
-    };
 
-    const removeCustomResource = async (id: string) => {
-        if (!characterRef.current) return;
-        const updated = customResources.filter(r => r.id !== id);
-        setCustomResources(updated);
-        // Also clear used count if it exists
-        const newUsed = { ...resourcesUsed };
-        delete newUsed[id];
-        setResourcesUsed(newUsed);
-        try {
-            await axios.put(`${API_URL}/api/characters/${characterRef.current._id}`, { customResources: updated, resourcesUsed: newUsed }, { headers: { 'Authorization': `Bearer ${token}` } });
-        } catch (err) { console.error("Error removing custom resource:", err); }
-    };
+        const onShopPublished = (data: any) => {
+            setShopItems(data.shopItems || []);
+            setIsShopPublished(data.isPublished);
+            if (data.isPublished) {
+                showToast("Shop Published!", "The DM has updated the available items.", "bg-orange-900 border-orange-500 text-orange-100");
+            }
+        };
 
-    // Empty line to clear the syntax error
+        (socket as any).on('character_stat_updated', onCharUpdated);
+        (socket as any).on('shop_published', onShopPublished);
 
-    // ── Long / Short Rest ─────────────────────────────────────────────────────
-    const applyLongRest = async () => {
-        const char = characterRef.current;
-        if (!char) return;
+        return () => {
+            (socket as any).off('character_stat_updated', onCharUpdated);
+            (socket as any).off('shop_published', onShopPublished);
+        };
+    }, [socket, character]);
 
-        let finalSpells = [...(char.spells || [])];
-        if (cantripToReplace && newWizardCantrip) {
-            finalSpells = finalSpells.filter(s => s !== cantripToReplace);
-            if (!finalSpells.includes(newWizardCantrip)) finalSpells.push(newWizardCantrip);
-        }
-
-        const newSlotsUsed: Record<string, number> = {};
-        const newResourcesUsed: Record<string, number> = {};
-        resources.forEach(r => { newResourcesUsed[r.key] = 0; });
-
-        setSpellSlotsUsed(newSlotsUsed);
-        setResourcesUsed(newResourcesUsed);
-        setConcentrationSpell('');
-        setDeathSaves({ successes: 0, failures: 0 });
-        setHitDiceUsed(Math.max(0, hitDiceUsed - Math.max(1, Math.floor(char.level / 2))));
-
-        await saveCombatState({
-            spellSlotsUsed: newSlotsUsed,
-            resourcesUsed: newResourcesUsed,
-            concentrationSpell: '',
-            currentHp: char.maxHp,
-            deathSaves: { successes: 0, failures: 0 },
-            hitDiceUsed: Math.max(0, hitDiceUsed - Math.max(1, Math.floor(char.level / 2))),
-            spells: finalSpells
-        });
-
-        if (cantripToReplace && newWizardCantrip) {
-            setCharacter({ ...char, spells: finalSpells });
-        }
-
-        setCurrentHp(char.maxHp);
-        setShowLongRestModal(false);
-        showToast('🌙 Long Rest', 'HP tam! Tüm slotlar ve kaynaklar yenilendi.', 'bg-indigo-900 border-indigo-500 text-indigo-100');
-    };
-
-    const handleLongRest = async () => {
-        const char = characterRef.current;
-        if (!char) return;
-
-        // Tasha's Wizard Cantrip Formulas Check
-        const hasCantripFormulas = clsName === 'Wizard' && char.level >= 3;
-
-        if (hasCantripFormulas) {
-            setShowLongRestModal(true);
-            setCantripToReplace("");
-            setNewWizardCantrip("");
+    useEffect(() => {
+        const fetchMeta = async () => {
             try {
-                const res = await axios.get(`${API_URL}/api/spells?class=Wizard&max_level=0`, { headers: { 'Authorization': `Bearer ${token}` } });
-                setWizardCantripOptions(res.data);
-            } catch (err) { console.error(err); }
-        } else {
-            await applyLongRest();
-        }
-    };
-
-    const handleShortRest = () => {
-        if (!characterRef.current) return;
-        setHitDiceToSpend(0);
-        setShowHitDiceModal(true);
-    };
-
-    const confirmShortRest = async () => {
-        const char = characterRef.current;
-        if (!char) return;
-        const newResourcesUsed = { ...resourcesUsed };
-        // Short rest: reset short-recharge resources, Warlock slots
-        resources.forEach(r => { if (r.recharge === 'short') newResourcesUsed[r.key] = 0; });
-
-        // Also reset custom resources that recharge on short rest
-        customResources.forEach(cr => {
-            if (cr.recharge === 'short') newResourcesUsed[cr.id] = 0;
-        });
-        // Also reset Warlock pact magic
-        const newSlotsUsed = { ...spellSlotsUsed };
-        if (clsName === 'Warlock') { Object.keys(newSlotsUsed).forEach(k => { newSlotsUsed[k] = 0; }); }
-
-        // Calculate Hit Dice Healing if spending dice
-        const hitDieStr = (char.classRef?.hit_die || 'd8') as string;
-        const hitDieMax = parseInt(hitDieStr.replace('d', '')) || 8;
-        const conMod = mod(char.stats?.CON ?? 10);
-        let totalHeal = 0;
-        for (let i = 0; i < hitDiceToSpend; i++) {
-            totalHeal += Math.max(1, Math.floor(Math.random() * hitDieMax) + 1 + conMod);
-        }
-
-        const currentHPVal = currentHp; // Use state value for guaranteed fresh local state
-        const maxHPVal = character?.maxHp || 10;
-        const newHp = Math.min(maxHPVal, currentHPVal + totalHeal);
-        const newHitDiceUsed = hitDiceUsed + hitDiceToSpend;
-
-        setResourcesUsed(newResourcesUsed);
-        setSpellSlotsUsed(newSlotsUsed);
-        setHitDiceUsed(newHitDiceUsed);
-        setCurrentHp(newHp);
-
-        await saveCombatState({
-            resourcesUsed: newResourcesUsed,
-            spellSlotsUsed: newSlotsUsed,
-            hitDiceUsed: newHitDiceUsed,
-            currentHp: newHp
-        });
-
-        setShowHitDiceModal(false);
-        showToast('⏳ Short Rest', `${hitDiceToSpend} adet ${hitDieStr} harcandı. +${totalHeal} HP Canlandın!`, 'bg-green-800 border-green-500 text-green-100');
-    };
-
-    const updateDeathSaves = async (type: 'successes' | 'failures', val: number) => {
-        const newDS = { ...deathSaves, [type]: val };
-        setDeathSaves(newDS);
-        await saveCombatState({ deathSaves: newDS });
-        if (socket && character) {
-            (socket as any).emit('update_character_stat', { campaignId, characterId: character._id, stat: 'deathSaves', value: newDS });
-        }
-    };
+                const [fRes, cRes] = await Promise.all([
+                    axios.get(`${API_URL}/api/feats`, { headers: { 'Authorization': `Bearer ${token}` } }),
+                    axios.get(`${API_URL}/api/classes`, { headers: { 'Authorization': `Bearer ${token}` } })
+                ]);
+                setLibFeats(fRes.data);
+                setAllClasses(cRes.data);
+            } catch (e) { }
+        };
+        if (token) fetchMeta();
+    }, [token]);
 
     const updatePetHp = async (petId: string, newHp: number) => {
         if (!characterRef.current) return;
@@ -834,6 +411,62 @@ export default function PlayerSheet() {
         }
     };
 
+    const updateHp = async (val: number) => {
+        if (!character) return;
+        const clamped = Math.max(0, Math.min(character.maxHp || 10, val));
+        setCurrentHp(clamped);
+        try {
+            await axios.put(`${API_URL}/api/characters/${character._id}`, { currentHp: clamped }, { headers: { 'Authorization': `Bearer ${token}` } });
+            if (socket) (socket as any).emit('character_stat_updated', { campaignId, characterId: character._id, stat: 'currentHp', value: clamped });
+        } catch (e) { console.error(e); }
+    };
+
+    const updateMoney = async (coin: string, amount: number) => {
+        if (!character) return;
+        const currentMoney = character.money || { cp: 0, sp: 0, ep: 0, gp: 0, pp: 0 };
+        const newMoney = { ...currentMoney, [coin]: Math.max(0, (currentMoney[coin] || 0) + amount) };
+        setCharacter({ ...character, money: newMoney });
+        try {
+            await axios.put(`${API_URL}/api/characters/${character._id}`, { money: newMoney }, { headers: { 'Authorization': `Bearer ${token}` } });
+            if (socket) (socket as any).emit('character_stat_updated', { campaignId, characterId: character._id, stat: 'money', value: newMoney });
+        } catch (e) { console.error(e); }
+    };
+
+    const setMoney = async (coin: string, absoluteAmount: number) => {
+        if (!character) return;
+        const currentMoney = character.money || { cp: 0, sp: 0, ep: 0, gp: 0, pp: 0 };
+        const newMoney = { ...currentMoney, [coin]: Math.max(0, absoluteAmount) };
+        setCharacter({ ...character, money: newMoney });
+        try {
+            await axios.put(`${API_URL}/api/characters/${character._id}`, { money: newMoney }, { headers: { 'Authorization': `Bearer ${token}` } });
+            if (socket) (socket as any).emit('character_stat_updated', { campaignId, characterId: character._id, stat: 'set_money', value: newMoney });
+        } catch (e) { console.error(e); }
+    };
+
+    const updateDeathSaves = async (type: 'successes' | 'failures', val: number) => {
+        if (!character) return;
+        const newSaves = { ...deathSaves, [type]: val };
+        setDeathSaves(newSaves);
+        try {
+            await axios.put(`${API_URL}/api/characters/${character._id}`, { deathSaves: newSaves }, { headers: { 'Authorization': `Bearer ${token}` } });
+        } catch (e) { console.error(e); }
+    };
+
+    const getEffectiveScore = (stat: string, baseScore: number) => {
+        let total = baseScore;
+        if (character?.inventory) {
+            character.inventory.forEach((it: any) => {
+                if (it.isEquipped && it.effects) {
+                    it.effects.forEach((eff: any) => {
+                        if (eff.type === 'stat_set' && eff.stat === stat) total = Math.max(total, eff.value);
+                        if (eff.type === 'stat_bonus' && eff.stat === stat) total += eff.value;
+                    });
+                }
+            });
+        }
+        return total;
+    };
+
 
     useEffect(() => {
         if (!socket) return;
@@ -851,14 +484,14 @@ export default function PlayerSheet() {
 
     const handleDeleteCharacter = async () => {
         if (!character) return;
-        if (!confirm(`"${character.name}" karakterini tamamen silmek istediğine emin misin? Bu işlem geri alınamaz.`)) return;
+        if (!confirm(`Are you sure you want to completely delete "${character.name}"? This action cannot be undone.`)) return;
         try {
             await axios.delete(`${API_URL}/api/characters/${character._id}`, { headers: { 'Authorization': `Bearer ${token}` } });
             localStorage.removeItem(`dnd_character_${campaignId}`);
             router.push('/dashboard');
         } catch (err) {
             console.error(err);
-            alert("Karakter silinirken hata oluştu.");
+            alert("Error deleting character.");
         }
     };
 
@@ -868,10 +501,10 @@ export default function PlayerSheet() {
         // Check if I am the target
         if (wd.targetPlayerName === 'DM') {
             if (dmLevelPermission) {
-                showToast(`${wd.senderName} Fısıldıyor 🤫`, wd.message, 'bg-purple-900 border-purple-500 text-purple-100');
+                showToast(`${wd.senderName} Whispers 🤫`, wd.message, 'bg-purple-900 border-purple-500 text-purple-100');
             }
         } else if (wd.targetPlayerName === character.name) {
-            showToast(`${wd.senderName} Fısıldıyor 🤫`, wd.message, 'bg-purple-900 border-purple-500 text-purple-100');
+            showToast(`${wd.senderName} Whispers 🤫`, wd.message, 'bg-purple-900 border-purple-500 text-purple-100');
         }
     }, [whisperData, character, dmLevelPermission]);
 
@@ -884,14 +517,116 @@ export default function PlayerSheet() {
         const onMedia = () => fetchGallery();
         (socket as any).on('media_shared', onMedia);
         return () => (socket as any).off('media_shared', onMedia);
-    }, [socket, campaignId]);
+    }, [socket, campaignId, token]);
+
+    const addItem = async () => {
+        if (!newItemName.trim() || !character) return;
+        setIsAddingItem(true);
+        const newItem = { name: newItemName, qty: newItemQty, isEquipped: false };
+        const newInventory = [...(character.inventory || []), newItem];
+        try {
+            const res = await axios.put(`${API_URL}/api/characters/${character._id}`, { inventory: newInventory }, { headers: { 'Authorization': `Bearer ${token}` } });
+            setCharacter(res.data);
+            setNewItemName("");
+            setNewItemQty(1);
+            showToast('Eşya Eklendi', `${newItemName} envantere eklendi.`, 'bg-green-900 border-green-500 text-green-100');
+        } catch { alert("Eşya eklenemedi."); }
+        finally { setIsAddingItem(false); }
+    };
+
+    const removeItem = async (index: number) => {
+        if (!character) return;
+        const newInventory = character.inventory.filter((_: any, i: number) => i !== index);
+        try {
+            const res = await axios.put(`${API_URL}/api/characters/${character._id}`, { inventory: newInventory }, { headers: { 'Authorization': `Bearer ${token}` } });
+            setCharacter(res.data);
+        } catch { alert("Eşya silinemedi."); }
+    };
+
+    const toggleEquip = async (index: number) => {
+        if (!character) return;
+        const newInventory = character.inventory.map((item: any, i: number) => 
+            i === index ? { ...item, isEquipped: !item.isEquipped } : item
+        );
+        try {
+            const res = await axios.put(`${API_URL}/api/characters/${character._id}`, { inventory: newInventory }, { headers: { 'Authorization': `Bearer ${token}` } });
+            setCharacter(res.data);
+            showToast(newInventory[index].isEquipped ? 'Kuşanıldı' : 'Çıkarıldı', `${newInventory[index].name} durumu güncellendi.`, 'bg-blue-900 border-blue-500 text-blue-100');
+        } catch { alert("Eşya durumu güncellenemedi."); }
+    };
+
+    const addCustomResource = async () => {
+        if (!newResourceName.trim() || !character) return;
+        const newRes = {
+            name: newResourceName,
+            max: newResourceMax,
+            recharge: newResourceRecharge,
+            desc: newResourceDesc,
+            key: `custom_${Date.now()}`
+        };
+        const currentCustom = character.customResources || [];
+        const newCustom = [...currentCustom, newRes];
+        try {
+            const res = await axios.put(`${API_URL}/api/characters/${character._id}`, { customResources: newCustom }, { headers: { 'Authorization': `Bearer ${token}` } });
+            setCharacter(res.data);
+            setShowCustomResourceModal(false);
+            setNewResourceName("");
+            setNewResourceMax(1);
+            setNewResourceDesc("");
+            showToast('Kaynak Eklendi', `${newResourceName} başarıyla eklendi.`, 'bg-orange-900 border-orange-500 text-orange-100');
+        } catch { alert("Kaynak eklenemedi."); }
+    };
+
+    const toggleSpell = async (spellName: string) => {
+        if (!character) return;
+        const currentSpells = [...(character.spells || [])];
+        const idx = currentSpells.indexOf(spellName);
+        let newSpells = [];
+        if (idx > -1) {
+            newSpells = currentSpells.filter(s => s !== spellName);
+        } else {
+            newSpells = [...currentSpells, spellName];
+        }
+        try {
+            const res = await axios.put(`${API_URL}/api/characters/${character._id}`, { spells: newSpells }, { headers: { 'Authorization': `Bearer ${token}` } });
+            setCharacter(res.data);
+            showToast(idx > -1 ? 'Büyü Unutuldu' : 'Büyü Öğrenildi', `${spellName} kütüphane durumu güncellendi.`, 'bg-purple-900 border-purple-500 text-purple-100');
+        } catch { alert("Büyü listesi güncellenemedi."); }
+    };
+
+    const useSlot = async (slotLevel: number, spellName: string, isConcentration: boolean) => {
+        if (!character) return;
+        const currentUsed = { ...spellSlotsUsed };
+        const key = String(slotLevel);
+        currentUsed[key] = (currentUsed[key] || 0) + 1;
+        setSpellSlotsUsed(currentUsed);
+
+        if (isConcentration) {
+            setConcentrationSpell(spellName);
+        }
+
+        try {
+            await axios.put(`${API_URL}/api/characters/${character._id}`, { 
+                spellSlotsUsed: currentUsed, 
+                concentrationSpell: isConcentration ? spellName : concentrationSpell 
+            }, { headers: { 'Authorization': `Bearer ${token}` } });
+            showToast('Büyü Yapıldı', `${spellName} (${slotLevel}. seviye) başarıyla kullanıldı.`, 'bg-purple-900 border-purple-500 text-purple-100');
+        } catch { alert("Büyü slotu güncellenemedi."); }
+    };
+
+    const dropConcentration = async () => {
+        setConcentrationSpell(null);
+        try {
+            await axios.put(`${API_URL}/api/characters/${character._id}`, { concentrationSpell: null }, { headers: { 'Authorization': `Bearer ${token}` } });
+            showToast('Konsantrasyon Bozuldu', 'Artık bir büyüye konsantre olmuyorsunuz.', 'bg-gray-800 border-gray-600 text-gray-300');
+        } catch { }
+    };
 
     const getSpellcastingAbility = (className: string) => {
         const map: any = {
-            'Wizard': 'INT', 'Mage': 'INT', 'Druid': 'WIS', 'Cleric': 'WIS', 'Ranger': 'WIS',
-            'Büyücü': 'INT', 'Ruhban': 'WIS', 'Kolcu': 'WIS',
-            'Bard': 'CHA', 'Ozan': 'CHA', 'Paladin': 'CHA', 'Sorcerer': 'CHA', 'Warlock': 'CHA',
-            'Artificer': 'INT', 'Şövalye': 'CHA', 'Büyücü/Sorcerer': 'CHA'
+            'Wizard': 'INT', 'Druid': 'WIS', 'Cleric': 'WIS', 'Ranger': 'WIS',
+            'Bard': 'CHA', 'Paladin': 'CHA', 'Sorcerer': 'CHA', 'Warlock': 'CHA',
+            'Artificer': 'INT', 'Sorceror': 'CHA' // Handling common typo
         };
         return map[className] || 'INT';
     };
@@ -913,8 +648,8 @@ export default function PlayerSheet() {
         setIsSavingStory(true);
         try {
             await axios.put(`${API_URL}/api/characters/${character._id}`, { backstory }, { headers: { 'Authorization': `Bearer ${token}` } });
-            showToast('Kayıt Başarılı', 'Karakter hikayen tomarlara işlendi.', 'bg-green-900 border-green-500 text-green-100');
-        } catch { alert("Hikaye kaydedilemedi."); }
+            showToast('Save Successful', 'Your character backstory has been updated.', 'bg-green-900 border-green-500 text-green-100');
+        } catch { alert("Failed to save backstory."); }
         finally { setIsSavingStory(false); }
     };
 
@@ -923,8 +658,8 @@ export default function PlayerSheet() {
         setIsSavingPrivateNotes(true);
         try {
             await axios.put(`${API_URL}/api/characters/${character._id}`, { privateNotes }, { headers: { 'Authorization': `Bearer ${token}` } });
-            showToast('Notlar Kaydedildi', 'Kişisel notların güncellendi.', 'bg-blue-900 border-blue-500 text-blue-100');
-        } catch { alert("Notlar kaydedilemedi."); }
+            showToast('Notes Saved', 'Your personal notes have been updated.', 'bg-blue-900 border-blue-500 text-blue-100');
+        } catch { alert("Failed to save notes."); }
         finally { setIsSavingPrivateNotes(false); }
     };
 
@@ -934,11 +669,11 @@ export default function PlayerSheet() {
             campaignId,
             targetPlayerName: whisperTarget,
             message: whisperMessage,
-            senderName: character?.name || 'Bir Oyuncu'
+            senderName: character?.name || 'A Player'
         });
         setWhisperMessage("");
         setIsWhisperModalOpen(false);
-        showToast('Fısıltı Gönderildi 🤫', `${whisperTarget === 'DM' ? 'DM' : whisperTarget}'e gizli mesajın iletildi.`, 'bg-purple-900 border-purple-500 text-purple-100');
+        showToast('Whisper Sent 🤫', `Secret message delivered to ${whisperTarget === 'DM' ? 'DM' : whisperTarget}.`, 'bg-purple-900 border-purple-500 text-purple-100');
     };
 
     const getItemBonus = (type: string, subType?: string) => {
@@ -979,7 +714,7 @@ export default function PlayerSheet() {
         const used = spellSlotsUsed[String(level)] ?? 0;
         const total = slotTotals[level - 1] ?? 0;
         if (used >= total) {
-            showToast("Yetersiz Büyü Slotu", `${level}. Seviye slotunuz kalmadı.`, "bg-red-900 border-red-500 text-red-100");
+            showToast("Insufficient Spell Slots", `You have no level ${level} slots remaining.`, "bg-red-900 border-red-500 text-red-100");
             return false;
         }
         const newUsed = { ...spellSlotsUsed, [String(level)]: used + 1 };
@@ -994,7 +729,7 @@ export default function PlayerSheet() {
         const maxVal = res.getMax(lv, mods);
         const used = resourcesUsed[key] ?? 0;
         if (used + amount > maxVal) {
-            showToast("Yetersiz Kaynak", `${res.name} için kullanım hakkınız yok.`, "bg-red-900 border-red-500 text-red-100");
+            showToast("Insufficient Resource", `No remaining uses for ${res.name}.`, "bg-red-900 border-red-500 text-red-100");
             return false;
         }
         const newUsed = { ...resourcesUsed, [key]: used + amount };
@@ -1022,13 +757,13 @@ export default function PlayerSheet() {
         characterRef.current = newChar;
         try {
             await axios.put(`${API_URL}/api/characters/${character._id}`, { spells: newSpells }, { headers: { 'Authorization': `Bearer ${token}` } });
-            showToast(newSpells.includes(spellName) ? 'Büyü Öğrenildi' : 'Büyü Unutuldu', `${spellName} güncellendi.`, 'bg-blue-900 border-blue-500 text-blue-100');
+            showToast(newSpells.includes(spellName) ? 'Spell Learned' : 'Spell Forgotten', `${spellName} updated.`, 'bg-blue-900 border-blue-500 text-blue-100');
         } catch (err) {
             console.error("Spell update error:", err);
             const rollbackChar = { ...characterRef.current, spells: oldSpells };
             setCharacter(rollbackChar);
             characterRef.current = rollbackChar;
-            showToast('Hata', 'Büyü güncellenirken bir hata oluştu.', 'bg-red-900 border-red-500 text-red-100');
+            showToast('Error', 'An error occurred while updating the spell.', 'bg-red-900 border-red-500 text-red-100');
         }
     };
 
@@ -1051,7 +786,7 @@ export default function PlayerSheet() {
                 type: `${name} ${typeLabel} (${formula})`
             });
         }
-        showToast(`🎲 ${name} - ${formula}`, cost ? `${cost.amount} ${cost.name} harcandı! Sonuç: ${total}` : `${typeLabel} Sonucu: ${total}`, 'bg-purple-900 border-purple-500 text-purple-100');
+        showToast(`🎲 ${name} - ${formula}`, cost ? `${cost.amount} ${cost.name} used! Result: ${total}` : `${typeLabel} Result: ${total}`, 'bg-purple-900 border-purple-500 text-purple-100');
     };
 
     const startLevelUp = () => {
@@ -1059,7 +794,7 @@ export default function PlayerSheet() {
         const char = characterRef.current;
         if (!char) return;
         const cls = char.classRef;
-        if (!cls || typeof cls !== 'object') { alert('Sınıf bilgisi yüklenemedi, sayfayı yenileyin.'); return; }
+        if (!cls || typeof cls !== 'object') { alert('Class information could not be loaded, please refresh.'); return; }
         const newLv = char.level + 1;
         if (newLv > 20) return; // Max level 20
         // Use fallback hit_die if missing
@@ -1111,7 +846,7 @@ export default function PlayerSheet() {
         const char = characterRef.current;
         if (!char) return;
         if ((char.level || 1) >= 20) {
-            alert('Karakter zaten maksimum seviyeye ulaştı (20).');
+            alert('Character has already reached the maximum level (20).');
             return;
         }
 
@@ -1147,12 +882,12 @@ export default function PlayerSheet() {
         // Check if already multclassed into this class
         const alreadyExists = currentMulticlasses.find((mc: any) => mc.classRef === mcPickedClassId || mc.classRef?._id === mcPickedClassId);
         if (alreadyExists) {
-            alert('Bu sınıfa zaten multiclass oldunuz.');
+            alert('You have already multiclassed into this class.');
             return;
         }
         // Check vs primary class
         if (char.classRef?._id === mcPickedClassId || char.classRef === mcPickedClassId) {
-            alert('Bu zaten birincil sınıfınız.');
+            alert('This is already your primary class.');
             return;
         }
 
@@ -1188,7 +923,7 @@ export default function PlayerSheet() {
         if (!char) return;
         if (char.level <= 1) return; // Min level 1
         const cls = char.classRef;
-        if (!cls || typeof cls !== 'object') { alert('Sınıf bilgisi yüklenemedi.'); return; }
+        if (!cls || typeof cls !== 'object') { alert('Class information could not be loaded.'); return; }
 
         const hitDie = (cls.hit_die || 'd8') as string;
         const hitDieMax = parseInt(hitDie.replace('d', '')) || 8;
@@ -1206,7 +941,7 @@ export default function PlayerSheet() {
             setCharacter(res.data);
             setCurrentHp(res.data.currentHp);
             characterRef.current = res.data;
-            showToast("Büyü Bozuldu", "Seviye düştü.", "bg-red-900 border-red-500 text-red-100");
+            showToast("Magic Fade", "Level decreased.", "bg-red-900 border-red-500 text-red-100");
             if (res.data.featSelections) {
                 setFeatStatSelections(res.data.featSelections.stats || {});
                 setFeatSpellSelections(res.data.featSelections.spells || {});
@@ -1214,7 +949,7 @@ export default function PlayerSheet() {
             }
         } catch (error) {
             console.error(error);
-            alert("Seviye düşürülürken hata oluştu.");
+            alert("Error while decreasing level.");
         } finally {
             setIsLevelingUp(false);
         }
@@ -1224,7 +959,7 @@ export default function PlayerSheet() {
     const levelUpMulticlass = async (mcIndex: number) => {
         const char = characterRef.current;
         if (!char) return;
-        if ((char.level || 1) >= 20) { alert('Karakter zaten maksimum seviyeye ulaştı (20).'); return; }
+        if ((char.level || 1) >= 20) { alert('Character has already reached the maximum level (20).'); return; }
 
         const mc = mcs[mcIndex];
         if (!mc) return;
@@ -1374,12 +1109,12 @@ export default function PlayerSheet() {
             }
             setLvModal(null);
             
-            let toastTitle = `Seviye ${lvModal.newLv}! 🎉`;
-            if (lvModal.mcAction === 'add') toastTitle = `🎉 ${lvModal.mcData.pickedClassName} Eklendi!`;
-            else if (lvModal.mcAction === 'levelup') toastTitle = `🎉 ${character.multiclasses?.[lvModal.mcData.mcIndex]?.className || 'Multiclass'} Sv.${lvModal.newLv}!`;
+            let toastTitle = `Level ${lvModal.newLv}! 🎉`;
+            if (lvModal.mcAction === 'add') toastTitle = `🎉 ${lvModal.mcData.pickedClassName} Added!`;
+            else if (lvModal.mcAction === 'levelup') toastTitle = `🎉 ${character.multiclasses?.[lvModal.mcData.mcIndex]?.className || 'Multiclass'} Lv.${lvModal.newLv}!`;
 
             showToast(toastTitle,
-                `+${lvModal.hpGained} maks HP kazandın!${(lvModal.classFeats.length + lvModal.subFeats.length) > 0 ? ` ${lvModal.classFeats.length + lvModal.subFeats.length} yeni özellik açıldı.` : ''}`,
+                `+${lvModal.hpGained} max HP gained!${(lvModal.classFeats.length + lvModal.subFeats.length) > 0 ? ` ${lvModal.classFeats.length + lvModal.subFeats.length} new features unlocked.` : ''}`,
                 'bg-yellow-900 border-yellow-500 text-yellow-100');
         } catch (e) { console.error(e); }
         finally { setIsLevelingUp(false); }
@@ -1494,7 +1229,7 @@ export default function PlayerSheet() {
         return (
             <div className="min-h-screen bg-gray-950 flex flex-col items-center justify-center text-white gap-4">
                 <div className="w-16 h-16 border-4 border-red-600 border-t-transparent rounded-full animate-spin"></div>
-                <p className="text-xl font-black tracking-widest uppercase animate-pulse">Karakter Yükleniyor...</p>
+                <p className="text-xl font-black tracking-widest uppercase animate-pulse">Loading Character...</p>
             </div>
         );
     }
@@ -1504,14 +1239,14 @@ export default function PlayerSheet() {
             <div className="min-h-screen bg-gray-950 flex flex-col items-center justify-center text-white gap-6 p-4 text-center">
                 <div className="text-6xl">🚫</div>
                 <div>
-                    <h1 className="text-3xl font-black mb-2">Karakter Bulunamadı</h1>
-                    <p className="text-gray-400">Bu kampanya için henüz bir karakterin yok veya yüklenirken bir hata oluştu.</p>
+                    <h1 className="text-3xl font-black mb-2">Character Not Found</h1>
+                    <p className="text-gray-400">You don't have a character for this campaign yet, or an error occurred while loading.</p>
                 </div>
                 <button 
                     onClick={() => router.push(`/player/${campaignId}/character-creator`)}
                     className="px-8 py-3 bg-red-700 hover:bg-red-600 text-white font-black rounded-xl transition shadow-lg border border-red-500"
                 >
-                    Yeni Karakter Oluştur
+                    Create New Character
                 </button>
             </div>
         );
@@ -1532,7 +1267,7 @@ export default function PlayerSheet() {
                             <div className="flex items-center justify-between mb-5">
                                 <div>
                                     <h2 className="text-2xl font-black text-white">{clsName} — Level Progression</h2>
-                                    <p className="text-gray-400 text-sm">Seviye atlayınca kazanacakların</p>
+                                    <p className="text-gray-400 text-sm">Gains when leveling up</p>
                                 </div>
                                 <button onClick={() => setShowLevelChart(false)} className="text-gray-500 hover:text-white text-2xl font-black">✕</button>
                             </div>
@@ -1566,7 +1301,7 @@ export default function PlayerSheet() {
                                                     <td className="px-3 py-2">
                                                         <div className="flex items-center gap-2">
                                                             <span className={`font-black text-lg w-8 text-center ${isCurrent ? 'text-red-400' : 'text-white'}`}>{lv}</span>
-                                                            {isCurrent && <span className="text-[10px] bg-red-700 text-red-100 px-1.5 py-0.5 rounded font-bold">ŞUAN</span>}
+                                                            {isCurrent && <span className="text-[10px] bg-red-700 text-red-100 px-1.5 py-0.5 rounded font-bold">CURRENT</span>}
                                                         </div>
                                                     </td>
                                                     <td className="px-3 py-2 text-center">
@@ -2002,7 +1737,10 @@ export default function PlayerSheet() {
                         ["world", "🌍 Dünya / Görevler"],
                         ["party", "🛡️ Parti / Oda"]
                     ] as const).map(([tab, label]) => {
-                        if (tab === "spells" && actualSpells.length === 0 && !isSpellcaster(character.classRef?.name || '')) return null;
+                        if (tab === "spells") {
+                            const isCharSpellcaster = isSpellcaster(character.classRef?.name || '') || mcs.some((mc: any) => isSpellcaster(mc.className));
+                            if (actualSpells.length === 0 && !isCharSpellcaster) return null;
+                        }
                         return (
                             <button key={tab} onClick={() => setActiveTab(tab)}
                                 className={`px-5 py-2.5 text-sm font-bold rounded-t-lg border-b-2 transition whitespace-nowrap ${activeTab === tab ? 'border-red-500 text-red-400 bg-gray-800' : 'border-transparent text-gray-500 hover:text-gray-300'}`}>
@@ -2525,7 +2263,7 @@ export default function PlayerSheet() {
                 {/* ══════════ TAB: ATTACKS & SPELLS ══════════ */}
                 {(activeTab === "attacks" || activeTab === "spells") && (() => {
                     // Find equipped weapons from inventory
-                    const equippedWeapons = (character.inventory || []).filter((it: any) => it.isEquipped && (it.type === 'weapon' || it.name.toLowerCase().match(/sword|axe|dagger|bow|staff|mace|hammer|spear|javelin/)));
+                    const equippedWeapons = (character.inventory || []).filter((it: any) => it.isEquipped && (it.type === 'weapon' || (it.name && it.name.toLowerCase().match(/sword|axe|dagger|bow|staff|mace|hammer|spear|javelin/))));
 
                     // Map equipped weapons to attack objects
                     const mappedWeaponAttacks = equippedWeapons.map((w: any) => {
@@ -2534,7 +2272,7 @@ export default function PlayerSheet() {
                         const isRanged = name.includes('bow') || name.includes('crossbow') || name.includes('sling') || name.includes('dart');
 
                         const atkAbility = isRanged ? 'DEX' : (isFinesse ? (mods.DEX > mods.STR ? 'DEX' : 'STR') : 'STR');
-                        const abilityMod = mods[atkAbility as keyof typeof mods];
+                        const abilityMod = mods[atkAbility as keyof typeof mods] || 0;
 
                         // Get weapon-specific bonus (e.g. +1 weapon)
                         let weaponBonus = 0;
@@ -2577,7 +2315,7 @@ export default function PlayerSheet() {
                         };
                     });
 
-                    const attacks = [
+                    const allAttacks = [
                         ...baseAttacks.map(atk => ({
                             ...atk,
                             toHit: atk.toHit ? fmt(evalAtk(atk.toHit, mods, prof)) : undefined,
@@ -2600,15 +2338,6 @@ export default function PlayerSheet() {
 
                     return (
                         <div className="pb-8 space-y-5">
-                            {/* ── REST ACTIONS (Moved to topbar) ── */}
-                            {concentrationSpell && (
-                                <div className="flex gap-3 flex-wrap">
-                                    <button onClick={dropConcentration} className="px-4 py-2.5 bg-red-800/60 hover:bg-red-700 text-red-200 font-bold rounded-xl text-sm transition border border-red-600 shadow-sm">
-                                        🔵 Drop Concentration: <span className="font-black">{concentrationSpell}</span>
-                                    </button>
-                                </div>
-                            )}
-
                             {/* ── CONCENTRATION STATUS ── */}
                             {concentrationSpell && (
                                 <div className="bg-blue-900/30 border-2 border-blue-500/60 rounded-xl px-5 py-3 flex items-center gap-3">
@@ -2622,179 +2351,75 @@ export default function PlayerSheet() {
                             )}
 
                             {activeTab === "attacks" && (
-                                <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
-                                    {/* ── BASIC ATTACKS ── */}
-                                    <div className="bg-gray-800 rounded-xl border border-red-800/40 overflow-hidden">
-                                        <div className="px-4 py-3 bg-red-900/20 border-b border-red-800/40">
-                                            <h3 className="font-black text-red-400 text-sm uppercase tracking-wide">⚔️ Attacks — {clsName}</h3>
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                    {allAttacks.map((atk, idx) => (
+                                        <div key={idx} className="bg-gray-800 rounded-xl border border-gray-700 p-4 hover:border-gray-500 transition-all flex items-center justify-between group shadow-lg">
+                                            <div className="flex-1">
+                                                <h4 className="font-black text-white text-sm uppercase tracking-tight group-hover:text-red-400 transition-colors">{atk.name}</h4>
+                                                <div className="flex gap-3 mt-1 items-center">
+                                                    <span className="text-[10px] bg-red-900/40 text-red-300 font-black px-2 py-0.5 rounded border border-red-500/30">BONUS: {fmt(atk.bonus)}</span>
+                                                    <span className="text-[10px] bg-gray-900/60 text-gray-400 font-bold px-2 py-0.5 rounded border border-white/5 uppercase">{atk.damage} {atk.type}</span>
+                                                </div>
+                                            </div>
+                                            <button 
+                                                onClick={() => handleRoll(atk.name, { count: 1, sides: 20, bonus: atk.bonus }, 'Atak')}
+                                                className="bg-red-700 hover:bg-red-600 text-white w-10 h-10 rounded-lg flex items-center justify-center font-black shadow-lg shadow-red-900/20 active:scale-95 transition-all"
+                                            >
+                                                🎲
+                                            </button>
                                         </div>
-                                        <div className="p-3 space-y-2">
-                                            {attacks.map((atk, i) => {
-                                                const expanded = expandedAtkIdx === i;
-                                                const dice = extractDice(atk.damage);
-                                                return (
-                                                    <div key={i}
-                                                        className={`group/atk relative rounded-2xl transition-all duration-300 border backdrop-blur-md overflow-hidden ${expanded ? 'border-white/30 bg-white/10 shadow-[0_0_25px_rgba(255,255,255,0.05)]' : 'border-white/5 bg-white/5 hover:bg-white/10 hover:border-white/20 hover:scale-[1.01] shadow-sm'}`}
-                                                        onClick={() => setExpandedAtkIdx(expanded ? null : i)}>
-                                                        
-                                                        {/* Glow effect on hover */}
-                                                        <div className="absolute inset-0 bg-gradient-to-r from-red-500/0 via-red-500/0 to-red-500/0 group-hover/atk:via-red-500/5 transition-all duration-700 pointer-events-none"></div>
+                                    ))}
+                                </div>
+                            )}
 
-                                                        <div className="p-4 relative">
-                                                            <div className="flex items-start justify-between gap-4">
-                                                                <div className="flex-1 flex flex-col gap-1.5">
-                                                                    <div className="flex items-center gap-2">
-                                                                        <span className={`text-[10px] px-2 py-0.5 rounded-full font-black uppercase tracking-widest border ${
-                                                                            atk.type === 'melee' ? 'bg-red-500/10 border-red-500/30 text-red-400' : 
-                                                                            atk.type === 'ranged' ? 'bg-blue-500/10 border-blue-500/30 text-blue-400' : 
-                                                                            atk.type === 'save' ? 'bg-yellow-500/10 border-yellow-500/30 text-yellow-400' : 
-                                                                            atk.type === 'heal' ? 'bg-green-500/10 border-green-500/30 text-green-400' : 
-                                                                            'bg-purple-500/10 border-purple-500/30 text-purple-400'
-                                                                        }`}>
-                                                                            {atk.type === 'melee' ? '⚔️ Melee' : atk.type === 'ranged' ? '🏹 Ranged' : atk.type === 'save' ? '⚡ Save' : atk.type === 'heal' ? '❤️ Heal' : '✨ Special'}
-                                                                        </span>
-                                                                        <h4 className="font-black text-white text-base tracking-tight group-hover/atk:text-red-300 transition-colors uppercase">{atk.name}</h4>
-                                                                    </div>
-                                                                    
-                                                                    <div className="flex gap-4 text-xs font-bold items-center ml-1">
-                                                                        {atk.toHit && (
-                                                                            <div className="flex flex-col">
-                                                                                <span className="text-[9px] text-gray-500 uppercase tracking-widest">To Hit</span>
-                                                                                <span className="text-emerald-400 font-black">{atk.toHit}</span>
-                                                                            </div>
-                                                                        )}
-                                                                        <div className="flex flex-col">
-                                                                            <span className="text-[9px] text-gray-500 uppercase tracking-widest">{atk.type === 'heal' ? 'Heal' : 'Damage'}</span>
-                                                                            <span className="text-orange-400 font-black">{atk.damage}</span>
-                                                                        </div>
-                                                                        {atk.range && (
-                                                                            <div className="flex flex-col">
-                                                                                <span className="text-[9px] text-gray-500 uppercase tracking-widest">Range</span>
-                                                                                <span className="text-gray-400 font-black">{atk.range}</span>
-                                                                            </div>
-                                                                        )}
-                                                                    </div>
-                                                                </div>
-
-                                                                {/* Persistent Roll Buttons */}
-                                                                <div className="flex gap-2">
-                                                                    {atk.toHit && (
-                                                                        <button 
-                                                                            onClick={(e) => { 
-                                                                                e.stopPropagation(); 
-                                                                                handleRoll(atk.name, { count: 1, sides: 20, bonus: evalAtk(atk.toHit || "0", mods, prof) }, 'Saldırı', atk.resourceCost); 
-                                                                            }} 
-                                                                            className="w-10 h-10 flex items-center justify-center bg-emerald-600/20 hover:bg-emerald-500 text-emerald-400 hover:text-white border border-emerald-500/30 rounded-xl transition-all duration-300 active:scale-90 shadow-lg shadow-emerald-900/10"
-                                                                            title="Attack Roll"
-                                                                        >
-                                                                            <span className="text-xl">⚔️</span>
-                                                                        </button>
-                                                                    )}
-                                                                    {dice && (
-                                                                        <button 
-                                                                            onClick={(e) => { 
-                                                                                e.stopPropagation(); 
-                                                                                handleRoll(atk.name, dice, 'Hasar', atk.resourceCost); 
-                                                                            }} 
-                                                                            className="w-10 h-10 flex items-center justify-center bg-orange-600/20 hover:bg-orange-500 text-orange-400 hover:text-white border border-orange-500/30 rounded-xl transition-all duration-300 active:scale-90 shadow-lg shadow-orange-900/10"
-                                                                            title="Damage Roll"
-                                                                        >
-                                                                            <span className="text-xl">🩸</span>
-                                                                        </button>
-                                                                    )}
-                                                                    {!atk.toHit && !dice && atk.resourceCost && (
-                                                                        <button 
-                                                                            onClick={async (e) => {
-                                                                                e.stopPropagation();
-                                                                                const success = await useResource(atk.resourceCost!.key, atk.resourceCost!.amount);
-                                                                                if (success) showToast(`✨ ${atk.name}`, `${atk.resourceCost!.amount} ${atk.resourceCost!.name} harcandı!`, 'bg-orange-900 border-orange-500 text-orange-100');
-                                                                            }} 
-                                                                            className="w-10 h-10 flex items-center justify-center bg-purple-600/20 hover:bg-purple-500 text-purple-400 hover:text-white border border-purple-500/30 rounded-xl transition-all duration-300 active:scale-90 shadow-lg shadow-purple-900/10"
-                                                                            title="Use Feature"
-                                                                        >
-                                                                            <span className="text-xl">✨</span>
-                                                                        </button>
-                                                                    )}
-                                                                </div>
-                                                            </div>
-
-                                                            {/* EXPANDED SECTION */}
-                                                            {expanded && (
-                                                                <div className="mt-4 pt-4 border-t border-white/5 animate-in slide-in-from-top-2 duration-300">
-                                                                    <p className="text-gray-300 text-xs leading-relaxed whitespace-pre-wrap italic opacity-80 mb-3">{atk.desc_tr}</p>
-                                                                    {atk.resourceCost && (
-                                                                        <div className="flex items-center gap-2 text-[10px] font-black text-orange-400/80 uppercase tracking-widest bg-orange-500/5 px-3 py-1.5 rounded-lg border border-orange-500/20 w-fit">
-                                                                            <span>⚡ Cost: {atk.resourceCost.amount}x {atk.resourceCost.name}</span>
-                                                                        </div>
-                                                                    )}
-                                                                </div>
-                                                            )}
-                                                            
-                                                            {/* Indicator */}
-                                                            <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-8 h-1 bg-white/5 rounded-full group-hover/atk:bg-white/10 transition-colors"></div>
-                                                        </div>
+                            {/* ── CLASS RESOURCES ── */}
+                            {activeTab === "attacks" && resources.length > 0 && (
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+                                    {resources.map(res => {
+                                        const maxVal = res.getMax(lv, mods);
+                                        if (maxVal <= 0) return null;
+                                        const used = resourcesUsed[res.key] ?? 0;
+                                        const remaining = Math.max(0, maxVal - used);
+                                        return (
+                                            <div key={res.key} className="bg-gray-800 rounded-2xl border border-orange-500/20 p-4 shadow-xl hover:border-orange-500/40 transition-all group">
+                                                <div className="flex items-center gap-3 mb-3">
+                                                    <div className="w-10 h-10 bg-orange-600/20 rounded-xl flex items-center justify-center border border-orange-500/30 text-orange-400 group-hover:scale-110 transition-transform">
+                                                        <span className="text-xl">{res.icon}</span>
                                                     </div>
-                                                );
-                                            })}
-                                        </div>
-                                    </div>
+                                                    <div className="flex-1">
+                                                        <h4 className="font-black text-white text-sm uppercase tracking-tight">{res.name}</h4>
+                                                        <p className="text-[10px] text-gray-500 font-bold uppercase tracking-widest">{res.recharge === 'short' ? 'Short Rest' : 'Long Rest'}</p>
+                                                    </div>
+                                                    <div className="text-right">
+                                                        <span className={`text-xl font-black ${remaining > 0 ? 'text-orange-400' : 'text-red-500'}`}>{remaining}</span>
+                                                        <span className="text-gray-600 text-xs">/{maxVal}</span>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div className="flex gap-1.5 mb-3 flex-wrap">
+                                                    {Array.from({ length: Math.min(maxVal, 20) }).map((_, i) => (
+                                                        <div key={i} className={`w-3 h-3 rounded-full border ${i < remaining ? 'bg-orange-500 border-orange-300 shadow-[0_0_8px_rgba(249,115,22,0.4)]' : 'bg-gray-950 border-gray-800'}`}></div>
+                                                    ))}
+                                                </div>
 
-                                    {/* ── CLASS RESOURCES ── */}
-                                    {resources.length > 0 && (
-                                        <div className="bg-gray-800 rounded-xl border border-orange-800/40 overflow-hidden">
-                                            <div className="px-4 py-3 bg-orange-900/20 border-b border-orange-800/40 flex justify-between items-center">
-                                                <h3 className="font-black text-orange-400 text-sm uppercase tracking-wide">⚡ Class Resources</h3>
-                                                <button onClick={() => setShowCustomResourceModal(true)} className="px-2 py-1 bg-orange-700 hover:bg-orange-600 text-white text-[10px] font-bold rounded transition border border-orange-500 shadow-sm">
-                                                    + Özel Kaynak
-                                                </button>
+                                                <div className="flex gap-2 mt-auto">
+                                                    <button 
+                                                        onClick={() => useResource(res.key)} 
+                                                        disabled={remaining <= 0}
+                                                        className="flex-1 py-1.5 bg-orange-700 hover:bg-orange-600 disabled:opacity-40 text-white font-black rounded-lg text-[10px] uppercase tracking-widest transition shadow-lg shadow-orange-900/20"
+                                                    >
+                                                        Use
+                                                    </button>
+                                                    <button 
+                                                        onClick={() => setResourcesUsed(p => ({ ...p, [res.key]: Math.max(0, (p[res.key] ?? 0) - 1) }))}
+                                                        className="px-3 py-1.5 bg-gray-700 hover:bg-gray-600 text-gray-400 font-bold rounded-lg text-xs transition"
+                                                    >
+                                                        ↩
+                                                    </button>
+                                                </div>
                                             </div>
-                                            <div className="p-3 space-y-3">
-                                                {resources.map(res => {
-                                                    const maxVal = res.getMax(lv, mods);
-                                                    if (maxVal <= 0) return null;
-                                                    const used = resourcesUsed[res.key] ?? 0;
-                                                    const remaining = Math.max(0, maxVal - used);
-                                                    return (
-                                                        <div key={res.key} className="bg-gray-900/60 rounded-xl p-3 border border-gray-700">
-                                                            <div className="flex items-center gap-2 mb-2">
-                                                                <span className="text-xl">{res.icon}</span>
-                                                                <div className="flex-1">
-                                                                    <div className="flex items-center gap-2">
-                                                                        <p className="font-black text-white text-sm">{res.name}</p>
-                                                                        {res.key.startsWith('cr-') && (
-                                                                            <button onClick={() => removeCustomResource(res.key)} className="text-red-500 hover:text-red-400 text-[10px]">Sil</button>
-                                                                        )}
-                                                                    </div>
-                                                                    <p className="text-gray-500 text-[10px]">{res.recharge === 'short' ? '⏳ Short Rest' : '🌙 Long Rest'}</p>
-                                                                </div>
-                                                                <div className="text-right">
-                                                                    <span className={`text-2xl font-black ${remaining > 0 ? 'text-orange-400' : 'text-red-500'}`}>{remaining}</span>
-                                                                    <span className="text-gray-600 text-sm">/{maxVal}</span>
-                                                                </div>
-                                                            </div>
-                                                            <div className="flex gap-1 flex-wrap mb-2">
-                                                                {Array.from({ length: Math.min(maxVal, 20) }).map((_, i) => (
-                                                                    <div key={i} className={`w-4 h-4 rounded-full border-2 ${i < remaining ? 'bg-orange-500 border-orange-400' : 'bg-gray-700 border-gray-600'}`} />
-                                                                ))}
-                                                            </div>
-                                                            <p className="text-gray-500 text-[10px] mb-2 leading-tight">{res.desc_tr}</p>
-                                                            <div className="flex gap-2">
-                                                                <button onClick={() => useResource(res.key)} disabled={remaining <= 0}
-                                                                    className="flex-1 py-1.5 bg-orange-700 hover:bg-orange-600 disabled:opacity-40 text-white font-bold rounded-lg text-xs transition">
-                                                                    Use
-                                                                </button>
-                                                                <button onClick={() => setResourcesUsed(p => ({ ...p, [res.key]: Math.max(0, (p[res.key] ?? 0) - 1) }))}
-                                                                    disabled={used <= 0}
-                                                                    className="px-3 py-1.5 bg-gray-700 hover:bg-gray-600 disabled:opacity-40 text-gray-300 font-bold rounded-lg text-xs transition">
-                                                                    ↩
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                    );
-                                                })}
-                                            </div>
-                                        </div>
-                                    )}
+                                        );
+                                    })}
                                 </div>
                             )}
 
@@ -2882,55 +2507,66 @@ export default function PlayerSheet() {
                                     )}
 
                                     {/* ── SPELLS LIST ── */}
-                                    {actualSpells.length > 0 && (() => {
-                                        const groupedSpells: Record<string, string[]> = {};
-                                        // Kategorileri sıralamak için önceden tanımlanmış sıra
-                                        const catOrder = ["Cantrips (0)", "Level 1", "Level 2", "Level 3", "Level 4", "Level 5", "Level 6", "Level 7", "Level 8", "Level 9", "Diğer Özellikler"];
-
-                                        actualSpells.forEach(sp => {
-                                            const details = spellDetails[sp];
-                                            let cat = 'Diğer Özellikler';
-                                            if (details && typeof details.level_int === 'number') {
-                                                if (details.level_int === 0) cat = "Cantrips (0)";
-                                                else cat = `Level ${details.level_int}`;
-                                            }
-                                            if (!groupedSpells[cat]) groupedSpells[cat] = [];
-                                            groupedSpells[cat].push(sp);
-                                        });
-
-                                        const activeCategories = catOrder.filter(cat => groupedSpells[cat] && groupedSpells[cat].length > 0);
-
-                                        return (
-                                            <div className="bg-gray-900/40 backdrop-blur-sm rounded-2xl border border-purple-500/20 shadow-2xl overflow-hidden mt-8">
-                                                <div className="px-6 py-4 bg-gradient-to-r from-purple-900/40 to-blue-900/40 border-b border-purple-500/30 flex items-center justify-between">
-                                                    <div className="flex items-center gap-3">
-                                                        <div className="w-8 h-8 bg-purple-600/20 rounded-lg flex items-center justify-center border border-purple-500/30 text-purple-400">
-                                                            <span className="text-lg">✨</span>
-                                                        </div>
-                                                        <h3 className="font-black text-white text-base lg:text-lg uppercase tracking-wider">Spell Grimoire</h3>
-                                                        <button 
-                                                            onClick={() => setShowSpellPicker(true)}
-                                                            className="ml-4 px-3 py-1 bg-purple-600 hover:bg-purple-500 text-white text-[10px] font-black rounded-lg transition border border-purple-400 shadow-sm uppercase tracking-widest"
-                                                        >
-                                                            Manage Spells
-                                                        </button>
-                                                    </div>
-                                                    <div className="bg-gray-950/60 px-3 py-1 rounded-full border border-purple-500/30">
-                                                        <span className="text-[10px] font-black text-purple-300 uppercase tracking-widest">{actualSpells.length} Known Spells</span>
-                                                    </div>
+                                    <div className="bg-gray-900/40 backdrop-blur-sm rounded-2xl border border-purple-500/20 shadow-2xl overflow-hidden mt-8">
+                                        <div className="px-6 py-4 bg-gradient-to-r from-purple-900/40 to-blue-900/40 border-b border-purple-500/30 flex items-center justify-between">
+                                            <div className="flex items-center gap-3">
+                                                <div className="w-8 h-8 bg-purple-600/20 rounded-lg flex items-center justify-center border border-purple-500/30 text-purple-400">
+                                                    <span className="text-lg">✨</span>
                                                 </div>
+                                                <h3 className="font-black text-white text-base lg:text-lg uppercase tracking-wider">Spell Grimoire</h3>
+                                                <button 
+                                                    onClick={() => setShowSpellPicker(true)}
+                                                    className="ml-4 px-3 py-1 bg-purple-600 hover:bg-purple-500 text-white text-[10px] font-black rounded-lg transition border border-purple-400 shadow-sm uppercase tracking-widest"
+                                                >
+                                                    Manage Spells
+                                                </button>
+                                            </div>
+                                            <div className="bg-gray-950/60 px-3 py-1 rounded-full border border-purple-500/30">
+                                                <span className="text-[10px] font-black text-purple-300 uppercase tracking-widest">{actualSpells.length} Known Spells</span>
+                                            </div>
+                                        </div>
 
-                                                <div className="p-6 space-y-12">
-                                                    {activeCategories.map(cat => (
-                                                        <div key={cat} className="space-y-4">
-                                                            <div className="flex items-center gap-4 group/header">
-                                                                <div className="h-px flex-1 bg-gradient-to-r from-transparent to-gray-800"></div>
-                                                                <h4 className="font-black text-orange-500 tracking-[0.2em] text-xs uppercase bg-gray-800/50 px-4 py-1.5 rounded-full border border-gray-700/50 group-hover:border-orange-500/30 transition-colors duration-300">{cat}</h4>
-                                                                <div className="h-px flex-1 bg-gradient-to-l from-transparent to-gray-800"></div>
+                                        <div className="p-6">
+                                            {actualSpells.length === 0 ? (
+                                                <div className="text-center py-12 space-y-4">
+                                                    <div className="text-4xl">📚</div>
+                                                    <p className="text-gray-400 text-sm font-medium">Henüz bir büyü seçmediniz.</p>
+                                                    <button 
+                                                        onClick={() => setShowSpellPicker(true)}
+                                                        className="px-6 py-2 bg-purple-600 hover:bg-purple-500 text-white text-xs font-black rounded-xl transition border border-purple-400 shadow-lg uppercase tracking-widest"
+                                                    >
+                                                        Büyüleri Yönet / Ekle
+                                                    </button>
+                                                </div>
+                                            ) : (() => {
+                                                const groupedSpells: Record<string, string[]> = {};
+                                                const catOrder = ["Cantrips (0)", "Level 1", "Level 2", "Level 3", "Level 4", "Level 5", "Level 6", "Level 7", "Level 8", "Level 9", "Diğer Özellikler"];
 
-                                                                <div className="flex justify-end min-w-[100px]">
-                                                                    {(() => {
-                                                                        const levelMatch = cat.match(/Level (\d+)/);
+                                                actualSpells.forEach(sp => {
+                                                    const details = spellDetails[sp];
+                                                    let cat = 'Diğer Özellikler';
+                                                    if (details && typeof details.level_int === 'number') {
+                                                        if (details.level_int === 0) cat = "Cantrips (0)";
+                                                        else cat = `Level ${details.level_int}`;
+                                                    }
+                                                    if (!groupedSpells[cat]) groupedSpells[cat] = [];
+                                                    groupedSpells[cat].push(sp);
+                                                });
+
+                                                const activeCategories = catOrder.filter(cat => groupedSpells[cat] && groupedSpells[cat].length > 0);
+
+                                                return (
+                                                    <div className="space-y-12">
+                                                        {activeCategories.map(cat => (
+                                                                    <div key={cat} className="space-y-4">
+                                                                        <div className="flex items-center gap-4 group/header">
+                                                                            <div className="h-px flex-1 bg-gradient-to-r from-transparent to-gray-800"></div>
+                                                                            <h4 className="font-black text-orange-500 tracking-[0.2em] text-xs uppercase bg-gray-800/50 px-4 py-1.5 rounded-full border border-gray-700/50 group-hover:border-orange-500/30 transition-colors duration-300">{cat}</h4>
+                                                                            <div className="h-px flex-1 bg-gradient-to-l from-transparent to-gray-800"></div>
+
+                                                                            <div className="flex justify-end min-w-[100px]">
+                                                                        {(() => {
+                                                                            const levelMatch = cat.match(/Level (\d+)/);
                                                                         if (levelMatch) {
                                                                             const slotLv = parseInt(levelMatch[1]);
                                                                             const total = slotTotals[slotLv - 1] ?? 0;
@@ -3108,7 +2744,7 @@ export default function PlayerSheet() {
                                                                                             ) : (
                                                                                                 <div className="flex gap-2">
                                                                                                     <button
-                                                                                                        onClick={() => { setCastingSpell(null); showToast(`✨ ${sp}`, 'Kullanıldı!', 'bg-purple-900 border-purple-500 text-purple-100'); }}
+                                                                                                        onClick={() => { setCastingSpell(null); showToast(`✨ ${sp}`, 'Kullanıldı!'); }}
                                                                                                         className="flex-1 py-3 bg-purple-600 text-white text-xs font-black uppercase tracking-widest rounded-xl hover:bg-purple-500 shadow-lg shadow-purple-900/20 transition-all active:scale-95"
                                                                                                     >
                                                                                                         ✓ Confirm Cast
@@ -3132,19 +2768,19 @@ export default function PlayerSheet() {
                                                         </div>
                                                     ))}
                                                 </div>
-                                            </div>
-                                        );
-                                    })()}
+                                            );
+                                        })()}
+                                    </div>
                                 </div>
-                            )}
-                        </div>
-                    );
-                })()}
-
+                            </div>
+                        )}
+                    </div>
+                );
+            })()}
+                    
                 {/* ══════════ TAB: INVENTORY ══════════ */}
                 {activeTab === "inventory" && (
-                    <div className="max-w-4xl pb-8 space-y-6">
-
+                    <div className="max-w-4xl space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
                         {/* ── MONEY CARD ── */}
                         <div className="bg-gray-800 rounded-xl border border-yellow-800/40 overflow-hidden">
                             <div className="px-4 py-3 bg-yellow-900/20 border-b border-yellow-800/40">
@@ -3205,7 +2841,7 @@ export default function PlayerSheet() {
                                                                     : 'bg-gray-700 text-gray-400 hover:bg-gray-600'
                                                                     }`}
                                                             >
-                                                                {item.isEquipped ? 'Giyili' : 'Giy'}
+                                                                 {item.isEquipped ? 'Giyili' : 'Giy'}
                                                             </button>
                                                         )}
                                                         <button onClick={() => removeItem(idx)} className="text-gray-500 hover:text-red-400 text-xs px-2 py-1 rounded bg-gray-800 hover:bg-gray-700 transition">Sil</button>
@@ -3516,9 +3152,9 @@ export default function PlayerSheet() {
                     <div className="pb-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                         <div className="bg-gray-800 rounded-2xl border border-gray-700 p-6 shadow-xl col-span-full mb-2">
                             <h2 className="text-2xl font-black text-white mb-2 flex items-center gap-2">
-                                <span className="text-yellow-500">🛡️</span> Kampanya Katılımcıları
+                                <span className="text-yellow-500">🛡️</span> Campaign Participants
                             </h2>
-                            <p className="text-gray-400 text-sm">Odadaki diğer oyuncularla gizli mesajlaşabilir veya durumlarını görebilirsin.</p>
+                            <p className="text-gray-400 text-sm">Whisper to other players in the room or view their status.</p>
                         </div>
 
                         {/* DM Card */}
@@ -3526,12 +3162,12 @@ export default function PlayerSheet() {
                             <div className="flex justify-between items-start">
                                 <div>
                                     <h3 className="font-black text-purple-400 text-xl">Dungeon Master</h3>
-                                    <p className="text-xs text-gray-500 uppercase tracking-widest font-bold">Oyun Kurucusu</p>
+                                    <p className="text-xs text-gray-500 uppercase tracking-widest font-bold">Game Master</p>
                                 </div>
                                 <span className="bg-purple-900 text-purple-100 text-[10px] font-black px-2 py-1 rounded uppercase">DM</span>
                             </div>
                             <button onClick={() => { setWhisperTarget("DM"); setIsWhisperModalOpen(true); }} className="w-full py-2 bg-purple-700 hover:bg-purple-600 text-white font-bold rounded-xl transition text-sm shadow-lg shadow-purple-900/20">
-                                🤫 DM'e Fısılda
+                                🤫 Whisper to DM
                             </button>
                         </div>
 
@@ -3546,11 +3182,11 @@ export default function PlayerSheet() {
                                             {stats.subclass ? (
                                                 <p className="text-xs text-yellow-500 font-bold truncate">{stats.subclass}</p>
                                             ) : (
-                                                <p className="text-xs text-gray-500 font-bold uppercase tracking-tighter">Maceracı</p>
+                                                <p className="text-xs text-gray-500 font-bold uppercase tracking-tighter">Adventurer</p>
                                             )}
                                         </div>
                                         <div className="flex flex-col items-end">
-                                            <span className="text-xs font-black text-gray-400">SVY {stats.level || 1}</span>
+                                            <span className="text-xs font-black text-gray-400">LV {stats.level || 1}</span>
                                             <div className="flex gap-1 mt-1">
                                                 {stats.conditions && stats.conditions.map((c: string) => (
                                                     <span key={c} className="w-2 h-2 rounded-full bg-red-500 shadow-[0_0_5px_rgba(239,68,68,0.5)]" title={c}></span>
@@ -3561,7 +3197,7 @@ export default function PlayerSheet() {
 
                                     <div className="space-y-1.5">
                                         <div className="flex justify-between text-[10px] font-bold uppercase tracking-widest text-gray-500">
-                                            <span>Can (HP)</span>
+                                            <span>Hit Points (HP)</span>
                                             <span>{stats.currentHp || 0} / {stats.maxHp || 10}</span>
                                         </div>
                                         <div className="w-full bg-gray-950 h-2 rounded-full overflow-hidden border border-gray-700/50">
@@ -3570,7 +3206,7 @@ export default function PlayerSheet() {
                                     </div>
 
                                     <button onClick={() => { setWhisperTarget(name); setIsWhisperModalOpen(true); }} className="w-full py-2 bg-gray-700 hover:bg-gray-600 text-gray-200 font-bold rounded-xl transition text-sm">
-                                        🤫 Fısılda
+                                        🤫 Whisper
                                     </button>
                                 </div>
                             );
@@ -3578,7 +3214,7 @@ export default function PlayerSheet() {
 
                         {(!partyStats || Object.keys(partyStats).filter(name => name !== character?.name).length === 0) && (
                             <div className="col-span-full py-12 text-center border-2 border-dashed border-gray-800 rounded-2xl">
-                                <p className="text-gray-500 font-bold italic">Odadaki diğer oyuncular bekleniyor...</p>
+                                <p className="text-gray-500 font-bold italic">Waiting for other players...</p>
                             </div>
                         )}
                     </div>
@@ -3594,9 +3230,9 @@ export default function PlayerSheet() {
                             <div className="flex flex-col md:flex-row justify-between md:items-center gap-4 mb-8">
                                 <div>
                                     <h2 className="text-3xl font-black text-white tracking-tighter flex items-center gap-3">
-                                        <span className="text-4xl">🖼️</span> DM Galerisi
+                                        <span className="text-4xl">🖼️</span> DM Gallery
                                     </h2>
-                                    <p className="text-gray-400 text-sm mt-1">Paylaşılan görseller ve kaynaklar</p>
+                                    <p className="text-gray-400 text-sm mt-1">Shared images and resources</p>
                                 </div>
                                 <div className="flex items-center gap-3">
                                     <div className="relative group">
@@ -3604,7 +3240,7 @@ export default function PlayerSheet() {
                                             type="text"
                                             value={gallerySearch}
                                             onChange={e => setGallerySearch(e.target.value)}
-                                            placeholder="Ara..."
+                                            placeholder="Search..."
                                             className="bg-gray-800 border border-gray-700 rounded-xl px-4 py-2 text-sm text-white w-48 md:w-64 focus:outline-none focus:border-purple-500 transition-all pl-10"
                                         />
                                         <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">🔍</span>
@@ -3616,9 +3252,9 @@ export default function PlayerSheet() {
                             {/* Filters */}
                             <div className="flex gap-2 mb-6 bg-gray-800/50 p-1.5 rounded-2xl w-fit border border-gray-700/30">
                                 {[
-                                    { id: 'all', label: 'Hepsi', icon: '🌈' },
-                                    { id: 'image', label: 'Görseller', icon: '🖼️' },
-                                    { id: 'link', label: 'Bağlantılar', icon: '🔗' }
+                                    { id: 'all', label: 'All', icon: '🌈' },
+                                    { id: 'image', label: 'Images', icon: '🖼️' },
+                                    { id: 'link', label: 'Links', icon: '🔗' }
                                 ].map(cat => (
                                     <button
                                         key={cat.id}
@@ -3643,7 +3279,7 @@ export default function PlayerSheet() {
                                         return (
                                             <div className="flex flex-col items-center justify-center py-20 text-center opacity-40">
                                                 <span className="text-6xl mb-4">🕵️‍♂️</span>
-                                                <p className="text-gray-400 font-bold">Herhangi bir şey bulunamadı.</p>
+                                                <p className="text-gray-400 font-bold">Nothing found.</p>
                                             </div>
                                         );
                                     }
@@ -3662,21 +3298,21 @@ export default function PlayerSheet() {
                                                                     onClick={() => setSelectedImage(m.url.startsWith('/uploads/') ? `${API_URL}${m.url}` : m.url)}
                                                                 />
                                                                 <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
-                                                                    <span className="bg-white/20 backdrop-blur-md px-3 py-1.5 rounded-lg text-xs font-black text-white border border-white/20">BÜYÜT</span>
+                                                                    <span className="bg-white/20 backdrop-blur-md px-3 py-1.5 rounded-lg text-xs font-black text-white border border-white/20">ENLARGE</span>
                                                                 </div>
                                                             </>
                                                         ) : (
                                                             <div className="flex flex-col items-center gap-3">
                                                                 <span className="text-4xl opacity-50">🔗</span>
-                                                                <a href={m.url} target="_blank" className="bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-xl text-xs font-black transition-all">Bağlantıyı Aç</a>
+                                                                <a href={m.url} target="_blank" className="bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-xl text-xs font-black transition-all">Open Link</a>
                                                             </div>
                                                         )}
                                                     </div>
                                                     <div className="p-4 bg-gray-900/40 backdrop-blur-sm border-t border-gray-700/30 flex-1">
                                                         <h4 className="text-gray-200 font-bold text-sm truncate mb-1">{m.name}</h4>
                                                         <div className="flex items-center justify-between mt-auto">
-                                                            <span className="text-[10px] font-black text-gray-500 uppercase tracking-widest">{m.type === 'image' ? 'Görsel' : 'Kaynak'}</span>
-                                                            <span className="text-[10px] text-gray-600">{new Date(m.createdAt || Date.now()).toLocaleDateString('tr-TR')}</span>
+                                                            <span className="text-[10px] font-black text-gray-500 uppercase tracking-widest">{m.type === 'image' ? 'Image' : 'Resource'}</span>
+                                                            <span className="text-[10px] text-gray-600">{new Date(m.createdAt || Date.now()).toLocaleDateString('en-US')}</span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -3719,7 +3355,7 @@ export default function PlayerSheet() {
                                 <span className="w-12 text-center">% {Math.round(imgZoom * 100)}</span>
                                 <button onClick={() => setImgZoom(prev => Math.min(5, prev + 0.2))} className="hover:text-purple-400">➕</button>
                                 <div className="w-px h-4 bg-gray-600 mx-1"></div>
-                                <button onClick={() => { setImgZoom(1); setImgOffset({ x: 0, y: 0 }); }} className="hover:text-purple-400">SIFIRLA</button>
+                                <button onClick={() => { setImgZoom(1); setImgOffset({ x: 0, y: 0 }); }} className="hover:text-purple-400">RESET</button>
                             </div>
                             <button onClick={() => { setSelectedImage(null); setImgZoom(1); setImgOffset({ x: 0, y: 0 }); }} className="bg-red-600 hover:bg-red-500 text-white w-12 h-12 rounded-xl flex items-center justify-center shadow-lg transition-all text-2xl font-black">✕</button>
                         </div>
@@ -3739,7 +3375,7 @@ export default function PlayerSheet() {
 
                         {imgZoom <= 1 && (
                             <div className="absolute bottom-10 left-1/2 -translate-x-1/2 bg-black/40 backdrop-blur-md px-6 py-2 rounded-full text-white/60 text-xs font-bold pointer-events-none border border-white/10">
-                                🖱️ Yakınlaştırmak için tekerleği kullanın
+                                🖱️ Use scroll wheel to zoom
                             </div>
                         )}
                     </div>
@@ -3771,14 +3407,14 @@ export default function PlayerSheet() {
                                 <button onClick={() => setShowHitDiceModal(false)} className="text-gray-400 hover:text-white text-2xl">✕</button>
                             </div>
                             <p className="text-gray-400 text-sm mb-4">
-                                Kısa bir mola verdiniz. Yetenekleriniz yenilendi. Ayrıca iyileşmek için Can Zarı (Hit Dice) harcayabilirsiniz.
+                                You took a short break. Your abilities have refreshed. You can also spend Hit Dice to heal.
                             </p>
 
                             <div className="bg-gray-800 border border-gray-700 rounded-xl p-4 mb-5 flex flex-col items-center">
-                                <span className="text-gray-400 text-xs font-bold uppercase mb-2">Harcanacak Zar Sayısı</span>
+                                <span className="text-gray-400 text-xs font-bold uppercase mb-2">Hit Dice to Spend</span>
                                 <div className="flex items-center gap-4 mb-2">
                                     <button onClick={() => setHitDiceToSpend(Math.max(0, hitDiceToSpend - 1))} className="w-10 h-10 rounded bg-gray-700 hover:bg-gray-600 font-black text-xl text-white flex items-center justify-center">-</button>
-                                    <div className="text-3xl font-black text-green-400">{hitDiceToSpend} <span className="text-sm text-gray-400 font-normal">/ {level - hitDiceUsed} Kaldı</span></div>
+                                    <div className="text-3xl font-black text-green-400">{hitDiceToSpend} <span className="text-sm text-gray-400 font-normal">/ {level - hitDiceUsed} Left</span></div>
                                     <button onClick={() => setHitDiceToSpend(Math.min(level - hitDiceUsed, hitDiceToSpend + 1))} className="w-10 h-10 rounded bg-gray-700 hover:bg-gray-600 font-black text-xl text-white flex items-center justify-center">+</button>
                                 </div>
                                 {(() => {
@@ -3797,8 +3433,8 @@ export default function PlayerSheet() {
                                     });
                                     return (
                                         <div className="text-center">
-                                            <p className="text-pink-300 text-[10px] font-bold uppercase mb-1">Mevcut Zar Havuzu: {desc.join(' + ')}</p>
-                                            <p className="text-gray-500 text-xs">Her zar başına ortalama <span className="font-bold text-gray-300">1 zar + {mod(character.stats?.CON ?? 10)}</span> HP kazanırsınız.</p>
+                                            <p className="text-pink-300 text-[10px] font-bold uppercase mb-1">Available Dice: {desc.join(' + ')}</p>
+                                            <p className="text-gray-500 text-xs">Each die restores <span className="font-bold text-gray-300">1 die + {mod(character.stats?.CON ?? 10)}</span> HP on average.</p>
                                         </div>
                                     );
                                 })()}
@@ -3806,7 +3442,7 @@ export default function PlayerSheet() {
 
                             <div className="flex gap-3">
                                 <button onClick={confirmShortRest} className="flex-1 bg-green-700 hover:bg-green-600 text-white font-bold py-3 rounded-lg border border-green-500 shadow-sm transition">
-                                    Dinlenmeyi Tamamla
+                                    Finish Rest
                                 </button>
                             </div>
                         </div>
@@ -3824,12 +3460,12 @@ export default function PlayerSheet() {
                             <div className="px-6 py-4 border-b border-gray-700 flex items-center justify-between shrink-0">
                                 <div>
                                     <h2 className="text-2xl font-black text-yellow-400">
-                                        🎉 Seviye {lvModal.newLv}!
+                                        🎉 Level {lvModal.newLv}!
                                     </h2>
                                     <p className="text-gray-400 text-sm">
-                                        {lvModal.step === "preview" && "Kazanımlarını incele"}
-                                        {lvModal.step === "subclass" && "Alt sınıfını seç"}
-                                        {lvModal.step === "asi" && "Yetenek Puanı Artışı veya Feat"}
+                                        {lvModal.step === "preview" && "Review your gains"}
+                                        {lvModal.step === "subclass" && "Choose your subclass"}
+                                        {lvModal.step === "asi" && "Ability Score Improvement or Feat"}
                                     </p>
                                 </div>
                                 {/* Step indicator */}
@@ -3847,7 +3483,7 @@ export default function PlayerSheet() {
                                     <div className="bg-green-900/30 border border-green-700/50 rounded-xl p-4 flex items-center gap-4">
                                         <span className="text-4xl">❤️</span>
                                         <div>
-                                            <p className="font-black text-green-400 text-lg">+{lvModal.hpGained} Maksimum HP</p>
+                                            <p className="font-black text-green-400 text-lg">+{lvModal.hpGained} Maximum HP</p>
                                             <p className="text-gray-400 text-sm">{character.maxHp} → {character.maxHp + lvModal.hpGained}</p>
                                         </div>
                                     </div>
@@ -3856,8 +3492,8 @@ export default function PlayerSheet() {
                                     <div className="bg-orange-900/20 border border-orange-700/40 rounded-xl p-4 flex items-center gap-4">
                                         <span className="text-4xl">✦</span>
                                         <div>
-                                            <p className="font-black text-orange-400 text-lg">Yeterlilik Bonusu: +{profBonus(lvModal.newLv)}</p>
-                                            <p className="text-gray-400 text-sm">Seviye {lvModal.newLv} yeterlilik bonusu</p>
+                                            <p className="font-black text-orange-400 text-lg">Proficiency Bonus: +{profBonus(lvModal.newLv)}</p>
+                                            <p className="text-gray-400 text-sm">Level {lvModal.newLv} proficiency bonus</p>
                                         </div>
                                     </div>
 
@@ -3866,8 +3502,8 @@ export default function PlayerSheet() {
                                         <div className="bg-blue-900/30 border border-blue-700/50 rounded-xl p-4 flex items-center gap-4">
                                             <span className="text-4xl">⬆️</span>
                                             <div>
-                                                <p className="font-black text-blue-400 text-lg">Yetenek Puanı Artışı</p>
-                                                <p className="text-gray-400 text-sm">Bu seviyede bir yeteneği artırabilir ya da Feat seçebilirsin.</p>
+                                                <p className="font-black text-blue-400 text-lg">Ability Score Improvement</p>
+                                                <p className="text-gray-400 text-sm">You can increase an ability score or choose a Feat at this level.</p>
                                             </div>
                                         </div>
                                     )}
@@ -3877,8 +3513,8 @@ export default function PlayerSheet() {
                                         <div className="bg-purple-900/30 border border-purple-700/50 rounded-xl p-4 flex items-center gap-4">
                                             <span className="text-4xl">✨</span>
                                             <div>
-                                                <p className="font-black text-purple-400 text-lg">Alt Sınıf Seçimi</p>
-                                                <p className="text-gray-400 text-sm">{character.classRef?.name} sınıfın için bir uzmanlaşma yolu seçmelisin.</p>
+                                                <p className="font-black text-purple-400 text-lg">Subclass Selection</p>
+                                                <p className="text-gray-400 text-sm">Choose a specialization for your {character.classRef?.name} class.</p>
                                             </div>
                                         </div>
                                     )}
@@ -3886,7 +3522,7 @@ export default function PlayerSheet() {
                                     {/* Class Features */}
                                     {lvModal.classFeats.length > 0 && (
                                         <div>
-                                            <h3 className="font-black text-white text-sm uppercase tracking-wide mb-2">⚔️ Sınıf Özellikleri</h3>
+                                            <h3 className="font-black text-white text-sm uppercase tracking-wide mb-2">⚔️ Class Features</h3>
                                             <div className="space-y-2">
                                                 {lvModal.classFeats.map((f, i) => (
                                                     <div key={i} className="bg-gray-800 border border-gray-700 rounded-xl p-4">
@@ -4016,7 +3652,7 @@ export default function PlayerSheet() {
                                         <div>
                                             <input
                                                 type="text" value={featSearch} onChange={e => setFeatSearch(e.target.value)}
-                                                placeholder="Feat ara… (Türkçe veya İngilizce)"
+                                                placeholder="Search Feats..."
                                                 className="w-full px-4 py-3 bg-gray-800 border border-gray-600 rounded-xl text-white text-sm mb-4 focus:outline-none focus:border-purple-500"
                                             />
                                             {featPick && (
@@ -4092,16 +3728,16 @@ export default function PlayerSheet() {
                             <div className="px-6 py-4 border-t border-gray-700 flex justify-between shrink-0">
                                 <button onClick={() => setLvModal(null)}
                                     className="px-5 py-2.5 bg-gray-700 hover:bg-gray-600 text-gray-300 font-bold rounded-xl transition text-sm">
-                                    İptal
+                                    Cancel
                                 </button>
                                 <button
                                     onClick={advanceLvModal}
                                     disabled={!canAdvance() || isLevelingUp}
                                     className="px-8 py-2.5 bg-yellow-500 hover:bg-yellow-400 disabled:opacity-40 text-yellow-950 font-black rounded-xl transition text-sm">
-                                    {isLevelingUp ? 'İşleniyor…' : (
-                                        lvModal.step === "preview" && (lvModal.needSubclass || lvModal.needASI) ? 'Devam Et →' :
-                                            lvModal.step === "subclass" && lvModal.needASI ? 'Devam: ASI/Feat →' :
-                                                'Seviye Atla! 🎉'
+                                    {isLevelingUp ? 'Processing...' : (
+                                        lvModal.step === "preview" && (lvModal.needSubclass || lvModal.needASI) ? 'Continue →' :
+                                            lvModal.step === "subclass" && lvModal.needASI ? 'Continue: ASI/Feat →' :
+                                                'Level Up! 🎉'
                                     )}
                                 </button>
                             </div>
@@ -4116,13 +3752,13 @@ export default function PlayerSheet() {
                     <div className="fixed inset-0 bg-black/80 z-[200] flex items-center justify-center p-4 animate-fade-in" onClick={() => setShowDmPopup(false)}>
                         <div className="bg-gray-900 border-4 border-red-700 rounded-2xl max-w-sm w-full p-6 text-center shadow-[0_0_30px_rgba(239,68,68,0.5)] transform scale-100 transition-transform" onClick={e => e.stopPropagation()}>
                             <div className="text-6xl mb-4">🛑</div>
-                            <h2 className="text-3xl font-black text-red-500 mb-2 uppercase">Hey, Dur Orada!</h2>
-                            <p className="text-gray-300 font-bold mb-4">Seviye değiştirmek için DM'nin izni (veya merhameti) gerekiyor.</p>
+                            <h2 className="text-3xl font-black text-red-500 mb-2 uppercase">Whoa, slow down!</h2>
+                            <p className="text-gray-300 font-bold mb-4">You need the DM's permission to change your level.</p>
                             <div className="bg-gray-800 p-3 rounded-lg border border-gray-700 mb-6 italic text-sm text-gray-400">
-                                "Güç kendi kendine gelmez, saygıdeğer Dungeon Master 'Ver' tuşuna basana kadar sadece bir hayaldir."
+                                "Power doesn't come for free; until the Dungeon Master clicks 'Grant', it's just a dream."
                             </div>
                             <button onClick={() => setShowDmPopup(false)} className="w-full px-4 py-3 bg-red-700 hover:bg-red-600 font-black text-white rounded-xl transition shadow-lg">
-                                Af Dile ve Kapat
+                                Ask for Mercy and Close
                             </button>
                         </div>
                     </div>
@@ -4136,19 +3772,19 @@ export default function PlayerSheet() {
                         <div className="bg-gray-900 border-4 border-orange-900/50 rounded-2xl w-full max-w-lg p-6 flex flex-col shadow-[0_0_40px_rgba(234,88,12,0.3)] relative" onClick={e => e.stopPropagation()}>
                             <div className="flex justify-between items-center mb-6 border-b border-orange-900/40 pb-4">
                                 <h2 className="text-2xl font-black text-orange-400 flex items-center gap-2">
-                                    <span className="text-3xl">🏬</span> Gezgin Tüccar
+                                    <span className="text-3xl">🏬</span> Traveling Merchant
                                 </h2>
                                 <button onClick={() => setShopData({ ...shopData, isOpen: false })} className="text-gray-400 hover:text-white bg-gray-800 w-8 h-8 rounded-full flex justify-center items-center font-bold">✕</button>
                             </div>
 
                             <div className="flex justify-between text-sm bg-gray-800 p-3 rounded-xl border border-gray-700 mb-4 items-center gap-4">
-                                <span className="text-gray-400 font-bold">Mevcut Bakiye:</span>
+                                <span className="text-gray-400 font-bold">Current Balance:</span>
                                 <span className="text-yellow-400 font-black text-xl bg-yellow-900/30 px-3 py-1 rounded shadow-inner border border-yellow-700/50">{character?.money?.gp || 0} GP</span>
                             </div>
 
                             <div className="overflow-y-auto max-h-[400px] flex-1 pr-2 space-y-3">
                                 {shopData.items.length === 0 ? (
-                                    <p className="text-center text-gray-500 py-8 italic font-bold">Tüccarın tezgahı şu an boş.</p>
+                                    <p className="text-center text-gray-500 py-8 italic font-bold">The merchant's stall is currently empty.</p>
                                 ) : (
                                     shopData.items.map(item => (
                                         <div key={item.id} className="bg-gray-800/80 border border-gray-700 p-4 rounded-xl flex items-center justify-between hover:bg-gray-750 transition-colors group">
@@ -4160,7 +3796,7 @@ export default function PlayerSheet() {
                                                 onClick={() => buyShopItem(item)}
                                                 className="bg-orange-600 hover:bg-orange-500 active:bg-orange-700 text-white font-black px-4 py-2 rounded-lg flex items-center gap-2 transition-transform hover:scale-105 shadow-md group-hover:shadow-[0_0_15px_rgba(234,88,12,0.4)] whitespace-nowrap"
                                             >
-                                                <span className="text-sm">Satın Al</span>
+                                                <span className="text-sm">Buy Item</span>
                                                 <span className="bg-orange-900/50 px-2 py-0.5 rounded text-yellow-300 text-xs border border-orange-500/30">{item.price} GP</span>
                                             </button>
                                         </div>
@@ -4179,24 +3815,24 @@ export default function PlayerSheet() {
                         <div className="bg-gray-900 border-4 border-indigo-900/50 rounded-2xl w-full max-w-md p-6 flex flex-col shadow-[0_0_40px_rgba(79,70,229,0.3)] relative" onClick={e => e.stopPropagation()}>
                             <div className="flex justify-between items-center mb-6 border-b border-indigo-900/40 pb-4">
                                 <h2 className="text-2xl font-black text-indigo-400 flex items-center gap-2">
-                                    <span className="text-3xl">🌙</span> Uzun Dinlenme
+                                    <span className="text-3xl">🌙</span> Long Rest
                                 </h2>
                                 <button onClick={() => setShowLongRestModal(false)} className="text-gray-400 hover:text-white bg-gray-800 w-8 h-8 rounded-full flex justify-center items-center font-bold">✕</button>
                             </div>
 
                             <p className="text-gray-300 text-sm mb-4 leading-relaxed mt-2">
-                                Büyücüler (Seviye 3+), bildikleri bir Cantrip (Başlangıç Büyüsü) yerine Wizard büyü listesinden başka bir Cantrip seçebilirler. İstemiyorsan boş bırakabilirsin.
+                                Wizards (Level 3+) can swap one cantrip they know for another from the Wizard spell list during a long rest. Leave blank if you don't wish to swap.
                             </p>
 
                             <div className="space-y-4 mb-6">
                                 <div>
-                                    <label className="block text-xs font-bold text-gray-400 uppercase mb-1">Unutulacak Cantrip</label>
+                                    <label className="block text-xs font-bold text-gray-400 uppercase mb-1">Cantrip to Forget</label>
                                     <select
                                         className="w-full bg-gray-800 border border-gray-700 rounded-xl px-3 py-2 text-white outline-none focus:border-indigo-500"
                                         value={cantripToReplace}
                                         onChange={e => setCantripToReplace(e.target.value)}
                                     >
-                                        <option value="">-- Değiştirmek İstemiyorum --</option>
+                                        <option value="">-- No changes --</option>
                                         {(character?.spells || []).map((sName: string) => {
                                             const details = spellDetails[sName];
                                             return details && details.level === "Cantrip" ? <option key={sName} value={sName}>{sName}</option> : null;
@@ -4206,13 +3842,13 @@ export default function PlayerSheet() {
 
                                 {cantripToReplace && (
                                     <div>
-                                        <label className="block text-xs font-bold text-gray-400 uppercase mb-1">Yeni Cantrip</label>
+                                        <label className="block text-xs font-bold text-gray-400 uppercase mb-1">New Cantrip</label>
                                         <select
                                             className="w-full bg-gray-800 border border-gray-700 rounded-xl px-3 py-2 text-white outline-none focus:border-indigo-500"
                                             value={newWizardCantrip}
                                             onChange={e => setNewWizardCantrip(e.target.value)}
                                         >
-                                            <option value="">-- Seçiniz --</option>
+                                            <option value="">-- Select --</option>
                                             {wizardCantripOptions.filter(sp => !(character?.spells || []).includes(sp.name)).map(sp => (
                                                 <option key={sp.name} value={sp.name}>{sp.name}</option>
                                             ))}
@@ -4225,7 +3861,7 @@ export default function PlayerSheet() {
                                 onClick={applyLongRest}
                                 className="bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-700 text-white font-black px-4 py-3 rounded-xl transition-colors shadow-lg shadow-indigo-500/20 w-full"
                             >
-                                Dinlenmeyi Tamamla
+                                Finish Long Rest
                             </button>
                         </div>
                     </div>
@@ -4238,9 +3874,9 @@ export default function PlayerSheet() {
                     <div className="fixed inset-0 bg-black/80 z-[200] flex items-center justify-center p-4 backdrop-blur-sm animate-fade-in" onClick={() => setIsWhisperModalOpen(false)}>
                         <div className="bg-gray-900 border-2 border-purple-700 rounded-2xl w-full max-w-md p-6 shadow-2xl relative" onClick={e => e.stopPropagation()}>
                             <h2 className="text-2xl font-black text-purple-400 mb-4 flex items-center gap-2">
-                                <span>🤫</span> {whisperTarget === 'DM' ? "DM'e Fısılda" : `${whisperTarget}'e Fısılda`}
+                                <span>🤫</span> {whisperTarget === 'DM' ? "Whisper to DM" : `Whisper to ${whisperTarget}`}
                             </h2>
-                            <p className="text-gray-400 text-sm mb-4">Bu mesajı sadece {whisperTarget === 'DM' ? "Dungeon Master" : whisperTarget} görebilecek.</p>
+                            <p className="text-gray-400 text-sm mb-4">Only {whisperTarget === 'DM' ? "the Dungeon Master" : whisperTarget} will be able to see this message.</p>
 
                             {/* Whisper History Log */}
                             <div className="flex-1 overflow-y-auto mb-4 bg-gray-950/50 rounded-xl p-3 border border-gray-800 space-y-2 max-h-64 custom-scrollbar">
@@ -4252,7 +3888,7 @@ export default function PlayerSheet() {
                                         <div key={idx} className={`text-sm p-2 rounded-lg ${w.senderName === character?.name ? 'bg-purple-900/40 ml-6 border border-purple-500/20' : 'bg-gray-800/40 mr-6 border border-gray-700/20'}`}>
                                             <div className="flex justify-between items-center mb-1">
                                                 <span className="font-black text-[9px] uppercase tracking-wider text-purple-400">
-                                                    {w.senderName === character?.name ? 'SEN' : w.senderName}
+                                                    {w.senderName === character?.name ? 'YOU' : w.senderName}
                                                 </span>
                                                 <span className="text-[9px] text-gray-500 opacity-50">{w.createdAt ? new Date(w.createdAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : '--:--'}</span>
                                             </div>
@@ -4262,7 +3898,7 @@ export default function PlayerSheet() {
                                 ) : (
                                     <div className="h-full flex flex-col items-center justify-center opacity-20 text-center py-10">
                                         <span className="text-4xl mb-2">🤫</span>
-                                        <p className="text-[10px] font-bold uppercase tracking-widest">Sessizce fısılda...</p>
+                                        <p className="text-[10px] font-bold uppercase tracking-widest">Whisper silently...</p>
                                     </div>
                                 )}
                                 <div ref={chatEndRef} />
@@ -4271,12 +3907,12 @@ export default function PlayerSheet() {
                             <textarea
                                 value={whisperMessage}
                                 onChange={e => setWhisperMessage(e.target.value)}
-                                placeholder="Gizli mesajın..."
+                                placeholder="Your secret message..."
                                 className="w-full h-24 p-4 bg-gray-950 border border-gray-700 rounded-xl text-purple-100 resize-none focus:outline-none focus:border-purple-500 transition-colors mb-4 text-sm"
                             />
                             <div className="flex gap-3">
-                                <button onClick={() => setIsWhisperModalOpen(false)} className="flex-1 py-3 bg-gray-800 hover:bg-gray-700 text-gray-300 font-bold rounded-xl transition">İptal</button>
-                                <button onClick={sendWhisper} disabled={!whisperMessage.trim()} className="flex-[2] py-3 bg-purple-700 hover:bg-purple-600 disabled:opacity-50 text-white font-black rounded-xl transition shadow-lg shadow-purple-900/30">Mesajı Gönder</button>
+                                <button onClick={() => setIsWhisperModalOpen(false)} className="flex-1 py-3 bg-gray-800 hover:bg-gray-700 text-gray-300 font-bold rounded-xl transition">Cancel</button>
+                                <button onClick={sendWhisper} disabled={!whisperMessage.trim()} className="flex-[2] py-3 bg-purple-700 hover:bg-purple-600 disabled:opacity-50 text-white font-black rounded-xl transition shadow-lg shadow-purple-900/30">Send Message</button>
                             </div>
                         </div>
                     </div>
@@ -4290,9 +3926,9 @@ export default function PlayerSheet() {
                         <div className="flex justify-between items-center mb-6 bg-gray-900/40 backdrop-blur-md p-5 rounded-2xl border border-white/10 shadow-2xl">
                             <div>
                                 <h2 className="text-3xl font-black text-white tracking-tighter flex items-center gap-3">
-                                    <span className="text-4xl">🗺️</span> Stratejik Harita
+                                    <span className="text-4xl">🗺️</span> Strategic Map
                                 </h2>
-                                <p className="text-gray-400 text-sm mt-1">{mapData.tokens.length} Token aktif • {Math.round(mapZoom * 100)}% Yakınlaştırma</p>
+                                <p className="text-gray-400 text-sm mt-1">{mapData.tokens.length} Tokens active • {Math.round(mapZoom * 100)}% Zoom</p>
                             </div>
                             <div className="flex items-center gap-4">
                                 <div className="bg-gray-800/80 backdrop-blur-md rounded-xl px-4 py-2 flex items-center gap-4 border border-white/10 text-white font-black text-xs">
@@ -4300,7 +3936,7 @@ export default function PlayerSheet() {
                                     <span className="w-12 text-center">% {Math.round(mapZoom * 100)}</span>
                                     <button onClick={() => setMapZoom(prev => Math.min(3, prev + 0.1))} className="hover:text-purple-400">➕</button>
                                     <div className="w-px h-4 bg-gray-600 mx-1"></div>
-                                    <button onClick={() => { setMapZoom(1); setMapOffset({ x: 0, y: 0 }); }} className="hover:text-purple-400">SIFIRLA</button>
+                                    <button onClick={() => { setMapZoom(1); setMapOffset({ x: 0, y: 0 }); }} className="hover:text-purple-400">RESET</button>
                                 </div>
                                 <button onClick={() => setIsMapOpen(false)} className="bg-red-700 hover:bg-red-600 text-white w-12 h-12 rounded-xl font-black flex items-center justify-center shadow-lg transition-all text-2xl">✕</button>
                             </div>
@@ -4309,7 +3945,7 @@ export default function PlayerSheet() {
                         <div className="flex-1 flex gap-6 overflow-hidden">
                             {/* Token Legend (Left Sidebar) */}
                             <div className="w-64 bg-gray-900/60 backdrop-blur-md rounded-3xl border border-white/10 p-5 flex flex-col hidden lg:flex shadow-2xl">
-                                <h3 className="text-xs font-black text-gray-500 uppercase tracking-widest mb-4 border-b border-white/5 pb-2">Token Listesi</h3>
+                                <h3 className="text-xs font-black text-gray-500 uppercase tracking-widest mb-4 border-b border-white/5 pb-2">Token List</h3>
                                 <div className="flex-1 overflow-y-auto space-y-2 pr-2 custom-scrollbar">
                                     {mapData.tokens.map((token: any) => (
                                         <div
@@ -4333,15 +3969,15 @@ export default function PlayerSheet() {
                                             </div>
                                             <div className="flex-1 min-w-0">
                                                 <p className="text-xs font-bold text-gray-200 truncate">{token.name}</p>
-                                                <p className="text-[10px] text-gray-500 uppercase">{token.type === 'player' ? 'Oyuncu' : 'Yaratık'}</p>
+                                                <p className="text-[10px] text-gray-500 uppercase">{token.type === 'player' ? 'Player' : 'Creature'}</p>
                                             </div>
                                         </div>
                                     ))}
-                                    {mapData.tokens.length === 0 && <p className="text-gray-600 text-xs text-center py-10 italic">Henüz token yok.</p>}
+                                    {mapData.tokens.length === 0 && <p className="text-gray-600 text-xs text-center py-10 italic">No tokens yet.</p>}
                                 </div>
                                 <div className="mt-4 pt-4 border-t border-white/5">
                                     <div className="bg-purple-900/20 border border-purple-500/30 p-3 rounded-xl text-[10px] text-purple-300 leading-tight">
-                                        💡 Tokenları sürükleyip taşıyabilir, haritayı kaydırmak için boş bir alandan sürükleyebilirsin.
+                                        💡 You can drag and move tokens, or pan the map by dragging from an empty area.
                                     </div>
                                 </div>
                             </div>
@@ -4397,7 +4033,7 @@ export default function PlayerSheet() {
                                         <img
                                             id="map-img"
                                             src={mapData.bgUrl}
-                                            alt="Harita"
+                                            alt="Map"
                                             draggable={false}
                                             className="block pointer-events-auto select-none rounded shadow-2xl"
                                             style={{ minWidth: '1000px' }} // Ensure some size if small image
@@ -4451,7 +4087,7 @@ export default function PlayerSheet() {
                                             }}
                                         >
                                             <div className="absolute -top-10 left-1/2 -translate-x-1/2 bg-black/80 backdrop-blur-md px-3 py-1 rounded-lg text-white opacity-0 group-hover:opacity-100 whitespace-nowrap transition-all border border-white/10 shadow-xl pointer-events-none scale-90 group-hover:scale-100">
-                                                {token.name} {token.entityId === character?._id ? ' (Sen)' : ''}
+                                                {token.name} {token.entityId === character?._id ? ' (You)' : ''}
                                                 <div className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-t-[6px] border-t-black/80"></div>
                                             </div>
                                             <div className="text-white text-center leading-tight uppercase font-black text-xs drop-shadow-[0_1px_2px_rgba(0,0,0,0.8)]">
@@ -4472,8 +4108,8 @@ export default function PlayerSheet() {
                                     <div className="absolute inset-0 flex items-center justify-center text-gray-700 flex-col gap-6 backdrop-blur-sm bg-black/40">
                                         <span className="text-9xl animate-bounce-slow">🔍</span>
                                         <div className="text-center">
-                                            <p className="text-2xl font-black text-white tracking-widest uppercase">Harita Aranıyor...</p>
-                                            <p className="text-gray-400 mt-2">Dungeon Master henüz bir savaş alanı yüklemedi.</p>
+                                            <p className="text-2xl font-black text-white tracking-widest uppercase">Searching for Map...</p>
+                                            <p className="text-gray-400 mt-2">Dungeon Master has not uploaded a battleground yet.</p>
                                         </div>
                                     </div>
                                 )}
@@ -4487,37 +4123,37 @@ export default function PlayerSheet() {
                 showCustomResourceModal && (
                     <div className="fixed inset-0 bg-black/80 z-[110] flex items-center justify-center p-4">
                         <div className="bg-gray-900 border border-orange-800/50 rounded-2xl max-w-md w-full p-6 shadow-2xl animate-in fade-in zoom-in duration-200">
-                            <h2 className="text-xl font-black text-orange-400 mb-4">Yeni Özel Kaynak</h2>
+                            <h2 className="text-xl font-black text-orange-400 mb-4">New Custom Resource</h2>
                             <div className="space-y-4">
                                 <div>
-                                    <label className="block text-gray-400 text-[10px] font-bold uppercase mb-1">Kaynak Adı</label>
+                                    <label className="block text-gray-400 text-[10px] font-bold uppercase mb-1">Resource Name</label>
                                     <input type="text" value={newResourceName} onChange={e => setNewResourceName(e.target.value)}
-                                        placeholder="Örn: Sorcery Points, Üstünlük Zarı..." className="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:border-orange-500" />
+                                        placeholder="e.g. Sorcery Points, Superiority Die..." className="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:border-orange-500" />
                                 </div>
                                 <div className="grid grid-cols-2 gap-4">
                                     <div>
-                                        <label className="block text-gray-400 text-[10px] font-bold uppercase mb-1">Maksimum Kullanım</label>
+                                        <label className="block text-gray-400 text-[10px] font-bold uppercase mb-1">Max Uses</label>
                                         <input type="number" value={newResourceMax} onChange={e => setNewResourceMax(parseInt(e.target.value) || 1)}
                                             className="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white" />
                                     </div>
                                     <div>
-                                        <label className="block text-gray-400 text-[10px] font-bold uppercase mb-1">Yenilenme</label>
+                                        <label className="block text-gray-400 text-[10px] font-bold uppercase mb-1">Recharge</label>
                                         <select value={newResourceRecharge} onChange={e => setNewResourceRecharge(e.target.value as any)}
                                             className="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white appearance-none">
-                                            <option value="long">Long Rest (Uzun)</option>
-                                            <option value="short">Short Rest (Kısa/Uzun)</option>
+                                            <option value="long">Long Rest</option>
+                                            <option value="short">Short/Long Rest</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div>
-                                    <label className="block text-gray-400 text-[10px] font-bold uppercase mb-1">Açıklama</label>
+                                    <label className="block text-gray-400 text-[10px] font-bold uppercase mb-1">Description</label>
                                     <textarea value={newResourceDesc} onChange={e => setNewResourceDesc(e.target.value)}
-                                        placeholder="Özelliğin ne yaptığını kısaca yaz..." className="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white h-24 resize-none" />
+                                        placeholder="Briefly describe what the feature does..." className="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white h-24 resize-none" />
                                 </div>
                             </div>
                             <div className="flex gap-3 mt-6">
-                                <button onClick={() => setShowCustomResourceModal(false)} className="flex-1 py-2 bg-gray-800 hover:bg-gray-700 text-gray-400 font-bold rounded-lg transition border border-gray-700">İptal</button>
-                                <button onClick={addCustomResource} disabled={!newResourceName.trim()} className="flex-1 py-2 bg-orange-700 hover:bg-orange-600 disabled:opacity-40 text-white font-black rounded-lg transition border border-orange-500 shadow-lg">Ekle</button>
+                                <button onClick={() => setShowCustomResourceModal(false)} className="flex-1 py-2 bg-gray-800 hover:bg-gray-700 text-gray-400 font-bold rounded-lg transition border border-gray-700">Cancel</button>
+                                <button onClick={addCustomResource} disabled={!newResourceName.trim()} className="flex-1 py-2 bg-orange-700 hover:bg-orange-600 disabled:opacity-40 text-white font-black rounded-lg transition border border-orange-500 shadow-lg">Add</button>
                             </div>
                         </div>
                     </div>
@@ -4542,7 +4178,7 @@ export default function PlayerSheet() {
                                         <span className="absolute left-4 top-1/2 -translate-y-1/2 text-purple-400 group-focus-within:text-purple-300 transition-colors">🔍</span>
                                         <input 
                                             type="text" 
-                                            placeholder="Büyü ara..." 
+                                            placeholder="Search spells..." 
                                             value={spellSearch}
                                             onChange={(e) => setSpellSearch(e.target.value)}
                                             className="w-full bg-gray-950/50 border border-purple-500/20 focus:border-purple-500/60 rounded-2xl py-3 pl-12 pr-4 text-sm text-white placeholder-purple-900/50 font-bold outline-none transition-all focus:bg-gray-950"
@@ -4553,7 +4189,7 @@ export default function PlayerSheet() {
                                         value={spellLevelFilter}
                                         onChange={(e) => setSpellLevelFilter(e.target.value)}
                                     >
-                                        <option value="all">Tüm Seviyeler</option>
+                                        <option value="all">All Levels</option>
                                         <option value="0">Cantrips</option>
                                         <option value="1">Level 1</option>
                                         <option value="2">Level 2</option>
@@ -4570,7 +4206,7 @@ export default function PlayerSheet() {
                                         value={spellSchoolFilter}
                                         onChange={(e) => setSpellSchoolFilter(e.target.value)}
                                     >
-                                        {SCHOOLS.map(s => <option key={s} value={s}>{s === "all" ? "Okul: Hepsi" : s.charAt(0).toUpperCase() + s.slice(1)}</option>)}
+                                        {SCHOOLS.map(s => <option key={s} value={s}>{s === "all" ? "School: All" : s.charAt(0).toUpperCase() + s.slice(1)}</option>)}
                                     </select>
                                 </div>
 
@@ -4588,7 +4224,7 @@ export default function PlayerSheet() {
                                             : 'bg-gray-800/50 text-gray-400 border-gray-700/50 hover:border-purple-500/50'
                                             }`}
                                     >
-                                        {type === 'all' ? 'HEPSİ' : type}
+                                        {type === 'all' ? 'ALL' : type}
                                     </button>
                                 ))}
                             </div>
@@ -4678,8 +4314,8 @@ export default function PlayerSheet() {
                                     return (
                                         <div className="h-full flex flex-col items-center justify-center py-20 opacity-30">
                                             <div className="text-8xl mb-6">🔮</div>
-                                            <p className="text-xl font-black uppercase tracking-widest text-center">Büyü bulunamadı</p>
-                                            <p className="text-xs text-gray-400 mt-2 font-bold uppercase">Arama terimini veya filtreyi değiştirin</p>
+                                            <p className="text-xl font-black uppercase tracking-widest text-center">No spells found</p>
+                                            <p className="text-xs text-gray-400 mt-2 font-bold uppercase">Change search term or filters</p>
                                         </div>
                                     );
                                 }
@@ -4711,4 +4347,6 @@ export default function PlayerSheet() {
             )}
         </div>
     );
-}
+};
+
+export default PlayerSheet;
