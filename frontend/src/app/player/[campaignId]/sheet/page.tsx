@@ -673,7 +673,7 @@ const PlayerSheet = () => {
         const map: any = {
             'Wizard': 'INT', 'Druid': 'WIS', 'Cleric': 'WIS', 'Ranger': 'WIS',
             'Bard': 'CHA', 'Paladin': 'CHA', 'Sorcerer': 'CHA', 'Warlock': 'CHA',
-            'Artificer': 'INT', 'Sorceror': 'CHA' // Handling common typo
+            'Artificer': 'INT'
         };
         return map[className] || 'INT';
     };
@@ -3852,7 +3852,7 @@ const PlayerSheet = () => {
                                     <label className="block text-xs font-bold text-gray-400 uppercase mb-1">Cantrip to Forget</label>
                                     <select
                                         className="w-full bg-gray-800 border border-gray-700 rounded-xl px-3 py-2 text-white outline-none focus:border-indigo-500"
-                                        value={cantripToReplace}
+                                        value={cantripToReplace || ""}
                                         onChange={e => setCantripToReplace(e.target.value)}
                                     >
                                         <option value="">-- No changes --</option>
@@ -4210,7 +4210,7 @@ const PlayerSheet = () => {
                                     <select 
                                         className="bg-gray-950/50 border border-purple-500/20 focus:border-purple-500/60 rounded-2xl px-4 py-3 text-sm text-purple-300 font-bold outline-none transition-all cursor-pointer hover:bg-gray-950"
                                         value={spellLevelFilter}
-                                        onChange={(e) => setSpellLevelFilter(e.target.value)}
+                                        onChange={(e) => setSpellLevelFilter(e.target.value as any)}
                                     >
                                         <option value="all">All Levels</option>
                                         <option value="0">Cantrips</option>

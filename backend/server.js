@@ -598,6 +598,19 @@ app.get('/api/spells', async (req, res) => {
   }
 });
 
+app.post('/api/spells/batch', authenticate, async (req, res) => {
+  try {
+    const { names } = req.body;
+    if (!names || !Array.isArray(names)) {
+      return res.status(400).json({ error: 'Büyü isimleri listesi (names) gerekli' });
+    }
+    const spells = await Spell.find({ name: { $in: names } });
+    res.json(spells);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 app.get('/api/feats', async (req, res) => {
   try {
     const feats = await Feat.find({}).sort({ name: 1 });
