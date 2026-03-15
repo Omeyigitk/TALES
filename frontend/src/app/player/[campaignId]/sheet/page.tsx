@@ -362,17 +362,23 @@ const PlayerSheet = () => {
                     return;
                 }
                 const res = await axios.get(`${API_URL}/api/characters/${charId}`, { headers: { 'Authorization': `Bearer ${token}` } });
-                setCharacter(res.data);
-                characterRef.current = res.data;
-                setPrivateNotes(res.data.privateNotes || "");
-                setSpellSlotsUsed(res.data.spellSlotsUsed || {});
-                setResourcesUsed(res.data.resourcesUsed || {});
-                setConcentrationSpell(res.data.concentrationSpell || null);
-                setCurrentHp(res.data.currentHp ?? res.data.maxHp ?? 10);
-                setConditions(res.data.conditions || []);
-                setHitDiceUsed(res.data.hitDiceUsed || 0);
-                setDeathSaves(res.data.deathSaves || { successes: 0, failures: 0 });
-                setPinnedSpells(res.data.pinnedSpells || []);
+                const charData = res.data;
+                
+                // Sanitize spells and pinned spells ensuring they are arrays of strings
+                if (charData.spells) charData.spells = charData.spells.map((s: any) => typeof s === 'string' ? s : (s.name || String(s)));
+                if (charData.pinnedSpells) charData.pinnedSpells = charData.pinnedSpells.map((s: any) => typeof s === 'string' ? s : (s.name || String(s)));
+                
+                setCharacter(charData);
+                characterRef.current = charData;
+                setPrivateNotes(charData.privateNotes || "");
+                setSpellSlotsUsed(charData.spellSlotsUsed || {});
+                setResourcesUsed(charData.resourcesUsed || {});
+                setConcentrationSpell(charData.concentrationSpell || null);
+                setCurrentHp(charData.currentHp ?? charData.maxHp ?? 10);
+                setConditions(charData.conditions || []);
+                setHitDiceUsed(charData.hitDiceUsed || 0);
+                setDeathSaves(charData.deathSaves || { successes: 0, failures: 0 });
+                setPinnedSpells(charData.pinnedSpells || []);
                 setLoading(false);
             } catch (err) {
                 console.error("Fetch error:", err);
