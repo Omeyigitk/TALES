@@ -631,6 +631,64 @@ app.post('/api/debug/fix-typos', async (req, res) => {
   } catch (err) { res.status(500).json({ error: err.message }); }
 });
 
+app.post('/api/debug/seed', async (req, res) => {
+  try {
+    const results = {};
+
+    // 1. Spells
+    const spellsPath = path.join(__dirname, 'data', 'spells_hybrid.json');
+    if (fs.existsSync(spellsPath)) {
+      const spellsData = JSON.parse(fs.readFileSync(spellsPath, 'utf-8'));
+      const spellsList = Object.values(spellsData);
+      const spellOps = spellsList.map(s => ({
+        updateOne: { filter: { name: s.name }, update: { $set: s }, upsert: true }
+      }));
+      await Spell.bulkWrite(spellOps);
+      results.spells = spellsList.length;
+    }
+
+    // 2. Monsters
+    const monstersPath = path.join(__dirname, 'data', 'monster_data_clean.json');
+    if (fs.existsSync(monstersPath)) {
+      const monstersData = JSON.parse(fs.readFileSync(monstersPath, 'utf-8'));
+      const monstersList = Object.entries(monstersData).map(([name, data]) => ({ name, ...data }));
+      const monsterOps = monstersList.map(m => ({
+        updateOne: { filter: { name: m.name }, update: { $set: m }, upsert: true }
+      }));
+      await Monster.bulkWrite(monsterOps);
+      results.monsters = monstersList.length;
+    }
+
+    // 3. Races
+    const racesPath = path.join(__dirname, 'data', 'races.json');
+    if (fs.existsSync(racesPath)) {
+      const racesList = JSON.parse(fs.readFileSync(racesPath, 'utf-8'));
+      const raceOps = racesList.map(r => ({
+        updateOne: { filter: { name: r.name }, update: { $set: r }, upsert: true }
+      }));
+      await Race.bulkWrite(raceOps);
+      results.races = racesList.length;
+    }
+
+    // 4. Classes
+    const classesPath = path.join(__dirname, 'data', 'classes.json');
+    if (fs.existsSync(classesPath)) {
+      const classesList = JSON.parse(fs.readFileSync(classesPath, 'utf-8'));
+      const classOps = classesList.map(c => ({
+        updateOne: { filter: { name: c.name }, update: { $set: c }, upsert: true }
+      }));
+      await Class.bulkWrite(classOps);
+      results.classes = classesList.length;
+    }
+
+    res.json({ message: "Seeding complete", results });
+  } catch (err) {
+    console.error("Seed error:", err);
+    res.status(500).json({ error: err.message });
+  }
+});
+
+
 app.get('/api/feats', async (req, res) => {
   try {
     const feats = await Feat.find({}).sort({ name: 1 });
