@@ -406,8 +406,6 @@ export default function CharacterCreator() {
             const promises = classesToFetch.map(c => axios.get(`${API_URL}/api/spells?class=${c}&max_level=${maxSpellLevel}`, { headers: { 'Authorization': `Bearer ${token}` } }));
             const results = await Promise.all(promises);
             const allSpells = results.flatMap(res => res.data);
-            console.log(`Büyüler Getirildi: ${allSpells.length} adet. Sınıflar:`, classesToFetch, "Max Level:", maxSpellLevel);
-            if (allSpells.length === 0) console.warn("DİKKAT: Hiç büyü dönmedi! API URL:", API_URL);
 
             // Remove duplicates (e.g., both Sorcerer and Cleric have 'Light' cantrip)
             const uniqueSpells = Array.from(new Map(allSpells.map(s => [s.name, s])).values());

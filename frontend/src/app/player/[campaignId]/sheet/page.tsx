@@ -346,7 +346,6 @@ const PlayerSheet = () => {
                 setSpellSlotsUsed(res.data.spellSlotsUsed || {});
                 setResourcesUsed(res.data.resourcesUsed || {});
                 setConcentrationSpell(res.data.concentrationSpell || null);
-                console.log("Cari Karakter Yuklendi:", res.data.name, "HP:", res.data.currentHp, "/", res.data.maxHp);
                 setCurrentHp(res.data.currentHp ?? res.data.maxHp ?? 10);
                 setConditions(res.data.conditions || []);
                 setHitDiceUsed(res.data.hitDiceUsed || 0);
