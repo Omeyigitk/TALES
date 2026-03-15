@@ -346,6 +346,11 @@ const PlayerSheet = () => {
                 setSpellSlotsUsed(res.data.spellSlotsUsed || {});
                 setResourcesUsed(res.data.resourcesUsed || {});
                 setConcentrationSpell(res.data.concentrationSpell || null);
+                console.log("Cari Karakter Yuklendi:", res.data.name, "HP:", res.data.currentHp, "/", res.data.maxHp);
+                setCurrentHp(res.data.currentHp ?? res.data.maxHp ?? 10);
+                setConditions(res.data.conditions || []);
+                setHitDiceUsed(res.data.hitDiceUsed || 0);
+                setDeathSaves(res.data.deathSaves || { successes: 0, failures: 0 });
                 setLoading(false);
             } catch (err) {
                 console.error("Fetch error:", err);
@@ -385,7 +390,9 @@ const PlayerSheet = () => {
         const onCharUpdated = (data: any) => {
             if (data.characterId === character._id || data.characterId === character.name) {
                 setCharacter((prev: any) => {
-                    if (!prev) return prev;
+                    if (data.stat === 'currentHp') setCurrentHp(data.value);
+                    if (data.stat === 'conditions') setConditions(data.value);
+                    if (data.stat === 'hitDiceUsed') setHitDiceUsed(data.value);
                     const next = { ...prev, [data.stat]: data.value };
                     characterRef.current = next;
                     return next;
@@ -1697,7 +1704,7 @@ const PlayerSheet = () => {
             </div>
 
             {/* ── DEATH SAVES FULLSCREEN MODAL ── */}
-            {currentHp <= 0 && (
+            {!loading && currentHp <= 0 && (
                 <div className="fixed inset-0 bg-black/90 z-[100] backdrop-blur-md flex items-center justify-center p-4">
                     <div className="bg-gray-900 border-2 border-red-700/60 rounded-3xl w-full max-w-lg p-8 shadow-[0_0_50px_rgba(185,28,28,0.4)] animate-in fade-in zoom-in duration-300">
                         <div className="text-center mb-8">
