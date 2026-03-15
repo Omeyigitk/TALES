@@ -176,6 +176,8 @@ const PlayerSheet = () => {
     const [gallery, setGallery] = useState<any[]>([]);
     const [shopItems, setShopItems] = useState<any[]>([]);
     const [isShopPublished, setIsShopPublished] = useState(false);
+    const [gallerySearch, setGallerySearch] = useState("");
+    const [galleryFilter, setGalleryFilter] = useState<number | 'all'>('all');
     const [actualSpells, setActualSpells] = useState<any[]>([]);
     const [libFeats, setLibFeats] = useState<any[]>([]);
     const [allClasses, setAllClasses] = useState<any[]>([]);
@@ -239,7 +241,28 @@ const PlayerSheet = () => {
     const [newResourceMax, setNewResourceMax] = useState(1);
     const [newResourceDesc, setNewResourceDesc] = useState("");
     const [newResourceRecharge, setNewResourceRecharge] = useState<'short' | 'long'>('long');
-    const [showClassFeatsUI, setShowClassFeatsUI] = useState(true);
+
+    // Restored UI & Data States
+    const [shopData, setShopData] = useState<{ isOpen: boolean, items: any[] }>({ isOpen: false, items: [] });
+    const [backstory, setBackstory] = useState("");
+    const [newItemNote, setNewItemNote] = useState<string>("");
+    const [isPanning, setIsPanning] = useState(false);
+    const [panStart, setPanStart] = useState({ x: 0, y: 0 });
+    const [mapData, setMapData] = useState<any>(null);
+    const [mapZoom, setMapZoom] = useState(1);
+    const [mapOffset, setMapOffset] = useState({ x: 0, y: 0 });
+    const [showHitDiceModal, setShowHitDiceModal] = useState(false);
+    const [hitDiceToSpend, setHitDiceToSpend] = useState(1);
+    const [newWizardCantrip, setNewWizardCantrip] = useState<string>("");
+    const [wizardCantripOptions, setWizardCantripOptions] = useState<any[]>([]);
+    const [isDraggingToken, setIsDraggingToken] = useState<string | null>(null);
+    const [showFeatsUI, setShowFeatsUI] = useState(true);
+    const [expandedFeat, setExpandedFeat] = useState<string | null>(null);
+    const [showDiceLogUI, setShowDiceLogUI] = useState(true);
+    const [confirmShortRest, setConfirmShortRest] = useState(false);
+    const [buyShopItem, setBuyShopItem] = useState<any>(null);
+    const chatEndRef = useRef<HTMLDivElement>(null);
+
 
     // Helper: Modifiers
     const mod = (score: number, statName: string) => {
@@ -272,10 +295,24 @@ const PlayerSheet = () => {
         CHA: mod(stats.CHA || 10, 'CHA')
     };
     const lv = character?.level || 1;
+    const level = lv; // Alias for level which is used in some calculations
     const prof = profBonus(lv);
     const clsName = character?.classRef?.name || '';
+    const cls = clsName; // Alias for cls which is used in some calculations
     const mcs = character?.multiclasses || [];
     const canCast = isSpellcaster(clsName) || mcs.some((mc: any) => isSpellcaster(mc.className));
+    const hpPct = character?.maxHp ? Math.round((currentHp / character.maxHp) * 100) : 0;
+    const actualFeats = [...(character?.feats || []), ...(character?.raceBonusFeats || [])];
+
+    // Auto-derived defenses (Resistances/Immunities)
+    const autoDefenses = (() => {
+        const res: string[] = character?.resistances || [];
+        const imm: string[] = character?.immunities || [];
+        const vuln: string[] = character?.vulnerabilities || [];
+        
+        // Add race/class/feat/item defenses logic here if needed
+        return { res, imm, vuln };
+    })();
 
     // Spell Slots & Resources
     const { merged: slotTotals, warlockPact } = getMulticlassSpellSlots(clsName, lv, mcs);
@@ -289,6 +326,7 @@ const PlayerSheet = () => {
             await axios.put(`${API_URL}/api/characters/${character._id}`, updates, { headers: { 'Authorization': `Bearer ${token}` } });
         } catch (e) { console.error("Save failure:", e); }
     };
+
 
     // Effects
     useEffect(() => {
@@ -580,24 +618,29 @@ const PlayerSheet = () => {
     const toggleSpell = async (spellName: string) => {
         if (!character) return;
         const currentSpells = [...(character.spells || [])];
-        const idx = currentSpells.indexOf(spellName);
-        let newSpells = [];
-        if (idx > -1) {
-            newSpells = currentSpells.filter(s => s !== spellName);
-        } else {
-            newSpells = [...currentSpells, spellName];
-        }
+        const isKnown = currentSpells.includes(spellName);
+        let newSpells = isKnown ? currentSpells.filter(s => s !== spellName) : [...currentSpells, spellName];
+        
         try {
             const res = await axios.put(`${API_URL}/api/characters/${character._id}`, { spells: newSpells }, { headers: { 'Authorization': `Bearer ${token}` } });
             setCharacter(res.data);
-            showToast(idx > -1 ? 'Büyü Unutuldu' : 'Büyü Öğrenildi', `${spellName} kütüphane durumu güncellendi.`, 'bg-purple-900 border-purple-500 text-purple-100');
-        } catch { alert("Büyü listesi güncellenemedi."); }
+            showToast(isKnown ? 'Spell Unlearned 🔮' : 'Spell Learned ✨', `${spellName} has been updated in your library.`, 'bg-purple-900 border-purple-500 text-purple-100');
+        } catch { 
+            showToast('Error', 'Failed to update spell list.', 'bg-red-900 border-red-500 text-red-100');
+        }
     };
 
-    const useSlot = async (slotLevel: number, spellName: string, isConcentration: boolean) => {
+    const useSlot = async (slotLevel: number, spellName: string = 'Basic Spell', isConcentration: boolean = false) => {
         if (!character) return;
         const currentUsed = { ...spellSlotsUsed };
         const key = String(slotLevel);
+        const totalRows = slotTotals[slotLevel - 1] ?? 0;
+        
+        if ((currentUsed[key] || 0) >= totalRows) {
+            showToast("Insufficient Spell Slots", `You have no level ${slotLevel} slots remaining.`, "bg-red-900 border-red-500 text-red-100");
+            return false;
+        }
+
         currentUsed[key] = (currentUsed[key] || 0) + 1;
         setSpellSlotsUsed(currentUsed);
 
@@ -611,7 +654,11 @@ const PlayerSheet = () => {
                 concentrationSpell: isConcentration ? spellName : concentrationSpell 
             }, { headers: { 'Authorization': `Bearer ${token}` } });
             showToast('Büyü Yapıldı', `${spellName} (${slotLevel}. seviye) başarıyla kullanıldı.`, 'bg-purple-900 border-purple-500 text-purple-100');
-        } catch { alert("Büyü slotu güncellenemedi."); }
+            return true;
+        } catch { 
+            alert("Büyü slotu güncellenemedi."); 
+            return false;
+        }
     };
 
     const dropConcentration = async () => {
@@ -637,11 +684,56 @@ const PlayerSheet = () => {
         return Math.floor((val - 10) / 2);
     };
 
-    const updateHp = (newHp: number) => {
-        const clamped = Math.max(0, Math.min(character.maxHp, newHp));
-        setCurrentHp(clamped);
-        if (socket && character) (socket as any).emit('update_character_stat', { campaignId, characterId: character._id, stat: 'currentHp', value: clamped });
+    const getItemBonus = (bonusType: string, secondaryType?: string) => {
+        let bonus = 0;
+        if (character?.inventory) {
+            character.inventory.forEach((it: any) => {
+                if (it.isEquipped && it.effects) {
+                    it.effects.forEach((eff: any) => {
+                        if (eff.type === bonusType) {
+                            if (!secondaryType || eff.stat === secondaryType) bonus += eff.value;
+                        }
+                    });
+                }
+            });
+        }
+        return bonus;
     };
+
+    const handleShortRest = () => setShowHitDiceModal(true);
+    const handleLongRest = () => setShowLongRestModal(true);
+
+    const applyLongRest = async () => {
+        if (!character) return;
+        setIsLevelingUp(true);
+        try {
+            // Restore all HP, half hit dice, all spell slots
+            const maxHD = character.level || 1;
+            const newHDUsed = Math.max(0, hitDiceUsed - Math.floor(maxHD / 2));
+            const updates = {
+                currentHp: character.maxHp,
+                spellSlotsUsed: {},
+                resourcesUsed: {},
+                hitDiceUsed: newHDUsed,
+                concentrationSpell: null
+            };
+            const res = await axios.put(`${API_URL}/api/characters/${character._id}`, updates, { headers: { 'Authorization': `Bearer ${token}` } });
+            setCharacter(res.data);
+            setCurrentHp(res.data.currentHp);
+            setSpellSlotsUsed({});
+            setResourcesUsed({});
+            setHitDiceUsed(newHDUsed);
+            setConcentrationSpell(null);
+            setShowLongRestModal(false);
+            showToast("Long Rest Complete ⛺", "All HP, spell slots and resources restored.", "bg-indigo-900 border-indigo-500 text-indigo-100");
+        } catch (e) {
+            console.error(e);
+        } finally {
+            setIsLevelingUp(false);
+        }
+    };
+
+
 
     const saveBackstory = async () => {
         if (!character) return;
@@ -676,52 +768,10 @@ const PlayerSheet = () => {
         showToast('Whisper Sent 🤫', `Secret message delivered to ${whisperTarget === 'DM' ? 'DM' : whisperTarget}.`, 'bg-purple-900 border-purple-500 text-purple-100');
     };
 
-    const getItemBonus = (type: string, subType?: string) => {
-        let bonus = 0;
-        if (character?.inventory && Array.isArray(character.inventory)) {
-            character.inventory.forEach((item: any) => {
-                if (item && item.isEquipped && item.effects && Array.isArray(item.effects)) {
-                    item.effects.forEach((eff: any) => {
-                        if (!eff) return;
-
-                        // Handle explicit types first
-                        if (subType === 'SPELL_ATTACK' && eff.type === 'spell_attack_bonus') {
-                            bonus += (eff.value || 0);
-                        } else if (subType === 'SPELL_DC' && eff.type === 'spell_dc_bonus') {
-                            bonus += (eff.value || 0);
-                        } else if (subType === 'SAVE' && eff.type === 'save_bonus') {
-                            bonus += (eff.value || 0);
-                        } else if (subType === 'SKILL' && eff.type === 'skill_bonus') {
-                            bonus += (eff.value || 0);
-                        }
-                        // Handle original nested object style
-                        else if (eff.type === type) {
-                            if (subType) {
-                                if (eff.value && typeof eff.value === 'object' && eff.value[subType]) bonus += eff.value[subType];
-                            } else {
-                                if (typeof eff.value === 'number') bonus += eff.value;
-                            }
-                        }
-                    });
-                }
-            });
-        }
-        return bonus;
-    };
 
 
-    const useSlot = async (level: number) => {
-        const used = spellSlotsUsed[String(level)] ?? 0;
-        const total = slotTotals[level - 1] ?? 0;
-        if (used >= total) {
-            showToast("Insufficient Spell Slots", `You have no level ${level} slots remaining.`, "bg-red-900 border-red-500 text-red-100");
-            return false;
-        }
-        const newUsed = { ...spellSlotsUsed, [String(level)]: used + 1 };
-        setSpellSlotsUsed(newUsed);
-        await saveCombatState({ spellSlotsUsed: newUsed });
-        return true;
-    };
+
+
 
     const useResource = async (key: string, amount: number = 1) => {
         const res = resources.find(r => r.key === key);
@@ -738,34 +788,7 @@ const PlayerSheet = () => {
         return true;
     };
 
-    const dropConcentration = async () => {
-        setConcentrationSpell('');
-        await saveCombatState({ concentrationSpell: '' });
-    };
 
-    const toggleSpell = async (spellName: string) => {
-        if (!characterRef.current) return;
-        const oldSpells = characterRef.current.spells || [];
-        let newSpells;
-        if (oldSpells.includes(spellName)) {
-            newSpells = oldSpells.filter((s: string) => s !== spellName);
-        } else {
-            newSpells = [...oldSpells, spellName];
-        }
-        const newChar = { ...characterRef.current, spells: newSpells };
-        setCharacter(newChar);
-        characterRef.current = newChar;
-        try {
-            await axios.put(`${API_URL}/api/characters/${character._id}`, { spells: newSpells }, { headers: { 'Authorization': `Bearer ${token}` } });
-            showToast(newSpells.includes(spellName) ? 'Spell Learned' : 'Spell Forgotten', `${spellName} updated.`, 'bg-blue-900 border-blue-500 text-blue-100');
-        } catch (err) {
-            console.error("Spell update error:", err);
-            const rollbackChar = { ...characterRef.current, spells: oldSpells };
-            setCharacter(rollbackChar);
-            characterRef.current = rollbackChar;
-            showToast('Error', 'An error occurred while updating the spell.', 'bg-red-900 border-red-500 text-red-100');
-        }
-    };
 
     const handleRoll = async (name: string, dice: any, typeLabel: string, cost?: { key: string, amount: number, name: string }) => {
         if (cost) {
@@ -927,7 +950,7 @@ const PlayerSheet = () => {
 
         const hitDie = (cls.hit_die || 'd8') as string;
         const hitDieMax = parseInt(hitDie.replace('d', '')) || 8;
-        const conMod = mod(char.stats?.CON ?? 10);
+        const conMod = mod(char.stats?.CON ?? 10, 'CON');
         const hpLost = Math.floor(hitDieMax / 2) + 1 + conMod;
 
         setIsLevelingUp(true);
@@ -1316,7 +1339,7 @@ const PlayerSheet = () => {
                                                     <td className="px-3 py-2">
                                                         <div className="flex flex-wrap gap-1">
                                                             {isASI && <span className="text-[10px] bg-yellow-700/60 border border-yellow-600 text-yellow-300 px-1.5 py-0.5 rounded font-bold">ASI/Feat</span>}
-                                                            {feats.map((f: any, fi: number) => (
+                                                            {feats.map((f: ClassFeature, fi: number) => (
                                                                 <span key={fi} className="text-[10px] bg-gray-800 border border-gray-600 text-gray-200 px-1.5 py-0.5 rounded">{f.name}</span>
                                                             ))}
                                                             {feats.length === 0 && !isASI && <span className="text-gray-700 text-xs">—</span>}
@@ -1645,7 +1668,7 @@ const PlayerSheet = () => {
                         // Only show for actual spellcasters or Monk (ki save DC)
                         const showForClass = isSpellcaster(cls) || cls === 'Monk';
                         if (!showForClass) return null;
-                        const abilityMod = mod(stats[ability] || 10);
+                        const abilityMod = mod(stats[ability] || 10, ability);
                         const spellDC = 8 + prof + abilityMod + getItemBonus('stat_bonus', 'SPELL_DC');
                         const spellAtk = prof + abilityMod + getItemBonus('stat_bonus', 'SPELL_ATTACK');
                         return (
@@ -1807,7 +1830,7 @@ const PlayerSheet = () => {
                                 <div className="p-2 space-y-0.5">
                                     {(['Perception', 'Investigation', 'Insight'] as const).map(skillName => {
                                         const skill = SKILLS.find(s => s.name === skillName)!;
-                                        const base = mod(stats[skill.ability] || 10);
+                                        const base = mod(stats[skill.ability] || 10, skill.ability);
                                         const skillProfs: string[] = (character.skillProfs || []).map((s: string) => s.toLowerCase().trim());
                                         const isProficient = skillProfs.some((s: string) => s === skill.name.toLowerCase() || s === skill.tr?.toLowerCase());
                                         const isExpert = (character.expertise || []).some((e: string) => e.toLowerCase() === skill.name.toLowerCase() || e.toLowerCase() === skill.tr?.toLowerCase());
@@ -2744,7 +2767,7 @@ const PlayerSheet = () => {
                                                                                             ) : (
                                                                                                 <div className="flex gap-2">
                                                                                                     <button
-                                                                                                        onClick={() => { setCastingSpell(null); showToast(`✨ ${sp}`, 'Kullanıldı!'); }}
+                                                                                                        onClick={() => { setCastingSpell(null); showToast(`✨ ${sp}`, 'Kullanıldı!', 'bg-blue-900 border-blue-500 text-blue-100'); }}
                                                                                                         className="flex-1 py-3 bg-purple-600 text-white text-xs font-black uppercase tracking-widest rounded-xl hover:bg-purple-500 shadow-lg shadow-purple-900/20 transition-all active:scale-95"
                                                                                                     >
                                                                                                         ✓ Confirm Cast
@@ -3389,9 +3412,9 @@ const PlayerSheet = () => {
                         <div className={`border-2 rounded-xl p-4 shadow-2xl ${toast.color}`}>
                             <div className="flex justify-between items-start gap-3 mb-1">
                                 <h3 className="font-black text-sm">{toast.title}</h3>
-                                <button onClick={() => setToast(null)} className="text-lg opacity-70 hover:opacity-100 leading-none">✕</button>
+                                <button onClick={() => setToast({ show: false, title: '', message: '', color: '' })} className="text-lg opacity-70 hover:opacity-100 leading-none">✕</button>
                             </div>
-                            <p className="text-sm opacity-90">{toast.msg}</p>
+                            <p className="text-sm opacity-90">{toast.message}</p>
                         </div>
                     </div>
                 )
@@ -3434,14 +3457,14 @@ const PlayerSheet = () => {
                                     return (
                                         <div className="text-center">
                                             <p className="text-pink-300 text-[10px] font-bold uppercase mb-1">Available Dice: {desc.join(' + ')}</p>
-                                            <p className="text-gray-500 text-xs">Each die restores <span className="font-bold text-gray-300">1 die + {mod(character.stats?.CON ?? 10)}</span> HP on average.</p>
+                                            <p className="text-gray-500 text-xs">Each die restores <span className="font-bold text-gray-300">1 die + {mod(character.stats?.CON ?? 10, 'CON')}</span> HP on average.</p>
                                         </div>
                                     );
                                 })()}
                             </div>
 
                             <div className="flex gap-3">
-                                <button onClick={confirmShortRest} className="flex-1 bg-green-700 hover:bg-green-600 text-white font-bold py-3 rounded-lg border border-green-500 shadow-sm transition">
+                                <button onClick={() => { handleShortRest(); setShowHitDiceModal(false); }} className="flex-1 bg-green-700 hover:bg-green-600 text-white font-bold py-3 rounded-lg border border-green-500 shadow-sm transition">
                                     Finish Rest
                                 </button>
                             </div>
@@ -3524,7 +3547,7 @@ const PlayerSheet = () => {
                                         <div>
                                             <h3 className="font-black text-white text-sm uppercase tracking-wide mb-2">⚔️ Class Features</h3>
                                             <div className="space-y-2">
-                                                {lvModal.classFeats.map((f, i) => (
+                                                {lvModal.classFeats.map((f: any, i: number) => (
                                                     <div key={i} className="bg-gray-800 border border-gray-700 rounded-xl p-4">
                                                         <p className="font-black text-red-400 mb-1">{f.name}</p>
                                                         <p className="text-gray-300 text-sm leading-relaxed">{f.desc_tr}</p>
@@ -3539,7 +3562,7 @@ const PlayerSheet = () => {
                                         <div>
                                             <h3 className="font-black text-white text-sm uppercase tracking-wide mb-2">✨ Alt Sınıf Özellikleri — {character.subclass}</h3>
                                             <div className="space-y-2">
-                                                {lvModal.subFeats.map((f, i) => (
+                                                {lvModal.subFeats.map((f: any, i: number) => (
                                                     <div key={i} className="bg-purple-900/20 border border-purple-700/50 rounded-xl p-4">
                                                         <p className="font-black text-purple-400 mb-1">{f.name}</p>
                                                         <p className="text-gray-300 text-sm leading-relaxed">{f.desc_tr}</p>
@@ -3632,7 +3655,7 @@ const PlayerSheet = () => {
                                                             <div key={s} className={`p-4 rounded-xl border-2 text-center ${pick ? 'border-blue-500 bg-blue-900/30' : 'border-gray-700 bg-gray-800'}`}>
                                                                 <div className="font-black text-gray-400 text-xs mb-1">{s}</div>
                                                                 <div className="text-3xl font-black text-white">{v}{pick && <span className="text-blue-400 text-xl"> → {newVal}</span>}</div>
-                                                                <div className="text-xs text-gray-500 mb-2">{mod(v) >= 0 ? '+' : ''}{mod(v)}</div>
+                                                                <div className="text-xs text-gray-500 mb-2">{mod(v, s) >= 0 ? '+' : ''}{mod(v, s)}</div>
                                                                 <div className="flex gap-1.5 justify-center">
                                                                     <button onClick={() => removeASI(s)} disabled={!pick || newVal <= v}
                                                                         className="w-7 h-7 bg-red-800 hover:bg-red-700 disabled:opacity-30 rounded font-black text-sm transition">-</button>
@@ -3793,7 +3816,7 @@ const PlayerSheet = () => {
                                                 {item.note && <div className="text-gray-400 text-xs mt-1 italic">{item.note}</div>}
                                             </div>
                                             <button
-                                                onClick={() => buyShopItem(item)}
+                                                onClick={() => setBuyShopItem(item)}
                                                 className="bg-orange-600 hover:bg-orange-500 active:bg-orange-700 text-white font-black px-4 py-2 rounded-lg flex items-center gap-2 transition-transform hover:scale-105 shadow-md group-hover:shadow-[0_0_15px_rgba(234,88,12,0.4)] whitespace-nowrap"
                                             >
                                                 <span className="text-sm">Buy Item</span>
@@ -3901,7 +3924,7 @@ const PlayerSheet = () => {
                                         <p className="text-[10px] font-bold uppercase tracking-widest">Whisper silently...</p>
                                     </div>
                                 )}
-                                <div ref={chatEndRef} />
+                                <div ref={chatEndRef as any} />
                             </div>
 
                             <textarea
@@ -4276,7 +4299,7 @@ const PlayerSheet = () => {
                                                 <div className="h-px bg-gradient-to-r from-orange-500/30 to-transparent flex-1"></div>
                                             </div>
                                             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
-                                                {grouped[lv].sort((a,b) => a.name.localeCompare(b.name)).map((sp: any) => {
+                                                {grouped[lv].sort((a: any, b: any) => a.name.localeCompare(b.name)).map((sp: any) => {
                                                     const isKnown = (character.spells || []).includes(sp.name);
                                                     return (
                                                         <button
