@@ -190,7 +190,7 @@ const PlayerSheet = () => {
     const [newResourceValue, setNewResourceValue] = useState(1);
     const [spellSlotsUsed, setSpellSlotsUsed] = useState<Record<string, number>>({});
     const [resourcesUsed, setResourcesUsed] = useState<Record<string, number>>({});
-    const [cantripToReplace, setCantripToReplace] = useState<string | null>(null);
+    const [cantripToReplace, setCantripToReplace] = useState<string>("");
     const [leveledSpellsToReplace, setLeveledSpellsToReplace] = useState<string[]>([]);
     
     // Gallery/Image Viewer State
