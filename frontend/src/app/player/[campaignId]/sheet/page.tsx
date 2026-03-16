@@ -368,7 +368,7 @@ const PlayerSheet = () => {
                 const details: any = {};
                 res.data.forEach((s: any) => details[s.name] = s);
                 setSpellDetails(details);
-                setActualSpells(res.data);
+                setActualSpells(res.data.map((s: any) => s.name));
             } catch (e) { }
         };
         if (token) fetchSpells();
@@ -2375,7 +2375,9 @@ const PlayerSheet = () => {
                                     <span className="text-blue-400 text-2xl">🔵</span>
                                     <div>
                                         <p className="text-blue-300 font-black text-xs uppercase tracking-wide">Aktif Konsantrasyon</p>
-                                        <p className="text-white font-black text-lg">{concentrationSpell}</p>
+                                        <p className="text-white font-black text-lg">
+                                            {typeof concentrationSpell === 'string' ? concentrationSpell : (concentrationSpell ? (concentrationSpell as any).name : '')}
+                                        </p>
                                     </div>
                                     <button onClick={dropConcentration} className="ml-auto text-gray-400 hover:text-white text-xl">✕</button>
                                 </div>
@@ -2643,7 +2645,9 @@ const PlayerSheet = () => {
                                                                             >
                                                                                 <div className="flex flex-col gap-1 flex-1">
                                                                                     <div className="flex items-center gap-2 flex-wrap">
-                                                                                        <span className="font-black text-white text-sm lg:text-base group-hover/card:text-purple-300 transition-colors uppercase tracking-tight">{sp}</span>
+                                                                                        <span className="font-black text-white text-sm lg:text-base group-hover/card:text-purple-300 transition-colors uppercase tracking-tight">
+                                                            {typeof sp === 'string' ? sp : (sp as any).name}
+                                                        </span>
                                                                                         {isConc && (
                                                                                             <span className="text-[9px] px-1.5 py-0.5 bg-blue-500/10 border border-blue-500/30 text-blue-400 rounded-md font-black uppercase tracking-widest" title="Concentration">Conc</span>
                                                                                         )}
