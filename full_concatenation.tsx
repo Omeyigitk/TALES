@@ -52,25 +52,45 @@ const evalAtk = (str: string, abilityMods: any, prof: number) => {
     // Clean string (uppercase, remove spaces)
     let calc = str.toUpperCase().replace(/\s/g, '');
     
+    // Replace choice patterns like "STR/DEX" with the maximum value
+    const abilityNames = ["STR", "DEX", "CON", "INT", "WIS", "CHA"];
+    for (let i = 0; i < abilityNames.length; i++) {
+        for (let j = 0; j < abilityNames.length; j++) {
+            const pattern = `${abilityNames[i]}/${abilityNames[j]}`;
+            if (calc.includes(pattern)) {
+                const val = Math.max(abilityMods[abilityNames[i]] || 0, abilityMods[abilityNames[j]] || 0);
+                calc = calc.replace(new RegExp(pattern, 'g'), String(val));
+            }
+        }
+    }
+
     // Replace ability abbreviations with their values
     const abilities = ["STR", "DEX", "CON", "INT", "WIS", "CHA"];
     abilities.forEach(ab => {
         const modValue = abilityMods[ab] || 0;
-        calc = calc.replace(new RegExp(ab, 'g'), `(${modValue})`);
+        calc = calc.replace(new RegExp(ab, 'g'), String(modValue));
     });
     
-    // Replace PROF
-    calc = calc.replace(/PROF/g, `(${prof})`);
+    // Replace PROF and SV/LEVEL
+    calc = calc.replace(/PROF/g, String(prof));
+    calc = calc.replace(/(SV|LEVEL)/g, String(abilityMods.LEVEL || abilityMods.lv || 1));
     
     // Evaluate the expression safely
     try {
+        // Replace any remaining double operators or leading pluses
+        calc = calc.replace(/\+\+/g, '+').replace(/\+-/g, '-').replace(/-\+/g, '-').replace(/--/g, '+');
+        if (calc.startsWith('+')) calc = calc.slice(1);
+        
         // Remove any characters that aren't numbers, +, -, *, /, or ( )
-        calc = calc.replace(/[^0-9+\-\*\/()]/g, '');
+        calc = calc.replace(/[^0-9+\-*/().]/g, '');
+        // If the resulting string is empty or just operators, return 0
+        if (!calc || /^[^0-9(]+$/.test(calc)) return 0;
         // eslint-disable-next-line no-new-func
-        return new Function(`return ${calc}`)();
+        const result = new Function(`return ${calc}`)();
+        return typeof result === 'number' ? Math.floor(result) : 0;
     } catch (e) {
         console.error("EvalAtk error for string:", str, "calc:", calc, e);
-        const fallback = parseInt(str);
+        const fallback = parseInt(str.replace(/[^0-9-]/g, ''));
         return isNaN(fallback) ? 0 : fallback;
     }
 };
@@ -177,7 +197,7 @@ const PlayerSheet = () => {
     const [shopItems, setShopItems] = useState<any[]>([]);
     const [isShopPublished, setIsShopPublished] = useState(false);
     const [gallerySearch, setGallerySearch] = useState("");
-    const [galleryFilter, setGalleryFilter] = useState<number | 'all'>('all');
+    const [galleryFilter, setGalleryFilter] = useState<string>('all');
     const [actualSpells, setActualSpells] = useState<any[]>([]);
     const [libFeats, setLibFeats] = useState<any[]>([]);
     const [allClasses, setAllClasses] = useState<any[]>([]);
@@ -202,7 +222,7 @@ const PlayerSheet = () => {
 
     // Filter States
     const [spellSearchModal, setSpellSearchModal] = useState("");
-    const [spellLevelFilter, setSpellLevelFilter] = useState<number | 'all'>('all');
+    const [spellLevelFilter, setSpellLevelFilter] = useState<string>('all');
     const [spellSchoolFilter, setSpellSchoolFilter] = useState('all');
     const [spellTypeFilter, setSpellTypeFilter] = useState('all');
     const [spellSearch, setSpellSearch] = useState("");
@@ -258,9 +278,11 @@ const PlayerSheet = () => {
     const [isDraggingToken, setIsDraggingToken] = useState<string | null>(null);
     const [showFeatsUI, setShowFeatsUI] = useState(true);
     const [expandedFeat, setExpandedFeat] = useState<string | null>(null);
+    const [expandedAtkIdx, setExpandedAtkIdx] = useState<number | null>(null);
     const [showDiceLogUI, setShowDiceLogUI] = useState(true);
     const [confirmShortRest, setConfirmShortRest] = useState(false);
     const [buyShopItem, setBuyShopItem] = useState<any>(null);
+    const [pinnedSpells, setPinnedSpells] = useState<string[]>(character?.pinnedSpells || []);
     const chatEndRef = useRef<HTMLDivElement>(null);
 
 
@@ -341,6 +363,11 @@ const PlayerSheet = () => {
                 }
                 const res = await axios.get(`${API_URL}/api/characters/${charId}`, { headers: { 'Authorization': `Bearer ${token}` } });
                 const charData = res.data;
+                
+                // Sanitize spells and pinned spells ensuring they are arrays of strings
+                if (charData.spells) charData.spells = charData.spells.map((s: any) => typeof s === 'string' ? s : (s.name || String(s)));
+                if (charData.pinnedSpells) charData.pinnedSpells = charData.pinnedSpells.map((s: any) => typeof s === 'string' ? s : (s.name || String(s)));
+                
                 setCharacter(charData);
                 characterRef.current = charData;
                 setPrivateNotes(charData.privateNotes || "");
@@ -351,6 +378,7 @@ const PlayerSheet = () => {
                 setConditions(charData.conditions || []);
                 setHitDiceUsed(charData.hitDiceUsed || 0);
                 setDeathSaves(charData.deathSaves || { successes: 0, failures: 0 });
+                setPinnedSpells(charData.pinnedSpells || []);
                 setLoading(false);
             } catch (err) {
                 console.error("Fetch error:", err);
@@ -390,7 +418,6 @@ const PlayerSheet = () => {
         const onCharUpdated = (data: any) => {
             if (data.characterId === character._id || data.characterId === character.name) {
                 setCharacter((prev: any) => {
-                    if (!prev) return prev;
                     if (data.stat === 'currentHp') setCurrentHp(data.value);
                     if (data.stat === 'conditions') setConditions(data.value);
                     if (data.stat === 'hitDiceUsed') setHitDiceUsed(data.value);
@@ -431,6 +458,20 @@ const PlayerSheet = () => {
         };
         if (token) fetchMeta();
     }, [token]);
+    
+    const togglePinSpell = async (spellName: string) => {
+        if (!character) return;
+        const isPinned = pinnedSpells.includes(spellName);
+        const newPinned = isPinned 
+            ? pinnedSpells.filter(s => s !== spellName)
+            : [...pinnedSpells, spellName];
+        
+        setPinnedSpells(newPinned);
+        try {
+            await axios.put(`${API_URL}/api/characters/${character._id}`, { pinnedSpells: newPinned }, { headers: { 'Authorization': `Bearer ${token}` } });
+            showToast(isPinned ? "Unpinned" : "Pinned", `${spellName} ${isPinned ? 'removed from' : 'added to'} actions.`, "bg-blue-900 border-blue-500 text-blue-100");
+        } catch (e) { console.error(e); }
+    };
 
     const updatePetHp = async (petId: string, newHp: number) => {
         if (!characterRef.current) return;
@@ -681,7 +722,7 @@ const PlayerSheet = () => {
         const map: any = {
             'Wizard': 'INT', 'Druid': 'WIS', 'Cleric': 'WIS', 'Ranger': 'WIS',
             'Bard': 'CHA', 'Paladin': 'CHA', 'Sorcerer': 'CHA', 'Warlock': 'CHA',
-            'Artificer': 'INT', 'Sorceror': 'CHA' // Handling common typo
+            'Artificer': 'INT'
         };
         return map[className] || 'INT';
     };
@@ -1347,7 +1388,7 @@ const PlayerSheet = () => {
                                                     <td className="px-3 py-2">
                                                         <div className="flex flex-wrap gap-1">
                                                             {isASI && <span className="text-[10px] bg-yellow-700/60 border border-yellow-600 text-yellow-300 px-1.5 py-0.5 rounded font-bold">ASI/Feat</span>}
-                                                            {feats.map((f: ClassFeature, fi: number) => (
+                                                            {feats.map((f: any, fi: number) => (
                                                                 <span key={fi} className="text-[10px] bg-gray-800 border border-gray-600 text-gray-200 px-1.5 py-0.5 rounded">{f.name}</span>
                                                             ))}
                                                             {feats.length === 0 && !isASI && <span className="text-gray-700 text-xs">—</span>}
@@ -1519,9 +1560,9 @@ const PlayerSheet = () => {
                         </p>
                         {conditions.length > 0 && (
                             <div className="flex gap-2 mt-2">
-                                {conditions.map((c: any) => (
-                                    <span key={typeof c === 'string' ? c : (c.name || JSON.stringify(c))} className="px-2 py-0.5 bg-red-900/40 border border-red-700/50 text-red-300 text-[10px] font-black uppercase tracking-wider rounded flex items-center gap-1 shadow-sm">
-                                        ⚠️ {typeof c === 'string' ? c : (c.name || 'Condition')}
+                                {conditions.map(c => (
+                                    <span key={c} className="px-2 py-0.5 bg-red-900/40 border border-red-700/50 text-red-300 text-[10px] font-black uppercase tracking-wider rounded flex items-center gap-1 shadow-sm">
+                                        ⚠️ {c}
                                     </span>
                                 ))}
                             </div>
@@ -1705,7 +1746,7 @@ const PlayerSheet = () => {
             </div>
 
             {/* ── DEATH SAVES FULLSCREEN MODAL ── */}
-            {currentHp <= 0 && (
+            {!loading && currentHp <= 0 && (
                 <div className="fixed inset-0 bg-black/90 z-[100] backdrop-blur-md flex items-center justify-center p-4">
                     <div className="bg-gray-900 border-2 border-red-700/60 rounded-3xl w-full max-w-lg p-8 shadow-[0_0_50px_rgba(185,28,28,0.4)] animate-in fade-in zoom-in duration-300">
                         <div className="text-center mb-8">
@@ -2347,23 +2388,38 @@ const PlayerSheet = () => {
                     });
 
                     const allAttacks = [
-                        ...baseAttacks.map(atk => ({
-                            ...atk,
-                            toHit: atk.toHit ? fmt(evalAtk(atk.toHit, mods, prof)) : undefined,
-                            damage: atk.damage.includes('+') || atk.damage.includes('-') 
-                                ? atk.damage.replace(/(STR|DEX|CON|INT|WIS|CHA|Prof)/g, (m) => {
-                                    if (m === 'Prof') return String(prof);
-                                    return String(mods[m as keyof typeof mods]);
-                                  })
-                                : (atk.damage.match(/^[0-9d+\s-]+$/) ? atk.damage : (() => {
-                                    // Handle cases like "1+STR"
-                                    const parts = atk.damage.split(' ');
-                                    const dice = parts[0];
-                                    const type = parts.slice(1).join(' ');
-                                    const val = evalAtk(dice, mods, prof);
-                                    return isNaN(Number(dice)) ? `${val} ${type}` : atk.damage;
-                                  })())
-                        })), 
+                        ...(baseAttacks || []).map(atk => {
+                            if (!atk) return null;
+                            let processedDamage = atk.damage || "";
+                            
+                            // If damage contains variable tokens, replace them
+                            if (processedDamage.match(/(STR|DEX|CON|INT|WIS|CHA|Prof|Sv|Level)/i)) {
+                                processedDamage = processedDamage.replace(/(STR|DEX|CON|INT|WIS|CHA|Prof|Sv|Level)/gi, (m) => {
+                                    const up = m.toUpperCase();
+                                    if (up === 'PROF') return String(prof || 0);
+                                    if (up === 'SV' || up === 'LEVEL') return String(character.level || 1);
+                                    return String(mods[up as keyof typeof mods] || 0);
+                                });
+                            }
+                            
+                            // Support for X/Y choice in damage as well
+                            if (processedDamage.includes('/')) {
+                                processedDamage = processedDamage.replace(/([A-Z]{3})\/([A-Z]{3})/gi, (m, a, b) => {
+                                    const valA = mods[a.toUpperCase() as keyof typeof mods] || 0;
+                                    const valB = mods[b.toUpperCase() as keyof typeof mods] || 0;
+                                    return String(Math.max(valA, valB));
+                                });
+                            }
+                            
+                            // Handle ceiling/floor symbols if any level-based math is left
+                            processedDamage = processedDamage.replace(/⌈/g, '').replace(/⌉/g, '').replace(/⌊/g, '').replace(/⌋/g, '');
+
+                            return {
+                                ...atk,
+                                toHit: atk.toHit ? fmt(evalAtk(atk.toHit, mods, prof)) : undefined,
+                                damage: processedDamage
+                            };
+                        }).filter(Boolean), 
                         ...mappedWeaponAttacks
                     ];
 
@@ -2375,31 +2431,144 @@ const PlayerSheet = () => {
                                     <span className="text-blue-400 text-2xl">🔵</span>
                                     <div>
                                         <p className="text-blue-300 font-black text-xs uppercase tracking-wide">Aktif Konsantrasyon</p>
-                                        <p className="text-white font-black text-lg">{concentrationSpell}</p>
+                                        <p className="text-white font-black text-lg">{String(concentrationSpell)}</p>
                                     </div>
                                     <button onClick={dropConcentration} className="ml-auto text-gray-400 hover:text-white text-xl">✕</button>
                                 </div>
                             )}
 
                             {activeTab === "attacks" && (
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    {allAttacks.map((atk, idx) => (
-                                        <div key={idx} className="bg-gray-800 rounded-xl border border-gray-700 p-4 hover:border-gray-500 transition-all flex items-center justify-between group shadow-lg">
-                                            <div className="flex-1">
-                                                <h4 className="font-black text-white text-sm uppercase tracking-tight group-hover:text-red-400 transition-colors">{atk.name}</h4>
-                                                <div className="flex gap-3 mt-1 items-center">
-                                                    <span className="text-[10px] bg-red-900/40 text-red-300 font-black px-2 py-0.5 rounded border border-red-500/30">BONUS: {fmt(atk.bonus)}</span>
-                                                    <span className="text-[10px] bg-gray-900/60 text-gray-400 font-bold px-2 py-0.5 rounded border border-white/5 uppercase">{atk.damage} {atk.type}</span>
-                                                </div>
-                                            </div>
-                                            <button 
-                                                onClick={() => handleRoll(atk.name, { count: 1, sides: 20, bonus: atk.bonus }, 'Atak')}
-                                                className="bg-red-700 hover:bg-red-600 text-white w-10 h-10 rounded-lg flex items-center justify-center font-black shadow-lg shadow-red-900/20 active:scale-95 transition-all"
-                                            >
-                                                🎲
-                                            </button>
+                                <div className="space-y-6">
+                                    {/* ── ATTACKS SECTION ── */}
+                                    <div className="bg-gray-800 rounded-xl border border-red-800/40 overflow-hidden shadow-2xl">
+                                        <div className="px-5 py-3 bg-red-900/20 border-b border-red-800/40 flex items-center justify-between">
+                                            <h3 className="font-black text-red-400 text-sm uppercase tracking-widest flex items-center gap-2">
+                                                <span className="text-lg">⚔️</span> Attacks — {clsName}
+                                            </h3>
+                                            <span className="text-[10px] bg-red-900/40 text-red-300 font-bold px-2 py-0.5 rounded border border-red-500/30 uppercase tracking-tighter">{allAttacks.length} Actions</span>
                                         </div>
-                                    ))}
+                                        <div className="p-3 space-y-2">
+                                            {allAttacks.map((atk, i) => {
+                                                const expanded = expandedAtkIdx === i;
+                                                return (
+                                                    <div key={i} className={`rounded-xl transition-all duration-300 border ${expanded ? 'bg-gray-900/60 border-red-500/40 shadow-inner' : 'bg-gray-800/40 border-gray-700/50 hover:border-gray-600'}`}>
+                                                        <div 
+                                                            className="px-4 py-3 cursor-pointer flex items-center justify-between gap-4"
+                                                            onClick={() => setExpandedAtkIdx(expanded ? null : i)}
+                                                        >
+                                                            <div className="flex-1">
+                                                                <div className="flex items-center gap-3">
+                                                                    <span className="font-black text-white text-sm uppercase tracking-tight group-hover:text-red-400 transition-colors">{atk.name}</span>
+                                                                    <div className="flex gap-2">
+                                                                        <span className="text-[9px] bg-red-900/30 text-red-400 font-black px-1.5 py-0.5 rounded border border-red-500/20">{atk.toHit} TO HIT</span>
+                                                                        <span className="text-[9px] bg-gray-900/60 text-gray-400 font-bold px-1.5 py-0.5 rounded border border-white/5 uppercase">{atk.damage}</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div className="flex items-center gap-3">
+                                                                <button 
+                                                                    onClick={(e) => { e.stopPropagation(); handleRoll(atk.name, { count: 1, sides: 20, bonus: atk.bonus }, 'Atak'); }}
+                                                                    className="w-8 h-8 bg-red-700/10 hover:bg-red-600 text-red-500 hover:text-white border border-red-500/20 hover:border-red-500 rounded-lg flex items-center justify-center transition-all duration-300 active:scale-90"
+                                                                >
+                                                                    🎲
+                                                                </button>
+                                                                <div className={`text-gray-600 transition-transform duration-300 ${expanded ? 'rotate-180' : ''}`}>
+                                                                    <span className="text-xs">▼</span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        {expanded && (
+                                                            <div className="px-4 pb-4 pt-1 animate-in slide-in-from-top-2 duration-300">
+                                                                <div className="p-3 bg-gray-950/40 rounded-xl border border-gray-800 text-[11px] text-gray-400 italic leading-relaxed">
+                                                                    {atk.desc_tr || atk.desc || "No additional description available."}
+                                                                </div>
+                                                                <div className="mt-3 flex gap-2">
+                                                                    <button 
+                                                                        onClick={() => handleRoll(atk.name, { count: 1, sides: 20, bonus: atk.bonus }, 'Atak')}
+                                                                        className="flex-1 py-2 bg-red-700 hover:bg-red-600 text-white text-[10px] font-black uppercase tracking-widest rounded-lg transition-all active:scale-95"
+                                                                    >
+                                                                        Saldırı Atışı (Roll To Hit)
+                                                                    </button>
+                                                                    {(() => {
+                                                                        const dice = extractDice(atk.damage);
+                                                                        if (!dice) return null;
+                                                                        return (
+                                                                            <button 
+                                                                                onClick={() => handleRoll(atk.name, dice, 'Hasar')}
+                                                                                className="flex-1 py-2 bg-gray-800 hover:bg-gray-700 text-red-400 border border-red-500/20 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all active:scale-95"
+                                                                            >
+                                                                                Hasar Atışı (Roll Damage)
+                                                                            </button>
+                                                                        );
+                                                                    })()}
+                                                                </div>
+                                                            </div>
+                                                        )}
+                                                    </div>
+                                                );
+                                            })}
+                                        </div>
+                                    </div>
+
+                                    {/* ── ACTION SPELLS SECTION ── */}
+                                    {pinnedSpells.length > 0 && (
+                                        <div className="bg-gray-800 rounded-xl border border-blue-800/40 overflow-hidden shadow-2xl mt-4">
+                                            <div className="px-5 py-3 bg-blue-900/20 border-b border-blue-800/40 flex items-center justify-between">
+                                                <h3 className="font-black text-blue-400 text-sm uppercase tracking-widest flex items-center gap-2">
+                                                    <span className="text-lg">✨</span> Büyüler (Actions)
+                                                </h3>
+                                                <span className="text-[10px] bg-blue-900/40 text-blue-300 font-bold px-2 py-0.5 rounded border border-blue-500/30 uppercase tracking-tighter">Pinned</span>
+                                            </div>
+                                            <div className="p-3 space-y-2">
+                                                {pinnedSpells.map((sp, i) => {
+                                                    const details = spellDetails[sp];
+                                                    const expanded = expandedSpell === sp;
+                                                    return (
+                                                        <div key={i} className={`rounded-xl transition-all duration-300 border ${expanded ? 'bg-gray-900/60 border-blue-500/40 shadow-inner' : 'bg-gray-800/40 border-gray-700/50 hover:border-gray-600'}`}>
+                                                            <div 
+                                                                className="px-4 py-3 cursor-pointer flex items-center justify-between gap-4"
+                                                                onClick={() => setExpandedSpell(expanded ? null : sp)}
+                                                            >
+                                                                <div className="flex-1">
+                                                                    <div className="flex items-center gap-3">
+                                                                        <span className="font-black text-white text-sm uppercase tracking-tight group-hover:text-blue-300 transition-colors">
+                                                                            {typeof sp === 'string' ? sp : (String((sp as any)?.name || sp || 'Unknown Spell'))}
+                                                                        </span>
+                                                                        <div className="flex gap-2">
+                                                                            {details && <span className="text-[9px] bg-blue-900/30 text-blue-400 font-black px-1.5 py-0.5 rounded border border-blue-500/20">LEVEL {details.level_int === 0 ? 'CANTRIP' : details.level_int}</span>}
+                                                                            {details && <span className="text-[9px] bg-gray-900/60 text-gray-400 font-bold px-1.5 py-0.5 rounded border border-white/5 uppercase">{String(details.casting_time || '')}</span>}
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div className="flex items-center gap-3">
+                                                                    <div className={`text-gray-600 transition-transform duration-300 ${expanded ? 'rotate-180' : ''}`}>
+                                                                        <span className="text-xs">▼</span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            {expanded && (
+                                                                <div className="px-4 pb-4 pt-1 animate-in slide-in-from-top-2 duration-300">
+                                                                    <p className="text-[11px] text-gray-400 mb-3">
+                                                                        {(() => {
+                                                                            const d = details?.desc_tr || details?.desc;
+                                                                            if (!d) return 'Loading...';
+                                                                            return Array.isArray(d) ? d.join('\n') : String(d);
+                                                                        })()}
+                                                                    </p>
+                                                                    <button 
+                                                                        onClick={() => setCastingSpell(sp)}
+                                                                        className="w-full py-2 bg-blue-700 hover:bg-blue-600 text-white text-[10px] font-black uppercase tracking-widest rounded-lg transition-all active:scale-95"
+                                                                    >
+                                                                        Cast Spell
+                                                                    </button>
+                                                                </div>
+                                                            )}
+                                                        </div>
+                                                    );
+                                                })}
+                                            </div>
+                                        </div>
+                                    )}
                                 </div>
                             )}
 
@@ -2449,12 +2618,12 @@ const PlayerSheet = () => {
                                                     </button>
                                                 </div>
                                             </div>
+                                            </div>
                                         );
-                                    })}
+                                    })()}
                                 </div>
                             )}
-
-                            {activeTab === "spells" && (
+                    {activeTab === "spells" && (
                                 <div className="space-y-6 pb-20">
                                     {/* ── SPELLS OVERVIEW CARD ── */}
                                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -2570,11 +2739,12 @@ const PlayerSheet = () => {
                                                     </button>
                                                 </div>
                                             ) : (() => {
-                                                const groupedSpells: Record<string, string[]> = {};
+                                                const groupedSpells: Record<string, any[]> = {};
                                                 const catOrder = ["Cantrips (0)", "Level 1", "Level 2", "Level 3", "Level 4", "Level 5", "Level 6", "Level 7", "Level 8", "Level 9", "Diğer Özellikler"];
 
                                                 actualSpells.forEach(sp => {
-                                                    const details = spellDetails[sp];
+                                                    const spellName = typeof sp === 'string' ? sp : sp.name;
+                                                    const details = spellDetails[spellName] || (typeof sp === 'object' ? sp : null);
                                                     let cat = 'Diğer Özellikler';
                                                     if (details && typeof details.level_int === 'number') {
                                                         if (details.level_int === 0) cat = "Cantrips (0)";
@@ -2589,227 +2759,202 @@ const PlayerSheet = () => {
                                                 return (
                                                     <div className="space-y-12">
                                                         {activeCategories.map(cat => (
-                                                                    <div key={cat} className="space-y-4">
-                                                                        <div className="flex items-center gap-4 group/header">
-                                                                            <div className="h-px flex-1 bg-gradient-to-r from-transparent to-gray-800"></div>
-                                                                            <h4 className="font-black text-orange-500 tracking-[0.2em] text-xs uppercase bg-gray-800/50 px-4 py-1.5 rounded-full border border-gray-700/50 group-hover:border-orange-500/30 transition-colors duration-300">{cat}</h4>
-                                                                            <div className="h-px flex-1 bg-gradient-to-l from-transparent to-gray-800"></div>
+                                                            <div key={cat} className="space-y-4">
+                                                                <div className="flex items-center gap-4 group/header">
+                                                                    <div className="h-px flex-1 bg-gradient-to-r from-transparent to-gray-800"></div>
+                                                                    <h4 className="font-black text-orange-500 tracking-[0.2em] text-xs uppercase bg-gray-800/50 px-4 py-1.5 rounded-full border border-gray-700/50 group-hover:border-orange-500/30 transition-colors duration-300">{cat}</h4>
+                                                                    <div className="h-px flex-1 bg-gradient-to-l from-transparent to-gray-800"></div>
 
-                                                                            <div className="flex justify-end min-w-[100px]">
+                                                                    <div className="flex justify-end min-w-[100px]">
                                                                         {(() => {
                                                                             const levelMatch = cat.match(/Level (\d+)/);
-                                                                        if (levelMatch) {
-                                                                            const slotLv = parseInt(levelMatch[1]);
-                                                                            const total = slotTotals[slotLv - 1] ?? 0;
-                                                                            const used = spellSlotsUsed[String(slotLv)] ?? 0;
-                                                                            if (total > 0) {
-                                                                                const remaining = total - used;
-                                                                                return (
-                                                                                    <div className="flex gap-1.5 items-center">
-                                                                                        {Array.from({ length: total }).map((_, i) => (
-                                                                                            <div key={i} className={`w-3.5 h-3.5 border rounded-sm transition-all duration-500 ${i < remaining ? 'bg-blue-400 border-blue-300 shadow-[0_0_8px_rgba(96,165,250,0.4)]' : 'bg-transparent border-gray-700 grayscale'}`}></div>
-                                                                                        ))}
-                                                                                    </div>
-                                                                                );
+                                                                            if (levelMatch) {
+                                                                                const slotLv = parseInt(levelMatch[1]);
+                                                                                const total = slotTotals[slotLv - 1] ?? 0;
+                                                                                const used = spellSlotsUsed[String(slotLv)] ?? 0;
+                                                                                if (total > 0) {
+                                                                                    const remaining = total - used;
+                                                                                    return (
+                                                                                        <div className="flex gap-1.5 items-center">
+                                                                                            {Array.from({ length: total }).map((_, i) => (
+                                                                                                <div key={i} className={`w-3.5 h-3.5 border rounded-sm transition-all duration-500 ${i < remaining ? 'bg-blue-400 border-blue-300 shadow-[0_0_8px_rgba(96,165,250,0.4)]' : 'bg-transparent border-gray-700 grayscale'}`}></div>
+                                                                                            ))}
+                                                                                        </div>
+                                                                                    );
+                                                                                }
                                                                             }
-                                                                        }
-                                                                        return null;
-                                                                    })()}
+                                                                            return null;
+                                                                        })()}
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                                                {groupedSpells[cat].map((sp: string, i: number) => {
-                                                                    const isConc = CONCENTRATION_SPELLS.has(sp);
-                                                                    const isActiveConc = concentrationSpell === sp;
-                                                                    const isActiveCastTarget = castingSpell === sp;
-                                                                    const details = spellDetails[sp];
-                                                                    const isExpanded = expandedSpell === sp;
-                                                                    const hasValidSlotsForSpell = details?.level_int > 0 ? slotTotals.some((total, idx) => {
-                                                                        const slotLv = idx + 1;
-                                                                        return slotLv >= details.level_int && (total - (spellSlotsUsed[String(slotLv)] ?? 0) > 0);
-                                                                    }) : true;
+                                                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                                                    {groupedSpells[cat].map((sp: any, i: number) => {
+                                                                        const spellName = typeof sp === 'string' ? sp : sp.name;
+                                                                        const isConc = CONCENTRATION_SPELLS.has(spellName);
+                                                                        const isActiveConc = String(concentrationSpell) === spellName;
+                                                                        const isActiveCastTarget = castingSpell === spellName;
+                                                                        const details = spellDetails[spellName] || (typeof sp === 'object' ? sp : null);
+                                                                        const isExpanded = expandedSpell === spellName;
+                                                                        const hasValidSlotsForSpell = details?.level_int > 0 ? slotTotals.some((total, idx) => {
+                                                                            const slotLv = idx + 1;
+                                                                            return slotLv >= details.level_int && (total - (spellSlotsUsed[String(slotLv)] ?? 0) > 0);
+                                                                        }) : true;
 
-                                                                    return (
-                                                                        <div
-                                                                            key={i}
-                                                                            className={`group/card relative rounded-2xl transition-all duration-300 border ${isActiveConc
-                                                                                ? 'bg-blue-900/10 border-blue-500/40 shadow-[0_0_20px_rgba(59,130,246,0.1)]'
-                                                                                : 'bg-gray-800/30 border-gray-700/50 hover:border-purple-500/40 hover:bg-gray-800/50'
-                                                                                } ${isExpanded ? 'md:col-span-2' : ''}`}
-                                                                        >
+                                                                        return (
                                                                             <div
-                                                                                className="p-4 cursor-pointer flex items-center justify-between gap-4"
-                                                                                onClick={() => setExpandedSpell(isExpanded ? null : sp)}
+                                                                                key={i}
+                                                                                className={`group/card relative rounded-2xl transition-all duration-300 border ${isActiveConc
+                                                                                    ? 'bg-blue-900/10 border-blue-500/40 shadow-[0_0_20px_rgba(59,130,246,0.1)]'
+                                                                                    : 'bg-gray-800/30 border-gray-700/50 hover:border-purple-500/40 hover:bg-gray-800/50'
+                                                                                    } ${isExpanded ? 'md:col-span-2' : ''}`}
                                                                             >
-                                                                                <div className="flex flex-col gap-1 flex-1">
-                                                                                    <div className="flex items-center gap-2 flex-wrap">
-                                                                                        <span className="font-black text-white text-sm lg:text-base group-hover/card:text-purple-300 transition-colors uppercase tracking-tight">{sp}</span>
-                                                                                        {isConc && (
-                                                                                            <span className="text-[9px] px-1.5 py-0.5 bg-blue-500/10 border border-blue-500/30 text-blue-400 rounded-md font-black uppercase tracking-widest" title="Concentration">Conc</span>
-                                                                                        )}
-                                                                                        {isActiveConc && (
-                                                                                            <span className="text-[9px] px-1.5 py-0.5 bg-green-500/10 border border-green-500/30 text-green-400 rounded-md font-black uppercase tracking-widest animate-pulse">Active</span>
-                                                                                        )}
-                                                                                    </div>
-                                                                                    {details && (
-                                                                                        <div className="flex items-center gap-3 text-[10px] text-gray-500 font-bold uppercase tracking-wider">
-                                                                                            <span>{details.casting_time}</span>
-                                                                                            <span className="w-1 h-1 bg-gray-700 rounded-full"></span>
-                                                                                            <span>{details.range}</span>
-                                                                                        </div>
-                                                                                    )}
-                                                                                </div>
-
-                                                                                <div className="flex items-center gap-3">
-                                                                                    {!isExpanded && (
-                                                                                        <button
-                                                                                            onClick={(e) => { e.stopPropagation(); setCastingSpell(sp); }}
-                                                                                            className="px-3 py-1.5 bg-purple-600/10 hover:bg-purple-600 text-purple-400 hover:text-white border border-purple-500/20 hover:border-purple-500 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all duration-300 opacity-0 group-hover/card:opacity-100 transform translate-x-2 group-hover/card:translate-x-0"
-                                                                                        >
-                                                                                            Cast
-                                                                                        </button>
-                                                                                    )}
-                                                                                    <div className={`text-gray-600 transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`}>
-                                                                                        <span className="text-xs">▼</span>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-
-                                                                            {/* EXPANDED DETAILS */}
-                                                                            {isExpanded && (
-                                                                                <div className="px-4 pb-4 pt-0 space-y-4 animate-in slide-in-from-top-2 duration-300">
-                                                                                    {details && (
-                                                                                        <div className="space-y-3">
-                                                                                            {/* STATS BAR */}
-                                                                                            <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
-                                                                                                <div className="bg-gray-900/60 p-2 rounded-xl border border-gray-800 flex flex-col items-center justify-center gap-1">
-                                                                                                    <span className="text-[9px] text-gray-500 font-black uppercase tracking-widest">Time</span>
-                                                                                                    <span className="text-[10px] text-purple-300 font-bold">{details.casting_time}</span>
-                                                                                                </div>
-                                                                                                <div className="bg-gray-900/60 p-2 rounded-xl border border-gray-800 flex flex-col items-center justify-center gap-1">
-                                                                                                    <span className="text-[9px] text-gray-500 font-black uppercase tracking-widest">Range</span>
-                                                                                                    <span className="text-[10px] text-blue-300 font-bold">{details.range}</span>
-                                                                                                </div>
-                                                                                                <div className="bg-gray-900/60 p-2 rounded-xl border border-gray-800 flex flex-col items-center justify-center gap-1">
-                                                                                                    <span className="text-[9px] text-gray-500 font-black uppercase tracking-widest">Comps</span>
-                                                                                                    <span className="text-[10px] text-orange-300 font-bold">{details.components}</span>
-                                                                                                </div>
-                                                                                                <div className="bg-gray-900/60 p-2 rounded-xl border border-gray-800 flex flex-col items-center justify-center gap-1">
-                                                                                                    <span className="text-[9px] text-gray-500 font-black uppercase tracking-widest">Duration</span>
-                                                                                                    <span className="text-[10px] text-green-300 font-bold">{details.duration}</span>
-                                                                                                </div>
-                                                                                            </div>
-
-                                                                                            {/* DESCRIPTION */}
-                                                                                            <div className="p-4 bg-gray-950/40 backdrop-blur-sm rounded-2xl border border-gray-800/80 shadow-inner group/desc relative overflow-hidden">
-                                                                                                <div className="absolute top-0 right-0 p-4 bg-purple-500/5 blur-[40px] rounded-full -mr-8 -mt-8 grayscale group-hover/desc:grayscale-0 transition-all duration-700"></div>
-                                                                                                <p className="text-xs text-gray-300 leading-relaxed relative whitespace-pre-wrap opacity-90">{details.desc_tr || details.desc}</p>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    )}
-
-                                                                                    {/* ACTIONS */}
-                                                                                    {!isActiveCastTarget ? (
-                                                                                        <div className="flex gap-2 pt-2">
-                                                                                            <button
-                                                                                                onClick={() => setCastingSpell(sp)}
-                                                                                                disabled={canCast && details?.level_int > 0 && !hasValidSlotsForSpell && !isConc}
-                                                                                                className="flex-1 py-3 bg-purple-600 hover:bg-purple-500 disabled:opacity-40 disabled:grayscale text-white text-xs font-black uppercase tracking-widest rounded-xl transition-all duration-300 shadow-lg shadow-purple-900/20 active:scale-[0.98]"
-                                                                                            >
-                                                                                                Cast This Spell
-                                                                                            </button>
-                                                                                            {(() => {
-                                                                                                const dice = extractDice(details?.desc_tr || details?.desc);
-                                                                                                if (!dice) return null;
-                                                                                                return (
-                                                                                                    <button
-                                                                                                        onClick={() => handleRoll(sp, dice, 'Büyü')}
-                                                                                                        className="px-6 py-3 bg-gray-800 hover:bg-gray-700 text-purple-400 border border-purple-500/20 rounded-xl font-black text-xs transition-all duration-300 active:scale-[0.98]"
-                                                                                                    >
-                                                                                                        🎲 Roll
-                                                                                                    </button>
-                                                                                                );
-                                                                                            })()}
-                                                                                        </div>
-                                                                                    ) : (
-                                                                                        <div className="bg-gray-900/60 backdrop-blur-md border border-purple-500/30 p-4 rounded-2xl space-y-4 animate-in zoom-in-95 duration-200">
-                                                                                            {isConc && concentrationSpell && concentrationSpell !== sp && (
-                                                                                                <div className="bg-yellow-900/20 border border-yellow-500/30 px-3 py-2 rounded-xl flex items-center gap-2">
-                                                                                                    <span className="text-sm">⚠️</span>
-                                                                                                    <p className="text-yellow-400 text-[10px] font-bold uppercase tracking-tight">Warning: <strong>{concentrationSpell}</strong> will end!</p>
-                                                                                                </div>
+                                                                                <div
+                                                                                    className="p-4 cursor-pointer flex items-center justify-between gap-4"
+                                                                                    onClick={() => setExpandedSpell(isExpanded ? null : spellName)}
+                                                                                >
+                                                                                    <div className="flex flex-col gap-1 flex-1">
+                                                                                        <div className="flex items-center gap-2 flex-wrap">
+                                                                                            <span className="font-black text-white text-sm lg:text-base group-hover/card:text-purple-300 transition-colors uppercase tracking-tight">{spellName}</span>
+                                                                                            {isConc && (
+                                                                                                <span className="text-[9px] px-1.5 py-0.5 bg-blue-500/10 border border-blue-500/30 text-blue-400 rounded-md font-black uppercase tracking-widest" title="Concentration">Conc</span>
                                                                                             )}
+                                                                                            {isActiveConc && (
+                                                                                                <span className="text-[9px] px-1.5 py-0.5 bg-green-500/10 border border-green-500/30 text-green-400 rounded-md font-black uppercase tracking-widest animate-pulse">Active</span>
+                                                                                            )}
+                                                                                        </div>
+                                                                                        {details && (
+                                                                                            <div className="flex items-center gap-3 text-[10px] text-gray-500 font-bold uppercase tracking-wider">
+                                                                                                <span>{String(details.casting_time || '')}</span>
+                                                                                                <span className="w-1 h-1 bg-gray-700 rounded-full"></span>
+                                                                                                <span>{String(details.range || '')}</span>
+                                                                                            </div>
+                                                                                        )}
+                                                                                    </div>
 
-                                                                                            {canCast && details?.level_int > 0 ? (
-                                                                                                <div className="space-y-3">
-                                                                                                    <p className="text-purple-400/60 text-[10px] font-black uppercase tracking-widest text-center">Select Slot Level</p>
-                                                                                                    <div className="flex gap-2 flex-wrap justify-center">
-                                                                                                        {slotTotals.map((total, idx) => {
-                                                                                                            if (total === 0) return null;
-                                                                                                            const slotLv = idx + 1;
-                                                                                                            if (slotLv < details.level_int) return null;
-                                                                                                            const avail = total - (spellSlotsUsed[String(slotLv)] ?? 0);
-                                                                                                            return (
-                                                                                                                <button
-                                                                                                                    key={slotLv}
-                                                                                                                    onClick={() => useSlot(slotLv, sp, isConc)}
-                                                                                                                    disabled={avail <= 0}
-                                                                                                                    className={`min-w-[50px] py-2.5 rounded-xl text-xs font-black transition-all duration-300 border shadow-sm active:scale-95 ${avail > 0
-                                                                                                                        ? 'bg-purple-600 border-purple-400 text-white hover:bg-purple-500 shadow-purple-900/20'
-                                                                                                                        : 'bg-gray-800 border-gray-700 text-gray-600 grayscale cursor-not-allowed opacity-50'
-                                                                                                                        }`}
-                                                                                                                >
-                                                                                                                    L{slotLv}
-                                                                                                                    <div className="text-[8px] opacity-60">({avail})</div>
-                                                                                                                </button>
-                                                                                                            );
-                                                                                                        })}
-                                                                                                        <button
-                                                                                                            onClick={() => setCastingSpell(null)}
-                                                                                                            className="px-4 py-2.5 text-xs font-black text-gray-500 bg-gray-800/50 border border-gray-700 rounded-xl hover:bg-gray-800 transition-colors uppercase tracking-widest"
-                                                                                                        >
-                                                                                                            Cancel
-                                                                                                        </button>
+                                                                                    <div className="flex items-center gap-3">
+                                                                                        {!isExpanded && (
+                                                                                            <div className="flex items-center gap-2 opacity-0 group-hover/card:opacity-100 transition-all duration-300 transform translate-x-2 group-hover/card:translate-x-0">
+                                                                                                <button
+                                                                                                    onClick={(e) => { e.stopPropagation(); togglePinSpell(spellName); }}
+                                                                                                    className={`p-1.5 rounded-lg border transition-all duration-300 ${pinnedSpells.includes(spellName) ? 'bg-blue-600 border-blue-500 text-white' : 'bg-gray-800 border-gray-700 text-gray-500 hover:text-blue-400'}`}
+                                                                                                    title={pinnedSpells.includes(spellName) ? "Unpin from Actions" : "Pin to Actions"}
+                                                                                                >
+                                                                                                    <span className="text-sm">{pinnedSpells.includes(spellName) ? '📍' : '📌'}</span>
+                                                                                                </button>
+                                                                                                <button
+                                                                                                    onClick={(e) => { e.stopPropagation(); setCastingSpell(spellName); }}
+                                                                                                    className="px-3 py-1.5 bg-purple-600/10 hover:bg-purple-600 text-purple-400 hover:text-white border border-purple-500/20 hover:border-purple-500 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all duration-300"
+                                                                                                >
+                                                                                                    Cast
+                                                                                                </button>
+                                                                                            </div>
+                                                                                        )}
+                                                                                        <div className={`text-gray-600 transition-transform duration-300 ${isExpanded ? 'rotate-180' : ''}`}>
+                                                                                            <span className="text-xs">▼</span>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                {/* EXPANDED DETAILS */}
+                                                                                {isExpanded && (
+                                                                                    <div className="px-4 pb-4 pt-0 space-y-4 animate-in slide-in-from-top-2 duration-300">
+                                                                                        {details && (
+                                                                                            <div className="space-y-3">
+                                                                                                {/* STATS BAR */}
+                                                                                                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                                                                                                    <div className="bg-gray-900/60 p-2 rounded-xl border border-gray-800 flex flex-col items-center justify-center gap-1">
+                                                                                                        <span className="text-[9px] text-gray-500 font-black uppercase tracking-widest">Time</span>
+                                                                                                        <span className="text-[10px] text-purple-300 font-bold">{String(details.casting_time || '')}</span>
+                                                                                                    </div>
+                                                                                                    <div className="bg-gray-900/60 p-2 rounded-xl border border-gray-800 flex flex-col items-center justify-center gap-1">
+                                                                                                        <span className="text-[9px] text-gray-500 font-black uppercase tracking-widest">Range</span>
+                                                                                                        <span className="text-[10px] text-blue-300 font-bold">{String(details.range || '')}</span>
+                                                                                                    </div>
+                                                                                                    <div className="bg-gray-900/60 p-2 rounded-xl border border-gray-800 flex flex-col items-center justify-center gap-1">
+                                                                                                        <span className="text-[9px] text-gray-500 font-black uppercase tracking-widest">Comps</span>
+                                                                                                        <span className="text-[10px] text-orange-300 font-bold">{String(details.components || '')}</span>
+                                                                                                    </div>
+                                                                                                    <div className="bg-gray-900/60 p-2 rounded-xl border border-gray-800 flex flex-col items-center justify-center gap-1">
+                                                                                                        <span className="text-[9px] text-gray-500 font-black uppercase tracking-widest">Duration</span>
+                                                                                                        <span className="text-[10px] text-green-300 font-bold">{String(details.duration || '')}</span>
                                                                                                     </div>
                                                                                                 </div>
-                                                                                            ) : (
-                                                                                                <div className="flex gap-2">
-                                                                                                    <button
-                                                                                                        onClick={() => { setCastingSpell(null); showToast(`✨ ${sp}`, 'Kullanıldı!', 'bg-blue-900 border-blue-500 text-blue-100'); }}
-                                                                                                        className="flex-1 py-3 bg-purple-600 text-white text-xs font-black uppercase tracking-widest rounded-xl hover:bg-purple-500 shadow-lg shadow-purple-900/20 transition-all active:scale-95"
-                                                                                                    >
-                                                                                                        ✓ Confirm Cast
-                                                                                                    </button>
-                                                                                                    <button
-                                                                                                        onClick={() => setCastingSpell(null)}
-                                                                                                        className="px-6 py-3 text-xs font-black text-gray-500 bg-gray-800/50 border border-gray-700 rounded-xl hover:bg-gray-800 transition-colors uppercase tracking-widest"
-                                                                                                    >
-                                                                                                        Cancel
-                                                                                                    </button>
+
+                                                                                                {/* DESCRIPTION */}
+                                                                                                <div className="p-4 bg-gray-950/40 backdrop-blur-sm rounded-2xl border border-gray-800/80 shadow-inner group/desc relative overflow-hidden">
+                                                                                                    <div className="absolute top-0 right-0 p-4 bg-purple-500/5 blur-[40px] rounded-full -mr-8 -mt-8 grayscale group-hover/desc:grayscale-0 transition-all duration-700"></div>
+                                                                                                    <p className="text-xs text-gray-300 leading-relaxed relative whitespace-pre-wrap opacity-90">
+                                                                        {(() => {
+                                                                            const d = details.desc_tr || details.desc;
+                                                                            return Array.isArray(d) ? d.join('\n') : String(d || '');
+                                                                        })()}
+                                                                    </p>
                                                                                                 </div>
-                                                                                            )}
-                                                                                        </div>
-                                                                                    )}
-                                                                                </div>
-                                                                            )}
-                                                                        </div>
-                                                                    );
-                                                                })}
-                                                            </div>
-                                                        </div>
-                                                    ))}
-                                                </div>
-                                            );
-                                        })()}
-                                    </div>
-                                </div>
-                            </div>
-                        )}
-                    </div>
-                );
-            })()}
-                    
-                {/* ══════════ TAB: INVENTORY ══════════ */}
+                                                                                            </div>
+                                                                                        )}
+
+                                                                                        <div className="flex flex-col gap-4">
+                                                                                            {!isActiveCastTarget ? (
+                                                                                                <div className="flex gap-2 pt-2">
+                                                                                                    <button 
+                                                                                                        onClick={() => setCastingSpell(spellName)}
+                                                                                                        disabled={details?.level_int > 0 && !hasValidSlotsForSpell && !isConc}
+                                                                                                        className="flex-1 py-3 bg-purple-600 hover:bg-purple-500 disabled:opacity-40 disabled:grayscale text-white text-xs font-black uppercase tracking-widest rounded-xl transition-all duration-300 shadow-lg shadow-purple-900/20 active:scale-[0.98]"
+                                                                                                    >
+                                                                                                        Cast This Spell
+                                                                                                    </button>
+                                                                                                    {(() => {
+                                                                                                        const dice = extractDice(details?.desc_tr || details?.desc);
+                                                                                                        if (!dice) return null;
+                                                                                                        return (
+                                                                                                            <button 
+                                                                                                                onClick={() => handleRoll(spellName, dice, 'Büyü')}
+                                                                                                                className="px-6 py-3 bg-gray-800 hover:bg-gray-700 text-purple-400 border border-purple-500/20 rounded-xl font-black text-xs transition-all duration-300 active:scale-[0.98]"
+                                                                                                            >
+                                                                                                                🎲 Roll
+                                                                                                            </button>
+                                                                                                        );
+                                                                                                    })()}
+                                                                                                </div>
+                                                                                            ) : (
+                                                                                                <div className="bg-gray-900/60 backdrop-blur-md border border-purple-500/30 p-4 rounded-2xl space-y-4 animate-in zoom-in-95 duration-200">
+                                                                                                    {isConc && concentrationSpell && concentrationSpell !== spellName && (
+                                                                                                        <div className="bg-yellow-900/20 border border-yellow-500/30 px-3 py-2 rounded-xl flex items-center gap-2">
+                                                                                                            <span className="text-sm">⚠️</span>
+                                                                                                            <p className="text-yellow-400 text-[10px] font-bold uppercase tracking-tight">Warning: <strong>{String(concentrationSpell)}</strong> will end!</p>
+                                                                                                        </div>
+                                                                                                    )}
+
+                                                                                                    {details?.level_int > 0 ? (
+                                                                                                        <div className="space-y-3">
+                                                                                                            <p className="text-purple-400/60 text-[10px] font-black uppercase tracking-widest text-center">Select Slot Level</p>
+                                                                                                            <div className="flex gap-2 flex-wrap justify-center">
+                                                                                                                {slotTotals.map((total, idx) => {
+                                                                                                                    if (total === 0) return null;
+                                                                                                                    const slotLv = idx + 1;
+                                                                                                                    if (slotLv < details.level_int) return null;
+                                                                                                                    const avail = total - (spellSlotsUsed[String(slotLv)] ?? 0);
+                                                                                                                    return (
+                                                                                                                        <button 
+                                                                                                                            key={slotLv}
+                                                                                                                            onClick={() => useSlot(slotLv, spellName, isConc)}
+                                                                                                                            disabled={avail <= 0}
+                                                                                                                            className={`min-w-[50px] py-2.5 rounded-xl text-xs font-black transition-all duration-300 border shadow-sm active:scale-95 ${avail > 0 
+                                                                                                                                ? 'bg-purple-600 border-purple-400 text-white hover:bg-purple-500 shadow-purple-900/20' 
+                                                                                                                                : 'bg-gray-800 border-gray-700 text-gray-600 grayscale cursor-not-allowed opacity-50'
+                                                                                                                            }`}
+                                                                                                                        >
+                                                                                                                            L{slotLv}
+                                                                                                                            <div className="text-[8px] opacity-60">({avail})</div>
+                                                                                                                        </button>
+                                                                                                                    );
+                                                                                                                })}
+                                                                                                                <button 
+                                                                                                                    onClick={() => setCastingSpell(null)}
+                                                                                                                    className="px-4 py-2.5 text-xs font-black text-gray-500 bg-gray-800/50 border border-gray-700 rounded-xl hover:bg-gray-800 transition-colors uppercase tracking-widest"
+                                                                                                                >
+                                                                                                                    Cancel
+                                                                                                                </button>
                 {activeTab === "inventory" && (
                     <div className="max-w-4xl space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
                         {/* ── MONEY CARD ── */}
@@ -2899,21 +3044,18 @@ const PlayerSheet = () => {
                                         <div className="w-24">
                                             <input type="number" min="1" value={newItemQty} onChange={e => setNewItemQty(Number(e.target.value) || 1)} className="w-full bg-gray-800 border-2 border-gray-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-blue-500 transition text-center" />
                                         </div>
-                                        <div className="flex-[2]">
-                                            <input type="text" value={newItemNote} onChange={e => setNewItemNote(e.target.value)} placeholder="Not (Opsiyonel)" className="w-full bg-gray-800 border-2 border-gray-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-blue-500 transition" />
-                                        </div>
-                                        <button onClick={addItem} disabled={!newItemName.trim()} className="bg-blue-600 hover:bg-blue-500 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold rounded-lg px-6 py-2 text-sm transition shrink-0">Ekle</button>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
-                    </div>
-                )}
+                    )}
 
-                {/* ══════════ TAB: STORY ══════════ */}
+    </div>
+    </div>
+    </div>
+    </div>
                 {activeTab === "story" && (
                     <div className="max-w-3xl pb-8 space-y-6">
 
+                    </div>
+                )}
                         {/* Background */}
                         {character.background && (() => {
                             const BG_DESCRIPTIONS: Record<string, { desc_tr: string; features_tr: string[]; skills: string[] }> = {
@@ -3219,8 +3361,8 @@ const PlayerSheet = () => {
                                         <div className="flex flex-col items-end">
                                             <span className="text-xs font-black text-gray-400">LV {stats.level || 1}</span>
                                             <div className="flex gap-1 mt-1">
-                                                {stats.conditions && stats.conditions.map((c: any) => (
-                                                    <span key={typeof c === 'string' ? c : (c.name || JSON.stringify(c))} className="w-2 h-2 rounded-full bg-red-500 shadow-[0_0_5px_rgba(239,68,68,0.5)]" title={typeof c === 'string' ? c : (c.name || 'Condition')}></span>
+                                                {stats.conditions && stats.conditions.map((c: string) => (
+                                                    <span key={c} className="w-2 h-2 rounded-full bg-red-500 shadow-[0_0_5px_rgba(239,68,68,0.5)]" title={c}></span>
                                                 ))}
                                             </div>
                                         </div>
@@ -3289,7 +3431,7 @@ const PlayerSheet = () => {
                                 ].map(cat => (
                                     <button
                                         key={cat.id}
-                                        onClick={() => setGalleryFilter(cat.id as any)}
+                                        onClick={() => setGalleryFilter(cat.id)}
                                         className={`px-4 py-2 rounded-xl text-xs font-black transition-all flex items-center gap-2 ${galleryFilter === cat.id ? 'bg-purple-600 text-white shadow-lg' : 'text-gray-400 hover:bg-gray-700'}`}
                                     >
                                         <span>{cat.icon}</span> {cat.label}
@@ -3860,7 +4002,7 @@ const PlayerSheet = () => {
                                     <label className="block text-xs font-bold text-gray-400 uppercase mb-1">Cantrip to Forget</label>
                                     <select
                                         className="w-full bg-gray-800 border border-gray-700 rounded-xl px-3 py-2 text-white outline-none focus:border-indigo-500"
-                                        value={cantripToReplace}
+                                        value={cantripToReplace || ""}
                                         onChange={e => setCantripToReplace(e.target.value)}
                                     >
                                         <option value="">-- No changes --</option>
@@ -4187,10 +4329,8 @@ const PlayerSheet = () => {
                                 <button onClick={addCustomResource} disabled={!newResourceName.trim()} className="flex-1 py-2 bg-orange-700 hover:bg-orange-600 disabled:opacity-40 text-white font-black rounded-lg transition border border-orange-500 shadow-lg">Add</button>
                             </div>
                         </div>
-                    </div>
-                )
-            }
-            {/* ── SPELL SELECTION MODAL ── */}
+                    )}
+
             {showSpellPicker && (
                 <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[110] flex items-center justify-center p-4 transition-all animate-fade-in" onClick={() => { setShowSpellPicker(false); setSpellSearch(""); setSpellLevelFilter("all"); setSpellSchoolFilter("all"); setSpellTypeFilter("all"); }}>
                     <div className="bg-gray-900 border border-purple-500/30 rounded-3xl w-full max-w-5xl h-[90vh] overflow-hidden flex flex-col shadow-[0_0_50px_rgba(168,85,247,0.15)] animate-in zoom-in-95 duration-200" onClick={e => e.stopPropagation()}>
@@ -4218,7 +4358,7 @@ const PlayerSheet = () => {
                                     <select 
                                         className="bg-gray-950/50 border border-purple-500/20 focus:border-purple-500/60 rounded-2xl px-4 py-3 text-sm text-purple-300 font-bold outline-none transition-all cursor-pointer hover:bg-gray-950"
                                         value={spellLevelFilter}
-                                        onChange={(e) => setSpellLevelFilter(e.target.value === 'all' ? 'all' : Number(e.target.value))}
+                                        onChange={(e) => setSpellLevelFilter(e.target.value as any)}
                                     >
                                         <option value="all">All Levels</option>
                                         <option value="0">Cantrips</option>
@@ -4278,7 +4418,7 @@ const PlayerSheet = () => {
                                 const filteredBySearch = filteredByClass.filter(sp => {
                                     const nameMatch = sp.name.toLowerCase().includes(spellSearch.toLowerCase());
                                     const trMatch = (sp.name_tr || "").toLowerCase().includes(spellSearch.toLowerCase());
-                                    const levelMatch = spellLevelFilter === "all" || (sp.level_int ?? 0) === spellLevelFilter;
+                                    const levelMatch = spellLevelFilter === "all" || String(sp.level_int ?? 0) === spellLevelFilter;
                                     const matchSchool = spellSchoolFilter === "all" || (sp.school || "").toLowerCase() === spellSchoolFilter.toLowerCase();
                                     const tags = getSpellTags(sp);
                                     const matchType = spellTypeFilter === "all" || tags.includes(spellTypeFilter);
@@ -4349,7 +4489,6 @@ const PlayerSheet = () => {
                                             <p className="text-xs text-gray-400 mt-2 font-bold uppercase">Change search term or filters</p>
                                         </div>
                                     );
-                                }
                                 return content;
                             })()}
                         </div>
@@ -4377,7 +4516,239 @@ const PlayerSheet = () => {
                 </div>
             )}
         </div>
+
+        </div>
+                            </div>
+                            <div className="flex gap-3 mt-6">
+                                <button onClick={() => setShowCustomResourceModal(false)} className="flex-1 py-2 bg-gray-800 hover:bg-gray-700 text-gray-400 font-bold rounded-lg transition border border-gray-700">Cancel</button>
+                                <button onClick={addCustomResource} disabled={!newResourceName.trim()} className="flex-1 py-2 bg-orange-700 hover:bg-orange-600 disabled:opacity-40 text-white font-black rounded-lg transition border border-orange-500 shadow-lg">Add</button>
+                            </div>
+                        </div>
+                    )}
+
+            {showSpellPicker && (
+                <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[110] flex items-center justify-center p-4 transition-all animate-fade-in" onClick={() => { setShowSpellPicker(false); setSpellSearch(""); setSpellLevelFilter("all"); setSpellSchoolFilter("all"); setSpellTypeFilter("all"); }}>
+                    <div className="bg-gray-900 border border-purple-500/30 rounded-3xl w-full max-w-5xl h-[90vh] overflow-hidden flex flex-col shadow-[0_0_50px_rgba(168,85,247,0.15)] animate-in zoom-in-95 duration-200" onClick={e => e.stopPropagation()}>
+                        <div className="p-6 border-b border-purple-500/20 bg-gradient-to-r from-purple-900/40 via-blue-900/30 to-purple-900/40 flex flex-col gap-4">
+                            <div className="flex flex-col md:flex-row items-center justify-between gap-4">
+                                <div className="flex items-center gap-4">
+                                    <div className="w-12 h-12 bg-purple-600 rounded-2xl flex items-center justify-center text-2xl shadow-lg shadow-purple-600/20">✨</div>
+                                    <div>
+                                        <h2 className="text-2xl font-black text-white uppercase tracking-wider leading-none">Manage Spells</h2>
+                                        <p className="text-purple-400 text-[10px] font-bold uppercase tracking-[0.2em] mt-1.5 opacity-80">Sync spells for all your classes</p>
+                                    </div>
+                                </div>
+                                
+                                <div className="flex flex-1 max-w-2xl w-full gap-2">
+                                    <div className="relative flex-1 group">
+                                        <span className="absolute left-4 top-1/2 -translate-y-1/2 text-purple-400 group-focus-within:text-purple-300 transition-colors">🔍</span>
+                                        <input 
+                                            type="text" 
+                                            placeholder="Search spells..." 
+                                            value={spellSearch}
+                                            onChange={(e) => setSpellSearch(e.target.value)}
+                                            className="w-full bg-gray-950/50 border border-purple-500/20 focus:border-purple-500/60 rounded-2xl py-3 pl-12 pr-4 text-sm text-white placeholder-purple-900/50 font-bold outline-none transition-all focus:bg-gray-950"
+                                        />
+                                    </div>
+                                    <select 
+                                        className="bg-gray-950/50 border border-purple-500/20 focus:border-purple-500/60 rounded-2xl px-4 py-3 text-sm text-purple-300 font-bold outline-none transition-all cursor-pointer hover:bg-gray-950"
+                                        value={spellLevelFilter}
+                                        onChange={(e) => setSpellLevelFilter(e.target.value as any)}
+                                    >
+                                        <option value="all">All Levels</option>
+                                        <option value="0">Cantrips</option>
+                                        <option value="1">Level 1</option>
+                                        <option value="2">Level 2</option>
+                                        <option value="3">Level 3</option>
+                                        <option value="4">Level 4</option>
+                                        <option value="5">Level 5</option>
+                                        <option value="6">Level 6</option>
+                                        <option value="7">Level 7</option>
+                                        <option value="8">Level 8</option>
+                                        <option value="9">Level 9</option>
+                                    </select>
+                                    <select 
+                                        className="bg-gray-950/50 border border-purple-500/20 focus:border-purple-500/60 rounded-2xl px-4 py-3 text-sm text-purple-300 font-bold outline-none transition-all cursor-pointer hover:bg-gray-950"
+                                        value={spellSchoolFilter}
+                                        onChange={(e) => setSpellSchoolFilter(e.target.value)}
+                                    >
+                                        {SCHOOLS.map(s => <option key={s} value={s}>{s === "all" ? "School: All" : s.charAt(0).toUpperCase() + s.slice(1)}</option>)}
+                                    </select>
+                                </div>
+
+                                <button onClick={() => { setShowSpellPicker(false); setSpellSearch(""); setSpellLevelFilter("all"); setSpellSchoolFilter("all"); setSpellTypeFilter("all"); }} className="w-10 h-10 rounded-xl bg-gray-800 hover:bg-red-600/20 hover:text-red-400 text-gray-400 flex items-center justify-center transition-all border border-gray-700 hover:border-red-500/50">✕</button>
+                            </div>
+
+                            <div className="flex flex-wrap gap-2 w-full max-w-2xl px-4 py-2 bg-black/20 rounded-2xl border border-white/5">
+                                <span className="text-[9px] text-purple-500 font-black uppercase tracking-widest self-center mr-2">Categories:</span>
+                                {SPELL_TYPES.map(type => (
+                                    <button
+                                        key={type}
+                                        onClick={() => setSpellTypeFilter(type)}
+                                        className={`px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest transition-all border ${spellTypeFilter === type
+                                            ? 'bg-purple-600 text-white border-purple-400 shadow-[0_0_15px_rgba(168,85,247,0.3)]'
+                                            : 'bg-gray-800/50 text-gray-400 border-gray-700/50 hover:border-purple-500/50'
+                                            }`}
+                                    >
+                                        {type === 'all' ? 'ALL' : type}
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+                        
+                        <div className="flex-1 overflow-auto p-8 space-y-8 bg-gray-950/20 custom-scrollbar">
+                            {(() => {
+                                if (!character) return null;
+                                const charClasses = [
+                                    character.classRef?.name,
+                                    ...(character.multiclasses || []).map((mc: any) => mc.className)
+                                ].filter(Boolean);
+                                
+                                const filteredByClass = allSpells.filter(sp => {
+                                    if (!sp.classes || !Array.isArray(sp.classes)) return false;
+                                    const normalizedCharClasses = charClasses.map(c => String(c).toLowerCase());
+                                    return sp.classes.some((c: string) => normalizedCharClasses.includes(c.toLowerCase()));
+                                });
+
+                                const filteredBySearch = filteredByClass.filter(sp => {
+                                    const nameMatch = sp.name.toLowerCase().includes(spellSearch.toLowerCase());
+                                    const trMatch = (sp.name_tr || "").toLowerCase().includes(spellSearch.toLowerCase());
+                                    const levelMatch = spellLevelFilter === "all" || String(sp.level_int ?? 0) === spellLevelFilter;
+                                    const matchSchool = spellSchoolFilter === "all" || (sp.school || "").toLowerCase() === spellSchoolFilter.toLowerCase();
+                                    const tags = getSpellTags(sp);
+                                    const matchType = spellTypeFilter === "all" || tags.includes(spellTypeFilter);
+                                    return (nameMatch || trMatch) && levelMatch && matchSchool && matchType;
+                                });
+                                
+                                const grouped: Record<string, any[]> = {};
+                                const levels = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+                                levels.forEach(lv => grouped[lv] = []);
+                                
+                                filteredBySearch.forEach(sp => {
+                                    const lv = sp.level_int ?? 0;
+                                    if (grouped[lv]) grouped[lv].push(sp);
+                                });
+                                
+                                let hasResults = false;
+                                const content = levels.map(lv => {
+                                    if (grouped[lv].length === 0) return null;
+                                    hasResults = true;
+                                    return (
+                                        <div key={lv} className="space-y-4">
+                                            <div className="flex items-center gap-4">
+                                                <h3 className="text-orange-500 font-black text-[10px] uppercase tracking-[0.3em] whitespace-nowrap">
+                                                    {lv === 0 ? "Cantrips" : `Level ${lv} Spells`}
+                                                </h3>
+                                                <div className="h-px bg-gradient-to-r from-orange-500/30 to-transparent flex-1"></div>
+                                            </div>
+                                            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
+                                                {grouped[lv].sort((a: any, b: any) => a.name.localeCompare(b.name)).map((sp: any) => {
+                                                    const isKnown = (character.spells || []).includes(sp.name);
+                                                    return (
+                                                        <button
+                                                            key={sp._id || sp.name}
+                                                            onClick={() => toggleSpell(sp.name)}
+                                                            className={`p-4 rounded-2xl border text-left transition-all duration-300 group relative overflow-hidden ${
+                                                                isKnown 
+                                                                ? 'bg-purple-600/10 border-purple-500 shadow-[0_0_20px_rgba(168,85,247,0.1)]' 
+                                                                : 'bg-gray-800/20 border-gray-700/50 hover:bg-gray-800 hover:border-purple-500/40 hover:scale-[1.02]'
+                                                            }`}
+                                                        >
+                                                            {isKnown && <div className="absolute top-0 right-0 w-16 h-16 bg-purple-500 opacity-5 -mr-8 -mt-8 rotate-45"></div>}
+                                                            <div className="flex items-center justify-between gap-3 relative z-10">
+                                                                <div className="flex flex-col min-w-0">
+                                                                    <span className={`text-xs font-black uppercase tracking-tight truncate ${isKnown ? 'text-purple-300' : 'text-gray-300 group-hover:text-white'}`}>
+                                                                        {sp.name_tr || sp.name}
+                                                                    </span>
+                                                                    {sp.name_tr && <span className="text-[10px] text-gray-500 font-bold truncate opacity-60 italic">{sp.name}</span>}
+                                                                </div>
+                                                                {isKnown ? (
+                                                                    <div className="shrink-0 w-6 h-6 rounded-full bg-purple-500 flex items-center justify-center text-white text-xs shadow-lg shadow-purple-500/40">✓</div>
+                                                                ) : (
+                                                                    <div className="shrink-0 w-6 h-6 rounded-full border-2 border-gray-700 flex items-center justify-center text-gray-500 text-xs transition-colors group-hover:border-purple-500 group-hover:text-purple-400">+</div>
+                                                                )}
+                                                            </div>
+                                                        </button>
+                                                    );
+                                                })}
+                                            </div>
+                                        </div>
+                                    );
+                                });
+
+                                if (!hasResults) {
+                                    return (
+                                        <div className="h-full flex flex-col items-center justify-center py-20 opacity-30">
+                                            <div className="text-8xl mb-6">🔮</div>
+                                            <p className="text-xl font-black uppercase tracking-widest text-center">No spells found</p>
+                                            <p className="text-xs text-gray-400 mt-2 font-bold uppercase">Change search term or filters</p>
+                                        </div>
+                                    );
+                                return content;
+                            })()}
+                        </div>
+                        
+                        <div className="p-8 border-t border-white/5 bg-gray-950 flex flex-col sm:flex-row justify-between items-center gap-6">
+                            <div className="flex items-center gap-4">
+                                <div className="flex flex-col">
+                                    <span className="text-[10px] text-gray-500 font-black uppercase tracking-widest opacity-60">Library Size</span>
+                                    <span className="text-sm font-black text-purple-400">{allSpells.length} Spells</span>
+                                </div>
+                                <div className="w-px h-8 bg-gray-800"></div>
+                                <div className="flex flex-col">
+                                    <span className="text-[10px] text-gray-500 font-black uppercase tracking-widest opacity-60">Selected</span>
+                                    <span className="text-sm font-black text-green-400">{character?.spells?.length || 0} Known</span>
+                                </div>
+                            </div>
+                            <button 
+                                onClick={() => { setShowSpellPicker(false); setSpellSearch(""); setSpellLevelFilter("all"); setSpellSchoolFilter("all"); setSpellTypeFilter("all"); }} 
+                                className="px-12 py-4 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-500 hover:to-blue-500 text-white text-xs font-black uppercase tracking-[0.2em] rounded-2xl transition-all shadow-xl shadow-purple-900/40 hover:scale-[1.05] active:scale-95"
+                            >
+                                Done & Close
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            )}
+        </div>
+    )
     );
 };
 
-export default PlayerSheet;
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    )
+    }
+    }
+    }
+    }
+    }
+    }
+    }
+    }
+    }
+    );
+};
+
