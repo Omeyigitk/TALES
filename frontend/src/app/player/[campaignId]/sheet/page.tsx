@@ -65,7 +65,7 @@ const evalAtk = (str: string, abilityMods: any, prof: number) => {
     // Evaluate the expression safely
     try {
         // Remove any characters that aren't numbers, +, -, *, /, or ( )
-        calc = calc.replace(/[^0-9+\-*/()]/g, '');
+        calc = calc.replace(/[^0-9+\-\*\/()]/g, '');
         // eslint-disable-next-line no-new-func
         return new Function(`return ${calc}`)();
     } catch (e) {
@@ -4210,7 +4210,7 @@ const PlayerSheet = () => {
                                     <select 
                                         className="bg-gray-950/50 border border-purple-500/20 focus:border-purple-500/60 rounded-2xl px-4 py-3 text-sm text-purple-300 font-bold outline-none transition-all cursor-pointer hover:bg-gray-950"
                                         value={spellLevelFilter}
-                                        onChange={(e) => setSpellLevelFilter(e.target.value)}
+                                        onChange={(e) => setSpellLevelFilter(e.target.value === 'all' ? 'all' : Number(e.target.value))}
                                     >
                                         <option value="all">All Levels</option>
                                         <option value="0">Cantrips</option>
