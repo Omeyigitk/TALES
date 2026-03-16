@@ -340,12 +340,17 @@ const PlayerSheet = () => {
                     return;
                 }
                 const res = await axios.get(`${API_URL}/api/characters/${charId}`, { headers: { 'Authorization': `Bearer ${token}` } });
-                setCharacter(res.data);
-                characterRef.current = res.data;
-                setPrivateNotes(res.data.privateNotes || "");
-                setSpellSlotsUsed(res.data.spellSlotsUsed || {});
-                setResourcesUsed(res.data.resourcesUsed || {});
-                setConcentrationSpell(res.data.concentrationSpell || null);
+                const charData = res.data;
+                setCharacter(charData);
+                characterRef.current = charData;
+                setPrivateNotes(charData.privateNotes || "");
+                setSpellSlotsUsed(charData.spellSlotsUsed || {});
+                setResourcesUsed(charData.resourcesUsed || {});
+                setConcentrationSpell(charData.concentrationSpell || null);
+                setCurrentHp(charData.currentHp ?? charData.maxHp ?? 10);
+                setConditions(charData.conditions || []);
+                setHitDiceUsed(charData.hitDiceUsed || 0);
+                setDeathSaves(charData.deathSaves || { successes: 0, failures: 0 });
                 setLoading(false);
             } catch (err) {
                 console.error("Fetch error:", err);
@@ -386,6 +391,9 @@ const PlayerSheet = () => {
             if (data.characterId === character._id || data.characterId === character.name) {
                 setCharacter((prev: any) => {
                     if (!prev) return prev;
+                    if (data.stat === 'currentHp') setCurrentHp(data.value);
+                    if (data.stat === 'conditions') setConditions(data.value);
+                    if (data.stat === 'hitDiceUsed') setHitDiceUsed(data.value);
                     const next = { ...prev, [data.stat]: data.value };
                     characterRef.current = next;
                     return next;
