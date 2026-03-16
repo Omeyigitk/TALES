@@ -4270,7 +4270,7 @@ const PlayerSheet = () => {
                                 const filteredBySearch = filteredByClass.filter(sp => {
                                     const nameMatch = sp.name.toLowerCase().includes(spellSearch.toLowerCase());
                                     const trMatch = (sp.name_tr || "").toLowerCase().includes(spellSearch.toLowerCase());
-                                    const levelMatch = spellLevelFilter === "all" || String(sp.level_int ?? 0) === spellLevelFilter;
+                                    const levelMatch = spellLevelFilter === "all" || (sp.level_int ?? 0) === spellLevelFilter;
                                     const matchSchool = spellSchoolFilter === "all" || (sp.school || "").toLowerCase() === spellSchoolFilter.toLowerCase();
                                     const tags = getSpellTags(sp);
                                     const matchType = spellTypeFilter === "all" || tags.includes(spellTypeFilter);
