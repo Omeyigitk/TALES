@@ -29,6 +29,7 @@ export function useCampaignSocket(campaignId, role, userId, token) {
     const [dmLevelPermission, setDmLevelPermission] = useState(false);
     const [mapData, setMapData] = useState({ bgUrl: '', gridSize: 50, showGrid: true, tokens: [] });
     const [partyGold, setPartyGold] = useState(0);
+    const [partyInventory, setPartyInventory] = useState([]);
     const [fogOfWar, setFogOfWar] = useState([]);
     const [quests, setQuests] = useState([]);
     const [factions, setFactions] = useState([]);
@@ -120,6 +121,7 @@ export function useCampaignSocket(campaignId, role, userId, token) {
         });
 
         s.on("party_gold_updated", (gold) => setPartyGold(gold));
+        s.on("party_inventory_updated", (inv) => setPartyInventory(inv || []));
         s.on("fog_updated", (fog) => setFogOfWar(fog || []));
         s.on("quests_sync", (data) => setQuests(data || []));
         s.on("factions_sync", (data) => setFactions(data || []));
@@ -138,6 +140,7 @@ export function useCampaignSocket(campaignId, role, userId, token) {
             s.off("party_sync");
             s.off("dice_history");
             s.off("party_gold_updated");
+            s.off("party_inventory_updated");
             s.off("fog_updated");
             s.off("quests_sync");
             s.off("factions_sync");
@@ -148,8 +151,7 @@ export function useCampaignSocket(campaignId, role, userId, token) {
     }, [campaignId, role, userId, token]);
 
     return { 
-        encounterStatus, partyStats, diceLogs, whisperData, whisperHistory, 
-        socket, dmLevelPermission, mapData, partyGold, fogOfWar, 
-        quests, factions, sessionNotes 
+        socket, partyStats, encounterStatus, diceLogs, dmLevelPermission, whisperData, whisperHistory,
+        mapData, partyGold, partyInventory, fogOfWar, quests, factions, sessionNotes
     };
 }

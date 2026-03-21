@@ -183,8 +183,20 @@ const allSubclasses = {
 };
 
 classes = classes.map(c => {
-    if (allSubclasses[c.name]) {
-        return { ...c, ...allSubclasses[c.name] };
+    const override = allSubclasses[c.name];
+    if (override) {
+        if (override.subclass_unlock_level !== undefined) {
+            c.subclass_unlock_level = override.subclass_unlock_level;
+        }
+        if (override.subclasses) {
+            if (!c.subclasses) c.subclasses = [];
+            const existingSubclassNames = new Set(c.subclasses.map(s => s.name));
+            override.subclasses.forEach(newS => {
+                if (!existingSubclassNames.has(newS.name)) {
+                    c.subclasses.push(newS);
+                }
+            });
+        }
     }
     return c;
 });

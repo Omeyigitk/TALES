@@ -151,6 +151,61 @@ export function getSpellSlotTotals(className: string, level: number): number[] {
     return [];
 }
 
+const SPELLS_KNOWN: Record<string, number[]> = {
+    Bard: [4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 15, 16, 18, 19, 19, 20, 22, 22, 22],
+    Sorcerer: [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 12, 13, 13, 14, 14, 15, 15, 15, 15],
+    Warlock: [2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15],
+    Ranger: [0, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11],
+};
+
+const CANTRIPS_KNOWN: Record<string, number[]> = {
+    Bard: [2, 2, 2, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4],
+    Cleric: [3, 3, 3, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5],
+    Druid: [2, 2, 2, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4],
+    Sorcerer: [4, 4, 4, 5, 5, 5, 5, 5, 5, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6],
+    Warlock: [2, 2, 2, 3, 3, 3, 3, 3, 3, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4, 4],
+    Wizard: [3, 3, 3, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5, 5],
+    Artificer: [2, 2, 2, 2, 2, 2, 2, 2, 2, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3, 3],
+};
+
+// Wizard starting spellbook is 6, +2 per level
+// Prepared = Level + Mod for Wizard/Cleric/Druid/Paladin/Artificer
+export function getSpellLimits(className: string, level: number, stats?: Record<string, number>) {
+    const lv = Math.min(Math.max(level, 1), 20);
+    const lvIdx = lv - 1;
+
+    const getMod = (stat: string) => {
+        if (!stats) return 0;
+        const val = stats[stat] ?? 10;
+        return Math.floor((val - 10) / 2);
+    };
+    
+    let cantrips = CANTRIPS_KNOWN[className]?.[lvIdx] ?? 0;
+    let spellsTotal = 0; // Total that can be "known" or in "spellbook"
+    let prepared = 0;    // Total that can be "prepared" or "castable" at once
+
+    if (className === 'Wizard') {
+        spellsTotal = 6 + (lv - 1) * 2;
+        prepared = Math.max(1, lv + getMod('INT'));
+    } else if (['Cleric', 'Druid'].includes(className)) {
+        spellsTotal = 999; // Represents "All"
+        prepared = Math.max(1, lv + getMod('WIS'));
+    } else if (className === 'Paladin') {
+        spellsTotal = 999;
+        prepared = Math.max(1, Math.floor(lv / 2) + getMod('CHA'));
+    } else if (className === 'Artificer') {
+        spellsTotal = 999;
+        prepared = Math.max(1, Math.floor(lv / 2) + getMod('INT'));
+    } else {
+        // Known casters (Bard, Sorcerer, Warlock, Ranger)
+        spellsTotal = SPELLS_KNOWN[className]?.[lvIdx] ?? 0;
+        prepared = spellsTotal;
+    }
+
+    return { cantrips, spellsTotal, prepared };
+}
+
+
 export function isSpellcaster(className: string): boolean {
     return ['Wizard', 'Sorcerer', 'Bard', 'Cleric', 'Druid', 'Paladin', 'Ranger', 'Warlock', 'Artificer'].includes(className);
 }

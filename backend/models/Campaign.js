@@ -5,6 +5,7 @@ const campaignSchema = new mongoose.Schema({
     dmId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
     players: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
     partyGold: { type: Number, default: 0 },
+    sharedInventory: [mongoose.Schema.Types.Mixed],
     fogOfWar: [String], // Array of "x,y" coordinates that are HIDDEN
     activeEncounter: {
         isActive: { type: Boolean, default: false },

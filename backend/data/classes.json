@@ -368,6 +368,17 @@
                         "desc_tr": "Artık Rage esnasında Dev ötesi, KOCAMAN (Huge) olursun! Menzilin 10 Feet'e (Kuşatma kulesi gibi) ulaşır, Ayrıca Element silahının bindiği O ekstra hasar (2d6'ya) çıkar."
                     }
                 ]
+            },
+            {
+                "name": "Path of the Battlerager",
+                "description_tr": "Sivri zırh parçaları giyen ve gövde temasıyla düşmanları kanatan Cüce savaşçılar.",
+                "features": [
+                    {
+                        "level": 3,
+                        "name": "Battlerager Armor",
+                        "desc_tr": "Sivri zırh giydiğinde yakın dövüş saldırılarında ek delici hasar verirsin."
+                    }
+                ]
             }
         ]
     },
@@ -2175,6 +2186,17 @@
                         "desc_tr": "Eşsiz Vuruş Zarı!. Silah Vuruş(Gun Atacklarda) Zar Artık ZAR=20 Değilde! 19 Veya 20 Attığında Kritik Hasara Biner. Ayrıca Sen Ne kadar ÇOK KRİTİK Atar O Düşman Parçalarsan Seni Havuzuna(Grit) Cephanesi Bedavadan Eklenir! Çevik Hız Şovu Devam Eder."
                     }
                 ]
+            },
+            {
+                "name": "Purple Dragon Knight (Banneret)",
+                "description_tr": "Liderlik ve ilham yeteneğiyle müttefiklerini destekleyen komutan savaşçılar.",
+                "features": [
+                    {
+                        "level": 3,
+                        "name": "Rallying Cry",
+                        "desc_tr": "Second Wind kullandığında etrafındaki 3 müttefikin de can kazanmasını sağlarsın."
+                    }
+                ]
             }
         ]
     },
@@ -2946,6 +2968,50 @@
                         "desc_tr": "Son Maceraci! Bir aksiyon buutonu ile 1 dakika boyunca mükemmel denizci formuna girersin: Duvarları tırmansın, üzerinde olduğun su üzerinde koşun, ve rakiplerinle mükemmel duello yap (saldırı zarına Cha ekle ve karşı tarafın Opportunity Saldırı hakkını sıfırla)."
                     }
                 ]
+            },
+            {
+                "name": "Oath of Redemption",
+                "description_tr": "Şiddetten kaçınan, her düşmanı ıslah etmeye çalışan ve hasar emerek dostları koruyan şövalyeler.",
+                "features": [
+                    {
+                        "level": 3,
+                        "name": "Rebuke the Violent",
+                        "desc_tr": "Bir müttefikin zarar görmesine tepki olarak saldırgana aynı hasarı yansıtırsın."
+                    }
+                ]
+            },
+            {
+                "name": "Oath of the Watchers",
+                "description_tr": "Uzay-ötesi tehditlere (aberration, celestial, fey, fiend) karşı Mortaller'ı koruyan nöbetçi şövalyeler.",
+                "features": [
+                    {
+                        "level": 3,
+                        "name": "Watcher's Will",
+                        "desc_tr": "Müttefiklerine zihne etki eden büyülere karşı avantaj verirsin."
+                    }
+                ]
+            },
+            {
+                "name": "Oathbreaker",
+                "description_tr": "Andını çiğneyerek karanlığa düşmüş, ölümsüzleri emreden ve nekrotik güç kullanan şövalyeler.",
+                "features": [
+                    {
+                        "level": 3,
+                        "name": "Dreadful Aspect",
+                        "desc_tr": "Karanlık korku aurası yayarak etraftakileri korkutur."
+                    }
+                ]
+            },
+            {
+                "name": "Oath of the Crown",
+                "description_tr": "Medeniyete ve yasasına bağlı, müttefiklerini asla terk etmeyen kahraman şövalyeler.",
+                "features": [
+                    {
+                        "level": 3,
+                        "name": "Champion Challenge",
+                        "desc_tr": "Etrafındaki düşmanları senden uzaklaşmamaya zorlarsın."
+                    }
+                ]
             }
         ]
     },
@@ -3577,6 +3643,50 @@
                         "desc_tr": "Saldırıyı Kaçırdığında Tekrar Odaklan (Kısa Dinlenmede 1 Kez)! Bir Atakta Iskalarsan O SİLAH ATAĞINI KESİNLİKLE AVANTAJLA baştan Yeniden deneme/atma (Reroll) hakkı kazanırsın!"
                     }
                 ]
+            },
+            {
+                "name": "Inquisitive",
+                "description_tr": "Her ayrıntıyı fark eden, yalanı sezebilen ve düşmanı istismar eden dedektif savaşçılar.",
+                "features": [
+                    {
+                        "level": 3,
+                        "name": "Insightful Fighting",
+                        "desc_tr": "Bonus action ile düşmanı analiz edip zırh bağımsız Sneak Attack uygularsın."
+                    }
+                ]
+            },
+            {
+                "name": "Scout",
+                "description_tr": "Ön keşif ve doğada hayatta kalmayı mükemmelleştirmiş, ilk turda yıldırım hızıyla hareket eden izciler.",
+                "features": [
+                    {
+                        "level": 3,
+                        "name": "Skirmisher",
+                        "desc_tr": "Bitişik düşman varken reaksiyon ile 5 ft çekilebilirsin (fırsat saldırısı olmadan)."
+                    }
+                ]
+            },
+            {
+                "name": "Phantom",
+                "description_tr": "Ölümle yakın bağı kullanan, hayaletlerin güçlerine dokunan ölüm hırsızları.",
+                "features": [
+                    {
+                        "level": 3,
+                        "name": "Wails from the Grave",
+                        "desc_tr": "Sneak Attack aynı anda ikinci bir düşmana da nekrotik hasar verir."
+                    }
+                ]
+            },
+            {
+                "name": "Soulknife",
+                "description_tr": "Psiyonik enerjiyle oluşturduğu zihinsel bıçaklarla savaşan psi hırsızları.",
+                "features": [
+                    {
+                        "level": 3,
+                        "name": "Psychic Blades",
+                        "desc_tr": "Maddesel olmayan psiyonik bıçaklar oluşturursun; direnç uygulanamaz."
+                    }
+                ]
             }
         ]
     },
@@ -3899,6 +4009,28 @@
                         "desc_tr": "Öldüğünde veya sıfır HP'ye düştüğünde Yanardağ misali PATLARSIN! 30 feet alanına (4d6 x Sorcerer level) seviyesinde devasa ateş hasarı saçılır (Dex save ile yarım). İşte bu şekilde bile ölürken intikam alırsın."
                     }
                 ]
+            },
+            {
+                "name": "Shadow Magic",
+                "description_tr": "Shadowfell'in karanlığından güç devşiren, gölge köpekleri çağıran sihirbazlar.",
+                "features": [
+                    {
+                        "level": 1,
+                        "name": "Strength of the Grave",
+                        "desc_tr": "HP'n 0'a düşünce Charisma kurtarma atışıyla ayakta kalabilirsin."
+                    }
+                ]
+            },
+            {
+                "name": "Storm Sorcery",
+                "description_tr": "Fırtına ve yıldırımın kudretini soyundan getiren, elektrikli sihirbazlar.",
+                "features": [
+                    {
+                        "level": 1,
+                        "name": "Tempestuous Magic",
+                        "desc_tr": "Büyü attıktan sonra Bonus Action ile 10 ft uçarak hareket edebilirsin."
+                    }
+                ]
             }
         ]
     },
@@ -4138,6 +4270,50 @@
                         "level": 14,
                         "name": "Indestructible Life",
                         "desc_tr": "Cennet'ten gelen HP. Her turun BAŞINDA canın 0 ise veya 0'ın üzerindeyse; Con Modifier + Warlock Seviyesi kadar HP kazanırsın. Bu özellik bazı durumlarda birden fazla kez ölmene rağmen kalkmana neden olabilir."
+                    }
+                ]
+            },
+            {
+                "name": "The Great Old One",
+                "description_tr": "Uzay ötesi, anlaşılmaz varlıklarla pakt yapan psişik ve zihin okuyan büyücüler.",
+                "features": [
+                    {
+                        "level": 1,
+                        "name": "Awakened Mind",
+                        "desc_tr": "30 ft içindeki canlıyla dil engeli olmaksızın telepatik konuşabilirsin."
+                    }
+                ]
+            },
+            {
+                "name": "The Celestial",
+                "description_tr": "Cennet bağlantılı bir varlıkla anlaşan, hem hasar hem iyileştirme yapan ışıklı sihirbazlar.",
+                "features": [
+                    {
+                        "level": 1,
+                        "name": "Healing Light",
+                        "desc_tr": "Bonus action ile can iyileştirebilirsin (1d6 x Warlock seviyesi pool)."
+                    }
+                ]
+            },
+            {
+                "name": "The Fathomless",
+                "description_tr": "Okyanusun derinliklerindeki bilinmez varlıkla pakt yapan derin deniz büyücüleri.",
+                "features": [
+                    {
+                        "level": 1,
+                        "name": "Tentacle of the Deeps",
+                        "desc_tr": "Bonus action ile büyülü tentakel çağırırsın; düşmanları yavaşlatır ve kışkırtır."
+                    }
+                ]
+            },
+            {
+                "name": "The Undead",
+                "description_tr": "Lich veya vampir benzeri güçlü ölümsüz bir varlıkla pakt yapan karanlık büyücüler.",
+                "features": [
+                    {
+                        "level": 1,
+                        "name": "Form of Dread",
+                        "desc_tr": "Ölüm görünümüne bürünerek geçici can, Fright bağışıklığı ve düşman korkutma kazanırsın."
                     }
                 ]
             }
@@ -4605,6 +4781,28 @@
                         "level": 14,
                         "name": "Convergent Future",
                         "desc_tr": "Artık Reaksiyon vererek sadece zar tekrarlama yapmazsın: KADERİ BELİRLERSİN, Attığı Zarı GÖRMEZDEN GELİR Ve O Zarın Ya Başarılı Ya DA Mecburen Fail (BAŞARISIZ OLMASINI) Söylersin. Ancak bu eylem Senin BEDENİNEGeri teper Ve Sana 1 Yorgunluk Zarı (Exhaustion leveli Ekler)."
+                    }
+                ]
+            },
+            {
+                "name": "War Magic",
+                "description_tr": "Savunma ve saldırıyı eş zamanlı yürüten, büyü-zırh uyumunda mükemmelleşmiş savaş büyücüleri.",
+                "features": [
+                    {
+                        "level": 2,
+                        "name": "Arcane Deflection",
+                        "desc_tr": "Saldırı veya kurtarma atışı için reaksiyon olarak +2/+4 bonus kazanırsın."
+                    }
+                ]
+            },
+            {
+                "name": "Graviturgy Magic",
+                "description_tr": "Yerçekimini manipüle ederek düşmanları iter, çeker veya ağırlaştıran Exandria büyücüleri.",
+                "features": [
+                    {
+                        "level": 2,
+                        "name": "Adjust Density",
+                        "desc_tr": "Bir nesneyi ağırlaştırıp yavaşlatırsın ya da hafifleştirip yükseltirsin."
                     }
                 ]
             }

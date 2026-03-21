@@ -19,6 +19,7 @@ const characterSchema = new mongoose.Schema({
     },
     maxHp: Number,
     currentHp: Number,
+    tempHp: { type: Number, default: 0 },
     ac: Number,
     spells: [String],
     pinnedSpells: [String],
@@ -43,8 +44,10 @@ const characterSchema = new mongoose.Schema({
     relationship: { type: String, default: "Nötr" }, // Dost | Nötr | Düşman
     companions: [{
         name: String,
+        level: Number,
         hp: Number,
         maxHp: Number,
+        tempHp: { type: Number, default: 0 },
         ac: Number,
         type: String,
         note: String

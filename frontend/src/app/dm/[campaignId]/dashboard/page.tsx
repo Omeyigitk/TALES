@@ -34,8 +34,15 @@ export default function DMDashboard() {
     // Odaya DM rolüyle katıl
     const { 
         partyStats, diceLogs, socket, dmLevelPermission, whisperData, whisperHistory,
-        partyGold, fogOfWar, quests, factions, sessionNotes 
+        partyGold, partyInventory, fogOfWar, quests, factions, sessionNotes, mapData: socketMapData
     } = useCampaignSocket(campaignId, 'DM', 'DM', token);
+    
+    // Sync local mapData with socket mapData on mount/updates
+    useEffect(() => {
+        if (socketMapData && socketMapData.tokens) {
+            setMapData(prev => ({ ...prev, ...socketMapData }));
+        }
+    }, [socketMapData]);
 
     // Toast Notification System
     const [toast, setToast] = useState<{ show: boolean, title: string, message: string, color: string }>({ show: false, title: '', message: '', color: '' });
@@ -104,12 +111,20 @@ export default function DMDashboard() {
     const [isShopPublished, setIsShopPublished] = useState(false);
     const [newShopItem, setNewShopItem] = useState({ name: '', price: 10, note: '' });
 
+    // Party Vault / Shared Inventory States
+    const [newPartyItemName, setNewPartyItemName] = useState("");
+    const [newPartyItemQty, setNewPartyItemQty] = useState(1);
+    const [newPartyItemNote, setNewPartyItemNote] = useState("");
+    const [partyGoldInput, setPartyGoldInput] = useState("");
+
     // DM Level İzni İzleme (UI gösterimi için)
     const [levelPermEnabled, setLevelPermEnabled] = useState(false);
 
     // Edit Character States
     const [isEditCharModalOpen, setIsEditCharModalOpen] = useState(false);
     const [editingCharData, setEditingCharData] = useState<any>(null);
+    const [selectedPlayerToGift, setSelectedPlayerToGift] = useState<string | null>(null);
+    const [openConditionPickerId, setOpenConditionPickerId] = useState<string | null>(null);
 
     // NPC Sheet View State
     const [viewingNpcSheetData, setViewingNpcSheetData] = useState<any>(null);
@@ -522,10 +537,15 @@ export default function DMDashboard() {
         }
     };
 
-    const toggleShopPublish = (publish: boolean) => {
+    const toggleShopPublish = (publish: boolean, targetPlayerId: string = 'all') => {
         if (!socket) return;
         setIsShopPublished(publish);
-        socket.emit('publish_shop', { campaignId, shopItems: publish ? shopItems : [], isPublished: publish });
+        socket.emit('publish_shop', { campaignId, targetPlayerId, shopItems: publish ? shopItems : [], isPublished: publish });
+        if (publish) {
+            showToast("Dükkan Gönderildi", targetPlayerId === 'all' ? "Tüm oyunculara dükkan gönderildi." : "Dükkan seçili oyuncuya gönderildi.", "bg-orange-900 border-orange-500 text-orange-100");
+        } else {
+            showToast("Dükkan Kapandı", "Tüm oyuncularda dükkan kapatıldı.", "bg-gray-800 text-gray-300");
+        }
     };
 
     // Karakter Düzenleme (Edit) Fonksiyonları
@@ -573,6 +593,56 @@ export default function DMDashboard() {
             alert("Karakter veri tabanına kaydedilemedi!");
         }
     };
+
+    const addPartyItem = () => {
+        if (!newPartyItemName.trim()) return;
+        const inv: any[] = [...((partyInventory as any[]) || [])];
+        const searchName = newPartyItemName.trim().toLowerCase();
+        const existingIdx = inv.findIndex((i: any) => i.name.toLowerCase() === searchName);
+        
+        if (existingIdx >= 0) {
+            inv[existingIdx] = { ...inv[existingIdx], qty: (inv[existingIdx].qty || 1) + (newPartyItemQty || 1) };
+        } else {
+            inv.push({ name: newPartyItemName.trim(), qty: newPartyItemQty || 1, note: newPartyItemNote });
+        }
+        if (socket) (socket as any).emit('update_party_inventory', { campaignId, inventory: inv });
+        setNewPartyItemName("");
+        setNewPartyItemQty(1);
+        setNewPartyItemNote("");
+        showToast('Ortak Kasaya Eklendi', `${newPartyItemName} parti kasasına kondu.`, 'bg-yellow-900 border-yellow-500 text-yellow-100');
+    };
+
+    const updatePartyItemQty = (index: number, delta: number) => {
+        if (!socket) return;
+        const inv: any[] = [...((partyInventory as any[]) || [])];
+        const item = inv[index];
+        const newQty = Math.max(0, (item.qty || 1) + delta);
+        if (newQty <= 0) inv.splice(index, 1);
+        else inv[index] = { ...item, qty: newQty };
+        (socket as any).emit('update_party_inventory', { campaignId, inventory: inv });
+    };
+
+    const removePartyItem = (index: number) => {
+        if (!socket) return;
+        const inv: any[] = [...((partyInventory as any[]) || [])];
+        inv.splice(index, 1);
+        (socket as any).emit('update_party_inventory', { campaignId, inventory: inv });
+        showToast('Ortak Kasadan Çıkarıldı', `Eşya kasadan silindi.`, 'bg-gray-800 border-gray-500 text-gray-300');
+    };
+
+    const handleUpdatePartyGold = (delta: 'add' | 'sub' | 'set') => {
+        if (!socket) return;
+        let amount = parseInt(partyGoldInput);
+        if (isNaN(amount)) return;
+        let newGold = partyGold || 0;
+        if (delta === 'add') newGold += amount;
+        else if (delta === 'sub') newGold = Math.max(0, newGold - amount);
+        else if (delta === 'set') newGold = Math.max(0, amount);
+        (socket as any).emit('update_party_gold', { campaignId, gold: newGold });
+        setPartyGoldInput("");
+        showToast('Altın Güncellendi', `Parti altını şu an: ${newGold} GP`, 'bg-yellow-900 border-yellow-500 text-yellow-100');
+    };
+
 
     // Arama filtreleme
     const filteredMonsters = (monsters || []).filter(m =>
@@ -643,6 +713,15 @@ export default function DMDashboard() {
                         </button>
                         <button onClick={() => setIsMapOpen(true)} className="flex items-center gap-2 bg-gray-800/60 hover:bg-red-900/40 text-gray-200 hover:text-red-400 text-sm font-bold py-2 px-4 rounded-xl border border-gray-700/50 hover:border-red-500/50 transition-all shadow-sm">
                             🗺️ <span className="hidden xl:inline">Stratejik Harita</span>
+                        </button>
+                        <button onClick={() => setIsQuestMenuOpen(true)} className="flex items-center gap-2 bg-gray-800/60 hover:bg-emerald-900/40 text-gray-200 hover:text-emerald-400 text-sm font-bold py-2 px-4 rounded-xl border border-gray-700/50 hover:border-emerald-500/50 transition-all shadow-sm">
+                            📜 <span className="hidden xl:inline">Görev Takibi</span> {quests?.length > 0 && <span className="bg-emerald-600/50 border border-emerald-500/30 text-emerald-100 text-[10px] px-1.5 py-0.5 rounded-full">{quests.length}</span>}
+                        </button>
+                        <button onClick={() => setIsFactionMenuOpen(true)} className="flex items-center gap-2 bg-gray-800/60 hover:bg-indigo-900/40 text-gray-200 hover:text-indigo-400 text-sm font-bold py-2 px-4 rounded-xl border border-gray-700/50 hover:border-indigo-500/50 transition-all shadow-sm">
+                            🚩 <span className="hidden xl:inline">Fraksiyonlar</span>
+                        </button>
+                        <button onClick={() => setIsSessionNoteMenuOpen(true)} className="flex items-center gap-2 bg-gray-800/60 hover:bg-amber-900/40 text-gray-200 hover:text-amber-400 text-sm font-bold py-2 px-4 rounded-xl border border-gray-700/50 hover:border-amber-500/50 transition-all shadow-sm">
+                            ✍️ <span className="hidden xl:inline">Oturum Notları</span>
                         </button>
                         <button onClick={() => setIsMonsterBookOpen(true)} className="flex items-center gap-2 bg-gradient-to-r from-purple-900/80 to-purple-800/80 hover:from-purple-800 hover:to-purple-700 text-purple-100 text-sm font-bold py-2 px-5 rounded-xl border border-purple-500/50 shadow-[0_0_15px_rgba(168,85,247,0.3)] transition-all">
                             📖 <span className="hidden lg:inline">Canavar Kitabı</span>
@@ -1547,84 +1626,94 @@ export default function DMDashboard() {
                 {/* ── KARAKTER DÜZENLEME (EDIT STATS) MODALI ── */}
                 {
                     isEditCharModalOpen && editingCharData && (
-                        <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 backdrop-blur-sm animate-fade-in" onClick={() => setIsEditCharModalOpen(false)}>
-                            <div className="bg-gray-900 rounded-2xl border-2 border-gray-600 w-full max-w-lg shadow-[0_0_30px_rgba(0,0,0,0.8)] overflow-hidden" onClick={e => e.stopPropagation()}>
-                                <div className="bg-gray-800 p-4 border-b border-gray-700 flex justify-between items-center">
-                                    <div>
-                                        <h2 className="text-xl font-black text-white px-2 py-0.5 uppercase tracking-wide">
-                                            Oyuncu Düzenle: <span className="text-yellow-400">{editingCharData.name}</span>
+                        <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 backdrop-blur-md animate-fade-in" onClick={() => setIsEditCharModalOpen(false)}>
+                            <div className="bg-gray-900/90 backdrop-blur-2xl rounded-3xl border border-blue-500/30 w-full max-w-2xl shadow-[0_0_50px_rgba(59,130,246,0.15)] overflow-hidden relative" onClick={e => e.stopPropagation()}>
+                                <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl pointer-events-none -mx-20 -my-20"></div>
+                                <div className="bg-gradient-to-r from-gray-800 to-gray-900/80 p-5 border-b border-gray-700/50 flex justify-between items-center relative z-10">
+                                    <div className="flex flex-col">
+                                        <h2 className="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-200 uppercase tracking-widest flex items-center gap-2">
+                                            <span>🪄</span> {editingCharData.name} <span className="text-gray-500 text-sm font-bold tracking-normal">(Oyuncu Düzenle)</span>
                                         </h2>
-                                        <p className="text-xs text-gray-500 font-bold ml-2">Değişiklikler anında karşı tarafa yansıyacaktır.</p>
+                                        <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest mt-1">Değişimler anında karşı tarafa yansır.</p>
                                     </div>
-                                    <button onClick={() => setIsEditCharModalOpen(false)} className="text-gray-400 hover:text-white transition text-3xl font-black">&times;</button>
+                                    <button onClick={() => setIsEditCharModalOpen(false)} className="text-gray-500 hover:text-white transition-colors text-4xl font-light hover:rotate-90 transform duration-300">&times;</button>
                                 </div>
 
-                                <div className="p-6 space-y-6 bg-gray-900/50">
-                                    <div className="grid grid-cols-3 gap-4">
-                                        <div>
-                                            <label className="block text-xs text-gray-400 font-bold uppercase mb-1 drop-shadow-md">Seviye (Level)</label>
+                                <div className="p-6 space-y-8 relative z-10 custom-scrollbar max-h-[75vh] overflow-y-auto">
+                                    {/* CORE STATS GRID */}
+                                    <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                                        <div className="bg-gray-800/60 p-3 rounded-2xl border border-gray-700 hover:border-blue-500/50 transition-colors shadow-inner flex flex-col justify-center items-center group">
+                                            <label className="block text-[10px] text-gray-400 font-black uppercase tracking-widest mb-2 group-hover:text-blue-400 transition-colors">Seviye (Level)</label>
                                             <input type="number" min="1" max="20"
                                                 value={editingCharData.level || 1}
                                                 onChange={(e) => setEditingCharData({ ...editingCharData, level: Number(e.target.value) })}
-                                                className="w-full bg-gray-950 text-white font-bold p-2 rounded border border-gray-600 text-center" />
+                                                className="w-full bg-gray-950/50 text-white font-black text-2xl p-2 rounded-xl text-center outline-none focus:ring-2 focus:ring-blue-500/50 transition-all" />
                                         </div>
-                                        <div>
-                                            <label className="block text-xs text-red-400 font-bold uppercase mb-1 drop-shadow-md">Maksimum HP</label>
+                                        <div className="bg-red-950/20 p-3 rounded-2xl border border-red-900/30 hover:border-red-500/50 transition-colors shadow-inner flex flex-col justify-center items-center group">
+                                            <label className="block text-[10px] text-red-500 font-black uppercase tracking-widest mb-2 group-hover:text-red-400 transition-colors">🔥 Maks HP</label>
                                             <input type="number" min="1"
                                                 value={editingCharData.maxHp || 10}
                                                 onChange={(e) => setEditingCharData({ ...editingCharData, maxHp: Number(e.target.value) })}
-                                                className="w-full bg-red-950/40 text-red-300 font-black p-2 rounded border border-red-700/50 text-center focus:border-red-500 outline-none" />
+                                                className="w-full bg-red-950/40 text-red-300 font-black text-2xl p-2 rounded-xl text-center outline-none focus:ring-2 focus:ring-red-500/50 transition-all placeholder-red-800/50" />
                                         </div>
-                                        <div>
-                                            <label className="block text-xs text-blue-400 font-bold uppercase mb-1 drop-shadow-md">Armor Class</label>
+                                        <div className="bg-blue-950/20 p-3 rounded-2xl border border-blue-900/30 hover:border-blue-500/50 transition-colors shadow-inner flex flex-col justify-center items-center group">
+                                            <label className="block text-[10px] text-blue-500 font-black uppercase tracking-widest mb-2 group-hover:text-blue-400 transition-colors">🛡️ Armor Class</label>
                                             <input type="number" min="1"
                                                 value={editingCharData.ac || 10}
                                                 onChange={(e) => setEditingCharData({ ...editingCharData, ac: Number(e.target.value) })}
-                                                className="w-full bg-blue-950/40 text-blue-300 font-black p-2 rounded border border-blue-700/50 text-center focus:border-blue-500 outline-none" />
+                                                className="w-full bg-blue-950/40 text-blue-300 font-black text-2xl p-2 rounded-xl text-center outline-none focus:ring-2 focus:ring-blue-500/50 transition-all" />
                                         </div>
-                                        <div>
-                                            <label className="block text-xs text-green-400 font-bold uppercase mb-1 drop-shadow-md">Speed (Hız)</label>
+                                        <div className="bg-green-950/20 p-3 rounded-2xl border border-green-900/30 hover:border-green-500/50 transition-colors shadow-inner flex flex-col justify-center items-center group">
+                                            <label className="block text-[10px] text-green-500 font-black uppercase tracking-widest mb-2 group-hover:text-green-400 transition-colors">👟 Speed</label>
                                             <input type="number" min="0" step="5"
                                                 value={editingCharData.speed || 30}
                                                 onChange={(e) => setEditingCharData({ ...editingCharData, speed: Number(e.target.value) })}
-                                                className="w-full bg-green-950/40 text-green-300 font-black p-2 rounded border border-green-700/50 text-center focus:border-green-500 outline-none" />
+                                                className="w-full bg-green-950/40 text-green-300 font-black text-2xl p-2 rounded-xl text-center outline-none focus:ring-2 focus:ring-green-500/50 transition-all" />
                                         </div>
                                     </div>
 
-                                    <div className="border-t border-gray-700 pt-5">
-                                        <h3 className="text-sm font-bold text-gray-400 uppercase tracking-widest mb-3 text-center">Yetenek Skorları (Stats)</h3>
-                                        <div className="grid grid-cols-3 gap-3">
+                                    {/* ABILITY SCORES GRID */}
+                                    <div className="border-t border-gray-700/50 pt-6">
+                                        <h3 className="text-xs font-black text-gray-400 uppercase tracking-widest mb-4 flex items-center justify-center gap-2">
+                                            <span className="w-10 h-px bg-gradient-to-r from-transparent to-gray-600 block"></span>
+                                            Yetenek Skorları (Stats)
+                                            <span className="w-10 h-px bg-gradient-to-l from-transparent to-gray-600 block"></span>
+                                        </h3>
+                                        <div className="grid grid-cols-3 lg:grid-cols-6 gap-3">
                                             {['STR', 'DEX', 'CON', 'INT', 'WIS', 'CHA'].map((stat) => (
-                                                <div key={stat} className="bg-gray-800 p-2 rounded-lg border border-gray-700">
-                                                    <label className="block text-xs text-gray-500 font-black uppercase text-center mb-1">{stat}</label>
+                                                <div key={stat} className="bg-gray-800/80 p-3 rounded-xl border border-gray-700 hover:border-yellow-600/50 hover:bg-gray-800 transition-all shadow-sm flex flex-col items-center group">
+                                                    <label className="block text-[10px] text-gray-500 font-black uppercase text-center mb-1 group-hover:text-yellow-500 transition-colors">{stat}</label>
                                                     <input type="number" min="1" max="30"
                                                         value={editingCharData.stats?.[stat] || 10}
                                                         onChange={(e) => {
                                                             const newStats = { ...editingCharData.stats, [stat]: Number(e.target.value) };
                                                             setEditingCharData({ ...editingCharData, stats: newStats });
                                                         }}
-                                                        className="w-full bg-transparent text-white font-black text-center text-lg outline-none" />
+                                                        className="w-full bg-transparent text-white font-black text-center text-xl outline-none" />
                                                 </div>
                                             ))}
                                         </div>
                                     </div>
 
-                                    <div className="border-t border-gray-700 pt-5">
-                                        <h3 className="text-sm font-bold text-gray-400 uppercase tracking-widest mb-2 flex items-center gap-2">
-                                            <span>👁️</span> DM Özel Notları (Oyuncu Göremez)
+                                    {/* DM NOTES */}
+                                    <div className="border-t border-gray-700/50 pt-6">
+                                        <h3 className="text-[10px] font-black text-gray-400 uppercase tracking-widest mb-3 flex items-center gap-2">
+                                            <span>📝</span> Özel Notlar (Oyuncu Göremez)
                                         </h3>
                                         <textarea
                                             value={editingCharData.dmNotes || ""}
                                             onChange={(e) => setEditingCharData({ ...editingCharData, dmNotes: e.target.value })}
-                                            placeholder="Karakter hakkında sadece senin görebileceğin notlar..."
-                                            className="w-full bg-gray-950 text-gray-300 text-sm p-3 rounded-xl border border-gray-700 h-24 outline-none focus:border-yellow-600 transition-colors resize-none"
+                                            placeholder="Bu karakterin laneti var, aslında hırsız ama saklıyor vb..."
+                                            className="w-full bg-gray-950/60 text-gray-300 text-sm p-4 rounded-2xl border border-gray-700/80 h-28 outline-none focus:border-blue-500/50 transition-colors resize-none shadow-inner"
                                         />
                                     </div>
                                 </div>
 
-                                <div className="bg-gray-800 p-4 border-t border-gray-700 flex justify-end gap-3">
-                                    <button onClick={() => setIsEditCharModalOpen(false)} className="px-5 py-2 rounded-lg text-sm font-bold text-gray-300 hover:text-white hover:bg-gray-700 transition">İptal</button>
-                                    <button onClick={saveEditedChar} className="px-5 py-2 rounded-lg text-sm font-black bg-blue-600 text-white hover:bg-blue-500 transition shadow-md shadow-blue-500/20">Kaydet ve Uygula</button>
+                                <div className="bg-gradient-to-r from-gray-900 to-gray-800 p-5 border-t border-gray-700/50 flex flex-col-reverse md:flex-row justify-end gap-3 relative z-10">
+                                    <button onClick={() => setIsEditCharModalOpen(false)} className="px-6 py-2.5 rounded-xl text-xs font-black uppercase tracking-widest text-gray-400 hover:text-white hover:bg-gray-800/80 border border-transparent hover:border-gray-600 transition-all">İptal</button>
+                                    <button onClick={saveEditedChar} className="px-8 py-2.5 rounded-xl text-xs font-black uppercase tracking-widest bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-500 hover:to-blue-400 text-white transition-all shadow-lg shadow-blue-900/40 border border-blue-400/30 hover:scale-105 transform">
+                                        🪄 KAYDET VE UYGULA
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -1644,17 +1733,41 @@ export default function DMDashboard() {
                                 </div>
 
                                 {/* Yayınlama Durumu */}
-                                <div className="flex items-center justify-between bg-gray-800/80 p-5 rounded-xl border border-gray-700 mb-6 shadow-inner">
+                                <div className="flex flex-col md:flex-row items-start md:items-center justify-between bg-gray-800/80 p-5 rounded-xl border border-gray-700 mb-6 shadow-inner gap-4">
                                     <div>
-                                        <h3 className="text-white font-bold text-lg">Dükkanı Oyunculara Yayınla</h3>
-                                        <p className="text-sm text-gray-400 mt-1">Açıldığında listedeki eşyalar oyuncuların ekranında satın alınabilir olarak belirir.</p>
+                                        <h3 className="text-white font-bold text-lg">Dükkanı Oyunculara Gönder</h3>
+                                        <p className="text-sm text-gray-400 mt-1">Belirli bir oyuncuya veya herkese eşyaları anında ilet.</p>
                                     </div>
-                                    <button
-                                        onClick={() => toggleShopPublish(!isShopPublished)}
-                                        className={`px-6 py-3 rounded-xl font-black uppercase text-sm transition-all shadow-lg border-2 ${isShopPublished ? 'bg-green-600 border-green-400 text-white hover:bg-green-500 hover:shadow-green-500/20' : 'bg-gray-700 border-gray-600 text-gray-300 hover:bg-gray-600'}`}
-                                    >
-                                        {isShopPublished ? 'YAYINDA ✅' : 'KAPALI ❌'}
-                                    </button>
+                                    <div className="flex flex-col gap-2 w-full md:w-auto">
+                                        <div className="flex flex-wrap gap-2">
+                                            <button
+                                                onClick={() => toggleShopPublish(true, 'all')}
+                                                className="px-4 py-2 bg-gradient-to-r from-orange-600 to-amber-600 hover:from-orange-500 hover:to-amber-500 border border-orange-500 text-white font-black rounded-lg text-xs shadow-[0_0_15px_rgba(249,115,22,0.4)] transition-all active:scale-95 whitespace-nowrap"
+                                            >
+                                                Tüm Partiye Gönder 🌍
+                                            </button>
+                                            <button
+                                                onClick={() => toggleShopPublish(false, 'all')}
+                                                className="px-4 py-2 bg-gray-700 border border-gray-600 hover:bg-gray-600 text-gray-300 font-bold rounded-lg text-xs transition-all active:scale-95 whitespace-nowrap"
+                                            >
+                                                Kapat (Geri Çek) ❌
+                                            </button>
+                                        </div>
+                                        {Object.keys(partyStats).length > 0 && (
+                                            <div className="flex flex-wrap gap-2 mt-2 pt-2 border-t border-gray-700/50">
+                                                <span className="text-[9px] text-gray-500 uppercase font-black w-full tracking-widest">Sadece Bu Oyuncuya Yolla:</span>
+                                                {Object.entries(partyStats).map(([charName, stat]: [string, any]) => (
+                                                    <button
+                                                        key={charName}
+                                                        onClick={() => toggleShopPublish(true, stat.id || charName)}
+                                                        className="px-3 py-1 bg-gray-900 border border-gray-600 hover:border-orange-500 hover:bg-gray-800 text-orange-300 font-bold rounded-md text-[10px] transition-all shadow-sm"
+                                                    >
+                                                        {charName}
+                                                    </button>
+                                                ))}
+                                            </div>
+                                        )}
+                                    </div>
                                 </div>
 
                                 {/* Yeni Eşya Ekleme Formu */}
@@ -1846,45 +1959,58 @@ export default function DMDashboard() {
                                                             🏬 Dükkana Koy
                                                         </button>
                                                     </div>
-                                                    <div className="w-full flex gap-2">
-                                                        <select
-                                                            id="target-player-item-final"
-                                                            className="flex-1 bg-gray-950 border border-gray-700 text-white rounded-xl px-4 py-4 outline-none focus:border-blue-500 font-bold text-sm"
-                                                        >
-                                                            <option value="">Oyuncuya Ver...</option>
-                                                            {Object.values(partyStats || {}).map((ps: any) => (
-                                                                <option key={ps.characterId || ps.id} value={ps.characterId || ps.id}>{ps.name}</option>
-                                                            ))}
-                                                        </select>
+                                                    <div className="w-full mt-2 bg-gray-900/60 p-4 rounded-xl border border-gray-800">
+                                                        <label className="block text-[10px] font-black text-gray-500 uppercase mb-3 flex items-center gap-2">
+                                                            <span className="w-2 h-2 rounded-full bg-blue-500 inline-block animate-pulse"></span> Oyuncuya Doğrudan Gönder
+                                                        </label>
+                                                        <div className="flex flex-wrap gap-2 mb-4">
+                                                            {Object.values(partyStats || {}).map((ps: any) => {
+                                                                const isSelected = selectedPlayerToGift === (ps.characterId || ps.id);
+                                                                return (
+                                                                    <button
+                                                                        key={ps.characterId || ps.id}
+                                                                        onClick={() => setSelectedPlayerToGift(ps.characterId || ps.id)}
+                                                                        className={`px-3 py-1.5 rounded-lg text-[11px] font-black uppercase transition-all shadow-sm border ${isSelected ? 'bg-blue-600 border-blue-400 text-white shadow-blue-900/50 transform scale-105' : 'bg-gray-800 border-gray-700 text-gray-400 hover:bg-gray-700 hover:text-gray-200 hover:border-gray-500'}`}
+                                                                    >
+                                                                        {ps.name}
+                                                                    </button>
+                                                                );
+                                                            })}
+                                                        </div>
                                                         <button
                                                             onClick={async () => {
-                                                                const charId = (document.getElementById('target-player-item-final') as HTMLSelectElement).value;
-                                                                if (!charId) return alert("Oyuncu seçmelisin!");
+                                                                if (!selectedPlayerToGift) return showToast("Hata", "Lütfen bir oyuncu seçin!", "bg-red-900 border-red-500 text-red-100");
 
                                                                 try {
-                                                                    const charRes = await axios.get(`${API_URL}/api/characters/${charId}`);
+                                                                    const charRes = await axios.get(`${API_URL}/api/characters/${selectedPlayerToGift}`);
                                                                     const currentInv = charRes.data.inventory || [];
-                                                                    const newInv = [...currentInv, {
-                                                                        ...selectedItem,
-                                                                        id: `item-${Date.now()}`,
-                                                                        isEquipped: false,
-                                                                        qty: 1
-                                                                    }];
-                                                                    await axios.put(`${API_URL}/api/characters/${charId}`, { inventory: newInv });
-
-                                                                    if (socket) {
-                                                                        socket.emit('update_character_stat', { campaignId, characterId: charId, stat: 'inventory', value: newInv });
+                                                                    const newItem = { ...selectedItem, id: `item-${Date.now()}`, isEquipped: false, qty: 1 };
+                                                                    
+                                                                    let updatedInv = [...currentInv];
+                                                                    const existIdx = updatedInv.findIndex((i: any) => i.name?.toLowerCase() === newItem.name?.toLowerCase());
+                                                                    if (existIdx >= 0) {
+                                                                        updatedInv[existIdx] = { ...updatedInv[existIdx], qty: (updatedInv[existIdx].qty || 1) + 1 };
+                                                                    } else {
+                                                                        updatedInv.push(newItem);
                                                                     }
 
-                                                                    showToast("Eşya Verildi", `${selectedItem.name_tr || selectedItem.name}, oyuncunun envanterine uçtu!`, "bg-green-900 border-green-500 text-green-100");
+                                                                    await axios.put(`${API_URL}/api/characters/${selectedPlayerToGift}`, { inventory: updatedInv });
+
+                                                                    if (socket) {
+                                                                        socket.emit('update_character_stat', { campaignId, characterId: selectedPlayerToGift, stat: 'inventory', value: updatedInv });
+                                                                    }
+
+                                                                    showToast("Eşya Işınlandı!", `${selectedItem.name_tr || selectedItem.name}, oyuncunun envanterine uçtu!`, "bg-green-900 border-green-500 text-green-100");
+                                                                    setSelectedPlayerToGift(null);
                                                                 } catch (err) {
                                                                     console.error(err);
-                                                                    alert("Eşya verilemedi.");
+                                                                    showToast("Hata", "Eşya verilemedi.", "bg-red-900 border-red-500 text-red-100");
                                                                 }
                                                             }}
-                                                            className="bg-blue-600 hover:bg-blue-500 text-white font-black px-8 rounded-xl transition-all shadow-lg"
+                                                            disabled={!selectedPlayerToGift}
+                                                            className="w-full bg-gradient-to-r from-blue-700 to-blue-500 hover:from-blue-600 hover:to-blue-400 disabled:from-gray-800 disabled:to-gray-800 text-white disabled:text-gray-600 font-black px-8 py-3 rounded-xl transition-all shadow-lg hover:shadow-blue-900/40 uppercase tracking-widest text-xs disabled:cursor-not-allowed"
                                                         >
-                                                            GÖNDER
+                                                            🔥 GÖNDER
                                                         </button>
                                                     </div>
                                                 </div>
@@ -1977,29 +2103,113 @@ export default function DMDashboard() {
                                                         </div>
                                                     )}
 
-                                                    <div className="flex flex-wrap gap-2 pt-2 border-t border-gray-700/50">
-                                                        <select
-                                                            onChange={(e) => assignCondition(stats.id, charId, e.target.value, stats.conditions || [])}
-                                                            value=""
-                                                            className="bg-gray-950 text-gray-400 border border-gray-700 rounded-lg text-xs px-3 py-1.5 outline-none hover:border-yellow-500 transition-all cursor-pointer"
+                                                    <div className="flex flex-wrap gap-2 pt-2 border-t border-gray-700/50 relative">
+                                                        <button
+                                                            onClick={() => setOpenConditionPickerId(openConditionPickerId === (stats.id || charId) ? null : (stats.id || charId))}
+                                                            className="bg-gray-800 hover:bg-gray-700 text-gray-300 border border-gray-600 hover:border-yellow-500 rounded-lg text-xs px-3 py-1 font-bold transition-all shadow-sm"
                                                         >
-                                                            <option value="" disabled>+ Durum Ekle</option>
-                                                            {['Kör', 'Büyülenmiş', 'Sağır', 'Korkmuş', 'Görünmez', 'Yerde', 'Zehirli', 'Baygın', 'Taşlaşmış', 'Kısıtlı', 'Paralize', 'Engellenmiş', 'Şaşırmış', 'Bitkinlik 1', 'Bitkinlik 2', 'Bitkinlik 3', 'Bitkinlik 4', 'Bitkinlik 5'].map(c => (
-                                                                <option key={c} value={c}>{c}</option>
-                                                            ))}
-                                                        </select>
+                                                            + Durum
+                                                        </button>
+                                                        
+                                                        {openConditionPickerId === (stats.id || charId) && (
+                                                            <div className="absolute top-10 left-0 bg-gray-900/95 backdrop-blur-xl border border-gray-600 rounded-xl p-3 shadow-2xl z-50 w-64 md:w-80 custom-scrollbar max-h-48 overflow-y-auto">
+                                                                <div className="text-[10px] text-gray-400 font-bold uppercase tracking-widest mb-2 px-1 border-b border-gray-700 pb-1">Uygulanacak Durumu Seç</div>
+                                                                <div className="flex flex-wrap gap-1.5">
+                                                                    {['Kör', 'Büyülenmiş', 'Sağır', 'Korkmuş', 'Görünmez', 'Yerde', 'Zehirli', 'Baygın', 'Taşlaşmış', 'Kısıtlı', 'Paralize', 'Engellenmiş', 'Şaşırmış', 'Bitkinlik 1', 'Bitkinlik 2', 'Bitkinlik 3', 'Bitkinlik 4', 'Bitkinlik 5'].map(c => (
+                                                                        <button
+                                                                            key={c}
+                                                                            onClick={() => {
+                                                                                assignCondition(stats.id, charId, c, stats.conditions || []);
+                                                                                setOpenConditionPickerId(null);
+                                                                            }}
+                                                                            className="bg-gray-800 hover:bg-blue-600 text-gray-300 hover:text-white border border-gray-700 px-2 py-1 rounded text-[10px] font-black uppercase tracking-wider transition-all"
+                                                                        >
+                                                                            {c}
+                                                                        </button>
+                                                                    ))}
+                                                                </div>
+                                                            </div>
+                                                        )}
+
                                                         {stats.conditions && stats.conditions.map((c: string) => (
                                                             <span key={c}
                                                                 onClick={() => assignCondition(stats.id, charId, c, stats.conditions)}
-                                                                className="text-[10px] bg-red-900/40 text-red-300 px-2 py-1 rounded-lg border border-red-700/50 font-black uppercase tracking-widest cursor-pointer hover:bg-red-800 transition shadow-sm"
+                                                                className="text-[10px] bg-red-900/40 text-red-300 px-2.5 py-1 rounded-lg border border-red-700/50 font-black uppercase tracking-widest cursor-pointer hover:bg-red-800 hover:text-white transition shadow-sm animate-pulse flex items-center gap-1"
+                                                                title="Silmek için tıkla"
                                                             >
-                                                                ⚠️ {c}
+                                                                <span className="opacity-70 text-sm">⚠️</span> {c}
                                                             </span>
                                                         ))}
                                                     </div>
                                                 </div>
                                             );
                                         })}
+                                    </div>
+
+                                    {/* DM PARTY VAULT DELEGATION PANEL */}
+                                    <div className="mt-8 border-t border-gray-700/50 pt-8 grid grid-cols-1 lg:grid-cols-3 gap-6 animate-fade-in">
+                                        
+                                        {/* Ortak Kasa Yönetimi (Sol 2 sütun) */}
+                                        <div className="lg:col-span-2 bg-gray-900/50 rounded-2xl border border-yellow-700/30 overflow-hidden shadow-inner flex flex-col">
+                                            <div className="bg-gradient-to-r from-yellow-900/40 to-transparent p-4 border-b border-yellow-700/30 flex justify-between items-center relative overflow-hidden">
+                                                <div className="absolute top-0 right-0 w-32 h-32 bg-yellow-500/10 rounded-full blur-xl -mr-10 -mt-10 pointer-events-none"></div>
+                                                <h3 className="text-yellow-500 font-black uppercase tracking-widest flex items-center gap-2 relative z-10">
+                                                    🎒 Ortak Kasa (Party Vault)
+                                                </h3>
+                                            </div>
+                                            <div className="p-4 flex-1 overflow-y-auto max-h-64 custom-scrollbar">
+                                                {partyInventory?.length > 0 ? (
+                                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                                                        {partyInventory.map((item: any, idx: number) => (
+                                                            <div key={idx} className="bg-gray-800/80 border border-gray-700 hover:border-yellow-700/50 rounded-xl p-3 flex flex-col transition-all group shadow-sm">
+                                                                <div className="flex justify-between items-start mb-2">
+                                                                    <div className="flex items-center gap-2">
+                                                                        <div className="flex items-center bg-gray-900 rounded border border-gray-700 overflow-hidden shrink-0 shadow-inner">
+                                                                            <button onClick={() => updatePartyItemQty(idx, -1)} className="text-red-400 hover:bg-gray-700 px-2.5 py-1 text-sm font-black transition">-</button>
+                                                                            <span className="font-black text-xs text-yellow-300 w-6 text-center">{item.qty || 1}</span>
+                                                                            <button onClick={() => updatePartyItemQty(idx, 1)} className="text-green-400 hover:bg-gray-700 px-2.5 py-1 text-sm font-black transition">+</button>
+                                                                        </div>
+                                                                        <span className="font-bold text-sm text-yellow-100">{item.name}</span>
+                                                                    </div>
+                                                                    <button onClick={() => removePartyItem(idx)} className="text-gray-500 hover:text-red-400 text-xs px-2 py-1 bg-gray-900 rounded opacity-0 group-hover:opacity-100 transition-all shadow-sm">Sil</button>
+                                                                </div>
+                                                                {item.note && <p className="text-gray-400 text-[11px] italic border-l-2 border-yellow-900/50 pl-2 ml-1">{item.note}</p>}
+                                                            </div>
+                                                        ))}
+                                                    </div>
+                                                ) : (
+                                                    <p className="text-yellow-700/40 text-center py-8 italic font-bold text-sm">Kasada hiç eşya yok.</p>
+                                                )}
+                                            </div>
+                                            {/* Yeni Eşya Ekle Formu */}
+                                            <div className="bg-gray-800/80 p-3 border-t border-yellow-700/30 flex flex-nowrap items-center gap-2">
+                                                <input type="text" value={newPartyItemName} onChange={e => setNewPartyItemName(e.target.value)} placeholder="Kasaya Eşya Ekle..." className="flex-1 bg-gray-950 border border-gray-700 rounded-lg px-3 py-1.5 text-xs text-yellow-100 placeholder-gray-600 focus:border-yellow-600/50 outline-none transition-colors" />
+                                                <input type="number" min="1" value={newPartyItemQty} onChange={e => setNewPartyItemQty(Number(e.target.value) || 1)} className="w-16 bg-gray-950 border border-gray-700 rounded-lg px-2 py-1.5 text-xs text-yellow-300 focus:border-yellow-600/50 outline-none text-center font-bold transition-colors" />
+                                                <button onClick={addPartyItem} disabled={!newPartyItemName.trim()} className="bg-yellow-700/80 hover:bg-yellow-600 disabled:opacity-30 border border-yellow-500/50 rounded-lg px-4 py-1.5 text-xs font-black text-yellow-100 transition-colors shadow-lg">GÖNDER</button>
+                                            </div>
+                                        </div>
+
+                                        {/* Ortak Altın Yönetimi (Sağ sütun) */}
+                                        <div className="bg-gradient-to-br from-yellow-950/40 via-gray-900 to-gray-900 rounded-2xl border border-yellow-600/30 p-5 shadow-inner flex flex-col justify-center items-center text-center space-y-4 relative overflow-hidden group">
+                                            <div className="absolute top-0 right-0 w-48 h-48 bg-yellow-500/5 blur-3xl rounded-full pointer-events-none group-hover:bg-yellow-500/10 transition-colors duration-700"></div>
+                                            <div className="relative z-10 w-full">
+                                                <div className="text-yellow-500/80 font-black text-[10px] uppercase tracking-widest mb-1 flex items-center justify-center gap-1">
+                                                    <span>💰</span> Parti Cüzdanı
+                                                </div>
+                                                <div className="text-4xl font-black text-white drop-shadow-md tracking-tighter">
+                                                    {partyGold ? partyGold.toLocaleString() : '0'} <span className="text-yellow-500 text-base opacity-80 tracking-normal inline-block transform -translate-y-1">GP</span>
+                                                </div>
+                                            </div>
+                                            <div className="w-full relative z-10 pt-4 border-t border-yellow-700/20">
+                                                <input type="number" value={partyGoldInput} onChange={e => setPartyGoldInput(e.target.value)} placeholder="Tutar..." className="w-full bg-black/40 border border-yellow-900/50 rounded-lg px-3 py-2 text-center text-sm text-yellow-200 font-bold mb-3 focus:outline-none focus:border-yellow-500/50 transition-colors shadow-inner" />
+                                                <div className="flex gap-2 justify-center w-full">
+                                                    <button onClick={() => handleUpdatePartyGold('sub')} disabled={!partyGoldInput} className="flex-1 bg-gradient-to-t from-red-900/80 to-red-800/60 hover:from-red-800 hover:to-red-700 disabled:opacity-30 border border-red-700/50 rounded-lg py-2 text-[10px] font-black text-red-100 uppercase tracking-widest transition-all shadow-md">Eksilt</button>
+                                                    <button onClick={() => handleUpdatePartyGold('add')} disabled={!partyGoldInput} className="flex-1 bg-gradient-to-t from-green-900/80 to-green-800/60 hover:from-green-800 hover:to-green-700 disabled:opacity-30 border border-green-700/50 rounded-lg py-2 text-[10px] font-black text-green-100 uppercase tracking-widest transition-all shadow-md">Ekle</button>
+                                                </div>
+                                                <button onClick={() => handleUpdatePartyGold('set')} disabled={!partyGoldInput} className="w-full mt-2 bg-yellow-900/20 hover:bg-yellow-900/40 disabled:opacity-30 border border-yellow-700/30 hover:border-yellow-600/50 rounded-lg py-1.5 text-[10px] font-bold text-yellow-400 uppercase tracking-widest transition-all">Net Eşitle</button>
+                                            </div>
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -2082,35 +2292,57 @@ export default function DMDashboard() {
                                 </div>
 
                                 <div className="flex flex-wrap items-center gap-8 relative z-10 border-t border-slate-800/40 pt-6">
-                                    {/* URL Input Group */}
-                                    <div className="flex-1 min-w-[320px] flex gap-3">
-                                        <div className="relative flex-1">
-                                            <div className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500">🖼️</div>
-                                            <input
-                                                type="text"
-                                                placeholder="Harita URL (JPG/PNG)..."
-                                                value={mapData.bgUrl}
-                                                onChange={(e) => {
-                                                    const newMap = { ...mapData, bgUrl: e.target.value };
-                                                    setMapData(newMap);
-                                                    socket?.emit('update_map', { campaignId, mapData: newMap });
-                                                }}
-                                                className="w-full bg-slate-950/60 border border-slate-700/50 rounded-2xl pl-12 pr-5 py-4 text-sm text-blue-100 outline-none focus:border-blue-500/50 transition-all focus:ring-4 focus:ring-blue-500/10 placeholder-slate-600 shadow-inner"
-                                            />
+                                    {/* URL & File Input Group */}
+                                    <div className="flex-1 min-w-[400px] flex flex-col gap-3">
+                                        <div className="flex gap-2">
+                                            <div className="relative flex-1">
+                                                <div className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-500">🖼️</div>
+                                                <input
+                                                    type="text"
+                                                    placeholder="Harita URL (JPG/PNG)..."
+                                                    value={mapData.bgUrl || ''}
+                                                    onChange={(e) => {
+                                                        const newMap = { ...mapData, bgUrl: e.target.value };
+                                                        setMapData(newMap);
+                                                        socket?.emit('update_map', { campaignId, mapData: newMap });
+                                                    }}
+                                                    className="w-full bg-slate-950/60 border border-slate-700/50 rounded-2xl pl-12 pr-5 py-3 text-sm text-blue-100 outline-none focus:border-blue-500/50 transition-all focus:ring-4 focus:ring-blue-500/10 placeholder-slate-600 shadow-inner"
+                                                />
+                                            </div>
+                                            <label className="bg-slate-800 hover:bg-slate-700 border border-slate-600 cursor-pointer rounded-2xl px-6 flex items-center justify-center transition-all shadow-md group">
+                                                <span className="text-xl group-hover:-translate-y-1 transition-transform">📂</span>
+                                                <input type="file" accept="image/*" className="hidden" onChange={(e) => {
+                                                    const file = e.target.files?.[0];
+                                                    if (file) {
+                                                        const reader = new FileReader();
+                                                        reader.onloadend = () => {
+                                                            const newMap = { ...mapData, bgUrl: reader.result as string };
+                                                            setMapData(newMap);
+                                                            socket?.emit('update_map', { campaignId, mapData: newMap });
+                                                            showToast('Harita Yüklendi', 'Cihazdan seçilen harita oyuna aktarıldı.', 'bg-blue-900 border-blue-500 text-white');
+                                                        };
+                                                        reader.readAsDataURL(file);
+                                                    }
+                                                }} />
+                                            </label>
                                         </div>
-                                        <select 
-                                            onChange={(e) => {
-                                                const url = e.target.value;
-                                                if (url) {
-                                                    const newMap = { ...mapData, bgUrl: url };
-                                                    setMapData(newMap);
-                                                    socket?.emit('update_map', { campaignId, mapData: newMap });
-                                                }
-                                            }}
-                                            className="bg-slate-950/60 border border-slate-700/50 rounded-2xl px-4 py-4 text-[10px] text-slate-400 outline-none focus:border-blue-500/50 transition-all font-black uppercase tracking-widest cursor-pointer"
-                                        >
-                                            {MAP_TEMPLATES.map(t => <option key={t.url} value={t.url}>{t.name}</option>)}
-                                        </select>
+                                        
+                                        <div className="flex gap-2 flex-wrap">
+                                            {MAP_TEMPLATES.filter(t => t.url).map(t => (
+                                                <button 
+                                                    key={t.name}
+                                                    onClick={() => {
+                                                        const newMap = { ...mapData, bgUrl: t.url };
+                                                        setMapData(newMap);
+                                                        socket?.emit('update_map', { campaignId, mapData: newMap });
+                                                        showToast('Harita Değişti', `${t.name} haritası başarıyla yüklendi.`, 'bg-green-900 border-green-500 text-white');
+                                                    }}
+                                                    className="bg-slate-900/40 border border-slate-700 hover:border-blue-500/50 hover:bg-slate-800 text-[10px] text-slate-300 px-3 py-1.5 rounded-lg active:scale-95 transition-all uppercase tracking-widest font-black"
+                                                >
+                                                    {t.name}
+                                                </button>
+                                            ))}
+                                        </div>
                                     </div>
 
                                     {/* Visual Toggles & Sliders */}
@@ -2299,16 +2531,33 @@ export default function DMDashboard() {
                                     )}
 
                                     {/* Tokens */}
-                                    {(mapData?.tokens || []).map((token) => (
-                                        token && (
+                                    {(mapData?.tokens || []).map((token) => {
+                                        if (!token) return null;
+                                        const tSizeRaw = token.size || 1;
+                                        const pxSize = tSizeRaw * 56;
+                                        const pxOffset = pxSize / 2;
+                                        
+                                        return (
                                             <div
                                                 key={token.id}
                                                 draggable
                                                 onDragStart={() => setIsDraggingToken(token.id)}
-                                                className="absolute w-14 h-14 rounded-full border-[3px] border-white/90 shadow-[0_15px_35px_rgba(0,0,0,0.7)] flex items-center justify-center text-[11px] font-black cursor-grab active:cursor-grabbing select-none group transition-all hover:scale-110 active:scale-125"
+                                                onWheel={(e) => {
+                                                    e.stopPropagation();
+                                                    e.preventDefault();
+                                                    const deltaSize = e.deltaY > 0 ? -0.25 : 0.25;
+                                                    const newTSize = Math.max(0.5, Math.min(6, tSizeRaw + deltaSize));
+                                                    const newTokens = mapData.tokens.map(t => t && t.id === token.id ? { ...t, size: newTSize } : t);
+                                                    const newMap = { ...mapData, tokens: newTokens };
+                                                    setMapData(newMap);
+                                                    socket?.emit('update_map', { campaignId, mapData: newMap });
+                                                }}
+                                                className="absolute rounded-full border-[3px] border-white/90 shadow-[0_15px_35px_rgba(0,0,0,0.7)] flex items-center justify-center font-black cursor-grab active:cursor-grabbing select-none group transition-all"
                                                 style={{
-                                                    left: (token.x || 0) - 28,
-                                                    top: (token.y || 0) - 28,
+                                                    width: pxSize,
+                                                    height: pxSize,
+                                                    left: (token.x || 0) - pxOffset,
+                                                    top: (token.y || 0) - pxOffset,
                                                     backgroundColor: token.color || '#ef4444',
                                                     boxShadow: `0 0 25px ${token.color || '#ef4444'}66, 0 10px 40px rgba(0,0,0,0.8), inset 0 0 10px rgba(0,0,0,0.3)`,
                                                     zIndex: 50
@@ -2321,9 +2570,28 @@ export default function DMDashboard() {
                                                     {token.name || '??'}
                                                     <div className="absolute bottom-[-4px] left-1/2 -translate-x-1/2 w-2 h-2 bg-slate-950 border-r border-b border-slate-700 rotate-45"></div>
                                                 </div>
-                                                <div className="text-white text-center leading-none uppercase tracking-tighter drop-shadow-2xl z-10 text-xs">
+                                                <div className="text-white text-center leading-none uppercase tracking-tighter drop-shadow-2xl z-10" style={{ fontSize: `${pxSize * 0.3}px`}}>
                                                     {(token.name || '??').substring(0, 2)}
                                                 </div>
+                                                
+                                                {/* Edit Size Buttons */}
+                                                <div className="absolute -bottom-8 left-1/2 -translate-x-1/2 flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity z-20">
+                                                    <button onClick={(e) => {
+                                                        e.stopPropagation();
+                                                        const newTSize = Math.max(0.5, tSizeRaw - 0.25);
+                                                        const newMap = { ...mapData, tokens: mapData.tokens.map(t => t && t.id === token.id ? { ...t, size: newTSize } : t) };
+                                                        setMapData(newMap);
+                                                        socket?.emit('update_map', { campaignId, mapData: newMap });
+                                                    }} className="w-6 h-6 bg-slate-800 hover:bg-slate-700 text-white rounded-full flex items-center justify-center text-xs font-black shadow-lg border border-slate-600 cursor-pointer transition">-</button>
+                                                    <button onClick={(e) => {
+                                                        e.stopPropagation();
+                                                        const newTSize = Math.min(6, tSizeRaw + 0.25);
+                                                        const newMap = { ...mapData, tokens: mapData.tokens.map(t => t && t.id === token.id ? { ...t, size: newTSize } : t) };
+                                                        setMapData(newMap);
+                                                        socket?.emit('update_map', { campaignId, mapData: newMap });
+                                                    }} className="w-6 h-6 bg-slate-800 hover:bg-slate-700 text-white rounded-full flex items-center justify-center text-xs font-black shadow-lg border border-slate-600 cursor-pointer transition">+</button>
+                                                </div>
+
                                                 <button
                                                     onClick={(e) => {
                                                         e.stopPropagation();
@@ -2337,8 +2605,8 @@ export default function DMDashboard() {
                                                     ✕
                                                 </button>
                                             </div>
-                                        )
-                                    ))}
+                                        );
+                                    })}
 
                                     {!mapData.bgUrl && (
                                         <div className="absolute inset-0 flex items-center justify-center text-slate-800 flex-col gap-10 p-20 min-h-[800px] min-w-[1200px]">

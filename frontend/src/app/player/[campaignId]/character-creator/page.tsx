@@ -5,7 +5,7 @@ import axios from "axios";
 import { useParams, useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
 import { ASI_LEVELS, CLASS_FEATURES } from "../levelup_data";
-import { getSpellSlotTotals, isSpellcaster } from "../combat_data";
+import { getSpellSlotTotals, isSpellcaster, getSpellLimits } from "../combat_data";
 import { ALL_FEATS, ALL_METAMAGICS } from "../feats_data";
 import { ALL_BACKGROUNDS } from "../background_data";
 import { getFeatRequirements } from "../../feat_utils";
@@ -427,38 +427,24 @@ export default function CharacterCreator() {
     };
 
     // D&D 5e Buyul Limitleri (sinif + seviyeye gore)
-    const getSpellLimits = () => {
-        const lv = selectedLevel;
-        const intMod = Math.max(0, Math.floor((stats.INT - 10) / 2));
-        const wisMod = Math.max(0, Math.floor((stats.WIS - 10) / 2));
-        const chaMod = Math.max(0, Math.floor((stats.CHA - 10) / 2));
-        const bardKnown = [4, 5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 15, 16, 18, 19, 19, 20, 22, 22, 22];
-        const sorcKnown = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 12, 13, 13, 14, 14, 15, 15, 15, 15];
-        const warlKnown = [2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 11, 11, 12, 12, 13, 13, 14, 14, 15, 15]; // Warlock corrected
-        const rangKnown = [0, 2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 7, 8, 8, 9, 9, 10, 10, 11, 11]; // Ranger corrected
+    const getCharSpellLimits = () => {
+        if (!selectedClass) return { cantrips: 0, spells: 0 };
+        const { cantrips, spellsTotal, prepared } = getSpellLimits(selectedClass.name, selectedLevel, stats);
+        
+        let finalSpells = spellsTotal;
+        // If it's a class that "knows all" (Cleric/Druid/etc), limit them to 'prepared' count for starting loadout
+        if (spellsTotal === 999) finalSpells = prepared;
 
-        let bardSpells = bardKnown[lv - 1];
-        // College of Lore: Additional Magical Secrets at Level 6 (+2 spells)
-        if (selectedClass?.name === "Bard" && selectedSubclass?.name === "College of Lore" && lv >= 6) {
-            bardSpells += 2;
+        // Custom subclass logic (Lore Bard additional secrets)
+        if (selectedClass.name === "Bard" && selectedSubclass?.name === "College of Lore" && selectedLevel >= 6) {
+            finalSpells += 2;
         }
 
-        const limits: Record<string, { cantrips: number, spells: number }> = {
-            Bard: { cantrips: lv < 4 ? 2 : lv < 10 ? 3 : 4, spells: bardSpells },
-            Cleric: { cantrips: lv < 4 ? 3 : lv < 10 ? 4 : 5, spells: Math.max(1, lv + wisMod) },
-            Druid: { cantrips: lv < 4 ? 2 : lv < 10 ? 3 : 4, spells: Math.max(1, lv + wisMod) },
-            Paladin: { cantrips: 0, spells: Math.max(1, Math.floor(lv / 2) + chaMod) },
-            Ranger: { cantrips: 0, spells: rangKnown[lv - 1] },
-            Sorcerer: { cantrips: lv < 4 ? 4 : lv < 10 ? 5 : 6, spells: sorcKnown[lv - 1] },
-            Warlock: { cantrips: lv < 4 ? 2 : lv < 10 ? 3 : 4, spells: warlKnown[lv - 1] },
-            Wizard: { cantrips: lv < 4 ? 3 : lv < 10 ? 4 : 5, spells: Math.max(1, lv + intMod) },
-            Artificer: { cantrips: lv < 4 ? 2 : lv < 10 ? 3 : 4, spells: Math.max(1, Math.floor(lv / 2) + intMod) },
-        };
-        return limits[selectedClass?.name ?? ""] ?? { cantrips: 0, spells: 0 };
+        return { cantrips, spells: finalSpells };
     };
 
     const toggleCantrip = (name: string) => {
-        const { cantrips } = getSpellLimits();
+        const { cantrips } = getCharSpellLimits();
         setSelectedCantrips(prev => {
             if (prev.includes(name)) return prev.filter(s => s !== name);
             if (prev.length >= cantrips) return prev; // limit doldu
@@ -467,7 +453,7 @@ export default function CharacterCreator() {
     };
 
     const toggleLeveledSpell = (name: string) => {
-        const { spells } = getSpellLimits();
+        const { spells } = getCharSpellLimits();
         setSelectedLeveledSpells(prev => {
             if (prev.includes(name)) return prev.filter(s => s !== name);
             if (prev.length >= spells) return prev; // limit doldu
@@ -1844,7 +1830,7 @@ export default function CharacterCreator() {
 
                 {/* Step 5: Buyul Secimi - yeniden tasarlandi */}
                 {step === 5 && (() => {
-                    const limits = getSpellLimits();
+                    const limits = getCharSpellLimits();
                     const isSpellcaster = SPELLCASTING_CLASSES.includes(selectedClass?.name ?? "");
                     const cantrips = availableSpells.filter(s => s.level_int === 0);
                     const leveled = availableSpells.filter(s => s.level_int > 0);

@@ -11,7 +11,7 @@ import { ALL_BACKGROUNDS } from "../background_data";
 import { getFeatRequirements } from "../../feat_utils";
 import { FeatSpellSelectionArea, FeatStatSelectionArea, FeatChoiceSelectionArea } from "../../FeatComponents";
 // SINIFLARA GÖRE BAŞLANGIÇ EKİPMANLARI (CLASS_EQUIPMENT)
-import { getSpellSlotTotals, isSpellcaster, getMulticlassSpellSlots, CLASS_ATTACKS, CLASS_RESOURCES, CONCENTRATION_SPELLS } from "../combat_data";
+import { getSpellSlotTotals, isSpellcaster, getMulticlassSpellSlots, CLASS_ATTACKS, CLASS_RESOURCES, CONCENTRATION_SPELLS, getSpellLimits } from "../combat_data";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
 
@@ -142,7 +142,7 @@ const PlayerSheet = () => {
     // Socket Connection
     const { 
         socket, partyStats, diceLogs, dmLevelPermission, whisperData, whisperHistory,
-        partyGold, fogOfWar, quests, factions, sessionNotes 
+        partyGold, partyInventory, fogOfWar, quests, factions, sessionNotes, mapData
     } = useCampaignSocket(campaignId, 'Player', character?.name, token);
 
     // Toast Notification System
@@ -193,6 +193,11 @@ const PlayerSheet = () => {
     const [cantripToReplace, setCantripToReplace] = useState<string>("");
     const [leveledSpellsToReplace, setLeveledSpellsToReplace] = useState<string[]>([]);
     
+    // Party Shared Inventory Add States
+    const [newPartyItemName, setNewPartyItemName] = useState("");
+    const [newPartyItemQty, setNewPartyItemQty] = useState(1);
+    const [newPartyItemNote, setNewPartyItemNote] = useState("");
+    
     // Gallery/Image Viewer State
     const [selectedImage, setSelectedImage] = useState<string | null>(null);
     const [imgZoom, setImgZoom] = useState(1);
@@ -212,10 +217,12 @@ const PlayerSheet = () => {
 
     // Missing Global States
     const [currentHp, setCurrentHp] = useState(character?.currentHp || 0);
+    const [tempHp, setTempHp] = useState(character?.tempHp || 0);
     const [hpInput, setHpInput] = useState("");
     const [conditions, setConditions] = useState<string[]>(character?.conditions || []);
     const [hitDiceUsed, setHitDiceUsed] = useState(character?.hitDiceUsed || 0);
     const [deathSaves, setDeathSaves] = useState(character?.deathSaves || { successes: 0, failures: 0 });
+    const [hideDeathScreen, setHideDeathScreen] = useState(false);
     const [expandedSpell, setExpandedSpell] = useState<string | null>(null);
     const [lvModal, setLvModal] = useState<any>(null);
     const [isLevelingUp, setIsLevelingUp] = useState(false);
@@ -248,7 +255,7 @@ const PlayerSheet = () => {
     const [newItemNote, setNewItemNote] = useState<string>("");
     const [isPanning, setIsPanning] = useState(false);
     const [panStart, setPanStart] = useState({ x: 0, y: 0 });
-    const [mapData, setMapData] = useState<any>(null);
+
     const [mapZoom, setMapZoom] = useState(1);
     const [mapOffset, setMapOffset] = useState({ x: 0, y: 0 });
     const [showHitDiceModal, setShowHitDiceModal] = useState(false);
@@ -348,6 +355,7 @@ const PlayerSheet = () => {
                 setResourcesUsed(charData.resourcesUsed || {});
                 setConcentrationSpell(charData.concentrationSpell || null);
                 setCurrentHp(charData.currentHp ?? charData.maxHp ?? 10);
+                setTempHp(charData.tempHp || 0);
                 setConditions(charData.conditions || []);
                 setHitDiceUsed(charData.hitDiceUsed || 0);
                 setDeathSaves(charData.deathSaves || { successes: 0, failures: 0 });
@@ -392,6 +400,7 @@ const PlayerSheet = () => {
                 setCharacter((prev: any) => {
                     if (!prev) return prev;
                     if (data.stat === 'currentHp') setCurrentHp(data.value);
+                    if (data.stat === 'tempHp') setTempHp(data.value);
                     if (data.stat === 'conditions') setConditions(data.value);
                     if (data.stat === 'hitDiceUsed') setHitDiceUsed(data.value);
                     const next = { ...prev, [data.stat]: data.value };
@@ -402,10 +411,14 @@ const PlayerSheet = () => {
         };
 
         const onShopPublished = (data: any) => {
+            // Dükkan tüm partiye değil sadece belirli bir oyuncuya açıldıysa:
+            if (data.targetPlayerId && data.targetPlayerId !== "all" && data.targetPlayerId !== character._id) {
+                 return; // Bana özel değil, yoksay
+            }
             setShopItems(data.shopItems || []);
             setIsShopPublished(data.isPublished);
             if (data.isPublished) {
-                showToast("Shop Published!", "The DM has updated the available items.", "bg-orange-900 border-orange-500 text-orange-100");
+                showToast("Dükkan Açıldı!", "Karşına yeni eşyalar serildi.", "bg-orange-900 border-orange-500 text-orange-100");
             }
         };
 
@@ -459,11 +472,49 @@ const PlayerSheet = () => {
 
     const updateHp = async (val: number) => {
         if (!character) return;
-        const clamped = Math.max(0, Math.min(character.maxHp || 10, val));
-        setCurrentHp(clamped);
+        
+        let newCurrent = currentHp;
+        let newTemp = tempHp;
+        
+        if (val < currentHp) {
+            // Taking damage
+            let damage = currentHp - val;
+            if (newTemp > 0) {
+                if (newTemp >= damage) {
+                    newTemp -= damage;
+                    damage = 0;
+                } else {
+                    damage -= newTemp;
+                    newTemp = 0;
+                }
+            }
+            newCurrent = Math.max(0, currentHp - damage);
+        } else if (val > currentHp) {
+            // Healing
+            newCurrent = Math.min(character.maxHp || 10, val);
+        } else {
+            return;
+        }
+
+        setCurrentHp(newCurrent);
+        setTempHp(newTemp);
+        
         try {
-            await axios.put(`${API_URL}/api/characters/${character._id}`, { currentHp: clamped }, { headers: { 'Authorization': `Bearer ${token}` } });
-            if (socket) (socket as any).emit('character_stat_updated', { campaignId, characterId: character._id, stat: 'currentHp', value: clamped });
+            await axios.put(`${API_URL}/api/characters/${character._id}`, { currentHp: newCurrent, tempHp: newTemp }, { headers: { 'Authorization': `Bearer ${token}` } });
+            if (socket) {
+                (socket as any).emit('character_stat_updated', { campaignId, characterId: character._id, stat: 'currentHp', value: newCurrent });
+                (socket as any).emit('character_stat_updated', { campaignId, characterId: character._id, stat: 'tempHp', value: newTemp });
+            }
+        } catch (e) { console.error(e); }
+    };
+
+    const setTempHpAction = async (val: number) => {
+        if (!character) return;
+        const newTemp = Math.max(0, val);
+        setTempHp(newTemp);
+        try {
+            await axios.put(`${API_URL}/api/characters/${character._id}`, { tempHp: newTemp }, { headers: { 'Authorization': `Bearer ${token}` } });
+            if (socket) (socket as any).emit('character_stat_updated', { campaignId, characterId: character._id, stat: 'tempHp', value: newTemp });
         } catch (e) { console.error(e); }
     };
 
@@ -495,6 +546,23 @@ const PlayerSheet = () => {
         setDeathSaves(newSaves);
         try {
             await axios.put(`${API_URL}/api/characters/${character._id}`, { deathSaves: newSaves }, { headers: { 'Authorization': `Bearer ${token}` } });
+            if (socket) {
+                (socket as any).emit('update_character_stat', { campaignId, characterId: character._id, stat: 'deathSaves', value: newSaves });
+            }
+
+            // Eğer 3 başarıya ulaştıysa oyuna geri dönebilmesi için stabilize et ve uyandır (Canını 1 yap)
+            if (newSaves.successes >= 3) {
+                setCurrentHp(1);
+                const nextSaves = { successes: 0, failures: 0 };
+                setDeathSaves(nextSaves);
+                await axios.put(`${API_URL}/api/characters/${character._id}`, { currentHp: 1, deathSaves: nextSaves }, { headers: { 'Authorization': `Bearer ${token}` } });
+                if (socket) {
+                    (socket as any).emit('update_character_stat', { campaignId, characterId: character._id, stat: 'currentHp', value: 1 });
+                    (socket as any).emit('update_character_stat', { campaignId, characterId: character._id, stat: 'deathSaves', value: nextSaves });
+                }
+                showToast("Kurtuldun!", "Bir şekilde hayata tutunmayı başardın.", "bg-green-900 border-green-500 text-green-100");
+                setHideDeathScreen(false); // Can geldiği için sıfırlansın
+            }
         } catch (e) { console.error(e); }
     };
 
@@ -568,13 +636,31 @@ const PlayerSheet = () => {
     const addItem = async () => {
         if (!newItemName.trim() || !character) return;
         setIsAddingItem(true);
-        const newItem = { name: newItemName, qty: newItemQty, isEquipped: false };
-        const newInventory = [...(character.inventory || []), newItem];
+        
+        const inv = [...(character.inventory || [])];
+        const searchName = newItemName.trim().toLowerCase();
+        const existingIdx = inv.findIndex((i: any) => i.name.toLowerCase() === searchName);
+        
+        let newInventory;
+        if (existingIdx >= 0) {
+            // Varolan eşyanın adetini artır
+            inv[existingIdx] = { ...inv[existingIdx], qty: (inv[existingIdx].qty || 1) + (newItemQty || 1) };
+            newInventory = inv;
+        } else {
+            // Yeni esya
+            const newItem = { name: newItemName.trim(), qty: newItemQty || 1, isEquipped: false, note: newItemNote };
+            newInventory = [...inv, newItem];
+        }
+
         try {
             const res = await axios.put(`${API_URL}/api/characters/${character._id}`, { inventory: newInventory }, { headers: { 'Authorization': `Bearer ${token}` } });
             setCharacter(res.data);
+            if (socket) {
+                 (socket as any).emit('update_character_stat', { campaignId, characterId: character._id, stat: 'inventory', value: newInventory });
+            }
             setNewItemName("");
             setNewItemQty(1);
+            setNewItemNote("");
             showToast('Eşya Eklendi', `${newItemName} envantere eklendi.`, 'bg-green-900 border-green-500 text-green-100');
         } catch { alert("Eşya eklenemedi."); }
         finally { setIsAddingItem(false); }
@@ -586,7 +672,31 @@ const PlayerSheet = () => {
         try {
             const res = await axios.put(`${API_URL}/api/characters/${character._id}`, { inventory: newInventory }, { headers: { 'Authorization': `Bearer ${token}` } });
             setCharacter(res.data);
+            if (socket) {
+                 (socket as any).emit('update_character_stat', { campaignId, characterId: character._id, stat: 'inventory', value: newInventory });
+            }
         } catch { alert("Eşya silinemedi."); }
+    };
+
+    const updateItemQty = async (index: number, delta: number) => {
+        if (!character) return;
+        const newInventory = [...(character.inventory || [])];
+        const item = newInventory[index];
+        const newQty = Math.max(0, (item.qty || 1) + delta);
+        
+        if (newQty <= 0) {
+            newInventory.splice(index, 1);
+        } else {
+            newInventory[index] = { ...item, qty: newQty };
+        }
+        
+        try {
+            const res = await axios.put(`${API_URL}/api/characters/${character._id}`, { inventory: newInventory }, { headers: { 'Authorization': `Bearer ${token}` } });
+            setCharacter(res.data);
+            if (socket) {
+                 (socket as any).emit('update_character_stat', { campaignId, characterId: character._id, stat: 'inventory', value: newInventory });
+            }
+        } catch { alert("Miktar güncellenemedi."); }
     };
 
     const toggleEquip = async (index: number) => {
@@ -597,6 +707,9 @@ const PlayerSheet = () => {
         try {
             const res = await axios.put(`${API_URL}/api/characters/${character._id}`, { inventory: newInventory }, { headers: { 'Authorization': `Bearer ${token}` } });
             setCharacter(res.data);
+            if (socket) {
+                 (socket as any).emit('update_character_stat', { campaignId, characterId: character._id, stat: 'inventory', value: newInventory });
+            }
             showToast(newInventory[index].isEquipped ? 'Kuşanıldı' : 'Çıkarıldı', `${newInventory[index].name} durumu güncellendi.`, 'bg-blue-900 border-blue-500 text-blue-100');
         } catch { alert("Eşya durumu güncellenemedi."); }
     };
@@ -623,10 +736,103 @@ const PlayerSheet = () => {
         } catch { alert("Kaynak eklenemedi."); }
     };
 
+    const handleBuyItem = async (item: any) => {
+        if (!character) return;
+        const currentGp = character.money?.gp || 0;
+        if (currentGp < item.price) {
+            showToast("Yetersiz Bakiye!", "Bu eşyayı alacak kadar altının yok.", "bg-red-900 border-red-500 text-red-100");
+            return;
+        }
+
+        const confirmMsg = `"${item.name}" eşyasını ${item.price} GP karşılığında satın almak istiyor musun?`;
+        if (!window.confirm(confirmMsg)) return;
+
+        const newMoney = { ...character.money, gp: currentGp - item.price };
+        const inv = [...(character.inventory || [])];
+        const existingIdx = inv.findIndex((i: any) => i.name.toLowerCase() === item.name.toLowerCase());
+        
+        if (existingIdx >= 0) {
+            inv[existingIdx] = { ...inv[existingIdx], qty: (inv[existingIdx].qty || 1) + 1 };
+        } else {
+            inv.push({ name: item.name, qty: 1, isEquipped: false, note: item.note || '' });
+        }
+
+        try {
+            const res = await axios.put(`${API_URL}/api/characters/${character._id}`, { money: newMoney, inventory: inv }, { headers: { 'Authorization': `Bearer ${token}` } });
+            setCharacter(res.data);
+            if (socket) {
+                (socket as any).emit('update_character_stat', { campaignId, characterId: character._id, stat: 'money', value: newMoney });
+                (socket as any).emit('update_character_stat', { campaignId, characterId: character._id, stat: 'inventory', value: inv });
+            }
+            showToast("Satın Alındı!", `1x ${item.name} envantere eklendi. Bakiye: ${newMoney.gp} GP.`, "bg-green-900 border-green-500 text-green-100");
+        } catch {
+            alert("Satın alma başarısız oldu.");
+        }
+    };
+
+    const addPartyItem = () => {
+        if (!newPartyItemName.trim()) return;
+        const inv = [...(partyInventory || [])];
+        const searchName = newPartyItemName.trim().toLowerCase();
+        const existingIdx = inv.findIndex((i: any) => i.name.toLowerCase() === searchName);
+        
+        if (existingIdx >= 0) {
+            inv[existingIdx] = { ...inv[existingIdx], qty: (inv[existingIdx].qty || 1) + (newPartyItemQty || 1) };
+        } else {
+            inv.push({ name: newPartyItemName.trim(), qty: newPartyItemQty || 1, note: newPartyItemNote });
+        }
+        if (socket) (socket as any).emit('update_party_inventory', { campaignId, inventory: inv });
+        setNewPartyItemName("");
+        setNewPartyItemQty(1);
+        setNewPartyItemNote("");
+        showToast('Ortak Kasaya Eklendi', `${newPartyItemName} parti kasasına kondu.`, 'bg-yellow-900 border-yellow-500 text-yellow-100');
+    };
+
+    const updatePartyItemQty = (index: number, delta: number) => {
+        if (!socket) return;
+        const inv = [...(partyInventory || [])];
+        const item = inv[index];
+        const newQty = Math.max(0, (item.qty || 1) + delta);
+        if (newQty <= 0) inv.splice(index, 1);
+        else inv[index] = { ...item, qty: newQty };
+        (socket as any).emit('update_party_inventory', { campaignId, inventory: inv });
+    };
+    
+    const removePartyItem = (index: number) => {
+        if (!socket) return;
+        const inv = [...(partyInventory || [])];
+        inv.splice(index, 1);
+        (socket as any).emit('update_party_inventory', { campaignId, inventory: inv });
+        showToast('Ortak Kasadan Çıkarıldı', `Eşya kasadan alındı.`, 'bg-gray-800 border-gray-500 text-gray-300');
+    };
+
     const toggleSpell = async (spellName: string) => {
         if (!character) return;
         const currentSpells = [...(character.spells || [])];
         const isKnown = currentSpells.includes(spellName);
+        
+        if (!isKnown) {
+            // Apply limits if adding a new spell
+            const { cantrips: cantripLimit, spellsTotal: spellLimit } = getSpellLimits(character.classRef?.name || '', character.level || 1, character.stats);
+            
+            // Need to know the level of the spell we're adding
+            const spellData = allSpells.find(s => s.name === spellName) || spellDetails[spellName];
+            const isCantrip = spellData?.level_int === 0;
+
+            const currentCantrips = currentSpells.filter(s => {
+                const sd = allSpells.find(x => x.name === s) || spellDetails[s];
+                return sd?.level_int === 0;
+            }).length;
+            const currentLeveled = currentSpells.length - currentCantrips;
+
+            if (isCantrip && currentCantrips >= cantripLimit) {
+                return showToast("Cantrip Limit Reached", `You can only know ${cantripLimit} cantrips.`, "bg-orange-900 border-orange-500 text-orange-100");
+            }
+            if (!isCantrip && spellLimit !== 999 && currentLeveled >= spellLimit) {
+                return showToast("Spell Limit Reached", `You can only have ${spellLimit} spells in your list/spellbook.`, "bg-red-900 border-red-500 text-red-100");
+            }
+        }
+
         let newSpells = isKnown ? currentSpells.filter(s => s !== spellName) : [...currentSpells, spellName];
         
         try {
@@ -709,22 +915,46 @@ const PlayerSheet = () => {
     };
 
     const handleShortRest = () => setShowHitDiceModal(true);
-    const handleLongRest = () => setShowLongRestModal(true);
+    
+    const handleLongRest = () => {
+        let wizardLevel = 0;
+        if (character?.classRef?.name === 'Wizard' || character?.className === 'Wizard') {
+            const mcLvTotal = mcs.reduce((acc: number, mc: any) => acc + (mc.level || 1), 0);
+            wizardLevel = (character?.level || 1) - mcLvTotal;
+        }
+        const wizMc = mcs.find((mc: any) => mc.className === 'Wizard' || mc.classRef?.name === 'Wizard');
+        if (wizMc) wizardLevel += (wizMc.level || 1);
 
-    const applyLongRest = async () => {
+        if (wizardLevel >= 3) {
+            setShowLongRestModal(true);
+        } else {
+            // Hızlı Uygulama (Modal Atlanır)
+            applyLongRest(true);
+        }
+    };
+
+    const applyLongRest = async (skipModal = false) => {
         if (!character) return;
         setIsLevelingUp(true);
         try {
             // Restore all HP, half hit dice, all spell slots
             const maxHD = character.level || 1;
             const newHDUsed = Math.max(0, hitDiceUsed - Math.floor(maxHD / 2));
-            const updates = {
+            const updates: any = {
                 currentHp: character.maxHp,
                 spellSlotsUsed: {},
                 resourcesUsed: {},
                 hitDiceUsed: newHDUsed,
                 concentrationSpell: null
             };
+
+            let updatedSpells = [...(character.spells || [])];
+            if (!skipModal && cantripToReplace && newWizardCantrip) {
+                updatedSpells = updatedSpells.filter(s => s !== cantripToReplace);
+                updatedSpells.push(newWizardCantrip);
+                updates.spells = updatedSpells;
+            }
+
             const res = await axios.put(`${API_URL}/api/characters/${character._id}`, updates, { headers: { 'Authorization': `Bearer ${token}` } });
             setCharacter(res.data);
             setCurrentHp(res.data.currentHp);
@@ -732,10 +962,17 @@ const PlayerSheet = () => {
             setResourcesUsed({});
             setHitDiceUsed(newHDUsed);
             setConcentrationSpell(null);
-            setShowLongRestModal(false);
-            showToast("Long Rest Complete ⛺", "All HP, spell slots and resources restored.", "bg-indigo-900 border-indigo-500 text-indigo-100");
+            
+            if (!skipModal) {
+                setShowLongRestModal(false);
+                setCantripToReplace("");
+                setNewWizardCantrip("");
+            }
+            
+            showToast("Uzun Dinlenme Tamamlandı ⛺", "Tüm HP, büyü slotları ve yetenek kullanımları sıfırlandı.", "bg-indigo-900 border-indigo-500 text-indigo-100");
         } catch (e) {
             console.error(e);
+            showToast("Hata", "Dinlenme işlemi başarısız oldu.", "bg-red-900 border-red-500 text-white");
         } finally {
             setIsLevelingUp(false);
         }
@@ -1547,9 +1784,15 @@ const PlayerSheet = () => {
                     </div>
                     {/* REST BUTTONS MOVED TO FAR RIGHT */}
                     <div className="flex items-center gap-2 pl-3 ml-1 border-l border-gray-700">
-                        <div className="flex items-center gap-2 bg-yellow-950/30 border border-yellow-700/50 px-3 py-1.5 rounded-xl">
-                            <span className="text-yellow-500 text-xs font-black uppercase tracking-widest">Parti Altını</span>
-                            <span className="text-white font-black text-lg">{partyGold} <span className="text-yellow-500 text-sm">gp</span></span>
+                        <div className="relative group cursor-default flex items-center gap-3 bg-gradient-to-br from-yellow-900 via-yellow-800 to-yellow-900 border-2 border-yellow-500/50 px-4 py-1.5 rounded-2xl shadow-[0_0_15px_rgba(234,179,8,0.2)] hover:shadow-[0_0_25px_rgba(234,179,8,0.4)] transition-all transform hover:scale-[1.02]">
+                            <div className="absolute inset-0 bg-yellow-400/10 blur-xl rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                            <div className="relative flex items-center justify-center w-8 h-8 rounded-full bg-yellow-400 border-[3px] border-yellow-200 shadow-[inset_0_-2px_4px_rgba(0,0,0,0.4)] shadow-yellow-900/50 transition-transform hover:rotate-12">
+                                <span className="text-yellow-900 font-black text-lg drop-shadow-[0_1px_1px_rgba(255,255,255,0.5)]">🪙</span>
+                            </div>
+                            <div className="relative flex flex-col items-start leading-[1.1] gap-[1px]">
+                                <span className="text-yellow-200 text-[9px] font-black uppercase tracking-widest drop-shadow-sm opacity-90">Ortak Kasa</span>
+                                <span className="text-white font-black text-xl drop-shadow-md tracking-tight leading-none">{partyGold ? partyGold.toLocaleString() : '0'} <span className="text-yellow-400 text-xs opacity-90 tracking-normal font-bold">GP</span></span>
+                            </div>
                         </div>
                         <button onClick={() => setIsWhisperModalOpen(true)} className="px-3 py-2 bg-purple-950/40 hover:bg-purple-900/60 text-purple-300 font-bold rounded-lg text-xs transition border border-purple-700/50 shadow-sm">
                             🤫 DM'e Fısılda
@@ -1602,6 +1845,32 @@ const PlayerSheet = () => {
                                 }
                             }}
                             placeholder="± HP…" className="w-20 px-2 py-1 bg-gray-700 border border-gray-600 rounded text-sm text-white text-center" />
+                        
+                        {/* Temp HP Badge/Box */}
+                        <div className="flex flex-col items-center ml-4 border-l border-gray-700 pl-4">
+                            <span className="text-[10px] text-blue-400 font-black uppercase tracking-widest">🛡️ Temp HP</span>
+                            <div className="flex items-center gap-1 mt-1">
+                                <span className="text-xl font-black text-blue-400 w-8 text-center">{tempHp}</span>
+                                <input 
+                                   type="number" 
+                                   min="0"
+                                   placeholder="+ Ekle"
+                                   className="w-16 px-1 py-1 bg-blue-900/40 border border-blue-700 rounded text-xs text-white text-center outline-none focus:border-blue-400"
+                                   onKeyDown={e => {
+                                        if (e.key === 'Enter') {
+                                            const val = parseInt((e.target as HTMLInputElement).value) || 0;
+                                            if (val > 0) {
+                                                setTempHpAction(val);
+                                                (e.target as HTMLInputElement).value = '';
+                                            }
+                                        }
+                                   }}
+                                />
+                                {tempHp > 0 && (
+                                    <button onClick={() => setTempHpAction(0)} className="w-6 h-6 ml-1 bg-red-900/60 hover:bg-red-700 rounded text-white text-xs font-black transition">X</button>
+                                )}
+                            </div>
+                        </div>
                     </div>
                     {/* Hit Dice */}
                     <div className="flex items-center gap-2 cursor-pointer hover:bg-gray-700 p-1 -m-1 rounded transition" onClick={handleShortRest} title="Kısa Dinlenme (Can Zarı Harca)">
@@ -1705,56 +1974,95 @@ const PlayerSheet = () => {
             </div>
 
             {/* ── DEATH SAVES FULLSCREEN MODAL ── */}
-            {currentHp <= 0 && (
+            {currentHp <= 0 && !hideDeathScreen && (
                 <div className="fixed inset-0 bg-black/90 z-[100] backdrop-blur-md flex items-center justify-center p-4">
-                    <div className="bg-gray-900 border-2 border-red-700/60 rounded-3xl w-full max-w-lg p-8 shadow-[0_0_50px_rgba(185,28,28,0.4)] animate-in fade-in zoom-in duration-300">
-                        <div className="text-center mb-8">
-                            <div className="w-24 h-24 bg-red-900/40 rounded-full flex items-center justify-center text-5xl mx-auto mb-4 border-2 border-red-500/50 shadow-[0_0_20px_rgba(239,68,68,0.3)]">
-                                ☠️
+                    <div className="bg-gray-900 border-2 border-red-700/60 rounded-3xl w-full max-w-lg p-8 shadow-[0_0_50px_rgba(185,28,28,0.4)] animate-in fade-in zoom-in duration-300 relative">
+                        {deathSaves.failures >= 3 ? (
+                            <div className="text-center">
+                                <div className="w-32 h-32 bg-black rounded-full flex items-center justify-center text-7xl mx-auto mb-6 border-4 border-red-900 shadow-[0_0_50px_rgba(255,0,0,0.8)]">
+                                    🪦
+                                </div>
+                                <h2 className="text-5xl font-black text-red-600 uppercase tracking-tighter mb-4 drop-shadow-[0_0_20px_rgba(255,0,0,0.8)]">ÖLDÜN!</h2>
+                                <p className="text-red-400 font-bold text-lg mb-8 italic">
+                                    {
+                                        [
+                                            "Zarlar sana küstü... Toprağın bol olsun.",
+                                            "Bir kahramanın daha hazin sonu... En azından denedin.",
+                                            "Goblinler arkandan çok gülecek.",
+                                            "Işık hüzmesi göründü, gitme vakti geldi.",
+                                            "Grup arkadaşların cesedini lootlamak için sabırsızlanıyor.",
+                                            "Kaderin zarı 1 geldi... Hayata veda et."
+                                        ][(character?.name?.length || 0) % 6] // Seed pseudo-random per character so it doesn't flicker
+                                    }
+                                </p>
+                                <button onClick={() => setHideDeathScreen(true)} className="px-8 py-4 bg-red-900 hover:bg-red-800 border-2 border-red-500 text-white font-black rounded-2xl uppercase tracking-widest transition-all shadow-lg active:scale-95">
+                                    Savaşı İzlemeye Devam Et
+                                </button>
                             </div>
-                            <h2 className="text-4xl font-black text-red-500 uppercase tracking-tighter mb-2">Ölümün Kıyısında!</h2>
-                            <p className="text-gray-400 font-bold">Ölüm Kurtarışları: 10+ Başarılı Olur</p>
-                        </div>
+                        ) : (
+                            <>
+                                <div className="text-center mb-8">
+                                    <div className="w-24 h-24 bg-red-900/40 rounded-full flex items-center justify-center text-5xl mx-auto mb-4 border-2 border-red-500/50 shadow-[0_0_20px_rgba(239,68,68,0.3)]">
+                                        ☠️
+                                    </div>
+                                    <h2 className="text-4xl font-black text-red-500 uppercase tracking-tighter mb-2">Ölümün Kıyısında!</h2>
+                                    <p className="text-gray-400 font-bold">Ölüm Kurtarışları: 10+ Başarılı Olur</p>
+                                </div>
 
-                        <div className="space-y-10">
-                            {/* SUCCESSES */}
-                            <div className="space-y-4">
-                                <div className="flex justify-between items-center px-2">
-                                    <span className="text-green-400 font-black uppercase tracking-widest text-xs">Başarılar (Successes)</span>
-                                    <span className="text-gray-500 font-mono text-xs">{deathSaves.successes} / 3</span>
-                                </div>
-                                <div className="flex justify-center gap-6">
-                                    {[1, 2, 3].map(i => (
-                                        <button key={`s${i}`} onClick={() => updateDeathSaves('successes', deathSaves.successes === i ? i - 1 : i)}
-                                            className={`w-14 h-14 rounded-2xl border-[3px] flex items-center justify-center transition-all duration-300 ${deathSaves.successes >= i ? 'bg-green-500 border-green-400 text-white font-black scale-110 shadow-[0_0_20px_rgba(34,197,94,0.6)]' : 'bg-gray-800 border-gray-700 hover:border-green-600 cursor-pointer hover:bg-gray-700'}`}>
-                                            {deathSaves.successes >= i ? '✓' : ''}
-                                        </button>
-                                    ))}
-                                </div>
-                            </div>
+                                <div className="space-y-10">
+                                    {/* SUCCESSES */}
+                                    <div className="space-y-4">
+                                        <div className="flex justify-between items-center px-2">
+                                            <span className="text-green-400 font-black uppercase tracking-widest text-xs">Başarılar (Successes)</span>
+                                            <span className="text-gray-500 font-mono text-xs">{deathSaves.successes} / 3</span>
+                                        </div>
+                                        <div className="flex justify-center gap-6">
+                                            {[1, 2, 3].map(i => (
+                                                <button key={`s${i}`} onClick={() => updateDeathSaves('successes', deathSaves.successes === i ? i - 1 : i)}
+                                                    className={`w-14 h-14 rounded-2xl border-[3px] flex items-center justify-center transition-all duration-300 ${deathSaves.successes >= i ? 'bg-green-500 border-green-400 text-white font-black scale-110 shadow-[0_0_20px_rgba(34,197,94,0.6)]' : 'bg-gray-800 border-gray-700 hover:border-green-600 cursor-pointer hover:bg-gray-700'}`}>
+                                                    {deathSaves.successes >= i ? '✓' : ''}
+                                                </button>
+                                            ))}
+                                        </div>
+                                    </div>
 
-                            {/* FAILURES */}
-                            <div className="space-y-4">
-                                <div className="flex justify-between items-center px-2">
-                                    <span className="text-red-500 font-black uppercase tracking-widest text-xs">Başarısızlıklar (Failures)</span>
-                                    <span className="text-gray-500 font-mono text-xs">{deathSaves.failures} / 3</span>
+                                    {/* FAILURES */}
+                                    <div className="space-y-4">
+                                        <div className="flex justify-between items-center px-2">
+                                            <span className="text-red-500 font-black uppercase tracking-widest text-xs">Başarısızlıklar (Failures)</span>
+                                            <span className="text-gray-500 font-mono text-xs">{deathSaves.failures} / 3</span>
+                                        </div>
+                                        <div className="flex justify-center gap-6">
+                                            {[1, 2, 3].map(i => (
+                                                <button key={`f${i}`} onClick={() => updateDeathSaves('failures', deathSaves.failures === i ? i - 1 : i)}
+                                                    className={`w-14 h-14 rounded-2xl border-[3px] flex items-center justify-center transition-all duration-300 ${deathSaves.failures >= i ? 'bg-red-600 border-red-500 text-white font-black scale-110 shadow-[0_0_20px_rgba(185,28,28,0.6)]' : 'bg-gray-800 border-gray-700 hover:border-red-600 cursor-pointer hover:bg-gray-700'}`}>
+                                                    {deathSaves.failures >= i ? '✕' : ''}
+                                                </button>
+                                            ))}
+                                        </div>
+                                    </div>
                                 </div>
-                                <div className="flex justify-center gap-6">
-                                    {[1, 2, 3].map(i => (
-                                        <button key={`f${i}`} onClick={() => updateDeathSaves('failures', deathSaves.failures === i ? i - 1 : i)}
-                                            className={`w-14 h-14 rounded-2xl border-[3px] flex items-center justify-center transition-all duration-300 ${deathSaves.failures >= i ? 'bg-red-600 border-red-500 text-white font-black scale-110 shadow-[0_0_20px_rgba(185,28,28,0.6)]' : 'bg-gray-800 border-gray-700 hover:border-red-600 cursor-pointer hover:bg-gray-700'}`}>
-                                            {deathSaves.failures >= i ? '✕' : ''}
-                                        </button>
-                                    ))}
-                                </div>
-                            </div>
-                        </div>
 
-                        <div className="mt-12 pt-8 border-t border-gray-800 text-center">
-                            <p className="text-gray-500 text-xs italic">Eğer 3 başarıya ulaşırsan durumun stabilize olur, 3 başarısızlıkta karakterin ölür.</p>
-                        </div>
+                                <div className="mt-12 pt-8 border-t border-gray-800 text-center">
+                                    <p className="text-gray-500 text-xs italic">Eğer 3 başarıya ulaşırsan canın 1 olup hemen ayaklanırsın. 3 başarısızlıkta karakterin tam ölür.</p>
+                                </div>
+                            </>
+                        )}
                     </div>
                 </div>
+            )}
+            
+            {/* ── SHOP ACCESS BUTTON (Floating) ── */}
+            {isShopPublished && (
+                <button
+                    onClick={() => setIsShopModalOpen(true)}
+                    className="fixed bottom-24 right-8 bg-gradient-to-r from-orange-600 to-amber-600 hover:from-orange-500 hover:to-amber-500 text-white p-4 rounded-full shadow-[0_0_20px_rgba(249,115,22,0.6)] z-50 flex items-center justify-center animate-bounce duration-1000 group"
+                >
+                    <span className="text-2xl drop-shadow-md group-hover:scale-125 transition-transform">🏪</span>
+                    <span className="absolute -top-10 right-0 bg-gray-900/90 text-orange-400 px-3 py-1.5 rounded-lg text-[10px] font-black uppercase tracking-widest whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none border border-orange-500/50 backdrop-blur-sm">
+                        Dükkana Gir
+                    </span>
+                </button>
             )}
             {/* ── TABS ── */}
             <div className="max-w-7xl mx-auto px-4 pt-4">
@@ -2384,75 +2692,152 @@ const PlayerSheet = () => {
                             )}
 
                             {activeTab === "attacks" && (
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    {allAttacks.map((atk, idx) => (
-                                        <div key={idx} className="bg-gray-800 rounded-xl border border-gray-700 p-4 hover:border-gray-500 transition-all flex items-center justify-between group shadow-lg">
-                                            <div className="flex-1">
-                                                <h4 className="font-black text-white text-sm uppercase tracking-tight group-hover:text-red-400 transition-colors">{atk.name}</h4>
-                                                <div className="flex gap-3 mt-1 items-center">
-                                                    <span className="text-[10px] bg-red-900/40 text-red-300 font-black px-2 py-0.5 rounded border border-red-500/30">BONUS: {fmt(atk.bonus)}</span>
-                                                    <span className="text-[10px] bg-gray-900/60 text-gray-400 font-bold px-2 py-0.5 rounded border border-white/5 uppercase">{atk.damage} {atk.type}</span>
-                                                </div>
-                                            </div>
+                                <div className="flex flex-col lg:flex-row gap-6">
+                                    {/* ── SOL TARAF: EYLEMLER VE KAYNAKLAR ── */}
+                                    <div className="w-full lg:w-1/3 flex flex-col gap-4">
+                                        <div className="flex items-center justify-between border-b border-gray-700/50 pb-2">
+                                            <h3 className="font-black text-gray-300 uppercase tracking-wide text-sm flex items-center gap-2">
+                                                <span>⚡</span> Aksiyonlar & Kaynaklar
+                                            </h3>
                                             <button 
-                                                onClick={() => handleRoll(atk.name, { count: 1, sides: 20, bonus: atk.bonus }, 'Atak')}
-                                                className="bg-red-700 hover:bg-red-600 text-white w-10 h-10 rounded-lg flex items-center justify-center font-black shadow-lg shadow-red-900/20 active:scale-95 transition-all"
+                                                onClick={() => setShowCustomResourceModal(true)}
+                                                className="w-6 h-6 bg-gray-700 hover:bg-gray-600 rounded text-center text-xs font-bold text-gray-300 border border-gray-600 transition"
+                                                title="Yeni Aksiyon/Büyü Ekle"
                                             >
-                                                🎲
+                                                +
                                             </button>
                                         </div>
-                                    ))}
-                                </div>
-                            )}
 
-                            {/* ── CLASS RESOURCES ── */}
-                            {activeTab === "attacks" && resources.length > 0 && (
-                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
-                                    {resources.map(res => {
-                                        const maxVal = res.getMax(lv, mods);
-                                        if (maxVal <= 0) return null;
-                                        const used = resourcesUsed[res.key] ?? 0;
-                                        const remaining = Math.max(0, maxVal - used);
-                                        return (
-                                            <div key={res.key} className="bg-gray-800 rounded-2xl border border-orange-500/20 p-4 shadow-xl hover:border-orange-500/40 transition-all group">
-                                                <div className="flex items-center gap-3 mb-3">
-                                                    <div className="w-10 h-10 bg-orange-600/20 rounded-xl flex items-center justify-center border border-orange-500/30 text-orange-400 group-hover:scale-110 transition-transform">
-                                                        <span className="text-xl">{res.icon}</span>
+                                        <div className="space-y-4 max-h-[600px] pr-2 overflow-y-auto custom-scrollbar">
+                                            {/* Sınıf Kaynakları */}
+                                            {resources.length > 0 && resources.map(res => {
+                                                const maxVal = res.getMax(lv, mods);
+                                                if (maxVal <= 0) return null;
+                                                const used = resourcesUsed[res.key] ?? 0;
+                                                const remaining = Math.max(0, maxVal - used);
+                                                return (
+                                                    <div key={res.key} className="bg-gray-800 rounded-xl border border-orange-500/20 p-3 shadow-lg hover:border-orange-500/40 transition-all group">
+                                                        <div className="flex items-center justify-between mb-2">
+                                                            <div className="flex items-center gap-2">
+                                                                <span className="text-lg bg-orange-600/20 p-1.5 rounded-lg border border-orange-500/30 text-orange-400 group-hover:scale-110 transition-transform">
+                                                                    {res.icon}
+                                                                </span>
+                                                                <div>
+                                                                    <h4 className="font-black text-white text-xs uppercase tracking-tight">{res.name}</h4>
+                                                                    <p className="text-[9px] text-gray-500 font-bold uppercase tracking-widest">{res.recharge === 'short' ? 'Short Rest' : 'Long Rest'}</p>
+                                                                </div>
+                                                            </div>
+                                                            <div className="text-right">
+                                                                <span className={`text-lg font-black ${remaining > 0 ? 'text-orange-400' : 'text-red-500'}`}>{remaining}</span>
+                                                                <span className="text-gray-600 text-[10px]">/{maxVal}</span>
+                                                            </div>
+                                                        </div>
+                                                        <div className="flex gap-1 mb-2 flex-wrap">
+                                                            {Array.from({ length: Math.min(maxVal, 20) }).map((_, i) => (
+                                                                <div key={i} className={`w-2.5 h-2.5 rounded-full border ${i < remaining ? 'bg-orange-500 border-orange-300' : 'bg-gray-950 border-gray-800'}`}></div>
+                                                            ))}
+                                                        </div>
+                                                        <div className="flex gap-1.5 mt-auto">
+                                                            <button 
+                                                                onClick={() => useResource(res.key)} 
+                                                                disabled={remaining <= 0}
+                                                                className="flex-1 py-1 bg-orange-700 hover:bg-orange-600 disabled:opacity-40 text-white font-black rounded-md text-[10px] uppercase tracking-widest transition"
+                                                            >
+                                                                Kullan
+                                                            </button>
+                                                            <button 
+                                                                onClick={() => setResourcesUsed(p => ({ ...p, [res.key]: Math.max(0, (p[res.key] ?? 0) - 1) }))}
+                                                                className="px-2.5 py-1 bg-gray-700 hover:bg-gray-600 text-gray-300 font-bold rounded-md text-[10px] transition"
+                                                            >
+                                                                ↩
+                                                            </button>
+                                                        </div>
                                                     </div>
+                                                );
+                                            })}
+
+                                            {/* Özel Kaynaklar */}
+                                            {(character.customResources || []).map((res: any) => {
+                                                const used = resourcesUsed[res.id] ?? 0;
+                                                const remaining = Math.max(0, res.max - used);
+                                                return (
+                                                    <div key={res.id} className="bg-gray-800/80 rounded-xl border border-blue-500/20 p-3 shadow-lg hover:border-blue-500/40 transition-all relative group">
+                                                        <button
+                                                            onClick={async () => {
+                                                                if(confirm(`${res.name} öğesini silmek istediğinize emin misiniz?`)) {
+                                                                    const updated = (character.customResources || []).filter((r:any) => r.id !== res.id);
+                                                                    await axios.put(`${API_URL}/api/characters/${character._id}`, { customResources: updated });
+                                                                    setCharacter({ ...character, customResources: updated });
+                                                                    if (socket) (socket as any).emit('update_character_stat', { campaignId, characterId: character._id, stat: 'customResources', value: updated });
+                                                                }
+                                                            }}
+                                                            className="absolute -top-2 -right-2 w-5 h-5 bg-red-900/80 hover:bg-red-600 rounded-full flex items-center justify-center text-[10px] text-white opacity-0 group-hover:opacity-100 transition-opacity border border-black shadow-lg"
+                                                            title="Sil"
+                                                        >✕</button>
+                                                        <div className="flex items-center justify-between mb-2">
+                                                            <div className="flex flex-col">
+                                                                <h4 className="font-black text-blue-100 text-xs uppercase tracking-tight">{res.name}</h4>
+                                                                <p className="text-[9px] text-gray-500 font-bold uppercase tracking-widest">{res.recharge === 'short' ? 'Short Rest' : 'Long Rest'}</p>
+                                                            </div>
+                                                            <div className="text-right">
+                                                                <span className={`text-lg font-black ${remaining > 0 ? 'text-blue-400' : 'text-red-500'}`}>{remaining}</span>
+                                                                <span className="text-gray-600 text-[10px]">/{res.max}</span>
+                                                            </div>
+                                                        </div>
+                                                        {res.desc && <p className="text-[10px] text-gray-400 leading-tight mb-2 italic">"{res.desc}"</p>}
+                                                        <div className="flex gap-1 mb-2 flex-wrap">
+                                                            {Array.from({ length: Math.min(res.max, 20) }).map((_, i) => (
+                                                                <div key={i} className={`w-2.5 h-2.5 rounded-full border ${i < remaining ? 'bg-blue-500 border-blue-300' : 'bg-gray-950 border-gray-800'}`}></div>
+                                                            ))}
+                                                        </div>
+                                                        <div className="flex gap-1.5 mt-auto">
+                                                            <button 
+                                                                onClick={() => setResourcesUsed(p => ({ ...p, [res.id]: (p[res.id] ?? 0) + 1 }))}
+                                                                disabled={remaining <= 0}
+                                                                className="flex-1 py-1 bg-blue-700 hover:bg-blue-600 disabled:opacity-40 text-white font-black rounded-md text-[10px] uppercase tracking-widest transition"
+                                                            >
+                                                                Kullan
+                                                            </button>
+                                                            <button 
+                                                                onClick={() => setResourcesUsed(p => ({ ...p, [res.id]: Math.max(0, (p[res.id] ?? 0) - 1) }))}
+                                                                className="px-2.5 py-1 bg-gray-700 hover:bg-gray-600 text-gray-300 font-bold rounded-md text-[10px] transition"
+                                                            >
+                                                                ↩
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                );
+                                            })}
+                                        </div>
+                                    </div>
+
+                                    {/* ── SAĞ TARAF: SALDIRILAR VE SİLAHLAR ── */}
+                                    <div className="w-full lg:w-2/3 flex flex-col gap-4">
+                                        <div className="flex items-center justify-between border-b border-gray-700/50 pb-2">
+                                            <h3 className="font-black text-gray-300 uppercase tracking-wide text-sm flex items-center gap-2">
+                                                <span>⚔️</span> Silahlar & Saldırılar
+                                            </h3>
+                                        </div>
+                                        <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
+                                            {allAttacks.map((atk, idx) => (
+                                                <div key={idx} className="bg-gray-800 rounded-xl border border-gray-700 p-4 hover:border-gray-500 transition-all flex items-center justify-between group shadow-lg">
                                                     <div className="flex-1">
-                                                        <h4 className="font-black text-white text-sm uppercase tracking-tight">{res.name}</h4>
-                                                        <p className="text-[10px] text-gray-500 font-bold uppercase tracking-widest">{res.recharge === 'short' ? 'Short Rest' : 'Long Rest'}</p>
+                                                        <h4 className="font-black text-white text-sm uppercase tracking-tight group-hover:text-red-400 transition-colors">{atk.name}</h4>
+                                                        <div className="flex gap-3 mt-1 items-center">
+                                                            <span className="text-[10px] bg-red-900/40 text-red-300 font-black px-2 py-0.5 rounded border border-red-500/30">BONUS: {fmt(atk.bonus)}</span>
+                                                            <span className="text-[10px] bg-gray-900/60 text-gray-400 font-bold px-2 py-0.5 rounded border border-white/5 uppercase">{atk.damage} {atk.type}</span>
+                                                        </div>
                                                     </div>
-                                                    <div className="text-right">
-                                                        <span className={`text-xl font-black ${remaining > 0 ? 'text-orange-400' : 'text-red-500'}`}>{remaining}</span>
-                                                        <span className="text-gray-600 text-xs">/{maxVal}</span>
-                                                    </div>
-                                                </div>
-                                                
-                                                <div className="flex gap-1.5 mb-3 flex-wrap">
-                                                    {Array.from({ length: Math.min(maxVal, 20) }).map((_, i) => (
-                                                        <div key={i} className={`w-3 h-3 rounded-full border ${i < remaining ? 'bg-orange-500 border-orange-300 shadow-[0_0_8px_rgba(249,115,22,0.4)]' : 'bg-gray-950 border-gray-800'}`}></div>
-                                                    ))}
-                                                </div>
-
-                                                <div className="flex gap-2 mt-auto">
                                                     <button 
-                                                        onClick={() => useResource(res.key)} 
-                                                        disabled={remaining <= 0}
-                                                        className="flex-1 py-1.5 bg-orange-700 hover:bg-orange-600 disabled:opacity-40 text-white font-black rounded-lg text-[10px] uppercase tracking-widest transition shadow-lg shadow-orange-900/20"
+                                                        onClick={() => handleRoll(atk.name, { count: 1, sides: 20, bonus: atk.bonus }, 'Atak')}
+                                                        className="bg-red-700 hover:bg-red-600 text-white w-10 h-10 rounded-lg flex items-center justify-center font-black shadow-lg shadow-red-900/20 active:scale-95 transition-all"
                                                     >
-                                                        Use
-                                                    </button>
-                                                    <button 
-                                                        onClick={() => setResourcesUsed(p => ({ ...p, [res.key]: Math.max(0, (p[res.key] ?? 0) - 1) }))}
-                                                        className="px-3 py-1.5 bg-gray-700 hover:bg-gray-600 text-gray-400 font-bold rounded-lg text-xs transition"
-                                                    >
-                                                        ↩
+                                                        🎲
                                                     </button>
                                                 </div>
-                                            </div>
-                                        );
-                                    })}
+                                            ))}
+                                        </div>
+                                    </div>
                                 </div>
                             )}
 
@@ -2864,7 +3249,11 @@ const PlayerSheet = () => {
                                             <div key={idx} className={`bg-gray-900/60 border rounded-xl p-3 flex flex-col transition-all ${item.isEquipped ? 'border-blue-500 shadow-[0_0_10px_rgba(59,130,246,0.2)]' : 'border-gray-700'}`}>
                                                 <div className="flex justify-between items-start mb-2">
                                                     <div className="flex items-center gap-2">
-                                                        <span className="bg-gray-800 px-2 py-0.5 rounded font-black text-xs text-gray-400 border border-gray-700">{item.qty}x</span>
+                                                        <div className="flex items-center bg-gray-800 rounded border border-gray-700 overflow-hidden shadow-inner">
+                                                            <button onClick={() => updateItemQty(idx, -1)} className="text-red-400 hover:bg-gray-700 px-2 py-0.5 text-sm font-black transition active:scale-95">-</button>
+                                                            <span className="font-bold text-xs text-gray-200 w-5 text-center">{item.qty || 1}</span>
+                                                            <button onClick={() => updateItemQty(idx, 1)} className="text-green-400 hover:bg-gray-700 px-2 py-0.5 text-sm font-black transition active:scale-95">+</button>
+                                                        </div>
                                                         <span className={`font-black text-sm ${item.isEquipped ? 'text-blue-400' : 'text-white'}`}>{item.name} {item.isEquipped && '🛡️'}</span>
                                                     </div>
                                                     <div className="flex gap-2">
@@ -2911,6 +3300,61 @@ const PlayerSheet = () => {
                                 </div>
                             </div>
                         </div>
+
+                        {/* ── PARTY SHARED INVENTORY (ORTAK KASA) ── */}
+                        <div className="bg-gray-800 rounded-xl border-2 border-yellow-700/50 overflow-hidden shadow-[0_0_20px_rgba(234,179,8,0.1)] relative mt-8">
+                            <div className="absolute top-0 right-0 w-64 h-64 bg-yellow-500/5 rounded-full blur-3xl -mx-20 -my-20 pointer-events-none"></div>
+                            
+                            <div className="px-4 py-3 bg-gradient-to-r from-yellow-950/80 to-gray-800 border-b border-yellow-700/50 flex justify-between items-center relative">
+                                <h3 className="font-black text-yellow-500 text-sm uppercase tracking-widest flex items-center gap-2">
+                                    <span className="text-lg">🎒</span> Ortak Kasa (Party Vault) {partyInventory?.length ? `(${partyInventory.length})` : ''}
+                                </h3>
+                            </div>
+
+                            <div className="p-4 space-y-3 relative">
+                                {partyInventory?.length > 0 ? (
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-6">
+                                        {partyInventory.map((item: any, idx: number) => (
+                                            <div key={idx} className="bg-gray-900/80 border border-yellow-900/50 hover:border-yellow-700/50 rounded-xl p-3 flex flex-col transition-all shadow-inner group">
+                                                <div className="flex justify-between items-start mb-2">
+                                                    <div className="flex items-center gap-2">
+                                                        <div className="flex items-center bg-gray-800 rounded border border-gray-700 overflow-hidden shadow-inner shrink-0">
+                                                            <button onClick={() => updatePartyItemQty(idx, -1)} className="text-red-400 hover:bg-gray-700 px-2 py-0.5 text-sm font-black transition">-</button>
+                                                            <span className="font-bold text-xs text-yellow-300 w-5 text-center">{item.qty || 1}</span>
+                                                            <button onClick={() => updatePartyItemQty(idx, 1)} className="text-green-400 hover:bg-gray-700 px-2 py-0.5 text-sm font-black transition">+</button>
+                                                        </div>
+                                                        <span className="font-black text-sm text-yellow-100 px-2">{item.name}</span>
+                                                    </div>
+                                                    <div className="flex gap-2">
+                                                        <button onClick={() => removePartyItem(idx)} className="text-gray-500 hover:text-red-400 text-xs px-2 py-1 rounded bg-gray-800 hover:bg-gray-700 transition opacity-0 group-hover:opacity-100">Sil</button>
+                                                    </div>
+                                                </div>
+                                                {item.note && <p className="text-gray-400 text-xs italic border-l-2 border-yellow-900/50 pl-2 ml-1 flex-1">{item.note}</p>}
+                                            </div>
+                                        ))}
+                                    </div>
+                                ) : (
+                                    <p className="text-yellow-700/50 text-center py-6 italic font-bold">Ortak kasa şu an boş. Ekip ganimetlerinizi buraya koyabilirsiniz.</p>
+                                )}
+
+                                <div className="bg-gray-900/90 border border-yellow-900/50 rounded-xl p-4 shadow-inner">
+                                    <h4 className="font-black text-yellow-600/70 text-xs mb-3 uppercase tracking-wider flex items-center gap-2">➕ Kasaya Eşya Ekle</h4>
+                                    <div className="flex flex-col md:flex-row gap-3">
+                                        <div className="flex-1">
+                                            <input type="text" value={newPartyItemName} onChange={e => setNewPartyItemName(e.target.value)} placeholder="Ortak Eşya Adı (Örn: Çadır)" className="w-full bg-gray-800 border-[1.5px] border-gray-700 rounded-lg px-3 py-2 text-sm text-yellow-100 placeholder-gray-600 focus:outline-none focus:border-yellow-600/50 transition-colors" />
+                                        </div>
+                                        <div className="w-24">
+                                            <input type="number" min="1" value={newPartyItemQty} onChange={e => setNewPartyItemQty(Number(e.target.value) || 1)} className="w-full bg-gray-800 border-[1.5px] border-gray-700 rounded-lg px-3 py-2 text-sm text-yellow-300 focus:outline-none focus:border-yellow-600/50 transition-colors text-center font-bold" />
+                                        </div>
+                                        <div className="flex-[2]">
+                                            <input type="text" value={newPartyItemNote} onChange={e => setNewPartyItemNote(e.target.value)} placeholder="Not (Opsiyonel)" className="w-full bg-gray-800 border-[1.5px] border-gray-700 rounded-lg px-3 py-2 text-sm text-gray-300 placeholder-gray-600 focus:outline-none focus:border-yellow-600/50 transition-colors" />
+                                        </div>
+                                        <button onClick={addPartyItem} disabled={!newPartyItemName.trim()} className="bg-yellow-700/80 hover:bg-yellow-600 border border-yellow-500/50 disabled:opacity-30 disabled:cursor-not-allowed text-yellow-50 font-black rounded-lg px-6 py-2 text-sm transition-all shrink-0 shadow-lg hover:shadow-yellow-600/30">Koy</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 )}
 
@@ -3828,7 +4272,7 @@ const PlayerSheet = () => {
                                                 {item.note && <div className="text-gray-400 text-xs mt-1 italic">{item.note}</div>}
                                             </div>
                                             <button
-                                                onClick={() => setBuyShopItem(item)}
+                                                onClick={() => handleBuyItem(item)}
                                                 className="bg-orange-600 hover:bg-orange-500 active:bg-orange-700 text-white font-black px-4 py-2 rounded-lg flex items-center gap-2 transition-transform hover:scale-105 shadow-md group-hover:shadow-[0_0_15px_rgba(234,88,12,0.4)] whitespace-nowrap"
                                             >
                                                 <span className="text-sm">Buy Item</span>
@@ -3850,24 +4294,24 @@ const PlayerSheet = () => {
                         <div className="bg-gray-900 border-4 border-indigo-900/50 rounded-2xl w-full max-w-md p-6 flex flex-col shadow-[0_0_40px_rgba(79,70,229,0.3)] relative" onClick={e => e.stopPropagation()}>
                             <div className="flex justify-between items-center mb-6 border-b border-indigo-900/40 pb-4">
                                 <h2 className="text-2xl font-black text-indigo-400 flex items-center gap-2">
-                                    <span className="text-3xl">🌙</span> Long Rest
+                                    <span className="text-3xl">🌙</span> Uzun Dinlenme
                                 </h2>
                                 <button onClick={() => setShowLongRestModal(false)} className="text-gray-400 hover:text-white bg-gray-800 w-8 h-8 rounded-full flex justify-center items-center font-bold">✕</button>
                             </div>
 
                             <p className="text-gray-300 text-sm mb-4 leading-relaxed mt-2">
-                                Wizards (Level 3+) can swap one cantrip they know for another from the Wizard spell list during a long rest. Leave blank if you don't wish to swap.
+                                Büyücüler (Wizard - Seviye 3+) uzun dinlenme sırasında bildikleri bir cantripi (0. seviye büyü) Büyücü listesinden bir başkasıyla değiştirebilirler. <br/><span className="text-indigo-300 font-bold">Değiştirmek istemiyorsan boş bırak.</span>
                             </p>
 
                             <div className="space-y-4 mb-6">
                                 <div>
-                                    <label className="block text-xs font-bold text-gray-400 uppercase mb-1">Cantrip to Forget</label>
+                                    <label className="block text-xs font-bold text-gray-400 uppercase mb-1">Unutulacak Cantrip</label>
                                     <select
                                         className="w-full bg-gray-800 border border-gray-700 rounded-xl px-3 py-2 text-white outline-none focus:border-indigo-500"
                                         value={cantripToReplace}
                                         onChange={e => setCantripToReplace(e.target.value)}
                                     >
-                                        <option value="">-- No changes --</option>
+                                        <option value="">-- Değişiklik Yok --</option>
                                         {(character?.spells || []).map((sName: string) => {
                                             const details = spellDetails[sName];
                                             return details && details.level === "Cantrip" ? <option key={sName} value={sName}>{sName}</option> : null;
@@ -3876,14 +4320,14 @@ const PlayerSheet = () => {
                                 </div>
 
                                 {cantripToReplace && (
-                                    <div>
-                                        <label className="block text-xs font-bold text-gray-400 uppercase mb-1">New Cantrip</label>
+                                    <div className="animate-fade-in">
+                                        <label className="block text-xs font-bold text-gray-400 uppercase mb-1">Yeni Cantrip</label>
                                         <select
                                             className="w-full bg-gray-800 border border-gray-700 rounded-xl px-3 py-2 text-white outline-none focus:border-indigo-500"
                                             value={newWizardCantrip}
                                             onChange={e => setNewWizardCantrip(e.target.value)}
                                         >
-                                            <option value="">-- Select --</option>
+                                            <option value="">-- Yeni Büyü Seç --</option>
                                             {wizardCantripOptions.filter(sp => !(character?.spells || []).includes(sp.name)).map(sp => (
                                                 <option key={sp.name} value={sp.name}>{sp.name}</option>
                                             ))}
@@ -3893,10 +4337,10 @@ const PlayerSheet = () => {
                             </div>
 
                             <button
-                                onClick={applyLongRest}
+                                onClick={() => applyLongRest(false)}
                                 className="bg-indigo-600 hover:bg-indigo-500 active:bg-indigo-700 text-white font-black px-4 py-3 rounded-xl transition-colors shadow-lg shadow-indigo-500/20 w-full"
                             >
-                                Finish Long Rest
+                                Dinlenmeyi Tamamla
                             </button>
                         </div>
                     </div>
@@ -4367,7 +4811,14 @@ const PlayerSheet = () => {
                                 <div className="w-px h-8 bg-gray-800"></div>
                                 <div className="flex flex-col">
                                     <span className="text-[10px] text-gray-500 font-black uppercase tracking-widest opacity-60">Selected</span>
-                                    <span className="text-sm font-black text-green-400">{character?.spells?.length || 0} Known</span>
+                                    <span className="text-sm font-black text-green-400">
+                                        {(() => {
+                                            const { cantrips: cLimit, spellsTotal: sLimit } = getSpellLimits(character?.classRef?.name || '', character?.level || 1, character?.stats);
+                                            const currentCantrips = (character?.spells || []).filter((s: string) => (spellDetails[s] || allSpells.find(x => x.name === s))?.level_int === 0).length;
+                                            const currentLeveled = (character?.spells || []).length - currentCantrips;
+                                            return `${currentCantrips}/${cLimit} Cantrips, ${currentLeveled}/${sLimit === 999 ? '∞' : sLimit} Spells`;
+                                        })()}
+                                    </span>
                                 </div>
                             </div>
                             <button 

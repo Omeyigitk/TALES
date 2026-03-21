@@ -998,6 +998,9 @@ io.on('connection', (socket) => {
       // Send Party Gold
       socket.emit('party_gold_updated', campaign.partyGold || 0);
 
+      // Send Party Inventory
+      socket.emit('party_inventory_updated', campaign.sharedInventory || []);
+
       // Send Fog of War
       socket.emit('fog_updated', campaign.fogOfWar || []);
 
@@ -1162,6 +1165,13 @@ io.on('connection', (socket) => {
     try {
       await Campaign.findByIdAndUpdate(campaignId, { partyGold: gold });
       io.to(campaignId).emit('party_gold_updated', gold);
+    } catch (err) { console.error(err); }
+  });
+
+  socket.on('update_party_inventory', async ({ campaignId, inventory }) => {
+    try {
+      await Campaign.findByIdAndUpdate(campaignId, { sharedInventory: inventory });
+      io.to(campaignId).emit('party_inventory_updated', inventory);
     } catch (err) { console.error(err); }
   });
 
