@@ -78,6 +78,40 @@ const evalAtk = (str: string, abilityMods: any, prof: number) => {
     }
 };
 
+// Helper to resolve dynamic text in feature descriptions (e.g. "⌈Sv/2⌉d6" for Sneak Attack)
+const resolveFormula = (text: string, level: number, mods: any, prof: number, cls: string) => {
+    if (!text) return text;
+    let resolved = text;
+    
+    // 1. Math patterns
+    resolved = resolved.replace(/⌈Sv\/2⌉/g, String(Math.ceil(level / 2)));
+    resolved = resolved.replace(/⌈Level\/2⌉/g, String(Math.ceil(level / 2)));
+    resolved = resolved.replace(/Sv\.×5/g, String(level * 5));
+    
+    // 2. Simple placeholders
+    resolved = resolved.replace(/Sv\./g, String(level));
+    resolved = resolved.replace(/Level/g, String(level));
+    resolved = resolved.replace(/Prof/g, String(prof));
+    
+    // 3. Cantrip Scale
+    const cantripDice = level >= 17 ? 4 : level >= 11 ? 3 : level >= 5 ? 2 : 1;
+    resolved = resolved.replace(/\[CantripScale\]/g, String(cantripDice));
+
+    // 4. Ability mods
+    const abilities = ["STR", "DEX", "CON", "INT", "WIS", "CHA"];
+    abilities.forEach(ab => {
+        resolved = resolved.replace(new RegExp(ab, 'g'), String(mods[ab] || 0));
+    });
+
+    // 5. Monk Martial Arts (Special Case)
+    if (cls === 'Monk') {
+        const monkDie = level >= 17 ? '1d10' : level >= 11 ? '1d8' : level >= 5 ? '1d6' : '1d4';
+        resolved = resolved.replace(/Martial Arts die/g, monkDie);
+    }
+
+    return resolved;
+};
+
 // Class → saving throw proficiencies (SRD)
 const CLASS_SAVES: Record<string, string[]> = {
     Fighter: ["STR", "CON"], Barbarian: ["STR", "CON"], Paladin: ["WIS", "CHA"],
@@ -223,6 +257,7 @@ const PlayerSheet = () => {
     const [currentHp, setCurrentHp] = useState(character?.currentHp || 0);
     const [tempHp, setTempHp] = useState(character?.tempHp || 0);
     const [hpInput, setHpInput] = useState("");
+    const [personalGoldInput, setPersonalGoldInput] = useState("");
     const [conditions, setConditions] = useState<string[]>(character?.conditions || []);
     const [hitDiceUsed, setHitDiceUsed] = useState(character?.hitDiceUsed || 0);
     const [deathSaves, setDeathSaves] = useState(character?.deathSaves || { successes: 0, failures: 0 });
@@ -576,6 +611,15 @@ const PlayerSheet = () => {
             await axios.put(`${API_URL}/api/characters/${character._id}`, { money: newMoney }, { headers: { 'Authorization': `Bearer ${token}` } });
             if (socket) (socket as any).emit('character_stat_updated', { campaignId, characterId: character._id, stat: 'money', value: newMoney });
         } catch (e) { console.error(e); }
+    };
+
+    const handleUpdatePartyGold = (mode: 'add' | 'sub' | 'set', overrideAmount?: number) => {
+        if (!socket) return;
+        const amountStr = overrideAmount !== undefined ? String(overrideAmount) : partyGoldInput;
+        const val = parseInt(amountStr);
+        if (isNaN(val)) return;
+        (socket as any).emit('update_party_gold', { campaignId, amount: val, mode });
+        if (overrideAmount === undefined) setPartyGoldInput("");
     };
 
     const setMoney = async (coin: string, absoluteAmount: number) => {
@@ -2437,7 +2481,7 @@ const PlayerSheet = () => {
                                                             </span>
                                                             <span className={`text-sm font-black ${open ? 'text-purple-300' : 'text-gray-500'}`}>{f.name}</span>
                                                         </div>
-                                                        <p className={`text-xs leading-relaxed ${open ? 'text-gray-300' : 'text-gray-500'}`}>{f.desc_tr || f.desc}</p>
+                                                        <p className={`text-xs leading-relaxed ${open ? 'text-gray-300' : 'text-gray-500'}`}>{resolveFormula(f.desc_tr || f.desc)}</p>
                                                     </div>
                                                 );
                                             })}
@@ -2487,7 +2531,7 @@ const PlayerSheet = () => {
                                                         </span>
                                                         <span className="text-sm font-black text-gray-200">{f.name}</span>
                                                     </div>
-                                                    <p className="text-xs leading-relaxed text-gray-400">{f.desc_tr || f.desc}</p>
+                                                    <p className="text-xs leading-relaxed text-gray-400">{resolveFormula(f.desc_tr || f.desc)}</p>
                                                 </div>
                                             ))}
                                         </div>
@@ -2546,7 +2590,7 @@ const PlayerSheet = () => {
                                                     </div>
                                                     {isExpanded && featDetails && (
                                                         <div className="mt-2 text-xs text-gray-300 font-normal leading-relaxed border-t border-yellow-800/30 pt-2">
-                                                            <div className="mb-2 whitespace-pre-wrap">{featDetails.desc_tr || featDetails.desc}</div>
+                                                            <div className="mb-2 whitespace-pre-wrap">{resolveFormula(featDetails.desc_tr || featDetails.desc)}</div>
                                                             {featDetails.effects && featDetails.effects.length > 0 && (
                                                                 <div className="bg-black/20 p-2 rounded border border-yellow-900/30">
                                                                     <p className="font-black text-[10px] text-yellow-600 uppercase mb-1">Etkiler:</p>
@@ -2677,7 +2721,7 @@ const PlayerSheet = () => {
                                             {character.raceRef.traits.map((t: any, i: number) => (
                                                 <div key={i} className="p-2 bg-yellow-900/10 border border-yellow-800/30 rounded-lg">
                                                     <p className="font-black text-yellow-300 text-xs mb-0.5">{t.name}</p>
-                                                    <p className="text-gray-400 text-xs leading-relaxed">{t.desc_tr}</p>
+                                                    <p className="text-gray-400 text-xs leading-relaxed">{resolveFormula(t.desc_tr)}</p>
                                                 </div>
                                             ))}
                                         </div>
@@ -2886,7 +2930,7 @@ const PlayerSheet = () => {
                             type: isRanged ? 'ranged' : 'melee',
                             toHit: fmt(toHit),
                             damage: `${damage}${fmt(damageMod)}`,
-                            desc_tr: w.note || `${w.name} ile saldırı.`,
+                            desc_tr: resolveFormula(w.note || `${w.name} ile saldırı.`),
                             range: isRanged ? 'Ranged' : 'Melee'
                         };
                     });
@@ -2910,7 +2954,8 @@ const PlayerSheet = () => {
                                 ...atk,
                                 toHit: toHitVal,
                                 toHitRaw: parsedToHit,
-                                damage: parsedDamage
+                                damage: parsedDamage,
+                                desc_tr: resolveFormula(atk.desc_tr)
                             };
                         }), 
                         ...mappedWeaponAttacks.map((atk: any) => ({ ...atk, toHitRaw: parseInt(atk.toHit) }))
@@ -3093,9 +3138,9 @@ const PlayerSheet = () => {
                                                             </span>
                                                         </div>
                                                         {atk.desc_tr && (
-                                                            <p className="text-xs text-gray-400 mt-2 leading-tight">
+                                                            <div className="text-xs text-gray-400 mt-2 leading-tight">
                                                                 {atk.desc_tr}
-                                                            </p>
+                                                            </div>
                                                         )}
                                                     </div>
                                                     {atk.toHit && (
@@ -3536,6 +3581,40 @@ const PlayerSheet = () => {
                                     )
                                 })}
                             </div>
+
+                            {/* Personal GP Quick-Add Shortcuts */}
+                            <div className="px-4 pb-4 pt-1 border-t border-yellow-900/10">
+                                <div className="flex items-center gap-2 mb-2">
+                                    <span className="text-[10px] font-black text-yellow-600/70 uppercase tracking-widest">Hızlı Altın Ekle (GP)</span>
+                                </div>
+                                <div className="flex gap-2">
+                                    {[10, 50, 100].map(v => (
+                                        <button 
+                                            key={v} 
+                                            onClick={() => updateMoney('gp', v)}
+                                            className="flex-1 bg-yellow-900/10 hover:bg-yellow-900/30 border border-yellow-700/20 rounded-lg py-1.5 text-[10px] font-black text-yellow-600 transition-all font-mono"
+                                        >
+                                            +{v} GP
+                                        </button>
+                                    ))}
+                                    <div className="flex-1 relative">
+                                        <input 
+                                            type="number" 
+                                            placeholder="±..."
+                                            value={personalGoldInput}
+                                            onChange={e => setPersonalGoldInput(e.target.value)}
+                                            onKeyDown={e => {
+                                                if (e.key === 'Enter') {
+                                                    const val = parseInt(personalGoldInput);
+                                                    if (!isNaN(val)) updateMoney('gp', val);
+                                                    setPersonalGoldInput("");
+                                                }
+                                            }}
+                                            className="w-full bg-black/20 border border-yellow-900/30 rounded-lg px-2 py-1.5 text-[10px] text-center text-yellow-500 font-bold focus:outline-none focus:border-yellow-500/50 transition-colors"
+                                        />
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
                         {/* ── INVENTORY LIST ── */}
@@ -3621,6 +3700,19 @@ const PlayerSheet = () => {
                                         <button onClick={() => handleUpdatePartyGold('add')} disabled={!partyGoldInput} className="flex-1 bg-gradient-to-t from-green-900/80 to-green-800/60 hover:from-green-800 hover:to-green-700 disabled:opacity-30 border border-green-700/50 rounded-lg py-2 text-[10px] font-black text-green-100 uppercase tracking-widest transition-all shadow-md">Ekle</button>
                                     </div>
                                     <button onClick={() => handleUpdatePartyGold('set')} disabled={!partyGoldInput} className="w-full mt-2 bg-yellow-900/20 hover:bg-yellow-900/40 disabled:opacity-30 border border-yellow-700/30 hover:border-yellow-600/50 rounded-lg py-1.5 text-[10px] font-bold text-yellow-400 uppercase tracking-widest transition-all">Net Eşitle</button>
+                                    
+                                    {/* Party Gold Quick Add Tokens */}
+                                    <div className="flex gap-2 mt-4 pt-4 border-t border-yellow-700/10">
+                                        {[10, 50, 100].map(v => (
+                                            <button 
+                                                key={v} 
+                                                onClick={() => handleUpdatePartyGold('add', v)}
+                                                className="flex-1 bg-yellow-900/10 hover:bg-yellow-900/30 border border-yellow-700/20 rounded-lg py-1.5 text-[10px] font-black text-yellow-600 transition-all"
+                                            >
+                                                +{v} GP
+                                            </button>
+                                        ))}
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -4330,7 +4422,7 @@ const PlayerSheet = () => {
                                                 {lvModal.classFeats.map((f: any, i: number) => (
                                                     <div key={i} className="bg-gray-800 border border-gray-700 rounded-xl p-4">
                                                         <p className="font-black text-red-400 mb-1">{f.name}</p>
-                                                        <p className="text-gray-300 text-sm leading-relaxed">{f.desc_tr}</p>
+                                                        <div className="text-gray-300 text-sm leading-relaxed">{resolveFormula(f.desc_tr)}</div>
                                                     </div>
                                                 ))}
                                             </div>
@@ -4345,7 +4437,7 @@ const PlayerSheet = () => {
                                                 {lvModal.subFeats.map((f: any, i: number) => (
                                                     <div key={i} className="bg-purple-900/20 border border-purple-700/50 rounded-xl p-4">
                                                         <p className="font-black text-purple-400 mb-1">{f.name}</p>
-                                                        <p className="text-gray-300 text-sm leading-relaxed">{f.desc_tr}</p>
+                                                        <div className="text-gray-300 text-sm leading-relaxed">{resolveFormula(f.desc_tr)}</div>
                                                     </div>
                                                 ))}
                                             </div>
