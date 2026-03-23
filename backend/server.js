@@ -1004,6 +1004,9 @@ io.on('connection', (socket) => {
       // Send Fog of War
       socket.emit('fog_updated', campaign.fogOfWar || []);
 
+      // Send Encounter Status
+      socket.emit('encounter_updated', campaign.activeEncounter?.participants || []);
+
       // Send initial data for new features
       const quests = await Quest.find({ campaignId });
       socket.emit('quests_sync', quests);
@@ -1072,8 +1075,15 @@ io.on('connection', (socket) => {
   });
 
   socket.on('update_encounter', async ({ campaignId, encounterData }) => {
-    // Veritabanına da kaydedilebilir
-    io.to(campaignId).emit('encounter_updated', encounterData);
+    try {
+      await Campaign.findByIdAndUpdate(campaignId, { 
+        'activeEncounter.participants': encounterData,
+        'activeEncounter.isActive': encounterData.length > 0 
+      });
+      io.to(campaignId).emit('encounter_updated', encounterData);
+    } catch (err) {
+      console.error('Encounter sync error:', err);
+    }
   });
 
   socket.on('roll_dice', async ({ campaignId, id, playerName, rollResult, type, isHidden }) => {

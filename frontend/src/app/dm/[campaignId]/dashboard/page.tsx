@@ -34,7 +34,8 @@ export default function DMDashboard() {
     // Odaya DM rolüyle katıl
     const { 
         partyStats, diceLogs, socket, dmLevelPermission, whisperData, whisperHistory,
-        partyGold, partyInventory, fogOfWar, quests, factions, sessionNotes, mapData: socketMapData
+        partyGold, partyInventory, fogOfWar, quests, factions, sessionNotes, mapData: socketMapData,
+        encounterStatus
     } = useCampaignSocket(campaignId, 'DM', 'DM', token);
     
     // Sync local mapData with socket mapData on mount/updates
@@ -71,6 +72,14 @@ export default function DMDashboard() {
     const [expandedMonsterId, setExpandedMonsterId] = useState<string | null>(null);
     const [expandedCombatantId, setExpandedCombatantId] = useState<string | null>(null);
     const [isRollHidden, setIsRollHidden] = useState(false);
+
+    // Sync active combatants with encounter data from server
+    useEffect(() => {
+        const es = encounterStatus as any;
+        if (es && es.participants) {
+            setActiveCombatants(es.participants);
+        }
+    }, [encounterStatus]);
 
     // Lore States (NPC & Notes)
     const [isNpcMenuOpen, setIsNpcMenuOpen] = useState(false);
@@ -367,6 +376,36 @@ export default function DMDashboard() {
         if (socket) {
             socket.emit('update_encounter', { campaignId, encounterData: data });
         }
+    };
+
+    const updateCombatantInitiative = (id: string, value: number) => {
+        const updated = activeCombatants.map(c => c.id === id ? { ...c, initiative: value } : c)
+            .sort((a, b) => b.initiative - a.initiative);
+        setActiveCombatants(updated);
+        syncEncounter(updated);
+    };
+
+    const addPlayerToEncounter = (playerName: string) => {
+        const stats = partyStats as any;
+        const pStats = stats[playerName];
+        if (!pStats) return;
+
+        // Check if already in encounter
+        if (activeCombatants.find(c => c.name === playerName)) return;
+
+        const newCombatant = {
+            id: `player-${playerName}-${Date.now()}`,
+            name: playerName,
+            maxHp: pStats.maxHp || 10,
+            currentHp: pStats.hp || 10,
+            ac: pStats.ac || 10,
+            initiative: 10, // Default base
+            _isPlayer: true
+        };
+
+        const updated = [...activeCombatants, newCombatant].sort((a, b) => b.initiative - a.initiative);
+        setActiveCombatants(updated);
+        syncEncounter(updated);
     };
 
     // DM Zarı At
@@ -784,9 +823,35 @@ export default function DMDashboard() {
                 <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
                     {/* Savaş/Encounter Paneli */}
                     <section className="xl:col-span-2 bg-gray-900/40 backdrop-blur-md rounded-2xl p-6 border border-gray-700/50 shadow-[0_8px_32px_rgba(0,0,0,0.5)] flex flex-col h-[75vh]">
-                        <h2 className="text-xl font-black text-red-500 mb-6 flex items-center gap-2 tracking-wide">
-                            <span className="bg-red-900/40 px-2 py-1 rounded-lg border border-red-500/30">⚔️</span> Aktif Savaş Çizelgesi
-                        </h2>
+                        <div className="flex justify-between items-center mb-6">
+                            <h2 className="text-xl font-black text-red-500 flex items-center gap-2 tracking-wide">
+                                <span className="bg-red-900/40 px-2 py-1 rounded-lg border border-red-500/30">⚔️</span> Aktif Savaş Çizelgesi
+                            </h2>
+                            <div className="flex gap-2">
+                                <select 
+                                    className="bg-gray-800 border border-gray-700 text-xs rounded px-2 py-1 outline-none focus:border-red-500"
+                                    onChange={(e) => {
+                                        if (e.target.value) addPlayerToEncounter(e.target.value);
+                                        e.target.value = "";
+                                    }}
+                                >
+                                    <option value="">+ Karakter Ekle</option>
+                                    {Object.keys(partyStats || {}).map(name => (
+                                        <option key={name} value={name}>{name}</option>
+                                    ))}
+                                </select>
+                                <button 
+                                    onClick={() => {
+                                        const updated = [...activeCombatants].sort((a, b) => b.initiative - a.initiative);
+                                        setActiveCombatants(updated);
+                                        syncEncounter(updated);
+                                    }}
+                                    className="bg-gray-800 border border-gray-700 text-[10px] font-bold px-2 py-1 rounded hover:bg-gray-700 transition-colors"
+                                >
+                                    🔄 Sırala
+                                </button>
+                            </div>
+                        </div>
 
                         <div className="flex-1 overflow-y-auto space-y-4 pr-2">
                             {activeCombatants.length === 0 ? (
@@ -795,7 +860,7 @@ export default function DMDashboard() {
                                 activeCombatants.map((monster, index) => (
                                     <div
                                         key={monster.id}
-                                        className={`bg-gray-800 rounded-lg border-l-4 shadow-md group cursor-pointer transition-all hover:bg-gray-700 ${monster.currentHp <= 0 ? 'opacity-50 grayscale contrast-75 border-gray-600' : (monster._isLeveledNpc
+                                        className={`bg-gray-800 rounded-lg border-l-4 shadow-md group cursor-pointer transition-all hover:bg-gray-700 ${monster.currentHp <= 0 ? 'opacity-50 grayscale contrast-75 border-gray-600' : (monster._isPlayer ? 'border-blue-500' : monster._isLeveledNpc
                                             ? monster._relationship === 'Dost' ? 'border-emerald-500' : monster._relationship === 'Düşman' ? 'border-red-500' : 'border-yellow-500'
                                             : 'border-red-500')
                                             }`}
@@ -811,12 +876,20 @@ export default function DMDashboard() {
                                     >
                                         <div className="p-4 flex justify-between items-center">
                                             <div className="flex items-center space-x-4">
-                                                <div className="bg-gray-900 px-3 py-1 rounded text-yellow-500 font-black border border-gray-700 w-12 text-center">
-                                                    {monster.initiative}
+                                                <div className="bg-gray-900 px-1 py-1 rounded text-yellow-500 font-black border border-gray-700 w-14 text-center" onClick={e => e.stopPropagation()}>
+                                                    <input 
+                                                        type="number" 
+                                                        value={monster.initiative} 
+                                                        onChange={(e) => updateCombatantInitiative(monster.id, parseInt(e.target.value) || 0)}
+                                                        className="w-full bg-transparent text-center outline-none focus:text-white"
+                                                    />
                                                 </div>
                                                 <div>
                                                     <div className="flex items-center gap-2">
-                                                        <div className="font-bold text-lg text-white group-hover:text-red-400 transition-colors">{monster.name}</div>
+                                                        <div className="font-bold text-lg text-white group-hover:text-red-400 transition-colors">
+                                                            {monster._isPlayer && <span className="mr-2">👤</span>}
+                                                            {monster.name}
+                                                        </div>
                                                         {monster._isLeveledNpc && (
                                                             <span className={`text-[9px] px-1.5 py-0.5 rounded font-black uppercase ${monster._relationship === 'Dost' ? 'bg-emerald-700 text-emerald-100' :
                                                                 monster._relationship === 'Düşman' ? 'bg-red-700 text-red-100' :
@@ -1964,15 +2037,15 @@ export default function DMDashboard() {
                                                             <span className="w-2 h-2 rounded-full bg-blue-500 inline-block animate-pulse"></span> Oyuncuya Doğrudan Gönder
                                                         </label>
                                                         <div className="flex flex-wrap gap-2 mb-4">
-                                                            {Object.values(partyStats || {}).map((ps: any) => {
+                                                            {Object.entries(partyStats || {}).map(([charName, ps]: [string, any]) => {
                                                                 const isSelected = selectedPlayerToGift === (ps.characterId || ps.id);
                                                                 return (
                                                                     <button
-                                                                        key={ps.characterId || ps.id}
+                                                                        key={ps.characterId || ps.id || charName}
                                                                         onClick={() => setSelectedPlayerToGift(ps.characterId || ps.id)}
                                                                         className={`px-3 py-1.5 rounded-lg text-[11px] font-black uppercase transition-all shadow-sm border ${isSelected ? 'bg-blue-600 border-blue-400 text-white shadow-blue-900/50 transform scale-105' : 'bg-gray-800 border-gray-700 text-gray-400 hover:bg-gray-700 hover:text-gray-200 hover:border-gray-500'}`}
                                                                     >
-                                                                        {ps.name}
+                                                                        {ps.name || charName}
                                                                     </button>
                                                                 );
                                                             })}

@@ -22,6 +22,7 @@ const characterSchema = new mongoose.Schema({
     tempHp: { type: Number, default: 0 },
     ac: Number,
     spells: [String],
+    preparedSpells: [String],
     pinnedSpells: [String],
     spellSlots: { type: Map, of: Number },
     feats: [String],

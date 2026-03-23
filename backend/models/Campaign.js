@@ -11,7 +11,15 @@ const campaignSchema = new mongoose.Schema({
         isActive: { type: Boolean, default: false },
         round: { type: Number, default: 0 },
         turnIndex: { type: Number, default: 0 },
-        participants: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Character' }]
+        participants: [{
+            characterId: { type: mongoose.Schema.Types.ObjectId, ref: 'Character' },
+            name: String,
+            initiative: { type: Number, default: 0 },
+            ac: Number,
+            currentHp: Number,
+            maxHp: Number,
+            isPlayer: { type: Boolean, default: false }
+        }]
     },
     mapData: {
         bgUrl: { type: String, default: '' },

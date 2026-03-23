@@ -3348,6 +3348,37 @@
                         "desc_tr": "Darbe aldığında Reaksiyon ile SÜRÜYE DÖNÜŞÜP DAĞILIR ve hasarı yarı yarıya düşürürsün(Resistance). Akabinde böcek bulutun 30 feet uzağa uçarak kendini saniyeler içinde baştan toparlar (Kusursuz bedava ışınlanmalı savunma)."
                     }
                 ]
+            },
+            {
+                "name": "Drakewarden",
+                "description_tr": "Ejderhaların yüce gücüyle mistik bir bağ kuran, yanında sadık bir ejderha dostu (Drake) ile savaşan ve elementlerin kadim enerjisini hem kılıcına hem de zırhına yansıtan kadim Ranger yolu.",
+                "features": [
+                    {
+                        "level": 3,
+                        "name": "Draconic Gift",
+                        "desc_tr": "Ejderha dillerini (Draconic) sökersin ve Thaumaturgy cantrip'ini öğrenirsin. Ejderhaların mistik dokunuşu üzerindedir."
+                    },
+                    {
+                        "level": 3,
+                        "name": "Drake Companion",
+                        "desc_tr": "Bir eylemle sadık bir Drake (Küçük Ejderha) çağırırsın. O senin emirlerini dinler, ısırığıyla seçtiğin bir elementte (Ateş, Soğuk, Asit, Yıldırım veya Zehir) hasar vurur ve reaksiyonunla senin silah hasarına element ekler."
+                    },
+                    {
+                        "level": 7,
+                        "name": "Bond of Fang and Scale",
+                        "desc_tr": "Ejderhanla bağın fizikselleşir. Drake artık uçabilir (kanatlar çıkar) ve binit (Mount) olarak kullanılabilir. Ayrıca seçtiğin bir elemente karşı hem sen hem de ejderhan direnç (Resistance) kazanırsınız."
+                    },
+                    {
+                        "level": 11,
+                        "name": "Drake's Breath",
+                        "desc_tr": "Ejderhan (veya sen) 30 feetlik bir alana element nefesi (8d6 hasar) püskürtebilirsiniz. Kısa veya uzun dinlenmede bir kez ücretsizdir."
+                    },
+                    {
+                        "level": 15,
+                        "name": "Perfected Bond",
+                        "desc_tr": "Mükemmel bağ. Ejderhanın boyutu BÜYÜK (Large) olur ve saldırıları (Bite) +1d6 fazladan vurur. Ayrıca sen veya ejderhan hasar aldığınızda reaksiyonla birbirinize direnç sağlayarak hasarı yarıya indirebilirsiniz."
+                    }
+                ]
             }
         ]
     },
@@ -3652,6 +3683,21 @@
                         "level": 3,
                         "name": "Insightful Fighting",
                         "desc_tr": "Bonus action ile düşmanı analiz edip zırh bağımsız Sneak Attack uygularsın."
+                    },
+                    {
+                        "level": 9,
+                        "name": "Steady Eye",
+                        "desc_tr": "Yeter ki sakin kal. Kendi turunda hızının yarısından fazla hareket etmediysen, Wisdom (Perception) veya Intelligence (Investigation) zarlarını Avantajlı (Advantage) atarsın."
+                    },
+                    {
+                        "level": 13,
+                        "name": "Unerring Eye",
+                        "desc_tr": "Seni kandırmak imkansız. Eylem (Action) harcayarak 30 feet içindeki illüzyonları, şekil değiştirenleri ve duyuları aldatan büyüleri anında sezip fark edersin."
+                    },
+                    {
+                        "level": 17,
+                        "name": "Eye for Weakness",
+                        "desc_tr": "Düşmanın açığını buldun! Insightful Fighting özelliğin bir hedefe karşı aktifken, ona yaptığın Sneak Attack hasarına fazladan 3d6 zar daha eklersin."
                     }
                 ]
             },
@@ -3663,6 +3709,21 @@
                         "level": 3,
                         "name": "Skirmisher",
                         "desc_tr": "Bitişik düşman varken reaksiyon ile 5 ft çekilebilirsin (fırsat saldırısı olmadan)."
+                    },
+                    {
+                        "level": 9,
+                        "name": "Superior Mobility",
+                        "desc_tr": "Durdurulamaz izci! Yürüme hızın 10 feet artar. Eğer tırmanma (climb) veya yüzme (swim) hızın varsa, bu 10 feetlik artış onlara da eklenir."
+                    },
+                    {
+                        "level": 13,
+                        "name": "Ambush Master",
+                        "desc_tr": "Pusu ustası! İnisiyatif zarlarına Avantaj kazanırsın. Ayrıca bir savaşın ilk turunda vurduğun ilk kişi, senin bir sonraki turuna kadar herkesin saldırılarına karşı Avantajlı (Advantage) hale gelir."
+                    },
+                    {
+                        "level": 17,
+                        "name": "Sudden Strike",
+                        "desc_tr": "Yıldırım gibi iki vuruş! Kendi turunda Saldırı (Attack) eylemi yaptığında, Bonus Eylemle fazladan bir silah saldırısı daha yapabilirsin. Bu ikinci saldırı, o tur Sneak Attack kullanmış olsan bile (farklı bir hedefe ise) Sneak Attack hasarı vurabilir."
                     }
                 ]
             },
@@ -3674,6 +3735,21 @@
                         "level": 3,
                         "name": "Wails from the Grave",
                         "desc_tr": "Sneak Attack aynı anda ikinci bir düşmana da nekrotik hasar verir."
+                    },
+                    {
+                        "level": 9,
+                        "name": "Tokens of the Departed",
+                        "desc_tr": "Ölülerin hatırası. 30 feet yakınında bir canlı öldüğünde Reaksiyonla onun ruhunu ufak bir objeye (Soul Trinket) hapsedersin. Bu objeler sende olduğu sürece Death Save ve CON save zarlarına avantaj kazanırsın. Ayrıca bunları yok ederek ruhlara soru sorabilirsin."
+                    },
+                    {
+                        "level": 13,
+                        "name": "Ghost Walk",
+                        "desc_tr": "Bonus Eylemle 10 dakikalığına ruhani bir forma geçersin; uçar, havada süzülür ve duvarların içinden geçebilirsin. Bu formdayken sana yapılan saldırılar Dezavantajlı (Disadvantage) olur."
+                    },
+                    {
+                        "level": 17,
+                        "name": "Death's Friend",
+                        "desc_tr": "Ölümün en yakın dostu! Wails from the Grave özelliğin artık her iki hedefe de Sneak Attack'ın tam hasarını vurur. Ayrıca uzun dinlenme sonunda hiç ruh objen (soul trinket) yoksa bir tane bedava kazanırsın."
                     }
                 ]
             },
@@ -3685,6 +3761,21 @@
                         "level": 3,
                         "name": "Psychic Blades",
                         "desc_tr": "Maddesel olmayan psiyonik bıçaklar oluşturursun; direnç uygulanamaz."
+                    },
+                    {
+                        "level": 9,
+                        "name": "Soul Blades",
+                        "desc_tr": "Psişik bıçakların evrim geçirir! Iskalamak üzere olduğun atışlara Psiyonik zar ekleyerek tutturabilirsin (Homing Strikes). Ayrıca bir bıçak fırlatıp patlatarak o noktaya ışınlanabilirsin (Psychic Teleportation)."
+                    },
+                    {
+                        "level": 13,
+                        "name": "Psychic Veil",
+                        "desc_tr": "Zihinsel perde! Eylem (Action) harcayarak kendini ve eşyalarını 1 saatliğine tamamen Görünmez (Invisible) yapabilirsin. Birine hasar verirsen veya save attırırsan görünmezlik bozulur."
+                    },
+                    {
+                        "level": 17,
+                        "name": "Rend Mind",
+                        "desc_tr": "Zihin parçalayan darbe! Psişik bıçağınla Sneak Attack vurduğun bir rakibi Wisdom Save atamazsa 1 dakikalığına sersemletebilirsin (Stunned)."
                     }
                 ]
             }
@@ -4018,6 +4109,21 @@
                         "level": 1,
                         "name": "Strength of the Grave",
                         "desc_tr": "HP'n 0'a düşünce Charisma kurtarma atışıyla ayakta kalabilirsin."
+                    },
+                    {
+                        "level": 6,
+                        "name": "Hound of Ill Omen",
+                        "desc_tr": "Melanet köpeği! Bonus Eylem ve 3 Sorcery Point ile bir hedefi damgalayan sadık bir gölge köpek çağırırsın. Köpek hedefine saldırır ve hedefin senin büyü de dahil tüm save zarlarına Dezavantaj almasını sağlar."
+                    },
+                    {
+                        "level": 14,
+                        "name": "Shadow Walk",
+                        "desc_tr": "Gölge yürüyüşü! Bir gölgenin içindeyken Bonus Eylemle 120 feet mesafedeki başka bir gölgenin içine anında ışınlanabilirsin."
+                    },
+                    {
+                        "level": 18,
+                        "name": "Umbral Form",
+                        "desc_tr": "Gölge formu! 6 Sorcery Point harcayarak 1 dakikalığına yarı saydam bir gölgeye dönüşürsün. Tüm hasarlara (Force ve Radiant hariç) Direnç kazanırsın ve nesnelerin içinden geçebilirsin."
                     }
                 ]
             },
@@ -4029,6 +4135,21 @@
                         "level": 1,
                         "name": "Tempestuous Magic",
                         "desc_tr": "Büyü attıktan sonra Bonus Action ile 10 ft uçarak hareket edebilirsin."
+                    },
+                    {
+                        "level": 6,
+                        "name": "Heart of the Storm",
+                        "desc_tr": "Fırtınanın kalbi! Yıldırım ve Gök gürültüsü (Lightning/Thunder) hasarına direnç kazanırsın. Ayrıca bir büyü attığında çevrendeki düşmanlara fırtına hasarı verirsin."
+                    },
+                    {
+                        "level": 14,
+                        "name": "Storm's Fury",
+                        "desc_tr": "Fırtınanın öfkesi! Bir düşman sana vurduğunda Reaksiyonla ona elektrik şoku verip geriye doğru savurabilirsin."
+                    },
+                    {
+                        "level": 18,
+                        "name": "Wind Soul",
+                        "desc_tr": "Rüzgarın ruhu! Kalıcı uçma hızı kazanırsın. Ayrıca müttefiklerini de rüzgarla havaya kaldırıp onların da uçmasını sağlayabilirsin."
                     }
                 ]
             }
@@ -4281,6 +4402,21 @@
                         "level": 1,
                         "name": "Awakened Mind",
                         "desc_tr": "30 ft içindeki canlıyla dil engeli olmaksızın telepatik konuşabilirsin."
+                    },
+                    {
+                        "level": 6,
+                        "name": "Entropic Ward",
+                        "desc_tr": "Entropik kalkan! Sana saldıran birine Reaksiyonla Dezavantaj verebilirsin. Eğer saldırı ıskalarsa, senin o hedefe yapacağın sonraki saldırın Avantajlı olur."
+                    },
+                    {
+                        "level": 10,
+                        "name": "Thought Shield",
+                        "desc_tr": "Zihin kalkanı! Psişik hasara direnç kazanırsın ve birisi senin zihnini okumaya ya da psişik hasar vermeye çalışırsa o hasarı aynen ona geri yansıtırsın."
+                    },
+                    {
+                        "level": 14,
+                        "name": "Create Thrall",
+                        "desc_tr": "Mistik köleleştirme! Bilinci yerinde olmayan bir insansıya dokunarak onu sonsuza dek (büyü bozulana dek) telepatik kölen yapabilir ve her zaman Charm etkisinde tutabilirsin."
                     }
                 ]
             },
@@ -4292,6 +4428,21 @@
                         "level": 1,
                         "name": "Healing Light",
                         "desc_tr": "Bonus action ile can iyileştirebilirsin (1d6 x Warlock seviyesi pool)."
+                    },
+                    {
+                        "level": 6,
+                        "name": "Radiant Soul",
+                        "desc_tr": "Işıltılı ruh! Işıltılı (Radiant) hasara direnç kazanırsın. Ayrıca ışıltılı veya ateş hasarı veren büyülerin hasarını Karizma puanın kadar artırırsın."
+                    },
+                    {
+                        "level": 10,
+                        "name": "Celestial Resistance",
+                        "desc_tr": "Göklerin koruması! Her dinlenme sonunda kendine ve 5 arkadaşına seviyen + Karizma kadar Geçici Can (Temp HP) kazandırırsın."
+                    },
+                    {
+                        "level": 14,
+                        "name": "Searing Vengeance",
+                        "desc_tr": "Yakıcı intikam! Ölüm eşiğine (0 HP) geldiğinde patlayarak ayağa kalkarsın; çevrendeki düşmanlar kör olur ve 2d8 + Karizma kadar ışıltılı hasar yer."
                     }
                 ]
             },
@@ -4303,6 +4454,21 @@
                         "level": 1,
                         "name": "Tentacle of the Deeps",
                         "desc_tr": "Bonus action ile büyülü tentakel çağırırsın; düşmanları yavaşlatır ve kışkırtır."
+                    },
+                    {
+                        "level": 6,
+                        "name": "Oceanic Soul",
+                        "desc_tr": "Okyanus ruhu! Sualtında nefes alabilirsin ve yüzme hızı kazanırsın. Ayrıca 30 feet'teki herkesle suyun altında konuşabilir ve soğuk hasarına direnç kazanırsın."
+                    },
+                    {
+                        "level": 10,
+                        "name": "Guardian Coil",
+                        "desc_tr": "Koruyucu sarmal! Tentakelin artık seni ve arkadaşlarını koruyabilir; hasar aldığınızda Reaksiyonla hasarı azaltabilirsin."
+                    },
+                    {
+                        "level": 14,
+                        "name": "Fathomless Plunge",
+                        "desc_tr": "Derinliklere yolculuk! Eylem (Action) harcayarak kendinle beraber 5 arkadaşını 1 mil mesafedeki herhangi bir su kütlesine anında ışınlayabilirsin."
                     }
                 ]
             },
@@ -4314,6 +4480,21 @@
                         "level": 1,
                         "name": "Form of Dread",
                         "desc_tr": "Ölüm görünümüne bürünerek geçici can, Fright bağışıklığı ve düşman korkutma kazanırsın."
+                    },
+                    {
+                        "level": 6,
+                        "name": "Grave Touched",
+                        "desc_tr": "Mezar dokunuşu! Artık yemek yemeye veya nefes almaya ihtiyacın yok. Ayrıca vurduğun hasarın türünü Nekrotik hasara çevirebilir ve her tur bir kez fazladan bir hasar zarı atabilirsin."
+                    },
+                    {
+                        "level": 10,
+                        "name": "Necrotic Husk",
+                        "desc_tr": "Ölü doku! Nekrotik hasara direnç kazanırsın. Canın 0'a düştüğünde patlayarak etrafa hasar saçıp 1 HP ile ayağa kalkabilirsin."
+                    },
+                    {
+                        "level": 14,
+                        "name": "Spirit Projection",
+                        "desc_tr": "Ruhsal yansıma! Bedeninden ruhunu ayırıp özgürce uçabilirsin; bu formdayken tüm fiziksel hasarlara dirençli olursun ve müttefiklerini iyileştirebilirsin."
                     }
                 ]
             }
@@ -4785,17 +4966,6 @@
                 ]
             },
             {
-                "name": "War Magic",
-                "description_tr": "Savunma ve saldırıyı eş zamanlı yürüten, büyü-zırh uyumunda mükemmelleşmiş savaş büyücüleri.",
-                "features": [
-                    {
-                        "level": 2,
-                        "name": "Arcane Deflection",
-                        "desc_tr": "Saldırı veya kurtarma atışı için reaksiyon olarak +2/+4 bonus kazanırsın."
-                    }
-                ]
-            },
-            {
                 "name": "Graviturgy Magic",
                 "description_tr": "Yerçekimini manipüle ederek düşmanları iter, çeker veya ağırlaştıran Exandria büyücüleri.",
                 "features": [
@@ -4803,6 +4973,21 @@
                         "level": 2,
                         "name": "Adjust Density",
                         "desc_tr": "Bir nesneyi ağırlaştırıp yavaşlatırsın ya da hafifleştirip yükseltirsin."
+                    },
+                    {
+                        "level": 6,
+                        "name": "Gravity Well",
+                        "desc_tr": "Yerçekimi kuyusu! Bir yaratığa büyü attığında, yerçekimini bükerek onu 5 feet istediğin yöne doğru çekebilir ya da itebilirsin."
+                    },
+                    {
+                        "level": 10,
+                        "name": "Violent Accentuation",
+                        "desc_tr": "Şiddetli vurgu! Bir yaratığa hasar vurduğunda yerçekimini yoğunlaştırarak hasarı 2d10 artırabilirsin. Ya da birinin düşme hasarını korkunç seviyelere çıkarabilirsin."
+                    },
+                    {
+                        "level": 14,
+                        "name": "Event Horizon",
+                        "desc_tr": "Olay ufku! Eylem (Action) harcayarak çevrende 30 feetlik bir yerçekimi alanı oluşturursun. Düşmanlar bu alanda çok yavaş hareket eder ve her tur başında devasa Force hasarı alarak yere yapışırlar."
                     }
                 ]
             }

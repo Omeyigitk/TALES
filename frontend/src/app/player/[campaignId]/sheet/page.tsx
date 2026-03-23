@@ -42,7 +42,10 @@ const SAVING_THROWS = ["STR", "DEX", "CON", "INT", "WIS", "CHA"];
 // Proficiency bonusu hesapla
 const profBonus = (level: number) => Math.ceil(1 + level / 4);
 
-const fmt = (n: number) => (n >= 0 ? `+${n}` : String(n));
+const fmt = (n: any) => {
+    if (n === undefined || n === null || isNaN(n)) return undefined;
+    return n >= 0 ? `+${n}` : String(n);
+};
 
 // Helper to evaluate attack strings like "STR+Prof" or "DEX+Prof"
 const evalAtk = (str: string, abilityMods: any, prof: number) => {
@@ -154,6 +157,7 @@ const PlayerSheet = () => {
 
     // UI & Tab States
     const [activeTab, setActiveTab] = useState('combat');
+    const [isSubclassFeaturesOpen, setIsSubclassFeaturesOpen] = useState(true);
     const [isPrivateNotesOpen, setIsPrivateNotesOpen] = useState(false);
     const [isSavingPrivateNotes, setIsSavingPrivateNotes] = useState(false);
     const [privateNotes, setPrivateNotes] = useState("");
@@ -163,7 +167,6 @@ const PlayerSheet = () => {
 
     // Modal & Selection States
     const [isGalleryOpen, setIsGalleryOpen] = useState(false);
-    const [isShopModalOpen, setIsShopModalOpen] = useState(false);
     const [isSpellModalOpen, setIsSpellModalOpen] = useState(false);
     const [showLongRestModal, setShowLongRestModal] = useState(false);
     const [showLevelChart, setShowLevelChart] = useState(false);
@@ -197,6 +200,7 @@ const PlayerSheet = () => {
     const [newPartyItemName, setNewPartyItemName] = useState("");
     const [newPartyItemQty, setNewPartyItemQty] = useState(1);
     const [newPartyItemNote, setNewPartyItemNote] = useState("");
+    const [partyGoldInput, setPartyGoldInput] = useState("");
     
     // Gallery/Image Viewer State
     const [selectedImage, setSelectedImage] = useState<string | null>(null);
@@ -264,6 +268,10 @@ const PlayerSheet = () => {
     const [wizardCantripOptions, setWizardCantripOptions] = useState<any[]>([]);
     const [isDraggingToken, setIsDraggingToken] = useState<string | null>(null);
     const [showFeatsUI, setShowFeatsUI] = useState(true);
+    const [showRacialTraitsUI, setShowRacialTraitsUI] = useState(true);
+    const [showBackgroundUI, setShowBackgroundUI] = useState(true);
+    const [showActionsUI, setShowActionsUI] = useState(true);
+    const [showAttacksUI, setShowAttacksUI] = useState(true);
     const [expandedFeat, setExpandedFeat] = useState<string | null>(null);
     const [showDiceLogUI, setShowDiceLogUI] = useState(true);
     const [confirmShortRest, setConfirmShortRest] = useState(false);
@@ -272,18 +280,7 @@ const PlayerSheet = () => {
 
 
     // Helper: Modifiers
-    const mod = (score: number, statName: string) => {
-        let val = Math.floor((score - 10) / 2);
-        // Add item bonuses if applicable
-        if (character) {
-            (character.inventory || []).filter((it: any) => it.isEquipped && it.effects).forEach((it: any) => {
-                it.effects.forEach((eff: any) => {
-                    if (eff.type === 'stat_bonus' && eff.stat === statName) val += eff.value;
-                });
-            });
-        }
-        return val;
-    };
+    const mod = (score: number) => Math.floor((score - 10) / 2);
 
     const extractDice = (str: string) => {
         if (!str) return null;
@@ -292,14 +289,43 @@ const PlayerSheet = () => {
     };
 
     // Derived Values
-    const stats = character?.stats || {};
+    const stats = character?.stats || { STR: 10, DEX: 10, CON: 10, INT: 10, WIS: 10, CHA: 10 };
+    
+    // Effective Stats (Including Item Bonuses/Overrides)
+    const effectiveStats = (() => {
+        const eff = { ...stats };
+        if (character?.inventory) {
+            // 1. Stat Overrides (e.g. STR to 19)
+            character.inventory.forEach((it: any) => {
+                if (it.isEquipped && it.effects) {
+                    it.effects.forEach((effct: any) => {
+                        if (effct.type === 'stat_override' && effct.stat && typeof effct.value === 'number') {
+                            eff[effct.stat as keyof typeof eff] = Math.max(eff[effct.stat as keyof typeof eff], effct.value);
+                        }
+                    });
+                }
+            });
+            // 2. Stat Bonuses (e.g. +2 STR)
+            character.inventory.forEach((it: any) => {
+                if (it.isEquipped && it.effects) {
+                    it.effects.forEach((effct: any) => {
+                        if (effct.type === 'stat_bonus' && effct.stat && typeof effct.value === 'number') {
+                            eff[effct.stat as keyof typeof eff] += effct.value;
+                        }
+                    });
+                }
+            });
+        }
+        return eff;
+    })();
+
     const mods = {
-        STR: mod(stats.STR || 10, 'STR'),
-        DEX: mod(stats.DEX || 10, 'DEX'),
-        CON: mod(stats.CON || 10, 'CON'),
-        INT: mod(stats.INT || 10, 'INT'),
-        WIS: mod(stats.WIS || 10, 'WIS'),
-        CHA: mod(stats.CHA || 10, 'CHA')
+        STR: mod(effectiveStats.STR || 10),
+        DEX: mod(effectiveStats.DEX || 10),
+        CON: mod(effectiveStats.CON || 10),
+        INT: mod(effectiveStats.INT || 10),
+        WIS: mod(effectiveStats.WIS || 10),
+        CHA: mod(effectiveStats.CHA || 10)
     };
     const lv = character?.level || 1;
     const level = lv; // Alias for level which is used in some calculations
@@ -334,6 +360,29 @@ const PlayerSheet = () => {
         } catch (e) { console.error("Save failure:", e); }
     };
 
+    const [showDefensesModal, setShowDefensesModal] = useState(false);
+    const [defenseType, setDefenseType] = useState<"resistances"|"immunities"|"vulnerabilities">("resistances");
+    const [defenseInput, setDefenseInput] = useState("");
+
+    const handleAddDefense = async () => {
+        if (!defenseInput.trim()) return;
+        const currentArr = character[defenseType] || [];
+        const updatedArr = [...currentArr, defenseInput.trim()];
+        const updatedChar = { ...character, [defenseType]: updatedArr };
+        setCharacter(updatedChar);
+        if (socket) (socket as any).emit('update_character_stat', { campaignId, characterId: character._id, stat: defenseType, value: updatedArr });
+        setDefenseInput("");
+        await axios.put(`${API_URL}/api/characters/${character._id}`, { [defenseType]: updatedArr });
+    };
+
+    const handleRemoveDefense = async (type: string, idx: number) => {
+        const currentArr = character[type as keyof typeof character] || [];
+        const updatedArr = (currentArr as any).filter((_: any, i: number) => i !== idx);
+        const updatedChar = { ...character, [type]: updatedArr };
+        setCharacter(updatedChar);
+        if (socket) (socket as any).emit('update_character_stat', { campaignId, characterId: character._id, stat: type, value: updatedArr });
+        await axios.put(`${API_URL}/api/characters/${character._id}`, { [type]: updatedArr });
+    };
 
     // Effects
     useEffect(() => {
@@ -701,8 +750,26 @@ const PlayerSheet = () => {
 
     const toggleEquip = async (index: number) => {
         if (!character) return;
-        const newInventory = character.inventory.map((item: any, i: number) => 
-            i === index ? { ...item, isEquipped: !item.isEquipped } : item
+        const item = character.inventory[index];
+        const isEquipping = !item.isEquipped;
+
+        // Magical item limit check (Attunement)
+        if (isEquipping) {
+            const isMagical = item.requires_attunement || (item.rarity && !['Common', 'None'].includes(item.rarity));
+            if (isMagical) {
+                const attunedCount = (character.inventory || []).filter((it: any) => 
+                    it.isEquipped && (it.requires_attunement || (it.rarity && !['Common', 'None'].includes(it.rarity)))
+                ).length;
+                
+                if (attunedCount >= 3) {
+                    showToast("Uyumlanma Sınırı!", "Maksimum 3 büyülü eşyaya uyumlanabilirsin.", "bg-red-900 border-red-500 text-red-100 shadow-xl");
+                    return;
+                }
+            }
+        }
+
+        const newInventory = character.inventory.map((it: any, i: number) => 
+            i === index ? { ...it, isEquipped: !it.isEquipped } : it
         );
         try {
             const res = await axios.put(`${API_URL}/api/characters/${character._id}`, { inventory: newInventory }, { headers: { 'Authorization': `Bearer ${token}` } });
@@ -788,6 +855,21 @@ const PlayerSheet = () => {
         showToast('Ortak Kasaya Eklendi', `${newPartyItemName} parti kasasına kondu.`, 'bg-yellow-900 border-yellow-500 text-yellow-100');
     };
 
+    const handleUpdatePartyGold = (action: 'add' | 'sub' | 'set') => {
+        if (!partyGoldInput || !socket) return;
+        const amount = parseInt(partyGoldInput);
+        if (isNaN(amount) || amount < 0) return;
+
+        let newGold = partyGold || 0;
+        if (action === 'add') newGold += amount;
+        if (action === 'sub') newGold = Math.max(0, newGold - amount);
+        if (action === 'set') newGold = amount;
+
+        (socket as any).emit('update_party_gold', { campaignId, gold: newGold });
+        setPartyGoldInput("");
+        showToast('Ortak Kasa Güncellendi', `Yeni bakiye: ${newGold.toLocaleString()} GP`, 'bg-yellow-900 border-yellow-500 text-yellow-100');
+    };
+
     const updatePartyItemQty = (index: number, delta: number) => {
         if (!socket) return;
         const inv: any[] = [...(partyInventory || [])];
@@ -842,6 +924,73 @@ const PlayerSheet = () => {
         } catch { 
             showToast('Error', 'Failed to update spell list.', 'bg-red-900 border-red-500 text-red-100');
         }
+    };
+
+    const togglePrepareSpell = async (spellName: string) => {
+        if (!character) return;
+        const currentPrepared = [...(character.preparedSpells || [])];
+        const isPrepared = currentPrepared.includes(spellName);
+        
+        if (!isPrepared) {
+            const limit = getMaxPreparedSpells();
+            // Count prepared spells that are not cantrips (cantrips don't normally need preparation in 5e for these classes, but let's be sure)
+            const preparedLeveled = currentPrepared.filter(s => {
+                const sd = allSpells.find(x => x.name === s) || spellDetails[s];
+                return sd?.level_int > 0;
+            }).length;
+
+            const spellData = allSpells.find(s => s.name === spellName) || spellDetails[spellName];
+            const isCantrip = spellData?.level_int === 0;
+
+            if (!isCantrip && preparedLeveled >= limit) {
+                return showToast('Hazırlık Sınırı', `En fazla ${limit} büyü hazırlayabilirsin.`, 'bg-orange-900 border-orange-500 text-orange-100');
+            }
+        }
+
+        let newPrepared = isPrepared 
+            ? currentPrepared.filter(s => s !== spellName) 
+            : [...currentPrepared, spellName];
+        
+        try {
+            const res = await axios.put(`${API_URL}/api/characters/${character._id}`, { preparedSpells: newPrepared }, { headers: { 'Authorization': `Bearer ${token}` } });
+            setCharacter(res.data);
+            showToast(isPrepared ? 'Büyü Hazırlığı Kaldırıldı 🧊' : 'Büyü Hazırlandı 🔥', `${spellName} listenden ${isPrepared ? 'çıkarıldı' : 'eklendi'}.`, 'bg-blue-900 border-blue-500 text-blue-100');
+        } catch {
+            showToast('Hata', 'Büyü hazırlığı güncellenemedi.', 'bg-red-900 border-red-500 text-red-100');
+        }
+    };
+
+    const getMaxPreparedSpells = () => {
+        if (!character) return 0;
+        
+        let totalLimit = 0;
+        const clsName = character.classRef?.name || '';
+        const mcs = character.multiclass || [];
+        
+        const classes = [clsName, ...mcs.map((mc: any) => mc.className)];
+        const levels = [character.level || 1, ...mcs.map((mc: any) => mc.level || 1)];
+
+        classes.forEach((className, idx) => {
+            const level = levels[idx];
+            const ability = getSpellcastingAbility(className);
+            const mod = getModifier(ability);
+
+            if (['Wizard', 'Cleric', 'Druid'].includes(className)) {
+                totalLimit += Math.max(1, level + mod);
+            } else if (['Paladin', 'Artificer'].includes(className)) {
+                totalLimit += Math.max(1, Math.floor(level / 2) + mod);
+            }
+        });
+
+        return totalLimit;
+    };
+
+    const needsPreparationCheck = () => {
+        if (!character) return false;
+        const clsName = character.classRef?.name || '';
+        const mcs = character.multiclass || [];
+        const classes = [clsName, ...mcs.map((mc: any) => mc.className)];
+        return classes.some(c => ['Wizard', 'Cleric', 'Druid', 'Paladin', 'Artificer'].includes(c));
     };
 
     const useSlot = async (slotLevel: number, spellName: string = 'Basic Spell', isConcentration: boolean = false) => {
@@ -1068,7 +1217,7 @@ const PlayerSheet = () => {
         // Use fallback hit_die if missing
         const hitDie = (cls.hit_die || 'd8') as string;
         const hitDieMax = parseInt(hitDie.replace('d', '')) || 8;
-        const conMod = mod(char.stats?.CON ?? 10, 'CON');
+        const conMod = mod(char.stats?.CON ?? 10);
         let hpGained = Math.floor(hitDieMax / 2) + 1 + conMod;
 
         // Feat HP Bonus (e.g. Tough: +2 per level)
@@ -1143,7 +1292,7 @@ const PlayerSheet = () => {
 
         // Hit die average + CON mod for new class first level
         const hitDieMax = parseInt((pickedCls.hit_die || 'd8').replace('d', '')) || 8;
-        const conMod = mod(char.stats?.CON ?? 10, 'CON');
+        const conMod = mod(char.stats?.CON ?? 10);
         const hpGained = Math.floor(hitDieMax / 2) + 1 + conMod;
 
         const currentMulticlasses = char.multiclasses || [];
@@ -1195,7 +1344,7 @@ const PlayerSheet = () => {
 
         const hitDie = (cls.hit_die || 'd8') as string;
         const hitDieMax = parseInt(hitDie.replace('d', '')) || 8;
-        const conMod = mod(char.stats?.CON ?? 10, 'CON');
+        const conMod = mod(char.stats?.CON ?? 10);
         const hpLost = Math.floor(hitDieMax / 2) + 1 + conMod;
 
         setIsLevelingUp(true);
@@ -1239,7 +1388,7 @@ const PlayerSheet = () => {
             if (clsData) hitDieStr = clsData.hit_die || 'd8';
         }
         const hitDieMax = parseInt(hitDieStr.replace('d', '')) || 8;
-        const conMod = mod(char.stats?.CON ?? 10, 'CON');
+        const conMod = mod(char.stats?.CON ?? 10);
         const hpGained = Math.floor(hitDieMax / 2) + 1 + conMod;
 
         const newLv = (mc.level || 1) + 1;
@@ -1392,8 +1541,8 @@ const PlayerSheet = () => {
 
     // ─── Skill bonus hesapla ─────────────────────────────────────────────────
     const getSkillMod = (skill: typeof SKILLS[0]) => {
-        if (!skill || !stats) return 0;
-        let base = mod(stats[skill.ability] || 10, skill.ability);
+        if (!skill || !effectiveStats) return 0;
+        let base = mod(effectiveStats[skill.ability as keyof typeof effectiveStats] || 10);
         const hasExpertise = (character?.expertise || []).includes(skill.name) || (character?.expertise || []).includes(skill.tr);
         if (hasExpertise) return base + (prof || 0) * 2;
         return base;
@@ -1401,10 +1550,10 @@ const PlayerSheet = () => {
 
     // ─── Class-aware AC terebilimi ────────────────────────────────────────────
     const calcAC = () => {
-        if (!stats) return 10;
-        const dexMod = mod(stats.DEX || 10, 'DEX');
-        const wisMod = mod(stats.WIS || 10, 'WIS');
-        const conMod = mod(stats.CON || 10, 'CON');
+        if (!effectiveStats) return 10;
+        const dexMod = mod(effectiveStats.DEX || 10);
+        const wisMod = mod(effectiveStats.WIS || 10);
+        const conMod = mod(effectiveStats.CON || 10);
 
         let baseAC = 10 + dexMod;
         // Class Unarmored Defense
@@ -1459,8 +1608,8 @@ const PlayerSheet = () => {
     // War Magic Wizard adds Int to Initiative (Tactical Wit)
     // Chronurgy Wizard adds Int to Initiative (Temporal Awareness)
     const calcInitiative = () => {
-        if (!stats) return 0;
-        let bonus = mod(stats.DEX || 10, 'DEX') + getItemBonus('initiative_bonus');
+        if (!effectiveStats) return 0;
+        let bonus = mod(effectiveStats.DEX || 10) + getItemBonus('initiative_bonus');
 
         // Feat Initiative Bonuses
         const allFeatsForInit = [...(character?.feats || []), ...(character?.raceBonusFeats || [])];
@@ -1474,8 +1623,8 @@ const PlayerSheet = () => {
             }
         });
 
-        const wisMod = mod(stats.WIS || 10, 'WIS');
-        const intMod = mod(stats.INT || 10, 'INT');
+        const wisMod = mod(effectiveStats.WIS || 10);
+        const intMod = mod(effectiveStats.INT || 10);
         if (cls === 'Fighter' && character.subclass === 'Samurai') return bonus + wisMod;
         if (cls === 'Wizard' && (character.subclass === 'War Magic' || character.subclass === 'Chronurgy')) return bonus + intMod;
         return bonus;
@@ -1490,6 +1639,20 @@ const PlayerSheet = () => {
         if (level >= 6) return 15;
         if (level >= 2) return 10;
         return 0;
+    };
+    
+    const hasDisadvantage = (type: 'attack' | 'check' | 'save') => {
+        const conds = (character?.conditions || []).map((c: string) => c.toLowerCase());
+        if (type === 'attack') {
+            return conds.some(c => ['blinded', 'frightened', 'poisoned', 'prone', 'restrained'].includes(c));
+        }
+        if (type === 'check') {
+            return conds.some(c => ['frightened', 'poisoned'].includes(c));
+        }
+        if (type === 'save') {
+             return conds.some(c => ['restrained'].includes(c)); // Restrained gives disadvantage on Dex saves
+        }
+        return false;
     };
 
 
@@ -1755,12 +1918,37 @@ const PlayerSheet = () => {
                             {character.background && <span className="text-yellow-500 ml-1">· {character.background}</span>}
                         </p>
                         {conditions.length > 0 && (
-                            <div className="flex gap-2 mt-2">
-                                {conditions.map((c: any) => (
-                                    <span key={typeof c === 'string' ? c : (c.name || JSON.stringify(c))} className="px-2 py-0.5 bg-red-900/40 border border-red-700/50 text-red-300 text-[10px] font-black uppercase tracking-wider rounded flex items-center gap-1 shadow-sm">
-                                        ⚠️ {typeof c === 'string' ? c : (c.name || 'Condition')}
-                                    </span>
-                                ))}
+                            <div className="flex flex-col gap-2 mt-3 mb-2">
+                                <div className="flex flex-wrap gap-2">
+                                    {conditions.map((c: any) => {
+                                        const cName = typeof c === 'string' ? c : (c.name || 'Condition');
+                                        const cLower = cName.toLowerCase();
+                                        let tip = "Bu durumun özel mekanik cezaları olabilir.";
+                                        if (cLower.includes("blinded") || cLower.includes("kör")) tip = "Saldırı zarlarınız dezavantajlı. Size karşı yapılan saldırılar avantajlı.";
+                                        else if (cLower.includes("charmed") || cLower.includes("büyü")) tip = "Büyüleyene saldıramazsınız. Büyüleyen size karşı yetenek zarlarında avantajlıdır.";
+                                        else if (cLower.includes("deafened") || cLower.includes("sağır")) tip = "Duyma gerektiren algı zarlarında otomatik başarısız.";
+                                        else if (cLower.includes("frightened") || cLower.includes("korkmuş")) tip = "Korku kaynağını görürken saldırı ve yetenek zarlarında dezavantajlı.";
+                                        else if (cLower.includes("grappled") || cLower.includes("kavran")) tip = "Hareket hızınız 0'dır.";
+                                        else if (cLower.includes("invisible") || cLower.includes("görünmez")) tip = "Saldırı zarlarınız avantajlı. Size karşı yapılan saldırılar dezavantajlı.";
+                                        else if (cLower.includes("paralyzed") || cLower.includes("felçli")) tip = "Hız 0'dır, eylem/tepki yapılamaz. STR/DEX zarları başarısız. 5ft içindeki saldırılar kritik vurur.";
+                                        else if (cLower.includes("petrified") || cLower.includes("taşlaş")) tip = "Hız 0'dır, eylem yapılamaz. Tüm hasarlara dirençli.";
+                                        else if (cLower.includes("poisoned") || cLower.includes("zehir")) tip = "Saldırı zarları ve yetenek kontrolleri dezavantajlı.";
+                                        else if (cLower.includes("prone") || cLower.includes("yere düş")) tip = "Sadece sürünerek ilerlenebilir. Yakın saldırılarda (5ft) düşman avantajlı, uzak (5ft+) dezavantajlı.";
+                                        else if (cLower.includes("restrained") || cLower.includes("kısıt")) tip = "Hız 0'dır. Saldırı zarlarınız dezavantajlı, düşmanlarınki avantajlıdır. DEX kurtarmaları dezavantajlı.";
+                                        else if (cLower.includes("stunned") || cLower.includes("sersem")) tip = "Hız 0'dır. Eylem/tepki yapılamaz. STR/DEX kurtarmaları otomatik başarısız. Düşmanlar avantajlı.";
+                                        else if (cLower.includes("unconscious") || cLower.includes("baygın")) tip = "Hız 0'dır. Eylem yapılamaz. Yere düşersiniz. STR/DEX başarısız. 5ft içi otomatik kritik.";
+                                        else if (cLower.includes("exhaustion") || cLower.includes("yorgun")) tip = "Yorgunluk seviyesine göre dezavantajlar veya hız düşüşleri.";
+
+                                        return (
+                                            <div key={cName} className="flex flex-col bg-red-950/40 border border-red-800/60 rounded-md px-2 py-1 shadow-sm">
+                                                <span className="text-red-300 text-xs font-black uppercase tracking-wider flex items-center gap-1">
+                                                    ⚠️ {cName}
+                                                </span>
+                                                <span className="text-red-200/80 text-[10px] mt-0.5 leading-tight max-w-[200px]">{tip}</span>
+                                            </div>
+                                        );
+                                    })}
+                                </div>
                             </div>
                         )}
                     </div>
@@ -1928,6 +2116,10 @@ const PlayerSheet = () => {
                                         });
                                     }
                                 });
+                                const condStr = conditions.map((c:any) => typeof c === 'string' ? c.toLowerCase() : (c.name || '').toLowerCase()).join(' ');
+                                if (condStr.includes('grappled') || condStr.includes('restrained') || condStr.includes('paralyzed') || condStr.includes('petrified') || condStr.includes('stunned') || condStr.includes('unconscious') || condStr.includes('kavranmış') || condStr.includes('kısıtlanmış') || condStr.includes('felçli') || condStr.includes('taşlaşmış') || condStr.includes('sersemlemiş') || condStr.includes('baygın')) {
+                                    return 0;
+                                }
                                 return totalSpeed;
                             })()} ft
                         </span>
@@ -1945,7 +2137,7 @@ const PlayerSheet = () => {
                         // Only show for actual spellcasters or Monk (ki save DC)
                         const showForClass = isSpellcaster(cls) || cls === 'Monk';
                         if (!showForClass) return null;
-                        const abilityMod = mod(stats[ability] || 10, ability);
+                        const abilityMod = mod(effectiveStats[ability as keyof typeof effectiveStats] || 10);
                         const spellDC = 8 + prof + abilityMod + getItemBonus('stat_bonus', 'SPELL_DC');
                         const spellAtk = prof + abilityMod + getItemBonus('stat_bonus', 'SPELL_ATTACK');
                         return (
@@ -2055,7 +2247,7 @@ const PlayerSheet = () => {
             {/* ── SHOP ACCESS BUTTON (Floating) ── */}
             {isShopPublished && (
                 <button
-                    onClick={() => setIsShopModalOpen(true)}
+                    onClick={() => setShopData({ ...shopData, isOpen: true })}
                     className="fixed bottom-24 right-8 bg-gradient-to-r from-orange-600 to-amber-600 hover:from-orange-500 hover:to-amber-500 text-white p-4 rounded-full shadow-[0_0_20px_rgba(249,115,22,0.6)] z-50 flex items-center justify-center animate-bounce duration-1000 group"
                 >
                     <span className="text-2xl drop-shadow-md group-hover:scale-125 transition-transform">🏪</span>
@@ -2102,13 +2294,13 @@ const PlayerSheet = () => {
                                 </div>
                                 <div className="grid grid-cols-3 gap-px bg-gray-700">
                                     {Object.entries(stats).map(([s, v]: any) => {
-                                        const effective = getEffectiveScore(s, v);
+                                        const effective = effectiveStats[s as keyof typeof effectiveStats] || v;
                                         const isBoosted = effective > v;
                                         return (
                                             <div key={s} className="bg-gray-800 p-3 text-center">
                                                 <div className={`text-[10px] font-black uppercase tracking-widest mb-0.5 ${isBoosted ? 'text-blue-400' : 'text-gray-500'}`}>{s}</div>
                                                 <div className={`text-2xl font-black ${isBoosted ? 'text-blue-300 drop-shadow-[0_0_8px_rgba(96,165,250,0.5)]' : 'text-white'}`}>{effective}</div>
-                                                <div className={`text-sm font-black ${mod(v, s) >= 0 ? 'text-green-400' : 'text-red-400'}`}>{fmt(mod(v, s))}</div>
+                                                <div className={`text-sm font-black ${mod(effective) >= 0 ? 'text-green-400' : 'text-red-400'}`}>{fmt(mod(effective))}</div>
                                             </div>
                                         );
                                     })}
@@ -2124,7 +2316,7 @@ const PlayerSheet = () => {
                                     {SAVING_THROWS.map(s => {
                                         const hasSave = saves.includes(s);
                                         const globalSaveBonus = getItemBonus('stat_bonus', 'SAVE');
-                                        const bonus = mod(stats[s] || 10, s) + (hasSave ? prof : 0) + globalSaveBonus;
+                                        const bonus = mod(effectiveStats[s as keyof typeof effectiveStats] || 10) + (hasSave ? prof : 0) + globalSaveBonus;
                                         return (
                                             <div key={s} className="flex items-center gap-2 px-2 py-1.5 rounded hover:bg-gray-700/50">
                                                 <div className={`w-4 h-4 rounded-full border-2 flex items-center justify-center shrink-0 ${hasSave ? 'bg-green-500 border-green-400' : 'border-gray-600'}`}>
@@ -2146,7 +2338,7 @@ const PlayerSheet = () => {
                                 <div className="p-2 space-y-0.5">
                                     {(['Perception', 'Investigation', 'Insight'] as const).map(skillName => {
                                         const skill = SKILLS.find(s => s.name === skillName)!;
-                                        const base = mod(stats[skill.ability] || 10, skill.ability);
+                                        const base = mod(effectiveStats[skill.ability as keyof typeof effectiveStats] || 10);
                                         const skillProfs: string[] = (character.skillProfs || []).map((s: string) => s.toLowerCase().trim());
                                         const isProficient = skillProfs.some((s: string) => s === skill.name.toLowerCase() || s === skill.tr?.toLowerCase());
                                         const isExpert = (character.expertise || []).some((e: string) => e.toLowerCase() === skill.name.toLowerCase() || e.toLowerCase() === skill.tr?.toLowerCase());
@@ -2169,7 +2361,7 @@ const PlayerSheet = () => {
                                 </div>
                                 <div className="p-2 space-y-0.5 max-h-[500px] overflow-y-auto">
                                     {SKILLS.map(skill => {
-                                        const base = mod(stats[skill.ability] || 10, skill.ability);
+                                        const base = mod(effectiveStats[skill.ability as keyof typeof effectiveStats] || 10);
                                         const skillProfs: string[] = (character.skillProfs || []).map((s: string) => s.toLowerCase().trim());
                                         const isProficient = skillProfs.some(s => s === skill.name.toLowerCase() || s === skill.tr?.toLowerCase());
                                         const isExpert = (character.expertise || []).some((e: string) => e.toLowerCase() === skill.name.toLowerCase() || e.toLowerCase() === skill.tr?.toLowerCase());
@@ -2189,7 +2381,10 @@ const PlayerSheet = () => {
                                                         {skill.name}
                                                         <span className="text-gray-600 text-[10px] ml-1">({skill.ability})</span>
                                                     </span>
-                                                    <span className={`text-sm font-black tabular-nums ${bonus >= 0 ? (isExpert ? 'text-green-400' : isProficient ? 'text-purple-400' : 'text-green-400') : 'text-red-400'}`}>{fmt(bonus)}</span>
+                                                    <span className={`text-sm font-black tabular-nums ${bonus >= 0 ? (isExpert ? 'text-green-400' : isProficient ? 'text-purple-400' : 'text-green-400') : 'text-red-400'}`}>
+                                                        {hasDisadvantage('check') && <span className="text-red-500 mr-1" title="Dezavantajlı!">⚠️</span>}
+                                                        {fmt(bonus)}
+                                                    </span>
                                                     <span className="text-gray-600 text-xs">{isOpen ? '▲' : '▼'}</span>
                                                 </div>
                                                 {isOpen && (
@@ -2207,18 +2402,32 @@ const PlayerSheet = () => {
                         {/* ── ORTA: Subclass Özellikleri + Zar Kaydı ── */}
                         <div className="space-y-4">
                             {/* Subclass features */}
-                            {character.subclass && character.classRef?.subclasses && (() => {
-                                const sub = character.classRef.subclasses.find((s: any) => s.name === character.subclass);
-                                if (!sub) return null;
+                            {character.subclass && (() => {
+                                const mainClsData = allClasses.find((c: any) => c._id === (character.classRef?._id || character.classRef) || c.name === character.class);
+                                const subData = mainClsData?.subclasses?.find((s: any) => s.name === character.subclass);
+                                if (!subData) return null;
                                 return (
-                                    <div className="bg-gray-800 rounded-xl border border-purple-800/50 overflow-hidden">
-                                        <div className="px-4 py-3 bg-purple-900/30 border-b border-purple-800/50 flex items-center gap-2">
-                                            <span className="text-purple-400 text-lg">✨</span>
-                                            <h3 className="font-black text-purple-300">{character.subclass}</h3>
-                                            <span className="text-purple-500 text-xs ml-auto">{character.classRef.name} Subclass</span>
+                                    <div className="bg-gray-800 rounded-xl border border-purple-800/50 overflow-hidden mb-4 shadow-lg">
+                                        <div 
+                                            onClick={() => setIsSubclassFeaturesOpen(!isSubclassFeaturesOpen)} 
+                                            className="px-4 py-3 bg-purple-900/30 border-b border-purple-800/50 flex items-center justify-between cursor-pointer hover:bg-purple-900/50 transition-colors group"
+                                        >
+                                            <div className="flex items-center gap-2">
+                                                <span className="text-purple-400 text-lg">✨</span>
+                                                <h3 className="font-black text-purple-100 uppercase tracking-tight text-sm">Alt Sınıf: {character.subclass}</h3>
+                                            </div>
+                                            <div className="flex items-center gap-3">
+                                                <span className="text-purple-400 text-[10px] font-bold uppercase tracking-widest bg-purple-950/50 px-2 py-0.5 rounded border border-purple-700/30">
+                                                    {(mainClsData?.name || character.class)}
+                                                </span>
+                                                <span className="text-gray-500 text-xs transition-transform duration-300">
+                                                    {isSubclassFeaturesOpen ? '▼' : '▲'}
+                                                </span>
+                                            </div>
                                         </div>
-                                        <div className="p-4 grid grid-cols-1 md:grid-cols-2 gap-2">
-                                            {sub.features.map((f: any, i: number) => {
+                                        {isSubclassFeaturesOpen && (
+                                            <div className="p-4 grid grid-cols-1 md:grid-cols-2 gap-3">
+                                            {subData.features.map((f: any, i: number) => {
                                                 const open = level >= f.level;
                                                 return (
                                                     <div key={i} className={`p-3 rounded-lg border ${open ? 'border-purple-700/50 bg-purple-900/20' : 'border-gray-700 bg-gray-900/50 opacity-60'}`}>
@@ -2233,6 +2442,7 @@ const PlayerSheet = () => {
                                                 );
                                             })}
                                         </div>
+                                        )}
                                     </div>
                                 );
                             })()}
@@ -2310,13 +2520,15 @@ const PlayerSheet = () => {
 
                             {/* Feats */}
                             {actualFeats.length > 0 && (
-                                <div className="bg-gray-800 rounded-xl border border-yellow-800/40 overflow-hidden mb-4">
+                                <div className="bg-gray-800 rounded-xl border border-yellow-800/40 overflow-hidden mb-4 shadow-lg">
                                     <div 
-                                        className="px-4 py-2 bg-yellow-900/20 border-b border-yellow-800/40 flex items-center justify-between cursor-pointer hover:bg-yellow-800/30 transition-colors"
                                         onClick={() => setShowFeatsUI(!showFeatsUI)}
+                                        className="px-4 py-3 bg-yellow-900/20 border-b border-yellow-800/40 flex items-center justify-between cursor-pointer hover:bg-yellow-900/30 transition-colors group"
                                     >
-                                        <h3 className="font-black text-yellow-500 uppercase text-xs tracking-widest">🌟 Featlar <span className="text-yellow-600/70 normal-case font-normal ml-1">(tıkla: {showFeatsUI ? 'gizle' : 'göster'})</span></h3>
-                                        <span className="text-yellow-500 text-xs">{showFeatsUI ? '▼' : '▲'}</span>
+                                        <h3 className="font-black text-yellow-500 uppercase tracking-tight text-sm">🌟 Featlar / Özel Yetenekler</h3>
+                                        <span className="text-gray-500 text-xs">
+                                            {showFeatsUI ? '▼' : '▲'}
+                                        </span>
                                     </div>
                                     {showFeatsUI && (
                                     <div className="p-3 space-y-2">
@@ -2406,7 +2618,16 @@ const PlayerSheet = () => {
                             {/* Resistances & Immunities */}
                             <div className="bg-gray-800 rounded-xl border border-blue-800/50 overflow-hidden">
                                 <div className="px-4 py-2 bg-blue-900/20 border-b border-blue-800/50">
-                                    <h3 className="font-black text-blue-400 uppercase text-xs tracking-widest flex items-center gap-2">🛡️ Savunmalar & Dirençler</h3>
+                                    <div className="flex justify-between items-center w-full">
+                                        <h3 className="font-black text-blue-400 uppercase text-xs tracking-widest flex items-center gap-2">🛡️ Savunmalar & Dirençler</h3>
+                                        <button 
+                                            onClick={() => setShowDefensesModal(true)}
+                                            className="w-6 h-6 bg-blue-900 hover:bg-blue-800 border border-blue-700 rounded flex items-center justify-center text-blue-300 font-black text-xs transition shadow-sm"
+                                            title="Özel Direnç/Bağışıklık Ekle"
+                                        >
+                                            +
+                                        </button>
+                                    </div>
                                 </div>
                                 <div className="p-3 space-y-3">
                                     {/* Dirençler */}
@@ -2441,18 +2662,26 @@ const PlayerSheet = () => {
 
                             {/* Irk yetenekleri */}
                             {character.raceRef?.traits?.length > 0 && (
-                                <div className="bg-gray-800 rounded-xl border border-yellow-800/50 overflow-hidden">
-                                    <div className="px-4 py-3 bg-yellow-900/20 border-b border-yellow-800/50">
-                                        <h3 className="font-black text-yellow-400 text-sm">🌟 Racial Traits — {character.raceRef.name}{character.subrace ? ` (${character.subrace})` : ''}</h3>
+                                <div className="bg-gray-800 rounded-xl border border-yellow-800/50 overflow-hidden shadow-lg mb-4">
+                                    <div 
+                                        onClick={() => setShowRacialTraitsUI(!showRacialTraitsUI)}
+                                        className="px-4 py-3 bg-yellow-900/20 border-b border-yellow-800/50 flex items-center justify-between cursor-pointer hover:bg-yellow-900/30 transition-colors group"
+                                    >
+                                        <h3 className="font-black text-yellow-400 text-sm uppercase tracking-tight">🌟 Irksal Özellikler — {character.raceRef.name}{character.subrace ? ` (${character.subrace})` : ''}</h3>
+                                        <span className="text-gray-500 text-xs">
+                                            {showRacialTraitsUI ? '▼' : '▲'}
+                                        </span>
                                     </div>
-                                    <div className="p-3 space-y-2">
-                                        {character.raceRef.traits.map((t: any, i: number) => (
-                                            <div key={i} className="p-2 bg-yellow-900/10 border border-yellow-800/30 rounded-lg">
-                                                <p className="font-black text-yellow-300 text-xs mb-0.5">{t.name}</p>
-                                                <p className="text-gray-400 text-xs leading-relaxed">{t.desc_tr}</p>
-                                            </div>
-                                        ))}
-                                    </div>
+                                    {showRacialTraitsUI && (
+                                        <div className="p-3 space-y-2">
+                                            {character.raceRef.traits.map((t: any, i: number) => (
+                                                <div key={i} className="p-2 bg-yellow-900/10 border border-yellow-800/30 rounded-lg">
+                                                    <p className="font-black text-yellow-300 text-xs mb-0.5">{t.name}</p>
+                                                    <p className="text-gray-400 text-xs leading-relaxed">{t.desc_tr}</p>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    )}
                                 </div>
                             )}
 
@@ -2461,26 +2690,34 @@ const PlayerSheet = () => {
                                 const bgData = ALL_BACKGROUNDS.find(b => b.name === character.background);
                                 if (!bgData) return null;
                                 return (
-                                    <div className="bg-gray-800 rounded-xl border border-emerald-800/50 overflow-hidden">
-                                        <div className="px-4 py-3 bg-emerald-900/20 border-b border-emerald-800/50">
-                                            <h3 className="font-black text-emerald-400 text-sm">📜 Geçmiş (Background) — {bgData.tr || bgData.name}</h3>
+                                    <div className="bg-gray-800 rounded-xl border border-emerald-800/50 overflow-hidden shadow-lg mb-4">
+                                        <div 
+                                            onClick={() => setShowBackgroundUI(!showBackgroundUI)}
+                                            className="px-4 py-3 bg-emerald-900/20 border-b border-emerald-800/50 flex items-center justify-between cursor-pointer hover:bg-emerald-900/30 transition-colors group"
+                                        >
+                                            <h3 className="font-black text-emerald-400 text-sm uppercase tracking-tight">📜 Geçmiş (Background) — {bgData.tr || bgData.name}</h3>
+                                            <span className="text-gray-500 text-xs">
+                                                {showBackgroundUI ? '▼' : '▲'}
+                                            </span>
                                         </div>
-                                        <div className="p-3 space-y-2">
-                                            <div className="p-2 bg-emerald-900/10 border border-emerald-800/30 rounded-lg">
-                                                <p className="font-black text-emerald-300 text-xs mb-0.5">Açıklama</p>
-                                                <p className="text-gray-400 text-xs leading-relaxed">{bgData.desc}</p>
-                                            </div>
-                                            <div className="p-2 bg-emerald-900/10 border border-emerald-800/30 rounded-lg flex items-center justify-between">
-                                                <div>
-                                                    <p className="font-black text-emerald-300 text-xs mb-0.5">Yetenekler</p>
-                                                    <p className="text-gray-400 text-xs">{bgData.skills}</p>
+                                        {showBackgroundUI && (
+                                            <div className="p-3 space-y-2">
+                                                <div className="p-2 bg-emerald-900/10 border border-emerald-800/30 rounded-lg">
+                                                    <p className="font-black text-emerald-300 text-xs mb-0.5">Açıklama</p>
+                                                    <p className="text-gray-400 text-xs leading-relaxed">{bgData.desc}</p>
                                                 </div>
-                                                <div className="text-right">
-                                                    <p className="font-black text-yellow-500 text-xs mb-0.5">Başlangıç Altını</p>
-                                                    <p className="text-yellow-400 font-bold text-xs">{bgData.gold} gp</p>
+                                                <div className="p-2 bg-emerald-900/10 border border-emerald-800/30 rounded-lg flex items-center justify-between">
+                                                    <div>
+                                                        <p className="font-black text-emerald-300 text-xs mb-0.5">Yetenekler</p>
+                                                        <p className="text-gray-400 text-xs">{bgData.skills}</p>
+                                                    </div>
+                                                    <div className="text-right">
+                                                        <p className="font-black text-yellow-500 text-xs mb-0.5">Başlangıç Altını</p>
+                                                        <p className="text-yellow-400 font-bold text-xs">{bgData.gold} gp</p>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        )}
                                     </div>
                                 );
                             })()}
@@ -2574,8 +2811,8 @@ const PlayerSheet = () => {
                                 {/* Stat bazlı zar atışları */}
                                 <div className="mt-3 space-y-1">
                                     <p className="text-gray-500 text-xs uppercase font-bold mb-2">Ability Checks</p>
-                                    {Object.entries(stats).map(([s, v]: any) => {
-                                        const m = mod(v as number, s);
+                                    {Object.entries(stats).map(([s, _]: any) => {
+                                        const m = mod(effectiveStats[s as keyof typeof effectiveStats] || 10);
                                         return (
                                             <button key={s} onClick={() => {
                                                 const roll = Math.floor(Math.random() * 20) + 1;
@@ -2655,24 +2892,28 @@ const PlayerSheet = () => {
                     });
 
                     const allAttacks = [
-                        ...baseAttacks.map(atk => ({
-                            ...atk,
-                            toHit: atk.toHit ? fmt(evalAtk(atk.toHit, mods, prof)) : undefined,
-                            damage: atk.damage.includes('+') || atk.damage.includes('-') 
-                                ? atk.damage.replace(/(STR|DEX|CON|INT|WIS|CHA|Prof)/g, (m) => {
+                        ...baseAttacks.map((atk: any) => {
+                            const parsedToHit = atk.toHit ? evalAtk(atk.toHit, mods, prof) : undefined;
+                            
+                            // Let's do a simple replace on the damage string instead of running dangerous evalAtk on things like "1d6"
+                            let parsedDamage = atk.damage;
+                            if (parsedDamage && (parsedDamage.includes('+') || parsedDamage.includes('-'))) {
+                                parsedDamage = parsedDamage.replace(/\b(STR|DEX|CON|INT|WIS|CHA|Prof)\b/g, (m: string) => {
                                     if (m === 'Prof') return String(prof);
                                     return String(mods[m as keyof typeof mods]);
-                                  })
-                                : (atk.damage.match(/^[0-9d+\s-]+$/) ? atk.damage : (() => {
-                                    // Handle cases like "1+STR"
-                                    const parts = atk.damage.split(' ');
-                                    const dice = parts[0];
-                                    const type = parts.slice(1).join(' ');
-                                    const val = evalAtk(dice, mods, prof);
-                                    return isNaN(Number(dice)) ? `${val} ${type}` : atk.damage;
-                                  })())
-                        })), 
-                        ...mappedWeaponAttacks
+                                });
+                            }
+                            
+                            const toHitVal = (parsedToHit !== undefined && !isNaN(parsedToHit)) ? fmt(parsedToHit) : undefined;
+                            
+                            return {
+                                ...atk,
+                                toHit: toHitVal,
+                                toHitRaw: parsedToHit,
+                                damage: parsedDamage
+                            };
+                        }), 
+                        ...mappedWeaponAttacks.map((atk: any) => ({ ...atk, toHitRaw: parseInt(atk.toHit) }))
                     ];
 
                     return (
@@ -2695,19 +2936,26 @@ const PlayerSheet = () => {
                                 <div className="flex flex-col lg:flex-row gap-6">
                                     {/* ── SOL TARAF: EYLEMLER VE KAYNAKLAR ── */}
                                     <div className="w-full lg:w-1/3 flex flex-col gap-4">
-                                        <div className="flex items-center justify-between border-b border-gray-700/50 pb-2">
+                                        <div 
+                                            onClick={() => setShowActionsUI(!showActionsUI)}
+                                            className="flex items-center justify-between border-b border-gray-700/50 pb-2 cursor-pointer hover:bg-gray-800/30 transition-colors group"
+                                        >
                                             <h3 className="font-black text-gray-300 uppercase tracking-wide text-sm flex items-center gap-2">
                                                 <span>⚡</span> Aksiyonlar & Kaynaklar
                                             </h3>
-                                            <button 
-                                                onClick={() => setShowCustomResourceModal(true)}
-                                                className="w-6 h-6 bg-gray-700 hover:bg-gray-600 rounded text-center text-xs font-bold text-gray-300 border border-gray-600 transition"
-                                                title="Yeni Aksiyon/Büyü Ekle"
-                                            >
-                                                +
-                                            </button>
+                                            <div className="flex items-center gap-2" onClick={e => e.stopPropagation()}>
+                                                <button 
+                                                    onClick={() => setShowCustomResourceModal(true)}
+                                                    className="w-6 h-6 bg-gray-700 hover:bg-gray-600 rounded text-center text-xs font-bold text-gray-300 border border-gray-600 transition"
+                                                    title="Yeni Aksiyon/Büyü Ekle"
+                                                >
+                                                    +
+                                                </button>
+                                                <span className="text-gray-500 text-xs">{showActionsUI ? '▼' : '▲'}</span>
+                                            </div>
                                         </div>
 
+                                        {showActionsUI && (
                                         <div className="space-y-4 max-h-[600px] pr-2 overflow-y-auto custom-scrollbar">
                                             {/* Sınıf Kaynakları */}
                                             {resources.length > 0 && resources.map(res => {
@@ -2809,34 +3057,60 @@ const PlayerSheet = () => {
                                                 );
                                             })}
                                         </div>
+                                        )}
                                     </div>
 
                                     {/* ── SAĞ TARAF: SALDIRILAR VE SİLAHLAR ── */}
                                     <div className="w-full lg:w-2/3 flex flex-col gap-4">
-                                        <div className="flex items-center justify-between border-b border-gray-700/50 pb-2">
+                                        <div 
+                                            onClick={() => setShowAttacksUI(!showAttacksUI)}
+                                            className="flex items-center justify-between border-b border-gray-700/50 pb-2 cursor-pointer hover:bg-gray-800/30 transition-colors group"
+                                        >
                                             <h3 className="font-black text-gray-300 uppercase tracking-wide text-sm flex items-center gap-2">
                                                 <span>⚔️</span> Silahlar & Saldırılar
                                             </h3>
+                                            <span className="text-gray-500 text-xs">{showAttacksUI ? '▼' : '▲'}</span>
                                         </div>
+                                        {showAttacksUI && (
                                         <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
-                                            {allAttacks.map((atk, idx) => (
-                                                <div key={idx} className="bg-gray-800 rounded-xl border border-gray-700 p-4 hover:border-gray-500 transition-all flex items-center justify-between group shadow-lg">
-                                                    <div className="flex-1">
+                                            {allAttacks.map((atk: any, idx: number) => (
+                                                <div key={idx} className="bg-gray-800 rounded-xl border border-gray-700 p-4 hover:border-gray-500 transition-all flex items-start justify-between group shadow-lg">
+                                                    <div className="flex-1 pr-4">
                                                         <h4 className="font-black text-white text-sm uppercase tracking-tight group-hover:text-red-400 transition-colors">{atk.name}</h4>
-                                                        <div className="flex gap-3 mt-1 items-center">
-                                                            <span className="text-[10px] bg-red-900/40 text-red-300 font-black px-2 py-0.5 rounded border border-red-500/30">BONUS: {fmt(atk.bonus)}</span>
-                                                            <span className="text-[10px] bg-gray-900/60 text-gray-400 font-bold px-2 py-0.5 rounded border border-white/5 uppercase">{atk.damage} {atk.type}</span>
+                                                        <div className="flex flex-wrap gap-2 mt-2 items-center">
+                                                            {atk.toHit && (
+                                                                <span className="text-[10px] bg-red-900/40 text-red-300 font-black px-2 py-0.5 rounded border border-red-500/30 whitespace-nowrap">
+                                                                    BONUS: {atk.toHit}
+                                                                </span>
+                                                            )}
+                                                            {hasDisadvantage('attack') && (
+                                                                <span className="text-[10px] bg-red-600 text-white font-black px-2 py-0.5 rounded border border-red-400 whitespace-nowrap animate-pulse">
+                                                                    ⚠️ DEZAVANTAJ
+                                                                </span>
+                                                            )}
+                                                            <span className="text-[10px] bg-gray-900/60 text-gray-400 font-bold px-2 py-0.5 rounded border border-white/5 uppercase whitespace-nowrap">
+                                                                {atk.damage} {atk.type !== 'special' ? atk.type : ''}
+                                                            </span>
                                                         </div>
+                                                        {atk.desc_tr && (
+                                                            <p className="text-xs text-gray-400 mt-2 leading-tight">
+                                                                {atk.desc_tr}
+                                                            </p>
+                                                        )}
                                                     </div>
-                                                    <button 
-                                                        onClick={() => handleRoll(atk.name, { count: 1, sides: 20, bonus: atk.bonus }, 'Atak')}
-                                                        className="bg-red-700 hover:bg-red-600 text-white w-10 h-10 rounded-lg flex items-center justify-center font-black shadow-lg shadow-red-900/20 active:scale-95 transition-all"
-                                                    >
-                                                        🎲
-                                                    </button>
+                                                    {atk.toHit && (
+                                                        <button 
+                                                            onClick={() => handleRoll(atk.name, { count: 1, sides: 20, bonus: atk.toHitRaw || parseInt(atk.toHit) || 0 }, 'Atak')}
+                                                            className="bg-red-700 hover:bg-red-600 text-white w-10 h-10 rounded-lg flex items-center justify-center font-black shadow-lg shadow-red-900/20 active:scale-95 transition-all shrink-0 mt-1"
+                                                            title="Saldırı Zarı At (d20)"
+                                                        >
+                                                            🎲
+                                                        </button>
+                                                    )}
                                                 </div>
                                             ))}
                                         </div>
+                                        )}
                                     </div>
                                 </div>
                             )}
@@ -2939,8 +3213,16 @@ const PlayerSheet = () => {
                                                     Manage Spells
                                                 </button>
                                             </div>
-                                            <div className="bg-gray-950/60 px-3 py-1 rounded-full border border-purple-500/30">
+                                            <div className="bg-gray-950/60 px-3 py-1 rounded-full border border-purple-500/30 flex items-center gap-4">
                                                 <span className="text-[10px] font-black text-purple-300 uppercase tracking-widest">{actualSpells.length} Known Spells</span>
+                                                {needsPreparationCheck() && (
+                                                    <>
+                                                        <div className="w-px h-3 bg-purple-500/20"></div>
+                                                        <span className="text-[10px] font-black text-blue-300 uppercase tracking-widest">
+                                                            Prepared: {(character.preparedSpells || []).filter((s: string) => (spellDetails[s] || allSpells.find(x => x.name === s))?.level_int > 0).length} / {getMaxPreparedSpells()}
+                                                        </span>
+                                                    </>
+                                                )}
                                             </div>
                                         </div>
 
@@ -3024,35 +3306,56 @@ const PlayerSheet = () => {
                                                                                 : 'bg-gray-800/30 border-gray-700/50 hover:border-purple-500/40 hover:bg-gray-800/50'
                                                                                 } ${isExpanded ? 'md:col-span-2' : ''}`}
                                                                         >
-                                                                            <div
-                                                                                className="p-4 cursor-pointer flex items-center justify-between gap-4"
-                                                                                onClick={() => setExpandedSpell(isExpanded ? null : sp)}
-                                                                            >
-                                                                                <div className="flex flex-col gap-1 flex-1">
-                                                                                    <div className="flex items-center gap-2 flex-wrap">
-                                                                                        <span className="font-black text-white text-sm lg:text-base group-hover/card:text-purple-300 transition-colors uppercase tracking-tight">
-                                                            {typeof sp === 'string' ? sp : (sp as any).name}
-                                                        </span>
-                                                                                        {isConc && (
-                                                                                            <span className="text-[9px] px-1.5 py-0.5 bg-blue-500/10 border border-blue-500/30 text-blue-400 rounded-md font-black uppercase tracking-widest" title="Concentration">Conc</span>
+                                                                                <div
+                                                                                    className="p-4 cursor-pointer flex items-center justify-between gap-4"
+                                                                                    onClick={() => setExpandedSpell(isExpanded ? null : sp)}
+                                                                                >
+                                                                                    <div className="flex items-center gap-3">
+                                                                                        {details?.level_int > 0 && needsPreparationCheck() && (
+                                                                                            <button
+                                                                                                onClick={(e) => {
+                                                                                                    e.stopPropagation();
+                                                                                                    togglePrepareSpell(sp);
+                                                                                                }}
+                                                                                                className={`w-6 h-6 rounded flex items-center justify-center transition-all ${
+                                                                                                    (character.preparedSpells || []).includes(sp)
+                                                                                                        ? 'bg-blue-600 text-white border-blue-400'
+                                                                                                        : 'bg-gray-900 border-gray-600 text-gray-500 hover:border-gray-400'
+                                                                                                } border`}
+                                                                                                title={(character.preparedSpells || []).includes(sp) ? 'Hazır (Tıkla: Kaldır)' : 'Hazırlanmamış (Tıkla: Hazırla)'}
+                                                                                            >
+                                                                                                {(character.preparedSpells || []).includes(sp) ? '🔥' : '🧊'}
+                                                                                            </button>
                                                                                         )}
-                                                                                        {isActiveConc && (
-                                                                                            <span className="text-[9px] px-1.5 py-0.5 bg-green-500/10 border border-green-500/30 text-green-400 rounded-md font-black uppercase tracking-widest animate-pulse">Active</span>
-                                                                                        )}
-                                                                                    </div>
-                                                                                    {details && (
-                                                                                        <div className="flex items-center gap-3 text-[10px] text-gray-500 font-bold uppercase tracking-wider">
-                                                                                            <span>{details.casting_time}</span>
-                                                                                            <span className="w-1 h-1 bg-gray-700 rounded-full"></span>
-                                                                                            <span>{details.range}</span>
+                                                                                        <div className="flex flex-col gap-1 flex-1">
+                                                                                            <div className="flex items-center gap-2 flex-wrap">
+                                                                                                <span className={`font-black text-sm lg:text-base group-hover/card:text-purple-300 transition-colors uppercase tracking-tight ${
+                                                                                                    details?.level_int > 0 && needsPreparationCheck() && !(character.preparedSpells || []).includes(sp) ? 'text-gray-500' : 'text-white'
+                                                                                                }`}>
+                                                                                                    {typeof sp === 'string' ? sp : (sp as any).name}
+                                                                                                </span>
+                                                                                                {isConc && (
+                                                                                                    <span className="text-[9px] px-1.5 py-0.5 bg-blue-500/10 border border-blue-500/30 text-blue-400 rounded-md font-black uppercase tracking-widest" title="Concentration">Conc</span>
+                                                                                                )}
+                                                                                                {isActiveConc && (
+                                                                                                    <span className="text-[9px] px-1.5 py-0.5 bg-green-500/10 border border-green-500/30 text-green-400 rounded-md font-black uppercase tracking-widest animate-pulse">Active</span>
+                                                                                                )}
+                                                                                            </div>
+                                                                                            {details && (
+                                                                                                <div className="flex items-center gap-3 text-[10px] text-gray-500 font-bold uppercase tracking-wider">
+                                                                                                    <span>{details.casting_time}</span>
+                                                                                                    <span className="w-1 h-1 bg-gray-700 rounded-full"></span>
+                                                                                                    <span>{details.range}</span>
+                                                                                                </div>
+                                                                                            )}
                                                                                         </div>
-                                                                                    )}
-                                                                                </div>
+                                                                                    </div>
 
                                                                                 <div className="flex items-center gap-3">
                                                                                     {!isExpanded && (
                                                                                         <button
                                                                                             onClick={(e) => { e.stopPropagation(); setCastingSpell(sp); }}
+                                                            disabled={details?.level_int > 0 && needsPreparationCheck() && !(character.preparedSpells || []).includes(sp)}
                                                                                             className="px-3 py-1.5 bg-purple-600/10 hover:bg-purple-600 text-purple-400 hover:text-white border border-purple-500/20 hover:border-purple-500 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all duration-300 opacity-0 group-hover/card:opacity-100 transform translate-x-2 group-hover/card:translate-x-0"
                                                                                         >
                                                                                             Cast
@@ -3102,6 +3405,7 @@ const PlayerSheet = () => {
                                                                                         <div className="flex gap-2 pt-2">
                                                                                             <button
                                                                                                 onClick={() => setCastingSpell(sp)}
+                                                                disabled={(canCast && details?.level_int > 0 && !hasValidSlotsForSpell && !isConc) || (details?.level_int > 0 && needsPreparationCheck() && !(character.preparedSpells || []).includes(sp))}
                                                                                                 disabled={canCast && details?.level_int > 0 && !hasValidSlotsForSpell && !isConc}
                                                                                                 className="flex-1 py-3 bg-purple-600 hover:bg-purple-500 disabled:opacity-40 disabled:grayscale text-white text-xs font-black uppercase tracking-widest rounded-xl transition-all duration-300 shadow-lg shadow-purple-900/20 active:scale-[0.98]"
                                                                                             >
@@ -3297,6 +3601,27 @@ const PlayerSheet = () => {
                                         </div>
                                         <button onClick={addItem} disabled={!newItemName.trim()} className="bg-blue-600 hover:bg-blue-500 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold rounded-lg px-6 py-2 text-sm transition shrink-0">Ekle</button>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        {/* ── PARTY SHARED GOLD (ORTAK BAKIYE) ── */}
+                        <div className="bg-gradient-to-br from-yellow-950/40 via-gray-900 to-gray-900 rounded-xl border-2 border-yellow-700/50 p-5 mt-8 flex flex-col items-center justify-center relative overflow-hidden group shadow-[0_0_20px_rgba(234,179,8,0.1)]">
+                            <div className="absolute top-0 right-0 w-48 h-48 bg-yellow-500/5 blur-3xl rounded-full pointer-events-none group-hover:bg-yellow-500/10 transition-colors duration-700"></div>
+                            <div className="relative z-10 w-full text-center">
+                                <div className="text-yellow-500/80 font-black text-xs uppercase tracking-widest mb-1 flex items-center justify-center gap-2">
+                                    <span>💰</span> Parti Cüzdanı
+                                </div>
+                                <div className="text-4xl font-black text-white drop-shadow-md tracking-tighter mb-4">
+                                    {partyGold ? partyGold.toLocaleString() : '0'} <span className="text-yellow-500 text-base opacity-80 tracking-normal inline-block transform -translate-y-1">GP</span>
+                                </div>
+                                <div className="w-full max-w-sm mx-auto pt-4 border-t border-yellow-700/20">
+                                    <input type="number" value={partyGoldInput} onChange={e => setPartyGoldInput(e.target.value)} placeholder="Tutar..." className="w-full bg-black/40 border border-yellow-900/50 rounded-lg px-3 py-2 text-center text-sm text-yellow-200 font-bold mb-3 focus:outline-none focus:border-yellow-500/50 transition-colors shadow-inner" />
+                                    <div className="flex gap-2 justify-center w-full">
+                                        <button onClick={() => handleUpdatePartyGold('sub')} disabled={!partyGoldInput} className="flex-1 bg-gradient-to-t from-red-900/80 to-red-800/60 hover:from-red-800 hover:to-red-700 disabled:opacity-30 border border-red-700/50 rounded-lg py-2 text-[10px] font-black text-red-100 uppercase tracking-widest transition-all shadow-md">Eksilt</button>
+                                        <button onClick={() => handleUpdatePartyGold('add')} disabled={!partyGoldInput} className="flex-1 bg-gradient-to-t from-green-900/80 to-green-800/60 hover:from-green-800 hover:to-green-700 disabled:opacity-30 border border-green-700/50 rounded-lg py-2 text-[10px] font-black text-green-100 uppercase tracking-widest transition-all shadow-md">Ekle</button>
+                                    </div>
+                                    <button onClick={() => handleUpdatePartyGold('set')} disabled={!partyGoldInput} className="w-full mt-2 bg-yellow-900/20 hover:bg-yellow-900/40 disabled:opacity-30 border border-yellow-700/30 hover:border-yellow-600/50 rounded-lg py-1.5 text-[10px] font-bold text-yellow-400 uppercase tracking-widest transition-all">Net Eşitle</button>
                                 </div>
                             </div>
                         </div>
@@ -3913,7 +4238,7 @@ const PlayerSheet = () => {
                                     return (
                                         <div className="text-center">
                                             <p className="text-pink-300 text-[10px] font-bold uppercase mb-1">Available Dice: {desc.join(' + ')}</p>
-                                            <p className="text-gray-500 text-xs">Each die restores <span className="font-bold text-gray-300">1 die + {mod(character.stats?.CON ?? 10, 'CON')}</span> HP on average.</p>
+                                            <p className="text-gray-500 text-xs">Each die restores <span className="font-bold text-gray-300">1 die + {mod(character.stats?.CON ?? 10)}</span> HP on average.</p>
                                         </div>
                                     );
                                 })()}
@@ -4111,7 +4436,7 @@ const PlayerSheet = () => {
                                                             <div key={s} className={`p-4 rounded-xl border-2 text-center ${pick ? 'border-blue-500 bg-blue-900/30' : 'border-gray-700 bg-gray-800'}`}>
                                                                 <div className="font-black text-gray-400 text-xs mb-1">{s}</div>
                                                                 <div className="text-3xl font-black text-white">{v}{pick && <span className="text-blue-400 text-xl"> → {newVal}</span>}</div>
-                                                                <div className="text-xs text-gray-500 mb-2">{mod(v, s) >= 0 ? '+' : ''}{mod(v, s)}</div>
+                                                                <div className="text-xs text-gray-500 mb-2">{mod(v) >= 0 ? '+' : ''}{mod(v)}</div>
                                                                 <div className="flex gap-1.5 justify-center">
                                                                     <button onClick={() => removeASI(s)} disabled={!pick || newVal <= v}
                                                                         className="w-7 h-7 bg-red-800 hover:bg-red-700 disabled:opacity-30 rounded font-black text-sm transition">-</button>
@@ -4827,6 +5152,73 @@ const PlayerSheet = () => {
                             >
                                 Done & Close
                             </button>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {/* DEFENSES MODAL */}
+            {showDefensesModal && (
+                <div className="fixed inset-0 bg-black/80 z-[60] flex items-center justify-center p-4">
+                    <div className="bg-gray-900 border border-blue-800 rounded-2xl w-full max-w-sm overflow-hidden shadow-2xl">
+                        <div className="bg-blue-950 p-4 border-b border-blue-900 flex justify-between items-center">
+                            <h3 className="font-black text-white text-sm uppercase tracking-wider">Savunma & Direnç Ekle</h3>
+                            <button onClick={() => setShowDefensesModal(false)} className="text-gray-400 hover:text-white">✕</button>
+                        </div>
+                        <div className="p-4 space-y-4">
+                            <div>
+                                <label className="text-xs font-bold text-gray-400 mb-1 block">Tür</label>
+                                <select 
+                                    className="w-full bg-gray-800 border border-gray-700 rounded-lg p-2 text-white text-sm font-bold"
+                                    value={defenseType}
+                                    onChange={e => setDefenseType(e.target.value as any)}
+                                >
+                                    <option value="resistances">Direnç (Yarım Hasar)</option>
+                                    <option value="immunities">Bağışıklık (Sıfır Hasar)</option>
+                                    <option value="vulnerabilities">Zayıflık (Çift Hasar)</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label className="text-xs font-bold text-gray-400 mb-1 block">Değer (örn. Ateş, Zehir)</label>
+                                <div className="flex gap-2">
+                                    <input 
+                                        type="text" 
+                                        className="flex-1 bg-gray-800 border border-gray-700 rounded-lg p-2 text-white text-sm font-bold placeholder-gray-600 focus:outline-none focus:border-blue-500"
+                                        placeholder="Hasar tipi/durum..."
+                                        value={defenseInput}
+                                        onChange={e => setDefenseInput(e.target.value)}
+                                        onKeyDown={e => e.key === 'Enter' && handleAddDefense()}
+                                    />
+                                    <button onClick={handleAddDefense} className="bg-blue-600 hover:bg-blue-500 text-white font-black px-4 rounded-lg shadow-lg">+</button>
+                                </div>
+                            </div>
+                            
+                            <div className="space-y-3 mt-4 pt-4 border-t border-gray-800">
+                                <h4 className="text-[10px] uppercase tracking-widest font-black text-gray-500">Mevcut Özel Kayıtlar</h4>
+                                {(['resistances', 'immunities', 'vulnerabilities'] as const).map((type) => {
+                                    const arr = character[type] || [];
+                                    if (arr.length === 0) return null;
+                                    const title = type === 'resistances' ? 'Dirençler' : type === 'immunities' ? 'Bağışıklıklar' : 'Zayıflıklar';
+                                    const color = type === 'resistances' ? 'blue' : type === 'immunities' ? 'green' : 'red';
+                                    return (
+                                        <div key={type} className="bg-gray-800/50 p-2.5 rounded-lg border border-gray-700/50">
+                                            <p className={`text-[10px] uppercase font-black text-${color}-400 mb-1.5`}>{title}</p>
+                                            <div className="flex flex-wrap gap-1.5">
+                                                {arr.map((val: string, idx: number) => (
+                                                    <span key={idx} className={`pl-2 pr-1 py-1 bg-${color}-900/30 border border-${color}-700/50 text-${color}-300 text-xs font-bold rounded flex items-center gap-1`}>
+                                                        {val}
+                                                        <button 
+                                                            onClick={() => handleRemoveDefense(type, idx)} 
+                                                            className={`w-4 h-4 rounded-full hover:bg-${color}-800/80 hover:text-white text-${color}-400/60 flex items-center justify-center text-[10px] ml-1 transition-colors`}
+                                                            title="Sil"
+                                                        >✕</button>
+                                                    </span>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    )
+                                })}
+                            </div>
                         </div>
                     </div>
                 </div>
