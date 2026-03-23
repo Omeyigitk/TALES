@@ -83,30 +83,33 @@ const resolveFormula = (text: string, level: number, mods: any, prof: number, cl
     if (!text) return text;
     let resolved = text;
     
-    // 1. Math patterns
-    resolved = resolved.replace(/⌈Sv\/2⌉/g, String(Math.ceil(level / 2)));
-    resolved = resolved.replace(/⌈Level\/2⌉/g, String(Math.ceil(level / 2)));
-    resolved = resolved.replace(/Sv\.×5/g, String(level * 5));
+    // 1. Math patterns (e.g. ⌈sv/2⌉ or [Level/2]) - Case insensitive and support for Turkish "seviye"
+    // Ceiling: ⌈...⌉ or [...]
+    resolved = resolved.replace(/[⌈\[](sv\.?|level|seviye)\/2[⌉\]]/gi, () => String(Math.ceil(level / 2)));
+    // Floor: ⌊...⌋ or [...]
+    resolved = resolved.replace(/[⌊\[](sv\.?|level|seviye)\/2[⌋\]]/gi, () => String(Math.floor(level / 2)));
     
+    // Level scaling: Sv.×5 or Level*5
+    resolved = resolved.replace(/(sv\.?|level|seviye)\.?\s*[×*x]\s*(\d+)/gi, (_, __, factor) => String(level * parseInt(factor)));
+
     // 2. Simple placeholders
-    resolved = resolved.replace(/Sv\./g, String(level));
-    resolved = resolved.replace(/Level/g, String(level));
-    resolved = resolved.replace(/Prof/g, String(prof));
+    resolved = resolved.replace(/\b(sv\.?|level|seviye)\b/gi, String(level));
+    resolved = resolved.replace(/\bprof\b/gi, String(prof));
     
     // 3. Cantrip Scale
     const cantripDice = level >= 17 ? 4 : level >= 11 ? 3 : level >= 5 ? 2 : 1;
-    resolved = resolved.replace(/\[CantripScale\]/g, String(cantripDice));
+    resolved = resolved.replace(/\[CantripScale\]/gi, String(cantripDice));
 
-    // 4. Ability mods
+    // 4. Ability mods (regex \b for exact matches like STR but not STRONG)
     const abilities = ["STR", "DEX", "CON", "INT", "WIS", "CHA"];
     abilities.forEach(ab => {
-        resolved = resolved.replace(new RegExp(ab, 'g'), String(mods[ab] || 0));
+        resolved = resolved.replace(new RegExp(`\\b${ab}\\b`, 'gi'), String(mods[ab as keyof typeof mods] || 0));
     });
 
     // 5. Monk Martial Arts (Special Case)
     if (cls === 'Monk') {
         const monkDie = level >= 17 ? '1d10' : level >= 11 ? '1d8' : level >= 5 ? '1d6' : '1d4';
-        resolved = resolved.replace(/Martial Arts die/g, monkDie);
+        resolved = resolved.replace(/Martial Arts die/gi, monkDie);
     }
 
     return resolved;
@@ -904,6 +907,37 @@ const PlayerSheet = () => {
         (socket as any).emit('update_party_gold', { campaignId, gold: newGold });
         if (overrideAmount === undefined) setPartyGoldInput("");
         showToast('Ortak Kasa Güncellendi', `Yeni bakiye: ${newGold.toLocaleString()} GP`, 'bg-yellow-900 border-yellow-500 text-yellow-100');
+    };
+
+    const handleTransferToParty = async (amount: number) => {
+        if (!character) return;
+        const currentGp = character.money?.gp || 0;
+        if (currentGp < amount) {
+            showToast('Yetersiz Bakiye', 'Cüzdanında yeterli altın yok.', 'bg-red-900 border-red-500 text-red-100');
+            return;
+        }
+        
+        // Update Personal (Delta is negative)
+        await updateMoney('gp', -amount);
+        // Update Party
+        handleUpdatePartyGold('add', amount);
+        
+        showToast('Partiye Gönderildi', `${amount} GP ortak kasaya aktarıldı.`, 'bg-blue-900 border-blue-500 text-blue-100');
+    };
+
+    const handleTransferToSelf = async (amount: number) => {
+        if (!character) return;
+        if ((partyGold || 0) < amount) {
+            showToast('Yetersiz Bakiye', 'Ortak kasada yeterli altın yok.', 'bg-red-900 border-red-500 text-red-100');
+            return;
+        }
+
+        // Update Party
+        handleUpdatePartyGold('sub', amount);
+        // Update Personal (Delta is positive)
+        await updateMoney('gp', amount);
+
+        showToast('Kasadan Alındı', `${amount} GP cüzdanına aktarıldı.`, 'bg-emerald-900 border-emerald-500 text-emerald-100');
     };
 
     const updatePartyItemQty = (index: number, delta: number) => {
@@ -3577,33 +3611,51 @@ const PlayerSheet = () => {
                             {/* Personal GP Quick-Add Shortcuts */}
                             <div className="px-4 pb-4 pt-1 border-t border-yellow-900/10">
                                 <div className="flex items-center gap-2 mb-2">
-                                    <span className="text-[10px] font-black text-yellow-600/70 uppercase tracking-widest">Hızlı Altın Ekle (GP)</span>
+                                    <span className="text-[10px] font-black text-yellow-600/70 uppercase tracking-widest">Hızlı Altın Yönetimi (GP)</span>
                                 </div>
-                                <div className="flex gap-2">
-                                    {[10, 50, 100].map(v => (
-                                        <button 
-                                            key={v} 
-                                            onClick={() => updateMoney('gp', v)}
-                                            className="flex-1 bg-yellow-900/10 hover:bg-yellow-900/30 border border-yellow-700/20 rounded-lg py-1.5 text-[10px] font-black text-yellow-600 transition-all font-mono"
-                                        >
-                                            +{v} GP
-                                        </button>
-                                    ))}
-                                    <div className="flex-1 relative">
-                                        <input 
-                                            type="number" 
-                                            placeholder="±..."
-                                            value={personalGoldInput}
-                                            onChange={e => setPersonalGoldInput(e.target.value)}
-                                            onKeyDown={e => {
-                                                if (e.key === 'Enter') {
-                                                    const val = parseInt(personalGoldInput);
-                                                    if (!isNaN(val)) updateMoney('gp', val);
-                                                    setPersonalGoldInput("");
-                                                }
-                                            }}
-                                            className="w-full bg-black/20 border border-yellow-900/30 rounded-lg px-2 py-1.5 text-[10px] text-center text-yellow-500 font-bold focus:outline-none focus:border-yellow-500/50 transition-colors"
-                                        />
+                                <div className="space-y-3">
+                                    <div className="flex gap-2">
+                                        {[10, 50, 100].map(v => (
+                                            <button 
+                                                key={v} 
+                                                onClick={() => updateMoney('gp', v)}
+                                                className="flex-1 bg-yellow-900/10 hover:bg-yellow-900/30 border border-yellow-700/20 rounded-lg py-1.5 text-[10px] font-black text-yellow-600 transition-all font-mono"
+                                                title={`Cüzdana ${v} GP ekle`}
+                                            >
+                                                +{v} GP
+                                            </button>
+                                        ))}
+                                        <div className="flex-1 relative">
+                                            <input 
+                                                type="number" 
+                                                placeholder="±..."
+                                                value={personalGoldInput}
+                                                onChange={e => setPersonalGoldInput(e.target.value)}
+                                                onKeyDown={e => {
+                                                    if (e.key === 'Enter') {
+                                                        const val = parseInt(personalGoldInput);
+                                                        if (!isNaN(val)) updateMoney('gp', val);
+                                                        setPersonalGoldInput("");
+                                                    }
+                                                }}
+                                                className="w-full bg-black/20 border border-yellow-900/30 rounded-lg px-2 py-1.5 text-[10px] text-center text-yellow-500 font-bold focus:outline-none focus:border-yellow-500/50 transition-colors"
+                                            />
+                                        </div>
+                                    </div>
+                                    
+                                    <div className="flex items-center gap-2 mb-1">
+                                        <span className="text-[9px] font-black text-blue-400/70 uppercase tracking-widest">Partiye Gönder 📤</span>
+                                    </div>
+                                    <div className="flex gap-2">
+                                        {[10, 50, 100].map(v => (
+                                            <button 
+                                                key={`toparty-${v}`} 
+                                                onClick={() => handleTransferToParty(v)}
+                                                className="flex-1 bg-blue-900/10 hover:bg-blue-900/30 border border-blue-700/20 rounded-lg py-1.5 text-[9px] font-black text-blue-400 transition-all uppercase"
+                                            >
+                                                {v} GP
+                                            </button>
+                                        ))}
                                     </div>
                                 </div>
                             </div>
@@ -3693,17 +3745,40 @@ const PlayerSheet = () => {
                                     </div>
                                     <button onClick={() => handleUpdatePartyGold('set')} disabled={!partyGoldInput} className="w-full mt-2 bg-yellow-900/20 hover:bg-yellow-900/40 disabled:opacity-30 border border-yellow-700/30 hover:border-yellow-600/50 rounded-lg py-1.5 text-[10px] font-bold text-yellow-400 uppercase tracking-widest transition-all">Net Eşitle</button>
                                     
+                                    {/* Party Gold Transfer Tokens */}
+                                    <div className="flex flex-col gap-2 mt-4 pt-4 border-t border-yellow-700/10">
+                                        <div className="text-[9px] font-black text-emerald-500/70 uppercase tracking-widest text-center mb-1">
+                                            Cüzdanına Al 📥
+                                        </div>
+                                        <div className="flex gap-2">
+                                            {[10, 50, 100].map(v => (
+                                                <button 
+                                                    key={`toself-${v}`} 
+                                                    onClick={() => handleTransferToSelf(v)}
+                                                    className="flex-1 bg-emerald-900/10 hover:bg-emerald-900/30 border border-emerald-700/20 rounded-lg py-2 text-[9px] font-black text-emerald-400 uppercase tracking-widest transition-all shadow-sm"
+                                                >
+                                                    {v} GP
+                                                </button>
+                                            ))}
+                                        </div>
+                                    </div>
+
                                     {/* Party Gold Quick Add Tokens */}
-                                    <div className="flex gap-2 mt-4 pt-4 border-t border-yellow-700/10">
-                                        {[10, 50, 100].map(v => (
-                                            <button 
-                                                key={v} 
-                                                onClick={() => handleUpdatePartyGold('add', v)}
-                                                className="flex-1 bg-yellow-900/10 hover:bg-yellow-900/30 border border-yellow-700/20 rounded-lg py-1.5 text-[10px] font-black text-yellow-600 transition-all"
-                                            >
-                                                +{v} GP
-                                            </button>
-                                        ))}
+                                    <div className="flex flex-col gap-2 mt-4 pt-4 border-t border-yellow-700/10">
+                                        <div className="text-[9px] font-black text-yellow-500/70 uppercase tracking-widest text-center mb-1">
+                                            Kasaya Hızlı Ekle 💰
+                                        </div>
+                                        <div className="flex gap-2">
+                                            {[10, 50, 100].map(v => (
+                                                <button 
+                                                    key={`party-${v}`} 
+                                                    onClick={() => handleUpdatePartyGold('add', v)}
+                                                    className="flex-1 bg-yellow-900/10 hover:bg-yellow-900/30 border border-yellow-700/20 rounded-lg py-2 text-[9px] font-black text-yellow-500 uppercase tracking-widest transition-all shadow-sm"
+                                                >
+                                                    +{v} GP
+                                                </button>
+                                            ))}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
