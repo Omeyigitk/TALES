@@ -613,15 +613,6 @@ const PlayerSheet = () => {
         } catch (e) { console.error(e); }
     };
 
-    const handleUpdatePartyGold = (mode: 'add' | 'sub' | 'set', overrideAmount?: number) => {
-        if (!socket) return;
-        const amountStr = overrideAmount !== undefined ? String(overrideAmount) : partyGoldInput;
-        const val = parseInt(amountStr);
-        if (isNaN(val)) return;
-        (socket as any).emit('update_party_gold', { campaignId, amount: val, mode });
-        if (overrideAmount === undefined) setPartyGoldInput("");
-    };
-
     const setMoney = async (coin: string, absoluteAmount: number) => {
         if (!character) return;
         const currentMoney = character.money || { cp: 0, sp: 0, ep: 0, gp: 0, pp: 0 };
@@ -899,9 +890,10 @@ const PlayerSheet = () => {
         showToast('Ortak Kasaya Eklendi', `${newPartyItemName} parti kasasına kondu.`, 'bg-yellow-900 border-yellow-500 text-yellow-100');
     };
 
-    const handleUpdatePartyGold = (action: 'add' | 'sub' | 'set') => {
-        if (!partyGoldInput || !socket) return;
-        const amount = parseInt(partyGoldInput);
+    const handleUpdatePartyGold = (action: 'add' | 'sub' | 'set', overrideAmount?: number) => {
+        if (!socket) return;
+        const amountStr = overrideAmount !== undefined ? String(overrideAmount) : partyGoldInput;
+        const amount = parseInt(amountStr);
         if (isNaN(amount) || amount < 0) return;
 
         let newGold = partyGold || 0;
@@ -910,7 +902,7 @@ const PlayerSheet = () => {
         if (action === 'set') newGold = amount;
 
         (socket as any).emit('update_party_gold', { campaignId, gold: newGold });
-        setPartyGoldInput("");
+        if (overrideAmount === undefined) setPartyGoldInput("");
         showToast('Ortak Kasa Güncellendi', `Yeni bakiye: ${newGold.toLocaleString()} GP`, 'bg-yellow-900 border-yellow-500 text-yellow-100');
     };
 
@@ -2481,7 +2473,7 @@ const PlayerSheet = () => {
                                                             </span>
                                                             <span className={`text-sm font-black ${open ? 'text-purple-300' : 'text-gray-500'}`}>{f.name}</span>
                                                         </div>
-                                                        <p className={`text-xs leading-relaxed ${open ? 'text-gray-300' : 'text-gray-500'}`}>{resolveFormula(f.desc_tr || f.desc)}</p>
+                                                        <p className={`text-xs leading-relaxed ${open ? 'text-gray-300' : 'text-gray-500'}`}>{resolveFormula(f.desc_tr || f.desc, level, mods, prof, clsName)}</p>
                                                     </div>
                                                 );
                                             })}
@@ -2531,7 +2523,7 @@ const PlayerSheet = () => {
                                                         </span>
                                                         <span className="text-sm font-black text-gray-200">{f.name}</span>
                                                     </div>
-                                                    <p className="text-xs leading-relaxed text-gray-400">{resolveFormula(f.desc_tr || f.desc)}</p>
+                                                    <p className="text-xs leading-relaxed text-gray-400">{resolveFormula(f.desc_tr || f.desc, level, mods, prof, clsName)}</p>
                                                 </div>
                                             ))}
                                         </div>
@@ -2590,7 +2582,7 @@ const PlayerSheet = () => {
                                                     </div>
                                                     {isExpanded && featDetails && (
                                                         <div className="mt-2 text-xs text-gray-300 font-normal leading-relaxed border-t border-yellow-800/30 pt-2">
-                                                            <div className="mb-2 whitespace-pre-wrap">{resolveFormula(featDetails.desc_tr || featDetails.desc)}</div>
+                                                            <div className="mb-2 whitespace-pre-wrap">{resolveFormula(featDetails.desc_tr || featDetails.desc, level, mods, prof, clsName)}</div>
                                                             {featDetails.effects && featDetails.effects.length > 0 && (
                                                                 <div className="bg-black/20 p-2 rounded border border-yellow-900/30">
                                                                     <p className="font-black text-[10px] text-yellow-600 uppercase mb-1">Etkiler:</p>
@@ -2721,7 +2713,7 @@ const PlayerSheet = () => {
                                             {character.raceRef.traits.map((t: any, i: number) => (
                                                 <div key={i} className="p-2 bg-yellow-900/10 border border-yellow-800/30 rounded-lg">
                                                     <p className="font-black text-yellow-300 text-xs mb-0.5">{t.name}</p>
-                                                    <p className="text-gray-400 text-xs leading-relaxed">{resolveFormula(t.desc_tr)}</p>
+                                                    <p className="text-gray-400 text-xs leading-relaxed">{resolveFormula(t.desc_tr, level, mods, prof, clsName)}</p>
                                                 </div>
                                             ))}
                                         </div>
@@ -2930,7 +2922,7 @@ const PlayerSheet = () => {
                             type: isRanged ? 'ranged' : 'melee',
                             toHit: fmt(toHit),
                             damage: `${damage}${fmt(damageMod)}`,
-                            desc_tr: resolveFormula(w.note || `${w.name} ile saldırı.`),
+                            desc_tr: resolveFormula(w.note || `${w.name} ile saldırı.`, level, mods, prof, clsName),
                             range: isRanged ? 'Ranged' : 'Melee'
                         };
                     });
@@ -2955,7 +2947,7 @@ const PlayerSheet = () => {
                                 toHit: toHitVal,
                                 toHitRaw: parsedToHit,
                                 damage: parsedDamage,
-                                desc_tr: resolveFormula(atk.desc_tr)
+                                desc_tr: resolveFormula(atk.desc_tr, level, mods, prof, clsName)
                             };
                         }), 
                         ...mappedWeaponAttacks.map((atk: any) => ({ ...atk, toHitRaw: parseInt(atk.toHit) }))
@@ -4422,7 +4414,7 @@ const PlayerSheet = () => {
                                                 {lvModal.classFeats.map((f: any, i: number) => (
                                                     <div key={i} className="bg-gray-800 border border-gray-700 rounded-xl p-4">
                                                         <p className="font-black text-red-400 mb-1">{f.name}</p>
-                                                        <div className="text-gray-300 text-sm leading-relaxed">{resolveFormula(f.desc_tr)}</div>
+                                                        <div className="text-gray-300 text-sm leading-relaxed">{resolveFormula(f.desc_tr, level, mods, prof, clsName)}</div>
                                                     </div>
                                                 ))}
                                             </div>
@@ -4437,7 +4429,7 @@ const PlayerSheet = () => {
                                                 {lvModal.subFeats.map((f: any, i: number) => (
                                                     <div key={i} className="bg-purple-900/20 border border-purple-700/50 rounded-xl p-4">
                                                         <p className="font-black text-purple-400 mb-1">{f.name}</p>
-                                                        <div className="text-gray-300 text-sm leading-relaxed">{resolveFormula(f.desc_tr)}</div>
+                                                        <div className="text-gray-300 text-sm leading-relaxed">{resolveFormula(f.desc_tr, level, mods, prof, clsName)}</div>
                                                     </div>
                                                 ))}
                                             </div>
