@@ -772,7 +772,7 @@ const PlayerSheet = () => {
 
     const addPartyItem = () => {
         if (!newPartyItemName.trim()) return;
-        const inv = [...(partyInventory || [])];
+        const inv: any[] = [...(partyInventory || [])];
         const searchName = newPartyItemName.trim().toLowerCase();
         const existingIdx = inv.findIndex((i: any) => i.name.toLowerCase() === searchName);
         
@@ -790,7 +790,7 @@ const PlayerSheet = () => {
 
     const updatePartyItemQty = (index: number, delta: number) => {
         if (!socket) return;
-        const inv = [...(partyInventory || [])];
+        const inv: any[] = [...(partyInventory || [])];
         const item = inv[index];
         const newQty = Math.max(0, (item.qty || 1) + delta);
         if (newQty <= 0) inv.splice(index, 1);
@@ -800,7 +800,7 @@ const PlayerSheet = () => {
     
     const removePartyItem = (index: number) => {
         if (!socket) return;
-        const inv = [...(partyInventory || [])];
+        const inv: any[] = [...(partyInventory || [])];
         inv.splice(index, 1);
         (socket as any).emit('update_party_inventory', { campaignId, inventory: inv });
         showToast('Ortak Kasadan Çıkarıldı', `Eşya kasadan alındı.`, 'bg-gray-800 border-gray-500 text-gray-300');
