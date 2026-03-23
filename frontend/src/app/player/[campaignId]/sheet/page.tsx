@@ -1644,13 +1644,13 @@ const PlayerSheet = () => {
     const hasDisadvantage = (type: 'attack' | 'check' | 'save') => {
         const conds = (character?.conditions || []).map((c: string) => c.toLowerCase());
         if (type === 'attack') {
-            return conds.some(c => ['blinded', 'frightened', 'poisoned', 'prone', 'restrained'].includes(c));
+            return conds.some((c: string) => ['blinded', 'frightened', 'poisoned', 'prone', 'restrained'].includes(c));
         }
         if (type === 'check') {
-            return conds.some(c => ['frightened', 'poisoned'].includes(c));
+            return conds.some((c: string) => ['frightened', 'poisoned'].includes(c));
         }
         if (type === 'save') {
-             return conds.some(c => ['restrained'].includes(c)); // Restrained gives disadvantage on Dex saves
+             return conds.some((c: string) => ['restrained'].includes(c)); // Restrained gives disadvantage on Dex saves
         }
         return false;
     };
