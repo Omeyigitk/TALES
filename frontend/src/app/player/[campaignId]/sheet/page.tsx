@@ -3406,7 +3406,6 @@ const PlayerSheet = () => {
                                                                                             <button
                                                                                                 onClick={() => setCastingSpell(sp)}
                                                                 disabled={(canCast && details?.level_int > 0 && !hasValidSlotsForSpell && !isConc) || (details?.level_int > 0 && needsPreparationCheck() && !(character.preparedSpells || []).includes(sp))}
-                                                                                                disabled={canCast && details?.level_int > 0 && !hasValidSlotsForSpell && !isConc}
                                                                                                 className="flex-1 py-3 bg-purple-600 hover:bg-purple-500 disabled:opacity-40 disabled:grayscale text-white text-xs font-black uppercase tracking-widest rounded-xl transition-all duration-300 shadow-lg shadow-purple-900/20 active:scale-[0.98]"
                                                                                             >
                                                                                                 Cast This Spell
