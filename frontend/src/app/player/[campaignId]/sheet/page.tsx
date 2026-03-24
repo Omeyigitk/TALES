@@ -1947,55 +1947,6 @@ const PlayerSheet = () => {
         return false;
     };
 
-    const getDiceIcon = (sides: number) => {
-        const baseClass = "w-6 h-6 stroke-current fill-none";
-        switch (sides) {
-            case 4: return (
-                <svg viewBox="0 0 24 24" className={baseClass} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M12 3l9 16H3L12 3z" />
-                    <path d="M12 3v16M3 19l9-8 9 8" className="opacity-40" />
-                </svg>
-            );
-            case 6: return (
-                <svg viewBox="0 0 24 24" className={baseClass} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
-                    <path d="M3 3l18 18M3 21L21 3" className="opacity-40" />
-                </svg>
-            );
-            case 8: return (
-                <svg viewBox="0 0 24 24" className={baseClass} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M12 2L4 12l8 10 8-10-8-10z" />
-                    <path d="M4 12h16M12 2v20" className="opacity-40" />
-                </svg>
-            );
-            case 10: return (
-                <svg viewBox="0 0 24 24" className={baseClass} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M12 2L3 12l9 10 9-10-9-10z" />
-                    <path d="M12 2l-3 10 3 10 3-10-3-10zM3 12h18" className="opacity-40" />
-                </svg>
-            );
-            case 12: return (
-                <svg viewBox="0 0 24 24" className={baseClass} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M12 2l9 6v8l-9 6-9-6V8l9-6z" />
-                    <path d="M12 2l3 6 6 0-3 6 3 6-6 0-3 6-3-6-6 0 3-6-3-6 6 0 3-6z" className="opacity-40 scale-[0.6] origin-center" />
-                </svg>
-            );
-            case 20: return (
-                <svg viewBox="0 0 24 24" className={baseClass} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M12 2l10 5.5v11L12 22l-10-5.5v-11L12 2z" />
-                    <path d="M12 2v20M2 7.5l10 4.5 10-4.5M2 18.5l10-4.5 10 4.5" className="opacity-40" />
-                </svg>
-            );
-            case 100: return (
-                <svg viewBox="0 0 24 24" className={baseClass} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <circle cx="12" cy="12" r="10" />
-                    <circle cx="12" cy="12" r="4" className="opacity-40" />
-                </svg>
-            );
-            default: return <span>d{sides}</span>;
-        }
-    };
-
 
     if (loading) {
         return (
