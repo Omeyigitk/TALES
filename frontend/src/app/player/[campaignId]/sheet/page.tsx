@@ -93,19 +93,21 @@ const resolveFormula = (text: string, level: number, mods: any, prof: number, cl
     // Level scaling: Sv.×5 or Level*5
     resolved = resolved.replace(/(sv\.?|level|seviye)\.?\s*[×*x]\s*(\d+)/gi, (_, __, factor) => String(level * parseInt(factor)));
 
-    // 2. Simple placeholders (Negative lookahead to avoid replacing Sv.1, Sv.2 etc labels)
-    resolved = resolved.replace(/\b(sv\.?|level|seviye)\b(?![.\s]*\d)/gi, String(level));
+    // 2. Simple placeholders (Avoid replacing if part of a rank like '1. seviye' or if followed by a number)
+    resolved = resolved.replace(/(?<!\d\.\s*)\b(sv\.?|level|seviye)\b(?![.\s]*\d)/gi, String(level));
     resolved = resolved.replace(/\b(prof|profici?e?n?c?y?)\b/gi, String(prof));
-    resolved = resolved.replace(/\b(yp|hp|hitpoints)\b/gi, String(mods.CON + level)); // Simple common placeholder
+    resolved = resolved.replace(/\b(yp|hp|hitpoints)\b/gi, String(mods.CON + level)); 
     
     // 3. Cantrip Scale
     const cantripDice = level >= 17 ? 4 : level >= 11 ? 3 : level >= 5 ? 2 : 1;
     resolved = resolved.replace(/\[CantripScale\]/gi, String(cantripDice));
 
-    // 4. Ability mods (regex \b for exact matches like STR but not STRONG)
+    // 4. Ability mods (More specific to avoid replacing 'INT, WIS, CHA' lists in feats)
     const abilities = ["STR", "DEX", "CON", "INT", "WIS", "CHA"];
     abilities.forEach(ab => {
-        resolved = resolved.replace(new RegExp(`\\b${ab}\\b`, 'gi'), String(mods[ab as keyof typeof mods] || 0));
+        // Only replace if followed by specific context like 'bonus', 'hasar', 'mod', etc., or if it's explicitly for a calculation
+        const contextRegex = new RegExp(`\\b${ab}\\b(?=\\s*(modifier|mod|bonus|hasar|damage|skor|score|atışı|zar))`, 'gi');
+        resolved = resolved.replace(contextRegex, String(mods[ab as keyof typeof mods] || 0));
     });
 
     // 5. Monk Martial Arts (Special Case)
@@ -2902,8 +2904,17 @@ const PlayerSheet = () => {
                                                         <span className="text-gray-500 text-xs">{isExpanded ? '▲' : '▼'}</span>
                                                     </div>
                                                     {isExpanded && featDetails && (
-                                                        <div className="mt-2 text-xs text-gray-300 font-normal leading-relaxed border-t border-yellow-800/30 pt-2">
-                                                            <div className="mb-2 whitespace-pre-wrap">{resolveFormula(featDetails.desc_tr || featDetails.desc, level, mods, prof, clsName)}</div>
+                                                        <div className="mt-2 text-xs text-gray-300 font-normal leading-relaxed border-t border-yellow-800/30 pt-2 space-y-2">
+                                                            {(() => {
+                                                                const resolved = resolveFormula(featDetails.desc_tr || featDetails.desc, level, mods, prof, clsName);
+                                                                // Split by first sentence or major break to "split in 2" as requested
+                                                                const parts = resolved.split(/(?<=\.\s)/);
+                                                                return parts.map((p, pi) => (
+                                                                    <div key={pi} className={pi > 0 ? "pl-2 border-l-2 border-yellow-900/40" : "font-semibold text-yellow-50"}>
+                                                                        {p}
+                                                                    </div>
+                                                                ));
+                                                            })()}
                                                             {featDetails.effects && featDetails.effects.length > 0 && (
                                                                 <div className="bg-black/20 p-2 rounded border border-yellow-900/30">
                                                                     <p className="font-black text-[10px] text-yellow-600 uppercase mb-1">Etkiler:</p>
