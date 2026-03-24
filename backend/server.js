@@ -181,7 +181,7 @@ app.post('/api/admin/seed', authenticate, async (req, res) => {
     if (fs.existsSync(path.join(dataPath, 'races.json'))) {
       const races = JSON.parse(fs.readFileSync(path.join(dataPath, 'races.json'), 'utf8'));
       await Race.deleteMany({});
-      await Race.insertMany(races);
+      await Race.insertMany(races, { ordered: false });
       console.log('Races seeded.');
     }
 
@@ -189,7 +189,7 @@ app.post('/api/admin/seed', authenticate, async (req, res) => {
     if (fs.existsSync(path.join(dataPath, 'classes.json'))) {
       const classes = JSON.parse(fs.readFileSync(path.join(dataPath, 'classes.json'), 'utf8'));
       await Class.deleteMany({});
-      await Class.insertMany(classes);
+      await Class.insertMany(classes, { ordered: false });
       console.log('Classes seeded.');
     }
 
@@ -197,7 +197,7 @@ app.post('/api/admin/seed', authenticate, async (req, res) => {
     if (fs.existsSync(path.join(dataPath, 'spells_hybrid.json'))) {
       const spells = JSON.parse(fs.readFileSync(path.join(dataPath, 'spells_hybrid.json'), 'utf8'));
       await Spell.deleteMany({});
-      await Spell.insertMany(spells);
+      await Spell.insertMany(spells, { ordered: false });
       console.log('Spells seeded.');
     }
 
@@ -207,7 +207,7 @@ app.post('/api/admin/seed', authenticate, async (req, res) => {
       const monstersJson = JSON.parse(monstersDataRaw);
       const monstersList = Object.entries(monstersJson).map(([name, data]) => ({ name, ...data }));
       await Monster.deleteMany({});
-      await Monster.insertMany(monstersList);
+      await Monster.insertMany(monstersList, { ordered: false });
       console.log('Monsters seeded.');
     }
 
@@ -322,7 +322,7 @@ app.post('/api/admin/seed', authenticate, async (req, res) => {
     if (fs.existsSync(path.join(dataPath, 'feats.json'))) {
       feats = JSON.parse(fs.readFileSync(path.join(dataPath, 'feats.json'), 'utf8'));
       await Feat.deleteMany({});
-      await Feat.insertMany(feats);
+      await Feat.insertMany(feats, { ordered: false });
     }
 
     console.log('Finalizing seed process...');

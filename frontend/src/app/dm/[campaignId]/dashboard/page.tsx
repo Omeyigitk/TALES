@@ -74,6 +74,8 @@ export default function DMDashboard() {
     const [expandedMonsterId, setExpandedMonsterId] = useState<string | null>(null);
     const [expandedCombatantId, setExpandedCombatantId] = useState<string | null>(null);
     const [isRollHidden, setIsRollHidden] = useState(false);
+    const [dicePool, setDicePool] = useState<number[]>([]);
+    const [isQuickDiceOpen, setIsQuickDiceOpen] = useState(false);
 
     // Sync active combatants with encounter data from server
     useEffect(() => {
@@ -451,6 +453,83 @@ export default function DMDashboard() {
             });
         }
         setIsDiceMenuOpen(false); // Zarı attıktan sonra menüyü kapat
+    };
+
+    const handlePoolRoll = () => {
+        if (dicePool.length === 0) return;
+        
+        const results = dicePool.map(sides => ({
+            sides,
+            result: Math.floor(Math.random() * sides) + 1
+        }));
+        const total = results.reduce((sum, r) => sum + r.result, 0);
+        const typeStr = dicePool.length > 5 
+            ? `${dicePool.length} Zarlar` 
+            : dicePool.map(s => `d${s}`).join(' + ');
+
+        if (socket) {
+            socket.emit('roll_dice', {
+                campaignId,
+                id: Math.random().toString(36).substring(7),
+                playerName: 'Dungeon Master',
+                rollResult: total,
+                type: typeStr,
+                isHidden: isRollHidden,
+                poolResults: results
+            });
+        }
+        setDicePool([]);
+        setIsQuickDiceOpen(false);
+        showToast("Zarlar Atıldı", `${typeStr} = ${total}`, isRollHidden ? "bg-purple-900 border-purple-500 text-purple-100" : "bg-red-900 border-red-500 text-red-100");
+    };
+
+    const getDiceIcon = (sides: number) => {
+        const baseClass = "w-6 h-6 stroke-current fill-none";
+        switch (sides) {
+            case 4: return (
+                <svg viewBox="0 0 24 24" className={baseClass} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M12 3l9 16H3L12 3z" />
+                    <path d="M12 3v16M3 19l9-8 9 8" className="opacity-40" />
+                </svg>
+            );
+            case 6: return (
+                <svg viewBox="0 0 24 24" className={baseClass} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                    <path d="M3 3l18 18M3 21L21 3" className="opacity-40" />
+                </svg>
+            );
+            case 8: return (
+                <svg viewBox="0 0 24 24" className={baseClass} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M12 2L4 12l8 10 8-10-8-10z" />
+                    <path d="M4 12h16M12 2v20" className="opacity-40" />
+                </svg>
+            );
+            case 10: return (
+                <svg viewBox="0 0 24 24" className={baseClass} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M12 2L3 12l9 10 9-10-9-10z" />
+                    <path d="M12 2l-3 10 3 10 3-10-3-10zM3 12h18" className="opacity-40" />
+                </svg>
+            );
+            case 12: return (
+                <svg viewBox="0 0 24 24" className={baseClass} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M12 2l9 6v8l-9 6-9-6V8l9-6z" />
+                    <path d="M12 2l3 6 6 0-3 6 3 6-6 0-3 6-3-6-6 0 3-6-3-6 6 0 3-6z" className="opacity-40 scale-[0.6] origin-center" />
+                </svg>
+            );
+            case 20: return (
+                <svg viewBox="0 0 24 24" className={baseClass} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M12 2l10 5.5v11L12 22l-10-5.5v-11L12 2z" />
+                    <path d="M12 2v20M2 7.5l10 4.5 10-4.5M2 18.5l10-4.5 10 4.5" className="opacity-40" />
+                </svg>
+            );
+            case 100: return (
+                <svg viewBox="0 0 24 24" className={baseClass} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <circle cx="12" cy="12" r="10" />
+                    <circle cx="12" cy="12" r="4" className="opacity-40" />
+                </svg>
+            );
+            default: return <span>d{sides}</span>;
+        }
     };
 
     // Fısıltı (Whisper) Gönder
@@ -837,16 +916,16 @@ export default function DMDashboard() {
                     <button
                         onClick={async () => {
                             const ok = await confirm({
-                                title: "Veritabanını Güncelle (Seed)",
-                                message: "Tüm veritabanını (Eşyalar, Canavarlar, Büyüler vb.) sıfırlayıp yeniden yüklemek istediğinizden emin misiniz? Bu işlem canlıdaki verileri günceller.",
-                                confirmText: "Güncelle (Seed)",
-                                severity: "warning"
+                                title: "Veritabanını Güncelle",
+                                message: "Ana veritabanı (itemlar, canavarlar, spelller vb.) yerel dosyalardan güncellenecek. Bu işlem yaklaşık 3-5 dakika sürebilir ve mevcut özel verileri etkilemez. Devam edilsin mi?",
+                                confirmText: "Güncellemeyi Başlat",
+                                cancelText: "Vazgeç"
                             });
                             if (!ok) return;
+
+                            showToast("Veritabanı", "Güncelleme başlatıldı, lütfen bekleyin...", "bg-blue-900 border-blue-500 text-blue-100");
                             try {
-                                const res = await axios.post(`${API_URL}/api/admin/seed`, {}, {
-                                    headers: { 'Authorization': `Bearer ${token}` }
-                                });
+                                const res = await axios.post(`${API_URL}/api/admin/seed`, {}, { headers: { 'Authorization': `Bearer ${token}` }, timeout: 360000 });
                                 showToast("Başarılı", res.data.message || "Veritabanı başarıyla güncellendi!", "bg-green-900 border-green-500 text-green-100");
                                 setTimeout(() => window.location.reload(), 2000);
                             } catch (err: any) {
@@ -1107,46 +1186,76 @@ export default function DMDashboard() {
                 </div>
 
                 {/* Floating DM Dice Roll Menu */}
-                <div className="fixed bottom-8 left-8 z-40 flex flex-col items-center space-y-4">
-                    {/* Zarlar (Açılır Menü) */}
-                    {isDiceMenuOpen && (
-                        <div className="flex flex-col-reverse space-y-reverse space-y-3 mb-4 animate-fade-in bg-gray-900/60 backdrop-blur-md p-3 rounded-3xl border border-gray-700/50 shadow-[0_8px_32px_rgba(0,0,0,0.5)] items-center">
-                            <label className="flex items-center space-x-2 text-xs font-bold text-gray-300 cursor-pointer mb-2 bg-gray-800/80 px-3 py-1.5 rounded-xl border border-gray-700 hover:bg-gray-700 transition">
-                                <input
-                                    type="checkbox"
-                                    checked={isRollHidden}
-                                    onChange={(e) => setIsRollHidden(e.target.checked)}
-                                    className="form-checkbox text-purple-600 rounded bg-gray-900 border-gray-500 accent-purple-500"
-                                />
-                                <span>Gizli At</span>
-                            </label>
-                            {[100, 20, 12, 10, 8, 6, 4].map(sides => (
-                                <button
-                                    key={sides}
-                                    onClick={() => rollDMDice(sides)}
-                                    className={`w-14 h-14 ${isRollHidden ? 'bg-purple-900/60 text-purple-300 border-purple-500/50' : 'bg-gray-800/80 text-red-400 border-red-500/50'} hover:bg-gray-700/80 border-2 rounded-full shadow-lg flex items-center justify-center font-bold text-lg transition-transform hover:scale-110 backdrop-blur-sm`}
-                                    title={isRollHidden ? `d${sides} Gizli At` : `d${sides} At`}
-                                >
-                                    d{sides}
-                                </button>
-                            ))}
-                        </div>
-                    )}
-
-                    {/* Ana Zar Butonu */}
-                    <button
-                        onClick={() => setIsDiceMenuOpen(!isDiceMenuOpen)}
-                        className={`w-20 h-20 ${isDiceMenuOpen ? 'bg-gray-800/90 border-red-500' : 'bg-gradient-to-br from-red-600 to-red-800 border-red-400'} hover:from-red-500 hover:to-red-700 text-white rounded-full shadow-[0_0_25px_rgba(239,68,68,0.5)] flex items-center justify-center text-4xl border-4 transition-all hover:scale-110 hover:-rotate-12 group`}
-                        title="Zar Menüsü"
-                    >
-                        {isDiceMenuOpen ? '✕' : (
-                            <svg viewBox="0 0 24 24" className="w-12 h-12 drop-shadow-lg group-hover:rotate-12 transition-transform duration-500" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M12 2L22 7.5V16.5L12 22L2 16.5V7.5L12 2Z" fill="white" stroke="white" strokeWidth="1.5" strokeLinejoin="round" />
-                                <path d="M12 2L2 7.5L12 12L22 7.5L12 2Z" stroke="#ef4444" strokeWidth="1" strokeLinejoin="round" />
-                                <path d="M2 16.5L12 12L22 16.5" stroke="#ef4444" strokeWidth="0.5" opacity="0.6" />
-                                <path d="M12 2V12M12 22V12M2 7.5L12 12M22 7.5L12 12" stroke="#7f1d1d" strokeWidth="0.5" opacity="0.4" />
-                            </svg>
+                <div className="fixed bottom-8 left-8 z-[60] flex flex-col items-center">
+                    {/* Premium Selection Menu */}
+                    <div className={`flex flex-col-reverse items-center gap-3 mb-4 transition-all duration-500 origin-bottom ${isQuickDiceOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-0 pointer-events-none'}`}>
+                        {/* Pool Roll Button */}
+                        {dicePool.length > 0 && (
+                            <button
+                                onClick={handlePoolRoll}
+                                className="group relative w-14 h-14 bg-red-600 hover:bg-red-500 text-white rounded-full shadow-[0_0_20px_rgba(239,68,68,0.5)] flex items-center justify-center transition-all animate-bounce overflow-hidden"
+                            >
+                                <span className="relative z-10 text-xl font-black">ROLL</span>
+                                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                            </button>
                         )}
+
+                        {/* Dice Selection Grid */}
+                        <div className="bg-gray-900/90 backdrop-blur-xl border border-white/10 p-3 rounded-2xl shadow-2xl flex flex-col gap-2">
+                            <div className="grid grid-cols-2 gap-2">
+                                {[20, 100, 12, 10, 8, 6, 4].map((sides, idx) => (
+                                    <button
+                                        key={sides}
+                                        onClick={() => setDicePool([...dicePool, sides])}
+                                        className="w-12 h-12 bg-gray-800 hover:bg-gray-700 rounded-xl flex items-center justify-center transition-all group border border-white/5 hover:border-red-500/50 relative overflow-hidden"
+                                        style={{ transitionDelay: `${idx * 50}ms` }}
+                                    >
+                                        <div className={`transition-all duration-300 transform group-hover:scale-110 ${sides === 20 ? 'text-red-400' : 'text-gray-400 group-hover:text-white'}`}>
+                                            {getDiceIcon(sides)}
+                                        </div>
+                                        <span className="absolute bottom-1 right-1 text-[8px] font-black opacity-20 group-hover:opacity-40">{sides}</span>
+                                    </button>
+                                ))}
+                            </div>
+
+                            {/* Options within menu */}
+                            <div className="border-t border-white/10 mt-1 pt-2 flex flex-col gap-2">
+                                <button 
+                                    onClick={() => setDicePool([])}
+                                    disabled={dicePool.length === 0}
+                                    className="text-[10px] font-black text-gray-500 hover:text-red-400 disabled:opacity-0 transition-all uppercase tracking-widest text-center"
+                                >
+                                    TEMİZLE
+                                </button>
+                                <button
+                                    onClick={() => setIsRollHidden(!isRollHidden)}
+                                    className={`flex items-center justify-between gap-3 px-3 py-2 rounded-lg border transition-all ${isRollHidden ? 'bg-purple-900/40 border-purple-500/50 text-purple-200' : 'bg-gray-800/50 border-white/5 text-gray-400'}`}
+                                >
+                                    <span className="text-[10px] font-black uppercase tracking-tight">{isRollHidden ? 'GİZLİ' : 'AÇIK'}</span>
+                                    <span className="text-xs">{isRollHidden ? '👁️‍🗨️' : '👁️'}</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Main FAB */}
+                    <button
+                        onClick={() => setIsQuickDiceOpen(!isQuickDiceOpen)}
+                        className={`group relative w-16 h-16 rounded-2xl flex items-center justify-center transition-all duration-500 shadow-2xl border ${isQuickDiceOpen ? 'bg-red-600 border-red-400 rotate-90' : 'bg-gray-900 border-white/10 hover:border-red-500/50 rotate-0'}`}
+                    >
+                        {dicePool.length > 0 && (
+                            <div className="absolute -top-2 -right-2 min-w-[24px] h-[24px] bg-yellow-500 text-black text-[10px] font-black rounded-full flex items-center justify-center px-1.5 shadow-lg animate-in zoom-in duration-300 ring-4 ring-gray-950">
+                                {dicePool.length}
+                            </div>
+                        )}
+                        <div className={`transition-all duration-500 ${isQuickDiceOpen ? 'scale-75 opacity-50' : 'group-hover:scale-110'}`}>
+                            <svg viewBox="0 0 24 24" className="w-8 h-8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 2L22 7.5V16.5L12 22L2 16.5V7.5L12 2Z" fill="white" className={`${isQuickDiceOpen ? 'fill-white' : 'fill-red-600'} transition-colors duration-500`} stroke="white" strokeWidth="1.5" strokeLinejoin="round" />
+                                <path d="M12 2L2 7.5L12 12L22 7.5L12 2Z" stroke={isQuickDiceOpen ? "#ef4444" : "white"} strokeWidth="1" strokeLinejoin="round" />
+                                <path d="M2 16.5L12 12L22 16.5" stroke="white" strokeWidth="0.5" opacity="0.6" />
+                                <path d="M12 2V12M12 22V12M2 7.5L12 12M22 7.5L12 12" stroke="white" strokeWidth="0.5" opacity="0.4" />
+                            </svg>
+                        </div>
                     </button>
                 </div>
 
