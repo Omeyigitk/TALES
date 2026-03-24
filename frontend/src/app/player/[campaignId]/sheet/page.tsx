@@ -318,6 +318,7 @@ const PlayerSheet = () => {
     const [confirmShortRest, setConfirmShortRest] = useState(false);
     const [buyShopItem, setBuyShopItem] = useState<any>(null);
     const [isRollHidden, setIsRollHidden] = useState(false);
+    const [dicePool, setDicePool] = useState<number[]>([]);
     const chatEndRef = useRef<HTMLDivElement>(null);
 
 
@@ -1308,6 +1309,43 @@ const PlayerSheet = () => {
         showToast(isRollHidden ? `🎲 (Hidden) ${name} - ${formula}` : `🎲 ${name} - ${formula}`, cost ? `${cost.amount} ${cost.name} used! Result: ${total}` : `${typeLabel} Result: ${total}`, 'bg-purple-900 border-purple-500 text-purple-100');
     };
 
+    const handlePoolRoll = async () => {
+        if (dicePool.length === 0 || !character) return;
+        
+        let total = 0;
+        const rolls: string[] = [];
+        const diceCounts: Record<number, number> = {};
+        
+        dicePool.forEach(sides => {
+            const result = Math.floor(Math.random() * sides) + 1;
+            total += result;
+            diceCounts[sides] = (diceCounts[sides] || 0) + 1;
+            rolls.push(`d${sides}(${result})`);
+        });
+
+        // Create formula string like "2d6 + 1d20"
+        const formulaParts = Object.entries(diceCounts).map(([sides, count]) => `${count}d${sides}`);
+        const formula = formulaParts.join(' + ');
+
+        if (socket) {
+            (socket as any).emit('roll_dice', {
+                campaignId,
+                playerName: character.name,
+                rollResult: total,
+                type: `Zar Havuzu (${formula})`,
+                isHidden: isRollHidden
+            });
+        }
+
+        showToast(
+            isRollHidden ? `🎲 (Gizli) Havuz Atıldı` : `🎲 Havuz Atıldı`,
+            `${formula} = ${total}`,
+            'bg-purple-900 border-purple-500 text-purple-100'
+        );
+
+        setDicePool([]);
+    };
+
     const startLevelUp = async () => {
         // Use characterRef for always-fresh data (fixes consecutive level-up bug)
         const char = characterRef.current;
@@ -1854,8 +1892,51 @@ const PlayerSheet = () => {
                             <h2 className="text-xl font-black text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-red-600 flex items-center gap-2 tracking-wide uppercase">
                                 <span className="text-2xl">🎲</span> Zar Kayıtları
                             </h2>
-                            <button onClick={() => setShowDiceLogUI(false)} className="text-gray-500 hover:text-white transition-colors text-xl font-black">✕</button>
+                            <button 
+                                onClick={() => dicePool.length > 0 ? handlePoolRoll() : setShowDiceLogUI(false)} 
+                                className={`transition-all duration-300 ${dicePool.length > 0 ? 'bg-red-600 hover:bg-red-500 text-white w-10 h-10 rounded-full shadow-[0_0_15px_rgba(239,68,68,0.4)] flex items-center justify-center text-xl' : 'text-gray-500 hover:text-white text-xl font-black'}`}
+                                title={dicePool.length > 0 ? 'Havuzu At' : 'Kapat'}
+                            >
+                                {dicePool.length > 0 ? '🎲' : '✕'}
+                            </button>
                         </div>
+
+                        {/* Quick Dice Selection Bar */}
+                        <div className="grid grid-cols-7 gap-1 mb-4">
+                            {[4, 6, 8, 10, 12, 20, 100].map(sides => (
+                                <button
+                                    key={sides}
+                                    onClick={() => setDicePool(prev => [...prev, sides])}
+                                    className="aspect-square bg-gray-900 border border-white/5 rounded-lg flex flex-col items-center justify-center hover:bg-gray-800 hover:border-red-500/50 transition-all group"
+                                    title={`d${sides} ekle`}
+                                >
+                                    <span className="text-gray-400 group-hover:text-red-400 transform group-hover:scale-110 transition-all">{getDiceIcon(sides)}</span>
+                                    <span className="text-[8px] font-black text-gray-600 uppercase mt-0.5">{sides === 100 ? '%' : sides}</span>
+                                </button>
+                            ))}
+                        </div>
+
+                        {/* Dice Pool Preview */}
+                        {dicePool.length > 0 && (
+                            <div className="bg-red-950/20 border border-red-500/20 rounded-xl p-3 mb-4 animate-in slide-in-from-top-2 duration-300">
+                                <div className="flex justify-between items-center mb-2">
+                                    <span className="text-[10px] font-black text-red-400 uppercase tracking-widest">Atılacak Zarlar ({dicePool.length})</span>
+                                    <button onClick={() => setDicePool([])} className="text-[10px] font-black text-gray-500 hover:text-white uppercase tracking-tighter transition-colors">Temizle</button>
+                                </div>
+                                <div className="flex flex-wrap gap-1.5">
+                                    {dicePool.map((sides, idx) => (
+                                        <div 
+                                            key={idx} 
+                                            onClick={() => setDicePool(prev => prev.filter((_, i) => i !== idx))}
+                                            className="w-8 h-8 bg-gray-900 border border-red-500/30 rounded flex items-center justify-center text-[10px] font-black cursor-pointer hover:bg-red-900/40 hover:border-red-500 transition-all relative group"
+                                        >
+                                            {sides === 100 ? '%' : sides}
+                                            <span className="absolute -top-1 -right-1 w-3 h-3 bg-red-600 rounded-full flex items-center justify-center text-[8px] opacity-0 group-hover:opacity-100 transition-opacity">✕</span>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        )}
 
                         {/* Hidden Toggle inside Log */}
                         <div className="flex items-center justify-between bg-gray-900/50 p-3 rounded-xl border border-white/5 mb-4 group hover:border-purple-500/30 transition-all">
