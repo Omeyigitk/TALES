@@ -1188,34 +1188,53 @@ export default function DMDashboard() {
                 {/* Floating DM Dice Roll Menu */}
                 <div className="fixed bottom-8 left-8 z-[60] flex flex-col items-center">
                     {/* Premium Selection Menu */}
-                    <div className={`flex flex-col-reverse items-center gap-3 mb-4 transition-all duration-500 origin-bottom ${isQuickDiceOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-0 pointer-events-none'}`}>
-                        {/* Pool Roll Button */}
+                    <div className={`flex flex-col-reverse items-center gap-4 mb-5 transition-all duration-500 origin-bottom ${isQuickDiceOpen ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-90 translate-y-10 pointer-events-none'}`}>
+                        {/* Pool Roll Button - Classy Refinement */}
                         {dicePool.length > 0 && (
                             <button
                                 onClick={handlePoolRoll}
-                                className="group relative w-14 h-14 bg-red-600 hover:bg-red-500 text-white rounded-full shadow-[0_0_20px_rgba(239,68,68,0.5)] flex items-center justify-center transition-all animate-bounce overflow-hidden"
+                                className="group relative px-8 py-3 bg-gradient-to-br from-red-600 via-red-700 to-red-900 text-white rounded-2xl shadow-[0_10px_30px_rgba(185,28,28,0.5),inset_0_1px_1px_rgba(255,255,255,0.2)] flex flex-col items-center justify-center transition-all hover:scale-105 active:scale-95 overflow-hidden border border-red-500/30"
                             >
-                                <span className="relative z-10 text-xl font-black">ROLL</span>
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                                <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10 mix-blend-overlay"></div>
+                                <div className="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                                
+                                <span className="relative z-10 text-xs font-black tracking-[0.2em] uppercase text-red-100/80 mb-0.5">Zarları At</span>
+                                <span className="relative z-10 text-2xl font-black tracking-tight leading-none italic">
+                                    ROLL <span className="text-sm not-italic opacity-50 ml-1">({dicePool.length})</span>
+                                </span>
+                                
+                                <div className="absolute bottom-0 left-0 w-full h-1 bg-red-400/30 overflow-hidden">
+                                    <div className="h-full bg-white/40 animate-shimmer" style={{ width: '30%', background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent)' }}></div>
+                                </div>
                             </button>
                         )}
 
                         {/* Dice Selection Grid */}
                         <div className="bg-gray-900/90 backdrop-blur-xl border border-white/10 p-3 rounded-2xl shadow-2xl flex flex-col gap-2">
                             <div className="grid grid-cols-2 gap-2">
-                                {[20, 100, 12, 10, 8, 6, 4].map((sides, idx) => (
-                                    <button
-                                        key={sides}
-                                        onClick={() => setDicePool([...dicePool, sides])}
-                                        className="w-12 h-12 bg-gray-800 hover:bg-gray-700 rounded-xl flex items-center justify-center transition-all group border border-white/5 hover:border-red-500/50 relative overflow-hidden"
-                                        style={{ transitionDelay: `${idx * 50}ms` }}
-                                    >
-                                        <div className={`transition-all duration-300 transform group-hover:scale-110 ${sides === 20 ? 'text-red-400' : 'text-gray-400 group-hover:text-white'}`}>
-                                            {getDiceIcon(sides)}
-                                        </div>
-                                        <span className="absolute bottom-1 right-1 text-[8px] font-black opacity-20 group-hover:opacity-40">{sides}</span>
-                                    </button>
-                                ))}
+                                {[20, 100, 12, 10, 8, 6, 4].map((sides, idx) => {
+                                    const count = dicePool.filter(s => s === sides).length;
+                                    return (
+                                        <button
+                                            key={sides}
+                                            onClick={() => setDicePool([...dicePool, sides])}
+                                            className="w-14 h-14 bg-gray-800/80 hover:bg-gray-700 rounded-2xl flex items-center justify-center transition-all group border border-white/5 hover:border-red-500/50 relative overflow-visible shadow-lg"
+                                            style={{ transitionDelay: `${idx * 40}ms` }}
+                                        >
+                                            <div className={`transition-all duration-300 transform group-hover:scale-110 ${sides === 20 ? 'text-red-500 drop-shadow-[0_0_8px_rgba(239,68,68,0.4)]' : 'text-gray-400 group-hover:text-white'}`}>
+                                                {getDiceIcon(sides)}
+                                            </div>
+                                            <span className="absolute bottom-1.5 right-2 text-[7px] font-black opacity-30 group-hover:opacity-60 tracking-tighter">D{sides}</span>
+                                            
+                                            {/* Dice Count Indicator */}
+                                            {count > 0 && (
+                                                <div className="absolute -top-1.5 -right-1.5 min-w-[20px] h-5 bg-red-600 text-white text-[10px] font-black rounded-lg flex items-center justify-center px-1 shadow-[0_2px_10px_rgba(220,38,38,0.5)] border border-red-400/50 animate-in zoom-in duration-300 z-20">
+                                                    {count}
+                                                </div>
+                                            )}
+                                        </button>
+                                    );
+                                })}
                             </div>
 
                             {/* Options within menu */}
