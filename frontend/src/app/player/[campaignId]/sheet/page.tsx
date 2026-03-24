@@ -171,16 +171,6 @@ const getSpellTags = (spell: any) => {
     return tags.length > 0 ? tags : ["Utility"];
 };
 
-const getSpellcastingAbility = (cls: string) => {
-    const mapping: Record<string, string> = {
-        Cleric: 'WIS', Druid: 'WIS', Ranger: 'WIS', Monk: 'WIS',
-        Wizard: 'INT', Artificer: 'INT',
-        Sorcerer: 'CHA', Warlock: 'CHA', Bard: 'CHA', Paladin: 'CHA',
-        Fighter: 'INT', Rogue: 'INT'
-    };
-    return mapping[cls] || 'INT';
-};
-
 const PlayerSheet = () => {
     const { campaignId } = useParams();
     const router = useRouter();
@@ -398,18 +388,6 @@ const PlayerSheet = () => {
     const featSpellsList = character?.featSelections?.spells 
         ? Object.values(character.featSelections.spells).flat() as string[] 
         : [];
-    
-    // Non-spell feat features/abilities for Actions tab
-    const featFeaturesList = actualFeats.map(fName => libFeats.find(lf => lf.name === fName)).filter(f => {
-        if (!f) return false;
-        const desc = (f.desc_tr || "").toLowerCase();
-        const hasActionKeywords = /aksiyon|reaksiyon|bonus|kullan|kez|sefer/i.test(desc);
-        // If it's pure passive stats/profs and has no action keywords, exclude it from Actions tab
-        const isPurelyPassive = (f.effects || []).length > 0 && (f.effects || []).every(e => 
-            ['stat_bonus', 'proficiency', 'expertise', 'ac_bonus', 'speed_bonus', 'initiative_bonus', 'hp_per_level'].includes(e.type)
-        ) && !hasActionKeywords;
-        return !isPurelyPassive;
-    });
 
     // Auto-derived defenses (Resistances/Immunities)
     const autoDefenses = (() => {
@@ -2911,14 +2889,7 @@ const PlayerSheet = () => {
                                     </div>
                                     {showFeatsUI && (
                                     <div className="p-3 space-y-2">
-                                        {actualFeats
-                                            .filter(featName => {
-                                                // Filter out feats that are already shown as active features or spells
-                                                const isActionFeat = featFeaturesList.some(f => f.name === featName);
-                                                const isSpellFeat = (character.feats || []).some(f => f.name === featName && f.spells && f.spells.length > 0);
-                                                return !isActionFeat && !isSpellFeat;
-                                            })
-                                            .map((featName: string, idx: number) => {
+                                        {actualFeats.map((featName: string, idx: number) => {
                                             const featDetails = libFeats.find(f => f.name === featName);
                                             const isExpanded = expandedFeat === featName;
                                             return (
@@ -3403,7 +3374,7 @@ const PlayerSheet = () => {
                                                                 </span>
                                                                 <div>
                                                                     <h4 className="font-black text-white text-xs uppercase tracking-tight">{spName}</h4>
-                                                                    <p className="text-[9px] text-purple-400 font-bold uppercase tracking-widest leading-none">Feat Büyüsü</p>
+                                                                    <p className="text-[9px] text-purple-400 font-bold uppercase tracking-widest leading-none">Feat Özelliği</p>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -3415,55 +3386,12 @@ const PlayerSheet = () => {
                                                         <div className="flex gap-1.5 mt-auto relative">
                                                             <button 
                                                                 onClick={async () => {
-                                                                    const canUse = (details.level_int === 0 || details.level === 'Cantrip') || await confirm({ title: "Büyü Yap", message: `${spName} büyüsünü yapmak istiyor musun?` });
+                                                                    const canUse = details.level_int === 0 || await confirm({ title: "Büyü Yap", message: `${spName} büyüsünü yapmak istiyor musun?` });
                                                                     if (canUse) {
-                                                                        const ab = getSpellcastingAbility(clsName);
-                                                                        const abilityMod = mods[ab as keyof typeof mods] || 0;
-                                                                        handleRoll(spName, { count: 1, sides: 20, bonus: abilityMod + prof }, 'Büyü Atak');
+                                                                        handleRoll(spName, { count: 1, sides: 20, bonus: getModifier(getSpellcastingAbility(clsName)) + prof }, 'Büyü Atak');
                                                                     }
                                                                 }}
                                                                 className="flex-1 py-1.5 bg-purple-600 hover:bg-purple-500 text-white font-black rounded-md text-[10px] uppercase tracking-widest transition shadow-lg shadow-purple-900/20"
-                                                            >
-                                                                Kullan
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                );
-                                            })}
-
-                                            {/* Feat Özellikleri (Actions/Abilities) */}
-                                            {featFeaturesList.length > 0 && featFeaturesList.map((feat: any) => {
-                                                if (!feat) return null;
-                                                return (
-                                                    <div key={feat.name} className="bg-gradient-to-br from-amber-900/40 to-yellow-900/40 rounded-xl border border-amber-500/30 p-3 shadow-lg hover:border-amber-500/60 transition-all group relative overflow-hidden">
-                                                        <div className="absolute top-0 right-0 p-4 bg-amber-500/5 blur-xl rounded-full -mr-4 -mt-4"></div>
-                                                        <div className="flex items-center justify-between mb-2 relative">
-                                                            <div className="flex items-center gap-2">
-                                                                <span className="text-lg bg-amber-600/20 p-1.5 rounded-lg border border-amber-500/30 text-amber-400 group-hover:scale-110 transition-transform">
-                                                                    📜
-                                                                </span>
-                                                                <div>
-                                                                    <h4 className="font-black text-white text-xs uppercase tracking-tight">{feat.name_tr || feat.name}</h4>
-                                                                    <p className="text-[9px] text-amber-400 font-bold uppercase tracking-widest leading-none">Feat Yeteneği</p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        {feat.desc_tr && (
-                                                            <p className="text-[10px] text-gray-400 leading-tight mb-3 line-clamp-3 italic">
-                                                                {resolveFormula(feat.desc_tr, level, mods, prof, clsName)}
-                                                            </p>
-                                                        )}
-                                                        <div className="flex gap-1.5 mt-auto relative">
-                                                            <button 
-                                                                onClick={async () => {
-                                                                    const rollMatch = feat.desc_tr?.match(/(\d+)d(\d+)/);
-                                                                    if (rollMatch) {
-                                                                        handleRoll(feat.name_tr || feat.name, { count: parseInt(rollMatch[1]), sides: parseInt(rollMatch[2]), bonus: 0 }, 'Feat Yeteneği');
-                                                                    } else {
-                                                                        showToast(feat.name_tr || feat.name, "Yetenek kullanıldı.", "bg-amber-900 border-amber-600 text-amber-100");
-                                                                    }
-                                                                }}
-                                                                className="flex-1 py-1.5 bg-amber-700 hover:bg-amber-600 text-white font-black rounded-md text-[10px] uppercase tracking-widest transition shadow-lg shadow-amber-900/20"
                                                             >
                                                                 Kullan
                                                             </button>
@@ -4704,7 +4632,7 @@ const PlayerSheet = () => {
 
             {/* ── TOAST ── */}
             {
-                toast.show && (
+                toast && (
                     <div className="fixed bottom-8 right-8 z-[200] max-w-sm animate-in slide-in-from-right-10 fade-in duration-500">
                         <div className={`backdrop-blur-xl border-2 rounded-2xl p-5 shadow-[0_20px_50px_rgba(0,0,0,0.5)] transition-all ${toast.color}`}>
                             <div className="flex justify-between items-start gap-4 mb-2">

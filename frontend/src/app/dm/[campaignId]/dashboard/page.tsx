@@ -49,15 +49,9 @@ export default function DMDashboard() {
 
     // Toast Notification System
     const [toast, setToast] = useState<{ show: boolean, title: string, message: string, color: string }>({ show: false, title: '', message: '', color: '' });
-    const toastTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-
     const showToast = (title: string, message: string, color: string) => {
-        if (toastTimeoutRef.current) clearTimeout(toastTimeoutRef.current);
         setToast({ show: true, title, message, color });
-        toastTimeoutRef.current = setTimeout(() => {
-            setToast(prev => ({ ...prev, show: false }));
-            toastTimeoutRef.current = null;
-        }, 10000); // 10 saniye kuralı
+        setTimeout(() => setToast(prev => ({ ...prev, show: false })), 5000);
     };
 
     // Watch for whispers
@@ -3339,31 +3333,6 @@ export default function DMDashboard() {
                     </div>
                 )}
 
-
-                {/* Toast Notification Rendering */}
-                {toast.show && (
-                    <div className="fixed bottom-8 right-8 z-[200] animate-toast-in">
-                        <div className={`${toast.color || 'bg-gray-900'} backdrop-blur-xl border border-white/20 p-6 rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] flex items-start gap-4 max-w-md`}>
-                            <div className="w-12 h-12 rounded-2xl bg-white/10 flex items-center justify-center shrink-0 text-2xl">
-                                {toast.title.includes('Zar') || toast.title.includes('Dice') ? '🎲' : 
-                                 toast.title.includes('Hata') || toast.title.includes('Error') ? '❌' : 
-                                 toast.title.includes('Sistem') || toast.title.includes('System') ? '⚙️' : '🔔'}
-                            </div>
-                            <div className="flex-1">
-                                <h4 className="text-white font-black uppercase tracking-tight text-lg">{toast.title}</h4>
-                                <p className="text-white/80 text-sm mt-1 leading-relaxed font-medium">{toast.message}</p>
-                            </div>
-                            <button 
-                                onClick={() => setToast(prev => ({ ...prev, show: false }))}
-                                className="text-white/40 hover:text-white transition-colors"
-                            >
-                                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
-                                </svg>
-                            </button>
-                        </div>
-                    </div>
-                )}
 
             </div>
         </div >
