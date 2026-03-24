@@ -400,12 +400,12 @@ const PlayerSheet = () => {
         : [];
     
     // Non-spell feat features/abilities for Actions tab
-    const featFeaturesList = actualFeats.map((fName: string) => libFeats.find((lf: any) => lf.name === fName)).filter((f: any) => {
+    const featFeaturesList = actualFeats.map(fName => libFeats.find(lf => lf.name === fName)).filter(f => {
         if (!f) return false;
         const desc = (f.desc_tr || "").toLowerCase();
         const hasActionKeywords = /aksiyon|reaksiyon|bonus|kullan|kez|sefer/i.test(desc);
         // If it's pure passive stats/profs and has no action keywords, exclude it from Actions tab
-        const isPurelyPassive = (f.effects || []).length > 0 && (f.effects || []).every((e: any) => 
+        const isPurelyPassive = (f.effects || []).length > 0 && (f.effects || []).every(e => 
             ['stat_bonus', 'proficiency', 'expertise', 'ac_bonus', 'speed_bonus', 'initiative_bonus', 'hp_per_level'].includes(e.type)
         ) && !hasActionKeywords;
         return !isPurelyPassive;
@@ -2912,10 +2912,10 @@ const PlayerSheet = () => {
                                     {showFeatsUI && (
                                     <div className="p-3 space-y-2">
                                         {actualFeats
-                                            .filter((featName: string) => {
-                                                // Filter out feats that are already rendered as active features or spells
-                                                const isActionFeat = featFeaturesList.some((f: any) => f.name === featName);
-                                                const isSpellFeat = (character.feats || []).some((f: any) => f.name === featName && f.spells && f.spells.length > 0);
+                                            .filter(featName => {
+                                                // Filter out feats that are already shown as active features or spells
+                                                const isActionFeat = featFeaturesList.some(f => f.name === featName);
+                                                const isSpellFeat = (character.feats || []).some(f => f.name === featName && f.spells && f.spells.length > 0);
                                                 return !isActionFeat && !isSpellFeat;
                                             })
                                             .map((featName: string, idx: number) => {
