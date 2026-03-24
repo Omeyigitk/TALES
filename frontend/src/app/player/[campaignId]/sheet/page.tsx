@@ -1317,6 +1317,55 @@ const PlayerSheet = () => {
         showToast(isRollHidden ? `🎲 (Hidden) ${name} - ${formula}` : `🎲 ${name} - ${formula}`, cost ? `${cost.amount} ${cost.name} used! Result: ${total}` : `${typeLabel} Result: ${total}`, 'bg-purple-900 border-purple-500 text-purple-100');
     };
 
+    const getDiceIcon = (sides: number) => {
+        const baseClass = "w-6 h-6 stroke-current fill-none";
+        switch (sides) {
+            case 4: return (
+                <svg viewBox="0 0 24 24" className={baseClass} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M12 3l9 16H3L12 3z" />
+                    <path d="M12 3v16M3 19l9-8 9 8" className="opacity-40" />
+                </svg>
+            );
+            case 6: return (
+                <svg viewBox="0 0 24 24" className={baseClass} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                    <path d="M3 3l18 18M3 21L21 3" className="opacity-40" />
+                </svg>
+            );
+            case 8: return (
+                <svg viewBox="0 0 24 24" className={baseClass} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M12 2L4 12l8 10 8-10-8-10z" />
+                    <path d="M4 12h16M12 2v20" className="opacity-40" />
+                </svg>
+            );
+            case 10: return (
+                <svg viewBox="0 0 24 24" className={baseClass} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M12 2L3 12l9 10 9-10-9-10z" />
+                    <path d="M12 2l-3 10 3 10 3-10-3-10zM3 12h18" className="opacity-40" />
+                </svg>
+            );
+            case 12: return (
+                <svg viewBox="0 0 24 24" className={baseClass} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M12 2l9 6v8l-9 6-9-6V8l9-6z" />
+                    <path d="M12 2l3 6 6 0-3 6 3 6-6 0-3 6-3-6-6 0 3-6-3-6 6 0 3-6z" className="opacity-40 scale-[0.6] origin-center" />
+                </svg>
+            );
+            case 20: return (
+                <svg viewBox="0 0 24 24" className={baseClass} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M12 2l10 5.5v11L12 22l-10-5.5v-11L12 2z" />
+                    <path d="M12 2v20M2 7.5l10 4.5 10-4.5M2 18.5l10-4.5 10 4.5" className="opacity-40" />
+                </svg>
+            );
+            case 100: return (
+                <svg viewBox="0 0 24 24" className={baseClass} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <circle cx="12" cy="12" r="10" />
+                    <circle cx="12" cy="12" r="4" className="opacity-40" />
+                </svg>
+            );
+            default: return <span>d{sides}</span>;
+        }
+    };
+
     const handlePoolRoll = async () => {
         if (dicePool.length === 0 || !character) return;
         
@@ -5773,75 +5822,107 @@ const PlayerSheet = () => {
             )}
 
             {/* ── ENHANCED FLOATING DICE MENU (FAB) ── */}
-            <div className="fixed bottom-8 left-8 z-[100] flex flex-col items-start gap-4">
-                {/* Dice Selection Options (Appears above the toggle) */}
-                <div className={`flex flex-col gap-3 transition-all duration-500 transform ${isQuickDiceOpen ? 'translate-y-0 opacity-100 scale-100' : 'translate-y-10 opacity-0 scale-90 pointer-events-none'}`}>
-                    {/* Glassmorphic dice palette */}
-                    <div className="bg-gray-950/90 backdrop-blur-xl border border-white/10 p-3 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.5)] flex flex-col gap-2">
-                        {[4, 6, 8, 10, 12, 20, 100].map((sides, idx) => {
-                            const count = dicePool.filter(d => d === sides).length;
-                            return (
-                                <button
-                                    key={sides}
-                                    onClick={(e) => {
-                                        e.stopPropagation();
-                                        setDicePool(prev => [...prev, sides]);
-                                    }}
-                                    className="w-12 h-12 bg-gray-900/50 hover:bg-red-600/20 border border-white/5 hover:border-red-500/50 rounded-xl flex items-center justify-center transition-all group/dice relative"
-                                    style={{ transitionDelay: `${idx * 50}ms` }}
-                                    title={`Add d${sides}`}
-                                >
-                                    <span className="text-gray-400 group-hover/dice:text-red-400 transform group-hover/dice:scale-110 transition-all font-black text-[10px]">
-                                        d{sides === 100 ? '%' : sides}
-                                    </span>
-                                    {count > 0 && (
-                                        <div className="absolute -top-2 -right-2 bg-red-600 text-white text-[10px] font-black w-5 h-5 rounded-full flex items-center justify-center border-2 border-gray-950 animate-in zoom-in duration-200 shadow-lg">
-                                            {count}
-                                        </div>
-                                    )}
-                                </button>
-                            );
-                        })}
-                    </div>
-
-                    {/* Quick Actions (Roll & Clear) */}
-                    {dicePool.length > 0 && (
-                        <div className="flex flex-col gap-2 animate-in slide-in-from-bottom duration-300">
-                            <button
-                                onClick={() => handlePoolRoll()}
-                                className="w-12 h-12 bg-red-600 hover:bg-red-500 text-white rounded-xl flex items-center justify-center shadow-[0_0_20px_rgba(239,68,68,0.4)] transition-all animate-pulse"
-                                title="Roll Pool"
+            <div className="fixed bottom-8 left-8 z-[100] flex flex-col items-center">
+                {/* Refined Selection Menu & Roll Button */}
+                <div className={`flex flex-col-reverse items-center gap-6 mb-6 transition-all duration-500 origin-bottom ${isQuickDiceOpen ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-95 translate-y-10 pointer-events-none'}`}>
+                    
+                    {/* Refined Dice Selection Menu - Obsidian & Ruby Theme */}
+                    <div className="group/menu relative bg-gray-950/40 backdrop-blur-2xl border border-white/10 p-4 rounded-[2rem] shadow-[0_20px_50px_rgba(0,0,0,0.8),inset_0_1px_1px_rgba(255,255,255,0.05)] flex flex-col gap-4 overflow-hidden min-w-[180px]">
+                        {/* Decorative Background Glow */}
+                        <div className="absolute -top-10 -right-10 w-24 h-24 bg-red-600/10 rounded-full blur-3xl pointer-events-none group-hover/menu:bg-red-600/20 transition-all duration-700"></div>
+                        
+                        <div className="flex items-center justify-between px-1 mb-1">
+                            <span className="text-[10px] font-black text-gray-500 tracking-[0.3em] uppercase">Zar Seti</span>
+                            <div className="h-px flex-1 bg-gradient-to-r from-transparent via-white/5 to-transparent mx-4"></div>
+                            <button 
+                                onClick={(e) => { e.stopPropagation(); setDicePool([]); }}
+                                disabled={dicePool.length === 0}
+                                className="text-[9px] font-black text-red-500/60 hover:text-red-400 disabled:opacity-0 transition-all uppercase tracking-widest flex items-center gap-1.5"
                             >
-                                <svg viewBox="0 0 24 24" className="w-6 h-6 stroke-white fill-none" strokeWidth="2.5">
-                                    <path d="M12 2L22 7.5V16.5L12 22L2 16.5V7.5L12 2z" />
-                                    <path d="M12 2v20M2 7.5l10 4.5 10-4.5M2 18.5l10-4.5 10 4.5" className="opacity-40" />
-                                </svg>
-                            </button>
-                            <button
-                                onClick={() => setDicePool([])}
-                                className="w-12 h-12 bg-gray-800 hover:bg-gray-700 text-gray-400 border border-white/5 rounded-xl flex items-center justify-center transition-all"
-                                title="Clear Pool"
-                            >
-                                ✕
+                                <span>TEMİZLE</span>
+                                <span className="text-xs">×</span>
                             </button>
                         </div>
+
+                        <div className="grid grid-cols-2 gap-3">
+                            {[20, 100, 12, 10, 8, 6, 4].map((sides, idx) => {
+                                const count = dicePool.filter(s => s === sides).length;
+                                const isD20 = sides === 20;
+                                return (
+                                    <button
+                                        key={sides}
+                                        onClick={(e) => { e.stopPropagation(); setDicePool([...dicePool, sides]); }}
+                                        className={`w-16 h-16 rounded-2xl flex items-center justify-center transition-all group/dice border relative overflow-visible shadow-lg ${
+                                            isD20 
+                                            ? 'bg-red-950/20 border-red-500/20 hover:border-red-500/50 hover:bg-red-900/40' 
+                                            : 'bg-gray-900/40 border-white/5 hover:border-white/20 hover:bg-gray-800/60'
+                                        }`}
+                                        style={{ transitionDelay: `${idx * 40}ms` }}
+                                    >
+                                        <div className={`transition-all duration-500 transform group-hover/dice:scale-110 drop-shadow-[0_0_15px_rgba(0,0,0,0.5)] ${
+                                            isD20 ? 'text-red-500 group-hover/dice:text-red-400' : 'text-gray-400 group-hover/dice:text-gray-200'
+                                        }`}>
+                                            {getDiceIcon(sides)}
+                                        </div>
+                                        <span className="absolute bottom-2 right-2.5 text-[7px] font-black opacity-30 group-hover/dice:opacity-60 tracking-tighter uppercase font-mono">D{sides}</span>
+                                        
+                                        {/* Count Indicator - Ruby Style */}
+                                        {count > 0 && (
+                                            <div className="absolute -top-1.5 -right-1.5 min-w-[22px] h-5.5 bg-gradient-to-br from-red-500 to-red-800 text-white text-[10px] font-black rounded-lg flex items-center justify-center px-1.5 shadow-[0_4px_12px_rgba(220,38,38,0.5)] border border-white/20 animate-in zoom-in duration-300 z-20">
+                                                {count}
+                                            </div>
+                                        )}
+                                        
+                                        {/* Hover Glow Effect */}
+                                        <div className="absolute inset-0 rounded-2xl opacity-0 group-hover/dice:opacity-100 transition-opacity bg-gradient-to-br from-white/5 to-transparent pointer-events-none"></div>
+                                    </button>
+                                );
+                            })}
+                        </div>
+                    </div>
+
+                    {/* Pool Roll Button - Minimalist & Elegant */}
+                    {dicePool.length > 0 && (
+                        <button
+                            onClick={(e) => { e.stopPropagation(); handlePoolRoll(); }}
+                            className="group/roll relative px-12 py-3.5 bg-gray-950/80 backdrop-blur-xl border border-red-500/40 text-red-50 rounded-2xl shadow-[0_20px_50px_rgba(0,0,0,0.6),0_0_20px_rgba(239,68,68,0.1)] flex flex-col items-center justify-center transition-all hover:border-red-500 hover:bg-red-950/40 active:scale-95 overflow-hidden animate-in slide-in-from-bottom-2 duration-300"
+                        >
+                            <div className="absolute inset-0 bg-gradient-to-tr from-red-500/5 to-transparent opacity-0 group-hover/roll:opacity-100 transition-opacity"></div>
+                            
+                            <span className="relative z-10 text-[9px] font-bold tracking-[0.3em] uppercase text-gray-400 group-hover/roll:text-red-300 transition-colors mb-1">Zarları At</span>
+                            <div className="relative z-10 flex items-baseline gap-2">
+                                <span className="text-xl font-black tracking-[0.15em] uppercase text-white group-hover/roll:text-red-50 transition-colors">ROLL</span>
+                                <span className="text-sm font-bold text-red-500/80 group-hover/roll:text-red-400 font-mono">({dicePool.length})</span>
+                            </div>
+                            
+                            <div className="absolute bottom-0 left-0 w-full h-[2px] bg-red-500/0 group-hover/roll:bg-red-500/40 transition-all overflow-hidden">
+                                <div className="h-full bg-white/40 animate-shimmer" style={{ width: '40%', background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent)' }}></div>
+                            </div>
+                        </button>
                     )}
                 </div>
 
                 {/* Main FAB Toggle Button */}
                 <button
                     onClick={() => setIsQuickDiceOpen(!isQuickDiceOpen)}
-                    className={`w-16 h-16 rounded-2xl flex items-center justify-center transition-all duration-500 shadow-2xl group border-2 ${isQuickDiceOpen ? 'bg-red-600 border-red-400 rotate-90 scale-110 shadow-red-900/40' : 'bg-gray-950 border-white/10 hover:border-red-500 active:scale-95'}`}
+                    className={`w-16 h-16 rounded-2xl flex items-center justify-center transition-all duration-500 shadow-2xl group border-2 relative overflow-hidden ${
+                        isQuickDiceOpen 
+                        ? 'bg-red-600 border-red-400 rotate-90 scale-110 shadow-red-900/40' 
+                        : 'bg-gray-950 border-white/10 hover:border-red-500 active:scale-95'
+                    }`}
                 >
-                    <div className="relative">
-                        <svg viewBox="0 0 24 24" className={`w-8 h-8 transition-colors duration-500 ${isQuickDiceOpen ? 'stroke-white' : 'stroke-red-500 group-hover:stroke-red-400'}`} fill="none" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    {/* Background Shine */}
+                    <div className="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    
+                    <div className="relative z-10">
+                        <svg viewBox="0 0 24 24" className={`w-8 h-8 transition-all duration-500 ${isQuickDiceOpen ? 'stroke-white' : 'stroke-red-500 group-hover:stroke-red-400 group-hover:scale-110 rotate-[-15deg] group-hover:rotate-0'}`} fill="none" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                             <path d="M12 2L22 7.5V16.5L12 22L2 16.5V7.5L12 2z" />
                             <circle cx="12" cy="12" r="2" fill="currentColor" className={isQuickDiceOpen ? 'opacity-100' : 'opacity-20'} />
                         </svg>
                         
                         {/* Overall Pool Count Badge (Hidden when menu open) */}
                         {dicePool.length > 0 && !isQuickDiceOpen && (
-                            <div className="absolute -top-3 -right-3 bg-red-500 text-white text-[10px] font-black w-6 h-6 rounded-full flex items-center justify-center border-2 border-gray-950 animate-bounce shadow-lg">
+                            <div className="absolute -top-3 -right-3 bg-red-500 text-white text-[10px] font-black w-6 h-6 rounded-full flex items-center justify-center border-2 border-gray-950 animate-bounce shadow-[0_0_15px_rgba(239,68,68,0.5)]">
                                 {dicePool.length}
                             </div>
                         )}
