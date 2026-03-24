@@ -1188,23 +1188,23 @@ export default function DMDashboard() {
                 {/* Floating DM Dice Roll Menu */}
                 <div className="fixed bottom-8 left-8 z-[60] flex flex-col items-center">
                     {/* Premium Selection Menu */}
-                    <div className={`flex flex-col-reverse items-center gap-4 mb-5 transition-all duration-500 origin-bottom ${isQuickDiceOpen ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-90 translate-y-10 pointer-events-none'}`}>
-                        {/* Pool Roll Button - Classy Refinement */}
+                    <div className={`flex flex-col-reverse items-center gap-5 mb-6 transition-all duration-500 origin-bottom ${isQuickDiceOpen ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-95 translate-y-8 pointer-events-none'}`}>
+                        {/* Pool Roll Button - Minimalist & Elegant */}
                         {dicePool.length > 0 && (
                             <button
                                 onClick={handlePoolRoll}
-                                className="group relative px-8 py-3 bg-gradient-to-br from-red-600 via-red-700 to-red-900 text-white rounded-2xl shadow-[0_10px_30px_rgba(185,28,28,0.5),inset_0_1px_1px_rgba(255,255,255,0.2)] flex flex-col items-center justify-center transition-all hover:scale-105 active:scale-95 overflow-hidden border border-red-500/30"
+                                className="group relative px-10 py-3 bg-gray-950/80 backdrop-blur-xl border border-red-500/40 text-red-50 rounded-2xl shadow-[0_15px_40px_rgba(0,0,0,0.6),0_0_20px_rgba(239,68,68,0.1)] flex flex-col items-center justify-center transition-all hover:border-red-500 hover:bg-red-950/40 active:scale-95 overflow-hidden"
                             >
-                                <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10 mix-blend-overlay"></div>
-                                <div className="absolute inset-0 bg-gradient-to-tr from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                                <div className="absolute inset-0 bg-gradient-to-tr from-red-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
                                 
-                                <span className="relative z-10 text-xs font-black tracking-[0.2em] uppercase text-red-100/80 mb-0.5">Zarları At</span>
-                                <span className="relative z-10 text-2xl font-black tracking-tight leading-none italic">
-                                    ROLL <span className="text-sm not-italic opacity-50 ml-1">({dicePool.length})</span>
-                                </span>
+                                <span className="relative z-10 text-[9px] font-bold tracking-[0.3em] uppercase text-gray-400 group-hover:text-red-300 transition-colors mb-1">Zarları At</span>
+                                <div className="relative z-10 flex items-baseline gap-2">
+                                    <span className="text-xl font-black tracking-[0.15em] uppercase text-white group-hover:text-red-50 transition-colors">ROLL</span>
+                                    <span className="text-sm font-bold text-red-500/80 group-hover:text-red-400 font-mono">({dicePool.length})</span>
+                                </div>
                                 
-                                <div className="absolute bottom-0 left-0 w-full h-1 bg-red-400/30 overflow-hidden">
-                                    <div className="h-full bg-white/40 animate-shimmer" style={{ width: '30%', background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.8), transparent)' }}></div>
+                                <div className="absolute bottom-0 left-0 w-full h-[2px] bg-red-500/0 group-hover:bg-red-500/40 transition-all overflow-hidden">
+                                    <div className="h-full bg-white/40 animate-shimmer" style={{ width: '40%', background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent)' }}></div>
                                 </div>
                             </button>
                         )}
