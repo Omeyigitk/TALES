@@ -5588,7 +5588,7 @@ const PlayerSheet = () => {
                                 const charClasses = [
                                     character.classRef?.name,
                                     ...(character.multiclasses || []).map((mc: any) => mc.className)
-                                ].filter(Boolean);
+                                ].filter(Boolean).map(c => c === 'Sorceror' ? 'Sorcerer' : c);
                                 
                                 const filteredByClass = allSpells.filter(sp => {
                                     if (!sp.classes || !Array.isArray(sp.classes)) return false;

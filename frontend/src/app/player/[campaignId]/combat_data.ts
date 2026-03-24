@@ -207,7 +207,7 @@ export function getSpellLimits(className: string, level: number, stats?: Record<
 
 
 export function isSpellcaster(className: string): boolean {
-    return ['Wizard', 'Sorcerer', 'Bard', 'Cleric', 'Druid', 'Paladin', 'Ranger', 'Warlock', 'Artificer'].includes(className);
+    return ['Wizard', 'Sorcerer', 'Sorceror', 'Bard', 'Cleric', 'Druid', 'Paladin', 'Ranger', 'Warlock', 'Artificer'].includes(className);
 }
 
 // ─── Multiclass Spell Slot Merging ────────────────────────────────────────────

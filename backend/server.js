@@ -195,10 +195,11 @@ app.post('/api/admin/seed', authenticate, async (req, res) => {
 
     // 3. Büyüler
     if (fs.existsSync(path.join(dataPath, 'spells_hybrid.json'))) {
-      const spells = JSON.parse(fs.readFileSync(path.join(dataPath, 'spells_hybrid.json'), 'utf8'));
+      const spellsJson = JSON.parse(fs.readFileSync(path.join(dataPath, 'spells_hybrid.json'), 'utf8'));
+      const spellsList = Object.values(spellsJson);
       await Spell.deleteMany({});
-      await Spell.insertMany(spells, { ordered: false });
-      console.log('Spells seeded.');
+      await Spell.insertMany(spellsList, { ordered: false });
+      console.log(`Spells seeded: ${spellsList.length}`);
     }
 
     // 4. Canavarlar
