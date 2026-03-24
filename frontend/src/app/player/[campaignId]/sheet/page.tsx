@@ -197,7 +197,7 @@ const PlayerSheet = () => {
 
     // UI & Tab States
     const [activeTab, setActiveTab] = useState('combat');
-    const [isSubclassFeaturesOpen, setIsSubclassFeaturesOpen] = useState(true);
+    const [isSubclassFeaturesOpen, setIsSubclassFeaturesOpen] = useState(false);
     const [isPrivateNotesOpen, setIsPrivateNotesOpen] = useState(false);
     const [isSavingPrivateNotes, setIsSavingPrivateNotes] = useState(false);
     const [privateNotes, setPrivateNotes] = useState("");
@@ -256,7 +256,7 @@ const PlayerSheet = () => {
     const [spellTypeFilter, setSpellTypeFilter] = useState('all');
     const [spellSearch, setSpellSearch] = useState("");
     const [selectedSkill, setSelectedSkill] = useState<any>(null);
-    const [showClassFeatsUI, setShowClassFeatsUI] = useState(true);
+    const [showClassFeatsUI, setShowClassFeatsUI] = useState(false);
     const [saves, setSaves] = useState<string[]>(character?.classRef?.saving_throws || []);
 
     // Missing Global States
@@ -308,9 +308,9 @@ const PlayerSheet = () => {
     const [newWizardCantrip, setNewWizardCantrip] = useState<string>("");
     const [wizardCantripOptions, setWizardCantripOptions] = useState<any[]>([]);
     const [isDraggingToken, setIsDraggingToken] = useState<string | null>(null);
-    const [showFeatsUI, setShowFeatsUI] = useState(true);
-    const [showRacialTraitsUI, setShowRacialTraitsUI] = useState(true);
-    const [showBackgroundUI, setShowBackgroundUI] = useState(true);
+    const [showFeatsUI, setShowFeatsUI] = useState(false);
+    const [showRacialTraitsUI, setShowRacialTraitsUI] = useState(false);
+    const [showBackgroundUI, setShowBackgroundUI] = useState(false);
     const [showActionsUI, setShowActionsUI] = useState(false);
     const [showAttacksUI, setShowAttacksUI] = useState(false);
     const [expandedFeat, setExpandedFeat] = useState<string | null>(null);
@@ -3177,13 +3177,12 @@ const PlayerSheet = () => {
                                     {/* ── SOL TARAF: EYLEMLER VE KAYNAKLAR ── */}
                                     <div className="w-full lg:w-1/3 flex flex-col gap-4">
                                         <div 
-                                            onClick={() => setShowActionsUI(!showActionsUI)}
-                                            className="flex items-center justify-between border-b border-gray-700/50 pb-2 cursor-pointer hover:bg-gray-800/30 transition-colors group"
+                                            className="flex items-center justify-between border-b border-gray-700/50 pb-2 transition-colors group"
                                         >
                                             <h3 className="font-black text-gray-300 uppercase tracking-wide text-sm flex items-center gap-2">
                                                 <span>⚡</span> Aksiyonlar & Kaynaklar
                                             </h3>
-                                            <div className="flex items-center gap-2" onClick={e => e.stopPropagation()}>
+                                            <div className="flex items-center gap-2">
                                                 <button 
                                                     onClick={() => setShowCustomResourceModal(true)}
                                                     className="w-6 h-6 bg-gray-700 hover:bg-gray-600 rounded text-center text-xs font-bold text-gray-300 border border-gray-600 transition"
@@ -3191,11 +3190,9 @@ const PlayerSheet = () => {
                                                 >
                                                     +
                                                 </button>
-                                                <span className="text-gray-500 text-xs">{showActionsUI ? '▼' : '▲'}</span>
                                             </div>
                                         </div>
 
-                                        {showActionsUI && (
                                         <div className="space-y-4 max-h-[600px] pr-2 overflow-y-auto custom-scrollbar">
                                             {/* Sınıf Kaynakları */}
                                             {resources.length > 0 && resources.map(res => {
@@ -3343,21 +3340,17 @@ const PlayerSheet = () => {
                                                 );
                                             })}
                                         </div>
-                                        )}
                                     </div>
 
                                     {/* ── SAĞ TARAF: SALDIRILAR VE SİLAHLAR ── */}
                                     <div className="w-full lg:w-2/3 flex flex-col gap-4">
                                         <div 
-                                            onClick={() => setShowAttacksUI(!showAttacksUI)}
-                                            className="flex items-center justify-between border-b border-gray-700/50 pb-2 cursor-pointer hover:bg-gray-800/30 transition-colors group"
+                                            className="flex items-center justify-between border-b border-gray-700/50 pb-2 transition-colors group"
                                         >
                                             <h3 className="font-black text-gray-300 uppercase tracking-wide text-sm flex items-center gap-2">
                                                 <span>⚔️</span> Silahlar & Saldırılar
                                             </h3>
-                                            <span className="text-gray-500 text-xs">{showAttacksUI ? '▼' : '▲'}</span>
                                         </div>
-                                        {showAttacksUI && (
                                         <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
                                             {allAttacks.map((atk: any, idx: number) => (
                                                 <div key={idx} className="bg-gray-800 rounded-xl border border-gray-700 p-4 hover:border-gray-500 transition-all flex items-start justify-between group shadow-lg">
@@ -3396,7 +3389,6 @@ const PlayerSheet = () => {
                                                 </div>
                                             ))}
                                         </div>
-                                        )}
                                     </div>
                                 </div>
                             )}
