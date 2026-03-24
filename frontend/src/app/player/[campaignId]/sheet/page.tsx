@@ -319,7 +319,7 @@ const PlayerSheet = () => {
     const [showActionsUI, setShowActionsUI] = useState(false);
     const [showAttacksUI, setShowAttacksUI] = useState(false);
     const [expandedFeat, setExpandedFeat] = useState<string | null>(null);
-    const [showDiceLogUI, setShowDiceLogUI] = useState(true);
+    const [showDiceLogUI, setShowDiceLogUI] = useState(false);
     const [isQuickDiceOpen, setIsQuickDiceOpen] = useState(false);
     const [confirmShortRest, setConfirmShortRest] = useState(false);
     const [buyShopItem, setBuyShopItem] = useState<any>(null);
