@@ -2937,31 +2937,6 @@ const PlayerSheet = () => {
                                 </div>
                             )}
 
-                            {/* Dice Log */}
-                            <div className="bg-gray-800 rounded-xl border border-gray-700 overflow-hidden">
-                                <div 
-                                    className="px-4 py-2 border-b border-gray-700 flex items-center justify-between cursor-pointer hover:bg-gray-700/50 transition-colors"
-                                    onClick={() => setShowDiceLogUI(!showDiceLogUI)}
-                                >
-                                    <h3 className="font-black text-gray-300 uppercase text-xs tracking-widest">📜 Dice Log</h3>
-                                    <span className="text-gray-400 text-xs">{showDiceLogUI ? '▼' : '▲'}</span>
-                                </div>
-                                {showDiceLogUI && (
-                                <div className="p-3 space-y-1.5 max-h-64 overflow-y-auto">
-                                    {diceLogs.filter((l: any) => !l.isHidden).length === 0 ? (
-                                        <p className="text-gray-500 text-sm italic text-center py-4">No rolls yet.</p>
-                                    ) : (
-                                        diceLogs.filter((l: any) => !l.isHidden).map((log: any, i: number) => (
-                                            <div key={log.id || i} className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm border ${log.playerName === 'Dungeon Master' ? 'bg-red-900/20 border-red-800/50' : 'bg-gray-900/50 border-gray-700'}`}>
-                                                <span className="font-bold text-gray-300">{log.playerName}</span>
-                                                <span className="text-gray-500">{log.type}</span>
-                                                <span className={`ml-auto text-xl font-black ${log.rollResult === 20 ? 'text-yellow-400' : log.rollResult === 1 ? 'text-red-500' : 'text-white'}`}>{log.rollResult}</span>
-                                            </div>
-                                        ))
-                                    )}
-                                </div>
-                                )}
-                            </div>
                         </div>
 
                         {/* ── SAĞ: Race Traits + Background ── */}
@@ -3150,45 +3125,6 @@ const PlayerSheet = () => {
 
 
 
-                            {/* Hızlı zar butonları */}
-                            <div className="bg-gray-800 rounded-xl border border-gray-700 p-4">
-                                <h3 className="font-black text-gray-300 text-xs uppercase tracking-widest mb-3">🎲 Quick Dice</h3>
-                                <div className="grid grid-cols-3 gap-2">
-                                    {['d4', 'd6', 'd8', 'd10', 'd12', 'd20'].map(d => (
-                                        <button key={d} onClick={() => {
-                                            const sides = parseInt(d.replace('d', ''));
-                                            const roll = Math.floor(Math.random() * sides) + 1;
-                                            if (socket) (socket as any).emit('roll_dice', { campaignId, playerName: character.name, rollResult: roll, type: d });
-                                            showToast(`${d} Attın`, `Sonuç: ${roll}`, roll === sides ? 'bg-yellow-900 border-yellow-500 text-yellow-100' : 'bg-gray-800 border-gray-500 text-gray-100');
-                                        }} className="py-2 bg-gray-700 hover:bg-gray-600 border border-gray-600 rounded-lg text-sm font-black text-gray-300 transition">
-                                            {d}
-                                        </button>
-                                    ))}
-                                </div>
-                                {/* Stat bazlı zar atışları */}
-                                <div className="mt-3 space-y-1">
-                                    <p className="text-gray-500 text-xs uppercase font-bold mb-2">Ability Checks</p>
-                                    {Object.entries(stats).map(([s, _]: any) => {
-                                        const m = mod(effectiveStats[s as keyof typeof effectiveStats] || 10);
-                                        return (
-                                            <button key={s} onClick={() => {
-                                                const roll = Math.floor(Math.random() * 20) + 1;
-                                                const total = roll + m;
-                                                if (socket) (socket as any).emit('roll_dice', {
-                                                    campaignId,
-                                                    playerName: character.name,
-                                                    rollResult: total,
-                                                    type: `${s} Kontrolü (d20${fmt(m)})`
-                                                });
-                                                showToast(`${s} Kontrolü`, `Zar: ${roll} ${fmt(m)} | Sonuç: ${total}`, total >= 20 ? 'bg-green-900 border-green-500 text-green-100' : 'bg-gray-800 border-gray-500 text-gray-100');
-                                            }} className="w-full flex items-center justify-between px-3 py-1.5 bg-gray-700/50 hover:bg-gray-700 border border-gray-700 rounded text-xs transition">
-                                                <span className="font-bold text-gray-400">{s}</span>
-                                                <span className={`font-black ${m >= 0 ? 'text-green-400' : 'text-red-400'}`}>{fmt(m)}</span>
-                                            </button>
-                                        );
-                                    })}
-                                </div>
-                            </div>
                         </div>
                     </div>
                 )}
