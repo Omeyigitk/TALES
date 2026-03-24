@@ -317,7 +317,6 @@ const PlayerSheet = () => {
     const [showDiceLogUI, setShowDiceLogUI] = useState(true);
     const [confirmShortRest, setConfirmShortRest] = useState(false);
     const [buyShopItem, setBuyShopItem] = useState<any>(null);
-    const [isDiceMenuOpen, setIsDiceMenuOpen] = useState(false);
     const [isRollHidden, setIsRollHidden] = useState(false);
     const chatEndRef = useRef<HTMLDivElement>(null);
 
@@ -1847,68 +1846,81 @@ const PlayerSheet = () => {
     return (
         <div className="min-h-screen bg-gray-950 text-white font-sans relative">
             {/* ══ DİCE LOG SİDEBAR (Desktop) / TOP OVERLAY (Mobile) ══ */}
-            <div className={`fixed top-4 right-4 z-[60] w-80 max-h-[40vh] md:max-h-[60vh] flex flex-col transition-all duration-500 transform ${showDiceLogUI ? 'translate-x-0 opacity-100' : 'translate-x-[calc(100%+1rem)] opacity-0 pointer-events-none'}`}>
-                <div className="bg-gray-900/40 backdrop-blur-md rounded-2xl p-4 border border-gray-700/50 shadow-[0_8px_32px_rgba(0,0,0,0.5)] flex flex-col h-full overflow-hidden">
-                    <div className="flex justify-between items-center mb-3">
-                        <h2 className="text-sm font-black text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-red-600 flex items-center gap-2 tracking-wide uppercase">
-                            <span className="bg-red-900/40 px-1.5 py-0.5 rounded border border-red-500/30">🎲</span> Zar Kayıtları
-                        </h2>
-                        <button onClick={() => setShowDiceLogUI(false)} className="text-gray-500 hover:text-white transition-colors text-xs font-bold uppercase tracking-widest bg-gray-800/50 px-2 py-1 rounded-lg border border-white/5">Hide</button>
-                    </div>
-                    
-                    <div className="flex-1 overflow-y-auto space-y-2 font-mono text-[10px] leading-relaxed custom-scrollbar pb-2">
-                        {diceLogs && diceLogs.length === 0 ? (
-                            <div className="text-gray-600 italic text-center py-4">Henüz zar atılmadı.</div>
-                        ) : (
-                            diceLogs?.map?.((log: any, i: number) => (
-                                <div key={log.id || i} className={`p-2 rounded-lg border animate-in slide-in-from-right-4 fade-in duration-300 ${
-                                    log.playerName === "Dungeon Master" ? "bg-purple-900/20 text-purple-300 border-purple-500/30 shadow-[0_0_10px_rgba(168,85,247,0.1)]" : 
-                                    log.playerName === character.name ? "bg-red-900/20 text-red-200 border-red-500/30" : "bg-gray-800/40 text-gray-300 border-gray-700/50"
-                                } ${log.type?.includes("d20") && log.rollResult === 20 ? 'ring-2 ring-yellow-400 border-yellow-400 bg-yellow-900/20' : 
-                                   log.type?.includes("d20") && log.rollResult === 1 ? 'ring-2 ring-red-600 border-red-600 bg-red-950/40' : ''}`}>
-                                    <div className="flex justify-between items-start gap-2">
-                                        <div className="flex-1 min-w-0">
-                                            <div className="truncate opacity-60 font-black uppercase text-[8px] mb-0.5">{log.playerName === character.name ? 'YOU' : log.playerName}</div>
-                                            <div className="truncate text-[9px] flex items-center gap-1.5">
-                                                {log.playerName === "Dungeon Master" && <span className="w-1.5 h-1.5 rounded-full bg-purple-500 animate-pulse"></span>}
-                                                {log.type}
+            {/* ══ DİCE LOG OVERLAY ══ */}
+            <div className={`fixed inset-0 z-[60] flex items-center justify-end p-4 transition-all duration-500 bg-black/40 backdrop-blur-sm ${showDiceLogUI ? 'opacity-100' : 'opacity-0 pointer-events-none'}`} onClick={() => setShowDiceLogUI(false)}>
+                <div className={`w-full max-w-sm h-[80vh] flex flex-col transition-transform duration-500 transform ${showDiceLogUI ? 'translate-x-0' : 'translate-x-full'}`} onClick={e => e.stopPropagation()}>
+                    <div className="bg-gray-950 border border-gray-700/50 rounded-2xl p-6 shadow-2xl flex flex-col h-full overflow-hidden">
+                        <div className="flex justify-between items-center mb-2 pb-3 border-b border-white/5">
+                            <h2 className="text-xl font-black text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-red-600 flex items-center gap-2 tracking-wide uppercase">
+                                <span className="text-2xl">🎲</span> Zar Kayıtları
+                            </h2>
+                            <button onClick={() => setShowDiceLogUI(false)} className="text-gray-500 hover:text-white transition-colors text-xl font-black">✕</button>
+                        </div>
+
+                        {/* Hidden Toggle inside Log */}
+                        <div className="flex items-center justify-between bg-gray-900/50 p-3 rounded-xl border border-white/5 mb-4 group hover:border-purple-500/30 transition-all">
+                            <div className="flex items-center gap-3">
+                                <div className={`w-10 h-10 rounded-lg flex items-center justify-center transition-all ${isRollHidden ? 'bg-purple-900/40 text-purple-400 border border-purple-500/30' : 'bg-gray-800 text-gray-500 border border-white/5'}`}>
+                                    <span className="text-xl">{isRollHidden ? '👁️‍🗨️' : '👁️'}</span>
+                                </div>
+                                <div>
+                                    <p className="text-xs font-black text-white uppercase tracking-tight">Gizli Zar Atışı</p>
+                                    <p className="text-[10px] text-gray-500 font-bold uppercase tracking-widest">{isRollHidden ? 'Sadece sen ve DM görebilir' : 'Herkes görebilir'}</p>
+                                </div>
+                            </div>
+                            <button 
+                                onClick={() => setIsRollHidden(!isRollHidden)}
+                                className={`w-12 h-6 rounded-full p-1 transition-all duration-300 ${isRollHidden ? 'bg-purple-600' : 'bg-gray-700'}`}
+                            >
+                                <div className={`w-4 h-4 rounded-full bg-white shadow-md transition-transform duration-300 transform ${isRollHidden ? 'translate-x-6' : 'translate-x-0'}`}></div>
+                            </button>
+                        </div>
+                        
+                        <div className="flex-1 overflow-y-auto space-y-3 font-mono leading-relaxed custom-scrollbar pb-2">
+                            {diceLogs && diceLogs.length === 0 ? (
+                                <div className="text-gray-600 italic text-center py-10">Henüz zar atılmadı.</div>
+                            ) : (
+                                diceLogs?.map?.((log: any, i: number) => (
+                                    <div key={log.id || i} className={`p-3 rounded-xl border animate-in slide-in-from-right-4 fade-in duration-300 ${
+                                        log.playerName === "Dungeon Master" ? "bg-purple-900/20 text-purple-300 border-purple-500/30 shadow-[0_0_10px_rgba(168,85,247,0.1)]" : 
+                                        log.playerName === character.name ? "bg-red-900/20 text-red-200 border-red-500/30" : "bg-gray-800/40 text-gray-300 border-gray-700/50"
+                                    } ${log.type?.includes("d20") && log.rollResult === 20 ? 'ring-2 ring-yellow-400 border-yellow-400 bg-yellow-900/20' : 
+                                       log.type?.includes("d20") && log.rollResult === 1 ? 'ring-2 ring-red-600 border-red-600 bg-red-950/40' : ''}`}>
+                                        <div className="flex justify-between items-start gap-4">
+                                            <div className="flex-1 min-w-0">
+                                                <div className="truncate opacity-50 font-black uppercase text-[9px] mb-1 tracking-widest">{log.playerName === character.name ? 'YOU' : log.playerName}</div>
+                                                <div className="truncate text-sm font-bold flex items-center gap-2">
+                                                    {log.playerName === "Dungeon Master" && <span className="w-2 h-2 rounded-full bg-purple-500 animate-pulse"></span>}
+                                                    {log.type}
+                                                </div>
+                                            </div>
+                                            <div className="text-right">
+                                                <span className={`text-2xl font-black ${
+                                                    log.playerName === "Dungeon Master" ? "text-purple-400" : 
+                                                    (log.type?.includes("d20") && log.rollResult === 20) ? "text-yellow-400 drop-shadow-[0_0_12px_rgba(250,204,21,0.6)]" : 
+                                                    (log.type?.includes("d20") && log.rollResult === 1) ? "text-red-500" :
+                                                    "text-yellow-400"
+                                                }`}>
+                                                    {log.isHidden && log.playerName !== "Dungeon Master" && log.playerName !== character.name ? '?' : log.rollResult}
+                                                </span>
                                             </div>
                                         </div>
-                                        <div className="text-right">
-                                            <span className={`text-base font-black ${
-                                                log.playerName === "Dungeon Master" ? "text-purple-400" : 
-                                                (log.type?.includes("d20") && log.rollResult === 20) ? "text-yellow-400 drop-shadow-[0_0_8px_rgba(250,204,21,0.6)]" : 
-                                                (log.type?.includes("d20") && log.rollResult === 1) ? "text-red-500" :
-                                                "text-yellow-400"
-                                            }`}>
-                                                {log.isHidden && log.playerName !== "Dungeon Master" && log.playerName !== character.name ? '?' : log.rollResult}
-                                            </span>
-                                        </div>
+                                        {log.isHidden && (
+                                            <div className="flex justify-between items-center mt-2 pt-2 border-t border-white/5">
+                                                <span className="text-[10px] text-gray-500 font-bold uppercase tracking-widest flex items-center gap-1">
+                                                    <span className="text-xs">👁️</span> Gizli Zar
+                                                </span>
+                                            </div>
+                                        )}
                                     </div>
-                                    {log.isHidden && (
-                                        <div className="flex justify-between items-center mt-1 pt-1 border-t border-white/5">
-                                            <span className="text-[8px] text-gray-500 font-bold uppercase tracking-widest flex items-center gap-1">
-                                                <span className="text-xs">👁️</span> Gizli Zar
-                                            </span>
-                                        </div>
-                                    )}
-                                </div>
-                            ))
-                        )}
-                        <div ref={chatEndRef as any} />
+                                ))
+                            )}
+                            <div ref={chatEndRef as any} />
+                        </div>
                     </div>
                 </div>
             </div>
 
-            {/* Toggle Button for Dice Log (when hidden) */}
-            {!showDiceLogUI && (
-                <button 
-                    onClick={() => setShowDiceLogUI(true)}
-                    className="fixed top-4 right-4 z-[60] bg-gray-900/80 backdrop-blur-md px-4 py-2 rounded-xl border border-red-500/50 text-red-400 font-black text-xs shadow-xl animate-in slide-in-from-right-8 duration-300 hover:scale-110 active:scale-95 transition-all flex items-center gap-2"
-                >
-                    <span>🎲</span> LOGLARI AÇ
-                </button>
-            )}
 
 
             {/* ══ LEVEL CHART MODAL ══ */}
@@ -2183,6 +2195,10 @@ const PlayerSheet = () => {
                         title="Class Level Chart"
                         className="px-3 py-2 bg-gray-700 hover:bg-gray-600 text-gray-300 hover:text-white font-bold rounded-lg text-xs transition border border-gray-600 shadow-sm hidden md:block">
                         📊 Tablo
+                    </button>
+                    <button onClick={() => setShowDiceLogUI(true)}
+                        className="px-4 py-2 bg-gradient-to-r from-gray-800 to-gray-900 hover:from-gray-700 hover:to-gray-800 text-red-400 font-black rounded-lg text-sm transition shadow-md border border-red-500/50 flex items-center gap-2">
+                        <span>🎲</span> Zar Kayıtları
                     </button>
                     <button onClick={() => setIsGalleryOpen(true)}
                         className="px-4 py-2 bg-blue-700 hover:bg-blue-600 text-white font-bold rounded-lg text-sm transition shadow-sm border border-blue-500 ml-1">
@@ -5608,46 +5624,6 @@ const PlayerSheet = () => {
                 </div>
             )}
 
-            {/* ══ FLOATING DICE ROLL MENU ══ */}
-            <div className="fixed bottom-8 left-8 z-40 flex flex-col items-center space-y-4">
-                {/* Zarlar (Açılır Menü) */}
-                {isDiceMenuOpen && (
-                    <div className="flex flex-col-reverse space-y-reverse space-y-3 mb-4 items-center">
-                        <label className="flex items-center space-x-2 text-xs font-bold text-gray-300 cursor-pointer mb-2 bg-gray-900/80 backdrop-blur-md px-4 py-2 rounded-2xl border border-white/10 hover:bg-gray-800 transition shadow-xl animate-in fade-in slide-in-from-bottom-2 duration-300">
-                            <input
-                                type="checkbox"
-                                checked={isRollHidden}
-                                onChange={(e) => setIsRollHidden(e.target.checked)}
-                                className="form-checkbox text-purple-600 rounded bg-gray-900 border-gray-500 accent-purple-500"
-                            />
-                            <span>Gizli</span>
-                        </label>
-                        {[100, 20, 12, 10, 8, 6, 4].map((sides, idx) => (
-                            <button
-                                key={sides}
-                                onClick={() => handleRoll(`d${sides}`, { count: 1, sides, bonus: 0 }, 'Zar')}
-                                style={{ transitionDelay: `${idx * 50}ms` }}
-                                className={`w-14 h-14 ${isRollHidden ? 'bg-purple-900/90 text-purple-200 border-purple-400/50 shadow-[0_0_15px_rgba(168,85,247,0.3)]' : 'bg-gray-900/90 text-red-400 border-red-500/50 shadow-xl'} hover:scale-110 active:scale-95 hover:bg-gray-800 border-2 rounded-2xl flex items-center justify-center transition-all backdrop-blur-md group animate-in fade-in slide-in-from-bottom-4 duration-500 fill-mode-both`}
-                                title={isRollHidden ? `d${sides} Gizli At` : `d${sides} At`}
-                            >
-                                <div className="flex flex-col items-center justify-center gap-1">
-                                    <span className="group-hover:animate-pulse transition-transform group-hover:rotate-12 duration-300">{getDiceIcon(sides)}</span>
-                                    <span className="text-[10px] font-black leading-none">{sides === 100 ? '%' : sides}</span>
-                                </div>
-                            </button>
-                        ))}
-                    </div>
-                )}
-
-                {/* Ana Zar Butonu */}
-                <button
-                    onClick={() => setIsDiceMenuOpen(!isDiceMenuOpen)}
-                    className={`w-20 h-20 ${isDiceMenuOpen ? 'bg-gray-800/90 border-red-500' : 'bg-gradient-to-br from-red-600 to-red-800 border-red-400'} hover:from-red-500 hover:to-red-700 text-white rounded-full shadow-[0_0_25px_rgba(239,68,68,0.5)] flex items-center justify-center text-4xl border-4 transition-all hover:scale-110 hover:-rotate-12`}
-                    title="Zar Menüsü"
-                >
-                    {isDiceMenuOpen ? '✕' : '🎲'}
-                </button>
-            </div>
         </div>
     );
 };
