@@ -181,6 +181,7 @@ const PlayerSheet = () => {
     const [loading, setLoading] = useState(true);
     const characterRef = useRef<any>(null);
     const [hasMounted, setHasMounted] = useState(false);
+    const toastTimeoutRef = useRef<any>(null);
 
     // Socket Connection
     const { 
@@ -191,8 +192,12 @@ const PlayerSheet = () => {
     // Toast Notification System
     const [toast, setToast] = useState<{ show: boolean, title: string, message: string, color: string }>({ show: false, title: '', message: '', color: '' });
     const showToast = (title: string, message: string, color: string) => {
+        if (toastTimeoutRef.current) clearTimeout(toastTimeoutRef.current);
         setToast({ show: true, title, message, color });
-        setTimeout(() => setToast(prev => ({ ...prev, show: false })), 10000);
+        toastTimeoutRef.current = setTimeout(() => {
+            setToast(prev => ({ ...prev, show: false }));
+            toastTimeoutRef.current = null;
+        }, 10000);
     };
 
     // UI & Tab States
@@ -5685,8 +5690,8 @@ const PlayerSheet = () => {
                                     style={{ transitionDelay: `${idx * 50}ms` }}
                                     title={`Add d${sides}`}
                                 >
-                                    <span className="text-gray-400 group-hover/dice:text-red-400 transform group-hover/dice:scale-110 transition-all font-black text-xs">
-                                        {sides === 100 ? '%' : sides}
+                                    <span className="text-gray-400 group-hover/dice:text-red-400 transform group-hover/dice:scale-110 transition-all font-black text-[10px]">
+                                        d{sides === 100 ? '%' : sides}
                                     </span>
                                     {count > 0 && (
                                         <div className="absolute -top-2 -right-2 bg-red-600 text-white text-[10px] font-black w-5 h-5 rounded-full flex items-center justify-center border-2 border-gray-950 animate-in zoom-in duration-200 shadow-lg">
