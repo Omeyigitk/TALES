@@ -311,12 +311,14 @@ const PlayerSheet = () => {
     const [showFeatsUI, setShowFeatsUI] = useState(true);
     const [showRacialTraitsUI, setShowRacialTraitsUI] = useState(true);
     const [showBackgroundUI, setShowBackgroundUI] = useState(true);
-    const [showActionsUI, setShowActionsUI] = useState(true);
-    const [showAttacksUI, setShowAttacksUI] = useState(true);
+    const [showActionsUI, setShowActionsUI] = useState(false);
+    const [showAttacksUI, setShowAttacksUI] = useState(false);
     const [expandedFeat, setExpandedFeat] = useState<string | null>(null);
     const [showDiceLogUI, setShowDiceLogUI] = useState(true);
     const [confirmShortRest, setConfirmShortRest] = useState(false);
     const [buyShopItem, setBuyShopItem] = useState<any>(null);
+    const [isDiceMenuOpen, setIsDiceMenuOpen] = useState(false);
+    const [isRollHidden, setIsRollHidden] = useState(false);
     const chatEndRef = useRef<HTMLDivElement>(null);
 
 
@@ -377,6 +379,9 @@ const PlayerSheet = () => {
     const canCast = isSpellcaster(clsName) || mcs.some((mc: any) => isSpellcaster(mc.className));
     const hpPct = character?.maxHp ? Math.round((currentHp / character.maxHp) * 100) : 0;
     const actualFeats = [...(character?.feats || []), ...(character?.raceBonusFeats || [])];
+    const featSpellsList = character?.featSelections?.spells 
+        ? Object.values(character.featSelections.spells).flat() as string[] 
+        : [];
 
     // Auto-derived defenses (Resistances/Immunities)
     const autoDefenses = (() => {
@@ -1297,10 +1302,11 @@ const PlayerSheet = () => {
                 campaignId,
                 playerName: character.name,
                 rollResult: total,
-                type: `${name} ${typeLabel} (${formula})`
+                type: `${name} ${typeLabel} (${formula})`,
+                isHidden: isRollHidden
             });
         }
-        showToast(`🎲 ${name} - ${formula}`, cost ? `${cost.amount} ${cost.name} used! Result: ${total}` : `${typeLabel} Result: ${total}`, 'bg-purple-900 border-purple-500 text-purple-100');
+        showToast(isRollHidden ? `🎲 (Hidden) ${name} - ${formula}` : `🎲 ${name} - ${formula}`, cost ? `${cost.amount} ${cost.name} used! Result: ${total}` : `${typeLabel} Result: ${total}`, 'bg-purple-900 border-purple-500 text-purple-100');
     };
 
     const startLevelUp = async () => {
@@ -1761,6 +1767,55 @@ const PlayerSheet = () => {
         return false;
     };
 
+    const getDiceIcon = (sides: number) => {
+        const baseClass = "w-6 h-6 stroke-current fill-none";
+        switch (sides) {
+            case 4: return (
+                <svg viewBox="0 0 24 24" className={baseClass} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M12 3l9 16H3L12 3z" />
+                    <path d="M12 3v16M3 19l9-8 9 8" className="opacity-40" />
+                </svg>
+            );
+            case 6: return (
+                <svg viewBox="0 0 24 24" className={baseClass} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+                    <path d="M3 3l18 18M3 21L21 3" className="opacity-40" />
+                </svg>
+            );
+            case 8: return (
+                <svg viewBox="0 0 24 24" className={baseClass} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M12 2L4 12l8 10 8-10-8-10z" />
+                    <path d="M4 12h16M12 2v20" className="opacity-40" />
+                </svg>
+            );
+            case 10: return (
+                <svg viewBox="0 0 24 24" className={baseClass} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M12 2L3 12l9 10 9-10-9-10z" />
+                    <path d="M12 2l-3 10 3 10 3-10-3-10zM3 12h18" className="opacity-40" />
+                </svg>
+            );
+            case 12: return (
+                <svg viewBox="0 0 24 24" className={baseClass} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M12 2l9 6v8l-9 6-9-6V8l9-6z" />
+                    <path d="M12 2l3 6 6 0-3 6 3 6-6 0-3 6-3-6-6 0 3-6-3-6 6 0 3-6z" className="opacity-40 scale-[0.6] origin-center" />
+                </svg>
+            );
+            case 20: return (
+                <svg viewBox="0 0 24 24" className={baseClass} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M12 2l10 5.5v11L12 22l-10-5.5v-11L12 2z" />
+                    <path d="M12 2v20M2 7.5l10 4.5 10-4.5M2 18.5l10-4.5 10 4.5" className="opacity-40" />
+                </svg>
+            );
+            case 100: return (
+                <svg viewBox="0 0 24 24" className={baseClass} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <circle cx="12" cy="12" r="10" />
+                    <circle cx="12" cy="12" r="4" className="opacity-40" />
+                </svg>
+            );
+            default: return <span>d{sides}</span>;
+        }
+    };
+
 
     if (loading) {
         return (
@@ -1790,7 +1845,71 @@ const PlayerSheet = () => {
     }
 
     return (
-        <div className="min-h-screen bg-gray-950 text-white font-sans">
+        <div className="min-h-screen bg-gray-950 text-white font-sans relative">
+            {/* ══ DİCE LOG SİDEBAR (Desktop) / TOP OVERLAY (Mobile) ══ */}
+            <div className={`fixed top-4 right-4 z-[60] w-80 max-h-[40vh] md:max-h-[60vh] flex flex-col transition-all duration-500 transform ${showDiceLogUI ? 'translate-x-0 opacity-100' : 'translate-x-[calc(100%+1rem)] opacity-0 pointer-events-none'}`}>
+                <div className="bg-gray-900/40 backdrop-blur-md rounded-2xl p-4 border border-gray-700/50 shadow-[0_8px_32px_rgba(0,0,0,0.5)] flex flex-col h-full overflow-hidden">
+                    <div className="flex justify-between items-center mb-3">
+                        <h2 className="text-sm font-black text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-red-600 flex items-center gap-2 tracking-wide uppercase">
+                            <span className="bg-red-900/40 px-1.5 py-0.5 rounded border border-red-500/30">🎲</span> Zar Kayıtları
+                        </h2>
+                        <button onClick={() => setShowDiceLogUI(false)} className="text-gray-500 hover:text-white transition-colors text-xs font-bold uppercase tracking-widest bg-gray-800/50 px-2 py-1 rounded-lg border border-white/5">Hide</button>
+                    </div>
+                    
+                    <div className="flex-1 overflow-y-auto space-y-2 font-mono text-[10px] leading-relaxed custom-scrollbar pb-2">
+                        {diceLogs && diceLogs.length === 0 ? (
+                            <div className="text-gray-600 italic text-center py-4">Henüz zar atılmadı.</div>
+                        ) : (
+                            diceLogs?.map?.((log: any, i: number) => (
+                                <div key={log.id || i} className={`p-2 rounded-lg border animate-in slide-in-from-right-4 fade-in duration-300 ${
+                                    log.playerName === "Dungeon Master" ? "bg-purple-900/20 text-purple-300 border-purple-500/30 shadow-[0_0_10px_rgba(168,85,247,0.1)]" : 
+                                    log.playerName === character.name ? "bg-red-900/20 text-red-200 border-red-500/30" : "bg-gray-800/40 text-gray-300 border-gray-700/50"
+                                } ${log.type?.includes("d20") && log.rollResult === 20 ? 'ring-2 ring-yellow-400 border-yellow-400 bg-yellow-900/20' : 
+                                   log.type?.includes("d20") && log.rollResult === 1 ? 'ring-2 ring-red-600 border-red-600 bg-red-950/40' : ''}`}>
+                                    <div className="flex justify-between items-start gap-2">
+                                        <div className="flex-1 min-w-0">
+                                            <div className="truncate opacity-60 font-black uppercase text-[8px] mb-0.5">{log.playerName === character.name ? 'YOU' : log.playerName}</div>
+                                            <div className="truncate text-[9px] flex items-center gap-1.5">
+                                                {log.playerName === "Dungeon Master" && <span className="w-1.5 h-1.5 rounded-full bg-purple-500 animate-pulse"></span>}
+                                                {log.type}
+                                            </div>
+                                        </div>
+                                        <div className="text-right">
+                                            <span className={`text-base font-black ${
+                                                log.playerName === "Dungeon Master" ? "text-purple-400" : 
+                                                (log.type?.includes("d20") && log.rollResult === 20) ? "text-yellow-400 drop-shadow-[0_0_8px_rgba(250,204,21,0.6)]" : 
+                                                (log.type?.includes("d20") && log.rollResult === 1) ? "text-red-500" :
+                                                "text-yellow-400"
+                                            }`}>
+                                                {log.isHidden && log.playerName !== "Dungeon Master" && log.playerName !== character.name ? '?' : log.rollResult}
+                                            </span>
+                                        </div>
+                                    </div>
+                                    {log.isHidden && (
+                                        <div className="flex justify-between items-center mt-1 pt-1 border-t border-white/5">
+                                            <span className="text-[8px] text-gray-500 font-bold uppercase tracking-widest flex items-center gap-1">
+                                                <span className="text-xs">👁️</span> Gizli Zar
+                                            </span>
+                                        </div>
+                                    )}
+                                </div>
+                            ))
+                        )}
+                        <div ref={chatEndRef as any} />
+                    </div>
+                </div>
+            </div>
+
+            {/* Toggle Button for Dice Log (when hidden) */}
+            {!showDiceLogUI && (
+                <button 
+                    onClick={() => setShowDiceLogUI(true)}
+                    className="fixed top-4 right-4 z-[60] bg-gray-900/80 backdrop-blur-md px-4 py-2 rounded-xl border border-red-500/50 text-red-400 font-black text-xs shadow-xl animate-in slide-in-from-right-8 duration-300 hover:scale-110 active:scale-95 transition-all flex items-center gap-2"
+                >
+                    <span>🎲</span> LOGLARI AÇ
+                </button>
+            )}
+
 
             {/* ══ LEVEL CHART MODAL ══ */}
             {showLevelChart && (() => {
@@ -3151,7 +3270,7 @@ const PlayerSheet = () => {
                                                         >✕</button>
                                                         <div className="flex items-center justify-between mb-2">
                                                             <div className="flex flex-col">
-                                                                <h4 className="font-black text-blue-100 text-xs uppercase tracking-tight">{res.name}</h4>
+                                                                 <h4 className="font-black text-blue-100 text-xs uppercase tracking-tight">{res.name}</h4>
                                                                 <p className="text-[9px] text-gray-500 font-bold uppercase tracking-widest">{res.recharge === 'short' ? 'Short Rest' : 'Long Rest'}</p>
                                                             </div>
                                                             <div className="text-right">
@@ -3178,6 +3297,46 @@ const PlayerSheet = () => {
                                                                 className="px-2.5 py-1 bg-gray-700 hover:bg-gray-600 text-gray-300 font-bold rounded-md text-[10px] transition"
                                                             >
                                                                 ↩
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                );
+                                            })}
+
+                                            {/* Feat Büyüleri */}
+                                            {featSpellsList.length > 0 && featSpellsList.map((spName: string) => {
+                                                const details = spellDetails[spName] || allSpells.find(s => s.name === spName);
+                                                if (!details) return null;
+                                                return (
+                                                    <div key={spName} className="bg-gradient-to-br from-purple-900/40 to-blue-900/40 rounded-xl border border-purple-500/30 p-3 shadow-lg hover:border-purple-500/60 transition-all group relative overflow-hidden">
+                                                        <div className="absolute top-0 right-0 p-4 bg-purple-500/5 blur-xl rounded-full -mr-4 -mt-4"></div>
+                                                        <div className="flex items-center justify-between mb-2 relative">
+                                                            <div className="flex items-center gap-2">
+                                                                <span className="text-lg bg-purple-600/20 p-1.5 rounded-lg border border-purple-500/30 text-purple-400 group-hover:scale-110 transition-transform">
+                                                                    ✨
+                                                                </span>
+                                                                <div>
+                                                                    <h4 className="font-black text-white text-xs uppercase tracking-tight">{spName}</h4>
+                                                                    <p className="text-[9px] text-purple-400 font-bold uppercase tracking-widest leading-none">Feat Özelliği</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        {details.desc_tr && (
+                                                            <p className="text-[10px] text-gray-400 leading-tight mb-3 line-clamp-2 italic">
+                                                                {resolveFormula(details.desc_tr, level, mods, prof, clsName)}
+                                                            </p>
+                                                        )}
+                                                        <div className="flex gap-1.5 mt-auto relative">
+                                                            <button 
+                                                                onClick={async () => {
+                                                                    const canUse = details.level_int === 0 || await confirm({ title: "Büyü Yap", message: `${spName} büyüsünü yapmak istiyor musun?` });
+                                                                    if (canUse) {
+                                                                        handleRoll(spName, { count: 1, sides: 20, bonus: getModifier(getSpellcastingAbility(clsName)) + prof }, 'Büyü Atak');
+                                                                    }
+                                                                }}
+                                                                className="flex-1 py-1.5 bg-purple-600 hover:bg-purple-500 text-white font-black rounded-md text-[10px] uppercase tracking-widest transition shadow-lg shadow-purple-900/20"
+                                                            >
+                                                                Kullan
                                                             </button>
                                                         </div>
                                                     </div>
@@ -3354,7 +3513,7 @@ const PlayerSheet = () => {
                                         </div>
 
                                         <div className="p-6">
-                                            {actualSpells.length === 0 ? (
+                                            {actualSpells.filter(sp => !featSpellsList.includes(sp)).length === 0 ? (
                                                 <div className="text-center py-12 space-y-4">
                                                     <div className="text-4xl">📚</div>
                                                     <p className="text-gray-400 text-sm font-medium">Henüz bir büyü seçmediniz.</p>
@@ -3369,7 +3528,7 @@ const PlayerSheet = () => {
                                                 const groupedSpells: Record<string, string[]> = {};
                                                 const catOrder = ["Cantrips (0)", "Level 1", "Level 2", "Level 3", "Level 4", "Level 5", "Level 6", "Level 7", "Level 8", "Level 9", "Diğer Özellikler"];
 
-                                                actualSpells.forEach(sp => {
+                                                actualSpells.filter(sp => !featSpellsList.includes(sp)).forEach(sp => {
                                                     const details = spellDetails[sp];
                                                     let cat = 'Diğer Özellikler';
                                                     if (details && typeof details.level_int === 'number') {
@@ -5390,7 +5549,7 @@ const PlayerSheet = () => {
                 </div>
             )}
 
-            {/* DEFENSES MODAL */}
+            {/* ══ DEFENSES MODAL ══ */}
             {showDefensesModal && (
                 <div className="fixed inset-0 bg-black/80 z-[60] flex items-center justify-center p-4">
                     <div className="bg-gray-900 border border-blue-800 rounded-2xl w-full max-w-sm overflow-hidden shadow-2xl">
@@ -5456,6 +5615,47 @@ const PlayerSheet = () => {
                     </div>
                 </div>
             )}
+
+            {/* ══ FLOATING DICE ROLL MENU ══ */}
+            <div className="fixed bottom-8 left-8 z-40 flex flex-col items-center space-y-4">
+                {/* Zarlar (Açılır Menü) */}
+                {isDiceMenuOpen && (
+                    <div className="flex flex-col-reverse space-y-reverse space-y-3 mb-4 items-center">
+                        <label className="flex items-center space-x-2 text-xs font-bold text-gray-300 cursor-pointer mb-2 bg-gray-900/80 backdrop-blur-md px-4 py-2 rounded-2xl border border-white/10 hover:bg-gray-800 transition shadow-xl animate-in fade-in slide-in-from-bottom-2 duration-300">
+                            <input
+                                type="checkbox"
+                                checked={isRollHidden}
+                                onChange={(e) => setIsRollHidden(e.target.checked)}
+                                className="form-checkbox text-purple-600 rounded bg-gray-900 border-gray-500 accent-purple-500"
+                            />
+                            <span>Gizli</span>
+                        </label>
+                        {[100, 20, 12, 10, 8, 6, 4].map((sides, idx) => (
+                            <button
+                                key={sides}
+                                onClick={() => handleRoll(`d${sides}`, { count: 1, sides, bonus: 0 }, 'Zar')}
+                                style={{ transitionDelay: `${idx * 50}ms` }}
+                                className={`w-14 h-14 ${isRollHidden ? 'bg-purple-900/90 text-purple-200 border-purple-400/50 shadow-[0_0_15px_rgba(168,85,247,0.3)]' : 'bg-gray-900/90 text-red-400 border-red-500/50 shadow-xl'} hover:scale-110 active:scale-95 hover:bg-gray-800 border-2 rounded-2xl flex items-center justify-center transition-all backdrop-blur-md group animate-in fade-in slide-in-from-bottom-4 duration-500 fill-mode-both`}
+                                title={isRollHidden ? `d${sides} Gizli At` : `d${sides} At`}
+                            >
+                                <div className="flex flex-col items-center justify-center gap-1">
+                                    <span className="group-hover:animate-pulse transition-transform group-hover:rotate-12 duration-300">{getDiceIcon(sides)}</span>
+                                    <span className="text-[10px] font-black leading-none">{sides === 100 ? '%' : sides}</span>
+                                </div>
+                            </button>
+                        ))}
+                    </div>
+                )}
+
+                {/* Ana Zar Butonu */}
+                <button
+                    onClick={() => setIsDiceMenuOpen(!isDiceMenuOpen)}
+                    className={`w-20 h-20 ${isDiceMenuOpen ? 'bg-gray-800/90 border-red-500' : 'bg-gradient-to-br from-red-600 to-red-800 border-red-400'} hover:from-red-500 hover:to-red-700 text-white rounded-full shadow-[0_0_25px_rgba(239,68,68,0.5)] flex items-center justify-center text-4xl border-4 transition-all hover:scale-110 hover:-rotate-12`}
+                    title="Zar Menüsü"
+                >
+                    {isDiceMenuOpen ? '✕' : '🎲'}
+                </button>
+            </div>
         </div>
     );
 };
