@@ -106,7 +106,7 @@ const resolveFormula = (text: string, level: number, mods: any, prof: number, cl
     const abilities = ["STR", "DEX", "CON", "INT", "WIS", "CHA"];
     abilities.forEach(ab => {
         // Only replace if followed by specific context like 'bonus', 'hasar', 'mod', etc., or if it's explicitly for a calculation
-        const contextRegex = new RegExp(`\\b${ab}\\b(?=\\s*(modifier|mod|bonus|hasar|damage|skor|score|atışı|zar))`, 'gi');
+        const contextRegex = new RegExp(`\\b${ab}\\b(?=\\s*(modifier|mod|bonus|hasar|damage|skor|score|atışı|zar|kadar|ekle|puan))`, 'gi');
         resolved = resolved.replace(contextRegex, String(mods[ab as keyof typeof mods] || 0));
     });
 
