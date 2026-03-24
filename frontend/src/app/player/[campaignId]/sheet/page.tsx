@@ -1018,72 +1018,7 @@ const PlayerSheet = () => {
         }
     };
 
-    const togglePrepareSpell = async (spellName: string) => {
-        if (!character) return;
-        const currentPrepared = [...(character.preparedSpells || [])];
-        const isPrepared = currentPrepared.includes(spellName);
-        
-        if (!isPrepared) {
-            const limit = getMaxPreparedSpells();
-            // Count prepared spells that are not cantrips (cantrips don't normally need preparation in 5e for these classes, but let's be sure)
-            const preparedLeveled = currentPrepared.filter(s => {
-                const sd = allSpells.find(x => x.name === s) || spellDetails[s];
-                return sd?.level_int > 0;
-            }).length;
-
-            const spellData = allSpells.find(s => s.name === spellName) || spellDetails[spellName];
-            const isCantrip = spellData?.level_int === 0;
-
-            if (!isCantrip && preparedLeveled >= limit) {
-                return showToast('Hazırlık Sınırı', `En fazla ${limit} büyü hazırlayabilirsin.`, 'bg-orange-900 border-orange-500 text-orange-100');
-            }
-        }
-
-        let newPrepared = isPrepared 
-            ? currentPrepared.filter(s => s !== spellName) 
-            : [...currentPrepared, spellName];
-        
-        try {
-            const res = await axios.put(`${API_URL}/api/characters/${character._id}`, { preparedSpells: newPrepared }, { headers: { 'Authorization': `Bearer ${token}` } });
-            setCharacter(res.data);
-            showToast(isPrepared ? 'Büyü Hazırlığı Kaldırıldı 🧊' : 'Büyü Hazırlandı 🔥', `${spellName} listenden ${isPrepared ? 'çıkarıldı' : 'eklendi'}.`, 'bg-blue-900 border-blue-500 text-blue-100');
-        } catch {
-            showToast('Hata', 'Büyü hazırlığı güncellenemedi.', 'bg-red-900 border-red-500 text-red-100');
-        }
-    };
-
-    const getMaxPreparedSpells = () => {
-        if (!character) return 0;
-        
-        let totalLimit = 0;
-        const clsName = character.classRef?.name || '';
-        const mcs = character.multiclass || [];
-        
-        const classes = [clsName, ...mcs.map((mc: any) => mc.className)];
-        const levels = [character.level || 1, ...mcs.map((mc: any) => mc.level || 1)];
-
-        classes.forEach((className, idx) => {
-            const level = levels[idx];
-            const ability = getSpellcastingAbility(className);
-            const mod = getModifier(ability);
-
-            if (['Wizard', 'Cleric', 'Druid'].includes(className)) {
-                totalLimit += Math.max(1, level + mod);
-            } else if (['Paladin', 'Artificer'].includes(className)) {
-                totalLimit += Math.max(1, Math.floor(level / 2) + mod);
-            }
-        });
-
-        return totalLimit;
-    };
-
-    const needsPreparationCheck = () => {
-        if (!character) return false;
-        const clsName = character.classRef?.name || '';
-        const mcs = character.multiclass || [];
-        const classes = [clsName, ...mcs.map((mc: any) => mc.className)];
-        return classes.some(c => ['Wizard', 'Cleric', 'Druid', 'Paladin', 'Artificer'].includes(c));
-    };
+    const needsPreparationCheck = () => false; // Simplified system: everything is prepared
 
     const useSlot = async (slotLevel: number, spellName: string = 'Basic Spell', isConcentration: boolean = false) => {
         if (!character) return;
@@ -3654,14 +3589,6 @@ const PlayerSheet = () => {
                                             </div>
                                             <div className="bg-gray-950/60 px-3 py-1 rounded-full border border-purple-500/30 flex items-center gap-4">
                                                 <span className="text-[10px] font-black text-purple-300 uppercase tracking-widest">{actualSpells.length} Known Spells</span>
-                                                {needsPreparationCheck() && (
-                                                    <>
-                                                        <div className="w-px h-3 bg-purple-500/20"></div>
-                                                        <span className="text-[10px] font-black text-blue-300 uppercase tracking-widest">
-                                                            Prepared: {(character.preparedSpells || []).filter((s: string) => (spellDetails[s] || allSpells.find(x => x.name === s))?.level_int > 0).length} / {getMaxPreparedSpells()}
-                                                        </span>
-                                                    </>
-                                                )}
                                             </div>
                                         </div>
 
@@ -3750,27 +3677,10 @@ const PlayerSheet = () => {
                                                                                     onClick={() => setExpandedSpell(isExpanded ? null : sp)}
                                                                                 >
                                                                                     <div className="flex items-center gap-3">
-                                                                                        {details?.level_int > 0 && needsPreparationCheck() && (
-                                                                                            <button
-                                                                                                onClick={(e) => {
-                                                                                                    e.stopPropagation();
-                                                                                                    togglePrepareSpell(sp);
-                                                                                                }}
-                                                                                                className={`w-6 h-6 rounded flex items-center justify-center transition-all ${
-                                                                                                    (character.preparedSpells || []).includes(sp)
-                                                                                                        ? 'bg-blue-600 text-white border-blue-400'
-                                                                                                        : 'bg-gray-900 border-gray-600 text-gray-500 hover:border-gray-400'
-                                                                                                } border`}
-                                                                                                title={(character.preparedSpells || []).includes(sp) ? 'Hazır (Tıkla: Kaldır)' : 'Hazırlanmamış (Tıkla: Hazırla)'}
-                                                                                            >
-                                                                                                {(character.preparedSpells || []).includes(sp) ? '🔥' : '🧊'}
-                                                                                            </button>
-                                                                                        )}
+
                                                                                         <div className="flex flex-col gap-1 flex-1">
                                                                                             <div className="flex items-center gap-2 flex-wrap">
-                                                                                                <span className={`font-black text-sm lg:text-base group-hover/card:text-purple-300 transition-colors uppercase tracking-tight ${
-                                                                                                    details?.level_int > 0 && needsPreparationCheck() && !(character.preparedSpells || []).includes(sp) ? 'text-gray-500' : 'text-white'
-                                                                                                }`}>
+                                                                                                <span className="font-black text-sm lg:text-base group-hover/card:text-purple-300 transition-colors uppercase tracking-tight text-white">
                                                                                                     {typeof sp === 'string' ? sp : (sp as any).name}
                                                                                                 </span>
                                                                                                 {isConc && (
@@ -3794,7 +3704,7 @@ const PlayerSheet = () => {
                                                                                     {!isExpanded && (
                                                                                         <button
                                                                                             onClick={(e) => { e.stopPropagation(); setCastingSpell(sp); }}
-                                                            disabled={details?.level_int > 0 && needsPreparationCheck() && !(character.preparedSpells || []).includes(sp)}
+                                                                                            disabled={false}
                                                                                             className="px-3 py-1.5 bg-purple-600/10 hover:bg-purple-600 text-purple-400 hover:text-white border border-purple-500/20 hover:border-purple-500 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all duration-300 opacity-0 group-hover/card:opacity-100 transform translate-x-2 group-hover/card:translate-x-0"
                                                                                         >
                                                                                             Cast

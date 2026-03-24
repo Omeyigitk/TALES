@@ -185,17 +185,17 @@ export function getSpellLimits(className: string, level: number, stats?: Record<
     let prepared = 0;    // Total that can be "prepared" or "castable" at once
 
     if (className === 'Wizard') {
-        spellsTotal = 6 + (lv - 1) * 2;
         prepared = Math.max(1, lv + getMod('INT'));
+        spellsTotal = prepared; // Adjusted for simplified system
     } else if (['Cleric', 'Druid'].includes(className)) {
-        spellsTotal = 999; // Represents "All"
         prepared = Math.max(1, lv + getMod('WIS'));
+        spellsTotal = prepared; // Adjusted for simplified system
     } else if (className === 'Paladin') {
-        spellsTotal = 999;
         prepared = Math.max(1, Math.floor(lv / 2) + getMod('CHA'));
+        spellsTotal = prepared; // Adjusted for simplified system
     } else if (className === 'Artificer') {
-        spellsTotal = 999;
         prepared = Math.max(1, Math.floor(lv / 2) + getMod('INT'));
+        spellsTotal = prepared; // Adjusted for simplified system
     } else {
         // Known casters (Bard, Sorcerer, Warlock, Ranger)
         spellsTotal = SPELLS_KNOWN[className]?.[lvIdx] ?? 0;
