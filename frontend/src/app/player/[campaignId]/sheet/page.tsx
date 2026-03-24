@@ -1697,12 +1697,98 @@ const PlayerSheet = () => {
     const hpPctOldAvoidClash = character ? Math.round((currentHp / character.maxHp) * 100) : 0;
 
     // ─── Skill bonus hesapla ─────────────────────────────────────────────────
+    const getSkillProficiencyLevel = (skill: typeof SKILLS[0]) => {
+        if (!skill || !character) return 0;
+        const sNameLow = skill.name.toLowerCase();
+        const sTrLow = skill.tr?.toLowerCase();
+
+        let isExpert = (character.expertise || []).some((e: string) =>
+            e.toLowerCase() === sNameLow || e.toLowerCase() === sTrLow
+        );
+        let isProficient = (character.skillProfs || []).some((p: string) =>
+            p.toLowerCase() === sNameLow || p.toLowerCase() === sTrLow
+        );
+
+        // Check Feat Selections for Expertise/Proficiency
+        if (character.featSelections?.choices) {
+            Object.values(character.featSelections.choices).forEach((featChoices: any) => {
+                if (!featChoices || typeof featChoices !== 'object') return;
+                Object.values(featChoices).forEach((choiceList: any) => {
+                    const list = Array.isArray(choiceList) ? choiceList : [choiceList];
+                    list.forEach((c: any) => {
+                        if (typeof c !== 'string') return;
+                        const cLow = c.toLowerCase();
+                        if (cLow.includes("expertise")) {
+                            if (cLow.includes(sNameLow) || (sTrLow && cLow.includes(sTrLow))) isExpert = true;
+                        } else if (cLow.includes("proficiency") || cLow.includes("proficient")) {
+                            if (cLow.includes(sNameLow) || (sTrLow && cLow.includes(sTrLow))) isProficient = true;
+                        } else {
+                            if (cLow === sNameLow || cLow === sTrLow) isProficient = true;
+                        }
+                    });
+                });
+            });
+        }
+
+        if (isExpert) return 2;
+        if (isProficient) return 1;
+        return 0;
+    };
+
     const getSkillMod = (skill: typeof SKILLS[0]) => {
         if (!skill || !effectiveStats) return 0;
-        let base = mod(effectiveStats[skill.ability as keyof typeof effectiveStats] || 10);
-        const hasExpertise = (character?.expertise || []).includes(skill.name) || (character?.expertise || []).includes(skill.tr);
-        if (hasExpertise) return base + (prof || 0) * 2;
-        return base;
+        const b = mod(effectiveStats[skill.ability as keyof typeof effectiveStats] || 10);
+        const level = getSkillProficiencyLevel(skill);
+        const globalSkillBonus = getItemBonus('stat_bonus', 'SKILL');
+        
+        if (level === 2) return b + (prof * 2) + globalSkillBonus;
+        if (level === 1) return b + prof + globalSkillBonus;
+        return b + globalSkillBonus;
+    };
+
+    const toggleSkillProficiency = async (skill: typeof SKILLS[0]) => {
+        if (!character) return;
+        const currentLv = getSkillProficiencyLevel(skill);
+        const nextLv = (currentLv + 1) % 3; // 0 -> 1 -> 2 -> 0
+
+        let newProfs = [...(character.skillProfs || [])];
+        let newExpertise = [...(character.expertise || [])];
+
+        const sName = skill.name;
+        const sTr = skill.tr;
+
+        // Skill'i temizle
+        const clean = (arr: string[]) => arr.filter(p => 
+            p.toLowerCase() !== sName.toLowerCase() && 
+            p.toLowerCase() !== sTr.toLowerCase()
+        );
+
+        newProfs = clean(newProfs);
+        newExpertise = clean(newExpertise);
+
+        if (nextLv === 1) {
+            newProfs.push(sName);
+        } else if (nextLv === 2) {
+            newProfs.push(sName);
+            newExpertise.push(sName);
+        }
+
+        try {
+            const res = await axios.put(`${API_URL}/api/characters/${character._id}`, {
+                skillProfs: newProfs,
+                expertise: newExpertise
+            }, { headers: { 'Authorization': `Bearer ${token}` } });
+            
+            setCharacter(res.data);
+            characterRef.current = res.data;
+            
+            const msg = nextLv === 1 ? `${skill.name} Yetkin (Proficient)` : 
+                        nextLv === 2 ? `${skill.name} Uzman (Expertise)` : 
+                        `${skill.name} Eğitimsiz (Untrained)`;
+            showToast("Yetenek Güncellendi", msg, nextLv > 0 ? "bg-blue-900 border-blue-500 text-blue-100" : "bg-gray-800 border-gray-600 text-gray-300");
+        } catch (e) {
+            console.error("Yetenek güncellenirken hata:", e);
+        }
     };
 
     // ─── Class-aware AC terebilimi ────────────────────────────────────────────
@@ -2697,11 +2783,7 @@ const PlayerSheet = () => {
                                 <div className="p-2 space-y-0.5">
                                     {(['Perception', 'Investigation', 'Insight'] as const).map(skillName => {
                                         const skill = SKILLS.find(s => s.name === skillName)!;
-                                        const base = mod(effectiveStats[skill.ability as keyof typeof effectiveStats] || 10);
-                                        const skillProfs: string[] = (character.skillProfs || []).map((s: string) => s.toLowerCase().trim());
-                                        const isProficient = skillProfs.some((s: string) => s === skill.name.toLowerCase() || s === skill.tr?.toLowerCase());
-                                        const isExpert = (character.expertise || []).some((e: string) => e.toLowerCase() === skill.name.toLowerCase() || e.toLowerCase() === skill.tr?.toLowerCase());
-                                        const bonus = isExpert ? base + prof * 2 : isProficient ? base + prof : base;
+                                        const bonus = getSkillMod(skill);
                                         const passiveScore = 10 + bonus;
                                         return (
                                             <div key={skillName} className="flex items-center justify-between px-3 py-2 rounded bg-gray-900/40 border border-gray-700/50 mb-1">
@@ -2720,12 +2802,10 @@ const PlayerSheet = () => {
                                 </div>
                                 <div className="p-2 space-y-0.5 max-h-[500px] overflow-y-auto">
                                     {SKILLS.map(skill => {
-                                        const base = mod(effectiveStats[skill.ability as keyof typeof effectiveStats] || 10);
-                                        const skillProfs: string[] = (character.skillProfs || []).map((s: string) => s.toLowerCase().trim());
-                                        const isProficient = skillProfs.some(s => s === skill.name.toLowerCase() || s === skill.tr?.toLowerCase());
-                                        const isExpert = (character.expertise || []).some((e: string) => e.toLowerCase() === skill.name.toLowerCase() || e.toLowerCase() === skill.tr?.toLowerCase());
-                                        const globalSkillBonus = getItemBonus('stat_bonus', 'SKILL');
-                                        const bonus = (isExpert ? base + prof * 2 : isProficient ? base + prof : base) + globalSkillBonus;
+                                        const bonus = getSkillMod(skill);
+                                        const profLv = getSkillProficiencyLevel(skill);
+                                        const isExpert = profLv === 2;
+                                        const isProficient = profLv === 1;
                                         const isOpen = selectedSkill?.name === skill.name;
                                         return (
                                             <div key={skill.name}>
@@ -2744,6 +2824,16 @@ const PlayerSheet = () => {
                                                         {hasDisadvantage('check') && <span className="text-red-500 mr-1" title="Dezavantajlı!">⚠️</span>}
                                                         {fmt(bonus)}
                                                     </span>
+                                                    <button
+                                                        onClick={(e) => {
+                                                            e.stopPropagation();
+                                                            toggleSkillProficiency(skill);
+                                                        }}
+                                                        className="w-6 h-6 flex items-center justify-center rounded bg-gray-900 hover:bg-gray-700 border border-gray-700 hover:border-blue-500 text-gray-500 hover:text-blue-400 transition-all text-xs font-black ml-1 group/btn"
+                                                        title="Yetenek Yetkinliğini Değiştir"
+                                                    >
+                                                       <span className="group-hover/btn:scale-125 transition-transform">+</span>
+                                                    </button>
                                                     <span className="text-gray-600 text-xs">{isOpen ? '▲' : '▼'}</span>
                                                 </div>
                                                 {isOpen && (
