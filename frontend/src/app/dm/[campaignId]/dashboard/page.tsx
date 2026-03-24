@@ -1067,7 +1067,14 @@ export default function DMDashboard() {
                         <section className="bg-gray-900/40 backdrop-blur-md rounded-2xl p-6 border border-gray-700/50 shadow-[0_8px_32px_rgba(0,0,0,0.5)] flex-1 flex flex-col min-h-0 relative overflow-hidden">
                             <div className="absolute top-0 right-0 w-32 h-32 bg-red-500/5 rounded-full blur-2xl -mr-10 -mt-10 pointer-events-none"></div>
                             <h2 className="text-xl font-black text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-red-600 mb-4 flex items-center gap-2 tracking-wide relative z-10">
-                                <span className="bg-red-900/40 px-2 py-1 rounded-lg border border-red-500/30">🎲</span> Zar Kayıtları
+                                <span className="bg-red-900/40 px-2 py-1 rounded-lg border border-red-500/30 flex items-center justify-center">
+                                    <svg viewBox="0 0 24 24" className="w-5 h-5" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M12 2L22 7.5V16.5L12 22L2 16.5V7.5L12 2Z" fill="#7f1d1d" stroke="#ef4444" strokeWidth="1.5" strokeLinejoin="round" />
+                                        <path d="M12 2L2 7.5L12 12L22 7.5L12 2Z" stroke="#fca5a5" strokeWidth="1" strokeLinejoin="round" />
+                                        <path d="M2 16.5L12 12L22 16.5" stroke="#fca5a5" strokeWidth="0.5" opacity="0.6" />
+                                        <path d="M12 2V12M12 22V12M2 7.5L12 12M22 7.5L12 12" stroke="#ef4444" strokeWidth="0.5" opacity="0.4" />
+                                    </svg>
+                                </span> Zar Kayıtları
                             </h2>
                             <div className="p-2 flex-1 flex flex-col overflow-y-auto space-y-3 font-mono text-xs leading-relaxed custom-scrollbar relative z-10">
                                 {diceLogs && diceLogs.length === 0 ? (
@@ -1129,10 +1136,17 @@ export default function DMDashboard() {
                     {/* Ana Zar Butonu */}
                     <button
                         onClick={() => setIsDiceMenuOpen(!isDiceMenuOpen)}
-                        className={`w-20 h-20 ${isDiceMenuOpen ? 'bg-gray-800/90 border-red-500' : 'bg-gradient-to-br from-red-600 to-red-800 border-red-400'} hover:from-red-500 hover:to-red-700 text-white rounded-full shadow-[0_0_25px_rgba(239,68,68,0.5)] flex items-center justify-center text-4xl border-4 transition-all hover:scale-110 hover:-rotate-12`}
+                        className={`w-20 h-20 ${isDiceMenuOpen ? 'bg-gray-800/90 border-red-500' : 'bg-gradient-to-br from-red-600 to-red-800 border-red-400'} hover:from-red-500 hover:to-red-700 text-white rounded-full shadow-[0_0_25px_rgba(239,68,68,0.5)] flex items-center justify-center text-4xl border-4 transition-all hover:scale-110 hover:-rotate-12 group`}
                         title="Zar Menüsü"
                     >
-                        {isDiceMenuOpen ? '✕' : '🎲'}
+                        {isDiceMenuOpen ? '✕' : (
+                            <svg viewBox="0 0 24 24" className="w-12 h-12 drop-shadow-lg group-hover:rotate-12 transition-transform duration-500" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 2L22 7.5V16.5L12 22L2 16.5V7.5L12 2Z" fill="white" stroke="white" strokeWidth="1.5" strokeLinejoin="round" />
+                                <path d="M12 2L2 7.5L12 12L22 7.5L12 2Z" stroke="#ef4444" strokeWidth="1" strokeLinejoin="round" />
+                                <path d="M2 16.5L12 12L22 16.5" stroke="#ef4444" strokeWidth="0.5" opacity="0.6" />
+                                <path d="M12 2V12M12 22V12M2 7.5L12 12M22 7.5L12 12" stroke="#7f1d1d" strokeWidth="0.5" opacity="0.4" />
+                            </svg>
+                        )}
                     </button>
                 </div>
 
@@ -1144,7 +1158,15 @@ export default function DMDashboard() {
                         <div className="fixed inset-0 bg-black/60 z-50 flex items-center justify-center p-4 backdrop-blur-md animate-fade-in" onClick={() => setIsDiceLogOpen(false)}>
                             <div className="bg-gray-900/80 backdrop-blur-xl w-full max-w-md h-[70vh] rounded-3xl border border-red-500/50 shadow-[0_0_40px_rgba(239,68,68,0.2)] flex flex-col overflow-hidden" onClick={e => e.stopPropagation()}>
                                 <div className="flex justify-between items-center p-6 bg-gradient-to-b from-gray-800/80 to-transparent border-b border-gray-700/50">
-                                    <h2 className="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-red-600">🎲 Parti Zarları</h2>
+                                    <h2 className="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-red-600 flex items-center gap-2">
+                                        <svg viewBox="0 0 24 24" className="w-6 h-6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M12 2L22 7.5V16.5L12 22L2 16.5V7.5L12 2Z" fill="#7f1d1d" stroke="#ef4444" strokeWidth="1.5" strokeLinejoin="round" />
+                                            <path d="M12 2L2 7.5L12 12L22 7.5L12 2Z" stroke="#fca5a5" strokeWidth="1" strokeLinejoin="round" />
+                                            <path d="M2 16.5L12 12L22 16.5" stroke="#fca5a5" strokeWidth="0.5" opacity="0.6" />
+                                            <path d="M12 2V12M12 22V12M2 7.5L12 12M22 7.5L12 12" stroke="#ef4444" strokeWidth="0.5" opacity="0.4" />
+                                        </svg>
+                                        Parti Zarları
+                                    </h2>
                                     <button onClick={() => setIsDiceLogOpen(false)} className="text-gray-400 hover:text-red-400 text-3xl transition-colors">&times;</button>
                                 </div>
 

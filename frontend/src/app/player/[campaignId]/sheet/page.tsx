@@ -1890,14 +1890,28 @@ const PlayerSheet = () => {
                     <div className="bg-gray-950 border border-gray-700/50 rounded-2xl p-6 shadow-2xl flex flex-col h-full overflow-hidden">
                         <div className="flex justify-between items-center mb-2 pb-3 border-b border-white/5">
                             <h2 className="text-xl font-black text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-red-600 flex items-center gap-2 tracking-wide uppercase">
-                                <span className="text-2xl">🎲</span> Zar Kayıtları
+                                <span className="text-2xl drop-shadow-[0_0_8px_rgba(239,68,68,0.5)]">
+                                    <svg viewBox="0 0 24 24" className="w-6 h-6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M12 2L22 7.5V16.5L12 22L2 16.5V7.5L12 2Z" fill="#7f1d1d" stroke="#ef4444" strokeWidth="1.5" strokeLinejoin="round" />
+                                        <path d="M12 2L2 7.5L12 12L22 7.5L12 2Z" stroke="#fca5a5" strokeWidth="1" strokeLinejoin="round" />
+                                        <path d="M2 16.5L12 12L22 16.5" stroke="#fca5a5" strokeWidth="0.5" opacity="0.6" />
+                                        <path d="M12 2V12M12 22V12M2 7.5L12 12M22 7.5L12 12" stroke="#ef4444" strokeWidth="0.5" opacity="0.4" />
+                                    </svg>
+                                </span> Zar Kayıtları
                             </h2>
                             <button 
                                 onClick={() => dicePool.length > 0 ? handlePoolRoll() : setShowDiceLogUI(false)} 
                                 className={`transition-all duration-300 ${dicePool.length > 0 ? 'bg-red-600 hover:bg-red-500 text-white w-10 h-10 rounded-full shadow-[0_0_15px_rgba(239,68,68,0.4)] flex items-center justify-center text-xl' : 'text-gray-500 hover:text-white text-xl font-black'}`}
                                 title={dicePool.length > 0 ? 'Havuzu At' : 'Kapat'}
                             >
-                                {dicePool.length > 0 ? '🎲' : '✕'}
+                                {dicePool.length > 0 ? (
+                                    <svg viewBox="0 0 24 24" className="w-6 h-6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M12 2L22 7.5V16.5L12 22L2 16.5V7.5L12 2Z" fill="white" stroke="white" strokeWidth="1.5" strokeLinejoin="round" />
+                                        <path d="M12 2L2 7.5L12 12L22 7.5L12 2Z" stroke="#ef4444" strokeWidth="1" strokeLinejoin="round" />
+                                        <path d="M2 16.5L12 12L22 16.5" stroke="#ef4444" strokeWidth="0.5" opacity="0.6" />
+                                        <path d="M12 2V12M12 22V12M2 7.5L12 12M22 7.5L12 12" stroke="#7f1d1d" strokeWidth="0.5" opacity="0.4" />
+                                    </svg>
+                                ) : '✕'}
                             </button>
                         </div>
 
@@ -2278,8 +2292,15 @@ const PlayerSheet = () => {
                         📊 Tablo
                     </button>
                     <button onClick={() => setShowDiceLogUI(true)}
-                        className="px-4 py-2 bg-gradient-to-r from-gray-800 to-gray-900 hover:from-gray-700 hover:to-gray-800 text-red-400 font-black rounded-lg text-sm transition shadow-md border border-red-500/50 flex items-center gap-2">
-                        <span>🎲</span> Zar Kayıtları
+                        className="px-4 py-2 bg-gradient-to-r from-gray-800 to-gray-900 hover:from-gray-700 hover:to-gray-800 text-red-400 font-black rounded-lg text-sm transition shadow-md border border-red-500/50 flex items-center gap-2 group">
+                        <span className="group-hover:scale-110 group-hover:rotate-12 transition-transform duration-300">
+                            <svg viewBox="0 0 24 24" className="w-5 h-5" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 2L22 7.5V16.5L12 22L2 16.5V7.5L12 2Z" fill="#7f1d1d" stroke="#ef4444" strokeWidth="1.5" strokeLinejoin="round" />
+                                <path d="M12 2L2 7.5L12 12L22 7.5L12 2Z" stroke="#fca5a5" strokeWidth="1" strokeLinejoin="round" />
+                                <path d="M2 16.5L12 12L22 16.5" stroke="#fca5a5" strokeWidth="0.5" opacity="0.6" />
+                                <path d="M12 2V12M12 22V12M2 7.5L12 12M22 7.5L12 12" stroke="#ef4444" strokeWidth="0.5" opacity="0.4" />
+                            </svg>
+                        </span> Zar Kayıtları
                     </button>
                     <button onClick={() => setIsGalleryOpen(true)}
                         className="px-4 py-2 bg-blue-700 hover:bg-blue-600 text-white font-bold rounded-lg text-sm transition shadow-sm border border-blue-500 ml-1">
