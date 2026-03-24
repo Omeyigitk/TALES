@@ -477,7 +477,7 @@ export const CLASS_ATTACKS: Record<string, Attack[]> = {
         },
         {
             name: 'Sneak Attack', type: 'special', damage: '⌈Sv/2⌉d6 Piercing',
-            desc_tr: 'Tur başında YALNIZCABİR KERE: Avantajlı saldırı attıysan VEYA mücadelecinin bitişiğinde düşmanla temas eden bir müttefikin varsa (dezavantajın yoksa) ekstra ⌈seviye/2⌉d6 hasar ekle. (Sv.1=1d6, Sv.3=2d6, Sv.5=3d6...)'
+            desc_tr: 'Tur başında YALNIZCA BİR KERE: Avantajlı saldırı attıysan VEYA mücadelecinin bitişiğinde düşmanla temas eden bir müttefikin varsa (dezavantajın yoksa) ekstra ⌈seviye/2⌉d6 hasar ekle. (Sv. 1=1d6, Sv. 3=2d6, Sv. 5=3d6...)'
         },
         {
             name: 'Cunning Action', type: 'special', damage: '—',

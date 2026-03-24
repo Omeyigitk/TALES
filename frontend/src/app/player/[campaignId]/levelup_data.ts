@@ -27,7 +27,7 @@ export interface ClassFeature {
 export const CLASS_FEATURES: Record<string, Record<number, ClassFeature[]>> = {
     Barbarian: {
         1: [{ name: "Rage", desc_tr: "Bonus aksiyon olarak öfkeye girebilirsin. Öfke süresince fiziksel hasar bonusu, STR/CON kurtarma atışlarına avantaj ve fiziksel hasar direnci kazanırsın." },
-        { name: "Unarmored Defense", desc_tr: "Zırh giymezsen AC = 10 + DEX modi + CON modi olur." }],
+        { name: "Unarmored Defense", desc_tr: "Zırh giymezsen AC = 10 + DEX modu + CON modu olur." }],
         2: [{ name: "Reckless Attack", desc_tr: "Tur başında saldırını avantajlı yapabilirsin; ancak bu tur sana karşı yapılan saldırılar da avantajlı olur." },
         { name: "Danger Sense", desc_tr: "DEX kurtarma atışlarına avantaj (gördüğün tehlikeler için)." }],
         3: [{ name: "Primal Path", desc_tr: "Barbarian alt sınıfın olan İlkel Yol'u seçersin (Berserker, Totem Warrior vb.)" }],
@@ -81,7 +81,7 @@ export const CLASS_FEATURES: Record<string, Record<number, ClassFeature[]>> = {
         3: [{ name: "Roguish Archetype", desc_tr: "Alt sınıfını seçersin (Thief, Assassin, Arcane Trickster vb.)" }],
         5: [{ name: "Uncanny Dodge", desc_tr: "Görebileceğin saldırılara karşı reaksiyon ile hasarı yarıya indirirsin." }],
         6: [{ name: "Expertise (x2)", desc_tr: "2 beceri daha için uzmanlık kazanırsın." }],
-        7: [{ name: "Evasion", desc_tr: "DEX save gerektiren alan büyülerine başarılıysan 0, başarısizsan yarım hasar alırsın." }],
+        7: [{ name: "Evasion", desc_tr: "DEX save gerektiren alan büyülerine başarılıysan 0, başarısızsan yarım hasar alırsın." }],
         9: [{ name: "Archetype Feature", desc_tr: "Hırsız alt sınıfından yeni bir özellik kazanırsın." }],
         11: [{ name: "Reliable Talent", desc_tr: "Yeterli olduğun beceri/araç kontrollerinde 9 veya daha düşük zarları 10 sayılır." }],
         13: [{ name: "Archetype Feature", desc_tr: "Hırsız alt sınıfından yeni bir özellik kazanırsın." }],

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams, useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
+import { useDialog } from "@/context/DialogContext";
 import { ASI_LEVELS, CLASS_FEATURES } from "../levelup_data";
 import { getSpellSlotTotals, isSpellcaster, getSpellLimits } from "../combat_data";
 import { ALL_FEATS, ALL_METAMAGICS } from "../feats_data";
@@ -117,6 +118,7 @@ export default function CharacterCreator() {
     const { campaignId } = useParams();
     const router = useRouter();
     const { user, token, loading: authLoading } = useAuth();
+    const { alert } = useDialog();
     const [hasMounted, setHasMounted] = useState(false);
 
     // Redirect if not logged in
@@ -666,7 +668,11 @@ export default function CharacterCreator() {
             }
         } catch (error) {
             console.error(error);
-            alert("Could not save character!");
+            await alert({
+                title: "Error",
+                message: "Could not save character!",
+                severity: "danger"
+            });
         }
     };
 
@@ -1807,7 +1813,7 @@ export default function CharacterCreator() {
 
                         <div className="mt-12 flex justify-between pt-6 border-t border-gray-700">
                             <button onClick={() => setStep(4)} className="px-8 py-3 bg-gray-600 hover:bg-gray-500 rounded-lg text-lg font-bold transition-colors">Back</button>
-                            <button onClick={() => {
+                            <button onClick={async () => {
                                 // Validation
                                 const invalid = asiSelections.some(asi =>
                                     (asi.type === 'stat11' && asi.stat1 === asi.stat2) ||
@@ -1816,8 +1822,22 @@ export default function CharacterCreator() {
                                 const raceFeatCount = getRaceFeatCount(selectedRace);
                                 const raceInvalid = Array.from({ length: raceFeatCount }).some((_, i) => !raceFeatStore[i]);
 
-                                if (invalid) return alert("Please complete your ASI selections validly (do not select the same stat twice or leave the Feat name empty).");
-                                if (raceInvalid) return alert("Please complete your race bonus feat selection.");
+                                if (invalid) {
+                                    await alert({
+                                        title: "Validation Error",
+                                        message: "Please complete your ASI selections validly (do not select the same stat twice or leave the Feat name empty).",
+                                        severity: "warning"
+                                    });
+                                    return;
+                                }
+                                if (raceInvalid) {
+                                    await alert({
+                                        title: "Validation Error",
+                                        message: "Please complete your race bonus feat selection.",
+                                        severity: "warning"
+                                    });
+                                    return;
+                                }
 
                                 fetchSpells();
                                 setStep(5);

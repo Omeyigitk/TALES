@@ -3,6 +3,7 @@
 import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
+import { useDialog } from "@/context/DialogContext";
 
 interface Campaign {
     _id: string;
@@ -12,6 +13,7 @@ interface Campaign {
 
 export default function Dashboard() {
     const { user, token, logout, loading: authLoading } = useAuth();
+    const { confirm, alert, prompt } = useDialog();
     const router = useRouter();
     const [campaigns, setCampaigns] = useState<Campaign[]>([]);
     const [loading, setLoading] = useState(true);
@@ -97,7 +99,13 @@ export default function Dashboard() {
     };
 
     const handleDeleteCampaign = async (id: string, name: string) => {
-        if (!confirm(`"${name}" kampanyasını ve içindeki TÜM verileri (karakterler, notlar vb.) silmek istediğine emin misin?`)) return;
+        const ok = await confirm({
+            title: "Kampanyayı Sil",
+            message: `"${name}" kampanyasını ve içindeki TÜM verileri (karakterler, notlar vb.) silmek istediğine emin misin?`,
+            confirmText: "Kampanyayı Sil",
+            severity: "danger"
+        });
+        if (!ok) return;
         try {
             const apiUrl = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
             const res = await fetch(`${apiUrl}/api/campaigns/${id}`, {
@@ -108,10 +116,18 @@ export default function Dashboard() {
                 fetchCampaigns();
             } else {
                 const data = await res.json();
-                alert(data.error);
+                await alert({
+                    title: "Hata",
+                    message: data.error,
+                    severity: "danger"
+                });
             }
         } catch (err) {
-            alert("Bağlantı hatası");
+            await alert({
+                title: "Bağlantı Hatası",
+                message: "Sunucuya bağlanılamadı.",
+                severity: "danger"
+            });
         }
     };
 
@@ -126,7 +142,11 @@ export default function Dashboard() {
                 setAllUsers(data);
                 setIsUserManagementOpen(true);
             } else {
-                alert("Kullanıcılar alınamadı (Yetkisiz erişim olabilir)");
+                await alert({
+                    title: "Yetki Hatası",
+                    message: "Kullanıcılar alınamadı (Yetkisiz erişim olabilir)",
+                    severity: "warning"
+                });
             }
         } catch (err) {
             console.error(err);
@@ -134,7 +154,11 @@ export default function Dashboard() {
     };
 
     const handleResetPassword = async (targetUserId: string, username: string) => {
-        const newPass = prompt(`${username} için yeni şifreyi girin:`, "123456");
+        const newPass = await prompt({
+            title: "Şifre Sıfırla",
+            message: `${username} için yeni şifreyi girin:`,
+            defaultValue: "123456"
+        });
         if (!newPass) return;
 
         try {
@@ -148,10 +172,18 @@ export default function Dashboard() {
                 body: JSON.stringify({ targetUserId, newPassword: newPass })
             });
             if (res.ok) {
-                alert("Şifre başarıyla güncellendi!");
+                await alert({
+                    title: "Başarılı",
+                    message: "Şifre başarıyla güncellendi!",
+                    severity: "success"
+                });
             }
         } catch (err) {
-            alert("Hata oluştu");
+            await alert({
+                title: "Hata",
+                message: "İşlem sırasında bir hata oluştu.",
+                severity: "danger"
+            });
         }
     };
 

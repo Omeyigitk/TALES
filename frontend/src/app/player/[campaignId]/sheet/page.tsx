@@ -4,6 +4,7 @@ import { useParams, useRouter } from "next/navigation";
 import { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { useAuth } from "@/context/AuthContext";
+import { useDialog } from "@/context/DialogContext";
 import { useCampaignSocket } from "../../../../../useCampaignSocket";
 import { ASI_LEVELS, CLASS_FEATURES, type Feat, type ClassFeature } from "../levelup_data";
 import { ALL_FEATS } from "../feats_data";
@@ -92,9 +93,10 @@ const resolveFormula = (text: string, level: number, mods: any, prof: number, cl
     // Level scaling: Sv.×5 or Level*5
     resolved = resolved.replace(/(sv\.?|level|seviye)\.?\s*[×*x]\s*(\d+)/gi, (_, __, factor) => String(level * parseInt(factor)));
 
-    // 2. Simple placeholders
-    resolved = resolved.replace(/\b(sv\.?|level|seviye)\b/gi, String(level));
-    resolved = resolved.replace(/\bprof\b/gi, String(prof));
+    // 2. Simple placeholders (Negative lookahead to avoid replacing Sv.1, Sv.2 etc labels)
+    resolved = resolved.replace(/\b(sv\.?|level|seviye)\b(?![.\s]*\d)/gi, String(level));
+    resolved = resolved.replace(/\b(prof|profici?e?n?c?y?)\b/gi, String(prof));
+    resolved = resolved.replace(/\b(yp|hp|hitpoints)\b/gi, String(mods.CON + level)); // Simple common placeholder
     
     // 3. Cantrip Scale
     const cantripDice = level >= 17 ? 4 : level >= 11 ? 3 : level >= 5 ? 2 : 1;
@@ -173,6 +175,7 @@ const PlayerSheet = () => {
     const { campaignId } = useParams();
     const router = useRouter();
     const { user, token, loading: authLoading } = useAuth();
+    const { confirm, alert, prompt } = useDialog();
 
     const [character, setCharacter] = useState<any>(null);
     const [loading, setLoading] = useState(true);
@@ -685,14 +688,20 @@ const PlayerSheet = () => {
 
     const handleDeleteCharacter = async () => {
         if (!character) return;
-        if (!confirm(`Are you sure you want to completely delete "${character.name}"? This action cannot be undone.`)) return;
+        if (!await confirm({ 
+            title: "Karakteri Sil", 
+            message: `"${character.name}" karakterini tamamen silmek istediğine emin misin? Bu işlem geri alınamaz.`,
+            severity: "danger",
+            confirmText: "Sil",
+            cancelText: "Vazgeç"
+        })) return;
         try {
             await axios.delete(`${API_URL}/api/characters/${character._id}`, { headers: { 'Authorization': `Bearer ${token}` } });
             localStorage.removeItem(`dnd_character_${campaignId}`);
             router.push('/dashboard');
         } catch (err) {
             console.error(err);
-            alert("Error deleting character.");
+            await alert({ title: "Hata", message: "Karakter silinirken bir hata oluştu.", severity: "danger" });
         }
     };
 
@@ -749,7 +758,7 @@ const PlayerSheet = () => {
             setNewItemQty(1);
             setNewItemNote("");
             showToast('Eşya Eklendi', `${newItemName} envantere eklendi.`, 'bg-green-900 border-green-500 text-green-100');
-        } catch { alert("Eşya eklenemedi."); }
+        } catch { await alert({ title: "Hata", message: "Eşya eklenemedi.", severity: "danger" }); }
         finally { setIsAddingItem(false); }
     };
 
@@ -762,7 +771,7 @@ const PlayerSheet = () => {
             if (socket) {
                  (socket as any).emit('update_character_stat', { campaignId, characterId: character._id, stat: 'inventory', value: newInventory });
             }
-        } catch { alert("Eşya silinemedi."); }
+        } catch { await alert({ title: "Hata", message: "Eşya silinemedi.", severity: "danger" }); }
     };
 
     const updateItemQty = async (index: number, delta: number) => {
@@ -783,7 +792,7 @@ const PlayerSheet = () => {
             if (socket) {
                  (socket as any).emit('update_character_stat', { campaignId, characterId: character._id, stat: 'inventory', value: newInventory });
             }
-        } catch { alert("Miktar güncellenemedi."); }
+        } catch { await alert({ title: "Hata", message: "Miktar güncellenemedi.", severity: "danger" }); }
     };
 
     const toggleEquip = async (index: number) => {
@@ -816,7 +825,7 @@ const PlayerSheet = () => {
                  (socket as any).emit('update_character_stat', { campaignId, characterId: character._id, stat: 'inventory', value: newInventory });
             }
             showToast(newInventory[index].isEquipped ? 'Kuşanıldı' : 'Çıkarıldı', `${newInventory[index].name} durumu güncellendi.`, 'bg-blue-900 border-blue-500 text-blue-100');
-        } catch { alert("Eşya durumu güncellenemedi."); }
+        } catch { await alert({ title: "Hata", message: "Eşya durumu güncellenemedi.", severity: "danger" }); }
     };
 
     const addCustomResource = async () => {
@@ -838,7 +847,7 @@ const PlayerSheet = () => {
             setNewResourceMax(1);
             setNewResourceDesc("");
             showToast('Kaynak Eklendi', `${newResourceName} başarıyla eklendi.`, 'bg-orange-900 border-orange-500 text-orange-100');
-        } catch { alert("Kaynak eklenemedi."); }
+        } catch { await alert({ title: "Hata", message: "Kaynak eklenemedi.", severity: "danger" }); }
     };
 
     const handleBuyItem = async (item: any) => {
@@ -850,7 +859,7 @@ const PlayerSheet = () => {
         }
 
         const confirmMsg = `"${item.name}" eşyasını ${item.price} GP karşılığında satın almak istiyor musun?`;
-        if (!window.confirm(confirmMsg)) return;
+        if (!await confirm({ title: "Satın Al", message: confirmMsg })) return;
 
         const newMoney = { ...character.money, gp: currentGp - item.price };
         const inv = [...(character.inventory || [])];
@@ -871,7 +880,7 @@ const PlayerSheet = () => {
             }
             showToast("Satın Alındı!", `1x ${item.name} envantere eklendi. Bakiye: ${newMoney.gp} GP.`, "bg-green-900 border-green-500 text-green-100");
         } catch {
-            alert("Satın alma başarısız oldu.");
+            await alert({ title: "Hata", message: "Satın alma başarısız oldu.", severity: "danger" });
         }
     };
 
@@ -1089,7 +1098,7 @@ const PlayerSheet = () => {
             showToast('Büyü Yapıldı', `${spellName} (${slotLevel}. seviye) başarıyla kullanıldı.`, 'bg-purple-900 border-purple-500 text-purple-100');
             return true;
         } catch { 
-            alert("Büyü slotu güncellenemedi."); 
+            await alert({ title: "Hata", message: "Büyü slotu güncellenemedi.", severity: "danger" }); 
             return false;
         }
     };
@@ -1133,9 +1142,27 @@ const PlayerSheet = () => {
         return bonus;
     };
 
-    const handleShortRest = () => setShowHitDiceModal(true);
+    const handleShortRest = async () => {
+        if (await confirm({ 
+            title: "Kısa Dinlenme (Short Rest)", 
+            message: "Kısa dinlenme yapmak istediğine emin misin?", 
+            severity: "info",
+            confirmText: "Dinlen",
+            cancelText: "Vazgeç"
+        })) {
+            setShowHitDiceModal(true);
+        }
+    };
     
-    const handleLongRest = () => {
+    const handleLongRest = async () => {
+        if (!await confirm({
+            title: "Uzun Dinlenme (Long Rest)",
+            message: "Uzun dinlenme yapmak istediğine emin misin? Tüm kaynakların yenilenecek.",
+            severity: "info",
+            confirmText: "Dinlen",
+            cancelText: "Vazgeç"
+        })) return;
+
         let wizardLevel = 0;
         if (character?.classRef?.name === 'Wizard' || character?.className === 'Wizard') {
             const mcLvTotal = mcs.reduce((acc: number, mc: any) => acc + (mc.level || 1), 0);
@@ -1205,7 +1232,7 @@ const PlayerSheet = () => {
         try {
             await axios.put(`${API_URL}/api/characters/${character._id}`, { backstory }, { headers: { 'Authorization': `Bearer ${token}` } });
             showToast('Save Successful', 'Your character backstory has been updated.', 'bg-green-900 border-green-500 text-green-100');
-        } catch { alert("Failed to save backstory."); }
+        } catch { await alert({ title: "Hata", message: "Geçmiş hikaye kaydedilemedi.", severity: "danger" }); }
         finally { setIsSavingStory(false); }
     };
 
@@ -1215,7 +1242,7 @@ const PlayerSheet = () => {
         try {
             await axios.put(`${API_URL}/api/characters/${character._id}`, { privateNotes }, { headers: { 'Authorization': `Bearer ${token}` } });
             showToast('Notes Saved', 'Your personal notes have been updated.', 'bg-blue-900 border-blue-500 text-blue-100');
-        } catch { alert("Failed to save notes."); }
+        } catch { await alert({ title: "Hata", message: "Notlar kaydedilemedi.", severity: "danger" }); }
         finally { setIsSavingPrivateNotes(false); }
     };
 
@@ -1276,12 +1303,15 @@ const PlayerSheet = () => {
         showToast(`🎲 ${name} - ${formula}`, cost ? `${cost.amount} ${cost.name} used! Result: ${total}` : `${typeLabel} Result: ${total}`, 'bg-purple-900 border-purple-500 text-purple-100');
     };
 
-    const startLevelUp = () => {
+    const startLevelUp = async () => {
         // Use characterRef for always-fresh data (fixes consecutive level-up bug)
         const char = characterRef.current;
         if (!char) return;
         const cls = char.classRef;
-        if (!cls || typeof cls !== 'object') { alert('Class information could not be loaded, please refresh.'); return; }
+        if (!cls || typeof cls !== 'object') { 
+            await alert({ title: "Hata", message: "Sınıf bilgileri yüklenemedi, lütfen sayfayı yenileyin.", severity: "danger" }); 
+            return; 
+        }
         const newLv = char.level + 1;
         if (newLv > 20) return; // Max level 20
         // Use fallback hit_die if missing
@@ -1324,7 +1354,7 @@ const PlayerSheet = () => {
         setLvModal({ open: true, step: "preview", newLv, hpGained, classFeats, subFeats, needSubclass, needASI });
     };
 
-    const handleLevelUpClick = () => {
+    const handleLevelUpClick = async () => {
         if (!dmLevelPermission) {
             setShowDmPopup(true);
             return;
@@ -1333,7 +1363,7 @@ const PlayerSheet = () => {
         const char = characterRef.current;
         if (!char) return;
         if ((char.level || 1) >= 20) {
-            alert('Character has already reached the maximum level (20).');
+            await alert({ title: "Maksimum Seviye", message: "Karakter zaten maksimum seviyeye (20) ulaştı.", severity: "info" });
             return;
         }
 
@@ -1369,12 +1399,12 @@ const PlayerSheet = () => {
         // Check if already multclassed into this class
         const alreadyExists = currentMulticlasses.find((mc: any) => mc.classRef === mcPickedClassId || mc.classRef?._id === mcPickedClassId);
         if (alreadyExists) {
-            alert('You have already multiclassed into this class.');
+            await alert({ title: "Hata", message: "Bu sınıfa zaten çoklu sınıf (multiclass) olarak sahipsin.", severity: "warning" });
             return;
         }
         // Check vs primary class
         if (char.classRef?._id === mcPickedClassId || char.classRef === mcPickedClassId) {
-            alert('This is already your primary class.');
+            await alert({ title: "Hata", message: "Bu zaten senin ana sınıfın.", severity: "warning" });
             return;
         }
 
@@ -1410,7 +1440,10 @@ const PlayerSheet = () => {
         if (!char) return;
         if (char.level <= 1) return; // Min level 1
         const cls = char.classRef;
-        if (!cls || typeof cls !== 'object') { alert('Class information could not be loaded.'); return; }
+        if (!cls || typeof cls !== 'object') { 
+            await alert({ title: "Hata", message: "Sınıf bilgileri yüklenemedi.", severity: "danger" }); 
+            return; 
+        }
 
         const hitDie = (cls.hit_die || 'd8') as string;
         const hitDieMax = parseInt(hitDie.replace('d', '')) || 8;
@@ -1436,7 +1469,7 @@ const PlayerSheet = () => {
             }
         } catch (error) {
             console.error(error);
-            alert("Error while decreasing level.");
+            await alert({ title: "Hata", message: "Seviye düşürülürken hata oluştu.", severity: "danger" });
         } finally {
             setIsLevelingUp(false);
         }
@@ -1446,7 +1479,10 @@ const PlayerSheet = () => {
     const levelUpMulticlass = async (mcIndex: number) => {
         const char = characterRef.current;
         if (!char) return;
-        if ((char.level || 1) >= 20) { alert('Character has already reached the maximum level (20).'); return; }
+        if ((char.level || 1) >= 20) { 
+            await alert({ title: "Maksimum Seviye", message: "Karakter zaten maksimum seviyeye (20) ulaştı.", severity: "info" });
+            return; 
+        }
 
         const mc = mcs[mcIndex];
         if (!mc) return;
@@ -2074,12 +2110,20 @@ const PlayerSheet = () => {
                     {/* HP */}
                     <div className="flex items-center gap-3">
                         <span className="text-gray-400 text-sm font-bold uppercase tracking-wide">❤️ HP</span>
-                        <button onClick={() => updateHp(currentHp - 1)} className="w-8 h-8 bg-red-800 hover:bg-red-700 rounded font-black text-lg transition">-</button>
+                        <button onClick={() => {
+                            const val = parseInt(hpInput) || 1;
+                            updateHp(currentHp - val);
+                            if (hpInput) setHpInput("");
+                        }} className="w-8 h-8 bg-red-800 hover:bg-red-700 rounded font-black text-lg transition">-</button>
                         <div className="flex items-baseline gap-1">
                             <span className={`text-3xl font-black ${hpPct <= 25 ? 'text-red-500' : hpPct <= 50 ? 'text-orange-400' : 'text-green-400'}`}>{currentHp}</span>
                             <span className="text-gray-500 text-lg">/{character.maxHp}</span>
                         </div>
-                        <button onClick={() => updateHp(currentHp + 1)} className="w-8 h-8 bg-green-800 hover:bg-green-700 rounded font-black text-lg transition">+</button>
+                        <button onClick={() => {
+                            const val = parseInt(hpInput) || 1;
+                            updateHp(currentHp + val);
+                            if (hpInput) setHpInput("");
+                        }} className="w-8 h-8 bg-green-800 hover:bg-green-700 rounded font-black text-lg transition">+</button>
                         <div className="w-32 h-4 bg-gray-700 rounded-full overflow-hidden">
                             <div className={`h-full rounded-full transition-all ${hpPct <= 25 ? 'bg-red-500' : hpPct <= 50 ? 'bg-orange-400' : 'bg-green-500'}`} style={{ width: `${hpPct}%` }} />
                         </div>
@@ -2095,8 +2139,8 @@ const PlayerSheet = () => {
                                     } else if (val.startsWith('-')) {
                                         delta = -(parseInt(val.slice(1)) || 0);
                                     } else {
-                                        // Varsayılan olarak hasar (eksi)
-                                        delta = -(parseInt(val) || 0);
+                                        // Varsayılan olarak ekleme (artı) - Kullanıcı isteği
+                                        delta = (parseInt(val) || 0);
                                     }
                                     updateHp(currentHp + delta);
                                     setHpInput("");
@@ -2818,7 +2862,13 @@ const PlayerSheet = () => {
                                                     </div>
                                                     <button
                                                         onClick={async () => {
-                                                            if (confirm(`${pet.name} yoldaşlıktan ayrılsın mı?`)) {
+                                                            if (await confirm({ 
+                                                                title: "Yoldaşı Ayır", 
+                                                                message: `${pet.name} yoldaşlıktan ayrılsın mı?`, 
+                                                                severity: "warning",
+                                                                confirmText: "Ayır",
+                                                                cancelText: "Vazgeç"
+                                                            })) {
                                                                 const newComps = character.companions.filter((p: any) => p.id !== pet.id);
                                                                 await axios.put(`${API_URL}/api/characters/${character._id}`, { companions: newComps });
                                                                 setCharacter({ ...character, companions: newComps });
@@ -3083,7 +3133,13 @@ const PlayerSheet = () => {
                                                     <div key={res.id} className="bg-gray-800/80 rounded-xl border border-blue-500/20 p-3 shadow-lg hover:border-blue-500/40 transition-all relative group">
                                                         <button
                                                             onClick={async () => {
-                                                                if(confirm(`${res.name} öğesini silmek istediğinize emin misiniz?`)) {
+                                                                if(await confirm({ 
+                                                                    title: "Kaynağı Sil", 
+                                                                    message: `${res.name} öğesini silmek istediğinize emin misiniz?`, 
+                                                                    severity: "danger",
+                                                                    confirmText: "Sil",
+                                                                    cancelText: "Vazgeç"
+                                                                })) {
                                                                     const updated = (character.customResources || []).filter((r:any) => r.id !== res.id);
                                                                     await axios.put(`${API_URL}/api/characters/${character._id}`, { customResources: updated });
                                                                     setCharacter({ ...character, customResources: updated });
@@ -3160,12 +3216,12 @@ const PlayerSheet = () => {
                                                                 </span>
                                                             )}
                                                             <span className="text-[10px] bg-gray-900/60 text-gray-400 font-bold px-2 py-0.5 rounded border border-white/5 uppercase whitespace-nowrap">
-                                                                {atk.damage} {atk.type !== 'special' ? atk.type : ''}
+                                                                {resolveFormula(atk.damage, level, mods, prof, clsName)} {atk.type !== 'special' ? atk.type : ''}
                                                             </span>
                                                         </div>
                                                         {atk.desc_tr && (
                                                             <div className="text-xs text-gray-400 mt-2 leading-tight">
-                                                                {atk.desc_tr}
+                                                                {resolveFormula(atk.desc_tr, level, mods, prof, clsName)}
                                                             </div>
                                                         )}
                                                     </div>
@@ -3646,7 +3702,8 @@ const PlayerSheet = () => {
                                     <div className="flex items-center gap-2 mb-1">
                                         <span className="text-[9px] font-black text-blue-400/70 uppercase tracking-widest">Partiye Gönder 📤</span>
                                     </div>
-                                    <div className="flex gap-2">
+                                     <div className="flex gap-2">
+                                        {/* Transfer to party shortcuts */}
                                         {[10, 50, 100].map(v => (
                                             <button 
                                                 key={`toparty-${v}`} 
@@ -3656,6 +3713,15 @@ const PlayerSheet = () => {
                                                 {v} GP
                                             </button>
                                         ))}
+                                        <button 
+                                            onClick={async () => {
+                                                const val = await prompt({ title: "Partiye Gönder", message: "Kaç GP göndermek istersin?", defaultValue: "0", inputType: "number" });
+                                                if (val && parseInt(val) > 0) handleTransferToParty(parseInt(val));
+                                            }}
+                                            className="flex-1 bg-blue-900/20 hover:bg-blue-900/40 border border-blue-600/40 rounded-lg py-1.5 text-[9px] font-black text-blue-300 transition-all uppercase"
+                                        >
+                                            Özel
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -3760,6 +3826,15 @@ const PlayerSheet = () => {
                                                     {v} GP
                                                 </button>
                                             ))}
+                                            <button 
+                                                onClick={async () => {
+                                                    const val = await prompt({ title: "Kasadan Al", message: "Kaç GP almak istersin?", defaultValue: "0", inputType: "number" });
+                                                    if (val && parseInt(val) > 0) handleTransferToSelf(parseInt(val));
+                                                }}
+                                                className="flex-1 bg-emerald-900/20 hover:bg-emerald-900/40 border border-emerald-600/40 rounded-lg py-2 text-[9px] font-black text-emerald-300 transition-all uppercase tracking-widest shadow-sm"
+                                            >
+                                                Özel
+                                            </button>
                                         </div>
                                     </div>
 

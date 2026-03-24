@@ -6,6 +6,7 @@ import axios from "axios";
 import { useCampaignSocket } from "../../../../../useCampaignSocket";
 import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
+import { useDialog } from "@/context/DialogContext";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
 
@@ -20,6 +21,7 @@ const MAP_TEMPLATES = [
 export default function DMDashboard() {
     const { campaignId } = useParams();
     const { user, token, loading: authLoading } = useAuth();
+    const { confirm, alert, prompt } = useDialog();
     const router = useRouter();
     const role = 'DM';
     const [hasMounted, setHasMounted] = useState(false);
@@ -205,7 +207,13 @@ export default function DMDashboard() {
     };
 
     const handleResetPassword = async (targetUserId: string, username: string) => {
-        const newPass = prompt(`${username} için yeni şifreyi girin:`, "123456");
+        const newPass = await prompt({
+            title: "Şifre Sıfırla",
+            message: `${username} için yeni şifreyi girin:`,
+            defaultValue: "123456",
+            confirmText: "Şifreyi Güncelle",
+            cancelText: "İptal"
+        });
         if (!newPass) return;
 
         try {
@@ -217,7 +225,13 @@ export default function DMDashboard() {
     };
 
     const handleRenameUser = async (targetUserId: string, oldName: string) => {
-        const newName = prompt(`"${oldName}" kullanıcısının yeni adını girin:`, oldName);
+        const newName = await prompt({
+            title: "Kullanıcı Adı Değiştir",
+            message: `"${oldName}" kullanıcısının yeni adını girin:`,
+            defaultValue: oldName,
+            confirmText: "İsmi Güncelle",
+            cancelText: "İptal"
+        });
         if (!newName || newName === oldName) return;
 
         try {
@@ -225,19 +239,34 @@ export default function DMDashboard() {
             setAllUsers(allUsers.map(u => u._id === targetUserId ? { ...u, username: newName } : u));
             showToast("Başarılı", "Kullanıcı adı güncellendi", "bg-green-900 border-green-500 text-green-100");
         } catch (error: any) {
-            alert("Hata: " + (error.response?.data?.error || "Kullanıcı adı değiştirilemedi"));
+            await alert({
+                title: "Hata",
+                message: error.response?.data?.error || "Kullanıcı adı değiştirilemedi",
+                severity: "danger"
+            });
         }
     };
 
     const handleDeleteUser = async (targetUserId: string, username: string) => {
-        if (!confirm(`"${username}" kullanıcısını tamamen silmek istediğine emin misin? Bu işlem geri alınamaz!`)) return;
+        const ok = await confirm({
+            title: "Kullanıcıyı Sil",
+            message: `"${username}" kullanıcısını tamamen silmek istediğine emin misin? Bu işlem geri alınamaz!`,
+            confirmText: "Kullanıcıyı Sil",
+            cancelText: "Vazgeç",
+            severity: "danger"
+        });
+        if (!ok) return;
 
         try {
             await axios.delete(`${API_URL}/api/admin/users/${targetUserId}`, { headers: { 'Authorization': `Bearer ${token}` } });
             setAllUsers(allUsers.filter(u => u._id !== targetUserId));
             showToast("Başarılı", "Kullanıcı silindi", "bg-red-900 border-red-500 text-red-100");
         } catch (error: any) {
-            alert("Hata: " + (error.response?.data?.error || "Kullanıcı silinemedi"));
+            await alert({
+                title: "Hata",
+                message: error.response?.data?.error || "Kullanıcı silinemedi",
+                severity: "danger"
+            });
         }
     };
 
@@ -470,7 +499,11 @@ export default function DMDashboard() {
             setMediaUrl("");
         } catch (error) {
             console.error(error);
-            alert("Medya yüklenirken hata oluştu.");
+            await alert({
+                title: "Medya Hatası",
+                message: "Medya yüklenirken hata oluştu.",
+                severity: "danger"
+            });
         }
     };
 
@@ -500,7 +533,13 @@ export default function DMDashboard() {
         }
     };
     const deleteNpc = async (id: string) => {
-        if (!confirm("Bu NPC'yi silmek istediğine emin misin?")) return;
+        const ok = await confirm({
+            title: "NPC Sil",
+            message: "Bu NPC'yi silmek istediğine emin misin?",
+            confirmText: "NPC'yi Sil",
+            severity: "warning"
+        });
+        if (!ok) return;
         try {
             await axios.delete(`${API_URL}/api/npcs/${id}`, { headers: { 'Authorization': `Bearer ${token}` } });
             setNpcs(npcs.filter(n => n._id !== id));
@@ -510,13 +549,23 @@ export default function DMDashboard() {
     };
 
     const deleteCharacter = async (id: string, name: string) => {
-        if (!confirm(`"${name}" karakterini silmek istediğine emin misin? Bu işlem geri alınamaz.`)) return;
+        const ok = await confirm({
+            title: "Karakter Sil",
+            message: `"${name}" karakterini silmek istediğine emin misin? Bu işlem geri alınamaz.`,
+            confirmText: "Karakteri Sil",
+            severity: "danger"
+        });
+        if (!ok) return;
         try {
             await axios.delete(`${API_URL}/api/characters/${id}`, { headers: { 'Authorization': `Bearer ${token}` } });
             showToast("Karakter Silindi", `"${name}" karakteri başarıyla silindi. Sayfayı yenileyebilirsiniz.`, "bg-red-900 border-red-500 text-red-100");
         } catch (error) {
             console.error("Karakter Silinemedi:", error);
-            alert("Karakter silinirken bir hata oluştu.");
+            await alert({
+                title: "Karakter Hatası",
+                message: "Karakter silinirken bir hata oluştu.",
+                severity: "danger"
+            });
         }
     };
 
@@ -598,7 +647,11 @@ export default function DMDashboard() {
             setIsEditCharModalOpen(true);
         } catch (error) {
             console.error("Karakter verisi alınamadı", error);
-            alert("Karakter detayı alınamadı!");
+            await alert({
+                title: "Hata",
+                message: "Karakter detayı alınamadı!",
+                severity: "danger"
+            });
         }
     };
 
@@ -626,10 +679,18 @@ export default function DMDashboard() {
             }
             setIsEditCharModalOpen(false);
             setEditingCharData(null);
-            alert("Karakter güncellendi! Oyuncunun ekranına yansıdı.");
+            await alert({
+                title: "Başarılı",
+                message: "Karakter güncellendi! Oyuncunun ekranına yansıdı.",
+                severity: "success"
+            });
         } catch (error) {
             console.error("Karakter kaydedilemedi", error);
-            alert("Karakter veri tabanına kaydedilemedi!");
+            await alert({
+                title: "Hata",
+                message: "Karakter veri tabanına kaydedilemedi!",
+                severity: "danger"
+            });
         }
     };
 
@@ -775,7 +836,13 @@ export default function DMDashboard() {
                 <div className="flex justify-end gap-3 animate-fade-in-up mt-2 pr-2">
                     <button
                         onClick={async () => {
-                            if (!window.confirm("Tüm veritabanını (Eşyalar, Canavarlar, Büyüler vb.) sıfırlayıp yeniden yüklemek istediğinizden emin misiniz? Bu işlem canlıdaki verileri günceller.")) return;
+                            const ok = await confirm({
+                                title: "Veritabanını Güncelle (Seed)",
+                                message: "Tüm veritabanını (Eşyalar, Canavarlar, Büyüler vb.) sıfırlayıp yeniden yüklemek istediğinizden emin misiniz? Bu işlem canlıdaki verileri günceller.",
+                                confirmText: "Güncelle (Seed)",
+                                severity: "warning"
+                            });
+                            if (!ok) return;
                             try {
                                 const res = await axios.post(`${API_URL}/api/admin/seed`, {}, {
                                     headers: { 'Authorization': `Bearer ${token}` }
@@ -784,7 +851,11 @@ export default function DMDashboard() {
                                 setTimeout(() => window.location.reload(), 2000);
                             } catch (err: any) {
                                 console.error(err);
-                                alert("Güncelleme sırasında bir hata oluştu: " + (err.response?.data?.error || err.message));
+                                await alert({
+                                    title: "Güncelleme Hatası",
+                                    message: "Güncelleme sırasında bir hata oluştu: " + (err.response?.data?.error || err.message),
+                                    severity: "danger"
+                                });
                             }
                         }}
                         className="bg-purple-900/60 hover:bg-purple-700/80 text-purple-100 text-xs font-bold py-1.5 px-3 rounded-lg border border-purple-500/50 shadow-sm transition-all flex items-center gap-1"
@@ -1511,7 +1582,18 @@ export default function DMDashboard() {
                                                                     </div>
                                                                     <div className="flex items-center gap-1">
                                                                         <button onClick={() => openEditCharModal(lnpc._id)} className="bg-gray-700 hover:bg-gray-600 text-white p-1.5 rounded-lg transition-all" title="Düzenle">⚙️</button>
-                                                                        <button onClick={async () => { if (confirm(`${lnpc.name} silinecek, emin misin?`)) { await axios.delete(`${API_URL}/api/characters/${lnpc._id}`, { headers: { 'Authorization': `Bearer ${token}` } }); setLeveledNpcs(leveledNpcs.filter((n: any) => n._id !== lnpc._id)); } }} className="bg-red-900/50 hover:bg-red-600 text-white p-1.5 rounded-lg transition-all" title="Sil">✕</button>
+                                                                        <button onClick={async () => {
+                                                                            const ok = await confirm({
+                                                                                title: "Silmeyi Onayla",
+                                                                                message: `${lnpc.name} silinecek, emin misin?`,
+                                                                                confirmText: "Hepsini Sil",
+                                                                                severity: "danger"
+                                                                            });
+                                                                            if (ok) {
+                                                                                await axios.delete(`${API_URL}/api/characters/${lnpc._id}`, { headers: { 'Authorization': `Bearer ${token}` } });
+                                                                                setLeveledNpcs(leveledNpcs.filter((n: any) => n._id !== lnpc._id));
+                                                                            }
+                                                                        }} className="bg-red-900/50 hover:bg-red-600 text-white p-1.5 rounded-lg transition-all" title="Sil">✕</button>
                                                                     </div>
                                                                 </div>
 
@@ -2310,9 +2392,14 @@ export default function DMDashboard() {
                                     <div className="flex items-center gap-4">
                                         <div className="flex bg-slate-950/50 p-1.5 rounded-2xl border border-slate-800/50 mr-4">
                                             <button
-                                                onClick={() => {
-                                                    const confirmAll = window.confirm("Tüm haritayı GİZLEMEK istediğine emin misin?");
-                                                    if (!confirmAll) return;
+                                                onClick={async () => {
+                                                    const ok = await confirm({
+                                                        title: "Haritayı Gizle",
+                                                        message: "Tüm haritayı GİZLEMEK istediğine emin misin?",
+                                                        confirmText: "Sisle Kapla",
+                                                        severity: "warning"
+                                                    });
+                                                    if (!ok) return;
                                                     
                                                     // Generate a large grid (e.g., 50x50) to hide everything
                                                     const fullFog = [];
@@ -2330,8 +2417,14 @@ export default function DMDashboard() {
                                                 🌑 Hepsini Gizle
                                             </button>
                                             <button
-                                                onClick={() => {
-                                                    if (window.confirm("Tüm haritayı AÇMAK istediğine emin misin?")) {
+                                                onClick={async () => {
+                                                    const ok = await confirm({
+                                                        title: "Haritayı Aç",
+                                                        message: "Tüm haritayı AÇMAK istediğine emin misin?",
+                                                        confirmText: "Sisi Kaldır",
+                                                        severity: "info"
+                                                    });
+                                                    if (ok) {
                                                         socket?.emit('update_fog', { campaignId, fogOfWar: [] });
                                                         showToast("Sis Dağıldı", "Tüm harita oyunculara açıldı.", "bg-blue-900 border-blue-500 text-white");
                                                     }
@@ -2344,8 +2437,14 @@ export default function DMDashboard() {
                                         </div>
 
                                         <button
-                                            onClick={() => {
-                                                if (window.confirm("Tüm tokenları haritadan silmek istediğine emin misin?")) {
+                                            onClick={async () => {
+                                                const ok = await confirm({
+                                                    title: "Tokenları Temizle",
+                                                    message: "Tüm tokenları haritadan silmek istediğine emin misin?",
+                                                    confirmText: "Hepsini Sil",
+                                                    severity: "danger"
+                                                });
+                                                if (ok) {
                                                     const newMap = { ...mapData, tokens: [] };
                                                     setMapData(newMap);
                                                     socket?.emit('update_map', { campaignId, mapData: newMap });
@@ -2739,18 +2838,35 @@ export default function DMDashboard() {
                                     </div>
                                     <button
                                         onClick={async () => {
-                                            if (!newPet.name || !targetPetPlayerId) return alert("İsim ve hedef oyuncu gerekli!");
+                                            if (!newPet.name || !targetPetPlayerId) {
+                                                await alert({
+                                                    title: "Eksik Bilgi",
+                                                    message: "İsim ve hedef oyuncu gerekli!",
+                                                    severity: "warning"
+                                                });
+                                                return;
+                                            }
                                             try {
                                                 const charRes = await axios.get(`${API_URL}/api/characters/${targetPetPlayerId}`);
                                                 const currentCompanions = charRes.data.companions || [];
                                                 const newCompanions = [...currentCompanions, { ...newPet, id: `pet-${Date.now()}` }];
                                                 await axios.put(`${API_URL}/api/characters/${targetPetPlayerId}`, { companions: newCompanions });
-                                                alert(`${newPet.name} başarıyla verildi!`);
+                                                
+                                                await alert({
+                                                    title: "Başarılı",
+                                                    message: `${newPet.name} başarıyla verildi!`,
+                                                    severity: "success"
+                                                });
+                                                
                                                 setIsPetModalOpen(false);
                                                 setNewPet({ name: '', hp: 10, maxHp: 10, ac: 10, type: '', notes: '' });
                                             } catch (err) {
                                                 console.error(err);
-                                                alert("Pet verilirken hata oluştu.");
+                                                await alert({
+                                                    title: "Hata",
+                                                    message: "Pet verilirken hata oluştu.",
+                                                    severity: "danger"
+                                                });
                                             }
                                         }}
                                         className="w-full bg-yellow-600 hover:bg-yellow-500 text-white font-black py-4 rounded-xl shadow-lg shadow-yellow-900/40 transition-all uppercase tracking-widest mt-4"
@@ -2984,7 +3100,14 @@ export default function DMDashboard() {
                                         const title = (document.getElementById('q-title') as HTMLInputElement).value;
                                         const desc = (document.getElementById('q-desc') as HTMLTextAreaElement).value;
                                         const rewards = (document.getElementById('q-rewards') as HTMLInputElement).value;
-                                        if (!title) return alert("Başlık gerekli!");
+                                        if (!title) {
+                                            await alert({
+                                                title: "Eksik Bilgi",
+                                                message: "Başlık gerekli!",
+                                                severity: "warning"
+                                            });
+                                            return;
+                                        }
                                         
                                         try {
                                             const res = await axios.post(`${API_URL}/api/quests`, { campaignId, title, description: desc, rewards }, { headers: { 'Authorization': `Bearer ${token}` } });
@@ -3017,7 +3140,13 @@ export default function DMDashboard() {
                                                         </>
                                                     )}
                                                     <button onClick={async () => {
-                                                        if (!confirm("Silmek istediğine emin misin?")) return;
+                                                        const ok = await confirm({
+                                                            title: "Görevi Sil",
+                                                            message: "Silmek istediğine emin misin?",
+                                                            confirmText: "Sil",
+                                                            severity: "warning"
+                                                        });
+                                                        if (!ok) return;
                                                         await axios.delete(`${API_URL}/api/quests/${q._id}`, { headers: { 'Authorization': `Bearer ${token}` } });
                                                         socket?.emit('join_campaign', { campaignId, role, userId: user?.id });
                                                     }} className="text-gray-500 hover:text-red-500">🗑️</button>
@@ -3047,7 +3176,14 @@ export default function DMDashboard() {
                                     <textarea id="sn-content" placeholder="Oturumda ne oldu? Önemli olayları not et..." className="w-full bg-gray-900 border border-gray-800 rounded-xl px-4 py-2 text-white outline-none focus:border-amber-500 h-32"></textarea>
                                     <button onClick={async () => {
                                         const content = (document.getElementById('sn-content') as HTMLTextAreaElement).value;
-                                        if (!content) return alert("İçerik gerekli!");
+                                        if (!content) {
+                                            await alert({
+                                                title: "Eksik Bilgi",
+                                                message: "İçerik gerekli!",
+                                                severity: "warning"
+                                            });
+                                            return;
+                                        }
                                         
                                         try {
                                             await axios.post(`${API_URL}/api/session-notes`, { campaignId, authorName: 'DM', content }, { headers: { 'Authorization': `Bearer ${token}` } });
@@ -3090,7 +3226,14 @@ export default function DMDashboard() {
                                     <button onClick={async () => {
                                         const name = (document.getElementById('f-name') as HTMLInputElement).value;
                                         const desc = (document.getElementById('f-desc') as HTMLTextAreaElement).value;
-                                        if (!name) return alert("İsim gerekli!");
+                                        if (!name) {
+                                            await alert({
+                                                title: "Eksik Bilgi",
+                                                message: "İsim gerekli!",
+                                                severity: "warning"
+                                            });
+                                            return;
+                                        }
                                         
                                         try {
                                             await axios.post(`${API_URL}/api/factions`, { campaignId, name, description: desc }, { headers: { 'Authorization': `Bearer ${token}` } });
@@ -3112,7 +3255,13 @@ export default function DMDashboard() {
                                                     <p className="text-gray-400 text-sm">{f.description}</p>
                                                 </div>
                                                 <button onClick={async () => {
-                                                    if (!confirm("Fraksiyonu silmek istediğine emin misin?")) return;
+                                                    const ok = await confirm({
+                                                        title: "Fraksiyonu Sil",
+                                                        message: "Fraksiyonu silmek istediğine emin misin?",
+                                                        confirmText: "Sil",
+                                                        severity: "warning"
+                                                    });
+                                                    if (!ok) return;
                                                     await axios.delete(`${API_URL}/api/factions/${f._id}`, { headers: { 'Authorization': `Bearer ${token}` } });
                                                     socket?.emit('join_campaign', { campaignId, role, userId: user?.id });
                                                 }} className="text-gray-500 hover:text-red-500">🗑️</button>
