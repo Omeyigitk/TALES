@@ -141,6 +141,22 @@ export default function DMDashboard() {
 
     // NPC Sheet View State
     const [viewingNpcSheetData, setViewingNpcSheetData] = useState<any>(null);
+    const [npcSpellDetails, setNpcSpellDetails] = useState<Record<string, any>>({});
+    const [selectedNpcSpell, setSelectedNpcSpell] = useState<any>(null);
+
+    // Fetch spell details when NPC sheet opens
+    useEffect(() => {
+        if (!viewingNpcSheetData?.spells?.length) { setNpcSpellDetails({}); return; }
+        const activeToken = token || (typeof window !== 'undefined' ? localStorage.getItem('token') : null);
+        if (!activeToken) return;
+        axios.post(`${API_URL}/api/spells/batch`, { names: viewingNpcSheetData.spells }, { headers: { 'Authorization': `Bearer ${activeToken}` } })
+            .then(res => {
+                const map: Record<string, any> = {};
+                (Array.isArray(res.data) ? res.data : []).forEach((s: any) => { if (s?.name) map[s.name] = s; });
+                setNpcSpellDetails(map);
+            })
+            .catch(err => console.error('Spell fetch error:', err));
+    }, [viewingNpcSheetData, token]);
 
     // New Features Modals
     const [isQuestMenuOpen, setIsQuestMenuOpen] = useState(false);
@@ -2990,16 +3006,62 @@ export default function DMDashboard() {
                 {/* --- NPC CHARACTER SHEET MODAL --- */}
                 {viewingNpcSheetData && (() => {
                     const npc = viewingNpcSheetData;
+                    const lvl: number = npc.level || 1;
+                    const profBonus: number = Math.ceil(lvl / 4) + 1; // 1–4: +2, 5–8: +3, 9–12: +4, 13–16: +5, 17–20: +6
                     const mod = (v: number) => Math.floor((v - 10) / 2);
                     const fmtMod = (v: number) => { const m = mod(v); return (m >= 0 ? '+' : '') + m; };
-                    const stats: [string, string][] = [['STR', '💪'], ['DEX', '🏃'], ['CON', '❤️'], ['INT', '🧠'], ['WIS', '👁️'], ['CHA', '✨']];
+                    const s = npc.stats || {};
+
+                    // Saving throw proficiencies by class (rough approximation for common classes)
+                    const classStSaved: Record<string, string[]> = {
+                        'Fighter': ['STR', 'CON'], 'Barbarian': ['STR', 'CON'],
+                        'Monk': ['STR', 'DEX'], 'Rogue': ['DEX', 'INT'],
+                        'Ranger': ['STR', 'DEX'], 'Paladin': ['WIS', 'CHA'],
+                        'Cleric': ['WIS', 'CHA'], 'Druid': ['INT', 'WIS'],
+                        'Sorcerer': ['CON', 'CHA'], 'Warlock': ['WIS', 'CHA'],
+                        'Wizard': ['INT', 'WIS'], 'Bard': ['DEX', 'CHA'],
+                        'Artificer': ['CON', 'INT'],
+                    };
+                    const className = npc.classRef?.name || '';
+                    const stProfs: string[] = classStSaved[className] || [];
+                    const stList: [string, string][] = [['STR', '💪'], ['DEX', '🏃'], ['CON', '❤️'], ['INT', '🧠'], ['WIS', '👁️'], ['CHA', '✨']];
+
+                    // Weapon attack helper from inventory
+                    const getWeaponInfo = (item: any) => {
+                        const name: string = (item.name || '').toLowerCase();
+                        const isFinesse = ['rapier', 'shortsword', 'dagger', 'scimitar', 'whip', 'handcrossbow'].some(w => name.includes(w));
+                        const isRanged = ['bow', 'crossbow', 'dart', 'sling'].some(w => name.includes(w));
+                        const strMod = mod(s.STR || 10);
+                        const dexMod = mod(s.DEX || 10);
+                        const atkMod = isRanged ? dexMod : isFinesse ? Math.max(strMod, dexMod) : strMod;
+                        const totalAtk = atkMod + profBonus;
+                        const dmg = item.damageDice || item.damage || '1d6';
+                        return { atk: (totalAtk >= 0 ? '+' : '') + totalAtk, dmg, atkMod };
+                    };
+
+                    // Spellcasting modifier by class
+                    const spellcastingMod: Record<string, string> = {
+                        'Wizard': 'INT', 'Artificer': 'INT',
+                        'Cleric': 'WIS', 'Druid': 'WIS', 'Ranger': 'WIS',
+                        'Paladin': 'CHA', 'Sorcerer': 'CHA', 'Warlock': 'CHA', 'Bard': 'CHA',
+                        'Fighter': 'INT', 'Rogue': 'INT',
+                    };
+                    const spellMod = spellcastingMod[className] || 'INT';
+                    const spellModVal = mod(s[spellMod] || 10);
+                    const spellAtk = spellModVal + profBonus;
+                    const spellDC = 8 + spellAtk;
+
+                    const weaponItems = (npc.inventory || []).filter((item: any) =>
+                        item && typeof item === 'object' && item.type && ['weapon', 'Weapon', 'Silah'].some(t => String(item.type).toLowerCase() === t.toLowerCase() || String(item.category || '').toLowerCase().includes('weapon') || String(item.name || '').toLowerCase().match(/(sword|axe|bow|crossbow|spear|mace|dagger|staff|rapier|club|flail|glaive|pike)/))
+                    );
+
                     return (
                         <div
                             className="fixed inset-0 bg-black/70 backdrop-blur-sm z-[90] flex items-stretch justify-end"
-                            onClick={() => setViewingNpcSheetData(null)}
+                            onClick={() => { setViewingNpcSheetData(null); setSelectedNpcSpell(null); }}
                         >
                             <div
-                                className="w-full max-w-xl bg-gray-950 border-l border-gray-700/50 h-full flex flex-col shadow-[0_0_60px_rgba(0,0,0,0.8)] animate-in slide-in-from-right duration-300 overflow-hidden"
+                                className="w-full max-w-xl bg-gray-950 border-l border-gray-700/50 h-full flex flex-col shadow-[0_0_60px_rgba(0,0,0,0.8)] overflow-hidden"
                                 onClick={e => e.stopPropagation()}
                             >
                                 {/* Header */}
@@ -3007,93 +3069,177 @@ export default function DMDashboard() {
                                     <div className="absolute top-0 right-0 w-48 h-48 bg-violet-500/5 blur-3xl rounded-full pointer-events-none" />
                                     <div className="relative z-10">
                                         <button
-                                            onClick={() => setViewingNpcSheetData(null)}
+                                            onClick={() => { setViewingNpcSheetData(null); setSelectedNpcSpell(null); }}
                                             className="absolute top-0 right-0 w-10 h-10 rounded-xl flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/10 transition-all text-xl"
                                         >✕</button>
-                                        <div className="flex items-start gap-5 pr-10">
-                                            <div className={`w-16 h-16 rounded-2xl flex items-center justify-center text-3xl shadow-2xl flex-shrink-0 border ${npc.relationship === 'Dost' ? 'bg-emerald-900/40 border-emerald-500/40' : npc.relationship === 'Düşman' ? 'bg-red-900/40 border-red-500/40' : 'bg-yellow-900/30 border-yellow-500/30'}`}>
+                                        <div className="flex items-start gap-4 pr-10">
+                                            <div className={`w-14 h-14 rounded-2xl flex items-center justify-center text-2xl shadow-2xl flex-shrink-0 border ${npc.relationship === 'Dost' ? 'bg-emerald-900/40 border-emerald-500/40' : npc.relationship === 'Düşman' ? 'bg-red-900/40 border-red-500/40' : 'bg-yellow-900/30 border-yellow-500/30'}`}>
                                                 {npc.relationship === 'Dost' ? '🟩' : npc.relationship === 'Düşman' ? '🟥' : '🟨'}
                                             </div>
-                                            <div>
-                                                <h2 className="text-3xl font-black text-white tracking-tight leading-none">{npc.name}</h2>
-                                                <p className="text-sm font-bold text-gray-400 mt-1 uppercase tracking-widest">
-                                                    {npc.raceRef?.name} · {npc.classRef?.name} {npc.subclass ? `— ${npc.subclass}` : ''} · Lv.{npc.level}
+                                            <div className="flex-1 min-w-0">
+                                                <h2 className="text-2xl font-black text-white tracking-tight leading-none truncate">{npc.name}</h2>
+                                                <p className="text-xs font-bold text-gray-400 mt-1 uppercase tracking-widest">
+                                                    {npc.raceRef?.name} · {npc.classRef?.name} {npc.subclass ? `— ${npc.subclass}` : ''} · Lv.{lvl}
                                                 </p>
-                                                {npc.alignment && <p className="text-xs text-violet-400 font-bold mt-1">{npc.alignment}</p>}
-                                                <div className="flex gap-2 mt-2 flex-wrap">
-                                                    {npc.relationship && <span className={`text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest ${npc.relationship === 'Dost' ? 'bg-emerald-700 text-white' : npc.relationship === 'Düşman' ? 'bg-red-700 text-white' : 'bg-yellow-700 text-white'}`}>{npc.relationship}</span>}
-                                                    {npc.isNpc && <span className="text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest bg-violet-700/60 text-violet-200 border border-violet-500/30">NPC</span>}
+                                                {npc.alignment && <p className="text-[11px] text-violet-400 font-bold mt-0.5">{npc.alignment}</p>}
+                                                <div className="flex items-center gap-2 mt-1.5 flex-wrap">
+                                                    <span className="text-[10px] font-black bg-gray-800 text-gray-300 px-2 py-0.5 rounded-lg">PB: +{profBonus}</span>
+                                                    {npc.spells?.length > 0 && <span className="text-[10px] font-black bg-violet-900/40 text-violet-300 border border-violet-700/40 px-2 py-0.5 rounded-lg">Spell DC {spellDC} · Atk {spellAtk >= 0 ? '+' : ''}{spellAtk}</span>}
                                                 </div>
                                             </div>
                                         </div>
                                         {/* Core Stats Bar */}
-                                        <div className="grid grid-cols-3 gap-2 mt-5">
-                                            <div className="bg-red-950/30 border border-red-700/30 rounded-xl p-3 flex flex-col items-center">
-                                                <span className="text-[9px] text-red-400 font-black uppercase tracking-widest mb-1">HP</span>
-                                                <span className="text-2xl font-black text-red-300">{npc.currentHp ?? npc.maxHp ?? '—'}</span>
+                                        <div className="grid grid-cols-4 gap-2 mt-4">
+                                            <div className="bg-red-950/30 border border-red-700/30 rounded-xl p-2.5 flex flex-col items-center">
+                                                <span className="text-[9px] text-red-400 font-black uppercase tracking-widest">HP</span>
+                                                <span className="text-xl font-black text-red-300">{npc.currentHp ?? npc.maxHp ?? '—'}</span>
                                                 <span className="text-[10px] text-red-700 font-bold">/ {npc.maxHp ?? '—'}</span>
                                             </div>
-                                            <div className="bg-blue-950/30 border border-blue-700/30 rounded-xl p-3 flex flex-col items-center">
-                                                <span className="text-[9px] text-blue-400 font-black uppercase tracking-widest mb-1">AC</span>
-                                                <span className="text-2xl font-black text-blue-300">{npc.ac ?? '—'}</span>
+                                            <div className="bg-blue-950/30 border border-blue-700/30 rounded-xl p-2.5 flex flex-col items-center">
+                                                <span className="text-[9px] text-blue-400 font-black uppercase tracking-widest">AC</span>
+                                                <span className="text-xl font-black text-blue-300">{npc.ac ?? '—'}</span>
                                             </div>
-                                            <div className="bg-green-950/30 border border-green-700/30 rounded-xl p-3 flex flex-col items-center">
-                                                <span className="text-[9px] text-green-400 font-black uppercase tracking-widest mb-1">SPD</span>
-                                                <span className="text-2xl font-black text-green-300">{npc.speed ?? '30'}ft</span>
+                                            <div className="bg-green-950/30 border border-green-700/30 rounded-xl p-2.5 flex flex-col items-center">
+                                                <span className="text-[9px] text-green-400 font-black uppercase tracking-widest">Speed</span>
+                                                <span className="text-xl font-black text-green-300">{npc.speed ?? 30}ft</span>
+                                            </div>
+                                            <div className="bg-yellow-950/30 border border-yellow-700/30 rounded-xl p-2.5 flex flex-col items-center">
+                                                <span className="text-[9px] text-yellow-400 font-black uppercase tracking-widest">Hit Die</span>
+                                                <span className="text-xl font-black text-yellow-300">{lvl}d{npc.classRef?.hitDie || 8}</span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
 
                                 {/* Body - Scrollable */}
-                                <div className="flex-1 overflow-y-auto p-6 space-y-6">
+                                <div className="flex-1 overflow-y-auto space-y-5 p-5">
 
-                                    {/* Ability Scores */}
+                                    {/* Ability Scores + Saving Throws */}
                                     {npc.stats && (
                                         <div>
-                                            <h3 className="text-[10px] font-black text-gray-500 uppercase tracking-widest mb-3 flex items-center gap-2">
-                                                <span className="h-px flex-1 bg-gray-800"></span> Ability Scores <span className="h-px flex-1 bg-gray-800"></span>
+                                            <h3 className="text-[10px] font-black text-gray-500 uppercase tracking-widest mb-2.5 flex items-center gap-2">
+                                                <span className="h-px flex-1 bg-gray-800"></span> Ability Scores & Saving Throws <span className="h-px flex-1 bg-gray-800"></span>
                                             </h3>
-                                            <div className="grid grid-cols-6 gap-2">
-                                                {stats.map(([stat, icon]) => (
-                                                    <div key={stat} className="bg-gray-900/60 border border-gray-700/50 rounded-xl p-2 flex flex-col items-center group hover:border-gray-500 transition-all">
-                                                        <span className="text-lg">{icon}</span>
-                                                        <span className="text-[8px] text-gray-500 font-black uppercase tracking-widest mt-0.5">{stat}</span>
-                                                        <span className="text-lg font-black text-white">{npc.stats[stat] ?? '—'}</span>
-                                                        <span className={`text-[11px] font-black ${mod(npc.stats[stat] ?? 10) >= 0 ? 'text-green-400' : 'text-red-400'}`}>{fmtMod(npc.stats[stat] ?? 10)}</span>
-                                                    </div>
-                                                ))}
+                                            <div className="grid grid-cols-6 gap-1.5">
+                                                {stList.map(([stat]) => {
+                                                    const val = s[stat] ?? 10;
+                                                    const modVal = mod(val);
+                                                    const hasST = stProfs.includes(stat);
+                                                    const stBonus = modVal + (hasST ? profBonus : 0);
+                                                    return (
+                                                        <div key={stat} className={`rounded-xl p-2 flex flex-col items-center border transition-all ${hasST ? 'bg-emerald-950/20 border-emerald-700/40' : 'bg-gray-900/60 border-gray-700/40'}`}>
+                                                            <span className="text-[8px] text-gray-500 font-black uppercase">{stat}</span>
+                                                            <span className="text-base font-black text-white">{val}</span>
+                                                            <span className={`text-[11px] font-black ${modVal >= 0 ? 'text-green-400' : 'text-red-400'}`}>{fmtMod(val)}</span>
+                                                            <div className={`text-[9px] font-black mt-0.5 px-1.5 py-0.5 rounded-md ${hasST ? 'bg-emerald-800/50 text-emerald-300' : 'bg-gray-800/60 text-gray-500'}`}>
+                                                                ST: {stBonus >= 0 ? '+' : ''}{stBonus}
+                                                            </div>
+                                                        </div>
+                                                    );
+                                                })}
                                             </div>
                                         </div>
                                     )}
 
-                                    {/* Spells */}
+                                    {/* Weapon Attacks */}
+                                    {weaponItems.length > 0 && (
+                                        <div>
+                                            <h3 className="text-[10px] font-black text-gray-500 uppercase tracking-widest mb-2.5 flex items-center gap-2">
+                                                <span className="h-px flex-1 bg-gray-800"></span> ⚔️ Silah Saldırıları <span className="h-px flex-1 bg-gray-800"></span>
+                                            </h3>
+                                            <div className="space-y-1.5">
+                                                {weaponItems.map((item: any, idx: number) => {
+                                                    const wi = getWeaponInfo(item);
+                                                    return (
+                                                        <div key={idx} className="flex items-center justify-between bg-gray-900/50 border border-gray-700/40 rounded-xl px-3 py-2">
+                                                            <div>
+                                                                <span className="text-sm font-black text-gray-200">{item.name}</span>
+                                                                {item.description && <p className="text-[10px] text-gray-500 mt-0.5">{item.description}</p>}
+                                                            </div>
+                                                            <div className="flex items-center gap-3 flex-shrink-0 ml-3">
+                                                                <div className="text-center">
+                                                                    <div className="text-[9px] text-gray-500 font-bold uppercase">Atk</div>
+                                                                    <div className="text-sm font-black text-orange-400">{wi.atk}</div>
+                                                                </div>
+                                                                <div className="text-center">
+                                                                    <div className="text-[9px] text-gray-500 font-bold uppercase">Hasar</div>
+                                                                    <div className="text-sm font-black text-red-400">{wi.dmg} {wi.atkMod !== 0 ? (wi.atkMod > 0 ? `+${wi.atkMod}` : wi.atkMod) : ''}</div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    );
+                                                })}
+                                            </div>
+                                        </div>
+                                    )}
+
+                                    {/* Spells - clickable with tooltip */}
                                     {npc.spells && npc.spells.length > 0 && (
                                         <div>
-                                            <h3 className="text-[10px] font-black text-gray-500 uppercase tracking-widest mb-3 flex items-center gap-2">
-                                                <span className="h-px flex-1 bg-gray-800"></span> ✨ Büyüler ({npc.spells.length}) <span className="h-px flex-1 bg-gray-800"></span>
+                                            <h3 className="text-[10px] font-black text-gray-500 uppercase tracking-widest mb-2.5 flex items-center gap-2">
+                                                <span className="h-px flex-1 bg-gray-800"></span> ✨ Büyüler ({npc.spells.length}) — tıkla detay gör <span className="h-px flex-1 bg-gray-800"></span>
                                             </h3>
-                                            <div className="flex flex-wrap gap-2">
-                                                {npc.spells.map((spellName: string) => (
-                                                    <span key={spellName} className="px-3 py-1.5 bg-violet-900/20 border border-violet-700/40 text-violet-300 text-xs font-bold rounded-xl hover:bg-violet-900/40 hover:border-violet-500/60 transition-all cursor-default">
-                                                        {spellName}
-                                                    </span>
-                                                ))}
+                                            <div className="flex flex-wrap gap-1.5">
+                                                {npc.spells.map((spellName: string) => {
+                                                    const detail = npcSpellDetails[spellName];
+                                                    const hasDetail = !!detail;
+                                                    return (
+                                                        <button
+                                                            key={spellName}
+                                                            onClick={() => setSelectedNpcSpell(selectedNpcSpell?.name === spellName ? null : (detail || { name: spellName }))}
+                                                            className={`px-3 py-1.5 border text-xs font-bold rounded-xl transition-all ${hasDetail ? 'bg-violet-900/20 border-violet-700/40 text-violet-300 hover:bg-violet-800/40 hover:border-violet-500 cursor-pointer' : 'bg-gray-900/40 border-gray-700/30 text-gray-500 cursor-default'} ${selectedNpcSpell?.name === spellName ? 'ring-2 ring-violet-400 bg-violet-800/40' : ''}`}
+                                                        >
+                                                            {spellName}
+                                                            {detail?.level_int !== undefined && <span className="ml-1 text-[9px] text-violet-500 font-black">{detail.level_int === 0 ? 'C' : `L${detail.level_int}`}</span>}
+                                                        </button>
+                                                    );
+                                                })}
                                             </div>
+
+                                            {/* Spell Detail Popup */}
+                                            {selectedNpcSpell && (
+                                                <div className="mt-3 bg-gray-900 border border-violet-700/50 rounded-2xl p-4 shadow-[0_0_30px_rgba(139,92,246,0.15)]">
+                                                    <div className="flex justify-between items-start mb-3">
+                                                        <div>
+                                                            <h4 className="text-lg font-black text-violet-300 leading-none">{selectedNpcSpell.name}</h4>
+                                                            <p className="text-[11px] text-gray-500 font-bold mt-1 uppercase tracking-wider">
+                                                                {selectedNpcSpell.level || 'Cantrip'} {selectedNpcSpell.school ? `· ${selectedNpcSpell.school}` : ''}{selectedNpcSpell.ritual ? ' · Ritual' : ''}{selectedNpcSpell.concentration ? ' · Concentration' : ''}
+                                                            </p>
+                                                        </div>
+                                                        <button onClick={() => setSelectedNpcSpell(null)} className="text-gray-600 hover:text-gray-300 text-lg font-black ml-3">✕</button>
+                                                    </div>
+                                                    <div className="grid grid-cols-2 gap-2 mb-3 text-[11px]">
+                                                        {selectedNpcSpell.time && <div className="bg-gray-800/60 rounded-lg px-2 py-1.5"><span className="text-gray-500 font-bold">Casting: </span><span className="text-gray-200 font-bold">{selectedNpcSpell.time}</span></div>}
+                                                        {selectedNpcSpell.range && <div className="bg-gray-800/60 rounded-lg px-2 py-1.5"><span className="text-gray-500 font-bold">Range: </span><span className="text-gray-200 font-bold">{selectedNpcSpell.range}</span></div>}
+                                                        {selectedNpcSpell.duration && <div className="bg-gray-800/60 rounded-lg px-2 py-1.5"><span className="text-gray-500 font-bold">Duration: </span><span className="text-gray-200 font-bold">{selectedNpcSpell.duration}</span></div>}
+                                                        {selectedNpcSpell.components && <div className="bg-gray-800/60 rounded-lg px-2 py-1.5"><span className="text-gray-500 font-bold">Components: </span><span className="text-gray-200 font-bold">{selectedNpcSpell.components}</span></div>}
+                                                    </div>
+                                                    {selectedNpcSpell.desc && (
+                                                        <p className="text-xs text-gray-400 leading-relaxed max-h-40 overflow-y-auto">{selectedNpcSpell.desc}</p>
+                                                    )}
+                                                    {selectedNpcSpell.higher_level && (
+                                                        <div className="mt-2 p-2 bg-violet-950/30 border border-violet-800/30 rounded-lg">
+                                                            <span className="text-[10px] font-black text-violet-400 uppercase">Higher Level: </span>
+                                                            <span className="text-[11px] text-gray-400">{selectedNpcSpell.higher_level}</span>
+                                                        </div>
+                                                    )}
+                                                    {!selectedNpcSpell.desc && (
+                                                        <p className="text-xs text-gray-600 italic">Bu büyüye ait açıklama veritabanında bulunamadı.</p>
+                                                    )}
+                                                </div>
+                                            )}
                                         </div>
                                     )}
 
                                     {/* Feats */}
                                     {npc.feats && npc.feats.length > 0 && (
                                         <div>
-                                            <h3 className="text-[10px] font-black text-gray-500 uppercase tracking-widest mb-3 flex items-center gap-2">
-                                                <span className="h-px flex-1 bg-gray-800"></span> 🏆 Yetenekler (Feats) <span className="h-px flex-1 bg-gray-800"></span>
+                                            <h3 className="text-[10px] font-black text-gray-500 uppercase tracking-widest mb-2.5 flex items-center gap-2">
+                                                <span className="h-px flex-1 bg-gray-800"></span> 🏆 Yetenekler <span className="h-px flex-1 bg-gray-800"></span>
                                             </h3>
-                                            <div className="flex flex-wrap gap-2">
+                                            <div className="flex flex-wrap gap-1.5">
                                                 {npc.feats.map((feat: string) => (
-                                                    <span key={feat} className="px-3 py-1.5 bg-amber-900/20 border border-amber-700/40 text-amber-300 text-xs font-bold rounded-xl">
-                                                        {feat}
-                                                    </span>
+                                                    <span key={feat} className="px-2.5 py-1.5 bg-amber-900/20 border border-amber-700/40 text-amber-300 text-xs font-bold rounded-xl">{feat}</span>
                                                 ))}
                                             </div>
                                         </div>
@@ -3102,14 +3248,12 @@ export default function DMDashboard() {
                                     {/* Skills */}
                                     {npc.skillProfs && npc.skillProfs.length > 0 && (
                                         <div>
-                                            <h3 className="text-[10px] font-black text-gray-500 uppercase tracking-widest mb-3 flex items-center gap-2">
-                                                <span className="h-px flex-1 bg-gray-800"></span> 🎯 Yekinlikler <span className="h-px flex-1 bg-gray-800"></span>
+                                            <h3 className="text-[10px] font-black text-gray-500 uppercase tracking-widest mb-2.5 flex items-center gap-2">
+                                                <span className="h-px flex-1 bg-gray-800"></span> 🎯 Yekinlik Proficiencies <span className="h-px flex-1 bg-gray-800"></span>
                                             </h3>
                                             <div className="flex flex-wrap gap-1.5">
                                                 {npc.skillProfs.map((skill: string) => (
-                                                    <span key={skill} className="px-2 py-1 bg-cyan-900/20 border border-cyan-700/40 text-cyan-300 text-[11px] font-bold rounded-lg">
-                                                        {skill}
-                                                    </span>
+                                                    <span key={skill} className="px-2 py-1 bg-cyan-900/20 border border-cyan-700/40 text-cyan-300 text-[11px] font-bold rounded-lg">{skill}</span>
                                                 ))}
                                             </div>
                                         </div>
@@ -3118,15 +3262,32 @@ export default function DMDashboard() {
                                     {/* Inventory */}
                                     {npc.inventory && npc.inventory.length > 0 && (
                                         <div>
-                                            <h3 className="text-[10px] font-black text-gray-500 uppercase tracking-widest mb-3 flex items-center gap-2">
-                                                <span className="h-px flex-1 bg-gray-800"></span> ⚔️ Envanter <span className="h-px flex-1 bg-gray-800"></span>
+                                            <h3 className="text-[10px] font-black text-gray-500 uppercase tracking-widest mb-2.5 flex items-center gap-2">
+                                                <span className="h-px flex-1 bg-gray-800"></span> 🎒 Envanter <span className="h-px flex-1 bg-gray-800"></span>
                                             </h3>
-                                            <div className="space-y-1.5">
+                                            <div className="grid grid-cols-2 gap-1.5">
                                                 {npc.inventory.map((item: any, idx: number) => (
                                                     <div key={idx} className="flex items-center justify-between bg-gray-900/40 border border-gray-800/60 rounded-xl px-3 py-2">
-                                                        <span className="text-sm font-bold text-gray-200">{item.name || item}</span>
-                                                        {item.qty && item.qty > 1 && <span className="text-xs text-gray-500 font-bold">x{item.qty}</span>}
+                                                        <div className="min-w-0">
+                                                            <span className="text-xs font-bold text-gray-200 truncate block">{item.name || item}</span>
+                                                            {item.type && <span className="text-[10px] text-gray-600">{item.type}</span>}
+                                                        </div>
+                                                        {item.qty && item.qty > 1 && <span className="text-xs text-gray-500 font-bold flex-shrink-0 ml-1">x{item.qty}</span>}
                                                     </div>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    )}
+
+                                    {/* Conditions */}
+                                    {npc.conditions && npc.conditions.length > 0 && (
+                                        <div>
+                                            <h3 className="text-[10px] font-black text-gray-500 uppercase tracking-widest mb-2.5 flex items-center gap-2">
+                                                <span className="h-px flex-1 bg-gray-800"></span> 🌀 Aktif Condition'lar <span className="h-px flex-1 bg-gray-800"></span>
+                                            </h3>
+                                            <div className="flex flex-wrap gap-1.5">
+                                                {npc.conditions.map((c: string) => (
+                                                    <span key={c} className="px-2.5 py-1 bg-red-900/20 border border-red-700/30 text-red-300 text-xs font-bold rounded-full">{c}</span>
                                                 ))}
                                             </div>
                                         </div>
@@ -3135,31 +3296,31 @@ export default function DMDashboard() {
                                     {/* Backstory */}
                                     {npc.backstory && (
                                         <div>
-                                            <h3 className="text-[10px] font-black text-gray-500 uppercase tracking-widest mb-3 flex items-center gap-2">
+                                            <h3 className="text-[10px] font-black text-gray-500 uppercase tracking-widest mb-2.5 flex items-center gap-2">
                                                 <span className="h-px flex-1 bg-gray-800"></span> 📖 Geçmiş <span className="h-px flex-1 bg-gray-800"></span>
                                             </h3>
-                                            <p className="text-sm text-gray-400 leading-relaxed italic bg-gray-900/40 rounded-xl p-4 border border-gray-800/60">{npc.backstory}</p>
+                                            <p className="text-xs text-gray-400 leading-relaxed italic bg-gray-900/40 rounded-xl p-4 border border-gray-800/60">{npc.backstory}</p>
                                         </div>
                                     )}
 
                                     {/* DM Notes */}
                                     {npc.dmNotes && (
                                         <div className="bg-red-950/20 border border-red-700/30 rounded-xl p-4">
-                                            <h3 className="text-[10px] font-black text-red-400 uppercase tracking-widest mb-2 flex items-center gap-2">👁️ DM Gizli Notları</h3>
-                                            <p className="text-sm text-red-300/80 leading-relaxed italic">{npc.dmNotes}</p>
+                                            <h3 className="text-[10px] font-black text-red-400 uppercase tracking-widest mb-2">👁️ DM Gizli Notları</h3>
+                                            <p className="text-xs text-red-300/80 leading-relaxed italic">{npc.dmNotes}</p>
                                         </div>
                                     )}
 
                                     {/* Actions */}
-                                    <div className="flex gap-3 pt-2">
+                                    <div className="flex gap-3 pt-1 pb-4">
                                         <button
-                                            onClick={() => { openEditCharModal(npc._id); setViewingNpcSheetData(null); }}
+                                            onClick={() => { openEditCharModal(npc._id); setViewingNpcSheetData(null); setSelectedNpcSpell(null); }}
                                             className="flex-1 py-3 bg-blue-900/30 border border-blue-700/50 text-blue-300 font-black text-xs uppercase tracking-wider rounded-xl hover:bg-blue-800/50 transition-all"
                                         >
                                             ⚙️ Düzenle
                                         </button>
                                         <button
-                                            onClick={() => setViewingNpcSheetData(null)}
+                                            onClick={() => { setViewingNpcSheetData(null); setSelectedNpcSpell(null); }}
                                             className="flex-1 py-3 bg-gray-800/50 border border-gray-700/50 text-gray-400 font-black text-xs uppercase tracking-wider rounded-xl hover:bg-gray-700/50 transition-all"
                                         >
                                             ✕ Kapat
