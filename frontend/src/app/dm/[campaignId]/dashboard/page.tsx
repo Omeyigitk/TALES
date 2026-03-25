@@ -1800,12 +1800,12 @@ export default function DMDashboard() {
                                                                     ))}
                                                                 </div>
 
-                                                                {/* Known Spells */}
-                                                                {lnpc.knownSpells && lnpc.knownSpells.length > 0 && (
+                                                                {/* Spells (from character schema .spells field) */}
+                                                                {lnpc.spells && lnpc.spells.length > 0 && (
                                                                     <div className="mb-3">
-                                                                        <div className="text-[10px] font-black text-violet-400 uppercase tracking-widest mb-1.5">✨ Bilinen Büyüler</div>
+                                                                        <div className="text-[10px] font-black text-violet-400 uppercase tracking-widest mb-1.5">✨ Büyüler ({lnpc.spells.length})</div>
                                                                         <div className="flex flex-wrap gap-1">
-                                                                            {lnpc.knownSpells.map((spellName: string) => (
+                                                                            {lnpc.spells.map((spellName: string) => (
                                                                                 <span key={spellName} className="text-[10px] bg-violet-900/30 border border-violet-700/50 text-violet-300 px-1.5 py-0.5 rounded font-bold">
                                                                                     {spellName}
                                                                                 </span>
@@ -1813,18 +1813,17 @@ export default function DMDashboard() {
                                                                         </div>
                                                                     </div>
                                                                 )}
-                                                                {lnpc.preparedSpells && lnpc.preparedSpells.length > 0 && (
-                                                                    <div className="mb-3">
-                                                                        <div className="text-[10px] font-black text-blue-400 uppercase tracking-widest mb-1.5">📖 Hazırlanmış Büyüler</div>
-                                                                        <div className="flex flex-wrap gap-1">
-                                                                            {lnpc.preparedSpells.map((spellName: string) => (
-                                                                                <span key={spellName} className="text-[10px] bg-blue-900/30 border border-blue-700/50 text-blue-300 px-1.5 py-0.5 rounded font-bold">
-                                                                                    {spellName}
-                                                                                </span>
-                                                                            ))}
-                                                                        </div>
-                                                                    </div>
-                                                                )}
+                                                                {/* View Full Sheet Button */}
+                                                                <button
+                                                                    onClick={() => {
+                                                                        axios.get(`${API_URL}/api/characters/${lnpc._id}`, { headers: { 'Authorization': `Bearer ${token}` } })
+                                                                            .then(res => setViewingNpcSheetData(res.data))
+                                                                            .catch(err => console.error('Sheet Error:', err));
+                                                                    }}
+                                                                    className="w-full py-1.5 mb-2 rounded-lg text-xs font-black uppercase tracking-wider transition-all border bg-violet-900/20 border-violet-700/50 text-violet-300 hover:bg-violet-700 hover:text-white"
+                                                                >
+                                                                    📋 Tam Karakteri Görüntüle
+                                                                </button>
 
                                                                 {/* Add to combat button */}
                                                                 <button onClick={addNpcToEncounter}
@@ -2882,47 +2881,58 @@ export default function DMDashboard() {
                                     )}
 
                                     {/* Tokens */}
-                                    {(mapData?.tokens || []).map((token) => {
-                                        if (!token) return null;
-                                        const tSizeRaw = token.size || 1;
+                                    {(mapData?.tokens || []).map((mapToken) => {
+                                        if (!mapToken) return null;
+                                        const tSizeRaw = mapToken.size || 1;
                                         const pxSize = tSizeRaw * 56;
                                         const pxOffset = pxSize / 2;
+                                        // Find if this token corresponds to a leveled NPC in the encounter
+                                        const linkedCombatant = activeCombatants.find(c => c._isLeveledNpc && c.id === mapToken.entityId);
                                         
                                         return (
                                             <div
-                                                key={token.id}
+                                                key={mapToken.id}
                                                 draggable
-                                                onDragStart={() => setIsDraggingToken(token.id)}
+                                                onDragStart={() => setIsDraggingToken(mapToken.id)}
+                                                onClick={(e) => {
+                                                    // If this token is linked to a leveled NPC, open its sheet
+                                                    if (linkedCombatant?._npcId) {
+                                                        e.stopPropagation();
+                                                        axios.get(`${API_URL}/api/characters/${linkedCombatant._npcId}`, { headers: { 'Authorization': `Bearer ${token}` } })
+                                                            .then(res => setViewingNpcSheetData(res.data))
+                                                            .catch(err => console.error('Sheet Error:', err));
+                                                    }
+                                                }}
                                                 onWheel={(e) => {
                                                     e.stopPropagation();
                                                     e.preventDefault();
                                                     const deltaSize = e.deltaY > 0 ? -0.25 : 0.25;
                                                     const newTSize = Math.max(0.5, Math.min(6, tSizeRaw + deltaSize));
-                                                    const newTokens = mapData.tokens.map(t => t && t.id === token.id ? { ...t, size: newTSize } : t);
+                                                    const newTokens = mapData.tokens.map(t => t && t.id === mapToken.id ? { ...t, size: newTSize } : t);
                                                     const newMap = { ...mapData, tokens: newTokens };
                                                     setMapData(newMap);
                                                     socket?.emit('update_map', { campaignId, mapData: newMap });
                                                 }}
-                                                className="absolute rounded-full border-[3px] border-white/90 shadow-[0_15px_35px_rgba(0,0,0,0.7)] flex items-center justify-center font-black cursor-grab active:cursor-grabbing select-none group transition-all"
+                                                className={`absolute rounded-full border-[3px] border-white/90 shadow-[0_15px_35px_rgba(0,0,0,0.7)] flex items-center justify-center font-black select-none group transition-all ${linkedCombatant ? 'cursor-pointer ring-2 ring-violet-400/60 ring-offset-2 ring-offset-transparent' : 'cursor-grab active:cursor-grabbing'}`}
                                                 style={{
                                                     width: pxSize,
                                                     height: pxSize,
-                                                    left: (token.x || 0) - pxOffset,
-                                                    top: (token.y || 0) - pxOffset,
-                                                    backgroundColor: token.color || '#ef4444',
-                                                    boxShadow: `0 0 25px ${token.color || '#ef4444'}66, 0 10px 40px rgba(0,0,0,0.8), inset 0 0 10px rgba(0,0,0,0.3)`,
+                                                    left: (mapToken.x || 0) - pxOffset,
+                                                    top: (mapToken.y || 0) - pxOffset,
+                                                    backgroundColor: mapToken.color || '#ef4444',
+                                                    boxShadow: `0 0 25px ${mapToken.color || '#ef4444'}66, 0 10px 40px rgba(0,0,0,0.8), inset 0 0 10px rgba(0,0,0,0.3)`,
                                                     zIndex: 50
                                                 }}
                                             >
                                                 {/* Token Glow Effect */}
-                                                <div className="absolute inset-0 rounded-full animate-pulse opacity-40 blur-md pointer-events-none" style={{ backgroundColor: token.color }}></div>
+                                                <div className="absolute inset-0 rounded-full animate-pulse opacity-40 blur-md pointer-events-none" style={{ backgroundColor: mapToken.color }}></div>
                                                 
                                                 <div className="absolute -top-10 left-1/2 -translate-x-1/2 bg-slate-950 border border-slate-700 px-4 py-1.5 rounded-xl text-white text-[10px] font-bold opacity-0 group-hover:opacity-100 whitespace-nowrap transition-all shadow-2xl backdrop-blur-xl scale-90 group-hover:scale-100 group-hover:-translate-y-1">
-                                                    {token.name || '??'}
+                                                    {mapToken.name || '??'}
                                                     <div className="absolute bottom-[-4px] left-1/2 -translate-x-1/2 w-2 h-2 bg-slate-950 border-r border-b border-slate-700 rotate-45"></div>
                                                 </div>
                                                 <div className="text-white text-center leading-none uppercase tracking-tighter drop-shadow-2xl z-10" style={{ fontSize: `${pxSize * 0.3}px`}}>
-                                                    {(token.name || '??').substring(0, 2)}
+                                                    {(mapToken.name || '??').substring(0, 2)}
                                                 </div>
                                                 
                                                 {/* Edit Size Buttons */}
@@ -2930,14 +2940,14 @@ export default function DMDashboard() {
                                                     <button onClick={(e) => {
                                                         e.stopPropagation();
                                                         const newTSize = Math.max(0.5, tSizeRaw - 0.25);
-                                                        const newMap = { ...mapData, tokens: mapData.tokens.map(t => t && t.id === token.id ? { ...t, size: newTSize } : t) };
+                                                        const newMap = { ...mapData, tokens: mapData.tokens.map(t => t && t.id === mapToken.id ? { ...t, size: newTSize } : t) };
                                                         setMapData(newMap);
                                                         socket?.emit('update_map', { campaignId, mapData: newMap });
                                                     }} className="w-6 h-6 bg-slate-800 hover:bg-slate-700 text-white rounded-full flex items-center justify-center text-xs font-black shadow-lg border border-slate-600 cursor-pointer transition">-</button>
                                                     <button onClick={(e) => {
                                                         e.stopPropagation();
                                                         const newTSize = Math.min(6, tSizeRaw + 0.25);
-                                                        const newMap = { ...mapData, tokens: mapData.tokens.map(t => t && t.id === token.id ? { ...t, size: newTSize } : t) };
+                                                        const newMap = { ...mapData, tokens: mapData.tokens.map(t => t && t.id === mapToken.id ? { ...t, size: newTSize } : t) };
                                                         setMapData(newMap);
                                                         socket?.emit('update_map', { campaignId, mapData: newMap });
                                                     }} className="w-6 h-6 bg-slate-800 hover:bg-slate-700 text-white rounded-full flex items-center justify-center text-xs font-black shadow-lg border border-slate-600 cursor-pointer transition">+</button>
@@ -2946,7 +2956,7 @@ export default function DMDashboard() {
                                                 <button
                                                     onClick={(e) => {
                                                         e.stopPropagation();
-                                                        const newTokens = mapData.tokens.filter(t => t && t.id !== token.id);
+                                                        const newTokens = mapData.tokens.filter(t => t && t.id !== mapToken.id);
                                                         const newMap = { ...mapData, tokens: newTokens };
                                                         setMapData(newMap);
                                                         socket?.emit('update_map', { campaignId, mapData: newMap });
@@ -2976,6 +2986,190 @@ export default function DMDashboard() {
                         </div>
                     )
                 }
+
+                {/* --- NPC CHARACTER SHEET MODAL --- */}
+                {viewingNpcSheetData && (() => {
+                    const npc = viewingNpcSheetData;
+                    const mod = (v: number) => Math.floor((v - 10) / 2);
+                    const fmtMod = (v: number) => { const m = mod(v); return (m >= 0 ? '+' : '') + m; };
+                    const stats: [string, string][] = [['STR', '💪'], ['DEX', '🏃'], ['CON', '❤️'], ['INT', '🧠'], ['WIS', '👁️'], ['CHA', '✨']];
+                    return (
+                        <div
+                            className="fixed inset-0 bg-black/70 backdrop-blur-sm z-[90] flex items-stretch justify-end"
+                            onClick={() => setViewingNpcSheetData(null)}
+                        >
+                            <div
+                                className="w-full max-w-xl bg-gray-950 border-l border-gray-700/50 h-full flex flex-col shadow-[0_0_60px_rgba(0,0,0,0.8)] animate-in slide-in-from-right duration-300 overflow-hidden"
+                                onClick={e => e.stopPropagation()}
+                            >
+                                {/* Header */}
+                                <div className="relative bg-gradient-to-br from-gray-900 via-gray-900 to-gray-800 border-b border-gray-700/50 p-6 flex-shrink-0 overflow-hidden">
+                                    <div className="absolute top-0 right-0 w-48 h-48 bg-violet-500/5 blur-3xl rounded-full pointer-events-none" />
+                                    <div className="relative z-10">
+                                        <button
+                                            onClick={() => setViewingNpcSheetData(null)}
+                                            className="absolute top-0 right-0 w-10 h-10 rounded-xl flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/10 transition-all text-xl"
+                                        >✕</button>
+                                        <div className="flex items-start gap-5 pr-10">
+                                            <div className={`w-16 h-16 rounded-2xl flex items-center justify-center text-3xl shadow-2xl flex-shrink-0 border ${npc.relationship === 'Dost' ? 'bg-emerald-900/40 border-emerald-500/40' : npc.relationship === 'Düşman' ? 'bg-red-900/40 border-red-500/40' : 'bg-yellow-900/30 border-yellow-500/30'}`}>
+                                                {npc.relationship === 'Dost' ? '🟩' : npc.relationship === 'Düşman' ? '🟥' : '🟨'}
+                                            </div>
+                                            <div>
+                                                <h2 className="text-3xl font-black text-white tracking-tight leading-none">{npc.name}</h2>
+                                                <p className="text-sm font-bold text-gray-400 mt-1 uppercase tracking-widest">
+                                                    {npc.raceRef?.name} · {npc.classRef?.name} {npc.subclass ? `— ${npc.subclass}` : ''} · Lv.{npc.level}
+                                                </p>
+                                                {npc.alignment && <p className="text-xs text-violet-400 font-bold mt-1">{npc.alignment}</p>}
+                                                <div className="flex gap-2 mt-2 flex-wrap">
+                                                    {npc.relationship && <span className={`text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest ${npc.relationship === 'Dost' ? 'bg-emerald-700 text-white' : npc.relationship === 'Düşman' ? 'bg-red-700 text-white' : 'bg-yellow-700 text-white'}`}>{npc.relationship}</span>}
+                                                    {npc.isNpc && <span className="text-[10px] font-black px-3 py-1 rounded-full uppercase tracking-widest bg-violet-700/60 text-violet-200 border border-violet-500/30">NPC</span>}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {/* Core Stats Bar */}
+                                        <div className="grid grid-cols-3 gap-2 mt-5">
+                                            <div className="bg-red-950/30 border border-red-700/30 rounded-xl p-3 flex flex-col items-center">
+                                                <span className="text-[9px] text-red-400 font-black uppercase tracking-widest mb-1">HP</span>
+                                                <span className="text-2xl font-black text-red-300">{npc.currentHp ?? npc.maxHp ?? '—'}</span>
+                                                <span className="text-[10px] text-red-700 font-bold">/ {npc.maxHp ?? '—'}</span>
+                                            </div>
+                                            <div className="bg-blue-950/30 border border-blue-700/30 rounded-xl p-3 flex flex-col items-center">
+                                                <span className="text-[9px] text-blue-400 font-black uppercase tracking-widest mb-1">AC</span>
+                                                <span className="text-2xl font-black text-blue-300">{npc.ac ?? '—'}</span>
+                                            </div>
+                                            <div className="bg-green-950/30 border border-green-700/30 rounded-xl p-3 flex flex-col items-center">
+                                                <span className="text-[9px] text-green-400 font-black uppercase tracking-widest mb-1">SPD</span>
+                                                <span className="text-2xl font-black text-green-300">{npc.speed ?? '30'}ft</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {/* Body - Scrollable */}
+                                <div className="flex-1 overflow-y-auto p-6 space-y-6">
+
+                                    {/* Ability Scores */}
+                                    {npc.stats && (
+                                        <div>
+                                            <h3 className="text-[10px] font-black text-gray-500 uppercase tracking-widest mb-3 flex items-center gap-2">
+                                                <span className="h-px flex-1 bg-gray-800"></span> Ability Scores <span className="h-px flex-1 bg-gray-800"></span>
+                                            </h3>
+                                            <div className="grid grid-cols-6 gap-2">
+                                                {stats.map(([stat, icon]) => (
+                                                    <div key={stat} className="bg-gray-900/60 border border-gray-700/50 rounded-xl p-2 flex flex-col items-center group hover:border-gray-500 transition-all">
+                                                        <span className="text-lg">{icon}</span>
+                                                        <span className="text-[8px] text-gray-500 font-black uppercase tracking-widest mt-0.5">{stat}</span>
+                                                        <span className="text-lg font-black text-white">{npc.stats[stat] ?? '—'}</span>
+                                                        <span className={`text-[11px] font-black ${mod(npc.stats[stat] ?? 10) >= 0 ? 'text-green-400' : 'text-red-400'}`}>{fmtMod(npc.stats[stat] ?? 10)}</span>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    )}
+
+                                    {/* Spells */}
+                                    {npc.spells && npc.spells.length > 0 && (
+                                        <div>
+                                            <h3 className="text-[10px] font-black text-gray-500 uppercase tracking-widest mb-3 flex items-center gap-2">
+                                                <span className="h-px flex-1 bg-gray-800"></span> ✨ Büyüler ({npc.spells.length}) <span className="h-px flex-1 bg-gray-800"></span>
+                                            </h3>
+                                            <div className="flex flex-wrap gap-2">
+                                                {npc.spells.map((spellName: string) => (
+                                                    <span key={spellName} className="px-3 py-1.5 bg-violet-900/20 border border-violet-700/40 text-violet-300 text-xs font-bold rounded-xl hover:bg-violet-900/40 hover:border-violet-500/60 transition-all cursor-default">
+                                                        {spellName}
+                                                    </span>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    )}
+
+                                    {/* Feats */}
+                                    {npc.feats && npc.feats.length > 0 && (
+                                        <div>
+                                            <h3 className="text-[10px] font-black text-gray-500 uppercase tracking-widest mb-3 flex items-center gap-2">
+                                                <span className="h-px flex-1 bg-gray-800"></span> 🏆 Yetenekler (Feats) <span className="h-px flex-1 bg-gray-800"></span>
+                                            </h3>
+                                            <div className="flex flex-wrap gap-2">
+                                                {npc.feats.map((feat: string) => (
+                                                    <span key={feat} className="px-3 py-1.5 bg-amber-900/20 border border-amber-700/40 text-amber-300 text-xs font-bold rounded-xl">
+                                                        {feat}
+                                                    </span>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    )}
+
+                                    {/* Skills */}
+                                    {npc.skillProfs && npc.skillProfs.length > 0 && (
+                                        <div>
+                                            <h3 className="text-[10px] font-black text-gray-500 uppercase tracking-widest mb-3 flex items-center gap-2">
+                                                <span className="h-px flex-1 bg-gray-800"></span> 🎯 Yekinlikler <span className="h-px flex-1 bg-gray-800"></span>
+                                            </h3>
+                                            <div className="flex flex-wrap gap-1.5">
+                                                {npc.skillProfs.map((skill: string) => (
+                                                    <span key={skill} className="px-2 py-1 bg-cyan-900/20 border border-cyan-700/40 text-cyan-300 text-[11px] font-bold rounded-lg">
+                                                        {skill}
+                                                    </span>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    )}
+
+                                    {/* Inventory */}
+                                    {npc.inventory && npc.inventory.length > 0 && (
+                                        <div>
+                                            <h3 className="text-[10px] font-black text-gray-500 uppercase tracking-widest mb-3 flex items-center gap-2">
+                                                <span className="h-px flex-1 bg-gray-800"></span> ⚔️ Envanter <span className="h-px flex-1 bg-gray-800"></span>
+                                            </h3>
+                                            <div className="space-y-1.5">
+                                                {npc.inventory.map((item: any, idx: number) => (
+                                                    <div key={idx} className="flex items-center justify-between bg-gray-900/40 border border-gray-800/60 rounded-xl px-3 py-2">
+                                                        <span className="text-sm font-bold text-gray-200">{item.name || item}</span>
+                                                        {item.qty && item.qty > 1 && <span className="text-xs text-gray-500 font-bold">x{item.qty}</span>}
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    )}
+
+                                    {/* Backstory */}
+                                    {npc.backstory && (
+                                        <div>
+                                            <h3 className="text-[10px] font-black text-gray-500 uppercase tracking-widest mb-3 flex items-center gap-2">
+                                                <span className="h-px flex-1 bg-gray-800"></span> 📖 Geçmiş <span className="h-px flex-1 bg-gray-800"></span>
+                                            </h3>
+                                            <p className="text-sm text-gray-400 leading-relaxed italic bg-gray-900/40 rounded-xl p-4 border border-gray-800/60">{npc.backstory}</p>
+                                        </div>
+                                    )}
+
+                                    {/* DM Notes */}
+                                    {npc.dmNotes && (
+                                        <div className="bg-red-950/20 border border-red-700/30 rounded-xl p-4">
+                                            <h3 className="text-[10px] font-black text-red-400 uppercase tracking-widest mb-2 flex items-center gap-2">👁️ DM Gizli Notları</h3>
+                                            <p className="text-sm text-red-300/80 leading-relaxed italic">{npc.dmNotes}</p>
+                                        </div>
+                                    )}
+
+                                    {/* Actions */}
+                                    <div className="flex gap-3 pt-2">
+                                        <button
+                                            onClick={() => { openEditCharModal(npc._id); setViewingNpcSheetData(null); }}
+                                            className="flex-1 py-3 bg-blue-900/30 border border-blue-700/50 text-blue-300 font-black text-xs uppercase tracking-wider rounded-xl hover:bg-blue-800/50 transition-all"
+                                        >
+                                            ⚙️ Düzenle
+                                        </button>
+                                        <button
+                                            onClick={() => setViewingNpcSheetData(null)}
+                                            className="flex-1 py-3 bg-gray-800/50 border border-gray-700/50 text-gray-400 font-black text-xs uppercase tracking-wider rounded-xl hover:bg-gray-700/50 transition-all"
+                                        >
+                                            ✕ Kapat
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    );
+                })()}
 
                 {/* --- PET / COMPANION MODAL --- */}
                 {
