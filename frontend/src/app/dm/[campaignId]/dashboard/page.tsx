@@ -7,6 +7,7 @@ import { useCampaignSocket } from "../../../../../useCampaignSocket";
 import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
 import { useDialog } from "@/context/DialogContext";
+import { getSpellSlotTotals } from "../../../player/[campaignId]/combat_data";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
 
@@ -157,6 +158,21 @@ export default function DMDashboard() {
             })
             .catch(err => console.error('Spell fetch error:', err));
     }, [viewingNpcSheetData, token]);
+
+    const updateNpcSpellSlots = async (level: string, used: number) => {
+        if (!viewingNpcSheetData?._id) return;
+        const newSlots = { ...(viewingNpcSheetData.spellSlots || {}), [level]: used };
+        try {
+            const activeToken = token || (typeof window !== 'undefined' ? localStorage.getItem('token') : null);
+            await axios.put(`${API_URL}/api/characters/${viewingNpcSheetData._id}`, { spellSlots: newSlots }, { headers: { 'Authorization': `Bearer ${activeToken}` } });
+            setViewingNpcSheetData({ ...viewingNpcSheetData, spellSlots: newSlots });
+            if (socket) {
+                socket.emit('update_character_stat', { campaignId, characterId: viewingNpcSheetData._id, stat: 'spellSlots', value: newSlots });
+            }
+        } catch (err) {
+            console.error('Spell slot update error:', err);
+        }
+    };
 
     // New Features Modals
     const [isQuestMenuOpen, setIsQuestMenuOpen] = useState(false);
@@ -3104,8 +3120,20 @@ export default function DMDashboard() {
                                                 <span className="text-xl font-black text-green-300">{npc.speed ?? 30}ft</span>
                                             </div>
                                             <div className="bg-yellow-950/30 border border-yellow-700/30 rounded-xl p-2.5 flex flex-col items-center">
-                                                <span className="text-[9px] text-yellow-400 font-black uppercase tracking-widest">Hit Die</span>
-                                                <span className="text-xl font-black text-yellow-300">{lvl}d{npc.classRef?.hitDie || 8}</span>
+                                                <span className="text-[9px] text-yellow-400 font-black uppercase tracking-widest">Hit Dice</span>
+                                                <span className="text-xl font-black text-yellow-300">
+                                                    {lvl}{(() => {
+                                                        const hd = String(npc.classRef?.hit_die || npc.classRef?.hitDie || '').toLowerCase();
+                                                        if (hd.includes('d')) return hd.substring(hd.indexOf('d'));
+                                                        // Better fallback based on name if hit_die is missing or if it's a subclass
+                                                        const cn = (npc.classRef?.name || npc.subclass || '').toLowerCase();
+                                                        if (cn.includes('wizard') || cn.includes('sorcerer') || cn.includes('scribes')) return 'd6';
+                                                        if (cn.includes('bard') || cn.includes('cleric') || cn.includes('druid') || cn.includes('monk') || cn.includes('rogue') || cn.includes('warlock') || cn.includes('artificer')) return 'd8';
+                                                        if (cn.includes('fighter') || cn.includes('paladin') || cn.includes('ranger')) return 'd10';
+                                                        if (cn.includes('barbarian')) return 'd12';
+                                                        return 'd8';
+                                                    })()}
+                                                </span>
                                             </div>
                                         </div>
                                     </div>
@@ -3172,6 +3200,47 @@ export default function DMDashboard() {
                                             </div>
                                         </div>
                                     )}
+
+                                    {/* Spell Slots Tracking */}
+                                    {(() => {
+                                        const maxSlots = getSpellSlotTotals(npc.classRef?.name || '', npc.level || 1);
+                                        const hasSlots = maxSlots.some(s => s > 0);
+                                        if (!hasSlots) return null;
+                                        return (
+                                            <div className="bg-gray-900/40 border border-gray-800/60 rounded-2xl p-4 shadow-inner">
+                                                <h3 className="text-[10px] font-black text-gray-500 uppercase tracking-widest mb-4 flex items-center gap-2">
+                                                    <span className="h-px flex-1 bg-gray-800/50"></span> ✨ Büyü Slotları (Spell Slots) <span className="h-px flex-1 bg-gray-800/50"></span>
+                                                </h3>
+                                                <div className="grid grid-cols-2 gap-3">
+                                                    {maxSlots.map((total, idx) => {
+                                                        if (total === 0) return null;
+                                                        const level = idx + 1;
+                                                        const used = (npc.spellSlots?.[String(level)]) || 0;
+                                                        return (
+                                                            <div key={level} className="bg-gray-950/60 border border-gray-800/80 rounded-xl p-3 hover:border-violet-500/30 transition-colors">
+                                                                <div className="flex justify-between items-center mb-2">
+                                                                    <span className="text-[10px] font-black text-violet-400 uppercase tracking-widest">Seviye {level}</span>
+                                                                    <span className="text-[10px] font-bold text-gray-500 uppercase">Kalan: {total - used}/{total}</span>
+                                                                </div>
+                                                                <div className="flex flex-wrap gap-1.5">
+                                                                    {Array.from({ length: total }).map((_, i) => (
+                                                                        <button
+                                                                            key={i}
+                                                                            onClick={() => updateNpcSpellSlots(String(level), i < used ? i : i + 1)}
+                                                                            className={`w-5 h-5 rounded-md border-2 transition-all transform active:scale-90 ${i < used 
+                                                                                ? 'bg-gray-800 border-gray-700 text-gray-600 grayscale' 
+                                                                                : 'bg-gradient-to-br from-violet-600 to-indigo-700 border-violet-400 shadow-[0_0_10px_rgba(139,92,246,0.3)] hover:scale-110'}`}
+                                                                        >
+                                                                        </button>
+                                                                    ))}
+                                                                </div>
+                                                            </div>
+                                                        );
+                                                    })}
+                                                </div>
+                                            </div>
+                                        );
+                                    })()}
 
                                     {/* Spells - clickable with tooltip */}
                                     {npc.spells && npc.spells.length > 0 && (
