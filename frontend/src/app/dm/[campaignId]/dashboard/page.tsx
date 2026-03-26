@@ -83,11 +83,8 @@ export default function DMDashboard() {
     const [isGalleryOpen, setIsGalleryOpen] = useState(false);
     const [selectedImage, setSelectedImage] = useState<string | null>(null);
     const [isBackgroundGalleryOpen, setIsBackgroundGalleryOpen] = useState(false);
-    const [savedBackgrounds, setSavedBackgrounds] = useState<{ name: string, url: string }[]>([
-        { name: 'Dungeon', url: 'https://images.squarespace-cdn.com/content/v1/593e9232c534a5697e06a378/1566495638202-VUPY5M056T298C7SCSG5/Tavern_Grid.jpg' },
-        { name: 'Forest', url: 'https://i.pinimg.com/736x/8f/30/1c/8f301cc9388f8d6614144463690d5656.jpg' },
-        { name: 'City', url: 'https://2minutetabletop.com/wp-content/uploads/2021/05/Town-Square-Night-No-Props-44x32-Grid.jpg' },
-    ]);
+    const [savedBackgrounds, setSavedBackgrounds] = useState<{ name: string, url: string }[]>([]);
+
     const [bgUrlInput, setBgUrlInput] = useState('');
     const [expandedMonsterId, setExpandedMonsterId] = useState<string | null>(null);
     const [expandedCombatantId, setExpandedCombatantId] = useState<string | null>(null);

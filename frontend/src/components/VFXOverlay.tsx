@@ -9,11 +9,12 @@ interface EffectInstance {
     playerName?: string;
 }
 
-export const VFXOverlay: React.FC<{ 
+export const VFXOverlay = React.memo<{ 
     activeEffect: any, 
     conditions?: any[], 
     weather?: { type: string, types?: string[], severity: string, backgroundUrl?: string } 
-}> = ({ activeEffect, conditions = [], weather = { type: 'clear', types: ['clear'], severity: 'medium' } }) => {
+}>(({ activeEffect, conditions = [], weather = { type: 'clear', types: ['clear'], severity: 'medium' } }) => {
+
     const [queue, setQueue] = useState<EffectInstance[]>([]);
     const [lightnings, setLightnings] = useState<{ id: number, x: number, dur: number, fdur: number }[]>([]);
 
@@ -166,7 +167,7 @@ export const VFXOverlay: React.FC<{
         // ─ BLIZZARD ─
         if (type === 'blizzard') {
             const snowCount = weather.severity === 'heavy' ? 200 : 120;
-            const windCount = weather.severity === 'heavy' ? 20 : 10;
+            const windCount = weather.severity === 'heavy' ? 30 : 15; // More wind
             return (
                 <div key="blizzard" className={styles.weatherBlizzard}>
                     {Array.from({ length: snowCount }).map((_, i) => (
@@ -174,20 +175,22 @@ export const VFXOverlay: React.FC<{
                             left: `${Math.random() * 100}%`,
                             animationDelay: `${Math.random() * 4}s`,
                             animationDuration: `${1.5 + Math.random() * 3}s`,
-                            opacity: 0.6 + Math.random() * 0.4
-                        }} />
+                            opacity: 0.6 + Math.random() * 0.4,
+                            '--ss': `${0.5 + Math.random()}px`
+                        } as any} />
                     ))}
                     {Array.from({ length: windCount }).map((_, i) => (
                         <div key={`w${i}`} className={styles.blizzardWind} style={{
                             top: `${Math.random() * 100}%`,
-                            width: `${80 + Math.random() * 200}px`,
+                            width: `${120 + Math.random() * 300}px`, // Longer
                             animationDelay: `${Math.random() * 4}s`,
-                            animationDuration: `${0.5 + Math.random() * 1}s`
+                            animationDuration: `${0.4 + Math.random() * 0.8}s`
                         }} />
                     ))}
                 </div>
             );
         }
+
 
         // ─ EMBERS / VOLCANO ─
         if (type === 'embers') {
@@ -246,23 +249,46 @@ export const VFXOverlay: React.FC<{
 
         // ─ TORNADO ─
         if (type === 'tornado') {
-            const debrisCount = weather.severity === 'heavy' ? 80 : weather.severity === 'light' ? 30 : 50;
+            const debrisCount = weather.severity === 'heavy' ? 150 : 80;
+            const vortexCount = weather.severity === 'heavy' ? 40 : 20;
             return (
                 <div key="tornado" className={styles.weatherTornado}>
-                    <div className={styles.tornadoCore} />
-                    {Array.from({ length: debrisCount }).map((_, i) => (
-                        <div key={i} className={styles.tornadoDebris} style={{
-                            top: `${20 + Math.random() * 60}%`,
-                            left: `${30 + Math.random() * 40}%`,
-                            animationDelay: `${Math.random() * 4}s`,
-                            animationDuration: `${1.5 + Math.random() * 3}s`,
-                            '--tr': `${40 + Math.random() * 120}px`,
-                            '--ty': `${(Math.random() - 0.5) * 60}px`
+                    <div className={styles.tornadoDust} />
+                    <div className={styles.tornadoCore}>
+                        <div className={styles.tornadoInner} />
+                    </div>
+                    <div className={styles.tornadoOuter} />
+                    
+                    {/* Vortex Streaks around the Core */}
+                    {Array.from({ length: vortexCount }).map((_, i) => (
+                        <div key={`v${i}`} className={styles.tornadoVortexStreak} style={{
+                            bottom: `${Math.random() * 100}%`,
+                            left: '50%',
+                            width: `${100 + Math.random() * 200}px`,
+                            '--dur': `${0.3 + Math.random() * 0.5}s`,
+                            '--tr': `${100 + Math.random() * 200}px`
                         } as any} />
                     ))}
+
+                    {/* Debris */}
+                    {Array.from({ length: debrisCount }).map((_, i) => {
+                        const dur = 0.4 + Math.random() * 1.2;
+                        const tr = 80 + Math.random() * 400;
+                        return (
+                            <div key={i} className={styles.tornadoDebris} style={{
+                                top: `${Math.random() * 100}%`,
+                                left: `${50}%`,
+                                '--dur': `${dur}s`,
+                                '--tr': `${tr}px`,
+                                background: i % 2 === 0 ? '#333' : '#543'
+                            } as any} />
+                        );
+                    })}
                 </div>
             );
         }
+
+
 
         // ─ METEOR SHOWER ─
         if (type === 'meteor') {
@@ -356,8 +382,12 @@ export const VFXOverlay: React.FC<{
         return null;
     };
 
+    const isShaking = normalizedTypes.includes('tornado') || 
+                      (weather.severity === 'heavy' && (normalizedTypes.includes('thunder') || normalizedTypes.includes('blizzard')));
+
     return (
-        <div className={styles.vfxContainer}>
+        <div className={`${styles.vfxContainer} ${isShaking ? styles.shake : ''}`}>
+
             {/* Weather Layers */}
             {normalizedTypes.map(type => renderWeatherType(type))}
 
@@ -365,9 +395,33 @@ export const VFXOverlay: React.FC<{
             {lightnings.map(l => (
                 <React.Fragment key={l.id}>
                     <div className={styles.thunderFlash} style={{ '--fdur': `${l.fdur}s` } as any} />
-                    <div className={styles.lightning} style={{ '--lx': `${l.x}%`, '--dur': `${l.dur}s` } as any} />
+                    
+                    {/* Main Bolt */}
+                    <div className={styles.lightning} style={{ 
+                        left: `${l.x}%`, 
+                        '--dur': `${l.dur}s` 
+                    } as any} />
+
+                    {/* Sub-branches for realism */}
+                    {weather.severity === 'heavy' && [1, 2, 3].map(i => (
+                        <div key={`${l.id}-b${i}`} className={styles.lightning} style={{ 
+                            left: `${l.x + (i === 1 ? -4 : i === 2 ? 5 : -2)}%`, 
+                            '--dur': `${l.dur}s`, 
+                            opacity: 0.4 + (Math.random() * 0.3), 
+                            transform: `skewX(${(i - 2) * 15}deg) scaleX(${0.3 + Math.random() * 0.3})` 
+                        } as any} />
+                    ))}
+                    
+                    {/* Atmospheric Glow */}
+                    <div className={styles.thunderFlash} style={{ 
+                        '--fdur': `${l.fdur * 1.5}s`, 
+                        background: 'radial-gradient(circle at center, rgba(79, 172, 238, 0.2), transparent)',
+                        opacity: 0.3
+                    } as any} />
                 </React.Fragment>
             ))}
+
+
 
             {/* Condition Ambient Overlays */}
             {conditions.map((c, i) => {
@@ -394,4 +448,5 @@ export const VFXOverlay: React.FC<{
             ))}
         </div>
     );
-};
+});
+
