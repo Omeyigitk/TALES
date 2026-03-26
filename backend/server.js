@@ -1167,7 +1167,13 @@ io.on('connection', (socket) => {
 
   socket.on('update_environment', async ({ campaignId, environmentData }) => {
     try {
-        const campaign = await Campaign.findByIdAndUpdate(campaignId, { $set: { activeEnvironment: environmentData } }, { new: true });
+        // Build a partial $set using dot-notation so we only overwrite the provided fields,
+        // leaving the rest of activeEnvironment (e.g. type, severity, backgroundUrl) intact.
+        const setFields = {};
+        for (const [key, value] of Object.entries(environmentData)) {
+            setFields[`activeEnvironment.${key}`] = value;
+        }
+        const campaign = await Campaign.findByIdAndUpdate(campaignId, { $set: setFields }, { new: true });
         io.to(campaignId).emit('environment_updated', campaign.activeEnvironment);
     } catch (err) {
         console.error('Environment sync error:', err);
