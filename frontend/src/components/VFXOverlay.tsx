@@ -28,11 +28,16 @@ export const VFXOverlay: React.FC<{
     }, [activeEffect]);
 
     // Get normalized types (support both old 'type' and new 'types' array)
-    const activeTypes = Array.isArray(weather?.types) ? weather.types : (weather?.type ? [weather.type] : ['clear']);
+    const activeTypes = Array.isArray(weather?.types) 
+        ? weather.types 
+        : (weather?.type ? [weather.type] : ['clear']);
+        
+    // Ensure 'clear' doesn't stay if there are other effects, and fallback to ['clear'] if empty
+    const normalizedTypes = activeTypes.filter(t => t).length > 0 ? activeTypes : ['clear'];
 
     // Lightning strike timer for thunder/storm/blizzard
     useEffect(() => {
-        const hasLightning = activeTypes.includes('thunder') || activeTypes.includes('blizzard');
+        const hasLightning = normalizedTypes.includes('thunder') || normalizedTypes.includes('blizzard');
         if (!hasLightning) {
             if (lightnings.length > 0) setLightnings([]);
             return;
@@ -48,7 +53,7 @@ export const VFXOverlay: React.FC<{
             setTimeout(() => setLightnings(prev => prev.filter(l => l.id !== id)), 600);
         }, interval);
         return () => clearInterval(timer);
-    }, [activeTypes.join(','), weather?.severity]);
+    }, [normalizedTypes.join(','), weather?.severity]);
 
     const renderParticles = (count: number, color: string) => {
         return Array.from({ length: count }).map((_, i) => {
@@ -354,7 +359,7 @@ export const VFXOverlay: React.FC<{
     return (
         <div className={styles.vfxContainer}>
             {/* Weather Layers */}
-            {activeTypes.map(type => renderWeatherType(type))}
+            {normalizedTypes.map(type => renderWeatherType(type))}
 
             {/* Lightning Bolts (Shared across types) */}
             {lightnings.map(l => (

@@ -972,9 +972,9 @@ export default function DMDashboard() {
     if (!hasMounted) return <div className="min-h-screen bg-gray-950 flex items-center justify-center text-white font-black uppercase tracking-widest animate-pulse">Yükleniyor...</div>;
 
     return (
-        <div className="min-h-screen bg-gray-950 p-8 text-gray-100 font-sans relative">
+        <div className="min-h-screen bg-gray-950 p-8 text-gray-100 font-sans relative overflow-x-hidden">
             <VFXOverlay activeEffect={activeEffect} weather={activeEnvironment} />
-            <div className="max-w-7xl mx-auto space-y-8 animate-fade-in">
+            <div className="max-w-7xl mx-auto space-y-8 animate-fade-in relative z-10">
                 <header className="flex flex-col justify-between bg-gray-900/50 backdrop-blur-xl border border-gray-700/50 p-4 rounded-2xl shadow-[0_4px_30px_rgba(0,0,0,0.5)] gap-3">
                     {/* ROW 1: Identity + Global Controls */}
                     <div className="flex items-center justify-between flex-wrap gap-3">

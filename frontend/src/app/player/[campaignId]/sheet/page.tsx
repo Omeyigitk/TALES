@@ -2076,8 +2076,9 @@ const PlayerSheet = () => {
                 </div>
             )}
 
+            <VFXOverlay activeEffect={activeEffect} conditions={conditions} weather={activeEnvironment} />
+
             <div className="relative z-10">
-                <VFXOverlay activeEffect={activeEffect} conditions={conditions} weather={activeEnvironment} />
             
             {/* ── DEATH SCREEN OVERLAY ── */}
             {currentHp <= 0 && (
