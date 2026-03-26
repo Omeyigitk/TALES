@@ -6,6 +6,7 @@ import axios from "axios";
 import { useAuth } from "@/context/AuthContext";
 import { useDialog } from "@/context/DialogContext";
 import { useCampaignSocket } from "../../../../../useCampaignSocket";
+import { VFXOverlay } from "@/components/VFXOverlay";
 import { ASI_LEVELS, CLASS_FEATURES, type Feat, type ClassFeature } from "../levelup_data";
 import { ALL_FEATS } from "../feats_data";
 import { ALL_BACKGROUNDS } from "../background_data";
@@ -189,8 +190,28 @@ const PlayerSheet = () => {
     const { 
         socket, partyStats, diceLogs, dmLevelPermission, whisperData, whisperHistory,
         partyGold, partyInventory, fogOfWar, quests, factions, sessionNotes, mapData,
-        soundData
+        encounterStatus, activeEffect, activeEnvironment
     } = useCampaignSocket(campaignId, 'Player', character?.name, token);
+
+    // Battle / Turn Effects
+    const [isMyTurn, setIsMyTurn] = useState(false);
+    useEffect(() => {
+        const es = encounterStatus as any;
+        if (es && es.isActive && es.participants && es.participants.length > 0) {
+            const currentTurnChar = es.participants[es.turnIndex];
+            if (currentTurnChar && currentTurnChar.name === character?.name) {
+                if (!isMyTurn) {
+                    showToast("⚔️ Senin Sıran!", "Hamleni yapma vakti geldi.", "bg-amber-900 border-amber-500 text-amber-100");
+                    // Play a subtle sound if possible or a stronger visual
+                }
+                setIsMyTurn(true);
+            } else {
+                setIsMyTurn(false);
+            }
+        } else {
+            setIsMyTurn(false);
+        }
+    }, [encounterStatus, character]);
 
     // Toast Notification System
     const [toast, setToast] = useState<{ show: boolean, title: string, message: string, color: string }>({ show: false, title: '', message: '', color: '' });
@@ -210,35 +231,6 @@ const PlayerSheet = () => {
     const [isSavingPrivateNotes, setIsSavingPrivateNotes] = useState(false);
     const [privateNotes, setPrivateNotes] = useState("");
 
-    // Sound System Synchronization
-    const audioRefs = useRef<Record<string, HTMLAudioElement>>({});
-    useEffect(() => {
-        if (!soundData) return;
-        const { action, soundUrl, loop } = soundData as any;
-
-        if (action === 'play') {
-            if (audioRefs.current[soundUrl]) {
-                audioRefs.current[soundUrl].pause();
-                audioRefs.current[soundUrl].currentTime = 0;
-            }
-            const audio = new Audio(soundUrl);
-            audio.loop = !!loop;
-            audio.volume = 0.5; // Default safe volume
-            audio.play().catch(e => console.warn("Player audio autoplay blocked or failed:", e));
-            audioRefs.current[soundUrl] = audio;
-        } else if (action === 'stop') {
-            if (soundUrl === 'all') {
-                Object.values(audioRefs.current).forEach(audio => {
-                    audio.pause();
-                    audio.currentTime = 0;
-                });
-                audioRefs.current = {};
-            } else if (audioRefs.current[soundUrl]) {
-                audioRefs.current[soundUrl].pause();
-                delete audioRefs.current[soundUrl];
-            }
-        }
-    }, [soundData]);
     const [whisperTarget, setWhisperTarget] = useState('DM');
     const [whisperMessage, setWhisperMessage] = useState("");
     const [isWhisperModalOpen, setIsWhisperModalOpen] = useState(false);
@@ -336,6 +328,10 @@ const PlayerSheet = () => {
     const [shopData, setShopData] = useState<{ isOpen: boolean, items: any[] }>({ isOpen: false, items: [] });
     const [backstory, setBackstory] = useState("");
     const [newItemNote, setNewItemNote] = useState<string>("");
+    const [newItemDescription, setNewItemDescription] = useState<string>("");
+    const [newItemType, setNewItemType] = useState<string>("other");
+    const [expandedInventoryIdx, setExpandedInventoryIdx] = useState<number | null>(null);
+    const [expandedShopItemId, setExpandedShopItemId] = useState<string | null>(null);
     const [isPanning, setIsPanning] = useState(false);
     const [panStart, setPanStart] = useState({ x: 0, y: 0 });
 
@@ -418,6 +414,12 @@ const PlayerSheet = () => {
     const canCast = isSpellcaster(clsName) || mcs.some((mc: any) => isSpellcaster(mc.className));
     const hpPct = character?.maxHp ? Math.round((currentHp / character.maxHp) * 100) : 0;
     const actualFeats = [...(character?.feats || []), ...(character?.raceBonusFeats || [])];
+    
+    // Global Item Bonuses
+    const itemAtkBonus = getItemBonus('attack_bonus');
+    const itemDmgBonus = getItemBonus('damage_bonus');
+    const itemSpellBonus = getItemBonus('spell_atk_bonus'); // Future-proofing
+
     const featSpellsList = character?.featSelections?.spells 
         ? Object.values(character.featSelections.spells).flat() as string[] 
         : [];
@@ -578,6 +580,45 @@ const PlayerSheet = () => {
         };
         if (token) fetchMeta();
     }, [token]);
+
+    // Keyboard Navigation for Tabs (1, 2, 3...)
+    useEffect(() => {
+        const handleKeyDown = (e: KeyboardEvent) => {
+            // Don't trigger if any input/textarea is focused
+            const target = e.target as HTMLElement;
+            if (target.tagName === 'INPUT' || target.tagName === 'TEXTAREA' || target.isContentEditable) {
+                return;
+            }
+
+            const allTabs = [
+                { id: "main", label: "Karakter" },
+                { id: "attacks", label: "Saldırılar" },
+                { id: "spells", label: "Büyüler" },
+                { id: "inventory", label: "Envanter" },
+                { id: "story", label: "Hikaye" },
+                { id: "world", label: "Dünya" },
+                { id: "party", label: "Parti" }
+            ];
+
+            // Filter for visible tabs only (mirroring the UI logic)
+            const isCharSpellcaster = isSpellcaster(characterRef.current?.classRef?.name || '') || (characterRef.current?.multiclasses || []).some((mc: any) => isSpellcaster(mc.className));
+            const hasSpells = (characterRef.current?.spells || []).length > 0;
+            
+            const visibleTabs = allTabs.filter(t => {
+                if (t.id === "spells") return hasSpells || isCharSpellcaster;
+                return true;
+            });
+
+            const key = e.key;
+            const keyNum = parseInt(key);
+            if (!isNaN(keyNum) && keyNum >= 1 && keyNum <= visibleTabs.length) {
+                setActiveTab(visibleTabs[keyNum - 1].id);
+            }
+        };
+
+        window.addEventListener('keydown', handleKeyDown);
+        return () => window.removeEventListener('keydown', handleKeyDown);
+    }, []); // Only bind once on mount
 
     const updatePetHp = async (petId: string, newHp: number) => {
         if (!characterRef.current) return;
@@ -788,7 +829,7 @@ const PlayerSheet = () => {
             newInventory = inv;
         } else {
             // Yeni esya
-            const newItem = { name: newItemName.trim(), qty: newItemQty || 1, isEquipped: false, note: newItemNote };
+            const newItem = { name: newItemName.trim(), qty: newItemQty || 1, isEquipped: false, note: newItemNote, description: newItemDescription, type: newItemType };
             newInventory = [...inv, newItem];
         }
 
@@ -801,6 +842,8 @@ const PlayerSheet = () => {
             setNewItemName("");
             setNewItemQty(1);
             setNewItemNote("");
+            setNewItemDescription("");
+            setNewItemType("other");
             showToast('Eşya Eklendi', `${newItemName} envantere eklendi.`, 'bg-green-900 border-green-500 text-green-100');
         } catch { await alert({ title: "Hata", message: "Eşya eklenemedi.", severity: "danger" }); }
         finally { setIsAddingItem(false); }
@@ -912,7 +955,7 @@ const PlayerSheet = () => {
         if (existingIdx >= 0) {
             inv[existingIdx] = { ...inv[existingIdx], qty: (inv[existingIdx].qty || 1) + 1 };
         } else {
-            inv.push({ name: item.name, qty: 1, isEquipped: false, note: item.note || '' });
+            inv.push({ name: item.name, qty: 1, isEquipped: false, note: item.note || '', description: item.description || '' });
         }
 
         try {
@@ -1279,6 +1322,16 @@ const PlayerSheet = () => {
                 type: `${name} ${typeLabel} (${formula})`,
                 isHidden: isRollHidden
             });
+
+            // VFX Trigger for Natural 20 or Natural 1
+            if (dice.sides === 20 && dice.count === 1) {
+                const rawRoll = total - dice.bonus;
+                if (rawRoll === 20) {
+                    (socket as any).emit('vfx_trigger', { campaignId, type: 'NAT20', playerName: character.name });
+                } else if (rawRoll === 1) {
+                    (socket as any).emit('vfx_trigger', { campaignId, type: 'NAT1', playerName: character.name });
+                }
+            }
         }
         showToast(isRollHidden ? `🎲 (Hidden) ${name} - ${formula}` : `🎲 ${name} - ${formula}`, cost ? `${cost.amount} ${cost.name} used! Result: ${total}` : `${typeLabel} Result: ${total}`, 'bg-purple-900 border-purple-500 text-purple-100');
     };
@@ -1358,6 +1411,16 @@ const PlayerSheet = () => {
                 type: `Zar Havuzu (${formula})`,
                 isHidden: isRollHidden
             });
+
+            // VFX Trigger for Natural 20 or Natural 1 in the pool
+            const hasNat20 = dicePool.includes(20) && rolls.some(r => r.includes('d20(20)'));
+            const hasNat1 = dicePool.includes(20) && rolls.some(r => r.includes('d20(1)'));
+            
+            if (hasNat20) {
+                (socket as any).emit('vfx_trigger', { campaignId, type: 'NAT20', playerName: character.name });
+            } else if (hasNat1) {
+                (socket as any).emit('vfx_trigger', { campaignId, type: 'NAT1', playerName: character.name });
+            }
         }
 
         showToast(
@@ -1367,6 +1430,58 @@ const PlayerSheet = () => {
         );
 
         setDicePool([]);
+    };
+
+    const handleDeathSaveRoll = async () => {
+        if (!character || !socket) return;
+        
+        const roll = Math.floor(Math.random() * 20) + 1;
+        let newSaves = { ...deathSaves };
+        let message = "";
+        let color = "bg-gray-800 text-white";
+
+        if (roll === 20) {
+            // Natural 20: Stable with 1 HP
+            await axios.put(`${API_URL}/api/characters/${character._id}`, { currentHp: 1, deathSaves: { successes: 0, failures: 0 } }, { headers: { 'Authorization': `Bearer ${token}` } });
+            setCurrentHp(1);
+            setDeathSaves({ successes: 0, failures: 0 });
+            message = "KRİTİK BAŞARI! 1 HP ile ayağa kalktın!";
+            color = "bg-green-600 text-white border-green-400 border-2";
+            (socket as any).emit('vfx_trigger', { campaignId, type: 'NAT20', playerName: character.name });
+        } else if (roll === 1) {
+            // Natural 1: 2 failures
+            newSaves.failures = Math.min(3, newSaves.failures + 2);
+            message = "KRİTİK HATA! 2 başarısızlık eklendi!";
+            color = "bg-red-900 text-white border-red-600 border-2";
+            (socket as any).emit('vfx_trigger', { campaignId, type: 'NAT1', playerName: character.name });
+        } else if (roll >= 10) {
+            newSaves.successes = Math.min(3, newSaves.successes + 1);
+            message = `Başarılı! (${roll})`;
+            color = "bg-green-900/60 text-green-300 border-green-500/50 border";
+        } else {
+            newSaves.failures = Math.min(3, newSaves.failures + 1);
+            message = `Başarısız! (${roll})`;
+            color = "bg-red-900/60 text-red-300 border-red-500/50 border";
+        }
+
+        setDeathSaves(newSaves);
+        await axios.put(`${API_URL}/api/characters/${character._id}`, { deathSaves: newSaves }, { headers: { 'Authorization': `Bearer ${token}` } });
+        
+        (socket as any).emit('roll_dice', {
+            campaignId,
+            playerName: character.name,
+            rollResult: roll,
+            type: `Ölüm Kurtarması (Death Save)`,
+            isHidden: false
+        });
+
+        showToast("💀 Ölüm Kurtarması", message, color);
+
+        if (newSaves.failures >= 3) {
+            showToast("⚠️ KARAKTER ÖLDÜ", "DM ile iletişime geçin.", "bg-black border-red-900 text-red-500");
+        } else if (newSaves.successes >= 3) {
+            showToast("✨ Stabilize Oldun", "Durumun dengelendi ama hala baygınsın.", "bg-blue-900 border-blue-400");
+        }
     };
 
     const startLevelUp = async () => {
@@ -1942,7 +2057,78 @@ const PlayerSheet = () => {
     }
 
     return (
-        <div className="min-h-screen bg-gray-950 text-white font-sans relative">
+        <div className="min-h-screen bg-gray-950 text-white font-sans relative overflow-x-hidden">
+            {/* ── DYNAMIC BACKGROUND ── */}
+            {activeEnvironment?.backgroundUrl && (
+                <div 
+                    className="fixed inset-0 z-0 pointer-events-none transition-all duration-1000 animate-in fade-in"
+                    style={{ 
+                        backgroundImage: `url(${activeEnvironment.backgroundUrl})`,
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'center',
+                        backgroundAttachment: 'fixed'
+                    }}
+                >
+                    {/* Readability Overlay (Shadow) */}
+                    <div className="absolute inset-0 bg-black/60 backdrop-blur-[2px]"></div>
+                    <div className="absolute inset-0 bg-gradient-to-b from-gray-950 via-transparent to-gray-950 opacity-80"></div>
+                </div>
+            )}
+
+            <div className="relative z-10">
+                <VFXOverlay activeEffect={activeEffect} conditions={conditions} weather={activeEnvironment} />
+            
+            {/* ── DEATH SCREEN OVERLAY ── */}
+            {currentHp <= 0 && (
+                <div className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-xl flex items-center justify-center p-6 animate-in fade-in duration-1000">
+                    <div className="max-w-md w-full text-center space-y-12">
+                        <div className="relative inline-block">
+                            <div className="text-8xl mb-4 animate-pulse">💀</div>
+                            <div className="absolute inset-0 bg-red-600/20 blur-3xl rounded-full scale-150 -z-10"></div>
+                        </div>
+                        
+                        <div>
+                            <h1 className="text-5xl font-black text-white uppercase tracking-tighter mb-2">BİLİNCİN KAPIYOR...</h1>
+                            <p className="text-red-500 font-bold tracking-widest uppercase text-sm animate-pulse">Ölüm Kurtarma Zarını At!</p>
+                        </div>
+
+                        <div className="flex justify-center gap-12">
+                            {/* Successes */}
+                            <div className="space-y-4">
+                                <span className="text-[10px] font-black text-green-500 uppercase tracking-[0.2em]">BAŞARILAR</span>
+                                <div className="flex gap-3">
+                                    {[1, 2, 3].map(i => (
+                                        <div key={i} className={`w-8 h-8 rounded-full border-2 transform transition-all duration-500 ${deathSaves.successes >= i ? 'bg-green-500 border-green-400 scale-110 shadow-[0_0_15px_rgba(34,197,94,0.5)]' : 'border-gray-800 bg-gray-900/50'}`}></div>
+                                    ))}
+                                </div>
+                            </div>
+                            {/* Failures */}
+                            <div className="space-y-4">
+                                <span className="text-[10px] font-black text-red-600 uppercase tracking-[0.2em]">HATALAR</span>
+                                <div className="flex gap-3">
+                                    {[1, 2, 3].map(i => (
+                                        <div key={i} className={`w-8 h-8 rounded-full border-2 transform transition-all duration-500 ${deathSaves.failures >= i ? 'bg-red-600 border-red-500 scale-110 shadow-[0_0_15px_rgba(220,38,38,0.5)]' : 'border-gray-800 bg-gray-900/50'}`}></div>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+
+                        <button 
+                            onClick={handleDeathSaveRoll}
+                            disabled={deathSaves.successes >= 3 || deathSaves.failures >= 3}
+                            className="group relative px-12 py-6 bg-red-600 hover:bg-red-500 disabled:opacity-50 disabled:cursor-not-allowed text-white font-black rounded-2xl transition-all shadow-[0_0_40px_rgba(220,38,38,0.3)] active:scale-95"
+                        >
+                            <span className="relative z-10 text-xl tracking-widest uppercase">ZAR AT (d20) 🎲</span>
+                            <div className="absolute inset-0 bg-gradient-to-r from-red-600 to-red-400 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                        </button>
+
+                        <div className="pt-8">
+                            <p className="text-gray-500 text-xs italic">"Karanlık yaklaşıyor ama henüz her şey bitmedi..."</p>
+                        </div>
+                    </div>
+                </div>
+            )}
+
             {/* ══ DİCE LOG SİDEBAR (Desktop) / TOP OVERLAY (Mobile) ══ */}
             {/* ══ DİCE LOG OVERLAY ══ */}
             <div className={`fixed inset-0 z-[60] flex items-center justify-end p-4 transition-all duration-500 bg-black/40 backdrop-blur-sm ${showDiceLogUI ? 'opacity-100' : 'opacity-0 pointer-events-none'}`} onClick={() => setShowDiceLogUI(false)}>
@@ -2400,6 +2586,61 @@ const PlayerSheet = () => {
                     </div>
                 </div>
             </div>
+
+            {/* ── BATTLE TRACKER BANNER (PLAYER SIDE) ── */}
+            {(encounterStatus as any)?.isActive && (
+                <div className="bg-gray-900 border-b border-indigo-900/50 animate-in slide-in-from-top duration-700">
+                    <div className={`relative overflow-hidden transition-all duration-500 ${isMyTurn ? 'bg-amber-900/20 shadow-[0_0_30px_rgba(245,158,11,0.1)]' : 'bg-transparent'}`}>
+                        <div className="max-w-7xl mx-auto px-6 py-3 flex flex-col md:flex-row items-center justify-between gap-4">
+                            <div className="flex items-center gap-6">
+                                {/* Round Counter */}
+                                <div className="flex flex-col items-center justify-center bg-gray-950 border border-gray-800 rounded-xl px-4 py-1.5 min-w-[70px] shadow-inner">
+                                    <span className="text-[9px] font-black text-gray-500 uppercase tracking-widest leading-none mb-1">TUR</span>
+                                    <span className="text-xl font-black text-white leading-none">{(encounterStatus as any).round || 1}</span>
+                                </div>
+                                
+                                {/* Status Info */}
+                                <div>
+                                    <div className="flex items-center gap-2 mb-0.5">
+                                        <span className={`w-2 h-2 rounded-full ${isMyTurn ? 'bg-amber-500 animate-ping' : 'bg-red-500'}`}></span>
+                                        <h3 className="text-sm font-black text-white uppercase tracking-tight">
+                                            {isMyTurn ? "🔥 SENİN SIRAN!" : "⚔️ ÇATIŞMA DEVAM EDİYOR"}
+                                        </h3>
+                                    </div>
+                                    <div className="flex items-center gap-2">
+                                        <span className="text-[9px] font-black text-gray-500 uppercase tracking-widest">Sıradaki:</span>
+                                        <span className="text-[10px] font-bold text-indigo-300">
+                                            {(encounterStatus as any).participants?.[(encounterStatus as any).turnIndex]?.name || '...'}
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Initiative Queue Preview (Simplified for Top Bar) */}
+                            <div className="hidden lg:flex items-center gap-2">
+                                {(encounterStatus as any).participants?.slice(0, 6).map((p: any, i: number) => {
+                                    const active = (encounterStatus as any).turnIndex === i;
+                                    return (
+                                        <div key={i} className={`flex items-center gap-2 px-3 py-1 rounded-lg border transition-all ${active ? 'bg-indigo-600 border-indigo-400 scale-105 shadow-md' : 'bg-gray-800/50 border-gray-700 opacity-60'}`}>
+                                            <span className="text-[9px] font-black text-white uppercase">{p.name?.substring(0, 3)}</span>
+                                            <span className="text-[9px] font-black text-indigo-300/80">{p.initiative}</span>
+                                        </div>
+                                    );
+                                })}
+                            </div>
+
+                            {/* Action Advice */}
+                            {isMyTurn && (
+                                <div className="flex items-center gap-3 animate-pulse">
+                                    <span className="text-[10px] font-black text-amber-500 uppercase tracking-widest hidden sm:block">Hamleni Yap!</span>
+                                    <div className="h-6 w-px bg-amber-500/30 hidden sm:block"></div>
+                                    <span className="text-[10px] text-amber-200/60 leading-tight italic">DM onayını beklemeden saldırılarını yapabilirsin.</span>
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                </div>
+            )}
 
             {/* ── HP BAR ── */}
             <div className="bg-gray-800 px-6 py-3 border-b border-gray-700">
@@ -3263,6 +3504,19 @@ const PlayerSheet = () => {
                             
                             // Let's do a simple replace on the damage string instead of running dangerous evalAtk on things like "1d6"
                             let parsedDamage = atk.damage;
+                            
+                            // Include item damage bonus if it's a numeric damage roll
+                            if (parsedDamage && (parsedDamage.includes('d') || !isNaN(parseInt(parsedDamage))) && atk.type !== 'save' && atk.type !== 'special' && itemDmgBonus > 0) {
+                                // Simple check for "+X" at end or just appending it
+                                const currentModMatch = parsedDamage.match(/([+-]\d+)$/);
+                                if (currentModMatch) {
+                                    const currentModVal = parseInt(currentModMatch[1]);
+                                    parsedDamage = parsedDamage.replace(/([+-]\d+)$/, fmt(currentModVal + itemDmgBonus));
+                                } else {
+                                    parsedDamage = `${parsedDamage}${fmt(itemDmgBonus)}`;
+                                }
+                            }
+
                             if (parsedDamage && (parsedDamage.includes('+') || parsedDamage.includes('-'))) {
                                 parsedDamage = parsedDamage.replace(/\b(STR|DEX|CON|INT|WIS|CHA|Prof)\b/g, (m: string) => {
                                     if (m === 'Prof') return String(prof);
@@ -3270,17 +3524,23 @@ const PlayerSheet = () => {
                                 });
                             }
                             
-                            const toHitVal = (parsedToHit !== undefined && !isNaN(parsedToHit)) ? fmt(parsedToHit) : undefined;
+                            // Add item attack bonus 
+                            const finalToHitRaw = (parsedToHit !== undefined && atk.type !== 'save') ? (parsedToHit + itemAtkBonus) : parsedToHit;
+                            const toHitVal = (finalToHitRaw !== undefined && !isNaN(finalToHitRaw)) ? fmt(finalToHitRaw) : undefined;
                             
                             return {
                                 ...atk,
                                 toHit: toHitVal,
-                                toHitRaw: parsedToHit,
+                                toHitRaw: finalToHitRaw,
                                 damage: parsedDamage,
                                 desc_tr: resolveFormula(atk.desc_tr, level, mods, prof, clsName)
                             };
                         }), 
-                        ...mappedWeaponAttacks.map((atk: any) => ({ ...atk, toHitRaw: parseInt(atk.toHit) }))
+                        ...mappedWeaponAttacks.map((atk: any) => {
+                           const raw = parseInt(atk.toHit);
+                           const finalRaw = isNaN(raw) ? 0 : raw + itemAtkBonus;
+                           return { ...atk, toHit: fmt(finalRaw), toHitRaw: finalRaw };
+                        })
                     ];
 
                     return (
@@ -3537,7 +3797,7 @@ const PlayerSheet = () => {
                                         <div className="bg-gradient-to-br from-purple-900/40 to-indigo-900/40 backdrop-blur-md rounded-2xl border border-purple-500/20 p-5 shadow-xl flex items-center justify-between border-l-4 border-l-purple-500 group hover:bg-purple-900/50 transition-all duration-500">
                                             <div>
                                                 <p className="text-[10px] font-black text-purple-400 uppercase tracking-widest mb-1">Spell Save DC</p>
-                                                <h4 className="text-2xl font-black text-white font-mono">{8 + (getModifier(getSpellcastingAbility(clsName))) + (prof)}</h4>
+                                                <h4 className="text-2xl font-black text-white font-mono">{8 + (getModifier(getSpellcastingAbility(clsName))) + (prof) + itemAtkBonus}</h4>
                                             </div>
                                             <div className="w-12 h-12 bg-purple-500/10 rounded-xl flex items-center justify-center border border-purple-500/20 text-purple-400 group-hover:scale-110 transition-transform duration-500">
                                                 <span className="text-2xl">⚡</span>
@@ -3547,7 +3807,7 @@ const PlayerSheet = () => {
                                         <div className="bg-gradient-to-br from-cyan-900/40 to-blue-900/40 backdrop-blur-md rounded-2xl border border-cyan-500/20 p-5 shadow-xl flex items-center justify-between border-l-4 border-l-cyan-500 group hover:bg-cyan-900/50 transition-all duration-500">
                                             <div>
                                                 <p className="text-[10px] font-black text-cyan-400 uppercase tracking-widest mb-1">Spell Attack</p>
-                                                <h4 className="text-2xl font-black text-white font-mono">+{getModifier(getSpellcastingAbility(clsName)) + (prof)}</h4>
+                                                <h4 className="text-2xl font-black text-white font-mono">+{getModifier(getSpellcastingAbility(clsName)) + (prof) + itemAtkBonus}</h4>
                                             </div>
                                             <div className="w-12 h-12 bg-cyan-500/10 rounded-xl flex items-center justify-center border border-cyan-500/20 text-cyan-400 group-hover:scale-110 transition-transform duration-500">
                                                 <span className="text-2xl">🎯</span>
@@ -3991,18 +4251,22 @@ const PlayerSheet = () => {
                                 {character.inventory?.length > 0 ? (
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-6">
                                         {character.inventory.map((item: any, idx: number) => (
-                                            <div key={idx} className={`bg-gray-900/60 border rounded-xl p-3 flex flex-col transition-all ${item.isEquipped ? 'border-blue-500 shadow-[0_0_10px_rgba(59,130,246,0.2)]' : 'border-gray-700'}`}>
+                                            <div 
+                                                key={idx} 
+                                                className={`bg-gray-900/60 border rounded-xl p-3 flex flex-col transition-all cursor-pointer hover:bg-gray-800/80 ${item.isEquipped ? 'border-blue-500 shadow-[0_0_10px_rgba(59,130,246,0.2)]' : 'border-gray-700'}`}
+                                                onClick={() => setExpandedInventoryIdx(expandedInventoryIdx === idx ? null : idx)}
+                                            >
                                                 <div className="flex justify-between items-start mb-2">
                                                     <div className="flex items-center gap-2">
-                                                        <div className="flex items-center bg-gray-800 rounded border border-gray-700 overflow-hidden shadow-inner">
+                                                        <div className="flex items-center bg-gray-800 rounded border border-gray-700 overflow-hidden shadow-inner" onClick={e => e.stopPropagation()}>
                                                             <button onClick={() => updateItemQty(idx, -1)} className="text-red-400 hover:bg-gray-700 px-2 py-0.5 text-sm font-black transition active:scale-95">-</button>
                                                             <span className="font-bold text-xs text-gray-200 w-5 text-center">{item.qty || 1}</span>
                                                             <button onClick={() => updateItemQty(idx, 1)} className="text-green-400 hover:bg-gray-700 px-2 py-0.5 text-sm font-black transition active:scale-95">+</button>
                                                         </div>
                                                         <span className={`font-black text-sm ${item.isEquipped ? 'text-blue-400' : 'text-white'}`}>{item.name} {item.isEquipped && '🛡️'}</span>
                                                     </div>
-                                                    <div className="flex gap-2">
-                                                        {(item.type === 'armor' || item.type === 'weapon' || item.type === 'shield' || item.name?.toLowerCase().includes('shield') || (item.effects && item.effects.length > 0)) && (
+                                                    <div className="flex gap-2" onClick={e => e.stopPropagation()}>
+                                                        {(['armor', 'weapon', 'shield', 'ring', 'amulet', 'tattoo', 'bracers', 'cloak', 'wondrous'].includes(item.type) || item.isEquipped || item.name?.toLowerCase().includes('shield') || (item.effects && item.effects.length > 0)) && (
                                                             <button
                                                                 onClick={() => toggleEquip(idx)}
                                                                 className={`text-[10px] px-2 py-1 rounded font-bold transition ${item.isEquipped
@@ -4017,9 +4281,34 @@ const PlayerSheet = () => {
                                                     </div>
                                                 </div>
                                                 {item.note && <p className="text-gray-400 text-xs italic border-l-2 border-gray-600 pl-2 ml-1 flex-1">{item.note}</p>}
-                                                <div className="mt-2 flex gap-2">
-                                                    {item.type && <span className="text-[9px] bg-gray-800 text-gray-500 px-1.5 py-0.5 rounded border border-gray-700 uppercase tracking-tighter">{item.type}</span>}
-                                                </div>
+                                                {expandedInventoryIdx === idx && (
+                                                    <div className="mt-3 pt-3 border-t border-gray-700 animate-in fade-in slide-in-from-top-2 duration-300">
+                                                        <p className="text-gray-300 text-xs whitespace-pre-wrap mb-3">{item.description || "Açıklama bulunmuyor."}</p>
+                                                        <div className="flex items-center justify-between">
+                                                            {item.type && <span className="text-[9px] bg-gray-800 text-gray-500 px-1.5 py-0.5 rounded border border-gray-700 uppercase tracking-tighter">{item.type}</span>}
+                                                            {(item.type?.toLowerCase().includes('potion') || item.type?.toLowerCase().includes('consumable') || item.name?.toLowerCase().includes('iksir') || item.name?.toLowerCase().includes('potion')) && (
+                                                                <button 
+                                                                    onClick={(e) => {
+                                                                        e.stopPropagation();
+                                                                        if (!socket) return;
+                                                                        (socket as any).emit('request_item_use', {
+                                                                            campaignId,
+                                                                            characterId: character._id,
+                                                                            characterName: character.name,
+                                                                            itemId: item.id || item._id,
+                                                                            itemName: item.name
+                                                                        });
+                                                                        showToast("🧪 Talep İletildi", `${item.name} kullanımı için DM onayı bekleniyor...`, "bg-blue-900 border-blue-500");
+                                                                    }}
+                                                                    className="px-4 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white font-black rounded-lg text-[10px] uppercase tracking-widest transition-all shadow-lg shadow-emerald-900/20 active:scale-95 border-b-2 border-emerald-800"
+                                                                >
+                                                                    Kullan ✨
+                                                                </button>
+                                                            )}
+                                                        </div>
+                                                    </div>
+                                                )}
+                                                {!item.description && !item.note && !item.type && <div className="text-[9px] text-gray-600 mt-1 uppercase tracking-widest font-bold">Detay yok</div>}
                                             </div>
                                         ))}
                                     </div>
@@ -4028,20 +4317,43 @@ const PlayerSheet = () => {
                                 )}
 
                                 {/* ADD NEW ITEM */}
-                                <div className="bg-gray-900 border border-gray-700 rounded-xl p-4">
-                                    <h4 className="font-black text-gray-400 text-xs mb-3 uppercase tracking-wider">➕ Yeni Eşya Ekle</h4>
+                                <div className="bg-gray-900 border border-gray-700 rounded-xl p-4 space-y-3">
+                                    <h4 className="font-black text-gray-400 text-xs mb-1 uppercase tracking-wider">➕ Yeni Eşya Ekle</h4>
                                     <div className="flex flex-col md:flex-row gap-3">
-                                        <div className="flex-1">
+                                        <div className="flex-[2]">
                                             <input type="text" value={newItemName} onChange={e => setNewItemName(e.target.value)} placeholder="Eşya Adı (Örn: Potion of Healing)" className="w-full bg-gray-800 border-2 border-gray-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-blue-500 transition" />
                                         </div>
-                                        <div className="w-24">
+                                        <div className="w-20">
                                             <input type="number" min="1" value={newItemQty} onChange={e => setNewItemQty(Number(e.target.value) || 1)} className="w-full bg-gray-800 border-2 border-gray-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-blue-500 transition text-center" />
                                         </div>
-                                        <div className="flex-[2]">
-                                            <input type="text" value={newItemNote} onChange={e => setNewItemNote(e.target.value)} placeholder="Not (Opsiyonel)" className="w-full bg-gray-800 border-2 border-gray-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-blue-500 transition" />
+                                        <div className="w-32">
+                                            <select 
+                                                value={newItemType} 
+                                                onChange={e => setNewItemType(e.target.value)}
+                                                className="w-full bg-gray-800 border-2 border-gray-700 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-blue-500 transition font-bold"
+                                            >
+                                                <option value="other">Diğer</option>
+                                                <option value="weapon">Silah</option>
+                                                <option value="armor">Zırh</option>
+                                                <option value="shield">Kalkan</option>
+                                                <option value="ring">Yüzük</option>
+                                                <option value="amulet">Kolye/Muska</option>
+                                                <option value="tattoo">Dövme</option>
+                                                <option value="wondrous">Tılsım</option>
+                                                <option value="consumable">Sarf Malzemesi</option>
+                                            </select>
+                                        </div>
+                                        <div className="flex-[1.5]">
+                                            <input type="text" value={newItemNote} onChange={e => setNewItemNote(e.target.value)} placeholder="Özellik/Not (Kısa)" className="w-full bg-gray-800 border-2 border-gray-700 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-blue-500 transition" />
                                         </div>
                                         <button onClick={addItem} disabled={!newItemName.trim()} className="bg-blue-600 hover:bg-blue-500 disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold rounded-lg px-6 py-2 text-sm transition shrink-0">Ekle</button>
                                     </div>
+                                    <textarea 
+                                        value={newItemDescription} 
+                                        onChange={e => setNewItemDescription(e.target.value)} 
+                                        placeholder="Eşya Açıklaması (Opsiyonel)" 
+                                        className="w-full bg-gray-800 border-2 border-gray-700 rounded-lg px-3 py-2 text-xs text-white focus:outline-none focus:border-blue-500 transition h-20 resize-none"
+                                    ></textarea>
                                 </div>
                             </div>
                         </div>
@@ -5080,18 +5392,32 @@ const PlayerSheet = () => {
                                     <p className="text-center text-gray-500 py-8 italic font-bold">The merchant's stall is currently empty.</p>
                                 ) : (
                                     shopData.items.map(item => (
-                                        <div key={item.id} className="bg-gray-800/80 border border-gray-700 p-4 rounded-xl flex items-center justify-between hover:bg-gray-750 transition-colors group">
-                                            <div className="flex-1 pr-4">
-                                                <div className="font-bold text-gray-100 text-lg">{item.name}</div>
-                                                {item.note && <div className="text-gray-400 text-xs mt-1 italic">{item.note}</div>}
+                                        <div 
+                                            key={item.id} 
+                                            className="bg-gray-800/80 border border-gray-700 p-4 rounded-xl flex flex-col hover:bg-gray-750 transition-colors group cursor-pointer"
+                                            onClick={() => setExpandedShopItemId(expandedShopItemId === item.id ? null : item.id)}
+                                        >
+                                            <div className="flex items-center justify-between">
+                                                <div className="flex-1 pr-4">
+                                                    <div className="font-bold text-gray-100 text-lg">{item.name}</div>
+                                                    {item.note && <div className="text-gray-400 text-xs mt-1 italic">{item.note}</div>}
+                                                </div>
+                                                <button
+                                                    onClick={(e) => {
+                                                        e.stopPropagation();
+                                                        handleBuyItem(item);
+                                                    }}
+                                                    className="bg-orange-600 hover:bg-orange-500 active:bg-orange-700 text-white font-black px-4 py-2 rounded-lg flex items-center gap-2 transition-transform hover:scale-105 shadow-md group-hover:shadow-[0_0_15px_rgba(234,88,12,0.4)] whitespace-nowrap"
+                                                >
+                                                    <span className="text-sm">Buy Item</span>
+                                                    <span className="bg-orange-900/50 px-2 py-0.5 rounded text-yellow-300 text-xs border border-orange-500/30">{item.price} GP</span>
+                                                </button>
                                             </div>
-                                            <button
-                                                onClick={() => handleBuyItem(item)}
-                                                className="bg-orange-600 hover:bg-orange-500 active:bg-orange-700 text-white font-black px-4 py-2 rounded-lg flex items-center gap-2 transition-transform hover:scale-105 shadow-md group-hover:shadow-[0_0_15px_rgba(234,88,12,0.4)] whitespace-nowrap"
-                                            >
-                                                <span className="text-sm">Buy Item</span>
-                                                <span className="bg-orange-900/50 px-2 py-0.5 rounded text-yellow-300 text-xs border border-orange-500/30">{item.price} GP</span>
-                                            </button>
+                                            {expandedShopItemId === item.id && item.description && (
+                                                <div className="mt-3 pt-3 border-t border-gray-700 animate-in fade-in slide-in-from-top-2 duration-300">
+                                                    <p className="text-gray-300 text-sm leading-relaxed whitespace-pre-wrap">{item.description}</p>
+                                                </div>
+                                            )}
                                         </div>
                                     ))
                                 )}
@@ -5822,7 +6148,8 @@ const PlayerSheet = () => {
                 </button>
             </div>
         </div>
-    );
+    </div>
+);
 };
 
 export default PlayerSheet;

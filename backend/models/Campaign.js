@@ -34,6 +34,11 @@ const campaignSchema = new mongoose.Schema({
             type: { type: String, enum: ['player', 'npc', 'monster'] },
             entityId: String
         }]
+    },
+    activeEnvironment: {
+        type: { type: String, default: 'clear' }, // clear, rain, snow, fog, sandstorm
+        severity: { type: String, default: 'medium' }, // light, medium, heavy
+        backgroundUrl: { type: String, default: '' }
     }
 });
 

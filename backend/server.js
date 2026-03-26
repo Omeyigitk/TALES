@@ -373,7 +373,38 @@ app.post('/api/campaigns/:campaignId/map-upload', authenticate, upload.single('m
 
     res.json({ success: true, url: imageUrl });
   } catch (error) {
-    console.error('Map upload error:', error);
+    console.error('Background upload error:', error);
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Arkaplan Dosyası Yükleme
+app.post('/api/campaigns/:campaignId/background-upload', authenticate, upload.single('background'), async (req, res) => {
+  try {
+    if (!req.file) return res.status(400).json({ error: 'Dosya seçilmedi' });
+
+    const { campaignId } = req.params;
+    const protocol = req.headers['x-forwarded-proto'] || req.protocol;
+    const host = req.headers['host'];
+    const imageUrl = `${protocol}://${host}/uploads/${req.file.filename}`;
+
+    const campaign = await Campaign.findById(campaignId);
+    if (!campaign) return res.status(404).json({ error: 'Campaign bulunamadı' });
+
+    if (!campaign.activeEnvironment) {
+        campaign.activeEnvironment = { type: 'clear', severity: 'medium', backgroundUrl: imageUrl };
+    } else {
+        campaign.activeEnvironment.backgroundUrl = imageUrl;
+    }
+
+    await campaign.save();
+
+    // Socket ile tüm odaya bildir
+    io.to(campaignId).emit('environment_updated', campaign.activeEnvironment);
+
+    res.json({ success: true, url: imageUrl });
+  } catch (error) {
+    console.error('Background upload error:', error);
     res.status(500).json({ error: error.message });
   }
 });
@@ -1006,7 +1037,10 @@ io.on('connection', (socket) => {
       socket.emit('fog_updated', campaign.fogOfWar || []);
 
       // Send Encounter Status
-      socket.emit('encounter_updated', campaign.activeEncounter?.participants || []);
+      socket.emit('encounter_updated', campaign.activeEncounter || { participants: [], round: 1, turnIndex: 0, isActive: false });
+
+      // Send active environment
+      socket.emit('environment_updated', campaign.activeEnvironment || { type: 'clear', severity: 'medium' });
 
       // Send initial data for new features
       const quests = await Quest.find({ campaignId });
@@ -1077,13 +1111,66 @@ io.on('connection', (socket) => {
 
   socket.on('update_encounter', async ({ campaignId, encounterData }) => {
     try {
-      await Campaign.findByIdAndUpdate(campaignId, { 
-        'activeEncounter.participants': encounterData,
-        'activeEncounter.isActive': encounterData.length > 0 
-      });
-      io.to(campaignId).emit('encounter_updated', encounterData);
+      const update = {
+        'activeEncounter.participants': encounterData.participants || [],
+        'activeEncounter.isActive': encounterData.isActive !== undefined ? encounterData.isActive : (encounterData.participants?.length > 0),
+        'activeEncounter.round': encounterData.round || 1,
+        'activeEncounter.turnIndex': encounterData.turnIndex || 0
+      };
+      const campaign = await Campaign.findByIdAndUpdate(campaignId, { $set: update }, { new: true });
+      io.to(campaignId).emit('encounter_updated', campaign.activeEncounter);
     } catch (err) {
       console.error('Encounter sync error:', err);
+    }
+  });
+
+  socket.on('next_turn', async ({ campaignId }) => {
+    try {
+      const campaign = await Campaign.findById(campaignId);
+      if (!campaign || !campaign.activeEncounter.isActive) return;
+
+      let nextIndex = (campaign.activeEncounter.turnIndex + 1) % campaign.activeEncounter.participants.length;
+      let nextRound = campaign.activeEncounter.round;
+      
+      if (nextIndex === 0) {
+        nextRound += 1;
+      }
+
+      campaign.activeEncounter.turnIndex = nextIndex;
+      campaign.activeEncounter.round = nextRound;
+      await campaign.save();
+
+      io.to(campaignId).emit('encounter_updated', campaign.activeEncounter);
+    } catch (err) {
+      console.error('Next turn error:', err);
+    }
+  });
+
+  socket.on('request_item_use', ({ campaignId, characterId, characterName, itemName, itemId }) => {
+    // Notify DM
+    io.to(campaignId).emit('item_use_requested', { characterId, characterName, itemName, itemId });
+  });
+
+  socket.on('approve_item_use', async ({ campaignId, characterId, action, value }) => {
+    // action: 'heal', 'damage', 'message'
+    // value: amount or text
+    if (action === 'heal') {
+        const char = await Character.findById(characterId);
+        if (char) {
+            const newHp = Math.min(char.maxHp, char.currentHp + parseInt(value));
+            await Character.findByIdAndUpdate(characterId, { currentHp: newHp });
+            io.to(campaignId).emit('character_stat_updated', { characterId, name: char.name, stat: 'currentHp', value: newHp });
+        }
+    }
+    io.to(campaignId).emit('item_use_approved', { characterId, action, value });
+  });
+
+  socket.on('update_environment', async ({ campaignId, environmentData }) => {
+    try {
+        const campaign = await Campaign.findByIdAndUpdate(campaignId, { $set: { activeEnvironment: environmentData } }, { new: true });
+        io.to(campaignId).emit('environment_updated', campaign.activeEnvironment);
+    } catch (err) {
+        console.error('Environment sync error:', err);
     }
   });
 

@@ -8,6 +8,7 @@ import { useAuth } from "@/context/AuthContext";
 import { useRouter } from "next/navigation";
 import { useDialog } from "@/context/DialogContext";
 import { getSpellSlotTotals } from "../../../player/[campaignId]/combat_data";
+import { VFXOverlay } from "@/components/VFXOverlay";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
 
@@ -25,115 +26,9 @@ const getDiceIcon = (type: string) => {
 };
 
 const MAP_TEMPLATES = [
-    { name: 'Seç...', url: '' },
-    { name: 'Taverna', url: 'https://images.squarespace-cdn.com/content/v1/593e9232c534a5697e06a378/1566495638202-VUPY5M056T298C7SCSG5/Tavern_Grid.jpg' },
-    { name: 'Zindan Koridoru', url: 'https://i.pinimg.com/originals/91/92/72/919272338abd8e4ba7dbd5a08316279f.jpg' },
-    { name: 'Orman Yolu', url: 'https://i.pinimg.com/736x/8f/30/1c/8f301cc9388f8d6614144463690d5656.jpg' },
-    { name: 'Şehir Meydanı', url: 'https://2minutetabletop.com/wp-content/uploads/2021/05/Town-Square-Night-No-Props-44x32-Grid.jpg' },
+    { name: 'Seç...', url: '' }
 ];
 
-function Soundboard({ isOpen, onClose, playSound, stopSound, activeSounds }: any) {
-    const soundCategories = [
-        {
-            name: "Ambient",
-            icon: "🌲",
-            sounds: [
-                { name: "Dungeon", url: "https://www.fesliyanstudios.com/play-mp3/6511" },
-                { name: "Forest", url: "https://www.fesliyanstudios.com/play-mp3/6514" },
-                { name: "Tavern", url: "https://www.fesliyanstudios.com/play-mp3/6518" },
-                { name: "Rain", url: "https://www.fesliyanstudios.com/play-mp3/6520" }
-            ]
-        },
-        {
-            name: "Combat",
-            icon: "⚔️",
-            sounds: [
-                { name: "Battle Music", url: "https://www.fesliyanstudios.com/play-mp3/5661" },
-                { name: "Sword Clash", url: "https://www.fesliyanstudios.com/play-mp3/58" },
-                { name: "Dragon Roar", url: "https://www.fesliyanstudios.com/play-mp3/650" }
-            ]
-        },
-        {
-            name: "Magic",
-            icon: "✨",
-            sounds: [
-                { name: "Fireball", url: "https://www.fesliyanstudios.com/play-mp3/2650" },
-                { name: "Healing", url: "https://www.fesliyanstudios.com/play-mp3/2375" },
-                { name: "Spell Cast", url: "https://www.fesliyanstudios.com/play-mp3/2653" }
-            ]
-        }
-    ];
-
-    if (!isOpen) return null;
-
-    return (
-        <div className="fixed inset-0 bg-black bg-opacity-60 backdrop-blur-sm flex items-center justify-center z-[100]">
-            <div className="bg-slate-900 border border-slate-700 w-full max-w-2xl rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
-                <div className="p-6 border-b border-slate-800 flex justify-between items-center bg-slate-800/50">
-                    <div>
-                        <h2 className="text-2xl font-black text-white flex items-center gap-3">
-                            <span className="bg-blue-500 p-2 rounded-lg text-xl">🎵</span>
-                            Soundboard
-                        </h2>
-                        <p className="text-slate-400 text-sm mt-1">Tüm oyuncular için eş zamanlı ses tetikle.</p>
-                    </div>
-                    <button onClick={onClose} className="p-2 hover:bg-slate-700 rounded-full transition-colors text-slate-400 hover:text-white">
-                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
-                    </button>
-                </div>
-
-                <div className="flex-1 overflow-y-auto p-6 space-y-8">
-                    {soundCategories.map(cat => (
-                        <div key={cat.name} className="space-y-4">
-                            <div className="flex items-center gap-2 text-slate-300 font-bold border-l-4 border-blue-500 pl-3">
-                                <span>{cat.icon}</span>
-                                <span className="uppercase tracking-widest text-sm">{cat.name}</span>
-                            </div>
-                            <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-                                {cat.sounds.map(sound => {
-                                    const isActive = activeSounds[sound.url];
-                                    return (
-                                        <button
-                                            key={sound.name}
-                                            onClick={() => isActive ? stopSound(sound.url) : playSound(sound.url, cat.name === "Ambient")}
-                                            className={`group relative p-4 rounded-xl border flex flex-col items-center justify-center gap-2 transition-all duration-300 ${isActive 
-                                                ? 'bg-blue-600 border-blue-400 shadow-[0_0_20px_rgba(59,130,246,0.5)]' 
-                                                : 'bg-slate-800 border-slate-700 hover:border-slate-500 hover:bg-slate-700'}`}
-                                        >
-                                            <div className={`p-2 rounded-full ${isActive ? 'bg-blue-400/30' : 'bg-slate-700 group-hover:bg-slate-600'}`}>
-                                                {isActive ? (
-                                                    <div className="flex gap-1">
-                                                        <div className="w-1 h-3 bg-white animate-bounce"></div>
-                                                        <div className="w-1 h-3 bg-white animate-bounce [animation-delay:-0.2s]"></div>
-                                                        <div className="w-1 h-3 bg-white animate-bounce [animation-delay:-0.4s]"></div>
-                                                    </div>
-                                                ) : (
-                                                    <svg className="w-5 h-5 text-slate-300" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                                                )}
-                                            </div>
-                                            <span className={`text-xs font-bold ${isActive ? 'text-white' : 'text-slate-300'}`}>{sound.name}</span>
-                                            {isActive && <div className="absolute top-2 right-2 w-2 h-2 bg-white rounded-full animate-ping"></div>}
-                                        </button>
-                                    );
-                                })}
-                            </div>
-                        </div>
-                    ))}
-                </div>
-
-                <div className="p-4 bg-slate-950/50 border-t border-slate-800 text-center">
-                    <button 
-                        onClick={() => stopSound('all')}
-                        className="text-xs font-bold text-red-500 hover:text-red-400 transition-colors uppercase tracking-[0.2em] flex items-center justify-center gap-2 mx-auto py-2 px-6 rounded-lg bg-red-500/10 border border-red-500/20 hover:border-red-500/40"
-                    >
-                        <span className="text-lg">⏹️</span>
-                        Tüm Sesleri Durdur
-                    </button>
-                </div>
-            </div>
-        </div>
-    );
-}
 
 export default function DMDashboard() {
     const { campaignId } = useParams();
@@ -150,11 +45,10 @@ export default function DMDashboard() {
         }
     }, [user, authLoading]);
 
-    // Odaya DM rolüyle katıl
     const { 
         partyStats, diceLogs, socket, dmLevelPermission, whisperData, whisperHistory,
         partyGold, partyInventory, fogOfWar, quests, factions, sessionNotes, mapData: socketMapData,
-        encounterStatus, soundData
+        encounterStatus, activeEffect, itemUseRequest, activeEnvironment
     } = useCampaignSocket(campaignId, 'DM', 'DM', token);
     
     // Sync local mapData with socket mapData on mount/updates
@@ -179,52 +73,6 @@ export default function DMDashboard() {
         }
     }, [whisperData]);
 
-    // Ses Senkronizasyonu (Sound Sync)
-    useEffect(() => {
-        if (!soundData) return;
-        const { action, soundUrl, loop } = soundData as any;
-
-        if (action === 'play') {
-            // Eğer durdurulmamış eski bir kopya varsa durdur
-            if (audioRefs.current[soundUrl]) {
-                audioRefs.current[soundUrl].pause();
-                audioRefs.current[soundUrl].currentTime = 0;
-            }
-            const audio = new Audio(soundUrl);
-            audio.loop = !!loop;
-            audio.volume = 0.5;
-            audio.play().catch(err => console.error("Audio play failed:", err));
-            audioRefs.current[soundUrl] = audio;
-            if (!loop) {
-                audio.onended = () => {
-                    delete audioRefs.current[soundUrl];
-                    setActiveSounds(prev => {
-                        const next = { ...prev };
-                        delete next[soundUrl];
-                        return next;
-                    });
-                };
-            }
-        } else if (action === 'stop') {
-            if (soundUrl === 'all') {
-                Object.values(audioRefs.current).forEach(audio => {
-                    audio.pause();
-                    audio.currentTime = 0;
-                });
-                audioRefs.current = {};
-                setActiveSounds({});
-            } else if (audioRefs.current[soundUrl]) {
-                audioRefs.current[soundUrl].pause();
-                audioRefs.current[soundUrl].currentTime = 0;
-                delete audioRefs.current[soundUrl];
-                setActiveSounds(prev => {
-                    const next = { ...prev };
-                    delete next[soundUrl];
-                    return next;
-                });
-            }
-        }
-    }, [soundData]);
 
     // State yönetimi
     const [monsters, setMonsters] = useState<any[]>([]);
@@ -236,10 +84,38 @@ export default function DMDashboard() {
     const [selectedImage, setSelectedImage] = useState<string | null>(null);
     const [expandedMonsterId, setExpandedMonsterId] = useState<string | null>(null);
     const [expandedCombatantId, setExpandedCombatantId] = useState<string | null>(null);
-    const audioRefs = useRef<Record<string, HTMLAudioElement>>({});
     const [isRollHidden, setIsRollHidden] = useState(false);
     const [dicePool, setDicePool] = useState<Record<string, number>>({});
     const [isQuickDiceOpen, setIsQuickDiceOpen] = useState(false);
+    const [isNpcGeneratorOpen, setIsNpcGeneratorOpen] = useState(false);
+    const [generatedNpc, setGeneratedNpc] = useState<any>(null);
+
+    const NPC_DATA = {
+        names: ['Alara', 'Boran', 'Ceren', 'Demir', 'Eda', 'Fırat', 'Gökçe', 'Hakan', 'Ilgın', 'Jale', 'Kaan', 'Leyla', 'Mert', 'Nihan', 'Onur', 'Pelin', 'Rüzgar', 'Selin', 'Tarik', 'Umut', 'Vildan', 'Yaman', 'Zeynep'],
+        surnames: ['Gümüşel', 'Demirbilek', 'Gölgeadımla', 'Fırtınasoy', 'Akgezen', 'Karasakal', 'Altınel', 'Yeryüzü', 'Gökkıran', 'Denizci'],
+        races: ['İnsan', 'Elf', 'Cüce', 'Buçukluk', 'Ejderha Soylu', 'Gnome', 'Yarı-Obruk', 'Tiefling'],
+        traits: ['Çok konuşkan', 'Sürekli etrafı kolluyor', 'Aşırı kibar', 'Hafif kaba', 'Unutkan', 'Paragöz', 'Cesur', 'Korkak', 'Gizemli', 'Neşeli'],
+        appearances: ['Yara izli bir yüz', 'Pırıl pırıl zırh', 'Eski püskü kıyafetler', 'Göz alıcı takılar', 'Dövmeli kollar', 'Kukuletalı pelerin', 'Eksik bir diş', 'Gözlük takıyor'],
+        professions: ['Hancı', 'Demirci', 'Muhafız', 'Hırsız', 'Büyücü çırağı', 'Çiftçi', 'Balıkçı', 'Kütüphaneci', 'Sokak çalgıcısı']
+    };
+
+    const generateNPC = () => {
+        const name = NPC_DATA.names[Math.floor(Math.random() * NPC_DATA.names.length)];
+        const surname = NPC_DATA.surnames[Math.floor(Math.random() * NPC_DATA.surnames.length)];
+        const race = NPC_DATA.races[Math.floor(Math.random() * NPC_DATA.races.length)];
+        const trait = NPC_DATA.traits[Math.floor(Math.random() * NPC_DATA.traits.length)];
+        const appearance = NPC_DATA.appearances[Math.floor(Math.random() * NPC_DATA.appearances.length)];
+        const profession = NPC_DATA.professions[Math.floor(Math.random() * NPC_DATA.professions.length)];
+        
+        setGeneratedNpc({
+            fullName: `${name} ${surname}`,
+            race,
+            trait,
+            appearance,
+            profession
+        });
+        setIsNpcGeneratorOpen(true);
+    };
 
     // Sync active combatants with encounter data from server
     useEffect(() => {
@@ -262,32 +138,7 @@ export default function DMDashboard() {
     const [itemSearchTerm, setItemSearchTerm] = useState("");
     const [selectedItem, setSelectedItem] = useState<any>(null);
 
-    // Soundboard States
-    const [isSoundboardOpen, setIsSoundboardOpen] = useState(false);
-    const [activeSounds, setActiveSounds] = useState<Record<string, boolean>>({});
 
-    // Soundboard Functions
-    const playSound = (url: string, loop: boolean = false) => {
-        if (socket) {
-            socket.emit('play_sound', { campaignId, soundUrl: url, volume: 1.0, loop });
-            setActiveSounds(prev => ({ ...prev, [url]: true }));
-        }
-    };
-
-    const stopSound = (url: string) => {
-        if (socket) {
-            socket.emit('stop_sound', { campaignId, soundUrl: url });
-            if (url === 'all') {
-                setActiveSounds({});
-            } else {
-                setActiveSounds(prev => {
-                    const next = { ...prev };
-                    delete next[url];
-                    return next;
-                });
-            }
-        }
-    };
     const [priceToSet, setPriceToSet] = useState<number>(10);
 
     useEffect(() => {
@@ -311,9 +162,9 @@ export default function DMDashboard() {
 
     // Shop (Dükkan) States
     const [isShopMenuOpen, setIsShopMenuOpen] = useState(false);
-    const [shopItems, setShopItems] = useState<{ id: string, name: string, price: number, note: string }[]>([]);
+    const [shopItems, setShopItems] = useState<{ id: string, name: string, price: number, note: string, type: string }[]>([]);
     const [isShopPublished, setIsShopPublished] = useState(false);
-    const [newShopItem, setNewShopItem] = useState({ name: '', price: 10, note: '' });
+    const [newShopItem, setNewShopItem] = useState({ name: '', price: 10, note: '', description: '', type: 'other' });
 
     // Party Vault / Shared Inventory States
     const [newPartyItemName, setNewPartyItemName] = useState("");
@@ -413,6 +264,15 @@ export default function DMDashboard() {
     const [isUserManagementOpen, setIsUserManagementOpen] = useState(false);
     const [allUsers, setAllUsers] = useState<any[]>([]);
     const [isPartyStatusOpen, setIsPartyStatusOpen] = useState(false);
+
+    // Item Use Approval
+    const [pendingItemUseRequest, setPendingItemUseRequest] = useState<any>(null);
+
+    useEffect(() => {
+        if (itemUseRequest) {
+            setPendingItemUseRequest(itemUseRequest);
+        }
+    }, [itemUseRequest]);
 
     const toggleLevelPermission = (grant: boolean) => {
         if (!socket) return;
@@ -592,6 +452,27 @@ export default function DMDashboard() {
         reader.readAsText(file);
     };
 
+    const handleBackgroundUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (!file || !socket) return;
+        const formData = new FormData();
+        formData.append('background', file);
+        try {
+            const res = await axios.post(`${API_URL}/api/campaigns/${campaignId}/background-upload`, formData, { 
+                headers: { 
+                    'Authorization': `Bearer ${token}`, 
+                    'Content-Type': 'multipart/form-data' 
+                } 
+            });
+            if (res.data.success) {
+                showToast("✅ Arkaplan Yüklendi", "Tüm oyunculara yansıtılıyor.", "bg-green-900 border-green-500");
+            }
+        } catch (error: any) {
+            console.error('Background upload error:', error);
+            showToast("❌ Hata", "Arkaplan yüklenemedi: " + error.message, "bg-red-900 border-red-500");
+        }
+    };
+
     // Savaş alanına yaratık ekle
     const addMonsterToEncounter = (e: React.MouseEvent, monster: any) => {
         if (!monster) return;
@@ -636,6 +517,39 @@ export default function DMDashboard() {
             .sort((a, b) => b.initiative - a.initiative);
         setActiveCombatants(updated);
         syncEncounter(updated);
+    };
+
+    // Battle Tracker Controls
+    const startBattle = () => {
+        if (activeCombatants.length === 0) return;
+        const status = {
+            isActive: true,
+            round: 1,
+            turnIndex: 0,
+            participants: activeCombatants.map(c => ({ id: c.id, name: c.name, initiative: c.initiative, _isPlayer: c._isPlayer }))
+        };
+        socket?.emit('update_encounter', { campaignId, encounterData: activeCombatants, status });
+    };
+
+    const nextTurn = () => {
+        socket?.emit('next_turn', { campaignId });
+    };
+
+    const endBattle = () => {
+        const status = { isActive: false, round: 0, turnIndex: 0, participants: [] };
+        socket?.emit('update_encounter', { campaignId, encounterData: activeCombatants, status });
+    };
+
+    const handleApproveItemUse = (amount: number) => {
+        if (!pendingItemUseRequest) return;
+        socket?.emit('approve_item_use', {
+            campaignId,
+            requestId: pendingItemUseRequest.requestId,
+            characterId: pendingItemUseRequest.characterId,
+            itemName: pendingItemUseRequest.itemName,
+            healAmount: amount
+        });
+        setPendingItemUseRequest(null);
     };
 
     const addPlayerToEncounter = (playerName: string) => {
@@ -693,6 +607,19 @@ export default function DMDashboard() {
                 rollResult: total,
                 type: `Dice Pool (${typeStr}): [${results.join(', ')}]`,
                 isHidden: isRollHidden
+            });
+
+            // VFX Trigger for Natural 20 or Natural 1 in a d20 roll
+            results.forEach((res, idx) => {
+                // We need to know which die it was. This is a bit tricky with pools.
+                // But generally, if any d20 in the pool is 20, trigger it.
+                if (typeParts.some(p => p.includes('d20'))) {
+                    if (res === '20') {
+                        socket.emit('vfx_trigger', { campaignId, type: 'NAT20', playerName: 'Dungeon Master' });
+                    } else if (res === '1') {
+                        socket.emit('vfx_trigger', { campaignId, type: 'NAT1', playerName: 'Dungeon Master' });
+                    }
+                }
             });
         }
         setDicePool({});
@@ -856,11 +783,12 @@ export default function DMDashboard() {
     // Dükkan Fonksiyonları
     const addShopItem = () => {
         if (!newShopItem.name.trim()) return;
-        setShopItems([...shopItems, { ...newShopItem, id: Date.now().toString() }]);
-        setNewShopItem({ name: '', price: 10, note: '' });
+        const itemWithId = { ...newShopItem, id: Date.now().toString() };
+        setShopItems([...shopItems, itemWithId]);
+        setNewShopItem({ name: '', price: 10, note: '', description: '', type: 'other' });
         // Eğer dükkan yayındaysa anında güncelleme yollayabiliriz, ancak DM'nin explicitly "Kapat/Aç" yapması daha kontrollü olabilir.
         if (isShopPublished && socket) {
-            socket.emit('publish_shop', { campaignId, shopItems: [...shopItems, { ...newShopItem, id: Date.now().toString() }], isPublished: true });
+            socket.emit('publish_shop', { campaignId, shopItems: [...shopItems, itemWithId], isPublished: true });
         }
     };
 
@@ -1012,6 +940,7 @@ export default function DMDashboard() {
 
     return (
         <div className="min-h-screen bg-gray-950 p-8 text-gray-100 font-sans relative">
+            <VFXOverlay activeEffect={activeEffect} weather={activeEnvironment} />
             <div className="max-w-7xl mx-auto space-y-8 animate-fade-in">
                 <header className="flex flex-col md:flex-row justify-between items-center bg-gray-900/50 backdrop-blur-xl border border-gray-700/50 p-4 rounded-2xl shadow-[0_4px_30px_rgba(0,0,0,0.5)]">
                     <div className="flex items-center mb-4 md:mb-0">
@@ -1028,6 +957,118 @@ export default function DMDashboard() {
                     </div>
 
                     <div className="flex flex-wrap gap-2 justify-center">
+                        {/* Weather Controls Quick Access */}
+                        <div className="flex items-center gap-2 bg-gray-950/60 border border-gray-700/50 rounded-xl px-3 py-1.5 shadow-inner mr-2">
+                            <span className="text-[10px] text-gray-500 font-black uppercase tracking-widest">Atmosfer</span>
+                            <div className="flex gap-1">
+                                {[
+                                    { type: 'clear', icon: '☀️' },
+                                    { type: 'rain', icon: '🌧️' },
+                                    { type: 'snow', icon: '❄️' },
+                                    { type: 'fog', icon: '🌫️' },
+                                    { type: 'sandstorm', icon: '🏜️' }
+                                ].map((w) => (
+                                    <button
+                                        key={w.type}
+                                        onClick={() => {
+                                            if (!socket) return;
+                                            socket.emit('update_environment', { 
+                                                campaignId, 
+                                                environmentData: { type: w.type, severity: activeEnvironment?.severity || 'medium' } 
+                                            });
+                                        }}
+                                        className={`w-8 h-8 rounded-lg flex items-center justify-center transition-all ${activeEnvironment?.type === w.type ? 'bg-indigo-600 scale-110 shadow-lg shadow-indigo-900/50' : 'bg-gray-800 hover:bg-gray-700 opacity-60'}`}
+                                        title={w.type}
+                                    >
+                                        {w.icon}
+                                    </button>
+                                ))}
+                            </div>
+                            <div className="w-px h-6 bg-gray-800 mx-1" />
+                            <select 
+                                value={activeEnvironment?.severity || 'medium'}
+                                onChange={(e) => {
+                                    if (!socket) return;
+                                    socket.emit('update_environment', { 
+                                        campaignId, 
+                                        environmentData: { type: activeEnvironment?.type || 'clear', severity: e.target.value } 
+                                    });
+                                }}
+                                className="bg-transparent text-[10px] font-black uppercase tracking-widest text-indigo-400 outline-none cursor-pointer"
+                            >
+                                <option value="light">Hafif</option>
+                                <option value="medium">Orta</option>
+                                <option value="heavy">Yoğun</option>
+                            </select>
+                        </div>
+
+                        {/* Background Sync Controls */}
+                        <div className="flex items-center gap-2 bg-gray-950/60 border border-gray-700/50 rounded-xl px-3 py-1.5 shadow-inner mr-4">
+                            <span className="text-[10px] text-gray-500 font-black uppercase tracking-widest">Arkaplan</span>
+                            
+                            <button
+                                onClick={() => document.getElementById('bg-upload-input')?.click()}
+                                className="bg-gray-800 hover:bg-gray-700 text-gray-400 hover:text-white rounded-lg px-2 py-0.5 text-[10px] transition-all flex items-center gap-1 border border-gray-700/50"
+                                title="Bilgisayardan Yükle"
+                            >
+                                📁 <span className="text-[8px] font-black uppercase tracking-tighter">YÜKLE</span>
+                            </button>
+                            <input 
+                                type="file"
+                                id="bg-upload-input"
+                                className="hidden"
+                                onChange={handleBackgroundUpload}
+                                accept="image/*"
+                            />
+
+                            <div className="w-px h-4 bg-gray-800 mx-0.5" />
+
+                            <input 
+                                type="text"
+                                placeholder="URL Yapıştır..."
+                                defaultValue={activeEnvironment?.backgroundUrl || ''}
+                                onBlur={(e) => {
+                                    if (!socket) return;
+                                    socket.emit('update_environment', { 
+                                        campaignId, 
+                                        environmentData: { backgroundUrl: e.target.value } 
+                                    });
+                                }}
+                                className="bg-gray-900 border border-gray-800 rounded px-2 py-0.5 text-[10px] text-gray-300 w-24 outline-none focus:border-indigo-500"
+                            />
+                            <div className="flex gap-1 ml-1">
+                                {[
+                                    { name: 'Dungeon', url: 'https://images.squarespace-cdn.com/content/v1/593e9232c534a5697e06a378/1566495638202-VUPY5M056T298C7SCSG5/Tavern_Grid.jpg' },
+                                    { name: 'Forest', url: 'https://i.pinimg.com/736x/8f/30/1c/8f301cc9388f8d6614144463690d5656.jpg' },
+                                    { name: 'City', url: 'https://2minutetabletop.com/wp-content/uploads/2021/05/Town-Square-Night-No-Props-44x32-Grid.jpg' },
+                                    { name: 'None', url: '' }
+                                ].map((bg) => (
+                                    <button
+                                        key={bg.name}
+                                        onClick={() => {
+                                            if (!socket) return;
+                                            socket.emit('update_environment', { 
+                                                campaignId, 
+                                                environmentData: { backgroundUrl: bg.url } 
+                                            });
+                                        }}
+                                        className={`px-1.5 py-0.5 rounded text-[8px] font-black uppercase tracking-tighter transition-all ${activeEnvironment?.backgroundUrl === bg.url ? 'bg-indigo-600 text-white' : 'bg-gray-800 text-gray-500 hover:text-gray-300'}`}
+                                    >
+                                        {bg.name}
+                                    </button>
+                                ))}
+                            </div>
+                        </div>
+
+                        {/* NPC Generator Button */}
+                        <button
+                            onClick={generateNPC}
+                            className="flex items-center gap-2 bg-amber-600 hover:bg-amber-500 text-white font-black px-4 py-1.5 rounded-xl shadow-lg shadow-amber-900/20 transition-all uppercase tracking-widest text-xs"
+                        >
+                            <span>🎭</span>
+                            <span>Hızlı NPC</span>
+                        </button>
+
                         {/* DM Seviye İzni */}
                         <div className="flex items-center gap-2 bg-gray-950/60 border border-gray-700/50 rounded-xl px-3 py-1.5 shadow-inner">
                             <span className="text-xs text-gray-400 font-bold uppercase tracking-wider">Level İzni</span>
@@ -1144,10 +1185,46 @@ export default function DMDashboard() {
                     {/* Savaş/Encounter Paneli */}
                     <section className="xl:col-span-2 bg-gray-900/40 backdrop-blur-md rounded-2xl p-6 border border-gray-700/50 shadow-[0_8px_32px_rgba(0,0,0,0.5)] flex flex-col h-[75vh]">
                         <div className="flex justify-between items-center mb-6">
-                            <h2 className="text-xl font-black text-red-500 flex items-center gap-2 tracking-wide">
-                                <span className="bg-red-900/40 px-2 py-1 rounded-lg border border-red-500/30">⚔️</span> Aktif Savaş Çizelgesi
-                            </h2>
+                            <div className="flex items-center gap-4">
+                                <h2 className="text-xl font-black text-red-500 flex items-center gap-2 tracking-wide">
+                                    <span className="bg-red-900/40 px-2 py-1 rounded-lg border border-red-500/30">⚔️</span> Savaş Çizelgesi
+                                </h2>
+                                {encounterStatus.isActive && (
+                                    <div className="flex items-center gap-3 bg-red-950/40 border border-red-500/30 px-3 py-1 rounded-xl animate-pulse">
+                                        <span className="text-[10px] font-black text-red-400 uppercase tracking-widest">Tur:</span>
+                                        <span className="text-xl font-black text-red-500">{encounterStatus.round}</span>
+                                    </div>
+                                )}
+                            </div>
                             <div className="flex gap-2">
+                                {!encounterStatus.isActive ? (
+                                    <button 
+                                        onClick={startBattle}
+                                        disabled={activeCombatants.length === 0}
+                                        className="bg-green-600 hover:bg-green-500 disabled:opacity-50 text-white text-xs font-black px-4 py-1.5 rounded-lg transition-all shadow-lg shadow-green-900/40 uppercase tracking-widest"
+                                    >
+                                        Savaşı Başlat
+                                    </button>
+                                ) : (
+                                    <>
+                                        <button 
+                                            onClick={nextTurn}
+                                            className="bg-blue-600 hover:bg-blue-500 text-white text-xs font-black px-4 py-1.5 rounded-lg transition-all shadow-lg shadow-blue-900/40 uppercase tracking-widest"
+                                        >
+                                            Turu Bitir (Next)
+                                        </button>
+                                        <button 
+                                            onClick={async () => {
+                                                const ok = await confirm({ title: "Savaşı Bitir", message: "Savaşı sonlandırmak istediğine emin misin?", severity: 'warning' });
+                                                if (ok) endBattle();
+                                            }}
+                                            className="bg-gray-700 hover:bg-red-600 text-white text-xs font-black px-4 py-1.5 rounded-lg transition-all uppercase tracking-widest"
+                                        >
+                                            Bitir
+                                        </button>
+                                    </>
+                                )}
+                                <div className="w-px h-6 bg-gray-700/50 mx-1"></div>
                                 <select 
                                     className="bg-gray-800 border border-gray-700 text-xs rounded px-2 py-1 outline-none focus:border-red-500"
                                     onChange={(e) => {
@@ -1155,7 +1232,7 @@ export default function DMDashboard() {
                                         e.target.value = "";
                                     }}
                                 >
-                                    <option value="">+ Karakter Ekle</option>
+                                    <option value="">+ Karakter</option>
                                     {Object.keys(partyStats || {}).map(name => (
                                         <option key={name} value={name}>{name}</option>
                                     ))}
@@ -1180,10 +1257,13 @@ export default function DMDashboard() {
                                 activeCombatants.map((monster, index) => (
                                     <div
                                         key={monster.id}
-                                        className={`bg-gray-800 rounded-lg border-l-4 shadow-md group cursor-pointer transition-all hover:bg-gray-700 ${monster.currentHp <= 0 ? 'opacity-50 grayscale contrast-75 border-gray-600' : (monster._isPlayer ? 'border-blue-500' : monster._isLeveledNpc
-                                            ? monster._relationship === 'Dost' ? 'border-emerald-500' : monster._relationship === 'Düşman' ? 'border-red-500' : 'border-yellow-500'
-                                            : 'border-red-500')
-                                            }`}
+                                        className={`bg-gray-800 rounded-lg border-l-4 shadow-md group cursor-pointer transition-all hover:bg-gray-700 ${
+                                            encounterStatus.isActive && index === encounterStatus.turnIndex 
+                                            ? 'ring-2 ring-red-500 ring-offset-4 ring-offset-gray-950 scale-[1.02] border-red-500 bg-red-900/10' 
+                                            : (monster.currentHp <= 0 ? 'opacity-50 grayscale contrast-75 border-gray-600' : (monster._isPlayer ? 'border-blue-500' : monster._isLeveledNpc
+                                                ? monster._relationship === 'Dost' ? 'border-emerald-500' : monster._relationship === 'Düşman' ? 'border-red-500' : 'border-yellow-500'
+                                                : 'border-red-500'))
+                                        }`}
                                         onClick={() => {
                                             if (monster._isLeveledNpc) {
                                                 axios.get(`${API_URL}/api/characters/${monster._npcId}`, { headers: { 'Authorization': `Bearer ${token}` } })
@@ -1221,18 +1301,43 @@ export default function DMDashboard() {
                                                 </div>
                                             </div>
 
-                                            <div className="flex items-center space-x-4" onClick={(e) => e.stopPropagation()}>
-                                                <div className="text-right mr-4">
-                                                    <div className="text-[10px] text-gray-500 font-bold uppercase tracking-wider mb-1">Hit Points</div>
-                                                    <div className="font-mono text-xl">
-                                                        {monster.currentHp <= 0 ? (
-                                                            <span className="text-gray-400 font-black animate-pulse">💀 ÖLDÜ</span>
-                                                        ) : (
-                                                            <>
-                                                                <span className={monster.currentHp <= monster.maxHp / 3 ? "text-red-500 font-bold" : "text-green-400 font-bold"}>{monster.currentHp}</span>
-                                                                <span className="text-gray-500"> / {monster.maxHp}</span>
-                                                            </>
-                                                        )}
+                                            <div className="flex items-center space-x-3" onClick={(e) => e.stopPropagation()}>
+                                                <div className="text-right">
+                                                    <div className="text-[9px] text-gray-500 font-bold uppercase tracking-widest mb-1">Hit Points</div>
+                                                    <div className="flex items-center gap-1.5 bg-gray-900/60 px-2 py-1 rounded-lg border border-gray-700/50">
+                                                        <input 
+                                                            type="number" 
+                                                            value={monster.currentHp} 
+                                                            onChange={(e) => updateMonsterHp(monster.id, parseInt(e.target.value) || 0)}
+                                                            className={`w-12 bg-transparent text-center font-mono text-lg font-black outline-none transition-colors ${
+                                                                monster.currentHp <= 0 ? "text-gray-500" : 
+                                                                monster.currentHp <= monster.maxHp / 3 ? "text-red-500" : "text-green-400"
+                                                            }`}
+                                                        />
+                                                        <span className="text-gray-600 font-bold">/</span>
+                                                        <span className="text-gray-500 font-mono text-sm">{monster.maxHp}</span>
+                                                    </div>
+                                                </div>
+                                                
+                                                {/* HP Adjustment Helper */}
+                                                <div className="flex flex-col gap-1">
+                                                    <div className="bg-gray-900/40 rounded-md border border-gray-700/30 overflow-hidden h-7 flex items-center px-2">
+                                                        <span className="text-[10px] text-gray-500 font-bold mr-1">+/-</span>
+                                                        <input 
+                                                            type="text"
+                                                            placeholder="Değer"
+                                                            className="w-12 bg-transparent text-[10px] text-center font-bold text-white outline-none placeholder:text-gray-600"
+                                                            onKeyDown={(e) => {
+                                                                if (e.key === 'Enter') {
+                                                                    const val = parseInt((e.target as HTMLInputElement).value);
+                                                                    if (!isNaN(val)) {
+                                                                        // Eğer eksi girerse azalt, artı girerse artır
+                                                                        updateMonsterHp(monster.id, monster.currentHp + val);
+                                                                        (e.target as HTMLInputElement).value = '';
+                                                                    }
+                                                                }
+                                                            }}
+                                                        />
                                                     </div>
                                                 </div>
                                                 <div className="flex space-x-2">
@@ -1560,7 +1665,7 @@ export default function DMDashboard() {
                                                         onClick={() => setExpandedMonsterId(expandedMonsterId === monster._id ? null : monster._id)}
                                                     >
                                                         <div>
-                                                            <div className="font-bold text-gray-200 text-lg group-hover:text-purple-400 transition-colors">{monster.name || "Bilinmeyen Yaratık"}</div>
+                                                            <div className="font-bold text-white text-lg group-hover:text-purple-400 transition-colors">{monster.name || "Bilinmeyen Yaratık"}</div>
                                                             <div className="text-sm text-gray-400">{monster.type || "Bilinmeyen Tür"} • Challenge Rating: <span className="text-yellow-500 font-bold">{monster.challenge || "?"}</span></div>
                                                         </div>
                                                         <div className="flex items-center space-x-3">
@@ -2129,7 +2234,7 @@ export default function DMDashboard() {
                 {/* ── KARAKTER DÜZENLEME (EDIT STATS) MODALI ── */}
                 {
                     isEditCharModalOpen && editingCharData && (
-                        <div className="fixed inset-0 bg-black/80 z-50 flex items-center justify-center p-4 backdrop-blur-md animate-fade-in" onClick={() => setIsEditCharModalOpen(false)}>
+                        <div className="fixed inset-0 bg-black/80 z-[120] flex items-center justify-center p-4 backdrop-blur-md animate-fade-in" onClick={() => setIsEditCharModalOpen(false)}>
                             <div className="bg-gray-900/90 backdrop-blur-2xl rounded-3xl border border-blue-500/30 w-full max-w-2xl shadow-[0_0_50px_rgba(59,130,246,0.15)] overflow-hidden relative" onClick={e => e.stopPropagation()}>
                                 <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl pointer-events-none -mx-20 -my-20"></div>
                                 <div className="bg-gradient-to-r from-gray-800 to-gray-900/80 p-5 border-b border-gray-700/50 flex justify-between items-center relative z-10">
@@ -2262,10 +2367,10 @@ export default function DMDashboard() {
                                                 {Object.entries(partyStats).map(([charName, stat]: [string, any]) => (
                                                     <button
                                                         key={charName}
-                                                        onClick={() => toggleShopPublish(true, stat.id || charName)}
-                                                        className="px-3 py-1 bg-gray-900 border border-gray-600 hover:border-orange-500 hover:bg-gray-800 text-orange-300 font-bold rounded-md text-[10px] transition-all shadow-sm"
+                                                        onClick={() => toggleShopPublish(true, stat.characterId || stat.id)}
+                                                        className="px-3 py-1.5 rounded-lg text-[11px] font-black uppercase transition-all shadow-sm border bg-gray-800 border-gray-700 text-gray-400 hover:bg-gray-700 hover:text-gray-200 hover:border-gray-500"
                                                     >
-                                                        {charName}
+                                                        {stat.name || charName}
                                                     </button>
                                                 ))}
                                             </div>
@@ -2274,14 +2379,37 @@ export default function DMDashboard() {
                                 </div>
 
                                 {/* Yeni Eşya Ekleme Formu */}
-                                <div className="flex flex-col md:flex-row gap-3 mb-6 bg-gray-800/40 p-4 rounded-xl border border-gray-700/50">
-                                    <input type="text" placeholder="Eşya Adı (Örn: İyileşme İksiri)" value={newShopItem.name} onChange={e => setNewShopItem({ ...newShopItem, name: e.target.value })} className="flex-1 bg-gray-900 border border-gray-600 rounded-lg px-4 py-3 text-white focus:border-orange-500 outline-none transition-colors" />
-                                    <div className="flex items-center bg-gray-900 border border-gray-600 rounded-lg px-3 focus-within:border-orange-500 transition-colors shrink-0">
-                                        <input type="number" min="0" placeholder="Fiyat" value={newShopItem.price} onChange={e => setNewShopItem({ ...newShopItem, price: Number(e.target.value) })} className="w-16 bg-transparent text-white text-right outline-none py-3" />
-                                        <span className="text-yellow-500 font-bold ml-2">GP</span>
+                                <div className="space-y-3 mb-6 bg-gray-800/40 p-4 rounded-xl border border-gray-700/50">
+                                    <div className="flex flex-col md:flex-row gap-3">
+                                        <input type="text" placeholder="Eşya Adı (Örn: İyileşme İksiri)" value={newShopItem.name} onChange={e => setNewShopItem({ ...newShopItem, name: e.target.value })} className="flex-[2] bg-gray-900 border border-gray-600 rounded-lg px-4 py-2 text-white focus:border-orange-500 outline-none transition-colors text-sm" />
+                                        <div className="flex items-center bg-gray-900 border border-gray-600 rounded-lg px-3 focus-within:border-orange-500 transition-colors shrink-0 h-10 w-28">
+                                            <input type="number" min="0" placeholder="Fiyat" value={newShopItem.price} onChange={e => setNewShopItem({ ...newShopItem, price: Number(e.target.value) })} className="w-16 bg-transparent text-white text-right outline-none py-1 text-sm font-bold" />
+                                            <span className="text-yellow-500 font-bold ml-1 text-xs">GP</span>
+                                        </div>
+                                        <select 
+                                            value={newShopItem.type} 
+                                            onChange={e => setNewShopItem({ ...newShopItem, type: e.target.value })}
+                                            className="bg-gray-900 border border-gray-600 rounded-lg px-3 py-2 text-white focus:border-orange-500 outline-none transition-colors text-xs font-bold"
+                                        >
+                                            <option value="other">Diğer (Other)</option>
+                                            <option value="weapon">Silah (Weapon)</option>
+                                            <option value="armor">Zırh (Armor)</option>
+                                            <option value="shield">Kalkan (Shield)</option>
+                                            <option value="ring">Yüzük (Ring)</option>
+                                            <option value="amulet">Kolye (Amulet)</option>
+                                            <option value="tattoo">Dövme (Tattoo)</option>
+                                            <option value="wondrous">Tılsım (Wondrous)</option>
+                                            <option value="consumable">Sarf (Consumable)</option>
+                                        </select>
+                                        <input type="text" placeholder="Kısa Not (Örn: +1)" value={newShopItem.note} onChange={e => setNewShopItem({ ...newShopItem, note: e.target.value })} className="flex-1 bg-gray-900 border border-gray-600 rounded-lg px-4 py-2 text-white focus:border-orange-500 outline-none transition-colors text-sm" />
+                                        <button onClick={addShopItem} className="bg-orange-600 hover:bg-orange-500 hover:scale-105 active:scale-95 text-white font-black rounded-lg px-6 h-10 transition-all shadow-md shrink-0 whitespace-nowrap text-xs">EKLE</button>
                                     </div>
-                                    <input type="text" placeholder="Özellik/Not" value={newShopItem.note} onChange={e => setNewShopItem({ ...newShopItem, note: e.target.value })} className="flex-1 bg-gray-900 border border-gray-600 rounded-lg px-4 py-3 text-white focus:border-orange-500 outline-none transition-colors" />
-                                    <button onClick={addShopItem} className="bg-orange-600 hover:bg-orange-500 hover:scale-105 active:scale-95 text-white font-black rounded-lg px-6 py-3 transition-all shadow-md shrink-0 whitespace-nowrap">EKLE</button>
+                                    <textarea 
+                                        placeholder="Eşya Açıklaması (Opsiyonel)" 
+                                        value={newShopItem.description} 
+                                        onChange={e => setNewShopItem({ ...newShopItem, description: e.target.value })}
+                                        className="w-full bg-gray-900 border border-gray-600 rounded-lg px-4 py-2 text-white focus:border-orange-500 outline-none transition-colors text-xs h-20 resize-none"
+                                    ></textarea>
                                 </div>
 
                                 {/* Eşya Listesi */}
@@ -2302,6 +2430,7 @@ export default function DMDashboard() {
                                                             <span className="bg-yellow-900/40 text-yellow-400 border border-yellow-700/50 rounded-lg px-2.5 py-1 text-sm font-black shadow-sm">{item.price} GP</span>
                                                         </div>
                                                         {item.note && <p className="text-gray-400 text-sm italic border-l-2 border-gray-600 pl-2 ml-1">{item.note}</p>}
+                                                        {item.description && <p className="text-gray-300 text-xs mt-2 whitespace-pre-wrap">{item.description}</p>}
                                                     </div>
                                                     <button onClick={() => removeShopItem(item.id)} className="text-gray-500 hover:text-red-400 hover:bg-red-900/20 px-4 py-2 border border-transparent hover:border-red-500/30 rounded-lg transition-all text-sm font-bold shrink-0 self-start md:self-auto">Listeden Çıkar</button>
                                                 </div>
@@ -3539,6 +3668,66 @@ export default function DMDashboard() {
                     );
                 })()}
 
+                {/* ── ITEM USE APPROVAL MODAL ── */}
+                {pendingItemUseRequest && (
+                    <div className="fixed inset-0 bg-black/90 z-[100] flex items-center justify-center p-4 backdrop-blur-md animate-fade-in">
+                        <div className="bg-gray-900 border-4 border-emerald-900/50 rounded-2xl p-8 max-w-md w-full shadow-[0_0_50px_rgba(16,185,129,0.2)]">
+                            <h2 className="text-3xl font-black text-emerald-400 mb-2 flex items-center gap-3">
+                                🧪 Eşya Kullanımı
+                            </h2>
+                            <p className="text-gray-400 text-sm mb-6">
+                                <span className="text-emerald-300 font-bold">{pendingItemUseRequest.characterName || 'Bir oyuncu'}</span>, 
+                                <span className="text-white font-black mx-1">"{pendingItemUseRequest.itemName}"</span> 
+                                kullanmak istiyor. İyileştirme miktarını belirle:
+                            </p>
+                            
+                            <div className="bg-gray-950 border border-gray-800 rounded-2xl p-6 mb-8 text-center">
+                                <label className="block text-[10px] font-black text-emerald-500 uppercase tracking-widest mb-2">İyileşme Miktarı (HP)</label>
+                                <div className="flex items-center justify-center gap-4">
+                                    <button 
+                                        onClick={() => {
+                                            const input = document.getElementById('healInput') as HTMLInputElement;
+                                            if (input) input.value = Math.max(0, parseInt(input.value) - 1).toString();
+                                        }}
+                                        className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center text-xl font-black hover:bg-gray-700 transition-colors"
+                                    >-</button>
+                                    <input 
+                                        id="healInput"
+                                        type="number" 
+                                        defaultValue={pendingItemUseRequest.itemName?.toLowerCase().includes('greater') ? 14 : 7}
+                                        className="bg-transparent text-white font-black text-4xl w-24 text-center outline-none"
+                                    />
+                                    <button 
+                                        onClick={() => {
+                                            const input = document.getElementById('healInput') as HTMLInputElement;
+                                            if (input) input.value = (parseInt(input.value) + 1).toString();
+                                        }}
+                                        className="w-10 h-10 bg-gray-800 rounded-lg flex items-center justify-center text-xl font-black hover:bg-gray-700 transition-colors"
+                                    >+</button>
+                                </div>
+                            </div>
+
+                            <div className="flex gap-3">
+                                <button 
+                                    onClick={() => setPendingItemUseRequest(null)}
+                                    className="flex-1 py-3 bg-gray-800 text-gray-400 font-black rounded-xl hover:bg-gray-700 transition-all uppercase tracking-widest text-xs"
+                                >
+                                    Reddet
+                                </button>
+                                <button 
+                                    onClick={() => {
+                                        const input = document.getElementById('healInput') as HTMLInputElement;
+                                        handleApproveItemUse(parseInt(input?.value || '0'));
+                                    }}
+                                    className="flex-1 py-3 bg-emerald-600 text-white font-black rounded-xl hover:bg-emerald-500 transition-all shadow-lg shadow-emerald-900/40 uppercase tracking-widest text-xs"
+                                >
+                                    Onayla ✅
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                )}
+
                 {/* --- PET / COMPANION MODAL --- */}
                 {
                     isPetModalOpen && (
@@ -4052,45 +4241,46 @@ export default function DMDashboard() {
                     </div>
                 )}
 
-                <Soundboard
-                    isOpen={isSoundboardOpen}
-                    onClose={() => setIsSoundboardOpen(false)}
-                    playSound={playSound}
-                    stopSound={stopSound}
-                    activeSounds={activeSounds}
-                />
 
-                {/* Floating Soundboard Trigger - Bottom Right */}
-                <div className="fixed bottom-8 right-8 z-[60]">
-                    <button
-                        onClick={() => setIsSoundboardOpen(true)}
-                        className="group relative w-16 h-16 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-2xl flex items-center justify-center transition-all duration-500 shadow-[0_15px_40px_rgba(0,0,0,0.6),0_0_20px_rgba(37,99,235,0.2)] border border-blue-400/30 hover:border-blue-400 hover:scale-110 active:scale-95 overflow-hidden"
-                        title="Soundboard"
-                    >
-                        {/* Shimmer Effect */}
-                        <div className="absolute inset-0 bg-gradient-to-tr from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                        
-                        {/* Active Indicator Wave */}
-                        {Object.keys(activeSounds).length > 0 && (
-                            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                                <div className="w-full h-full border-4 border-blue-400/40 rounded-2xl animate-ping opacity-75"></div>
+
+                {/* --- NPC GENERATOR MODAL --- */}
+                {
+                    isNpcGeneratorOpen && generatedNpc && (
+                        <div className="fixed inset-0 bg-black/80 z-[120] flex items-center justify-center p-4 backdrop-blur-sm animate-in fade-in duration-300">
+                            <div className="bg-gray-900 border-2 border-amber-500/50 rounded-3xl w-full max-w-md overflow-hidden shadow-[0_0_50px_rgba(245,158,11,0.2)]">
+                                <div className="bg-amber-600 p-4 flex justify-between items-center">
+                                    <h3 className="text-xl font-black text-white uppercase tracking-tighter">🎭 Yeni NPC Oluşturuldu</h3>
+                                    <button onClick={() => setIsNpcGeneratorOpen(false)} className="text-white hover:text-amber-200 text-2xl">✕</button>
+                                </div>
+                                <div className="p-8 space-y-6">
+                                    <div className="text-center">
+                                        <div className="text-4xl font-black text-white mb-1 tracking-tight">{generatedNpc.fullName}</div>
+                                        <div className="text-amber-400 font-bold uppercase tracking-widest text-sm">{generatedNpc.race} • {generatedNpc.profession}</div>
+                                    </div>
+                                    
+                                    <div className="space-y-4">
+                                        <div className="bg-gray-950/50 p-4 rounded-2xl border border-gray-800">
+                                            <span className="text-[10px] font-black text-gray-500 uppercase tracking-widest block mb-1">Dış Görünüş</span>
+                                            <p className="text-gray-300 font-medium">{generatedNpc.appearance}</p>
+                                        </div>
+                                        <div className="bg-gray-950/50 p-4 rounded-2xl border border-gray-800">
+                                            <span className="text-[10px] font-black text-gray-500 uppercase tracking-widest block mb-1">Kişilik Özelliği</span>
+                                            <p className="text-gray-300 font-medium">{generatedNpc.trait}</p>
+                                        </div>
+                                    </div>
+
+                                    <button 
+                                        onClick={generateNPC}
+                                        className="w-full py-4 bg-gray-800 hover:bg-gray-700 text-amber-500 font-black rounded-2xl border border-amber-500/30 transition-all uppercase tracking-widest"
+                                    >
+                                        ♻️ Yeniden Zar At
+                                    </button>
+                                </div>
                             </div>
-                        )}
-
-                        <div className={`transition-all duration-500 ${isSoundboardOpen ? 'scale-75 opacity-50' : 'group-hover:scale-110'}`}>
-                            <span className="text-3xl">🎵</span>
                         </div>
-
-                        {/* Badge for active sounds */}
-                        {Object.keys(activeSounds).length > 0 && (
-                            <div className="absolute -top-2 -right-2 min-w-[24px] h-[24px] bg-blue-400 text-slate-900 text-[10px] font-black rounded-full flex items-center justify-center px-1.5 shadow-lg animate-in zoom-in duration-300 ring-4 ring-slate-900">
-                                {Object.keys(activeSounds).length}
-                            </div>
-                        )}
-                    </button>
-                </div>
-
+                    )
+                }
             </div>
-        </div >
+        </div>
     );
 }

@@ -21,7 +21,7 @@ function getSocket(token) {
 }
 
 export function useCampaignSocket(campaignId, role, userId, token) {
-    const [encounterStatus, setEncounterStatus] = useState(null);
+    const [encounterStatus, setEncounterStatus] = useState({ participants: [], round: 1, turnIndex: 0, isActive: false });
     const [partyStats, setPartyStats] = useState({});
     const [diceLogs, setDiceLogs] = useState([]);
     const [whisperData, setWhisperData] = useState(null);
@@ -34,7 +34,9 @@ export function useCampaignSocket(campaignId, role, userId, token) {
     const [quests, setQuests] = useState([]);
     const [factions, setFactions] = useState([]);
     const [sessionNotes, setSessionNotes] = useState([]);
-    const [soundData, setSoundData] = useState(null);
+    const [activeEffect, setActiveEffect] = useState(null);
+    const [itemUseRequest, setItemUseRequest] = useState(null);
+    const [activeEnvironment, setActiveEnvironment] = useState({ type: 'clear', severity: 'medium', backgroundUrl: '' });
     /** @type {[import('socket.io-client').Socket | null, Function]} */
     const [socket, setSocket] = useState(/** @type {any} */(null));
 
@@ -49,6 +51,12 @@ export function useCampaignSocket(campaignId, role, userId, token) {
         s.emit("join_campaign", { campaignId, role, userId });
 
         // Dinleyiciler (Listeners)
+        s.on("vfx_trigger", (effect) => {
+            setActiveEffect(effect);
+            // Reset after a short delay so the same effect can trigger again
+            setTimeout(() => setActiveEffect(null), 100);
+        });
+
         s.on("character_stat_updated", ({ characterId, name, stat, value }) => {
             setPartyStats(prev => {
                 const updated = { ...prev };
@@ -69,7 +77,16 @@ export function useCampaignSocket(campaignId, role, userId, token) {
         });
 
         s.on("encounter_updated", (data) => {
-            setEncounterStatus(data);
+            setEncounterStatus(data || { participants: [], round: 1, turnIndex: 0, isActive: false });
+        });
+
+        s.on("item_use_requested", (data) => {
+            setItemUseRequest(data);
+        });
+
+        s.on("item_use_approved", (data) => {
+            // Can be used to show a toast or local animation
+            setItemUseRequest(null);
         });
 
         s.on("dice_rolled", (data) => {
@@ -127,10 +144,8 @@ export function useCampaignSocket(campaignId, role, userId, token) {
         s.on("quests_sync", (data) => setQuests(data || []));
         s.on("factions_sync", (data) => setFactions(data || []));
         s.on("session_notes_sync", (data) => setSessionNotes(data || []));
+        s.on("environment_updated", (data) => setActiveEnvironment(data || { type: 'clear', severity: 'medium', backgroundUrl: '' }));
         
-        // Sound System
-        s.on("sound_played", (data) => setSoundData({ action: 'play', ...data, timestamp: Date.now() }));
-        s.on("sound_stopped", (data) => setSoundData({ action: 'stop', ...data, timestamp: Date.now() }));
 
         return () => {
             s.off("character_stat_updated");
@@ -150,8 +165,7 @@ export function useCampaignSocket(campaignId, role, userId, token) {
             s.off("quests_sync");
             s.off("factions_sync");
             s.off("session_notes_sync");
-            s.off("sound_played");
-            s.off("sound_stopped");
+            s.off("environment_updated");
             s.disconnect();
             _socket = null; // sonraki mount için sıfırla
         };
@@ -159,6 +173,7 @@ export function useCampaignSocket(campaignId, role, userId, token) {
 
     return { 
         socket, partyStats, encounterStatus, diceLogs, dmLevelPermission, whisperData, whisperHistory,
-        mapData, partyGold, partyInventory, fogOfWar, quests, factions, sessionNotes, soundData
+        mapData, partyGold, partyInventory, fogOfWar, quests, factions, sessionNotes, activeEffect, itemUseRequest,
+        activeEnvironment
     };
 }
