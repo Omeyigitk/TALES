@@ -950,24 +950,56 @@ export default function DMDashboard() {
         <div className="min-h-screen bg-gray-950 p-8 text-gray-100 font-sans relative">
             <VFXOverlay activeEffect={activeEffect} weather={activeEnvironment} />
             <div className="max-w-7xl mx-auto space-y-8 animate-fade-in">
-                <header className="flex flex-col md:flex-row justify-between items-center bg-gray-900/50 backdrop-blur-xl border border-gray-700/50 p-4 rounded-2xl shadow-[0_4px_30px_rgba(0,0,0,0.5)]">
-                    <div className="flex items-center mb-4 md:mb-0">
-                        <div className="w-12 h-12 bg-gradient-to-br from-red-600 to-red-900 rounded-xl flex items-center justify-center text-2xl shadow-[0_0_15px_rgba(239,68,68,0.5)] mr-4 border border-red-500/50">
-                            🐉
-                        </div>
-                        <div>
-                            <h1 className="text-3xl font-black text-white tracking-tight">Dungeon Yöneticisi</h1>
-                            <div className="flex items-center gap-2 mt-1">
-                                <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
-                                <span className="text-xs text-gray-400 font-bold tracking-widest uppercase">Aktif Oda: {campaignId}</span>
+                <header className="flex flex-col justify-between bg-gray-900/50 backdrop-blur-xl border border-gray-700/50 p-4 rounded-2xl shadow-[0_4px_30px_rgba(0,0,0,0.5)] gap-3">
+                    {/* ROW 1: Identity + Global Controls */}
+                    <div className="flex items-center justify-between flex-wrap gap-3">
+                        <div className="flex items-center">
+                            <div className="w-12 h-12 bg-gradient-to-br from-red-600 to-red-900 rounded-xl flex items-center justify-center text-2xl shadow-[0_0_15px_rgba(239,68,68,0.5)] mr-4 border border-red-500/50">
+                                🐉
                             </div>
+                            <div>
+                                <h1 className="text-3xl font-black text-white tracking-tight">Dungeon Yöneticisi</h1>
+                                <div className="flex items-center gap-2 mt-1">
+                                    <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                                    <span className="text-xs text-gray-400 font-bold tracking-widest uppercase">Aktif Oda: {campaignId}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="flex items-center gap-3 flex-wrap">
+                            {/* NPC Generator */}
+                            <button
+                                onClick={generateNPC}
+                                className="flex items-center gap-2 bg-amber-600 hover:bg-amber-500 text-white font-black px-4 py-2 rounded-xl shadow-lg shadow-amber-900/20 transition-all uppercase tracking-widest text-xs"
+                            >
+                                <span>🎭</span><span>Hızlı NPC</span>
+                            </button>
+
+                            {/* Level Permission */}
+                            <div className="flex items-center gap-2 bg-gray-950/60 border border-gray-700/50 rounded-xl px-3 py-2 shadow-inner">
+                                <span className="text-xs text-gray-400 font-bold uppercase tracking-wider">Level İzni</span>
+                                <button
+                                    onClick={() => toggleLevelPermission(true)}
+                                    className={`px-2 py-1 rounded-md text-[10px] uppercase font-black transition-all ${levelPermEnabled ? 'bg-green-500/20 text-green-400 border border-green-500/50 shadow-[0_0_10px_rgba(34,197,94,0.3)]' : 'hover:bg-green-900/30 text-gray-500'}`}
+                                >✅ Aç</button>
+                                <button
+                                    onClick={() => toggleLevelPermission(false)}
+                                    className={`px-2 py-1 rounded-md text-[10px] uppercase font-black transition-all ${!levelPermEnabled ? 'bg-red-500/20 text-red-400 border border-red-500/50 shadow-[0_0_10px_rgba(239,68,68,0.3)]' : 'hover:bg-red-900/30 text-gray-500'}`}
+                                >🔒 Kapat</button>
+                            </div>
+
+                            {/* Parti Durumu */}
+                            <button onClick={() => setIsPartyStatusOpen(true)} className="flex items-center gap-2 bg-gradient-to-r from-yellow-900/80 to-yellow-800/80 hover:from-yellow-800 hover:to-yellow-700 text-yellow-100 text-sm font-bold py-2 px-5 rounded-xl border border-yellow-500/50 shadow-[0_0_15px_rgba(234,179,8,0.3)] transition-all">
+                                🛡️ <span>Parti Durumu</span>
+                            </button>
                         </div>
                     </div>
 
-                    <div className="flex flex-wrap gap-2 justify-center">
-                        {/* Weather Controls Quick Access */}
-                        <div className="flex items-center gap-2 bg-gray-950/60 border border-gray-700/50 rounded-xl px-3 py-1.5 shadow-inner mr-2">
-                            <span className="text-[10px] text-gray-500 font-black uppercase tracking-widest">Atmosfer</span>
+                    {/* ROW 2: Environment Controls */}
+                    <div className="flex items-center gap-3 flex-wrap bg-gray-950/40 border border-gray-800/60 rounded-xl px-4 py-2.5">
+                        {/* Weather Controls */}
+                        <div className="flex items-center gap-2">
+                            <span className="text-[10px] text-gray-500 font-black uppercase tracking-widest shrink-0">🌤 Atmosfer</span>
                             <div className="flex gap-1">
                                 {[
                                     { type: 'clear', icon: '☀️' },
@@ -980,29 +1012,22 @@ export default function DMDashboard() {
                                         key={w.type}
                                         onClick={() => {
                                             if (!socket) return;
-                                            socket.emit('update_environment', { 
-                                                campaignId, 
-                                                environmentData: { type: w.type, severity: activeEnvironment?.severity || 'medium' } 
-                                            });
+                                            socket.emit('update_environment', { campaignId, environmentData: { type: w.type, severity: activeEnvironment?.severity || 'medium' } });
                                         }}
-                                        className={`w-8 h-8 rounded-lg flex items-center justify-center transition-all ${activeEnvironment?.type === w.type ? 'bg-indigo-600 scale-110 shadow-lg shadow-indigo-900/50' : 'bg-gray-800 hover:bg-gray-700 opacity-60'}`}
+                                        className={`w-8 h-8 rounded-lg flex items-center justify-center transition-all text-sm ${activeEnvironment?.type === w.type ? 'bg-indigo-600 scale-110 shadow-lg shadow-indigo-900/50' : 'bg-gray-800 hover:bg-gray-700 opacity-60 hover:opacity-100'}`}
                                         title={w.type}
                                     >
                                         {w.icon}
                                     </button>
                                 ))}
                             </div>
-                            <div className="w-px h-6 bg-gray-800 mx-1" />
-                            <select 
+                            <select
                                 value={activeEnvironment?.severity || 'medium'}
                                 onChange={(e) => {
                                     if (!socket) return;
-                                    socket.emit('update_environment', { 
-                                        campaignId, 
-                                        environmentData: { type: activeEnvironment?.type || 'clear', severity: e.target.value } 
-                                    });
+                                    socket.emit('update_environment', { campaignId, environmentData: { type: activeEnvironment?.type || 'clear', severity: e.target.value } });
                                 }}
-                                className="bg-transparent text-[10px] font-black uppercase tracking-widest text-indigo-400 outline-none cursor-pointer"
+                                className="bg-gray-800 border border-gray-700 text-[10px] font-black uppercase tracking-widest text-indigo-400 outline-none cursor-pointer rounded-lg px-2 py-1"
                             >
                                 <option value="light">Hafif</option>
                                 <option value="medium">Orta</option>
@@ -1010,41 +1035,30 @@ export default function DMDashboard() {
                             </select>
                         </div>
 
-                        {/* Background Sync Controls */}
-                        <div className="flex items-center gap-2 bg-gray-950/60 border border-gray-700/50 rounded-xl px-3 py-1.5 shadow-inner mr-4">
-                            <span className="text-[10px] text-gray-500 font-black uppercase tracking-widest">Arkaplan</span>
-                            
+                        <div className="w-px h-6 bg-gray-700/50 hidden md:block" />
+
+                        {/* Background Controls */}
+                        <div className="flex items-center gap-2 flex-wrap">
+                            <span className="text-[10px] text-gray-500 font-black uppercase tracking-widest shrink-0">🖼 Arkaplan</span>
                             <button
                                 onClick={() => document.getElementById('bg-upload-input')?.click()}
-                                className="bg-gray-800 hover:bg-gray-700 text-gray-400 hover:text-white rounded-lg px-2 py-0.5 text-[10px] transition-all flex items-center gap-1 border border-gray-700/50"
+                                className="bg-gray-800 hover:bg-gray-700 text-gray-400 hover:text-white rounded-lg px-2.5 py-1 text-[10px] transition-all flex items-center gap-1 border border-gray-700/50"
                                 title="Bilgisayardan Yükle"
                             >
-                                📁 <span className="text-[8px] font-black uppercase tracking-tighter">YÜKLE</span>
+                                📁 <span className="font-black uppercase tracking-tighter">Yükle</span>
                             </button>
-                            <input 
-                                type="file"
-                                id="bg-upload-input"
-                                className="hidden"
-                                onChange={handleBackgroundUpload}
-                                accept="image/*"
-                            />
-
-                            <div className="w-px h-4 bg-gray-800 mx-0.5" />
-
-                            <input 
+                            <input type="file" id="bg-upload-input" className="hidden" onChange={handleBackgroundUpload} accept="image/*" />
+                            <input
                                 type="text"
-                                placeholder="URL Yapıştır..."
+                                placeholder="URL yapıştır..."
                                 defaultValue={activeEnvironment?.backgroundUrl || ''}
                                 onBlur={(e) => {
                                     if (!socket) return;
-                                    socket.emit('update_environment', { 
-                                        campaignId, 
-                                        environmentData: { backgroundUrl: e.target.value } 
-                                    });
+                                    socket.emit('update_environment', { campaignId, environmentData: { backgroundUrl: e.target.value } });
                                 }}
-                                className="bg-gray-900 border border-gray-800 rounded px-2 py-0.5 text-[10px] text-gray-300 w-24 outline-none focus:border-indigo-500"
+                                className="bg-gray-800 border border-gray-700 rounded-lg px-2.5 py-1 text-[10px] text-gray-300 w-32 outline-none focus:border-indigo-500"
                             />
-                            <div className="flex gap-1 ml-1">
+                            <div className="flex gap-1">
                                 {[
                                     { name: 'Dungeon', url: 'https://images.squarespace-cdn.com/content/v1/593e9232c534a5697e06a378/1566495638202-VUPY5M056T298C7SCSG5/Tavern_Grid.jpg' },
                                     { name: 'Forest', url: 'https://i.pinimg.com/736x/8f/30/1c/8f301cc9388f8d6614144463690d5656.jpg' },
@@ -1055,78 +1069,52 @@ export default function DMDashboard() {
                                         key={bg.name}
                                         onClick={() => {
                                             if (!socket) return;
-                                            socket.emit('update_environment', { 
-                                                campaignId, 
-                                                environmentData: { backgroundUrl: bg.url } 
-                                            });
+                                            socket.emit('update_environment', { campaignId, environmentData: { backgroundUrl: bg.url } });
                                         }}
-                                        className={`px-1.5 py-0.5 rounded text-[8px] font-black uppercase tracking-tighter transition-all ${activeEnvironment?.backgroundUrl === bg.url ? 'bg-indigo-600 text-white' : 'bg-gray-800 text-gray-500 hover:text-gray-300'}`}
+                                        className={`px-2 py-1 rounded-lg text-[9px] font-black uppercase tracking-tighter transition-all ${activeEnvironment?.backgroundUrl === bg.url ? 'bg-indigo-600 text-white' : 'bg-gray-800 text-gray-500 hover:text-gray-200 border border-gray-700/50'}`}
                                     >
                                         {bg.name}
                                     </button>
                                 ))}
                             </div>
                         </div>
+                    </div>
 
-                        {/* NPC Generator Button */}
-                        <button
-                            onClick={generateNPC}
-                            className="flex items-center gap-2 bg-amber-600 hover:bg-amber-500 text-white font-black px-4 py-1.5 rounded-xl shadow-lg shadow-amber-900/20 transition-all uppercase tracking-widest text-xs"
-                        >
-                            <span>🎭</span>
-                            <span>Hızlı NPC</span>
+                    {/* ROW 3: Tool Buttons */}
+                    <div className="flex flex-wrap gap-2">
+                        <button onClick={() => setIsGalleryOpen(true)} className="flex items-center gap-2 bg-gray-800/60 hover:bg-blue-900/40 text-gray-200 hover:text-blue-400 text-sm font-bold py-1.5 px-3 rounded-xl border border-gray-700/50 hover:border-blue-500/50 transition-all">
+                            🖼️ Medya
                         </button>
-
-                        {/* DM Seviye İzni */}
-                        <div className="flex items-center gap-2 bg-gray-950/60 border border-gray-700/50 rounded-xl px-3 py-1.5 shadow-inner">
-                            <span className="text-xs text-gray-400 font-bold uppercase tracking-wider">Level İzni</span>
-                            <button
-                                onClick={() => toggleLevelPermission(true)}
-                                className={`px-2 py-1 rounded-md text-[10px] uppercase font-black transition-all ${levelPermEnabled ? 'bg-green-500/20 text-green-400 border border-green-500/50 shadow-[0_0_10px_rgba(34,197,94,0.3)]' : 'hover:bg-green-900/30 text-gray-500'}`}
-                            >✅ Aç</button>
-                            <button
-                                onClick={() => toggleLevelPermission(false)}
-                                className={`px-2 py-1 rounded-md text-[10px] uppercase font-black transition-all ${!levelPermEnabled ? 'bg-red-500/20 text-red-400 border border-red-500/50 shadow-[0_0_10px_rgba(239,68,68,0.3)]' : 'hover:bg-red-900/30 text-gray-500'}`}
-                            >🔒 Kapat</button>
-                        </div>
-
-                        <div className="h-8 w-px bg-gray-700/50 mx-1 hidden md:block"></div>
-
-                        <button onClick={() => setIsPartyStatusOpen(true)} className="flex items-center gap-2 bg-gradient-to-r from-yellow-900/80 to-yellow-800/80 hover:from-yellow-800 hover:to-yellow-700 text-yellow-100 text-sm font-bold py-2 px-5 rounded-xl border border-yellow-500/50 shadow-[0_0_15px_rgba(234,179,8,0.3)] transition-all">
-                            🛡️ <span className="hidden xl:inline">Parti Durumu</span>
+                        <button onClick={() => setIsNpcMenuOpen(true)} className="flex items-center gap-2 bg-gray-800/60 hover:bg-emerald-900/40 text-gray-200 hover:text-emerald-400 text-sm font-bold py-1.5 px-3 rounded-xl border border-gray-700/50 hover:border-emerald-500/50 transition-all">
+                            🤝 NPC Ağı
                         </button>
-                        <button onClick={() => setIsGalleryOpen(true)} className="flex items-center gap-2 bg-gray-800/60 hover:bg-blue-900/40 text-gray-200 hover:text-blue-400 text-sm font-bold py-2 px-4 rounded-xl border border-gray-700/50 hover:border-blue-500/50 transition-all shadow-sm">
-                            🖼️ <span className="hidden xl:inline">Medya Galerisi</span> {gallery.length > 0 && <span className="bg-blue-600 text-white text-[10px] px-1.5 py-0.5 rounded-full">{gallery.length}</span>}
+                        <button onClick={() => setIsNoteMenuOpen(true)} className="flex items-center gap-2 bg-gray-800/60 hover:bg-yellow-900/40 text-gray-200 hover:text-yellow-400 text-sm font-bold py-1.5 px-3 rounded-xl border border-gray-700/50 hover:border-yellow-500/50 transition-all">
+                            📝 Notlar
                         </button>
-                        <button onClick={() => setIsNpcMenuOpen(true)} className="flex items-center gap-2 bg-gray-800/60 hover:bg-emerald-900/40 text-gray-200 hover:text-emerald-400 text-sm font-bold py-2 px-4 rounded-xl border border-gray-700/50 hover:border-emerald-500/50 transition-all shadow-sm">
-                            🤝 <span className="hidden xl:inline">NPC Ağı</span>
+                        <button onClick={() => setIsShopMenuOpen(true)} className="flex items-center gap-2 bg-gray-800/60 hover:bg-orange-900/40 text-gray-200 hover:text-orange-400 text-sm font-bold py-1.5 px-3 rounded-xl border border-gray-700/50 hover:border-orange-500/50 transition-all">
+                            🏬 Dükkan
                         </button>
-                        <button onClick={() => setIsNoteMenuOpen(true)} className="flex items-center gap-2 bg-gray-800/60 hover:bg-yellow-900/40 text-gray-200 hover:text-yellow-400 text-sm font-bold py-2 px-4 rounded-xl border border-gray-700/50 hover:border-yellow-500/50 transition-all shadow-sm">
-                            📝 <span className="hidden xl:inline">Notlar</span>
+                        <button onClick={() => setIsMapOpen(true)} className="flex items-center gap-2 bg-gray-800/60 hover:bg-red-900/40 text-gray-200 hover:text-red-400 text-sm font-bold py-1.5 px-3 rounded-xl border border-gray-700/50 hover:border-red-500/50 transition-all">
+                            🗺️ Harita
                         </button>
-                        <button onClick={() => setIsShopMenuOpen(true)} className="flex items-center gap-2 bg-gray-800/60 hover:bg-orange-900/40 text-gray-200 hover:text-orange-400 text-sm font-bold py-2 px-4 rounded-xl border border-gray-700/50 hover:border-orange-500/50 transition-all shadow-sm">
-                            🏬 <span className="hidden xl:inline">Dükkan / Tüccar</span>
+                        <button onClick={() => setIsQuestMenuOpen(true)} className="flex items-center gap-2 bg-gray-800/60 hover:bg-emerald-900/40 text-gray-200 hover:text-emerald-400 text-sm font-bold py-1.5 px-3 rounded-xl border border-gray-700/50 hover:border-emerald-500/50 transition-all">
+                            📜 Görevler {quests?.length > 0 && <span className="bg-emerald-600/50 border border-emerald-500/30 text-emerald-100 text-[10px] px-1.5 py-0.5 rounded-full">{quests.length}</span>}
                         </button>
-                        <button onClick={() => setIsMapOpen(true)} className="flex items-center gap-2 bg-gray-800/60 hover:bg-red-900/40 text-gray-200 hover:text-red-400 text-sm font-bold py-2 px-4 rounded-xl border border-gray-700/50 hover:border-red-500/50 transition-all shadow-sm">
-                            🗺️ <span className="hidden xl:inline">Stratejik Harita</span>
+                        <button onClick={() => setIsFactionMenuOpen(true)} className="flex items-center gap-2 bg-gray-800/60 hover:bg-indigo-900/40 text-gray-200 hover:text-indigo-400 text-sm font-bold py-1.5 px-3 rounded-xl border border-gray-700/50 hover:border-indigo-500/50 transition-all">
+                            🚩 Fraksiyonlar
                         </button>
-                        <button onClick={() => setIsQuestMenuOpen(true)} className="flex items-center gap-2 bg-gray-800/60 hover:bg-emerald-900/40 text-gray-200 hover:text-emerald-400 text-sm font-bold py-2 px-4 rounded-xl border border-gray-700/50 hover:border-emerald-500/50 transition-all shadow-sm">
-                            📜 <span className="hidden xl:inline">Görev Takibi</span> {quests?.length > 0 && <span className="bg-emerald-600/50 border border-emerald-500/30 text-emerald-100 text-[10px] px-1.5 py-0.5 rounded-full">{quests.length}</span>}
-                        </button>
-                        <button onClick={() => setIsFactionMenuOpen(true)} className="flex items-center gap-2 bg-gray-800/60 hover:bg-indigo-900/40 text-gray-200 hover:text-indigo-400 text-sm font-bold py-2 px-4 rounded-xl border border-gray-700/50 hover:border-indigo-500/50 transition-all shadow-sm">
-                            🚩 <span className="hidden xl:inline">Fraksiyonlar</span>
-                        </button>
-                        <button onClick={() => setIsSessionNoteMenuOpen(true)} className="flex items-center gap-2 bg-gray-800/60 hover:bg-amber-900/40 text-gray-200 hover:text-amber-400 text-sm font-bold py-2 px-4 rounded-xl border border-gray-700/50 hover:border-amber-500/50 transition-all shadow-sm">
-                            ✍️ <span className="hidden xl:inline">Oturum Notları</span>
-                        </button>
-                        <button onClick={() => setIsMonsterBookOpen(true)} className="flex items-center gap-2 bg-gradient-to-r from-purple-900/80 to-purple-800/80 hover:from-purple-800 hover:to-purple-700 text-purple-100 text-sm font-bold py-2 px-5 rounded-xl border border-purple-500/50 shadow-[0_0_15px_rgba(168,85,247,0.3)] transition-all">
-                            📖 <span className="hidden lg:inline">Canavar Kitabı</span>
-                        </button>
-                        <button onClick={() => setIsItemBookOpen(true)} className="flex items-center gap-2 bg-gradient-to-r from-blue-900/80 to-blue-800/80 hover:from-blue-800 hover:to-blue-700 text-blue-100 text-sm font-bold py-2 px-5 rounded-xl border border-blue-500/50 shadow-[0_0_15px_rgba(59,130,246,0.3)] transition-all">
-                            ⚔️ <span className="hidden lg:inline">Eşya Kitabı</span>
+                        <button onClick={() => setIsSessionNoteMenuOpen(true)} className="flex items-center gap-2 bg-gray-800/60 hover:bg-amber-900/40 text-gray-200 hover:text-amber-400 text-sm font-bold py-1.5 px-3 rounded-xl border border-gray-700/50 hover:border-amber-500/50 transition-all">
+                            ✍️ Oturum Notları
                         </button>
 
+                        <div className="w-px h-8 bg-gray-700/50 mx-1 self-center hidden md:block" />
 
+                        <button onClick={() => setIsMonsterBookOpen(true)} className="flex items-center gap-2 bg-gradient-to-r from-purple-900/80 to-purple-800/80 hover:from-purple-800 hover:to-purple-700 text-purple-100 text-sm font-bold py-1.5 px-4 rounded-xl border border-purple-500/50 shadow-[0_0_12px_rgba(168,85,247,0.2)] transition-all">
+                            📖 Canavar Kitabı
+                        </button>
+                        <button onClick={() => setIsItemBookOpen(true)} className="flex items-center gap-2 bg-gradient-to-r from-blue-900/80 to-blue-800/80 hover:from-blue-800 hover:to-blue-700 text-blue-100 text-sm font-bold py-1.5 px-4 rounded-xl border border-blue-500/50 shadow-[0_0_12px_rgba(59,130,246,0.2)] transition-all">
+                            ⚔️ Eşya Kitabı
+                        </button>
                     </div>
                 </header>
 
