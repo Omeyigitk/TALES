@@ -1002,11 +1002,16 @@ export default function DMDashboard() {
                             <span className="text-[10px] text-gray-500 font-black uppercase tracking-widest shrink-0">🌤 Atmosfer</span>
                             <div className="flex gap-1">
                                 {[
-                                    { type: 'clear', icon: '☀️' },
-                                    { type: 'rain', icon: '🌧️' },
-                                    { type: 'snow', icon: '❄️' },
-                                    { type: 'fog', icon: '🌫️' },
-                                    { type: 'sandstorm', icon: '🏜️' }
+                                    { type: 'clear',     icon: '☀️', label: 'Güneşli' },
+                                    { type: 'rain',      icon: '🌧️', label: 'Yağmur' },
+                                    { type: 'snow',      icon: '❄️', label: 'Kar' },
+                                    { type: 'fog',       icon: '🌫️', label: 'Sis' },
+                                    { type: 'sandstorm', icon: '🏜️', label: 'Kum Fırtınası' },
+                                    { type: 'thunder',   icon: '⛈️', label: 'Fırtına' },
+                                    { type: 'blizzard',  icon: '🌨️', label: 'Tipi' },
+                                    { type: 'embers',    icon: '🌋', label: 'Volkan' },
+                                    { type: 'blood',     icon: '🩸', label: 'Kan Yağmuru' },
+                                    { type: 'magic',     icon: '✨', label: 'Büyü' },
                                 ].map((w) => (
                                     <button
                                         key={w.type}
@@ -1015,7 +1020,7 @@ export default function DMDashboard() {
                                             socket.emit('update_environment', { campaignId, environmentData: { type: w.type, severity: activeEnvironment?.severity || 'medium' } });
                                         }}
                                         className={`w-8 h-8 rounded-lg flex items-center justify-center transition-all text-sm ${activeEnvironment?.type === w.type ? 'bg-indigo-600 scale-110 shadow-lg shadow-indigo-900/50' : 'bg-gray-800 hover:bg-gray-700 opacity-60 hover:opacity-100'}`}
-                                        title={w.type}
+                                        title={w.label}
                                     >
                                         {w.icon}
                                     </button>

@@ -1,3 +1,4 @@
+/* ── VFX CONTAINER ── */
 .vfxContainer {
     position: fixed;
     top: 0;
@@ -5,15 +6,17 @@
     width: 100vw;
     height: 100vh;
     pointer-events: none;
-    z-index: 9999;
+    z-index: 5; /* Behind text (content is z-index 10+) */
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
 }
 
+/* ── DICE VFX (keep at high z-index) ── */
 .effect {
     position: absolute;
+    z-index: 9999;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -30,7 +33,7 @@
 }
 
 .nat20 {
-    color: #fbbf24; /* Amber 400 */
+    color: #fbbf24;
     text-shadow: 0 0 20px rgba(251, 191, 36, 0.8), 0 0 40px rgba(251, 191, 36, 0.4);
 }
 
@@ -52,7 +55,7 @@
 }
 
 .nat1 {
-    color: #ef4444; /* Red 500 */
+    color: #ef4444;
     text-shadow: 0 0 20px rgba(239, 68, 68, 0.8);
 }
 
@@ -88,7 +91,6 @@
     100% { transform: translate(1px, -2px) rotate(-1deg); }
 }
 
-/* Background Flash */
 .flash {
     position: absolute;
     inset: 0;
@@ -109,7 +111,6 @@
     100% { opacity: 0; transform: scale(1.5); }
 }
 
-/* Particles */
 .particle {
     position: absolute;
     width: 6px;
@@ -124,7 +125,6 @@
 }
 
 /* ── CONDITION AMBIENT EFFECTS ── */
-
 .conditionOverlay {
     position: absolute;
     inset: 0;
@@ -132,16 +132,14 @@
     height: 100%;
     pointer-events: none;
     transition: all 1s ease-in-out;
-    z-index: -1; /* Behind the NAT20/NAT1 text */
+    z-index: 1;
 }
 
-/* Blinded - Heavy Vignette */
 .blinded {
     background: radial-gradient(circle, transparent 20%, rgba(0,0,0,0.95) 80%);
     box-shadow: inset 0 0 150px 100px black;
 }
 
-/* Poisoned - Green Sickly Tint */
 .poisoned {
     background: rgba(22, 101, 52, 0.15);
     box-shadow: inset 0 0 100px rgba(34, 197, 94, 0.3);
@@ -153,35 +151,30 @@
     100% { opacity: 0.8; }
 }
 
-/* Frightened - Desaturated & Shaky */
 .frightened {
     background: rgba(30, 0, 0, 0.1);
     backdrop-filter: grayscale(0.5) contrast(1.2);
     box-shadow: inset 0 0 100px rgba(127, 29, 29, 0.2);
 }
 
-/* Charmed - Pink/Heart Glow */
 .charmed {
     background: rgba(190, 24, 93, 0.1);
     box-shadow: inset 0 0 100px rgba(236, 72, 153, 0.3);
     animation: pulse 3s infinite alternate;
 }
 
-/* Paralyzed / Stunned - Dazed Blur */
 .stunned, .paralyzed {
     backdrop-filter: blur(2px) brightness(1.1);
     background: rgba(255, 255, 255, 0.05);
     box-shadow: inset 0 0 100px rgba(234, 179, 8, 0.2);
 }
 
-/* Petrified - Gray Stone */
 .petrified {
     background: rgba(75, 85, 99, 0.4);
     backdrop-filter: grayscale(1);
     mix-blend-mode: multiply;
 }
 
-/* Unconscious - Near Black */
 .unconscious {
     background: black;
     opacity: 0.85;
@@ -194,68 +187,215 @@
 
 /* ── WEATHER EFFECTS ── */
 
-.weatherRain, .weatherSnow {
+/* All weather elements sit BEHIND content (z-index < main layout) */
+.weatherRain, .weatherSnow, .weatherThunder, .weatherBlizzard,
+.weatherEmbers, .weatherBlood, .weatherMagic {
     position: absolute;
     inset: 0;
     width: 100%;
     height: 100%;
     pointer-events: none;
     overflow: hidden;
+    z-index: 1;
 }
 
+/* ─ RAIN ─ */
 .drop {
     position: absolute;
-    width: 2px;
-    height: 15px;
-    background: rgba(173, 216, 230, 0.4);
+    width: 1.5px;
+    height: 18px;
+    background: linear-gradient(to bottom, transparent, rgba(173, 216, 230, 0.6));
     top: -20px;
     animation: rainLinear infinite linear;
+    transform: rotate(10deg);
 }
 
 @keyframes rainLinear {
-    to { transform: translateY(100vh); }
+    to { transform: translateY(110vh) rotate(10deg); }
 }
 
+/* ─ SNOW ─ */
 .flake {
     position: absolute;
-    width: 5px;
-    height: 5px;
-    background: white;
     border-radius: 50%;
     top: -10px;
-    animation: snowFall infinite linear;
+    animation: snowFall infinite ease-in-out;
+}
+
+/* Variation A: small dot */
+.flake:nth-child(3n) {
+    width: 4px;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.9);
+    filter: blur(0.5px);
+    box-shadow: 0 0 4px rgba(255,255,255,0.8);
+}
+/* Variation B: medium */
+.flake:nth-child(3n+1) {
+    width: 6px;
+    height: 6px;
+    background: rgba(240, 248, 255, 1);
     filter: blur(1px);
+    box-shadow: 0 0 6px rgba(255,255,255,0.7);
+}
+/* Variation C: fluffy */
+.flake:nth-child(3n+2) {
+    width: 8px;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.7);
+    filter: blur(2px);
+    box-shadow: 0 0 8px rgba(255,255,255,0.5);
 }
 
 @keyframes snowFall {
-    0% { transform: translateY(0) translateX(0); }
-    25% { transform: translateY(25vh) translateX(15px); }
-    50% { transform: translateY(50vh) translateX(-15px); }
-    75% { transform: translateY(75vh) translateX(15px); }
-    100% { transform: translateY(100vh) translateX(0); }
+    0%   { transform: translateY(0) translateX(0) rotate(0deg); }
+    25%  { transform: translateY(25vh) translateX(20px) rotate(90deg); }
+    50%  { transform: translateY(50vh) translateX(-20px) rotate(180deg); }
+    75%  { transform: translateY(75vh) translateX(20px) rotate(270deg); }
+    100% { transform: translateY(110vh) translateX(0) rotate(360deg); }
 }
 
+/* ─ FOG ─ */
 .weatherFog {
     position: absolute;
     inset: 0;
     pointer-events: none;
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(2px);
+    z-index: 1;
     transition: all 2s ease-in-out;
+    animation: fogDrift 12s infinite alternate ease-in-out;
 }
 
-.weatherFog.light { backdrop-filter: blur(1px); opacity: 0.3; }
-.weatherFog.medium { backdrop-filter: blur(4px); opacity: 0.5; }
-.weatherFog.heavy { backdrop-filter: blur(8px); opacity: 0.8; }
+.weatherFog.light  { background: rgba(200, 200, 220, 0.08); backdrop-filter: blur(1px); }
+.weatherFog.medium { background: rgba(200, 200, 220, 0.15); backdrop-filter: blur(3px); }
+.weatherFog.heavy  { background: rgba(200, 200, 220, 0.28); backdrop-filter: blur(6px); }
 
+@keyframes fogDrift {
+    from { transform: scale(1) translateX(0); }
+    to   { transform: scale(1.05) translateX(20px); }
+}
+
+/* ─ SANDSTORM ─ */
 .weatherSand {
     position: absolute;
     inset: 0;
-    background: rgba(194, 120, 57, 0.1);
-    animation: sandPulse 5s infinite alternate;
+    z-index: 1;
+    background: linear-gradient(135deg, rgba(194, 120, 57, 0.08), rgba(210, 150, 70, 0.14));
+    animation: sandPulse 4s infinite alternate;
+}
+
+.grain {
+    position: absolute;
+    height: 1px;
+    background: rgba(194, 150, 80, 0.5);
+    animation: grainMove infinite linear;
+    border-radius: 2px;
+}
+
+@keyframes grainMove {
+    0%   { transform: translateX(-10%) translateY(0); opacity: 0; }
+    10%  { opacity: 1; }
+    90%  { opacity: 1; }
+    100% { transform: translateX(110%) translateY(var(--vy, 20px)); opacity: 0; }
 }
 
 @keyframes sandPulse {
-    from { opacity: 0.3; transform: scale(1); }
-    to { opacity: 0.6; transform: scale(1.1); }
+    from { opacity: 0.4; }
+    to   { opacity: 0.9; }
+}
+
+/* ─ THUNDER / STORM ─ */
+.lightning {
+    position: absolute;
+    top: 0;
+    left: var(--lx, 50%);
+    width: 2px;
+    height: 100vh;
+    background: linear-gradient(to bottom, rgba(255,255,200,0.9), transparent);
+    animation: lightningStrike var(--dur, 0.15s) ease-out forwards;
+    filter: blur(1px);
+    box-shadow: 0 0 10px rgba(255,255,200,0.8), 0 0 30px rgba(255,255,200,0.4);
+}
+
+.thunderFlash {
+    position: absolute;
+    inset: 0;
+    background: rgba(220, 220, 255, 0.12);
+    animation: thunderFlashAnim var(--fdur, 0.3s) ease-out forwards;
+}
+
+@keyframes lightningStrike {
+    0%   { opacity: 0; height: 0; }
+    30%  { opacity: 1; height: 100vh; }
+    70%  { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+@keyframes thunderFlashAnim {
+    0%   { opacity: 0; }
+    20%  { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+/* ─ BLIZZARD ─ */
+.blizzardWind {
+    position: absolute;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(200,230,255,0.5), transparent);
+    animation: windStreakBlizzard infinite linear;
+}
+
+@keyframes windStreakBlizzard {
+    0%   { transform: translateX(-100%); opacity: 0; }
+    10%  { opacity: 1; }
+    90%  { opacity: 1; }
+    100% { transform: translateX(100vw); opacity: 0; }
+}
+
+/* ─ EMBERS (Volcano / Fire) ─ */
+.ember {
+    position: absolute;
+    border-radius: 50%;
+    bottom: -10px;
+    animation: emberRise infinite ease-out;
+    filter: blur(0.5px);
+}
+
+.ember:nth-child(3n)   { width: 4px; height: 4px; background: rgba(255, 100, 0, 0.9); box-shadow: 0 0 6px rgba(255,100,0,0.8); }
+.ember:nth-child(3n+1) { width: 3px; height: 3px; background: rgba(255, 180, 30, 0.9); box-shadow: 0 0 4px rgba(255,180,30,0.8); }
+.ember:nth-child(3n+2) { width: 5px; height: 5px; background: rgba(220, 50, 0, 0.8); box-shadow: 0 0 8px rgba(220,50,0,0.6); }
+
+@keyframes emberRise {
+    0%   { transform: translateY(0) translateX(0) scale(1); opacity: 1; }
+    50%  { transform: translateY(-50vh) translateX(var(--ex, 30px)) scale(0.8); opacity: 0.8; }
+    100% { transform: translateY(-100vh) translateX(var(--ex2, -20px)) scale(0); opacity: 0; }
+}
+
+/* ─ BLOOD RAIN ─ */
+.bloodDrop {
+    position: absolute;
+    width: 2px;
+    background: linear-gradient(to bottom, transparent, rgba(180, 0, 0, 0.7));
+    top: -20px;
+    animation: rainLinear infinite linear;
+    transform: rotate(5deg);
+}
+
+/* ─ MAGIC PARTICLES ─ */
+.magicOrb {
+    position: absolute;
+    border-radius: 50%;
+    animation: magicFloat infinite ease-in-out;
+}
+
+.magicOrb:nth-child(4n)   { width: 4px; height: 4px; background: rgba(168, 85, 247, 0.9); box-shadow: 0 0 8px rgba(168,85,247,0.9); }
+.magicOrb:nth-child(4n+1) { width: 3px; height: 3px; background: rgba(99, 102, 241, 0.9); box-shadow: 0 0 6px rgba(99,102,241,0.9); }
+.magicOrb:nth-child(4n+2) { width: 5px; height: 5px; background: rgba(236, 72, 153, 0.8); box-shadow: 0 0 10px rgba(236,72,153,0.8); }
+.magicOrb:nth-child(4n+3) { width: 3px; height: 3px; background: rgba(34, 211, 238, 0.9); box-shadow: 0 0 6px rgba(34,211,238,0.9); }
+
+@keyframes magicFloat {
+    0%   { transform: translateY(110vh) translateX(var(--mx, 0px)) scale(0.5); opacity: 0; }
+    10%  { opacity: 1; }
+    50%  { transform: translateY(50vh) translateX(var(--mx2, 30px)) scale(1); }
+    90%  { opacity: 1; }
+    100% { transform: translateY(-10vh) translateX(var(--mx3, -20px)) scale(0.3); opacity: 0; }
 }
