@@ -111,12 +111,15 @@ export const VFXOverlay = React.memo<{
             return (
                 <div key="snow" className={styles.weatherSnow}>
                     {Array.from({ length: count }).map((_, i) => (
-                        <div key={i} className={styles.flake} style={{
+                        <div key={i} className={styles.flakeFall} style={{
                             left: `${Math.random() * 100}%`,
                             animationDelay: `${Math.random() * 8}s`,
                             animationDuration: `${4 + Math.random() * 8}s`,
-                            opacity: 0.5 + Math.random() * 0.5
-                        }} />
+                        }}>
+                            <div className={styles.flake} style={{
+                                opacity: 0.5 + Math.random() * 0.5
+                            }} />
+                        </div>
                     ))}
                 </div>
             );
@@ -171,13 +174,16 @@ export const VFXOverlay = React.memo<{
             return (
                 <div key="blizzard" className={styles.weatherBlizzard}>
                     {Array.from({ length: snowCount }).map((_, i) => (
-                        <div key={`s${i}`} className={styles.flake} style={{
+                        <div key={`s${i}`} className={styles.flakeFall} style={{
                             left: `${Math.random() * 100}%`,
                             animationDelay: `${Math.random() * 4}s`,
                             animationDuration: `${1.5 + Math.random() * 3}s`,
-                            opacity: 0.6 + Math.random() * 0.4,
-                            '--ss': `${0.5 + Math.random()}px`
-                        } as any} />
+                        }}>
+                             <div className={styles.flake} style={{
+                                opacity: 0.6 + Math.random() * 0.4,
+                                '--ss': `${0.5 + Math.random()}px`
+                            } as any} />
+                        </div>
                     ))}
                     {Array.from({ length: windCount }).map((_, i) => (
                         <div key={`w${i}`} className={styles.blizzardWind} style={{

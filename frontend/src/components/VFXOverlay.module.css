@@ -238,11 +238,16 @@
 }
 
 /* ─ SNOW ─ */
-.flake {
+.flakeFall {
     position: absolute;
-    border-radius: 50%;
     top: -20px;
-    animation: snowFall infinite ease-in-out, snowSwing infinite ease-in-out;
+    animation: snowFall infinite ease-in-out;
+    will-change: transform;
+}
+
+.flake {
+    border-radius: 50%;
+    animation: snowSwing infinite ease-in-out;
     will-change: transform;
 }
 
