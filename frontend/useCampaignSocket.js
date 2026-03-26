@@ -36,7 +36,7 @@ export function useCampaignSocket(campaignId, role, userId, token) {
     const [sessionNotes, setSessionNotes] = useState([]);
     const [activeEffect, setActiveEffect] = useState(null);
     const [itemUseRequest, setItemUseRequest] = useState(null);
-    const [activeEnvironment, setActiveEnvironment] = useState({ type: 'clear', severity: 'medium', backgroundUrl: '' });
+    const [activeEnvironment, setActiveEnvironment] = useState({ type: 'clear', types: ['clear'], severity: 'medium', backgroundUrl: '' });
     /** @type {[import('socket.io-client').Socket | null, Function]} */
     const [socket, setSocket] = useState(/** @type {any} */(null));
 
@@ -144,7 +144,7 @@ export function useCampaignSocket(campaignId, role, userId, token) {
         s.on("quests_sync", (data) => setQuests(data || []));
         s.on("factions_sync", (data) => setFactions(data || []));
         s.on("session_notes_sync", (data) => setSessionNotes(data || []));
-        s.on("environment_updated", (data) => setActiveEnvironment(data || { type: 'clear', severity: 'medium', backgroundUrl: '' }));
+        s.on("environment_updated", (data) => setActiveEnvironment(data || { type: 'clear', types: ['clear'], severity: 'medium', backgroundUrl: '' }));
         
 
         return () => {

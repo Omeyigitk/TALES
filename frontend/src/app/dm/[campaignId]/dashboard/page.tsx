@@ -82,6 +82,13 @@ export default function DMDashboard() {
     const [isDiceLogOpen, setIsDiceLogOpen] = useState(false);
     const [isGalleryOpen, setIsGalleryOpen] = useState(false);
     const [selectedImage, setSelectedImage] = useState<string | null>(null);
+    const [isBackgroundGalleryOpen, setIsBackgroundGalleryOpen] = useState(false);
+    const [savedBackgrounds, setSavedBackgrounds] = useState<{ name: string, url: string }[]>([
+        { name: 'Dungeon', url: 'https://images.squarespace-cdn.com/content/v1/593e9232c534a5697e06a378/1566495638202-VUPY5M056T298C7SCSG5/Tavern_Grid.jpg' },
+        { name: 'Forest', url: 'https://i.pinimg.com/736x/8f/30/1c/8f301cc9388f8d6614144463690d5656.jpg' },
+        { name: 'City', url: 'https://2minutetabletop.com/wp-content/uploads/2021/05/Town-Square-Night-No-Props-44x32-Grid.jpg' },
+    ]);
+    const [bgUrlInput, setBgUrlInput] = useState('');
     const [expandedMonsterId, setExpandedMonsterId] = useState<string | null>(null);
     const [expandedCombatantId, setExpandedCombatantId] = useState<string | null>(null);
     const [isRollHidden, setIsRollHidden] = useState(false);
@@ -472,13 +479,31 @@ export default function DMDashboard() {
                     'Content-Type': 'multipart/form-data' 
                 } 
             });
-            if (res.data.success) {
-                showToast("✅ Arkaplan Yüklendi", "Tüm oyunculara yansıtılıyor.", "bg-green-900 border-green-500");
+            if (res.data.success && res.data.url) {
+                setSavedBackgrounds(prev => [...prev, { name: file.name.replace(/\.[^/.]+$/, ''), url: res.data.url }]);
+                showToast("✅ Arkaplan Yüklendi", "Galeriye eklendi.", "bg-green-900 border-green-500");
             }
         } catch (error: any) {
             console.error('Background upload error:', error);
             showToast("❌ Hata", "Arkaplan yüklenemedi: " + error.message, "bg-red-900 border-red-500");
         }
+    };
+
+    const applyBackground = (url: string) => {
+        if (!socket) return;
+        socket.emit('update_environment', { campaignId, environmentData: { backgroundUrl: url } });
+        showToast("🖼️ Arkaplan Uygulandı", url ? "Tüm oyunculara yansıtılıyor." : "Arkaplan kaldırıldı.", "bg-indigo-900 border-indigo-500");
+    };
+
+    const addBgFromUrl = () => {
+        if (!bgUrlInput.trim()) return;
+        setSavedBackgrounds(prev => [...prev, { name: `URL-${prev.length + 1}`, url: bgUrlInput.trim() }]);
+        setBgUrlInput('');
+        showToast("✅ Eklendi", "Arkaplan galeriye eklendi.", "bg-green-900 border-green-500");
+    };
+
+    const removeBgFromGallery = (url: string) => {
+        setSavedBackgrounds(prev => prev.filter(bg => bg.url !== url));
     };
 
     // Savaş alanına yaratık ekle
@@ -1017,19 +1042,47 @@ export default function DMDashboard() {
                                     { type: 'eclipse',   icon: '🌑', label: 'Tutulma' },
                                     { type: 'leaves',    icon: '🍂', label: 'Sonbahar' },
                                     { type: 'acid',      icon: '☠️', label: 'Asit Yağmuru' },
-                                ].map((w) => (
-                                    <button
-                                        key={w.type}
-                                        onClick={() => {
-                                            if (!socket) return;
-                                            socket.emit('update_environment', { campaignId, environmentData: { type: w.type, severity: activeEnvironment?.severity || 'medium' } });
-                                        }}
-                                        className={`w-8 h-8 rounded-lg flex items-center justify-center transition-all text-sm ${activeEnvironment?.type === w.type ? 'bg-indigo-600 scale-110 shadow-lg shadow-indigo-900/50' : 'bg-gray-800 hover:bg-gray-700 opacity-60 hover:opacity-100'}`}
-                                        title={w.label}
-                                    >
-                                        {w.icon}
-                                    </button>
-                                ))}
+                                ].map((w) => {
+                                    const currentTypes = Array.isArray(activeEnvironment?.types) ? activeEnvironment.types : (activeEnvironment?.type ? [activeEnvironment.type] : ['clear']);
+                                    const isActive = currentTypes.includes(w.type);
+                                    
+                                    return (
+                                        <button
+                                            key={w.type}
+                                            onClick={() => {
+                                                if (!socket) return;
+                                                let newTypes = [...currentTypes];
+                                                
+                                                if (w.type === 'clear') {
+                                                    newTypes = ['clear'];
+                                                } else {
+                                                    // Remove 'clear' if we're adding something else
+                                                    newTypes = newTypes.filter(t => t !== 'clear');
+                                                    
+                                                    if (isActive) {
+                                                        newTypes = newTypes.filter(t => t !== w.type);
+                                                        if (newTypes.length === 0) newTypes = ['clear'];
+                                                    } else {
+                                                        newTypes.push(w.type);
+                                                    }
+                                                }
+                                                
+                                                socket.emit('update_environment', { 
+                                                    campaignId, 
+                                                    environmentData: { 
+                                                        types: newTypes,
+                                                        type: newTypes[0] || 'clear', // Fallback for old clients
+                                                        severity: activeEnvironment?.severity || 'medium' 
+                                                    } 
+                                                });
+                                            }}
+                                            className={`w-8 h-8 rounded-lg flex items-center justify-center transition-all text-sm ${isActive ? 'bg-indigo-600 scale-110 shadow-lg shadow-indigo-900/50' : 'bg-gray-800 hover:bg-gray-700 opacity-60 hover:opacity-100'}`}
+                                            title={w.label}
+                                        >
+                                            {w.icon}
+                                        </button>
+                                    );
+                                })}
                             </div>
                             <select
                                 value={activeEnvironment?.severity || 'medium'}
@@ -1047,47 +1100,13 @@ export default function DMDashboard() {
 
                         <div className="w-px h-6 bg-gray-700/50 hidden md:block" />
 
-                        {/* Background Controls */}
-                        <div className="flex items-center gap-2 flex-wrap">
-                            <span className="text-[10px] text-gray-500 font-black uppercase tracking-widest shrink-0">🖼 Arkaplan</span>
-                            <button
-                                onClick={() => document.getElementById('bg-upload-input')?.click()}
-                                className="bg-gray-800 hover:bg-gray-700 text-gray-400 hover:text-white rounded-lg px-2.5 py-1 text-[10px] transition-all flex items-center gap-1 border border-gray-700/50"
-                                title="Bilgisayardan Yükle"
-                            >
-                                📁 <span className="font-black uppercase tracking-tighter">Yükle</span>
-                            </button>
-                            <input type="file" id="bg-upload-input" className="hidden" onChange={handleBackgroundUpload} accept="image/*" />
-                            <input
-                                type="text"
-                                placeholder="URL yapıştır..."
-                                defaultValue={activeEnvironment?.backgroundUrl || ''}
-                                onBlur={(e) => {
-                                    if (!socket) return;
-                                    socket.emit('update_environment', { campaignId, environmentData: { backgroundUrl: e.target.value } });
-                                }}
-                                className="bg-gray-800 border border-gray-700 rounded-lg px-2.5 py-1 text-[10px] text-gray-300 w-32 outline-none focus:border-indigo-500"
-                            />
-                            <div className="flex gap-1">
-                                {[
-                                    { name: 'Dungeon', url: 'https://images.squarespace-cdn.com/content/v1/593e9232c534a5697e06a378/1566495638202-VUPY5M056T298C7SCSG5/Tavern_Grid.jpg' },
-                                    { name: 'Forest', url: 'https://i.pinimg.com/736x/8f/30/1c/8f301cc9388f8d6614144463690d5656.jpg' },
-                                    { name: 'City', url: 'https://2minutetabletop.com/wp-content/uploads/2021/05/Town-Square-Night-No-Props-44x32-Grid.jpg' },
-                                    { name: 'None', url: '' }
-                                ].map((bg) => (
-                                    <button
-                                        key={bg.name}
-                                        onClick={() => {
-                                            if (!socket) return;
-                                            socket.emit('update_environment', { campaignId, environmentData: { backgroundUrl: bg.url } });
-                                        }}
-                                        className={`px-2 py-1 rounded-lg text-[9px] font-black uppercase tracking-tighter transition-all ${activeEnvironment?.backgroundUrl === bg.url ? 'bg-indigo-600 text-white' : 'bg-gray-800 text-gray-500 hover:text-gray-200 border border-gray-700/50'}`}
-                                    >
-                                        {bg.name}
-                                    </button>
-                                ))}
-                            </div>
-                        </div>
+                        {/* Background Gallery Button */}
+                        <button
+                            onClick={() => setIsBackgroundGalleryOpen(true)}
+                            className="bg-gray-800 hover:bg-indigo-600/30 text-gray-400 hover:text-white rounded-lg px-3 py-1.5 text-[10px] transition-all flex items-center gap-1.5 border border-gray-700/50 hover:border-indigo-500/50"
+                        >
+                            🖼️ <span className="font-black uppercase tracking-tighter">Arkaplan</span>
+                        </button>
                     </div>
 
                     {/* ROW 3: Tool Buttons */}
@@ -1630,6 +1649,102 @@ export default function DMDashboard() {
                                             </div>
                                         ))
                                     )}
+                                </div>
+                            </div>
+                        </div>
+                    )
+                }
+
+                {/* Arkaplan Galerisi Modal */}
+                {
+                    isBackgroundGalleryOpen && (
+                        <div className="fixed inset-0 bg-black/80 z-[60] flex items-center justify-center p-4 backdrop-blur-xl animate-fade-in" onClick={() => setIsBackgroundGalleryOpen(false)}>
+                            <div className="bg-gray-900/90 border border-indigo-500/30 w-full max-w-4xl h-[85vh] rounded-[2.5rem] shadow-[0_0_100px_rgba(79,70,229,0.2)] flex flex-col overflow-hidden" onClick={e => e.stopPropagation()}>
+                                <div className="flex justify-between items-center p-8 bg-gradient-to-b from-indigo-900/20 to-transparent border-b border-white/5">
+                                    <div>
+                                        <h2 className="text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 to-cyan-400 flex items-center gap-3">
+                                            🖼️ Arkaplan Galerisi
+                                        </h2>
+                                        <p className="text-gray-500 text-sm mt-1 font-medium tracking-wide">Kampanya atmosferini belirleyen görselleri yönetin</p>
+                                    </div>
+                                    <button onClick={() => setIsBackgroundGalleryOpen(false)} className="w-12 h-12 flex items-center justify-center rounded-2xl bg-gray-800 text-gray-400 hover:text-white hover:bg-red-500/20 transition-all text-3xl font-light">&times;</button>
+                                </div>
+
+                                <div className="p-8 flex-1 flex flex-col min-h-0 gap-8 overflow-y-auto custom-scrollbar">
+                                    {/* Upload & URL Section */}
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 shrink-0">
+                                        <div 
+                                            onClick={() => document.getElementById('modal-bg-upload')?.click()}
+                                            className="group relative h-32 border-2 border-dashed border-gray-700 hover:border-indigo-500/50 rounded-3xl flex flex-col items-center justify-center transition-all cursor-pointer overflow-hidden bg-gray-950/40"
+                                        >
+                                            <div className="absolute inset-0 bg-indigo-500/5 opacity-0 group-hover:opacity-100 transition-opacity" />
+                                            <span className="text-3xl mb-2 group-hover:scale-110 transition-transform">📁</span>
+                                            <span className="text-sm font-bold text-gray-400 group-hover:text-indigo-300">Cihazdan Fotoğraf Yükle</span>
+                                            <input type="file" id="modal-bg-upload" className="hidden" onChange={handleBackgroundUpload} accept="image/*" />
+                                        </div>
+
+                                        <div className="h-32 border border-gray-800 rounded-3xl p-6 bg-gray-950/40 flex flex-col justify-center">
+                                            <span className="text-xs font-black uppercase tracking-widest text-gray-500 mb-3 block">🔗 URL ile Ekle</span>
+                                            <div className="flex gap-3">
+                                                <input 
+                                                    type="text" 
+                                                    placeholder="Görsel linki yapıştır..." 
+                                                    className="flex-1 bg-gray-900 border border-gray-700 rounded-xl px-4 py-2.5 text-sm text-gray-300 outline-none focus:border-indigo-500"
+                                                    value={bgUrlInput}
+                                                    onChange={e => setBgUrlInput(e.target.value)}
+                                                />
+                                                <button 
+                                                    onClick={addBgFromUrl}
+                                                    className="bg-indigo-600 hover:bg-indigo-500 text-white font-bold px-6 rounded-xl transition-all"
+                                                >
+                                                    Ekle
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    {/* Gallery Grid */}
+                                    <div className="grid grid-cols-2 lg:grid-cols-3 gap-6">
+                                        {/* "None" Option */}
+                                        <div className={`group relative aspect-video rounded-3xl border ${!activeEnvironment?.backgroundUrl ? 'border-indigo-500/50 bg-indigo-500/10' : 'border-gray-800 bg-gray-950/40'} flex flex-col items-center justify-center transition-all overflow-hidden`}>
+                                            <span className="text-4xl mb-2 opacity-30 grayscale">🚫</span>
+                                            <span className="text-xs font-black uppercase text-gray-500">Arkaplan Yok</span>
+                                            <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 bg-black/60 backdrop-blur-sm transition-opacity">
+                                                <button 
+                                                    onClick={() => applyBackground('')}
+                                                    className="bg-white text-black font-black px-6 py-2 rounded-xl scale-95 group-hover:scale-100 transition-all text-xs"
+                                                >
+                                                    UYGULA
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                        {savedBackgrounds.map((bg, idx) => (
+                                            <div key={idx} className={`group relative aspect-video rounded-3xl border ${activeEnvironment?.backgroundUrl === bg.url ? 'border-indigo-500 ring-2 ring-indigo-500/20 shadow-[0_0_20px_rgba(79,70,229,0.2)]' : 'border-gray-800'} overflow-hidden transition-all bg-gray-950`}>
+                                                <img src={bg.url} alt={bg.name} className="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity" />
+                                                <div className="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-black/90 to-transparent">
+                                                    <span className="text-[10px] font-black uppercase tracking-widest text-white/70 block truncate">{bg.name}</span>
+                                                </div>
+                                                
+                                                {/* Hover Overlay */}
+                                                <div className="absolute inset-0 flex flex-col items-center justify-center gap-3 opacity-0 group-hover:opacity-100 bg-black/60 backdrop-blur-[2px] transition-opacity">
+                                                    <button 
+                                                        onClick={() => applyBackground(bg.url)}
+                                                        className="bg-indigo-600 hover:bg-indigo-500 text-white font-black px-8 py-2.5 rounded-xl scale-95 group-hover:scale-100 transition-all text-xs shadow-lg shadow-indigo-600/30"
+                                                    >
+                                                        UYGULA
+                                                    </button>
+                                                    <button 
+                                                        onClick={() => removeBgFromGallery(bg.url)}
+                                                        className="text-red-400 hover:text-red-300 font-bold p-2 transition-colors opacity-60 hover:opacity-100"
+                                                        title="Galeriden Kaldır"
+                                                    >
+                                                        🗑️ Kaldır
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
                                 </div>
                             </div>
                         </div>

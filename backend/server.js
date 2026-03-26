@@ -392,7 +392,7 @@ app.post('/api/campaigns/:campaignId/background-upload', authenticate, upload.si
     if (!campaign) return res.status(404).json({ error: 'Campaign bulunamadı' });
 
     if (!campaign.activeEnvironment) {
-        campaign.activeEnvironment = { type: 'clear', severity: 'medium', backgroundUrl: imageUrl };
+        campaign.activeEnvironment = { type: 'clear', types: ['clear'], severity: 'medium', backgroundUrl: imageUrl };
     } else {
         campaign.activeEnvironment.backgroundUrl = imageUrl;
     }
@@ -1040,7 +1040,7 @@ io.on('connection', (socket) => {
       socket.emit('encounter_updated', campaign.activeEncounter || { participants: [], round: 1, turnIndex: 0, isActive: false });
 
       // Send active environment
-      socket.emit('environment_updated', campaign.activeEnvironment || { type: 'clear', severity: 'medium' });
+      socket.emit('environment_updated', campaign.activeEnvironment || { type: 'clear', types: ['clear'], severity: 'medium' });
 
       // Send initial data for new features
       const quests = await Quest.find({ campaignId });

@@ -36,7 +36,8 @@ const campaignSchema = new mongoose.Schema({
         }]
     },
     activeEnvironment: {
-        type: { type: String, default: 'clear' }, // clear, rain, snow, fog, sandstorm
+        types: { type: [String], default: ['clear'] }, // clear, rain, snow, fog, etc. (Array for combinations)
+        type: { type: String, default: 'clear' }, // Fallback/Primary type
         severity: { type: String, default: 'medium' }, // light, medium, heavy
         backgroundUrl: { type: String, default: '' }
     }

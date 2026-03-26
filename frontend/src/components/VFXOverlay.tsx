@@ -9,7 +9,11 @@ interface EffectInstance {
     playerName?: string;
 }
 
-export const VFXOverlay: React.FC<{ activeEffect: any, conditions?: any[], weather?: { type: string, severity: string, backgroundUrl?: string } }> = ({ activeEffect, conditions = [], weather = { type: 'clear', severity: 'medium' } }) => {
+export const VFXOverlay: React.FC<{ 
+    activeEffect: any, 
+    conditions?: any[], 
+    weather?: { type: string, types?: string[], severity: string, backgroundUrl?: string } 
+}> = ({ activeEffect, conditions = [], weather = { type: 'clear', types: ['clear'], severity: 'medium' } }) => {
     const [queue, setQueue] = useState<EffectInstance[]>([]);
     const [lightnings, setLightnings] = useState<{ id: number, x: number, dur: number, fdur: number }[]>([]);
 
@@ -23,9 +27,17 @@ export const VFXOverlay: React.FC<{ activeEffect: any, conditions?: any[], weath
         }
     }, [activeEffect]);
 
-    // Lightning strike timer for thunder/storm
+    // Get normalized types (support both old 'type' and new 'types' array)
+    const activeTypes = Array.isArray(weather?.types) ? weather.types : (weather?.type ? [weather.type] : ['clear']);
+
+    // Lightning strike timer for thunder/storm/blizzard
     useEffect(() => {
-        if (weather?.type !== 'thunder' && weather?.type !== 'blizzard') return;
+        const hasLightning = activeTypes.includes('thunder') || activeTypes.includes('blizzard');
+        if (!hasLightning) {
+            if (lightnings.length > 0) setLightnings([]);
+            return;
+        }
+
         const interval = weather.severity === 'heavy' ? 2500 : weather.severity === 'light' ? 8000 : 5000;
         const timer = setInterval(() => {
             const id = Date.now();
@@ -36,7 +48,7 @@ export const VFXOverlay: React.FC<{ activeEffect: any, conditions?: any[], weath
             setTimeout(() => setLightnings(prev => prev.filter(l => l.id !== id)), 600);
         }, interval);
         return () => clearInterval(timer);
-    }, [weather?.type, weather?.severity]);
+    }, [activeTypes.join(','), weather?.severity]);
 
     const renderParticles = (count: number, color: string) => {
         return Array.from({ length: count }).map((_, i) => {
@@ -67,14 +79,14 @@ export const VFXOverlay: React.FC<{ activeEffect: any, conditions?: any[], weath
         return '';
     };
 
-    const renderWeather = () => {
-        if (!weather || weather.type === 'clear') return null;
+    const renderWeatherType = (type: string) => {
+        if (type === 'clear') return null;
         const count = weather.severity === 'heavy' ? 120 : weather.severity === 'light' ? 35 : 70;
 
         // ─ RAIN ─
-        if (weather.type === 'rain') {
+        if (type === 'rain') {
             return (
-                <div className={styles.weatherRain}>
+                <div key="rain" className={styles.weatherRain}>
                     {Array.from({ length: count }).map((_, i) => (
                         <div key={i} className={styles.drop} style={{
                             left: `${Math.random() * 100}%`,
@@ -89,9 +101,9 @@ export const VFXOverlay: React.FC<{ activeEffect: any, conditions?: any[], weath
         }
 
         // ─ SNOW ─
-        if (weather.type === 'snow') {
+        if (type === 'snow') {
             return (
-                <div className={styles.weatherSnow}>
+                <div key="snow" className={styles.weatherSnow}>
                     {Array.from({ length: count }).map((_, i) => (
                         <div key={i} className={styles.flake} style={{
                             left: `${Math.random() * 100}%`,
@@ -105,14 +117,14 @@ export const VFXOverlay: React.FC<{ activeEffect: any, conditions?: any[], weath
         }
 
         // ─ FOG ─
-        if (weather.type === 'fog') {
-            return <div className={`${styles.weatherFog} ${styles[weather.severity] || styles.medium}`} />;
+        if (type === 'fog') {
+            return <div key="fog" className={`${styles.weatherFog} ${styles[weather.severity] || styles.medium}`} />;
         }
 
         // ─ SANDSTORM ─
-        if (weather.type === 'sandstorm') {
+        if (type === 'sandstorm') {
             return (
-                <div className={styles.weatherSand}>
+                <div key="sandstorm" className={styles.weatherSand}>
                     {Array.from({ length: count }).map((_, i) => (
                         <div key={i} className={styles.grain} style={{
                             top: `${Math.random() * 100}%`,
@@ -127,10 +139,10 @@ export const VFXOverlay: React.FC<{ activeEffect: any, conditions?: any[], weath
         }
 
         // ─ THUNDER / STORM ─
-        if (weather.type === 'thunder') {
+        if (type === 'thunder') {
             const rainCount = weather.severity === 'heavy' ? 150 : 80;
             return (
-                <div className={styles.weatherThunder}>
+                <div key="thunder" className={styles.weatherThunder}>
                     {/* Heavy rain */}
                     {Array.from({ length: rainCount }).map((_, i) => (
                         <div key={`r${i}`} className={styles.drop} style={{
@@ -141,23 +153,17 @@ export const VFXOverlay: React.FC<{ activeEffect: any, conditions?: any[], weath
                             opacity: 0.5 + Math.random() * 0.4
                         }} />
                     ))}
-                    {/* Lightning bolts */}
-                    {lightnings.map(l => (
-                        <React.Fragment key={l.id}>
-                            <div className={styles.thunderFlash} style={{ '--fdur': `${l.fdur}s` } as any} />
-                            <div className={styles.lightning} style={{ '--lx': `${l.x}%`, '--dur': `${l.dur}s` } as any} />
-                        </React.Fragment>
-                    ))}
+                    {/* Lightning bolts rendered separately to sync across types if needed */}
                 </div>
             );
         }
 
         // ─ BLIZZARD ─
-        if (weather.type === 'blizzard') {
+        if (type === 'blizzard') {
             const snowCount = weather.severity === 'heavy' ? 200 : 120;
             const windCount = weather.severity === 'heavy' ? 20 : 10;
             return (
-                <div className={styles.weatherBlizzard}>
+                <div key="blizzard" className={styles.weatherBlizzard}>
                     {Array.from({ length: snowCount }).map((_, i) => (
                         <div key={`s${i}`} className={styles.flake} style={{
                             left: `${Math.random() * 100}%`,
@@ -174,19 +180,14 @@ export const VFXOverlay: React.FC<{ activeEffect: any, conditions?: any[], weath
                             animationDuration: `${0.5 + Math.random() * 1}s`
                         }} />
                     ))}
-                    {lightnings.map(l => (
-                        <React.Fragment key={l.id}>
-                            <div className={styles.thunderFlash} style={{ '--fdur': `${l.fdur}s` } as any} />
-                        </React.Fragment>
-                    ))}
                 </div>
             );
         }
 
         // ─ EMBERS / VOLCANO ─
-        if (weather.type === 'embers') {
+        if (type === 'embers') {
             return (
-                <div className={styles.weatherEmbers}>
+                <div key="embers" className={styles.weatherEmbers}>
                     {Array.from({ length: count }).map((_, i) => (
                         <div key={i} className={styles.ember} style={{
                             left: `${Math.random() * 100}%`,
@@ -202,9 +203,9 @@ export const VFXOverlay: React.FC<{ activeEffect: any, conditions?: any[], weath
         }
 
         // ─ BLOOD RAIN ─
-        if (weather.type === 'blood') {
+        if (type === 'blood') {
             return (
-                <div className={styles.weatherBlood}>
+                <div key="blood" className={styles.weatherBlood}>
                     {Array.from({ length: count }).map((_, i) => (
                         <div key={i} className={styles.bloodDrop} style={{
                             left: `${Math.random() * 100}%`,
@@ -220,9 +221,9 @@ export const VFXOverlay: React.FC<{ activeEffect: any, conditions?: any[], weath
         }
 
         // ─ MAGIC ─
-        if (weather.type === 'magic') {
+        if (type === 'magic') {
             return (
-                <div className={styles.weatherMagic}>
+                <div key="magic" className={styles.weatherMagic}>
                     {Array.from({ length: count }).map((_, i) => (
                         <div key={i} className={styles.magicOrb} style={{
                             left: `${Math.random() * 100}%`,
@@ -239,10 +240,10 @@ export const VFXOverlay: React.FC<{ activeEffect: any, conditions?: any[], weath
         }
 
         // ─ TORNADO ─
-        if (weather.type === 'tornado') {
+        if (type === 'tornado') {
             const debrisCount = weather.severity === 'heavy' ? 80 : weather.severity === 'light' ? 30 : 50;
             return (
-                <div className={styles.weatherTornado}>
+                <div key="tornado" className={styles.weatherTornado}>
                     <div className={styles.tornadoCore} />
                     {Array.from({ length: debrisCount }).map((_, i) => (
                         <div key={i} className={styles.tornadoDebris} style={{
@@ -259,10 +260,10 @@ export const VFXOverlay: React.FC<{ activeEffect: any, conditions?: any[], weath
         }
 
         // ─ METEOR SHOWER ─
-        if (weather.type === 'meteor') {
+        if (type === 'meteor') {
             const meteorCount = weather.severity === 'heavy' ? 20 : weather.severity === 'light' ? 6 : 12;
             return (
-                <div className={styles.weatherMeteor}>
+                <div key="meteor" className={styles.weatherMeteor}>
                     {Array.from({ length: meteorCount }).map((_, i) => {
                         const size = 3 + Math.random() * 5;
                         const delay = Math.random() * 10;
@@ -293,18 +294,18 @@ export const VFXOverlay: React.FC<{ activeEffect: any, conditions?: any[], weath
         }
 
         // ─ ECLIPSE ─
-        if (weather.type === 'eclipse') {
+        if (type === 'eclipse') {
             return (
-                <div className={styles.weatherEclipse}>
+                <div key="eclipse" className={styles.weatherEclipse}>
                     <div className={styles.eclipseCorona} />
                 </div>
             );
         }
 
         // ─ AUTUMN LEAVES ─
-        if (weather.type === 'leaves') {
+        if (type === 'leaves') {
             return (
-                <div className={styles.weatherLeaves}>
+                <div key="leaves" className={styles.weatherLeaves}>
                     {Array.from({ length: count }).map((_, i) => (
                         <div key={i} className={styles.leaf} style={{
                             left: `${Math.random() * 100}%`,
@@ -320,9 +321,9 @@ export const VFXOverlay: React.FC<{ activeEffect: any, conditions?: any[], weath
         }
 
         // ─ ACID RAIN ─
-        if (weather.type === 'acid') {
+        if (type === 'acid') {
             return (
-                <div className={styles.weatherAcid}>
+                <div key="acid" className={styles.weatherAcid}>
                     {Array.from({ length: count }).map((_, i) => (
                         <div key={i} className={styles.acidDrop} style={{
                             left: `${Math.random() * 100}%`,
@@ -352,8 +353,16 @@ export const VFXOverlay: React.FC<{ activeEffect: any, conditions?: any[], weath
 
     return (
         <div className={styles.vfxContainer}>
-            {/* Weather - rendered first (behind everything) */}
-            {renderWeather()}
+            {/* Weather Layers */}
+            {activeTypes.map(type => renderWeatherType(type))}
+
+            {/* Lightning Bolts (Shared across types) */}
+            {lightnings.map(l => (
+                <React.Fragment key={l.id}>
+                    <div className={styles.thunderFlash} style={{ '--fdur': `${l.fdur}s` } as any} />
+                    <div className={styles.lightning} style={{ '--lx': `${l.x}%`, '--dur': `${l.dur}s` } as any} />
+                </React.Fragment>
+            ))}
 
             {/* Condition Ambient Overlays */}
             {conditions.map((c, i) => {
@@ -362,7 +371,7 @@ export const VFXOverlay: React.FC<{ activeEffect: any, conditions?: any[], weath
                 return <div key={`cond-${i}`} className={`${styles.conditionOverlay} ${cls}`} />;
             })}
 
-            {/* Dice VFX - rendered last (on top) */}
+            {/* Dice VFX */}
             {queue.map((effect) => (
                 <div key={effect.id} className={`${styles.effect} ${effect.type === 'NAT20' ? styles.nat20 : styles.nat1}`}>
                     <div className={`${styles.flash} ${effect.type === 'NAT20' ? styles.nat20Flash : styles.nat1Flash}`} />
