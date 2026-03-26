@@ -161,8 +161,16 @@ export default function DMDashboard() {
     const [gallery, setGallery] = useState<any[]>([]);
 
     // Shop (Dükkan) States
+    interface ShopItem {
+        id: string;
+        name: string;
+        price: number;
+        note: string;
+        description?: string;
+        type: string;
+    }
     const [isShopMenuOpen, setIsShopMenuOpen] = useState(false);
-    const [shopItems, setShopItems] = useState<{ id: string, name: string, price: number, note: string, description?: string, type: string }[]>([]);
+    const [shopItems, setShopItems] = useState<ShopItem[]>([]);
     const [isShopPublished, setIsShopPublished] = useState(false);
     const [newShopItem, setNewShopItem] = useState({ name: '', price: 10, note: '', description: '', type: 'other' });
 
@@ -783,7 +791,7 @@ export default function DMDashboard() {
     // Dükkan Fonksiyonları
     const addShopItem = () => {
         if (!newShopItem.name.trim()) return;
-        const itemWithId = { ...newShopItem, id: Date.now().toString() };
+        const itemWithId: ShopItem = { ...newShopItem, id: Date.now().toString() };
         setShopItems([...shopItems, itemWithId]);
         setNewShopItem({ name: '', price: 10, note: '', description: '', type: 'other' });
         // Eğer dükkan yayındaysa anında güncelleme yollayabiliriz, ancak DM'nin explicitly "Kapat/Aç" yapması daha kontrollü olabilir.
@@ -2582,8 +2590,10 @@ export default function DMDashboard() {
                                                                     id: Date.now().toString(),
                                                                     name: selectedItem.name_tr || selectedItem.name,
                                                                     price: priceToSet,
-                                                                    note: selectedItem.type || selectedItem.category || ''
-                                                                }]);
+                                                                    note: selectedItem.type || selectedItem.category || '',
+                                                                    description: selectedItem.description_tr || selectedItem.description || '',
+                                                                    type: selectedItem.type || selectedItem.category || 'other'
+                                                                } as ShopItem]);
                                                                 showToast("Dükkana Eklendi", `${selectedItem.name_tr || selectedItem.name} dükkan listesine ${priceToSet} GP fiyatla eklendi.`, "bg-orange-900 border-orange-500 text-orange-100");
                                                             }}
                                                             className="bg-orange-600 hover:bg-orange-500 text-white font-black px-6 py-3 rounded-lg transition-all shadow-lg shadow-orange-900/20 uppercase tracking-widest text-xs"
