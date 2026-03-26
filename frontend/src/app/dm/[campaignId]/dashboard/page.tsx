@@ -1048,27 +1048,11 @@ export default function DMDashboard() {
                                             key={w.type}
                                             onClick={() => {
                                                 if (!socket) return;
-                                                let newTypes = [...currentTypes];
-                                                
-                                                if (w.type === 'clear') {
-                                                    newTypes = ['clear'];
-                                                } else {
-                                                    // Remove 'clear' if we're adding something else
-                                                    newTypes = newTypes.filter(t => t !== 'clear');
-                                                    
-                                                    if (isActive) {
-                                                        newTypes = newTypes.filter(t => t !== w.type);
-                                                        if (newTypes.length === 0) newTypes = ['clear'];
-                                                    } else {
-                                                        newTypes.push(w.type);
-                                                    }
-                                                }
-                                                
                                                 socket.emit('update_environment', { 
                                                     campaignId, 
                                                     environmentData: { 
-                                                        types: newTypes,
-                                                        type: newTypes[0] || 'clear', // Fallback for old clients
+                                                        types: [w.type],
+                                                        type: w.type, 
                                                         severity: activeEnvironment?.severity || 'medium' 
                                                     } 
                                                 });
