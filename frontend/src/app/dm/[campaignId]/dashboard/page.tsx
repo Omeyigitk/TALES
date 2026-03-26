@@ -123,12 +123,10 @@ function Soundboard({ isOpen, onClose, playSound, stopSound, activeSounds }: any
 
                 <div className="p-4 bg-slate-950/50 border-t border-slate-800 text-center">
                     <button 
-                        onClick={() => {
-                            // Stop all active sounds
-                            Object.keys(activeSounds).forEach(url => stopSound(url));
-                        }}
-                        className="text-xs font-bold text-red-400 hover:text-red-300 transition-colors uppercase tracking-widest"
+                        onClick={() => stopSound('all')}
+                        className="text-xs font-bold text-red-500 hover:text-red-400 transition-colors uppercase tracking-[0.2em] flex items-center justify-center gap-2 mx-auto py-2 px-6 rounded-lg bg-red-500/10 border border-red-500/20 hover:border-red-500/40"
                     >
+                        <span className="text-lg">⏹️</span>
                         Tüm Sesleri Durdur
                     </button>
                 </div>
@@ -156,7 +154,7 @@ export default function DMDashboard() {
     const { 
         partyStats, diceLogs, socket, dmLevelPermission, whisperData, whisperHistory,
         partyGold, partyInventory, fogOfWar, quests, factions, sessionNotes, mapData: socketMapData,
-        encounterStatus
+        encounterStatus, soundData
     } = useCampaignSocket(campaignId, 'DM', 'DM', token);
     
     // Sync local mapData with socket mapData on mount/updates
@@ -181,6 +179,53 @@ export default function DMDashboard() {
         }
     }, [whisperData]);
 
+    // Ses Senkronizasyonu (Sound Sync)
+    useEffect(() => {
+        if (!soundData) return;
+        const { action, soundUrl, loop } = soundData as any;
+
+        if (action === 'play') {
+            // Eğer durdurulmamış eski bir kopya varsa durdur
+            if (audioRefs.current[soundUrl]) {
+                audioRefs.current[soundUrl].pause();
+                audioRefs.current[soundUrl].currentTime = 0;
+            }
+            const audio = new Audio(soundUrl);
+            audio.loop = !!loop;
+            audio.volume = 0.5;
+            audio.play().catch(err => console.error("Audio play failed:", err));
+            audioRefs.current[soundUrl] = audio;
+            if (!loop) {
+                audio.onended = () => {
+                    delete audioRefs.current[soundUrl];
+                    setActiveSounds(prev => {
+                        const next = { ...prev };
+                        delete next[soundUrl];
+                        return next;
+                    });
+                };
+            }
+        } else if (action === 'stop') {
+            if (soundUrl === 'all') {
+                Object.values(audioRefs.current).forEach(audio => {
+                    audio.pause();
+                    audio.currentTime = 0;
+                });
+                audioRefs.current = {};
+                setActiveSounds({});
+            } else if (audioRefs.current[soundUrl]) {
+                audioRefs.current[soundUrl].pause();
+                audioRefs.current[soundUrl].currentTime = 0;
+                delete audioRefs.current[soundUrl];
+                setActiveSounds(prev => {
+                    const next = { ...prev };
+                    delete next[soundUrl];
+                    return next;
+                });
+            }
+        }
+    }, [soundData]);
+
     // State yönetimi
     const [monsters, setMonsters] = useState<any[]>([]);
     const [searchTerm, setSearchTerm] = useState("");
@@ -191,6 +236,7 @@ export default function DMDashboard() {
     const [selectedImage, setSelectedImage] = useState<string | null>(null);
     const [expandedMonsterId, setExpandedMonsterId] = useState<string | null>(null);
     const [expandedCombatantId, setExpandedCombatantId] = useState<string | null>(null);
+    const audioRefs = useRef<Record<string, HTMLAudioElement>>({});
     const [isRollHidden, setIsRollHidden] = useState(false);
     const [dicePool, setDicePool] = useState<Record<string, number>>({});
     const [isQuickDiceOpen, setIsQuickDiceOpen] = useState(false);
@@ -231,11 +277,15 @@ export default function DMDashboard() {
     const stopSound = (url: string) => {
         if (socket) {
             socket.emit('stop_sound', { campaignId, soundUrl: url });
-            setActiveSounds(prev => {
-                const next = { ...prev };
-                delete next[url];
-                return next;
-            });
+            if (url === 'all') {
+                setActiveSounds({});
+            } else {
+                setActiveSounds(prev => {
+                    const next = { ...prev };
+                    delete next[url];
+                    return next;
+                });
+            }
         }
     };
     const [priceToSet, setPriceToSet] = useState<number>(10);
@@ -1028,9 +1078,6 @@ export default function DMDashboard() {
                         </button>
 
 
-                        <button onClick={() => setIsSoundboardOpen(true)} className="flex items-center gap-2 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white text-sm font-black py-2.5 px-6 rounded-xl border border-blue-400/50 shadow-[0_0_20px_rgba(37,99,235,0.4)] transition-all scale-105 hover:scale-110 active:scale-95">
-                            🎵 <span className="hidden lg:inline">SOUNDBOARD</span>
-                        </button>
                     </div>
                 </header>
 
@@ -4012,6 +4059,36 @@ export default function DMDashboard() {
                     stopSound={stopSound}
                     activeSounds={activeSounds}
                 />
+
+                {/* Floating Soundboard Trigger - Bottom Right */}
+                <div className="fixed bottom-8 right-8 z-[60]">
+                    <button
+                        onClick={() => setIsSoundboardOpen(true)}
+                        className="group relative w-16 h-16 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-2xl flex items-center justify-center transition-all duration-500 shadow-[0_15px_40px_rgba(0,0,0,0.6),0_0_20px_rgba(37,99,235,0.2)] border border-blue-400/30 hover:border-blue-400 hover:scale-110 active:scale-95 overflow-hidden"
+                        title="Soundboard"
+                    >
+                        {/* Shimmer Effect */}
+                        <div className="absolute inset-0 bg-gradient-to-tr from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                        
+                        {/* Active Indicator Wave */}
+                        {Object.keys(activeSounds).length > 0 && (
+                            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                                <div className="w-full h-full border-4 border-blue-400/40 rounded-2xl animate-ping opacity-75"></div>
+                            </div>
+                        )}
+
+                        <div className={`transition-all duration-500 ${isSoundboardOpen ? 'scale-75 opacity-50' : 'group-hover:scale-110'}`}>
+                            <span className="text-3xl">🎵</span>
+                        </div>
+
+                        {/* Badge for active sounds */}
+                        {Object.keys(activeSounds).length > 0 && (
+                            <div className="absolute -top-2 -right-2 min-w-[24px] h-[24px] bg-blue-400 text-slate-900 text-[10px] font-black rounded-full flex items-center justify-center px-1.5 shadow-lg animate-in zoom-in duration-300 ring-4 ring-slate-900">
+                                {Object.keys(activeSounds).length}
+                            </div>
+                        )}
+                    </button>
+                </div>
 
             </div>
         </div >

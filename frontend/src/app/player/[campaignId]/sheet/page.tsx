@@ -227,7 +227,13 @@ const PlayerSheet = () => {
             audio.play().catch(e => console.warn("Player audio autoplay blocked or failed:", e));
             audioRefs.current[soundUrl] = audio;
         } else if (action === 'stop') {
-            if (audioRefs.current[soundUrl]) {
+            if (soundUrl === 'all') {
+                Object.values(audioRefs.current).forEach(audio => {
+                    audio.pause();
+                    audio.currentTime = 0;
+                });
+                audioRefs.current = {};
+            } else if (audioRefs.current[soundUrl]) {
                 audioRefs.current[soundUrl].pause();
                 delete audioRefs.current[soundUrl];
             }
