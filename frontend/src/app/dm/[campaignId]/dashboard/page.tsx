@@ -11,6 +11,18 @@ import { getSpellSlotTotals } from "../../../player/[campaignId]/combat_data";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
 
+const getDiceIcon = (type: string) => {
+    switch (type) {
+        case 'd4': return '📐';
+        case 'd6': return '📦';
+        case 'd8': return '💎';
+        case 'd10': return '💧';
+        case 'd12': return '🛑';
+        case 'd20': return '🎲';
+        case 'd100': return '💯';
+        default: return '🎲';
+    }
+};
 
 const MAP_TEMPLATES = [
     { name: 'Seç...', url: '' },
@@ -179,6 +191,9 @@ export default function DMDashboard() {
     const [selectedImage, setSelectedImage] = useState<string | null>(null);
     const [expandedMonsterId, setExpandedMonsterId] = useState<string | null>(null);
     const [expandedCombatantId, setExpandedCombatantId] = useState<string | null>(null);
+    const [isRollHidden, setIsRollHidden] = useState(false);
+    const [dicePool, setDicePool] = useState<Record<string, number>>({});
+    const [isQuickDiceOpen, setIsQuickDiceOpen] = useState(false);
 
     // Sync active combatants with encounter data from server
     useEffect(() => {
@@ -597,6 +612,43 @@ export default function DMDashboard() {
     };
 
     // DM Zarı At
+
+    const handlePoolRoll = () => {
+        if (Object.keys(dicePool).length === 0) return;
+        
+        let total = 0;
+        const results: string[] = [];
+        const typeParts: string[] = [];
+
+        for (const type in dicePool) {
+            const count = dicePool[type];
+            const sides = parseInt(type.substring(1)); // e.g., 'd20' -> 20
+            if (isNaN(sides)) continue;
+
+            typeParts.push(`${count}${type}`);
+            for (let i = 0; i < count; i++) {
+                const roll = Math.floor(Math.random() * sides) + 1;
+                total += roll;
+                results.push(roll.toString());
+            }
+        }
+        
+        const typeStr = typeParts.join(' + ');
+
+        if (socket) {
+            socket.emit('roll_dice', {
+                campaignId,
+                id: Math.random().toString(36).substring(7),
+                playerName: 'Dungeon Master',
+                rollResult: total,
+                type: `Dice Pool (${typeStr}): [${results.join(', ')}]`,
+                isHidden: isRollHidden
+            });
+        }
+        setDicePool({});
+        setIsQuickDiceOpen(false);
+        showToast("Zarlar Atıldı", `${typeStr} = ${total}`, isRollHidden ? "bg-purple-900 border-purple-500 text-purple-100" : "bg-red-900 border-red-500 text-red-100");
+    };
 
     // Fısıltı (Whisper) Gönder
     const sendWhisper = () => {
@@ -1256,6 +1308,127 @@ export default function DMDashboard() {
                     </div>
                 </div>
 
+                {/* Floating DM Dice Roll Menu */}
+                <div className="fixed bottom-8 left-8 z-[60] flex flex-col items-center">
+                    {/* Premium Selection Menu */}
+                    <div className={`flex flex-col-reverse items-center gap-5 mb-6 transition-all duration-500 origin-bottom ${isQuickDiceOpen ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-95 translate-y-8 pointer-events-none'}`}>
+                        {/* Pool Roll Button - Minimalist & Elegant */}
+                        {Object.keys(dicePool).length > 0 && (
+                            <button
+                                onClick={handlePoolRoll}
+                                className="group relative px-10 py-3 bg-gray-950/80 backdrop-blur-xl border border-red-500/40 text-red-50 rounded-2xl shadow-[0_15px_40px_rgba(0,0,0,0.6),0_0_20px_rgba(239,68,68,0.1)] flex flex-col items-center justify-center transition-all hover:border-red-500 hover:bg-red-950/40 active:scale-95 overflow-hidden"
+                            >
+                                <div className="absolute inset-0 bg-gradient-to-tr from-red-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                                
+                                <span className="relative z-10 text-[9px] font-bold tracking-[0.3em] uppercase text-gray-400 group-hover:text-red-300 transition-colors mb-1">Zarları At</span>
+                                <div className="relative z-10 flex items-baseline gap-2">
+                                    <span className="text-xl font-black tracking-[0.15em] uppercase text-white group-hover:text-red-50 transition-colors">ROLL</span>
+                                    <span className="text-sm font-bold text-red-500/80 group-hover:text-red-400 font-mono">({Object.values(dicePool).reduce((a: any, b: any) => a + b, 0)})</span>
+                                </div>
+                                
+                                <div className="absolute bottom-0 left-0 w-full h-[2px] bg-red-500/0 group-hover:bg-red-500/40 transition-all overflow-hidden">
+                                    <div className="h-full bg-white/40 animate-shimmer" style={{ width: '40%', background: 'linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent)' }}></div>
+                                </div>
+                            </button>
+                        )}
+
+                        {/* Dice Selection Grid */}
+                        {/* Refined Dice Selection Menu - Obsidian & Ruby Theme */}
+                        <div className="group/menu relative bg-gray-950/40 backdrop-blur-2xl border border-white/10 p-4 rounded-[2rem] shadow-[0_20px_50px_rgba(0,0,0,0.8),inset_0_1px_1px_rgba(255,255,255,0.05)] flex flex-col gap-4 animate-in fade-in slide-in-from-bottom-4 duration-500 overflow-hidden">
+                            {/* Decorative Background Glow */}
+                            <div className="absolute -top-10 -right-10 w-24 h-24 bg-red-600/10 rounded-full blur-3xl pointer-events-none group-hover/menu:bg-red-600/20 transition-all duration-700"></div>
+                            
+                            <div className="flex items-center justify-between px-1 mb-1">
+                                <span className="text-[10px] font-black text-gray-500 tracking-[0.3em] uppercase">Zar Seti</span>
+                                <div className="h-px flex-1 bg-gradient-to-r from-transparent via-white/5 to-transparent mx-4"></div>
+                                <button 
+                                    onClick={() => setDicePool({})}
+                                    disabled={Object.keys(dicePool).length === 0}
+                                    className="text-[9px] font-black text-red-500/60 hover:text-red-400 disabled:opacity-0 transition-all uppercase tracking-widest flex items-center gap-1.5"
+                                >
+                                    <span>TEMİZLE</span>
+                                    <span className="text-xs">×</span>
+                                </button>
+                            </div>
+
+                            <div className="grid grid-cols-2 gap-3">
+                                {[20, 100, 12, 10, 8, 6, 4].map((sides, idx) => {
+                                    const count = dicePool[`d${sides}`] || 0;
+                                    const isD20 = sides === 20;
+                                    return (
+                                        <button
+                                            key={sides}
+                                            onClick={() => setDicePool(prev => ({ ...prev, [`d${sides}`]: (prev[`d${sides}`] || 0) + 1 }))}
+                                            className={`w-16 h-16 rounded-2xl flex items-center justify-center transition-all group border relative overflow-visible shadow-lg ${
+                                                isD20 
+                                                ? 'bg-red-950/20 border-red-500/20 hover:border-red-500/50 hover:bg-red-900/40' 
+                                                : 'bg-gray-900/40 border-white/5 hover:border-white/20 hover:bg-gray-800/60'
+                                            }`}
+                                            style={{ transitionDelay: `${idx * 40}ms` }}
+                                        >
+                                            <div className={`transition-all duration-500 transform group-hover:scale-110 drop-shadow-[0_0_15px_rgba(0,0,0,0.5)] ${
+                                                isD20 ? 'text-red-500 group-hover:text-red-400' : 'text-gray-400 group-hover:text-gray-200'
+                                            }`}>
+                                                {getDiceIcon(`d${sides}`)}
+                                            </div>
+                                            <span className="absolute bottom-2 right-2.5 text-[7px] font-black opacity-30 group-hover:opacity-60 tracking-tighter uppercase font-mono">D{sides}</span>
+                                            
+                                            {/* Count Indicator - Ruby Style */}
+                                            {count > 0 && (
+                                                <div className="absolute -top-1.5 -right-1.5 min-w-[22px] h-5.5 bg-gradient-to-br from-red-500 to-red-800 text-white text-[10px] font-black rounded-lg flex items-center justify-center px-1.5 shadow-[0_4px_12px_rgba(220,38,38,0.5)] border border-white/20 animate-in zoom-in duration-300 z-20">
+                                                    {count}
+                                                </div>
+                                            )}
+                                            
+                                            {/* Hover Glow Effect */}
+                                            <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity bg-gradient-to-br from-white/5 to-transparent pointer-events-none"></div>
+                                        </button>
+                                    );
+                                })}
+                            </div>
+
+                            {/* Options within menu */}
+                            <div className="border-t border-white/5 mt-1 pt-3">
+                                <button
+                                    onClick={() => setIsRollHidden(!isRollHidden)}
+                                    className={`w-full flex items-center justify-between gap-4 px-4 py-2.5 rounded-xl border transition-all group/btn ${
+                                        isRollHidden 
+                                        ? 'bg-purple-900/30 border-purple-500/30 text-purple-300 shadow-[0_0_15px_rgba(168,85,247,0.1)]' 
+                                        : 'bg-gray-900/40 border-white/5 text-gray-500 hover:text-gray-300 hover:border-white/10'
+                                    }`}
+                                >
+                                    <div className="flex flex-col items-start leading-none">
+                                        <span className="text-[9px] font-black uppercase tracking-[0.2em] mb-0.5 opacity-60">Görünüm</span>
+                                        <span className="text-[11px] font-black uppercase tracking-tight">{isRollHidden ? 'GİZLİ' : 'AÇIK'}</span>
+                                    </div>
+                                    <div className={`text-lg transition-transform duration-500 ${isRollHidden ? 'rotate-[360deg] scale-110' : 'rotate-0 scale-100 group-hover/btn:scale-110'}`}>
+                                        {isRollHidden ? '👁️‍🗨️' : '👁️'}
+                                    </div>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Main FAB */}
+                    <button
+                        onClick={() => setIsQuickDiceOpen(!isQuickDiceOpen)}
+                        className={`group relative w-16 h-16 rounded-2xl flex items-center justify-center transition-all duration-500 shadow-2xl border ${isQuickDiceOpen ? 'bg-red-600 border-red-400 rotate-90' : 'bg-gray-900 border-white/10 hover:border-red-500/50 rotate-0'}`}
+                    >
+                        {Object.keys(dicePool).length > 0 && (
+                            <div className="absolute -top-2 -right-2 min-w-[24px] h-[24px] bg-yellow-500 text-black text-[10px] font-black rounded-full flex items-center justify-center px-1.5 shadow-lg animate-in zoom-in duration-300 ring-4 ring-gray-950">
+                                {Object.values(dicePool).reduce((a: any, b: any) => a + b, 0)}
+                            </div>
+                        )}
+                        <div className={`transition-all duration-500 ${isQuickDiceOpen ? 'scale-75 opacity-50' : 'group-hover:scale-110'}`}>
+                            <svg viewBox="0 0 24 24" className="w-8 h-8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 2L22 7.5V16.5L12 22L2 16.5V7.5L12 2Z" fill="white" className={`${isQuickDiceOpen ? 'fill-white' : 'fill-red-600'} transition-colors duration-500`} stroke="white" strokeWidth="1.5" strokeLinejoin="round" />
+                                <path d="M12 2L2 7.5L12 12L22 7.5L12 2Z" stroke={isQuickDiceOpen ? "#ef4444" : "white"} strokeWidth="1" strokeLinejoin="round" />
+                                <path d="M2 16.5L12 12L22 16.5" stroke="white" strokeWidth="0.5" opacity="0.6" />
+                                <path d="M12 2V12M12 22V12M2 7.5L12 12M22 7.5L12 12" stroke="white" strokeWidth="0.5" opacity="0.4" />
+                            </svg>
+                        </div>
+                    </button>
+                </div>
 
                 {/* --- MODALS --- */}
 
