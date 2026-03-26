@@ -1224,6 +1224,14 @@ io.on('connection', (socket) => {
     io.to(campaignId).emit('shop_published', { shopItems, isPublished });
   });
 
+  socket.on('play_sound', ({ campaignId, soundUrl, volume, loop }) => {
+    io.to(campaignId).emit('sound_played', { soundUrl, volume, loop });
+  });
+
+  socket.on('stop_sound', ({ campaignId, soundUrl }) => {
+    io.to(campaignId).emit('sound_stopped', { soundUrl });
+  });
+
 
   socket.on('disconnect', () => {
     console.log(`Bağlantı koptu: ${socket.id}`);

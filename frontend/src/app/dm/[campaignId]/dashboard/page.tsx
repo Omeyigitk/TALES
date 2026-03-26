@@ -98,6 +98,29 @@ export default function DMDashboard() {
     const [isItemBookOpen, setIsItemBookOpen] = useState(false);
     const [itemSearchTerm, setItemSearchTerm] = useState("");
     const [selectedItem, setSelectedItem] = useState<any>(null);
+
+    // Soundboard States
+    const [isSoundboardOpen, setIsSoundboardOpen] = useState(false);
+    const [activeSounds, setActiveSounds] = useState<Record<string, boolean>>({});
+
+    // Soundboard Functions
+    const playSound = (url: string, loop: boolean = false) => {
+        if (socket) {
+            socket.emit('play_sound', { campaignId, soundUrl: url, volume: 1.0, loop });
+            setActiveSounds(prev => ({ ...prev, [url]: true }));
+        }
+    };
+
+    const stopSound = (url: string) => {
+        if (socket) {
+            socket.emit('stop_sound', { campaignId, soundUrl: url });
+            setActiveSounds(prev => {
+                const next = { ...prev };
+                delete next[url];
+                return next;
+            });
+        }
+    };
     const [priceToSet, setPriceToSet] = useState<number>(10);
 
     useEffect(() => {
@@ -490,14 +513,17 @@ export default function DMDashboard() {
     const handlePoolRoll = () => {
         if (dicePool.length === 0) return;
         
-        const results = dicePool.map(sides => ({
-            sides,
-            result: Math.floor(Math.random() * sides) + 1
-        }));
-        const total = results.reduce((sum, r) => sum + r.result, 0);
-        const typeStr = dicePool.length > 5 
-            ? `${dicePool.length} Zarlar` 
-            : dicePool.map(s => `d${s}`).join(' + ');
+        const results = dicePool.map(sides => Math.floor(Math.random() * sides) + 1);
+        const total = results.reduce((a, b) => a + b, 0);
+        
+        const counts: Record<number, number> = {};
+        dicePool.forEach(sides => {
+            counts[sides] = (counts[sides] || 0) + 1;
+        });
+
+        const typeStr = Object.entries(counts)
+            .map(([sides, count]) => `${count}d${sides}`)
+            .join(' + ');
 
         if (socket) {
             socket.emit('roll_dice', {
@@ -505,9 +531,8 @@ export default function DMDashboard() {
                 id: Math.random().toString(36).substring(7),
                 playerName: 'Dungeon Master',
                 rollResult: total,
-                type: typeStr,
-                isHidden: isRollHidden,
-                poolResults: results
+                type: `Dice Pool (${typeStr}): [${results.join(', ')}]`,
+                isHidden: isRollHidden
             });
         }
         setDicePool([]);
