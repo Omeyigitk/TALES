@@ -1374,7 +1374,7 @@ export default function DMDashboard() {
                     {/* Premium Selection Menu */}
                     <div className={`flex flex-col-reverse items-center gap-5 mb-6 transition-all duration-500 origin-bottom ${isQuickDiceOpen ? 'opacity-100 scale-100 translate-y-0' : 'opacity-0 scale-95 translate-y-8 pointer-events-none'}`}>
                         {/* Pool Roll Button - Minimalist & Elegant */}
-                        {dicePool.length > 0 && (
+                        {Object.keys(dicePool).length > 0 && (
                             <button
                                 onClick={handlePoolRoll}
                                 className="group relative px-10 py-3 bg-gray-950/80 backdrop-blur-xl border border-red-500/40 text-red-50 rounded-2xl shadow-[0_15px_40px_rgba(0,0,0,0.6),0_0_20px_rgba(239,68,68,0.1)] flex flex-col items-center justify-center transition-all hover:border-red-500 hover:bg-red-950/40 active:scale-95 overflow-hidden"
@@ -1384,7 +1384,7 @@ export default function DMDashboard() {
                                 <span className="relative z-10 text-[9px] font-bold tracking-[0.3em] uppercase text-gray-400 group-hover:text-red-300 transition-colors mb-1">Zarları At</span>
                                 <div className="relative z-10 flex items-baseline gap-2">
                                     <span className="text-xl font-black tracking-[0.15em] uppercase text-white group-hover:text-red-50 transition-colors">ROLL</span>
-                                    <span className="text-sm font-bold text-red-500/80 group-hover:text-red-400 font-mono">({dicePool.length})</span>
+                                    <span className="text-sm font-bold text-red-500/80 group-hover:text-red-400 font-mono">({Object.values(dicePool).reduce((a: any, b: any) => a + b, 0)})</span>
                                 </div>
                                 
                                 <div className="absolute bottom-0 left-0 w-full h-[2px] bg-red-500/0 group-hover:bg-red-500/40 transition-all overflow-hidden">
@@ -1403,8 +1403,8 @@ export default function DMDashboard() {
                                 <span className="text-[10px] font-black text-gray-500 tracking-[0.3em] uppercase">Zar Seti</span>
                                 <div className="h-px flex-1 bg-gradient-to-r from-transparent via-white/5 to-transparent mx-4"></div>
                                 <button 
-                                    onClick={() => setDicePool([])}
-                                    disabled={dicePool.length === 0}
+                                    onClick={() => setDicePool({})}
+                                    disabled={Object.keys(dicePool).length === 0}
                                     className="text-[9px] font-black text-red-500/60 hover:text-red-400 disabled:opacity-0 transition-all uppercase tracking-widest flex items-center gap-1.5"
                                 >
                                     <span>TEMİZLE</span>
@@ -1414,12 +1414,12 @@ export default function DMDashboard() {
 
                             <div className="grid grid-cols-2 gap-3">
                                 {[20, 100, 12, 10, 8, 6, 4].map((sides, idx) => {
-                                    const count = dicePool.filter(s => s === sides).length;
+                                    const count = dicePool[`d${sides}`] || 0;
                                     const isD20 = sides === 20;
                                     return (
                                         <button
                                             key={sides}
-                                            onClick={() => setDicePool([...dicePool, sides])}
+                                            onClick={() => setDicePool(prev => ({ ...prev, [`d${sides}`]: (prev[`d${sides}`] || 0) + 1 }))}
                                             className={`w-16 h-16 rounded-2xl flex items-center justify-center transition-all group border relative overflow-visible shadow-lg ${
                                                 isD20 
                                                 ? 'bg-red-950/20 border-red-500/20 hover:border-red-500/50 hover:bg-red-900/40' 
@@ -1430,7 +1430,7 @@ export default function DMDashboard() {
                                             <div className={`transition-all duration-500 transform group-hover:scale-110 drop-shadow-[0_0_15px_rgba(0,0,0,0.5)] ${
                                                 isD20 ? 'text-red-500 group-hover:text-red-400' : 'text-gray-400 group-hover:text-gray-200'
                                             }`}>
-                                                {getDiceIcon(sides)}
+                                                {getDiceIcon(`d${sides}`)}
                                             </div>
                                             <span className="absolute bottom-2 right-2.5 text-[7px] font-black opacity-30 group-hover:opacity-60 tracking-tighter uppercase font-mono">D{sides}</span>
                                             
@@ -1475,9 +1475,9 @@ export default function DMDashboard() {
                         onClick={() => setIsQuickDiceOpen(!isQuickDiceOpen)}
                         className={`group relative w-16 h-16 rounded-2xl flex items-center justify-center transition-all duration-500 shadow-2xl border ${isQuickDiceOpen ? 'bg-red-600 border-red-400 rotate-90' : 'bg-gray-900 border-white/10 hover:border-red-500/50 rotate-0'}`}
                     >
-                        {dicePool.length > 0 && (
+                        {Object.keys(dicePool).length > 0 && (
                             <div className="absolute -top-2 -right-2 min-w-[24px] h-[24px] bg-yellow-500 text-black text-[10px] font-black rounded-full flex items-center justify-center px-1.5 shadow-lg animate-in zoom-in duration-300 ring-4 ring-gray-950">
-                                {dicePool.length}
+                                {Object.values(dicePool).reduce((a: any, b: any) => a + b, 0)}
                             </div>
                         )}
                         <div className={`transition-all duration-500 ${isQuickDiceOpen ? 'scale-75 opacity-50' : 'group-hover:scale-110'}`}>
