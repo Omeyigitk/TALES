@@ -162,7 +162,7 @@ export default function DMDashboard() {
 
     // Shop (Dükkan) States
     const [isShopMenuOpen, setIsShopMenuOpen] = useState(false);
-    const [shopItems, setShopItems] = useState<{ id: string, name: string, price: number, note: string, type: string }[]>([]);
+    const [shopItems, setShopItems] = useState<{ id: string, name: string, price: number, note: string, description?: string, type: string }[]>([]);
     const [isShopPublished, setIsShopPublished] = useState(false);
     const [newShopItem, setNewShopItem] = useState({ name: '', price: 10, note: '', description: '', type: 'other' });
 
