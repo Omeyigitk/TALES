@@ -11,6 +11,60 @@ import { getSpellSlotTotals } from "../../../player/[campaignId]/combat_data";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
 
+const getDiceIcon = (type: string) => {
+    switch (type) {
+        case 'd4': return '📐';
+        case 'd6': return '📦';
+        case 'd8': return '💎';
+        case 'd10': return '💧';
+        case 'd12': return '🛑';
+        case 'd20': return '🎲';
+        case 'd100': return '💯';
+        default: return '🎲';
+    }
+};
+
+function DiceMenu({ isOpen, onClose, onRoll, campaignId, dicePool, setDicePool }: any) {
+    const addDie = (type: string) => {
+        setDicePool((prev: any) => ({ ...prev, [type]: (prev[type] || 0) + 1 }));
+    };
+
+    const removeDie = (type: string) => {
+        setDicePool((prev: any) => {
+            const newPool = { ...prev };
+            if (newPool[type] > 1) newPool[type]--;
+            else delete newPool[type];
+            return newPool;
+        });
+    };
+
+    if (!isOpen) return null;
+
+    return (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+            <div className="bg-gray-800 p-6 rounded-lg shadow-xl border border-gray-700 w-96">
+                <h3 className="text-xl font-bold mb-4 text-white">Zar Havuzu</h3>
+                <div className="grid grid-cols-3 gap-2 mb-4">
+                    {[4, 6, 8, 10, 12, 20, 100].map(sides => (
+                        <div key={sides} className="flex items-center justify-between bg-gray-700 p-2 rounded">
+                            <span className="text-white">{getDiceIcon(`d${sides}`)} d{sides}</span>
+                            <div className="flex items-center">
+                                <button onClick={() => removeDie(`d${sides}`)} className="bg-red-600 hover:bg-red-700 text-white px-2 py-1 rounded-l">-</button>
+                                <span className="bg-gray-600 text-white px-3 py-1">{dicePool[`d${sides}`] || 0}</span>
+                                <button onClick={() => addDie(`d${sides}`)} className="bg-green-600 hover:bg-green-700 text-white px-2 py-1 rounded-r">+</button>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+                <div className="flex justify-end space-x-2">
+                    <button onClick={onClose} className="px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700">Kapat</button>
+                    <button onClick={onRoll} className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700" disabled={Object.keys(dicePool).length === 0}>Zarları At</button>
+                </div>
+            </div>
+        </div>
+    );
+}
+
 const MAP_TEMPLATES = [
     { name: 'Seç...', url: '' },
     { name: 'Taverna', url: 'https://images.squarespace-cdn.com/content/v1/593e9232c534a5697e06a378/1566495638202-VUPY5M056T298C7SCSG5/Tavern_Grid.jpg' },
@@ -18,6 +72,111 @@ const MAP_TEMPLATES = [
     { name: 'Orman Yolu', url: 'https://i.pinimg.com/736x/8f/30/1c/8f301cc9388f8d6614144463690d5656.jpg' },
     { name: 'Şehir Meydanı', url: 'https://2minutetabletop.com/wp-content/uploads/2021/05/Town-Square-Night-No-Props-44x32-Grid.jpg' },
 ];
+
+function Soundboard({ isOpen, onClose, playSound, stopSound, activeSounds }: any) {
+    const soundCategories = [
+        {
+            name: "Ambient",
+            icon: "🌲",
+            sounds: [
+                { name: "Dungeon", url: "https://www.fesliyanstudios.com/play-mp3/6511" },
+                { name: "Forest", url: "https://www.fesliyanstudios.com/play-mp3/6514" },
+                { name: "Tavern", url: "https://www.fesliyanstudios.com/play-mp3/6518" },
+                { name: "Rain", url: "https://www.fesliyanstudios.com/play-mp3/6520" }
+            ]
+        },
+        {
+            name: "Combat",
+            icon: "⚔️",
+            sounds: [
+                { name: "Battle Music", url: "https://www.fesliyanstudios.com/play-mp3/5661" },
+                { name: "Sword Clash", url: "https://www.fesliyanstudios.com/play-mp3/58" },
+                { name: "Dragon Roar", url: "https://www.fesliyanstudios.com/play-mp3/650" }
+            ]
+        },
+        {
+            name: "Magic",
+            icon: "✨",
+            sounds: [
+                { name: "Fireball", url: "https://www.fesliyanstudios.com/play-mp3/2650" },
+                { name: "Healing", url: "https://www.fesliyanstudios.com/play-mp3/2375" },
+                { name: "Spell Cast", url: "https://www.fesliyanstudios.com/play-mp3/2653" }
+            ]
+        }
+    ];
+
+    if (!isOpen) return null;
+
+    return (
+        <div className="fixed inset-0 bg-black bg-opacity-60 backdrop-blur-sm flex items-center justify-center z-[100]">
+            <div className="bg-slate-900 border border-slate-700 w-full max-w-2xl rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
+                <div className="p-6 border-b border-slate-800 flex justify-between items-center bg-slate-800/50">
+                    <div>
+                        <h2 className="text-2xl font-black text-white flex items-center gap-3">
+                            <span className="bg-blue-500 p-2 rounded-lg text-xl">🎵</span>
+                            Soundboard
+                        </h2>
+                        <p className="text-slate-400 text-sm mt-1">Tüm oyuncular için eş zamanlı ses tetikle.</p>
+                    </div>
+                    <button onClick={onClose} className="p-2 hover:bg-slate-700 rounded-full transition-colors text-slate-400 hover:text-white">
+                        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                    </button>
+                </div>
+
+                <div className="flex-1 overflow-y-auto p-6 space-y-8">
+                    {soundCategories.map(cat => (
+                        <div key={cat.name} className="space-y-4">
+                            <div className="flex items-center gap-2 text-slate-300 font-bold border-l-4 border-blue-500 pl-3">
+                                <span>{cat.icon}</span>
+                                <span className="uppercase tracking-widest text-sm">{cat.name}</span>
+                            </div>
+                            <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                                {cat.sounds.map(sound => {
+                                    const isActive = activeSounds[sound.url];
+                                    return (
+                                        <button
+                                            key={sound.name}
+                                            onClick={() => isActive ? stopSound(sound.url) : playSound(sound.url, cat.name === "Ambient")}
+                                            className={`group relative p-4 rounded-xl border flex flex-col items-center justify-center gap-2 transition-all duration-300 ${isActive 
+                                                ? 'bg-blue-600 border-blue-400 shadow-[0_0_20px_rgba(59,130,246,0.5)]' 
+                                                : 'bg-slate-800 border-slate-700 hover:border-slate-500 hover:bg-slate-700'}`}
+                                        >
+                                            <div className={`p-2 rounded-full ${isActive ? 'bg-blue-400/30' : 'bg-slate-700 group-hover:bg-slate-600'}`}>
+                                                {isActive ? (
+                                                    <div className="flex gap-1">
+                                                        <div className="w-1 h-3 bg-white animate-bounce"></div>
+                                                        <div className="w-1 h-3 bg-white animate-bounce [animation-delay:-0.2s]"></div>
+                                                        <div className="w-1 h-3 bg-white animate-bounce [animation-delay:-0.4s]"></div>
+                                                    </div>
+                                                ) : (
+                                                    <svg className="w-5 h-5 text-slate-300" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                                )}
+                                            </div>
+                                            <span className={`text-xs font-bold ${isActive ? 'text-white' : 'text-slate-300'}`}>{sound.name}</span>
+                                            {isActive && <div className="absolute top-2 right-2 w-2 h-2 bg-white rounded-full animate-ping"></div>}
+                                        </button>
+                                    );
+                                })}
+                            </div>
+                        </div>
+                    ))}
+                </div>
+
+                <div className="p-4 bg-slate-950/50 border-t border-slate-800 text-center">
+                    <button 
+                        onClick={() => {
+                            // Stop all active sounds
+                            Object.keys(activeSounds).forEach(url => stopSound(url));
+                        }}
+                        className="text-xs font-bold text-red-400 hover:text-red-300 transition-colors uppercase tracking-widest"
+                    >
+                        Tüm Sesleri Durdur
+                    </button>
+                </div>
+            </div>
+        </div>
+    );
+}
 
 export default function DMDashboard() {
     const { campaignId } = useParams();
@@ -75,7 +234,7 @@ export default function DMDashboard() {
     const [expandedMonsterId, setExpandedMonsterId] = useState<string | null>(null);
     const [expandedCombatantId, setExpandedCombatantId] = useState<string | null>(null);
     const [isRollHidden, setIsRollHidden] = useState(false);
-    const [dicePool, setDicePool] = useState<number[]>([]);
+    const [dicePool, setDicePool] = useState<Record<string, number>>({});
     const [isQuickDiceOpen, setIsQuickDiceOpen] = useState(false);
 
     // Sync active combatants with encounter data from server
@@ -511,19 +670,26 @@ export default function DMDashboard() {
     };
 
     const handlePoolRoll = () => {
-        if (dicePool.length === 0) return;
+        if (Object.keys(dicePool).length === 0) return;
         
-        const results = dicePool.map(sides => Math.floor(Math.random() * sides) + 1);
-        const total = results.reduce((a, b) => a + b, 0);
-        
-        const counts: Record<number, number> = {};
-        dicePool.forEach(sides => {
-            counts[sides] = (counts[sides] || 0) + 1;
-        });
+        let total = 0;
+        const results: string[] = [];
+        const typeParts: string[] = [];
 
-        const typeStr = Object.entries(counts)
-            .map(([sides, count]) => `${count}d${sides}`)
-            .join(' + ');
+        for (const type in dicePool) {
+            const count = dicePool[type];
+            const sides = parseInt(type.substring(1)); // e.g., 'd20' -> 20
+            if (isNaN(sides)) continue;
+
+            typeParts.push(`${count}${type}`);
+            for (let i = 0; i < count; i++) {
+                const roll = Math.floor(Math.random() * sides) + 1;
+                total += roll;
+                results.push(roll.toString());
+            }
+        }
+        
+        const typeStr = typeParts.join(' + ');
 
         if (socket) {
             socket.emit('roll_dice', {
@@ -535,58 +701,9 @@ export default function DMDashboard() {
                 isHidden: isRollHidden
             });
         }
-        setDicePool([]);
+        setDicePool({});
         setIsQuickDiceOpen(false);
         showToast("Zarlar Atıldı", `${typeStr} = ${total}`, isRollHidden ? "bg-purple-900 border-purple-500 text-purple-100" : "bg-red-900 border-red-500 text-red-100");
-    };
-
-    const getDiceIcon = (sides: number) => {
-        const baseClass = "w-6 h-6 stroke-current fill-none";
-        switch (sides) {
-            case 4: return (
-                <svg viewBox="0 0 24 24" className={baseClass} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M12 3l9 16H3L12 3z" />
-                    <path d="M12 3v16M3 19l9-8 9 8" className="opacity-40" />
-                </svg>
-            );
-            case 6: return (
-                <svg viewBox="0 0 24 24" className={baseClass} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
-                    <path d="M3 3l18 18M3 21L21 3" className="opacity-40" />
-                </svg>
-            );
-            case 8: return (
-                <svg viewBox="0 0 24 24" className={baseClass} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M12 2L4 12l8 10 8-10-8-10z" />
-                    <path d="M4 12h16M12 2v20" className="opacity-40" />
-                </svg>
-            );
-            case 10: return (
-                <svg viewBox="0 0 24 24" className={baseClass} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M12 2L3 12l9 10 9-10-9-10z" />
-                    <path d="M12 2l-3 10 3 10 3-10-3-10zM3 12h18" className="opacity-40" />
-                </svg>
-            );
-            case 12: return (
-                <svg viewBox="0 0 24 24" className={baseClass} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M12 2l9 6v8l-9 6-9-6V8l9-6z" />
-                    <path d="M12 2l3 6 6 0-3 6 3 6-6 0-3 6-3-6-6 0 3-6-3-6 6 0 3-6z" className="opacity-40 scale-[0.6] origin-center" />
-                </svg>
-            );
-            case 20: return (
-                <svg viewBox="0 0 24 24" className={baseClass} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M12 2l10 5.5v11L12 22l-10-5.5v-11L12 2z" />
-                    <path d="M12 2v20M2 7.5l10 4.5 10-4.5M2 18.5l10-4.5 10 4.5" className="opacity-40" />
-                </svg>
-            );
-            case 100: return (
-                <svg viewBox="0 0 24 24" className={baseClass} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <circle cx="12" cy="12" r="10" />
-                    <circle cx="12" cy="12" r="4" className="opacity-40" />
-                </svg>
-            );
-            default: return <span>d{sides}</span>;
-        }
     };
 
     // Fısıltı (Whisper) Gönder
@@ -964,6 +1081,16 @@ export default function DMDashboard() {
                         </button>
                         <button onClick={() => setIsItemBookOpen(true)} className="flex items-center gap-2 bg-gradient-to-r from-blue-900/80 to-blue-800/80 hover:from-blue-800 hover:to-blue-700 text-blue-100 text-sm font-bold py-2 px-5 rounded-xl border border-blue-500/50 shadow-[0_0_15px_rgba(59,130,246,0.3)] transition-all">
                             ⚔️ <span className="hidden lg:inline">Eşya Kitabı</span>
+                        </button>
+
+                        <div className="h-8 w-px bg-gray-700/50 mx-1"></div>
+
+                        <button onClick={() => setIsDiceMenuOpen(true)} className="flex items-center gap-2 bg-gradient-to-r from-orange-600 to-red-600 hover:from-orange-500 hover:to-red-500 text-white text-sm font-black py-2.5 px-6 rounded-xl border border-orange-400/50 shadow-[0_0_20px_rgba(234,88,12,0.4)] transition-all scale-105 hover:scale-110 active:scale-95">
+                            🎲 <span className="hidden lg:inline">ZAR MENÜSÜ</span>
+                        </button>
+
+                        <button onClick={() => setIsSoundboardOpen(true)} className="flex items-center gap-2 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white text-sm font-black py-2.5 px-6 rounded-xl border border-blue-400/50 shadow-[0_0_20px_rgba(37,99,235,0.4)] transition-all scale-105 hover:scale-110 active:scale-95">
+                            🎵 <span className="hidden lg:inline">SOUNDBOARD</span>
                         </button>
                     </div>
                 </header>
@@ -3939,6 +4066,22 @@ export default function DMDashboard() {
                     </div>
                 )}
 
+                <DiceMenu
+                    isOpen={isDiceMenuOpen}
+                    onClose={() => setIsDiceMenuOpen(false)}
+                    onRoll={() => handlePoolRoll()}
+                    campaignId={campaignId}
+                    dicePool={dicePool}
+                    setDicePool={setDicePool}
+                />
+
+                <Soundboard
+                    isOpen={isSoundboardOpen}
+                    onClose={() => setIsSoundboardOpen(false)}
+                    playSound={playSound}
+                    stopSound={stopSound}
+                    activeSounds={activeSounds}
+                />
 
             </div>
         </div >

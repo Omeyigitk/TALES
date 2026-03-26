@@ -188,7 +188,8 @@ const PlayerSheet = () => {
     // Socket Connection
     const { 
         socket, partyStats, diceLogs, dmLevelPermission, whisperData, whisperHistory,
-        partyGold, partyInventory, fogOfWar, quests, factions, sessionNotes, mapData
+        partyGold, partyInventory, fogOfWar, quests, factions, sessionNotes, mapData,
+        soundData
     } = useCampaignSocket(campaignId, 'Player', character?.name, token);
 
     // Toast Notification System
@@ -208,6 +209,30 @@ const PlayerSheet = () => {
     const [isPrivateNotesOpen, setIsPrivateNotesOpen] = useState(false);
     const [isSavingPrivateNotes, setIsSavingPrivateNotes] = useState(false);
     const [privateNotes, setPrivateNotes] = useState("");
+
+    // Sound System Synchronization
+    const audioRefs = useRef<Record<string, HTMLAudioElement>>({});
+    useEffect(() => {
+        if (!soundData) return;
+        const { action, soundUrl, loop } = soundData as any;
+
+        if (action === 'play') {
+            if (audioRefs.current[soundUrl]) {
+                audioRefs.current[soundUrl].pause();
+                audioRefs.current[soundUrl].currentTime = 0;
+            }
+            const audio = new Audio(soundUrl);
+            audio.loop = !!loop;
+            audio.volume = 0.5; // Default safe volume
+            audio.play().catch(e => console.warn("Player audio autoplay blocked or failed:", e));
+            audioRefs.current[soundUrl] = audio;
+        } else if (action === 'stop') {
+            if (audioRefs.current[soundUrl]) {
+                audioRefs.current[soundUrl].pause();
+                delete audioRefs.current[soundUrl];
+            }
+        }
+    }, [soundData]);
     const [whisperTarget, setWhisperTarget] = useState('DM');
     const [whisperMessage, setWhisperMessage] = useState("");
     const [isWhisperModalOpen, setIsWhisperModalOpen] = useState(false);

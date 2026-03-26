@@ -34,6 +34,7 @@ export function useCampaignSocket(campaignId, role, userId, token) {
     const [quests, setQuests] = useState([]);
     const [factions, setFactions] = useState([]);
     const [sessionNotes, setSessionNotes] = useState([]);
+    const [soundData, setSoundData] = useState(null);
     /** @type {[import('socket.io-client').Socket | null, Function]} */
     const [socket, setSocket] = useState(/** @type {any} */(null));
 
@@ -126,6 +127,10 @@ export function useCampaignSocket(campaignId, role, userId, token) {
         s.on("quests_sync", (data) => setQuests(data || []));
         s.on("factions_sync", (data) => setFactions(data || []));
         s.on("session_notes_sync", (data) => setSessionNotes(data || []));
+        
+        // Sound System
+        s.on("sound_played", (data) => setSoundData({ action: 'play', ...data, timestamp: Date.now() }));
+        s.on("sound_stopped", (data) => setSoundData({ action: 'stop', ...data, timestamp: Date.now() }));
 
         return () => {
             s.off("character_stat_updated");
@@ -145,6 +150,8 @@ export function useCampaignSocket(campaignId, role, userId, token) {
             s.off("quests_sync");
             s.off("factions_sync");
             s.off("session_notes_sync");
+            s.off("sound_played");
+            s.off("sound_stopped");
             s.disconnect();
             _socket = null; // sonraki mount için sıfırla
         };
@@ -152,6 +159,6 @@ export function useCampaignSocket(campaignId, role, userId, token) {
 
     return { 
         socket, partyStats, encounterStatus, diceLogs, dmLevelPermission, whisperData, whisperHistory,
-        mapData, partyGold, partyInventory, fogOfWar, quests, factions, sessionNotes
+        mapData, partyGold, partyInventory, fogOfWar, quests, factions, sessionNotes, soundData
     };
 }
