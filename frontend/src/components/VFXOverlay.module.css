@@ -399,3 +399,186 @@
     90%  { opacity: 1; }
     100% { transform: translateY(-10vh) translateX(var(--mx3, -20px)) scale(0.3); opacity: 0; }
 }
+
+/* ─ TORNADO ─ */
+.weatherTornado {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.tornadoDebris {
+    position: absolute;
+    border-radius: 2px;
+    animation: tornadoSpin infinite linear;
+    opacity: 0.7;
+}
+
+.tornadoDebris:nth-child(3n)   { width: 4px; height: 4px; background: rgba(139, 115, 85, 0.8); border-radius: 50%; }
+.tornadoDebris:nth-child(3n+1) { width: 40px; height: 2px; background: rgba(100, 80, 60, 0.6); }
+.tornadoDebris:nth-child(3n+2) { width: 8px; height: 3px; background: rgba(120, 100, 70, 0.7); }
+
+@keyframes tornadoSpin {
+    0%   { transform: rotate(0deg) translateX(var(--tr, 80px)) translateY(var(--ty, 0px)) scale(1.2); opacity: 0; }
+    10%  { opacity: 0.8; }
+    50%  { transform: rotate(180deg) translateX(var(--tr, 80px)) translateY(calc(var(--ty, 0px) * -1)) scale(0.6); }
+    90%  { opacity: 0.8; }
+    100% { transform: rotate(360deg) translateX(var(--tr, 80px)) translateY(var(--ty, 0px)) scale(0); opacity: 0; }
+}
+
+.tornadoCore {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 6px;
+    height: 100vh;
+    background: linear-gradient(to top, rgba(100,80,60,0.5), rgba(150,130,100,0.1), transparent);
+    clip-path: polygon(30% 0%, 70% 0%, 100% 100%, 0% 100%);
+    animation: tornadoWobble 3s infinite ease-in-out;
+}
+
+@keyframes tornadoWobble {
+    0%, 100% { transform: translateX(-50%) skewX(-3deg); }
+    50%       { transform: translateX(-48%) skewX(3deg); }
+}
+
+/* ─ METEOR SHOWER ─ */
+.weatherMeteor {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.meteor {
+    position: absolute;
+    top: -5%;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(255,200,100,1) 0%, rgba(255,120,30,0.5) 40%, transparent 100%);
+    animation: meteorFall infinite linear;
+    box-shadow: 0 0 6px rgba(255,150,50,0.9), 0 0 20px rgba(255,100,30,0.4);
+}
+
+.meteorTrail {
+    position: absolute;
+    height: 1.5px;
+    background: linear-gradient(to right, transparent, rgba(255,180,80,0.7), transparent);
+    transform-origin: right center;
+    animation: meteorFall infinite linear;
+    filter: blur(1px);
+}
+
+@keyframes meteorFall {
+    0%   { transform: translate(-20vw, -10vh) rotate(var(--mangle, 45deg)) scale(1); opacity: 0; }
+    5%   { opacity: 1; }
+    95%  { opacity: 1; }
+    100% { transform: translate(120vw, 120vh) rotate(var(--mangle, 45deg)) scale(0.3); opacity: 0; }
+}
+
+/* ─ ECLIPSE ─ */
+.weatherEclipse {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    background: radial-gradient(circle at 30% 20%, rgba(255,150,0,0.06) 0%, rgba(0,0,0,0.55) 60%, rgba(0,0,0,0.8) 100%);
+    animation: eclipsePulse 8s infinite alternate ease-in-out;
+}
+
+.eclipseCorona {
+    position: absolute;
+    top: 8%;
+    left: 22%;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,0,0,1) 45%, rgba(255,140,0,0.4) 60%, transparent 75%);
+    box-shadow: 0 0 40px 20px rgba(255,140,0,0.2), 0 0 80px 40px rgba(255,80,0,0.1);
+    animation: coronaGlow 4s infinite alternate ease-in-out;
+}
+
+@keyframes eclipsePulse {
+    0%   { opacity: 0.85; }
+    100% { opacity: 1; }
+}
+
+@keyframes coronaGlow {
+    0%   { box-shadow: 0 0 40px 20px rgba(255,140,0,0.2), 0 0 80px 40px rgba(255,80,0,0.1); }
+    100% { box-shadow: 0 0 60px 30px rgba(255,160,0,0.35), 0 0 120px 60px rgba(255,100,0,0.15); }
+}
+
+/* ─ AUTUMN LEAVES ─ */
+.weatherLeaves {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.leaf {
+    position: absolute;
+    top: -5%;
+    border-radius: 50% 10% 50% 10%;
+    animation: leafFall infinite ease-in-out;
+}
+
+.leaf:nth-child(4n)   { width: 10px; height: 7px; background: rgba(180, 60, 20, 0.85); }
+.leaf:nth-child(4n+1) { width: 8px;  height: 5px; background: rgba(220, 120, 20, 0.85); }
+.leaf:nth-child(4n+2) { width: 12px; height: 8px; background: rgba(190, 80,  10, 0.8);  }
+.leaf:nth-child(4n+3) { width: 9px;  height: 6px; background: rgba(240, 160, 30, 0.8);  }
+
+@keyframes leafFall {
+    0%   { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0; }
+    5%   { opacity: 1; }
+    25%  { transform: translateY(25vh) translateX(var(--lsx, 40px)) rotate(120deg); }
+    50%  { transform: translateY(50vh) translateX(var(--lsx2, -30px)) rotate(240deg); }
+    75%  { transform: translateY(75vh) translateX(var(--lsx, 40px)) rotate(360deg); }
+    95%  { opacity: 1; }
+    100% { transform: translateY(110vh) translateX(0) rotate(480deg); opacity: 0; }
+}
+
+/* ─ ACID RAIN ─ */
+.weatherAcid {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.acidDrop {
+    position: absolute;
+    width: 2px;
+    background: linear-gradient(to bottom, transparent, rgba(100,220,50,0.75));
+    top: -20px;
+    animation: rainLinear infinite linear;
+    transform: rotate(8deg);
+    box-shadow: 0 0 3px rgba(80,200,30,0.5);
+}
+
+.acidSplash {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(80, 200, 30, 0.2);
+    animation: acidSplashAnim infinite ease-out;
+    box-shadow: inset 0 0 4px rgba(80,200,30,0.3);
+}
+
+@keyframes acidSplashAnim {
+    0%   { transform: scale(0); opacity: 0.8; }
+    100% { transform: scale(3); opacity: 0; }
+}
+

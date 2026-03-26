@@ -238,6 +238,115 @@ export const VFXOverlay: React.FC<{ activeEffect: any, conditions?: any[], weath
             );
         }
 
+        // ─ TORNADO ─
+        if (weather.type === 'tornado') {
+            const debrisCount = weather.severity === 'heavy' ? 80 : weather.severity === 'light' ? 30 : 50;
+            return (
+                <div className={styles.weatherTornado}>
+                    <div className={styles.tornadoCore} />
+                    {Array.from({ length: debrisCount }).map((_, i) => (
+                        <div key={i} className={styles.tornadoDebris} style={{
+                            top: `${20 + Math.random() * 60}%`,
+                            left: `${30 + Math.random() * 40}%`,
+                            animationDelay: `${Math.random() * 4}s`,
+                            animationDuration: `${1.5 + Math.random() * 3}s`,
+                            '--tr': `${40 + Math.random() * 120}px`,
+                            '--ty': `${(Math.random() - 0.5) * 60}px`
+                        } as any} />
+                    ))}
+                </div>
+            );
+        }
+
+        // ─ METEOR SHOWER ─
+        if (weather.type === 'meteor') {
+            const meteorCount = weather.severity === 'heavy' ? 20 : weather.severity === 'light' ? 6 : 12;
+            return (
+                <div className={styles.weatherMeteor}>
+                    {Array.from({ length: meteorCount }).map((_, i) => {
+                        const size = 3 + Math.random() * 5;
+                        const delay = Math.random() * 10;
+                        const dur = 1.5 + Math.random() * 2;
+                        const startX = Math.random() * 80;
+                        return (
+                            <React.Fragment key={i}>
+                                <div className={styles.meteor} style={{
+                                    left: `${startX}%`,
+                                    width: `${size}px`,
+                                    height: `${size}px`,
+                                    animationDelay: `${delay}s`,
+                                    animationDuration: `${dur}s`,
+                                    '--mangle': '45deg'
+                                } as any} />
+                                <div className={styles.meteorTrail} style={{
+                                    left: `${startX}%`,
+                                    width: `${40 + Math.random() * 60}px`,
+                                    animationDelay: `${delay}s`,
+                                    animationDuration: `${dur}s`,
+                                    '--mangle': '45deg'
+                                } as any} />
+                            </React.Fragment>
+                        );
+                    })}
+                </div>
+            );
+        }
+
+        // ─ ECLIPSE ─
+        if (weather.type === 'eclipse') {
+            return (
+                <div className={styles.weatherEclipse}>
+                    <div className={styles.eclipseCorona} />
+                </div>
+            );
+        }
+
+        // ─ AUTUMN LEAVES ─
+        if (weather.type === 'leaves') {
+            return (
+                <div className={styles.weatherLeaves}>
+                    {Array.from({ length: count }).map((_, i) => (
+                        <div key={i} className={styles.leaf} style={{
+                            left: `${Math.random() * 100}%`,
+                            animationDelay: `${Math.random() * 8}s`,
+                            animationDuration: `${5 + Math.random() * 8}s`,
+                            opacity: 0.6 + Math.random() * 0.4,
+                            '--lsx': `${(Math.random() - 0.5) * 80}px`,
+                            '--lsx2': `${(Math.random() - 0.5) * 60}px`
+                        } as any} />
+                    ))}
+                </div>
+            );
+        }
+
+        // ─ ACID RAIN ─
+        if (weather.type === 'acid') {
+            return (
+                <div className={styles.weatherAcid}>
+                    {Array.from({ length: count }).map((_, i) => (
+                        <div key={i} className={styles.acidDrop} style={{
+                            left: `${Math.random() * 100}%`,
+                            height: `${12 + Math.random() * 10}px`,
+                            animationDelay: `${Math.random() * 2}s`,
+                            animationDuration: `${0.5 + Math.random() * 0.5}s`,
+                            opacity: 0.5 + Math.random() * 0.5
+                        }} />
+                    ))}
+                    {Array.from({ length: 15 }).map((_, i) => (
+                        <div key={`sp${i}`} className={styles.acidSplash} style={{
+                            left: `${Math.random() * 100}%`,
+                            bottom: `${Math.random() * 15}%`,
+                            width: `${6 + Math.random() * 10}px`,
+                            height: `${6 + Math.random() * 10}px`,
+                            animationDelay: `${Math.random() * 3}s`,
+                            animationDuration: `${0.8 + Math.random() * 0.8}s`
+                        }} />
+                    ))}
+                    <div style={{ position: 'absolute', inset: 0, background: 'rgba(30, 80, 10, 0.07)' }} />
+                </div>
+            );
+        }
+
         return null;
     };
 

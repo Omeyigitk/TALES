@@ -1000,7 +1000,7 @@ export default function DMDashboard() {
                         {/* Weather Controls */}
                         <div className="flex items-center gap-2">
                             <span className="text-[10px] text-gray-500 font-black uppercase tracking-widest shrink-0">🌤 Atmosfer</span>
-                            <div className="flex gap-1">
+                            <div className="flex gap-1 flex-wrap">
                                 {[
                                     { type: 'clear',     icon: '☀️', label: 'Güneşli' },
                                     { type: 'rain',      icon: '🌧️', label: 'Yağmur' },
@@ -1012,6 +1012,11 @@ export default function DMDashboard() {
                                     { type: 'embers',    icon: '🌋', label: 'Volkan' },
                                     { type: 'blood',     icon: '🩸', label: 'Kan Yağmuru' },
                                     { type: 'magic',     icon: '✨', label: 'Büyü' },
+                                    { type: 'tornado',   icon: '🌪️', label: 'Kasırga' },
+                                    { type: 'meteor',    icon: '☄️', label: 'Meteor Yağmuru' },
+                                    { type: 'eclipse',   icon: '🌑', label: 'Tutulma' },
+                                    { type: 'leaves',    icon: '🍂', label: 'Sonbahar' },
+                                    { type: 'acid',      icon: '☠️', label: 'Asit Yağmuru' },
                                 ].map((w) => (
                                     <button
                                         key={w.type}
