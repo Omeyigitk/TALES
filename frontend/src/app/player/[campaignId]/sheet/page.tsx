@@ -397,6 +397,22 @@ const PlayerSheet = () => {
         return eff;
     })();
 
+    const getItemBonus = (bonusType: string, secondaryType?: string) => {
+        let bonus = 0;
+        if (character?.inventory) {
+            character.inventory.forEach((it: any) => {
+                if (it.isEquipped && it.effects) {
+                    it.effects.forEach((eff: any) => {
+                        if (eff.type === bonusType) {
+                            if (!secondaryType || eff.stat === secondaryType) bonus += eff.value;
+                        }
+                    });
+                }
+            });
+        }
+        return bonus;
+    };
+
     const mods = {
         STR: mod(effectiveStats.STR || 10),
         DEX: mod(effectiveStats.DEX || 10),
@@ -1148,21 +1164,6 @@ const PlayerSheet = () => {
         return Math.floor((val - 10) / 2);
     };
 
-    const getItemBonus = (bonusType: string, secondaryType?: string) => {
-        let bonus = 0;
-        if (character?.inventory) {
-            character.inventory.forEach((it: any) => {
-                if (it.isEquipped && it.effects) {
-                    it.effects.forEach((eff: any) => {
-                        if (eff.type === bonusType) {
-                            if (!secondaryType || eff.stat === secondaryType) bonus += eff.value;
-                        }
-                    });
-                }
-            });
-        }
-        return bonus;
-    };
 
     const handleShortRest = async () => {
         if (await confirm({ 
