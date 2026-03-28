@@ -368,8 +368,12 @@ const PlayerSheet = () => {
     // Derived Values
     const stats = character?.stats || { STR: 10, DEX: 10, CON: 10, INT: 10, WIS: 10, CHA: 10 };
 
-    // Feats aggregation for calculations
-    const actualFeats = [...(character?.feats || []), ...(character?.raceBonusFeats || [])];
+    // Feats aggregation for calculations and UI
+    const actualFeats = Array.from(new Set([
+        ...(character?.feats || []),
+        ...(character?.raceBonusFeats || []),
+        ...(Object.values(character?.featSelections || {}).map((s: any) => s.feat).filter(Boolean))
+    ]));
 
     // Effective Stats (Including Item Bonuses/Overrides AND Feat Selections)
     const effectiveStats = (() => {
@@ -1135,7 +1139,7 @@ const PlayerSheet = () => {
         
         if (!isKnown) {
             // Apply limits if adding a new spell
-            const { cantrips: cantripLimit, spellsTotal: spellLimit } = getSpellLimits(character.classRef?.name || '', character.level || 1, character.stats);
+            const { cantrips: cantripLimit, spellsTotal: spellLimit } = getSpellLimits(character.classRef?.name || '', character.level || 1, effectiveStats);
             
             // Need to know the level of the spell we're adding
             const spellData = allSpells.find(s => s.name === spellName) || spellDetails[spellName];
@@ -5982,7 +5986,7 @@ const PlayerSheet = () => {
                                     <span className="text-[10px] text-gray-500 font-black uppercase tracking-widest opacity-60">Selected</span>
                                     <span className="text-sm font-black text-green-400">
                                         {(() => {
-                                            const { cantrips: cLimit, spellsTotal: sLimit } = getSpellLimits(character?.classRef?.name || '', character?.level || 1, character?.stats);
+                                            const { cantrips: cLimit, spellsTotal: sLimit } = getSpellLimits(character?.classRef?.name || '', character?.level || 1, effectiveStats);
                                             const currentCantrips = (character?.spells || []).filter((s: string) => (spellDetails[s] || allSpells.find(x => x.name === s))?.level_int === 0).length;
                                             const currentLeveled = (character?.spells || []).length - currentCantrips;
                                             return `${currentCantrips}/${cLimit} Cantrips, ${currentLeveled}/${sLimit === 999 ? '∞' : sLimit} Spells`;
