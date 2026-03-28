@@ -489,6 +489,30 @@ const PlayerSheet = () => {
     const clsName = character?.classRef?.name || '';
     const cls = clsName; // Alias for cls which is used in some calculations
     const mcs = character?.multiclasses || [];
+    const getCombinedSpellLimits = () => {
+        const mainClass = character?.classRef?.name || character?.className || character?.class || '';
+        const mcsList = character?.multiclasses || [];
+        const mcsTotalLv = mcsList.reduce((acc: number, mc: any) => acc + (mc.level || 0), 0);
+        const mainLv = Math.max(1, (character?.level || 1) - mcsTotalLv);
+        
+        let totalCantrips = 0;
+        let totalSpells = 0;
+        
+        // Main Class
+        const mainLimits = getSpellLimits(mainClass, mainLv, effectiveStats);
+        totalCantrips += mainLimits.cantrips;
+        totalSpells += mainLimits.spellsTotal;
+        
+        // Multiclasses
+        mcsList.forEach((mc: any) => {
+            const mcLimits = getSpellLimits(mc.className, mc.level, effectiveStats);
+            totalCantrips += mcLimits.cantrips;
+            totalSpells += mcLimits.spellsTotal;
+        });
+        
+        return { cantrips: totalCantrips, spellsTotal: totalSpells };
+    };
+
     const canCast = isSpellcaster(clsName) || mcs.some((mc: any) => isSpellcaster(mc.className));
     const hpPct = character?.maxHp ? Math.round((currentHp / character.maxHp) * 100) : 0;
     // Global Bonuses
@@ -1139,7 +1163,7 @@ const PlayerSheet = () => {
         
         if (!isKnown) {
             // Apply limits if adding a new spell
-            const { cantrips: cantripLimit, spellsTotal: spellLimit } = getSpellLimits(character.classRef?.name || '', character.level || 1, effectiveStats);
+            const { cantrips: cantripLimit, spellsTotal: spellLimit } = getCombinedSpellLimits();
             
             // Need to know the level of the spell we're adding
             const spellData = allSpells.find(s => s.name === spellName) || spellDetails[spellName];
@@ -5986,7 +6010,7 @@ const PlayerSheet = () => {
                                     <span className="text-[10px] text-gray-500 font-black uppercase tracking-widest opacity-60">Selected</span>
                                     <span className="text-sm font-black text-green-400">
                                         {(() => {
-                                            const { cantrips: cLimit, spellsTotal: sLimit } = getSpellLimits(character?.classRef?.name || '', character?.level || 1, effectiveStats);
+                                            const { cantrips: cLimit, spellsTotal: sLimit } = getCombinedSpellLimits();
                                             const currentCantrips = (character?.spells || []).filter((s: string) => (spellDetails[s] || allSpells.find(x => x.name === s))?.level_int === 0).length;
                                             const currentLeveled = (character?.spells || []).length - currentCantrips;
                                             return `${currentCantrips}/${cLimit} Cantrips, ${currentLeveled}/${sLimit === 999 ? '∞' : sLimit} Spells`;
