@@ -378,7 +378,9 @@ const PlayerSheet = () => {
     const actualFeats = Array.from(new Set([
         ...(character?.feats || []),
         ...(character?.raceBonusFeats || []),
-        ...(Object.values(character?.featSelections || {}).map((s: any) => s.feat).filter(Boolean))
+        ...(character?.featSelections?.stats ? Object.keys(character.featSelections.stats) : []),
+        ...(character?.featSelections?.spells ? Object.keys(character.featSelections.spells) : []),
+        ...(character?.featSelections?.choices ? Object.keys(character.featSelections.choices) : [])
     ]));
 
     // Effective Stats (Including Item Bonuses/Overrides AND Feat Selections)
@@ -603,6 +605,13 @@ const PlayerSheet = () => {
                 setConditions(charData.conditions || []);
                 setHitDiceUsed(charData.hitDiceUsed || 0);
                 setDeathSaves(charData.deathSaves || { successes: 0, failures: 0 });
+                
+                if (charData.featSelections) {
+                    setFeatStatSelections(charData.featSelections.stats || {});
+                    setFeatSpellSelections(charData.featSelections.spells || {});
+                    setFeatChoiceSelections(charData.featSelections.choices || {});
+                }
+
                 setLoading(false);
             } catch (err) {
                 console.error("Fetch error:", err);
@@ -5465,7 +5474,7 @@ const PlayerSheet = () => {
                                                 {(ALL_FEATS as any[]).filter((f, i, arr) => arr.findIndex(x => x.name === f.name) === i)
                                                     .filter(f => !featSearch || f.name.toLowerCase().includes(featSearch.toLowerCase()) || f.name_tr?.toLowerCase().includes(featSearch.toLowerCase()))
                                                     .map((f) => (
-                                                        <div key={f.name} onClick={() => { setFeatPick(f); setFeatStatSelections({}); setFeatSpellSelections({}); }}
+                                                        <div key={f.name} onClick={() => { setFeatPick(f); /* Stat/Spell selections are handled per-feat in the UI */ }}
                                                             className={`cursor-pointer p-3 rounded-xl border transition hover:border-purple-500/60 ${featPick?.name === f.name ? 'border-purple-500 bg-purple-900/20' : 'border-gray-700 bg-gray-800'}`}>
                                                             <div className="flex items-center justify-between mb-0.5">
                                                                 <span className="font-black text-sm text-white">{f.name_tr}</span>
