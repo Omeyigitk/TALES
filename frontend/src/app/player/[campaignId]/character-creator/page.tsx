@@ -428,10 +428,53 @@ export default function CharacterCreator() {
         }
     };
 
+    const getEffectiveStatsForCreator = () => {
+        const finalComputedStats = { ...stats };
+        if (!selectedRace) return finalComputedStats;
+
+        const anyBonuses = [
+            ...(selectedRace?.ability_bonuses?.filter((b: any) => b.ability === 'Any') || []),
+            ...(selectedSubrace?.ability_bonuses?.filter((b: any) => b.ability === 'Any') || [])
+        ];
+
+        const asiBonus = { STR: 0, DEX: 0, CON: 0, INT: 0, WIS: 0, CHA: 0 };
+        asiSelections.forEach(asi => {
+            if (asi.type === 'stat2' && asi.stat1) asiBonus[asi.stat1 as keyof typeof asiBonus] += 2;
+            if (asi.type === 'stat11' && asi.stat1 && asi.stat2) {
+                asiBonus[asi.stat1 as keyof typeof asiBonus] += 1;
+                asiBonus[asi.stat2 as keyof typeof asiBonus] += 1;
+            }
+        });
+
+        for (const stat of Object.keys(stats)) {
+            let bonus = 0;
+            selectedRace?.ability_bonuses?.forEach((b: any) => {
+                if (b.ability.toUpperCase().startsWith(stat) && b.ability !== 'Any') bonus += b.bonus;
+            });
+            selectedSubrace?.ability_bonuses?.forEach((b: any) => {
+                if (b.ability.toUpperCase().startsWith(stat) && b.ability !== 'Any') bonus += b.bonus;
+            });
+            Object.entries(raceStatPicks).forEach(([key, pickedStat]) => {
+                if (pickedStat === stat) {
+                    const idx = parseInt(key.replace('any-', ''));
+                    const actualBonus = anyBonuses[idx]?.bonus || 1;
+                    bonus += actualBonus;
+                }
+            });
+            Object.values(featStatSelections).forEach(pickedStat => {
+                if (pickedStat === stat) bonus += 1;
+            });
+
+            finalComputedStats[stat as keyof typeof stats] += bonus + asiBonus[stat as keyof typeof stats];
+        }
+        return finalComputedStats;
+    };
+
     // D&D 5e Buyul Limitleri (sinif + seviyeye gore)
     const getCharSpellLimits = () => {
         if (!selectedClass) return { cantrips: 0, spells: 0 };
-        const { cantrips, spellsTotal, prepared } = getSpellLimits(selectedClass.name, selectedLevel, stats);
+        const effStats = getEffectiveStatsForCreator();
+        const { cantrips, spellsTotal, prepared } = getSpellLimits(selectedClass.name, selectedLevel, effStats);
         
         let finalSpells = spellsTotal;
         // If it's a class that "knows all" (Cleric/Druid/etc), limit them to 'prepared' count for starting loadout
