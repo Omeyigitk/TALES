@@ -348,7 +348,7 @@ const PlayerSheet = () => {
     const [newWizardCantrip, setNewWizardCantrip] = useState<string>("");
     const [wizardCantripOptions, setWizardCantripOptions] = useState<any[]>([]);
     const [isDraggingToken, setIsDraggingToken] = useState<string | null>(null);
-    const [showFeatsUI, setShowFeatsUI] = useState(false);
+    const [showFeatsUI, setShowFeatsUI] = useState(true);
     const [showRacialTraitsUI, setShowRacialTraitsUI] = useState(false);
     const [showBackgroundUI, setShowBackgroundUI] = useState(false);
     const [showActionsUI, setShowActionsUI] = useState(false);
@@ -376,12 +376,12 @@ const PlayerSheet = () => {
 
     // Feats aggregation for calculations and UI
     const actualFeats = Array.from(new Set([
-        ...(character?.feats || []),
-        ...(character?.raceBonusFeats || []),
+        ...(character?.feats || []).map((f: any) => typeof f === 'string' ? f : f?.name),
+        ...(character?.raceBonusFeats || []).map((f: any) => typeof f === 'string' ? f : f?.name),
         ...(character?.featSelections?.stats ? Object.keys(character.featSelections.stats) : []),
         ...(character?.featSelections?.spells ? Object.keys(character.featSelections.spells) : []),
         ...(character?.featSelections?.choices ? Object.keys(character.featSelections.choices) : [])
-    ]));
+    ])).filter(Boolean);
 
     // Effective Stats (Including Item Bonuses/Overrides AND Feat Selections)
     const effectiveStats = (() => {
@@ -3301,7 +3301,7 @@ const PlayerSheet = () => {
                                     {showFeatsUI && (
                                     <div className="p-3 space-y-2">
                                         {actualFeats.map((featName: string, idx: number) => {
-                                            const featDetails = libFeats.find(f => f.name === featName);
+                                            const featDetails = (libFeats || []).find(f => f.name === featName) || (ALL_FEATS as any[]).find(f => f.name === featName);
                                             const isExpanded = expandedFeat === featName;
                                             return (
                                                 <div key={idx}
