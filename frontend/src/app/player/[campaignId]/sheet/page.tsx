@@ -2791,7 +2791,7 @@ const PlayerSheet = () => {
                         <span className="text-gray-400 text-sm font-bold">🏃 Speed</span>
                         <span className="text-2xl font-black text-white">
                             {(() => {
-                                let totalSpeed = (character.raceRef?.speed || 30) + monkSpeedBonus() + getItemBonus('speed_bonus');
+                                let totalSpeed = (character.raceRef?.speed || 30) + monkSpeedBonus() + getGlobalBonus('speed_bonus');
                                 const allFeatsForSpeed = [...(character.feats || []), ...(character.raceBonusFeats || [])];
                                 allFeatsForSpeed.forEach((fName: string) => {
                                     const fData = libFeats.find(x => x.name === fName);
@@ -2823,8 +2823,8 @@ const PlayerSheet = () => {
                         const showForClass = isSpellcaster(cls) || cls === 'Monk';
                         if (!showForClass) return null;
                         const abilityMod = mod(effectiveStats[ability as keyof typeof effectiveStats] || 10);
-                        const spellDC = 8 + prof + abilityMod + getItemBonus('stat_bonus', 'SPELL_DC');
-                        const spellAtk = prof + abilityMod + getItemBonus('stat_bonus', 'SPELL_ATTACK');
+                        const spellDC = 8 + prof + abilityMod + getGlobalBonus('stat_bonus', 'SPELL_DC');
+                        const spellAtk = prof + abilityMod + getGlobalBonus('stat_bonus', 'SPELL_ATTACK');
                         return (
                             <>
                                 <div className="flex items-center gap-2">
@@ -3000,7 +3000,7 @@ const PlayerSheet = () => {
                                 <div className="p-2 space-y-0.5">
                                     {SAVING_THROWS.map(s => {
                                         const hasSave = saves.includes(s);
-                                        const globalSaveBonus = getItemBonus('stat_bonus', 'SAVE');
+                                        const globalSaveBonus = getGlobalBonus('stat_bonus', 'SAVE');
                                         const bonus = mod(effectiveStats[s as keyof typeof effectiveStats] || 10) + (hasSave ? prof : 0) + globalSaveBonus;
                                         return (
                                             <div key={s} className="flex items-center gap-2 px-2 py-1.5 rounded hover:bg-gray-700/50">
@@ -3500,7 +3500,7 @@ const PlayerSheet = () => {
 
                         // Global bonuses from other items/features
                         const globalAtkBonus = (isRanged && character.fightingStyle === 'Archery') ? 2 : 0;
-                        const globalDmgBonus = getItemBonus('damage_bonus', isRanged ? 'ranged' : 'melee');
+                        const globalDmgBonus = getGlobalBonus('damage_bonus', isRanged ? 'ranged' : 'melee');
 
                         const toHit = prof + abilityMod + weaponBonus + globalAtkBonus;
                         const damageMod = abilityMod + weaponBonus + globalDmgBonus;
