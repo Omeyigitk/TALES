@@ -323,6 +323,12 @@ const PlayerSheet = () => {
     const [newResourceMax, setNewResourceMax] = useState(1);
     const [newResourceDesc, setNewResourceDesc] = useState("");
     const [newResourceRecharge, setNewResourceRecharge] = useState<'short' | 'long'>('long');
+    const [showCustomAttackModal, setShowCustomAttackModal] = useState(false);
+    const [newAttackName, setNewAttackName] = useState("");
+    const [newAttackToHit, setNewAttackToHit] = useState("");
+    const [newAttackDamage, setNewAttackDamage] = useState("");
+    const [newAttackDesc, setNewAttackDesc] = useState("");
+    const [editingAttackId, setEditingAttackId] = useState<string | null>(null);
 
     // Restored UI & Data States
     const [shopData, setShopData] = useState<{ isOpen: boolean, items: any[] }>({ isOpen: false, items: [] });
@@ -1037,6 +1043,46 @@ const PlayerSheet = () => {
             setNewResourceDesc("");
             showToast('Kaynak Eklendi', `${newResourceName} başarıyla eklendi.`, 'bg-orange-900 border-orange-500 text-orange-100');
         } catch { await alert({ title: "Hata", message: "Kaynak eklenemedi.", severity: "danger" }); }
+    };
+
+    const addCustomAttack = async () => {
+        if (!newAttackName.trim() || !character) return;
+        const newAtk = {
+            id: editingAttackId || `custom_atk_${Date.now()}`,
+            name: newAttackName,
+            toHit: newAttackToHit,
+            damage: newAttackDamage,
+            description: newAttackDesc,
+            type: 'custom'
+        };
+        let newCustom = [];
+        if (editingAttackId) {
+            newCustom = (character.customAttacks || []).map((a: any) => a.id === editingAttackId ? newAtk : a);
+        } else {
+            newCustom = [...(character.customAttacks || []), newAtk];
+        }
+        
+        try {
+            const res = await axios.put(`${API_URL}/api/characters/${character._id}`, { customAttacks: newCustom }, { headers: { 'Authorization': `Bearer ${token}` } });
+            setCharacter(res.data);
+            setShowCustomAttackModal(false);
+            setNewAttackName("");
+            setNewAttackToHit("");
+            setNewAttackDamage("");
+            setNewAttackDesc("");
+            setEditingAttackId(null);
+            showToast('Saldırı Kaydedildi', `${newAttackName} başarıyla kaydedildi.`, 'bg-red-900 border-red-500 text-red-100');
+        } catch { await alert({ title: "Hata", message: "Saldırı kaydedilemedi.", severity: "danger" }); }
+    };
+
+    const deleteCustomAttack = async (id: string) => {
+        if (!character) return;
+        const updated = (character.customAttacks || []).filter((a: any) => a.id !== id);
+        try {
+            const res = await axios.put(`${API_URL}/api/characters/${character._id}`, { customAttacks: updated }, { headers: { 'Authorization': `Bearer ${token}` } });
+            setCharacter(res.data);
+            showToast('Saldırı Silindi', 'Özel saldırı başarıyla silindi.', 'bg-red-900 border-red-500 text-red-100');
+        } catch { await alert({ title: "Hata", message: "Saldırı silinemedi.", severity: "danger" }); }
     };
 
     const handleBuyItem = async (item: any) => {
@@ -3597,7 +3643,11 @@ const PlayerSheet = () => {
                            const raw = parseInt(atk.toHit);
                            const finalRaw = isNaN(raw) ? 0 : raw + itemAtkBonus;
                            return { ...atk, toHit: fmt(finalRaw), toHitRaw: finalRaw };
-                        })
+                        }),
+                        ...(character.customAttacks || []).map((atk: any) => ({
+                            ...atk,
+                            desc_tr: resolveFormula(atk.description, level, mods, prof, clsName)
+                        }))
                     ];
 
                     return (
@@ -3794,12 +3844,57 @@ const PlayerSheet = () => {
                                             <h3 className="font-black text-gray-300 uppercase tracking-wide text-sm flex items-center gap-2">
                                                 <span>⚔️</span> Silahlar & Saldırılar
                                             </h3>
+                                            <button 
+                                                onClick={() => {
+                                                    setEditingAttackId(null);
+                                                    setNewAttackName("");
+                                                    setNewAttackToHit("");
+                                                    setNewAttackDamage("");
+                                                    setNewAttackDesc("");
+                                                    setShowCustomAttackModal(true);
+                                                }}
+                                                className="w-6 h-6 bg-gray-700 hover:bg-gray-600 rounded text-center text-xs font-bold text-gray-300 border border-gray-600 transition"
+                                                title="Özel Saldırı Ekle"
+                                            >
+                                                +
+                                            </button>
                                         </div>
                                         <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
                                             {allAttacks.map((atk: any, idx: number) => (
                                                 <div key={idx} className="bg-gray-800 rounded-xl border border-gray-700 p-4 hover:border-gray-500 transition-all flex items-start justify-between group shadow-lg">
                                                     <div className="flex-1 pr-4">
-                                                        <h4 className="font-black text-white text-sm uppercase tracking-tight group-hover:text-red-400 transition-colors">{atk.name}</h4>
+                                                        <div className="flex items-center gap-2">
+                                                            <h4 className="font-black text-white text-sm uppercase tracking-tight group-hover:text-red-400 transition-colors">{atk.name}</h4>
+                                                            {atk.type === 'custom' && (
+                                                                <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                                                                    <button 
+                                                                        onClick={() => {
+                                                                            setEditingAttackId(atk.id);
+                                                                            setNewAttackName(atk.name);
+                                                                            setNewAttackToHit(atk.toHit);
+                                                                            setNewAttackDamage(atk.damage);
+                                                                            setNewAttackDesc(atk.description);
+                                                                            setShowCustomAttackModal(true);
+                                                                        }}
+                                                                        className="p-1 text-[10px] hover:scale-125 transition-transform"
+                                                                        title="Düzenle"
+                                                                    >
+                                                                        ✏️
+                                                                    </button>
+                                                                    <button 
+                                                                        onClick={async () => {
+                                                                            if (await confirm({ title: "Saldırıyı Sil", message: `${atk.name} özel saldırısını silmek istediğine emin misin?`, severity: "danger" })) {
+                                                                                deleteCustomAttack(atk.id);
+                                                                            }
+                                                                        }}
+                                                                        className="p-1 text-[10px] hover:scale-125 transition-transform"
+                                                                        title="Sil"
+                                                                    >
+                                                                        🗑️
+                                                                    </button>
+                                                                </div>
+                                                            )}
+                                                        </div>
                                                         <div className="flex flex-wrap gap-2 mt-2 items-center">
                                                             {atk.toHit && (
                                                                 <span className="text-[10px] bg-red-900/40 text-red-300 font-black px-2 py-0.5 rounded border border-red-500/30 whitespace-nowrap">
@@ -5835,6 +5930,42 @@ const PlayerSheet = () => {
                     </div>
                 )
             }
+            {/* ── CUSTOM ATTACK MODAL ── */}
+            {showCustomAttackModal && (
+                <div className="fixed inset-0 bg-black/80 z-[110] flex items-center justify-center p-4">
+                    <div className="bg-gray-900 border border-red-800/50 rounded-2xl max-w-md w-full p-6 shadow-2xl animate-in fade-in zoom-in duration-200">
+                        <h2 className="text-xl font-black text-red-400 mb-4">{editingAttackId ? 'Düzenle: ' : 'Yeni '} Özel Saldırı</h2>
+                        <div className="space-y-4">
+                            <div>
+                                <label className="block text-gray-400 text-[10px] font-black uppercase mb-1">Saldırı Adı</label>
+                                <input type="text" value={newAttackName} onChange={e => setNewAttackName(e.target.value)}
+                                    placeholder="Örn: Alev Okları, Kutsal Darbe..." className="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:border-red-500" />
+                            </div>
+                            <div className="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label className="block text-gray-400 text-[10px] font-black uppercase mb-1">İsabet (To Hit)</label>
+                                    <input type="text" value={newAttackToHit} onChange={e => setNewAttackToHit(e.target.value)}
+                                        placeholder="Örn: +5, Save DC..." className="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:border-red-500" />
+                                </div>
+                                <div>
+                                    <label className="block text-gray-400 text-[10px] font-black uppercase mb-1">Hasar (Damage)</label>
+                                    <input type="text" value={newAttackDamage} onChange={e => setNewAttackDamage(e.target.value)}
+                                        placeholder="Örn: 1d8 + 3..." className="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white focus:outline-none focus:border-red-500" />
+                                </div>
+                            </div>
+                            <div>
+                                <label className="block text-gray-400 text-[10px] font-black uppercase mb-1">Açıklama</label>
+                                <textarea value={newAttackDesc} onChange={e => setNewAttackDesc(e.target.value)}
+                                    placeholder="Saldırının etkilerini kısaca açıklayın..." className="w-full px-3 py-2 bg-gray-800 border border-gray-700 rounded-lg text-white h-24 resize-none focus:outline-none focus:border-red-500" />
+                            </div>
+                        </div>
+                        <div className="flex gap-3 mt-6">
+                            <button onClick={() => setShowCustomAttackModal(false)} className="flex-1 py-2 bg-gray-800 hover:bg-gray-700 text-gray-400 font-bold rounded-lg transition border border-gray-700 uppercase text-xs">İptal</button>
+                            <button onClick={addCustomAttack} disabled={!newAttackName.trim()} className="flex-1 py-2 bg-red-700 hover:bg-red-600 disabled:opacity-40 text-white font-black rounded-lg transition border border-red-500 shadow-lg uppercase text-xs">{editingAttackId ? 'Güncelle' : 'Ekle'}</button>
+                        </div>
+                    </div>
+                </div>
+            )}
             {/* ── SPELL SELECTION MODAL ── */}
             {showSpellPicker && (
                 <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-[110] flex items-center justify-center p-4 transition-all animate-fade-in" onClick={() => { setShowSpellPicker(false); setSpellSearch(""); setSpellLevelFilter("all"); setSpellSchoolFilter("all"); setSpellTypeFilter("all"); }}>
@@ -5917,7 +6048,14 @@ const PlayerSheet = () => {
                                 const filteredByClass = allSpells.filter(sp => {
                                     if (!sp.classes || !Array.isArray(sp.classes)) return false;
                                     const normalizedCharClasses = charClasses.map(c => String(c).toLowerCase());
-                                    return sp.classes.some((c: string) => normalizedCharClasses.includes(c.toLowerCase()));
+                                    const classMatch = sp.classes.some((c: string) => normalizedCharClasses.includes(c.toLowerCase()));
+                                    if (!classMatch) return false;
+
+                                    // Filter by current slot levels character can cast
+                                    const maxSpellLevel = slotTotals.reduce((max: number, count: number, idx: number) => count > 0 ? idx + 1 : max, 0);
+                                    if (sp.level_int > 0 && sp.level_int > maxSpellLevel) return false;
+                                    
+                                    return true;
                                 });
 
                                 const filteredBySearch = filteredByClass.filter(sp => {

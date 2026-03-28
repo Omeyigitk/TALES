@@ -192,13 +192,13 @@ export function getSpellLimits(className: string, level: number, stats?: Record<
         spellsTotal = 6 + (lv - 1) * 2; // Spellbook size (6 initial + 2 per level)
     } else if (['Cleric', 'Druid'].includes(normalizedClass)) {
         prepared = Math.max(1, lv + getMod('WIS'));
-        spellsTotal = 999; // Can learn any number of spells (simplified for managing)
+        spellsTotal = prepared; // Selection = Preparation
     } else if (normalizedClass === 'Paladin') {
         prepared = Math.max(1, Math.floor(lv / 2) + getMod('CHA'));
-        spellsTotal = 999;
+        spellsTotal = prepared; // Selection = Preparation
     } else if (normalizedClass === 'Artificer') {
         prepared = Math.max(1, Math.floor(lv / 2) + getMod('INT'));
-        spellsTotal = 999;
+        spellsTotal = prepared; // Selection = Preparation
     } else {
         // Known casters (Bard, Sorcerer, Warlock, Ranger)
         spellsTotal = SPELLS_KNOWN[normalizedClass]?.[lvIdx] ?? 0;
