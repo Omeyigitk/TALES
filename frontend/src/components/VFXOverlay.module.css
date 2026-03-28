@@ -210,6 +210,14 @@
 /* ── WEATHER EFFECTS ── */
 
 /* All weather elements sit BEHIND content (z-index < main layout) */
+.vfxContainer {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    overflow: hidden;
+}
+
 .weatherRain, .weatherSnow, .weatherThunder, .weatherBlizzard,
 .weatherEmbers, .weatherBlood, .weatherMagic {
     position: absolute;
@@ -291,12 +299,16 @@
 
 /* ─ FOG ─ */
 .weatherFog {
-    position: absolute;
-    inset: 0;
-    pointer-events: none;
-    z-index: 1;
-    transition: all 2s ease-in-out;
-    animation: fogDrift 12s infinite alternate ease-in-out;
+    position: fixed;
+    inset: -10vw; /* Bleed area to prevent edge artifacts */
+    width: 120vw;
+    height: 120vh;
+    background: rgba(200, 210, 230, 0.15); /* Slightly cooler, more transparent */
+    backdrop-filter: blur(25px);
+    transition: all 3s ease;
+    animation: fogDrift 60s infinite alternate ease-in-out;
+    transform: translateZ(0); /* Force GPU layer */
+    backface-visibility: hidden;
 }
 
 .weatherFog.light  { background: rgba(200, 200, 220, 0.08); backdrop-filter: blur(1px); }
@@ -304,8 +316,8 @@
 .weatherFog.heavy  { background: rgba(200, 200, 220, 0.28); backdrop-filter: blur(6px); }
 
 @keyframes fogDrift {
-    from { transform: scale(1) translateX(0); }
-    to   { transform: scale(1.05) translateX(20px); }
+    from { transform: translate(0, 0); }
+    to   { transform: translate(30px, 20px); }
 }
 
 /* ─ SANDSTORM ─ */
@@ -313,23 +325,23 @@
     position: absolute;
     inset: 0;
     z-index: 1;
-    background: linear-gradient(135deg, rgba(194, 120, 57, 0.08), rgba(210, 150, 70, 0.14));
-    animation: sandPulse 4s infinite alternate;
+    background: rgba(194, 150, 80, 0.05); /* Very subtle desert haze */
+    overflow: hidden;
 }
 
 .grain {
     position: absolute;
     height: 1px;
-    background: rgba(194, 150, 80, 0.5);
+    background: linear-gradient(to right, transparent, rgba(194, 150, 80, 0.3), transparent);
     animation: grainMove infinite linear;
-    border-radius: 2px;
+    will-change: transform;
 }
 
 @keyframes grainMove {
-    0%   { transform: translateX(-10%) translateY(0); opacity: 0; }
+    0%   { transform: translateX(-20vw) translateY(0); opacity: 0; }
     10%  { opacity: 1; }
     90%  { opacity: 1; }
-    100% { transform: translateX(110%) translateY(var(--vy, 20px)); opacity: 0; }
+    100% { transform: translateX(120vw) translateY(var(--vy, 20px)); opacity: 0; }
 }
 
 @keyframes sandPulse {

@@ -33,8 +33,10 @@ export const VFXOverlay = React.memo<{
         ? weather.types 
         : (weather?.type ? [weather.type] : ['clear']);
         
-    // Ensure 'clear' doesn't stay if there are other effects, and fallback to ['clear'] if empty
-    const normalizedTypes = activeTypes.filter(t => t).length > 0 ? activeTypes : ['clear'];
+    // Ensure only ONE weather type is active at a time to prevent visual artifacts and performance issues.
+    // If multiple are provided (legacy or logic error), we take the first non-clear one.
+    const primaryType = activeTypes.find(t => t && t !== 'clear') || 'clear';
+    const normalizedTypes = [primaryType];
 
     // Lightning strike timer for thunder/storm/blizzard
     useEffect(() => {
@@ -137,10 +139,10 @@ export const VFXOverlay = React.memo<{
                     {Array.from({ length: count }).map((_, i) => (
                         <div key={i} className={styles.grain} style={{
                             top: `${Math.random() * 100}%`,
-                            width: `${30 + Math.random() * 80}px`,
-                            animationDelay: `${Math.random() * 3}s`,
-                            animationDuration: `${1 + Math.random() * 2}s`,
-                            '--vy': `${(Math.random() - 0.5) * 40}px`
+                            width: `${4 + Math.random() * 26}px`, // Shorter grains
+                            animationDelay: `${Math.random() * 4}s`,
+                            animationDuration: `${0.8 + Math.random() * 1.2}s`,
+                            '--vy': `${(Math.random() - 0.5) * 60}px`
                         } as any} />
                     ))}
                 </div>

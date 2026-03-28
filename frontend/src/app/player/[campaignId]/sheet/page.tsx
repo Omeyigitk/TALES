@@ -356,7 +356,6 @@ const PlayerSheet = () => {
     const [dicePool, setDicePool] = useState<number[]>([]);
     const chatEndRef = useRef<HTMLDivElement>(null);
 
-
     // Helper: Modifiers
     const mod = (score: number) => Math.floor((score - 10) / 2);
 
@@ -368,27 +367,67 @@ const PlayerSheet = () => {
 
     // Derived Values
     const stats = character?.stats || { STR: 10, DEX: 10, CON: 10, INT: 10, WIS: 10, CHA: 10 };
-    
-    // Effective Stats (Including Item Bonuses/Overrides)
+
+    // Feats aggregation for calculations
+    const actualFeats = [...(character?.feats || []), ...(character?.raceBonusFeats || [])];
+
+    // Effective Stats (Including Item Bonuses/Overrides AND Feat Selections)
     const effectiveStats = (() => {
         const eff = { ...stats };
-        if (character?.inventory) {
-            // 1. Stat Overrides (e.g. STR to 19)
-            character.inventory.forEach((it: any) => {
-                if (it.isEquipped && it.effects) {
-                    it.effects.forEach((effct: any) => {
-                        if (effct.type === 'stat_override' && effct.stat && typeof effct.value === 'number') {
-                            eff[effct.stat as keyof typeof eff] = Math.max(eff[effct.stat as keyof typeof eff], effct.value);
-                        }
-                    });
+        
+        // 1. Apply Feat Stat Selections (e.g. +1 from Resilient)
+        if (character?.featSelections?.stats) {
+            Object.entries(character.featSelections.stats).forEach(([featName, statBonus]: [string, any]) => {
+                if (typeof statBonus === 'string' && eff[statBonus as keyof typeof eff] !== undefined) {
+                    eff[statBonus as keyof typeof eff] += 1;
                 }
             });
-            // 2. Stat Bonuses (e.g. +2 STR)
+        }
+
+        // 2. Apply Passive Feat Stat Bonuses (e.g. Actor +1 CHA)
+        actualFeats.forEach((fName: string) => {
+            const fData = (libFeats || []).find(x => x && x.name === fName);
+            if (fData && fData.effects) {
+                fData.effects.forEach((effObj: any) => {
+                    if (effObj.type === 'stat_bonus') {
+                        if (effObj.value && typeof effObj.value === 'object') {
+                            Object.entries(effObj.value).forEach(([s, v]: [string, any]) => {
+                                if (eff[s as keyof typeof eff] !== undefined) {
+                                    eff[s as keyof typeof eff] += (v || 0);
+                                }
+                            });
+                        }
+                        else if (effObj.stat && typeof effObj.value === 'number') {
+                            if (eff[effObj.stat as keyof typeof eff] !== undefined) {
+                                eff[effObj.stat as keyof typeof eff] += effObj.value;
+                            }
+                        }
+                    }
+                    if (effObj.type === 'stat_set') {
+                        if (effObj.stat && typeof effObj.value === 'number') {
+                            eff[effObj.stat as keyof typeof eff] = Math.max(eff[effObj.stat as keyof typeof eff] || 0, effObj.value);
+                        }
+                    }
+                });
+            }
+        });
+
+        // 3. Apply Item Bonuses/Overrides
+        if (character?.inventory) {
             character.inventory.forEach((it: any) => {
                 if (it.isEquipped && it.effects) {
-                    it.effects.forEach((effct: any) => {
-                        if (effct.type === 'stat_bonus' && effct.stat && typeof effct.value === 'number') {
-                            eff[effct.stat as keyof typeof eff] += effct.value;
+                    it.effects.forEach((effObj: any) => {
+                        if (effObj.type === 'stat_set') {
+                            eff[effObj.stat as keyof typeof eff] = Math.max(eff[effObj.stat as keyof typeof eff] || 0, effObj.value);
+                        }
+                        if (effObj.type === 'stat_bonus') {
+                            if (effObj.value && typeof effObj.value === 'object') {
+                                Object.entries(effObj.value).forEach(([s, v]: [string, any]) => {
+                                    if (eff[s as keyof typeof eff] !== undefined) eff[s as keyof typeof eff] += (v || 0);
+                                });
+                            } else if (effObj.stat && typeof effObj.value === 'number') {
+                                if (eff[effObj.stat as keyof typeof eff] !== undefined) eff[effObj.stat as keyof typeof eff] += effObj.value;
+                            }
                         }
                     });
                 }
@@ -397,19 +436,38 @@ const PlayerSheet = () => {
         return eff;
     })();
 
-    const getItemBonus = (bonusType: string, secondaryType?: string) => {
+    const getGlobalBonus = (bonusType: string, secondaryType?: string) => {
         let bonus = 0;
+        
+        // 1. Item Bonuses
         if (character?.inventory) {
             character.inventory.forEach((it: any) => {
                 if (it.isEquipped && it.effects) {
                     it.effects.forEach((eff: any) => {
                         if (eff.type === bonusType) {
-                            if (!secondaryType || eff.stat === secondaryType) bonus += eff.value;
+                            if (!secondaryType || eff.stat === secondaryType) {
+                                bonus += (typeof eff.value === 'number' ? eff.value : 0);
+                            }
                         }
                     });
                 }
             });
         }
+
+        // 2. Feat Bonuses (includes AC, Init, Atk)
+        actualFeats.forEach((fName: string) => {
+            const fData = (libFeats || []).find(x => x && x.name === fName);
+            if (fData && fData.effects) {
+                fData.effects.forEach((eff: any) => {
+                    if (eff.type === bonusType) {
+                        if (!secondaryType || eff.stat === secondaryType) {
+                            bonus += (typeof eff.value === 'number' ? eff.value : 0);
+                        }
+                    }
+                });
+            }
+        });
+
         return bonus;
     };
 
@@ -429,12 +487,12 @@ const PlayerSheet = () => {
     const mcs = character?.multiclasses || [];
     const canCast = isSpellcaster(clsName) || mcs.some((mc: any) => isSpellcaster(mc.className));
     const hpPct = character?.maxHp ? Math.round((currentHp / character.maxHp) * 100) : 0;
-    const actualFeats = [...(character?.feats || []), ...(character?.raceBonusFeats || [])];
-    
-    // Global Item Bonuses
-    const itemAtkBonus = getItemBonus('attack_bonus');
-    const itemDmgBonus = getItemBonus('damage_bonus');
-    const itemSpellBonus = getItemBonus('spell_atk_bonus'); // Future-proofing
+    // Global Bonuses
+    const itemAtkBonus = getGlobalBonus('attack_bonus');
+    const itemDmgBonus = getGlobalBonus('damage_bonus');
+    const itemSpellBonus = getGlobalBonus('spell_atk_bonus'); 
+    const itemInitBonus = getGlobalBonus('initiative_bonus');
+    const itemACBonus = getGlobalBonus('ac_bonus');
 
     const featSpellsList = character?.featSelections?.spells 
         ? Object.values(character.featSelections.spells).flat() as string[] 
@@ -1159,8 +1217,8 @@ const PlayerSheet = () => {
     };
 
     const getModifier = (statName: string) => {
-        if (!stats) return 0;
-        const val = stats[statName] || 10;
+        if (!effectiveStats) return 0;
+        const val = effectiveStats[statName as keyof typeof effectiveStats] || 10;
         return Math.floor((val - 10) / 2);
     };
 
@@ -1870,7 +1928,7 @@ const PlayerSheet = () => {
         if (!skill || !effectiveStats) return 0;
         const b = mod(effectiveStats[skill.ability as keyof typeof effectiveStats] || 10);
         const level = getSkillProficiencyLevel(skill);
-        const globalSkillBonus = getItemBonus('stat_bonus', 'SKILL');
+        const globalSkillBonus = getGlobalBonus('stat_bonus', 'SKILL');
         
         if (level === 2) return b + (prof * 2) + globalSkillBonus;
         if (level === 1) return b + prof + globalSkillBonus;
@@ -1935,7 +1993,6 @@ const PlayerSheet = () => {
         if (cls === 'Barbarian') baseAC = 10 + dexMod + conMod;
 
         let shieldAC = 0;
-        let acBonus = 0;
         let hasArmor = false;
 
         if (character?.inventory && Array.isArray(character.inventory)) {
@@ -1953,54 +2010,24 @@ const PlayerSheet = () => {
                         baseAC = useDex ? armorBase + (maxDex !== null && maxDex !== undefined ? Math.min(maxDex, dexMod) : dexMod) : armorBase;
                     }
                 }
-
-                if (item.effects && Array.isArray(item.effects)) {
-                    item.effects.forEach((eff: any) => {
-                        if (eff && eff.type === 'ac_bonus' && typeof eff.value === 'number') acBonus += eff.value;
-                    });
-                }
             });
         }
 
-        // Feat AC Bonuses
-        const allFeats = [...(character?.feats || []), ...(character?.raceBonusFeats || [])];
-        allFeats.forEach((fName: string) => {
-            if (!fName) return;
-            const fData = (libFeats || []).find(x => x && x.name === fName);
-            if (fData && fData.effects && Array.isArray(fData.effects)) {
-                fData.effects.forEach((eff: any) => {
-                    if (eff && eff.type === 'ac_bonus' && typeof eff.value === 'number') acBonus += eff.value;
-                });
-            }
-        });
-
-        return baseAC + shieldAC + acBonus;
+        return baseAC + shieldAC + getGlobalBonus('ac_bonus', 'AC');
     };
 
     // ─── Class-aware Initiative ────────────────────────────────────────────────
-    // Samurai (Fighter subclass) adds Wis to Initiative
-    // War Magic Wizard adds Int to Initiative (Tactical Wit)
-    // Chronurgy Wizard adds Int to Initiative (Temporal Awareness)
     const calcInitiative = () => {
         if (!effectiveStats) return 0;
-        let bonus = mod(effectiveStats.DEX || 10) + getItemBonus('initiative_bonus');
-
-        // Feat Initiative Bonuses
-        const allFeatsForInit = [...(character?.feats || []), ...(character?.raceBonusFeats || [])];
-        allFeatsForInit.forEach((fName: string) => {
-            if (!fName) return;
-            const fData = (libFeats || []).find(x => x && x.name === fName);
-            if (fData && fData.effects && Array.isArray(fData.effects)) {
-                fData.effects.forEach((eff: any) => {
-                    if (eff && eff.type === 'initiative_bonus' && typeof eff.value === 'number') bonus += eff.value;
-                });
-            }
-        });
+        let bonus = mod(effectiveStats.DEX || 10) + itemInitBonus;
 
         const wisMod = mod(effectiveStats.WIS || 10);
         const intMod = mod(effectiveStats.INT || 10);
-        if (cls === 'Fighter' && character.subclass === 'Samurai') return bonus + wisMod;
-        if (cls === 'Wizard' && (character.subclass === 'War Magic' || character.subclass === 'Chronurgy')) return bonus + intMod;
+        
+        // Specific class features
+        if (clsName === 'Fighter' && character?.subclass === 'Samurai') bonus += wisMod;
+        if (clsName === 'Wizard' && (character?.subclass === 'War Magic' || character?.subclass === 'Chronurgy')) bonus += intMod;
+
         return bonus;
     };
 
@@ -3717,7 +3744,7 @@ const PlayerSheet = () => {
                                                                 onClick={async () => {
                                                                     const canUse = details.level_int === 0 || await confirm({ title: "Büyü Yap", message: `${spName} büyüsünü yapmak istiyor musun?` });
                                                                     if (canUse) {
-                                                                        handleRoll(spName, { count: 1, sides: 20, bonus: getModifier(getSpellcastingAbility(clsName)) + prof }, 'Büyü Atak');
+                                                                        handleRoll(spName, { count: 1, sides: 20, bonus: getModifier(getSpellcastingAbility(clsName)) + prof + itemSpellBonus }, 'Büyü Atak');
                                                                     }
                                                                 }}
                                                                 className="flex-1 py-1.5 bg-purple-600 hover:bg-purple-500 text-white font-black rounded-md text-[10px] uppercase tracking-widest transition shadow-lg shadow-purple-900/20"
@@ -3799,7 +3826,7 @@ const PlayerSheet = () => {
                                         <div className="bg-gradient-to-br from-purple-900/40 to-indigo-900/40 backdrop-blur-md rounded-2xl border border-purple-500/20 p-5 shadow-xl flex items-center justify-between border-l-4 border-l-purple-500 group hover:bg-purple-900/50 transition-all duration-500">
                                             <div>
                                                 <p className="text-[10px] font-black text-purple-400 uppercase tracking-widest mb-1">Spell Save DC</p>
-                                                <h4 className="text-2xl font-black text-white font-mono">{8 + (getModifier(getSpellcastingAbility(clsName))) + (prof) + itemAtkBonus}</h4>
+                                                <h4 className="text-2xl font-black text-white font-mono">{8 + (getModifier(getSpellcastingAbility(clsName))) + (prof) + itemSpellBonus}</h4>
                                             </div>
                                             <div className="w-12 h-12 bg-purple-500/10 rounded-xl flex items-center justify-center border border-purple-500/20 text-purple-400 group-hover:scale-110 transition-transform duration-500">
                                                 <span className="text-2xl">⚡</span>
@@ -3809,7 +3836,7 @@ const PlayerSheet = () => {
                                         <div className="bg-gradient-to-br from-cyan-900/40 to-blue-900/40 backdrop-blur-md rounded-2xl border border-cyan-500/20 p-5 shadow-xl flex items-center justify-between border-l-4 border-l-cyan-500 group hover:bg-cyan-900/50 transition-all duration-500">
                                             <div>
                                                 <p className="text-[10px] font-black text-cyan-400 uppercase tracking-widest mb-1">Spell Attack</p>
-                                                <h4 className="text-2xl font-black text-white font-mono">+{getModifier(getSpellcastingAbility(clsName)) + (prof) + itemAtkBonus}</h4>
+                                                <h4 className="text-2xl font-black text-white font-mono">+{getModifier(getSpellcastingAbility(clsName)) + (prof) + itemSpellBonus}</h4>
                                             </div>
                                             <div className="w-12 h-12 bg-cyan-500/10 rounded-xl flex items-center justify-center border border-cyan-500/20 text-cyan-400 group-hover:scale-110 transition-transform duration-500">
                                                 <span className="text-2xl">🎯</span>
