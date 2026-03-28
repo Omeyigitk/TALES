@@ -174,31 +174,34 @@ export function getSpellLimits(className: string, level: number, stats?: Record<
     const lv = Math.min(Math.max(level, 1), 20);
     const lvIdx = lv - 1;
 
+    const normalizedClass = className.toLowerCase() === 'sorceror' ? 'Sorcerer' : 
+                          className.charAt(0).toUpperCase() + className.slice(1).toLowerCase();
+
     const getMod = (stat: string) => {
         if (!stats) return 0;
         const val = stats[stat] ?? 10;
         return Math.floor((val - 10) / 2);
     };
     
-    let cantrips = CANTRIPS_KNOWN[className]?.[lvIdx] ?? 0;
+    let cantrips = CANTRIPS_KNOWN[normalizedClass]?.[lvIdx] ?? 0;
     let spellsTotal = 0; // Total that can be "known" or in "spellbook"
     let prepared = 0;    // Total that can be "prepared" or "castable" at once
 
-    if (className === 'Wizard') {
+    if (normalizedClass === 'Wizard') {
         prepared = Math.max(1, lv + getMod('INT'));
         spellsTotal = 6 + (lv - 1) * 2; // Spellbook size (6 initial + 2 per level)
-    } else if (['Cleric', 'Druid'].includes(className)) {
+    } else if (['Cleric', 'Druid'].includes(normalizedClass)) {
         prepared = Math.max(1, lv + getMod('WIS'));
         spellsTotal = 999; // Can learn any number of spells (simplified for managing)
-    } else if (className === 'Paladin') {
+    } else if (normalizedClass === 'Paladin') {
         prepared = Math.max(1, Math.floor(lv / 2) + getMod('CHA'));
         spellsTotal = 999;
-    } else if (className === 'Artificer') {
+    } else if (normalizedClass === 'Artificer') {
         prepared = Math.max(1, Math.floor(lv / 2) + getMod('INT'));
         spellsTotal = 999;
     } else {
         // Known casters (Bard, Sorcerer, Warlock, Ranger)
-        spellsTotal = SPELLS_KNOWN[className]?.[lvIdx] ?? 0;
+        spellsTotal = SPELLS_KNOWN[normalizedClass]?.[lvIdx] ?? 0;
         prepared = spellsTotal;
     }
 

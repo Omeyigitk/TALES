@@ -391,17 +391,25 @@ export default function CharacterCreator() {
         setStatMethod('rolling');
     };
 
+    const getNormalizedClassName = () => {
+        const name = selectedClass?.name ?? "";
+        if (name.toLowerCase() === 'sorceror') return 'Sorcerer';
+        return name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
+    };
+
     // Step 5'e gecilince sinifa ait buyuleri getir
     const fetchSpells = async () => {
-        if (!selectedClass) return;
+        const className = getNormalizedClassName();
+        if (!className) return;
         setLoadingSpells(true);
         try {
             // Seviyeye gore erisilebilir buyuleri hesapla
             // D&D5e: Seviye 1-4 = slot 1, 5-8 = slot 3, 9-12 = slot 5, vb. Basiti: max_spell_level = ceil(level/2)
+            const className = getNormalizedClassName();
             const maxSpellLevel = Math.min(9, Math.ceil(selectedLevel / 2));
 
-            let classesToFetch = [selectedClass.name];
-            if (selectedClass.name === 'Sorcerer' && selectedSubclass?.name === 'Divine Soul') {
+            let classesToFetch = [className];
+            if (className === 'Sorcerer' && selectedSubclass?.name === 'Divine Soul') {
                 classesToFetch.push('Cleric');
             }
 
@@ -472,16 +480,17 @@ export default function CharacterCreator() {
 
     // D&D 5e Buyul Limitleri (sinif + seviyeye gore)
     const getCharSpellLimits = () => {
-        if (!selectedClass) return { cantrips: 0, spells: 0 };
+        const className = getNormalizedClassName();
+        if (!className) return { cantrips: 0, spells: 0 };
         const effStats = getEffectiveStatsForCreator();
-        const { cantrips, spellsTotal, prepared } = getSpellLimits(selectedClass.name, selectedLevel, effStats);
+        const { cantrips, spellsTotal, prepared } = getSpellLimits(className, selectedLevel, effStats);
         
         let finalSpells = spellsTotal;
-        // If it's a class that "knows all" (Cleric/Druid/etc), limit them to 'prepared' count for starting loadout
-        if (spellsTotal === 999) finalSpells = prepared;
+        // If it's a class that "knows all" (Cleric/Druid/etc), we set to 999 so they can manage their full library
+        // if (spellsTotal === 999) finalSpells = prepared; // Previously capped to prepared count
 
         // Custom subclass logic (Lore Bard additional secrets)
-        if (selectedClass.name === "Bard" && selectedSubclass?.name === "College of Lore" && selectedLevel >= 6) {
+        if (className === "Bard" && selectedSubclass?.name === "College of Lore" && selectedLevel >= 6) {
             finalSpells += 2;
         }
 
@@ -634,7 +643,8 @@ export default function CharacterCreator() {
             }
 
             if (selectedClass) {
-                const classItems = CLASS_EQUIPMENT[selectedClass.name as string] || [];
+                const className = getNormalizedClassName();
+                const classItems = CLASS_EQUIPMENT[className] || [];
                 startingInventory = [...startingInventory, ...classItems];
             }
 
@@ -663,7 +673,7 @@ export default function CharacterCreator() {
                     const dexMod = Math.floor((finalComputedStats.DEX - 10) / 2);
                     const wisMod = Math.floor((finalComputedStats.WIS - 10) / 2);
                     const conMod = Math.floor((finalComputedStats.CON - 10) / 2);
-                    const className = selectedClass?.name || '';
+                    const className = getNormalizedClassName();
                     // Monk Unarmored Defense: 10 + DEX + WIS
                     if (className === 'Monk') return 10 + dexMod + wisMod;
                     // Barbarian Unarmored Defense: 10 + DEX + CON
@@ -1597,7 +1607,8 @@ export default function CharacterCreator() {
                             }} className="px-8 py-3 bg-gray-600 hover:bg-gray-500 rounded-lg text-lg font-bold transition-colors">Back</button>
                             <button
                                 onClick={() => {
-                                    const asiLevelMap = ASI_LEVELS[selectedClass?.name ?? ""] ?? [4, 8, 12, 16, 19];
+                                    const className = getNormalizedClassName();
+                                    const asiLevelMap = ASI_LEVELS[className] ?? [4, 8, 12, 16, 19];
                                     const asiCount = asiLevelMap.filter(l => selectedLevel >= l).length;
                                     const raceFeatCount = getRaceFeatCount(selectedRace);
                                     const hasRaceFeat = raceFeatCount > 0;
@@ -1893,8 +1904,9 @@ export default function CharacterCreator() {
 
                 {/* Step 5: Buyul Secimi - yeniden tasarlandi */}
                 {step === 5 && (() => {
+                    const className = getNormalizedClassName();
                     const limits = getCharSpellLimits();
-                    const isSpellcaster = SPELLCASTING_CLASSES.includes(selectedClass?.name ?? "");
+                    const isSpellcaster = SPELLCASTING_CLASSES.includes(className);
                     const cantrips = availableSpells.filter(s => s.level_int === 0);
                     const leveled = availableSpells.filter(s => s.level_int > 0);
 
@@ -2036,9 +2048,10 @@ export default function CharacterCreator() {
 
                                     {/* CLASS AND RACE FEATURES */}
                                     {(() => {
-                                        const styles = FIGHTING_STYLES[selectedClass?.name ?? ""] ?? [];
-                                        const autoFeatures = CLASS_AUTO_FEATURES[selectedClass?.name ?? ""] ?? [];
-                                        const isRogue = selectedClass?.name === "Rogue";
+                                        const className = getNormalizedClassName();
+                                        const styles = FIGHTING_STYLES[className] ?? [];
+                                        const autoFeatures = CLASS_AUTO_FEATURES[className] ?? [];
+                                        const isRogue = className === "Rogue";
                                         return (
                                             <div className="space-y-8 mt-5 border-t border-gray-700 pt-5">
                                                 {/* Fighting Style secimi */}
@@ -2073,7 +2086,8 @@ export default function CharacterCreator() {
 
                                                 {/* ── CLASS SKILL PROFICIENCY PICKER ── */}
                                                 {(() => {
-                                                    const clsProf = CLASS_SKILL_PROFS[selectedClass?.name ?? ''];
+                                                    const className = getNormalizedClassName();
+                                                    const clsProf = CLASS_SKILL_PROFS[className];
                                                     if (!clsProf) return null;
                                                     const { count, skills } = clsProf;
                                                     const bgSkills = (selectedBackground?.skills ?? '').split(',').map((s: string) => s.trim()).filter(Boolean);
@@ -2146,8 +2160,6 @@ export default function CharacterCreator() {
                                                     </div>
                                                 )}
 
-                                                {/* ── Race bonus feats removed from here, moved to Step 4.5 ── */}
-
                                                 {/* ── HALF-ELF +2 SKILLS ── */}
                                                 {RACE_EXTRA_SKILLS[selectedRace?.name ?? ''] && (() => {
                                                     const needed = RACE_EXTRA_SKILLS[selectedRace!.name]!;
@@ -2175,7 +2187,7 @@ export default function CharacterCreator() {
                                                 })()}
 
                                                 {/* ── BARD EXPERTISE ── */}
-                                                {selectedClass?.name === 'Bard' && (() => {
+                                                {getNormalizedClassName() === 'Bard' && (() => {
                                                     const ALL_SKILLS = ['Acrobatics', 'Animal Handling', 'Arcana', 'Athletics', 'Deception', 'History', 'Insight', 'Intimidation', 'Investigation', 'Medicine', 'Nature', 'Perception', 'Performance', 'Persuasion', 'Religion', 'Sleight of Hand', 'Stealth', 'Survival'];
                                                     const needed = selectedLevel >= 3 ? 4 : 2;
                                                     return (
@@ -2201,7 +2213,7 @@ export default function CharacterCreator() {
                                                 })()}
 
                                                 {/* ── WARLOCK: ELDRITCH INVOCATIONS ── */}
-                                                {selectedClass?.name === 'Warlock' && selectedLevel >= 2 && (() => {
+                                                {getNormalizedClassName() === 'Warlock' && selectedLevel >= 2 && (() => {
                                                     const invocCount = selectedLevel >= 18 ? 8 : selectedLevel >= 15 ? 7 : selectedLevel >= 12 ? 6 : selectedLevel >= 9 ? 5 : selectedLevel >= 7 ? 4 : selectedLevel >= 5 ? 3 : 2;
                                                     const INVOCATIONS = ['Agonizing Blast', 'Armor of Shadows', 'Ascendant Step', 'Beast Speech', 'Beguiling Influence', 'Bewitching Whispers', 'Book of Ancient Secrets', 'Chains of Carceri', 'Devil\'s Sight', 'Dreadful Word', 'Eldritch Sight', 'Eldritch Spear', 'Eyes of the Rune Keeper', 'Fiendish Vigor', 'Gaze of Two Minds', 'Ghostly Gaze', 'Gift of the Depths', 'Gift of the Ever-Living Ones', 'Grasp of Hadar', 'Improved Pact Weapon', 'Investment of the Chain Master', 'Lance of Lethargy', 'Lifedrinker', 'Maddening Hex', 'Mask of Many Faces', 'Master of Myriad Forms', 'Minions of Chaos', 'Misty Visions', 'One with Shadows', 'Otherworldly Leap', 'Relentless Hex', 'Repelling Blast', 'Sculptor of Flesh', 'Sign of Ill Omen', 'Thief of Five Fates', 'Thirsting Blade', 'Tomb of Levistus', 'Trickster\'s Escape', 'Undying Servitude', 'Visions of Distant Realms', 'Voice of the Chain Master', 'Whispers of the Grave', 'Witch Sight'];
                                                     return (
