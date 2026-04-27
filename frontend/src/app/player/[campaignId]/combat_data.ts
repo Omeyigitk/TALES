@@ -538,51 +538,11 @@ export const CLASS_ATTACKS: Record<string, Attack[]> = {
     ],
     Wizard: [
         {
-            name: 'Fire Bolt', type: 'ranged', toHit: 'INT+Prof', damage: '1d10 Fire (cantrip)', range: '120 ft',
-            desc_tr: 'Alev topağı fırlatır. Cantrip olduğu için slot harcamaz. Sv.1-4→1d10, Sv.5-10→2d10, Sv.11-16→3d10, Sv.17-20→4d10. Tahta nesneleri de yakar.'
-        },
-        {
-            name: 'Mind Sliver', type: 'save', damage: '1d6 Psychic (cantrip)', range: '60 ft',
-            desc_tr: 'INT saving throw. Hedefe zihinsel acı verir; hasar sonrası hedef ilk saving throw\'undan 1d4 çıkarır. Çapraz etkileşim için çok güçlüdür. Cantrip.'
-        },
-        {
-            name: 'Toll the Dead', type: 'save', damage: '1d8/1d12 Necrotic (cantrip)', range: '60 ft',
-            desc_tr: 'WIS saving throw. Hedef zaten yaralıysa zar 1d12\'ye çıkar. Ölümün çanını duyar — necrotik hasar. Cantrip.'
-        },
-        {
             name: 'Dagger', type: 'melee', toHit: 'STR/DEX+Prof', damage: '1d4 Piercing', range: 'Melee 5ft / 20/60ft',
             desc_tr: 'Hafif bıçak. Hem yakın hem de fırlatma silahı olarak kullanılabilir. Finesse özelliği var.'
-        },
-        {
-            name: 'Shocking Grasp', type: 'melee', toHit: 'INT+Prof', damage: '1d8 Lightning (cantrip)', range: 'Touch',
-            desc_tr: 'Dokunuşla elektrik şoku. Metal zırh giyen hedefe avantajlı saldırı atılır. İsabet ederse hedef bir sonraki turuna kadar Reaksiyon kullanamaz (kaçamaz!). Cantrip.'
-        },
-        {
-            name: 'Ray of Frost', type: 'ranged', toHit: 'INT+Prof', damage: '1d8 Cold (cantrip)', range: '60 ft',
-            desc_tr: 'Soğuk ışın. İsabet ederse 1 tur boyunca hareket hızını 10 ft azaltır. Cantrip.'
-        },
-        {
-            name: 'Cause Fear', type: 'save', damage: 'Frightened (Sv.1)', range: '60 ft',
-            desc_tr: 'WIS saving throw. Başarısız olursa büyü süresince (1 dk, kons.) senden korkar. Her tur sonu save tekrarı. Undead/Construct etkilenmez.'
-        },
+        }
     ],
     Sorcerer: [
-        {
-            name: 'Fire Bolt', type: 'ranged', toHit: 'CHA+Prof', damage: '1d10 Fire (cantrip)', range: '120 ft',
-            desc_tr: 'Alev topağı. Cantrip — slot yok. Sv. artışıyla zarı büyür (1d10→2d10→3d10→4d10).'
-        },
-        {
-            name: 'Chill Touch', type: 'ranged', toHit: 'CHA+Prof', damage: '1d8 Necrotic (cantrip)', range: '120 ft',
-            desc_tr: 'Hayalet pençesi: İsabet eden hedef 1 tur boyunca HP kazanamaz (iyileştirme almaz). Undead hedeflere saldırı atışlarında dezavantaj verir. Cantrip.'
-        },
-        {
-            name: 'Mind Sliver', type: 'save', damage: '1d6 Psychic (cantrip)', range: '60 ft',
-            desc_tr: 'INT saving throw. Hedefe zihinsel acı verir; hasar sonrası hedef ilk saving throw\'undan 1d4 çıkarır. Cantrip.'
-        },
-        {
-            name: 'Ray of Frost', type: 'ranged', toHit: 'CHA+Prof', damage: '1d8 Cold (cantrip)', range: '60 ft',
-            desc_tr: 'Buz ışını. İsabette hedefin hız 10 ft düşer (1 tur). Cantrip.'
-        },
         {
             name: 'Dagger', type: 'melee', toHit: 'DEX+Prof', damage: '1d4 Piercing', range: '20/60 ft',
             desc_tr: 'Acil durum yakın dövüş silahı. Finesse.'
@@ -598,22 +558,6 @@ export const CLASS_ATTACKS: Record<string, Attack[]> = {
         },
     ],
     Warlock: [
-        {
-            name: 'Eldritch Blast', type: 'ranged', toHit: 'CHA+Prof', damage: '1d10 Force/ışın (cantrip)', range: '120 ft',
-            desc_tr: 'Warlock\'un temel cantrip saldırısı. Seviye artışıyla ışın sayısı büyür: Sv.1-4→1 ışın, Sv.5-10→2, Sv.11-16→3, Sv.17-20→4 ışın. Her ışın bağımsız hedef alabilir. Eldritch Invocation\'larla güçlendirilebilir (itmek, yavaşlatmak vb.).'
-        },
-        {
-            name: 'Mind Sliver', type: 'save', damage: '1d6 Psychic (cantrip)', range: '60 ft',
-            desc_tr: 'INT saving throw. Hedefe zihinsel acı verir; hasar sonrası hedef ilk saving throw\'undan 1d4 çıkarır. Cantrip.'
-        },
-        {
-            name: 'Hex', type: 'special', damage: '+1d6 Necrotic/isabet',
-            desc_tr: 'Bonus aksiyon + konsantrasyon büyüsü: Hedefe laneti yaz. Her isabette +1d6 necrotik hasar. Seçilen bir ability check\'te dezavantaj verir. Hedef düşerse konsantrasyon bozmadan başka hedefe taşıyabilirsin.'
-        },
-        {
-            name: 'Cause Fear', type: 'save', damage: 'Frightened (Sv.1)', range: '60 ft',
-            desc_tr: 'WIS saving throw. Hedef senden korkar (1 dk, kons.). Her tur sonu save tekrarı. 1. Seviye slot harcar.'
-        },
         {
             name: 'Dagger', type: 'melee', toHit: 'DEX+Prof', damage: '1d4 Piercing', range: '20/60 ft',
             desc_tr: 'Yakın dövüş acil silahı.'
