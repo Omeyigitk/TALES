@@ -2094,8 +2094,16 @@ export default function CharacterCreator() {
                                             const subFeats = SUBCLASS_FEATURES[className]?.[subName]?.[l] || [];
                                             
                                             if (subFeats.length > 0) {
-                                                // Replace placeholders (Origin Feature, Subclass Feature, etc.)
-                                                feats = feats.filter(f => !f.name.includes("Origin") && !f.name.includes("Subclass") && !f.name.includes("Archetype"));
+                                                // Replace placeholders (Origin Feature, Subclass Feature, Archetype, Path, Circle, Oath, etc.)
+                                                feats = feats.filter(f => 
+                                                    !f.name.includes("Origin") && 
+                                                    !f.name.includes("Subclass") && 
+                                                    !f.name.includes("Archetype") &&
+                                                    !f.name.includes("Path") &&
+                                                    !f.name.includes("Circle") &&
+                                                    !f.name.includes("Oath") &&
+                                                    !f.name.includes("Tradition")
+                                                );
                                                 feats = [...feats, ...subFeats];
                                             }
                                             

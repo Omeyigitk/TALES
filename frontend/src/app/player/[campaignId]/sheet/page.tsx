@@ -1783,8 +1783,16 @@ const PlayerSheet = () => {
         const subFeatures = SUBCLASS_FEATURES[clsName]?.[char.subclass]?.[newLv] ?? [];
         
         if (subFeatures.length > 0) {
-            // Replace placeholders
-            classFeats = classFeats.filter(f => !f.name.includes("Origin") && !f.name.includes("Subclass") && !f.name.includes("Archetype"));
+            // Replace placeholders (Origin, Subclass, Archetype, Path, Circle, Oath, Tradition)
+            classFeats = classFeats.filter(f => 
+                !f.name.includes("Origin") && 
+                !f.name.includes("Subclass") && 
+                !f.name.includes("Archetype") &&
+                !f.name.includes("Path") &&
+                !f.name.includes("Circle") &&
+                !f.name.includes("Oath") &&
+                !f.name.includes("Tradition")
+            );
             classFeats = [...classFeats, ...subFeatures];
         }
 
@@ -3375,8 +3383,16 @@ const PlayerSheet = () => {
                                         const subFeats = SUBCLASS_FEATURES[clsName]?.[character.subclass]?.[l] || [];
                                         
                                         if (subFeats.length > 0) {
-                                            // Filter out placeholders
-                                            feats = feats.filter(f => !f.name.includes("Origin") && !f.name.includes("Subclass") && !f.name.includes("Archetype"));
+                                            // Filter out placeholders (Origin, Subclass, Archetype, Path, Circle, Oath, Tradition)
+                                            feats = feats.filter(f => 
+                                                !f.name.includes("Origin") && 
+                                                !f.name.includes("Subclass") && 
+                                                !f.name.includes("Archetype") &&
+                                                !f.name.includes("Path") &&
+                                                !f.name.includes("Circle") &&
+                                                !f.name.includes("Oath") &&
+                                                !f.name.includes("Tradition")
+                                            );
                                             feats = [...feats, ...subFeats];
                                         }
                                         

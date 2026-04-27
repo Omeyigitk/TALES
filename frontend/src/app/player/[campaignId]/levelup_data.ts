@@ -564,5 +564,190 @@ export const SUBCLASS_FEATURES: Record<string, Record<string, Record<number, Cla
                 { name: "Potent Cantrip", desc_tr: "Saving throw gerektiren cantrip'lerinden (örn: Toll the Dead) düşman kurtulsa bile, normal hasarın yarısını alır." }
             ]
         }
+    },
+    Fighter: {
+        'Battle Master': {
+            3: [
+                { name: "Combat Superiority", desc_tr: "4 adet d8 Superiority Die kazanırsın. Bunları manevralarını güçlendirmek için harcarsın. Kısa veya uzun dinlenmede yenilenir." },
+                { name: "Student of War", desc_tr: "Bir zanaat aracında (artisan's tools) yeterlilik kazanırsın." }
+            ],
+            7: [
+                { name: "Know Your Enemy", desc_tr: "Düşmanını 1 dakika gözlemleyerek onun dövüş yeteneklerini (AC, HP, Sınıf Seviyesi vb.) DM'den öğrenebilirsin." }
+            ],
+            10: [
+                { name: "Improved Combat Superiority", desc_tr: "Superiority zarların d10 olur." }
+            ]
+        },
+        'Champion': {
+            3: [{ name: "Improved Critical", desc_tr: "Silah saldırıların 19 veya 20 zarında kritik vurur." }],
+            7: [{ name: "Remarkable Athlete", desc_tr: "Yeterli olmadığın STR, DEX veya CON kontrollerine prof bonusunun yarısını (yuvarlanmış) ekleyebilirsin. Koşma mesafesi artar." }],
+            10: [{ name: "Additional Fighting Style", desc_tr: "İkinci bir dövüş stili (Fighting Style) seçersin." }]
+        }
+    },
+    Paladin: {
+        'Oath of Vengeance': {
+            3: [
+                { name: "Channel Divinity: Abjure Enemy", desc_tr: "60 ft içindeki birini korkutursun (Frightened). Hızı 0 olur." },
+                { name: "Channel Divinity: Vow of Enmity", desc_tr: "Bonus aksiyon olarak bir düşmana 1 dakika boyunca saldırı atışlarında avantaj kazanırsın." }
+            ],
+            7: [
+                { name: "Relentless Avenger", desc_tr: "Fırsat saldırısı yaptığında, hareketinin yarısı kadar hareket edebilirsin. Bu hareket fırsat saldırısı tetiklemez." }
+            ]
+        },
+        'Oath of Devotion': {
+            3: [
+                { name: "Channel Divinity: Sacred Weapon", desc_tr: "1 dakika boyunca silah saldırılarına CHA modifier'ını eklersin ve silah ışık saçar." },
+                { name: "Channel Divinity: Turn the Unholy", desc_tr: "30 ft içindeki ölümsüzleri ve iblisleri kaçırırsın." }
+            ],
+            7: [
+                { name: "Aura of Devotion", desc_tr: "Sen ve 10 ft içindeki dostların Charmed (büyülenme) etkisine giremezsiniz." }
+            ]
+        }
+    },
+    Rogue: {
+        'Assassin': {
+            3: [
+                { name: "Assassinate", desc_tr: "Sırası gelmemiş yaratıklara saldırıda avantaj kazanırsın. Sürprizlenmiş (Surprised) yaratıklara vurduğun her isabet kritiktir." },
+                { name: "Bonus Proficiencies", desc_tr: "Disguise Kit ve Poisoner's Kit yeterliliği kazanırsın." }
+            ],
+            9: [
+                { name: "Infiltration Expertise", desc_tr: "Sahte kimlikler oluşturabilir ve bunlara 7 gün içinde tam adapte olabilirsin." }
+            ]
+        },
+        'Thief': {
+            3: [
+                { name: "Fast Hands", desc_tr: "Bonus aksiyon ile Sleight of Hand kontrolü yapabilir, hırsız aletlerini kullanabilir veya bir nesneyle etkileşime girebilirsin." },
+                { name: "Second-Story Work", desc_tr: "Tırmanma hızı kazanırsın ve zıplama mesafen (DEX bonusu kadar) artar." }
+            ],
+            9: [
+                { name: "Supreme Sneak", desc_tr: "Bir turda hareketinin yarısından fazlasını kullanmazsan Stealth kontrollerinde avantaj kazanırsın." }
+            ]
+        },
+        'Arcane Trickster': {
+            3: [
+                { name: "Spellcasting", desc_tr: "Intelligence tabanlı büyü yapma yeteneği kazanırsın. Illusion ve Enchantment büyüleri ağırlıklıdır." },
+                { name: "Mage Hand Legerdemain", desc_tr: "Mage Hand cantrip'ini görünmez yapabilir ve onunla eşya çalabilir, kilit açabilirsin." }
+            ],
+            9: [
+                { name: "Magical Ambush", desc_tr: "Gizliyken birine büyü atarsan, o yaratık büyünün kurtarma atışına (save) dezavantajlı başlar." }
+            ]
+        }
+    },
+    Barbarian: {
+        'Path of the Totem Warrior': {
+            3: [
+                { name: "Spirit Seeker", desc_tr: "Beast Sense ve Speak with Animals büyülerini ritüel olarak yapabilirsin." },
+                { name: "Totem Spirit (Bear)", desc_tr: "Rage sırasında psişik hasar dışındaki tüm hasar türlerine direnç kazanırsın." }
+            ],
+            6: [
+                { name: "Aspect of the Beast", desc_tr: "Seçtiğin hayvana göre (Ayı, Kartal, Kurt) taşıma kapasitesi artışı veya çok uzakları görme gibi özellikler kazanırsın." }
+            ]
+        },
+        'Path of the Berserker': {
+            3: [
+                { name: "Frenzy", desc_tr: "Rage sırasında bonus aksiyon ile melee saldırısı yapabilirsin. Rage bitince 1 seviye yorgunluk (Exhaustion) alırsın." }
+            ],
+            6: [
+                { name: "Mindless Rage", desc_tr: "Rage sırasında Charmed veya Frightened etkilerine giremezsin. Mevcut etkiler askıya alınır." }
+            ]
+        }
+    },
+    Bard: {
+        'College of Lore': {
+            3: [
+                { name: "Bonus Proficiencies", desc_tr: "İstediğin 3 beceride (skill) yeterlilik kazanırsın." },
+                { name: "Cutting Words", desc_tr: "Reaksiyon olarak Bardic Inspiration harca: Bir düşmanın saldırı, kontrol veya hasar zarına 1d6 (ileride artar) düşürürsün." }
+            ],
+            6: [
+                { name: "Additional Magical Secrets", desc_tr: "Başka sınıfların listesinden 2 büyü öğrenirsin. Bunlar senin için Bard büyüsü sayılır ve limitine sayılmaz." }
+            ]
+        },
+        'College of Valor': {
+            3: [
+                { name: "Bonus Proficiencies", desc_tr: "Orta zırh, kalkan ve savaş silahları yeterliliği kazanırsın." },
+                { name: "Combat Inspiration", desc_tr: "İlham verdiğin kişiler zarı hasar zarına veya AC'larına (saldırı isabet etmeden önce) ekleyebilirler." }
+            ],
+            6: [
+                { name: "Extra Attack", desc_tr: "Kendi turunda bir saldırı yerine iki kez saldırabilirsin." }
+            ]
+        }
+    },
+    Cleric: {
+        'Life Domain': {
+            1: [
+                { name: "Bonus Proficiency", desc_tr: "Ağır zırh (Heavy Armor) yeterliliği kazanırsın." },
+                { name: "Disciple of Life", desc_tr: "İyileştirme büyülerin ekstra can basar: 2 + Büyü Seviyesi kadar HP." }
+            ],
+            2: [
+                { name: "Channel Divinity: Preserve Life", desc_tr: "5 * Cleric Seviyesi kadar HP'yi menzildeki dostlarına dağıtarak iyileştirirsin (Yarı canın üstüne çıkaramaz)." }
+            ],
+            6: [
+                { name: "Blessed Healer", desc_tr: "Başkasına iyileştirme büyüsü attığında sen de 2 + Büyü Seviyesi kadar HP kazanırsın." }
+            ]
+        },
+        'Light Domain': {
+            1: [
+                { name: "Bonus Cantrip", desc_tr: "Light cantrip'ini öğrenirsin (limitine sayılmaz)." },
+                { name: "Warding Flare", desc_tr: "30 ft içindeki saldırgana reaksiyonunla ışık patlaması yaparak saldırı zarına dezavantaj verirsin. WIS mod kadar / Uzun Dinlenme." }
+            ],
+            2: [
+                { name: "Channel Divinity: Radiance of the Dawn", desc_tr: "30 ft içindeki tüm karanlığı siler ve düşmanlara 2d10 + Seviye ışık (Radiant) hasarı verirsin (CON save)." }
+            ]
+        }
+    },
+    Warlock: {
+        'The Fiend': {
+            1: [
+                { name: "Dark One's Blessing", desc_tr: "Düşmanın canını 0'a indirdiğinde CHA mod + Seviye kadar geçici HP kazanırsın." }
+            ],
+            6: [
+                { name: "Dark One's Own Luck", desc_tr: "1/Kısa Dinlenme: Bir yetenek kontrolüne veya kurtarma atışına 1d10 ekleyebilirsin." }
+            ],
+            10: [
+                { name: "Fiendish Resilience", desc_tr: "Her kısa dinlenmede bir hasar türü seçersin; o türe karşı direnç kazanırsın (Gümüş veya büyü hariç)." }
+            ]
+        },
+        'The Hexblade': {
+            1: [
+                { name: "Hexblade's Curse", desc_tr: "Bonus aksiyon ile birini lanetle: Hasara prof bonusu ekle, 19-20 kritik vur, öldürünce HP kazan." },
+                { name: "Hex Warrior", desc_tr: "Orta zırh, kalkan ve savaş silahı yeterliliği. Bir silahla CHA kullanarak saldırıp hasar verebilirsin." }
+            ],
+            6: [
+                { name: "Accursed Specter", desc_tr: "Öldürdüğün bir insansı yaratığın ruhunu bağlayarak yanına bir hayalet (specter) çağırırsın." }
+            ]
+        }
+    },
+    Druid: {
+        'Circle of the Moon': {
+            2: [
+                { name: "Combat Wild Shape", desc_tr: "Wild Shape'i bonus aksiyonla yapabilirsin. Hayvan formundayken büyü slotu harcayarak 1d8 iyileşebilirsin." },
+                { name: "Circle Forms", desc_tr: "Daha güçlü hayvanlara dönüşebilirsin (Sv.2'de CR 1, Sv.6'dan itibaren Seviye/3)." }
+            ],
+            6: [
+                { name: "Primal Strike", desc_tr: "Hayvan formundaki saldırıların, dirençleri aşmak için büyülü sayılır." }
+            ]
+        },
+        'Circle of the Land': {
+            2: [
+                { name: "Bonus Cantrip", desc_tr: "Bir ekstra Druid cantrip öğrenirsin." },
+                { name: "Natural Recovery", desc_tr: "Kısa dinlenmede seviyenin yarısı kadar büyü slotu yenileyebilirsin." }
+            ]
+        }
+    },
+    Ranger: {
+        'Hunter': {
+            3: [
+                { name: "Hunter's Prey", desc_tr: "Bir stil seçersin: Colossus Slayer (ekstra 1d8 hasar), Giant Killer veya Horde Breaker." }
+            ],
+            7: [
+                { name: "Defensive Tactics", desc_tr: "Escape the Horde, Multiattack Defense veya Steel Will özelliklerinden birini seçersin." }
+            ]
+        },
+        'Gloom Stalker': {
+            3: [
+                { name: "Dread Ambusher", desc_tr: "Dövüşün ilk turunda +10 ft hız kazanırsın ve fazladan bir saldırı (+1d8 hasar) yapabilirsin. WIS modunu inisiyatife eklersin." },
+                { name: "Umbral Sight", desc_tr: "60 ft karanlık görüşü kazanırsın (zaten varsa +30 ft). Karanlıktaki yaratıklara karşı görünmez sayılırsın." }
+            ]
+        }
     }
 };
