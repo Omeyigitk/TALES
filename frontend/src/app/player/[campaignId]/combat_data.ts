@@ -442,30 +442,6 @@ export const CLASS_ATTACKS: Record<string, Attack[]> = {
             desc_tr: 'Düşmana isabetten hemen sonra bir spell slotu harca. 1. seviye slot = 2d8, her ekstra slot seviyesi +1d8 radiant hasar. Undead veya Fiend hedeflere +1d8 ekstra. Slot harcanır ama spell değildir.'
         },
         {
-            name: 'Searing Smite', type: 'special', damage: '1d6 Fire (Sv.1)',
-            desc_tr: 'Bonus aksiyon + konsantrasyon. İlk isabette +1d6 ateş hasarı ve hedef her tur sonu 1d6 ateş hasarı alır (save atana kadar). Seviye 1 büyüdür.'
-        },
-        {
-            name: 'Thunderous Smite', type: 'special', damage: '2d6 Thunder (Sv.1)',
-            desc_tr: 'Bonus aksiyon + konsantrasyon. İlk isabette +2d6 gürültü hasarı ve hedefi 10 ft geri itip yere serer (STR save). Seviye 1 büyüdür.'
-        },
-        {
-            name: 'Wrathful Smite', type: 'special', damage: '1d6 Psychic (Sv.1)',
-            desc_tr: 'Bonus aksiyon + konsantrasyon. İlk isabette +1d6 psişik hasar ve hedefi korkutur (WIS save). Seviye 1 büyüdür.'
-        },
-        {
-            name: 'Branding Smite', type: 'special', damage: '2d6 Radiant (Sv.2)',
-            desc_tr: 'Bonus aksiyon + konsantrasyon. İlk isabette +2d6 radiant hasar ve görünmez hedefleri görünür kılar. Seviye 2 büyüdür.'
-        },
-        {
-            name: 'Divine Favor', type: 'special', damage: '+1d4 Radiant (Sv.1)',
-            desc_tr: 'Bonus aksiyon + konsantrasyon. 1 dk boyunca tüm silah saldırılarına +1d4 radiant hasar ekler. Seviye 1 büyüdür.'
-        },
-        {
-            name: 'Blinding Smite', type: 'special', damage: '3d8 Radiant (Sv.3)',
-            desc_tr: 'Bonus aksiyon + konsantrasyon. İlk isabette +3d8 radiant hasar ve hedefi kör eder (CON save). Seviye 3 büyüdür.'
-        },
-        {
             name: 'Lay on Hands', type: 'heal', damage: 'HP Havuzu (Sv.×5)',
             desc_tr: 'Aksiyon: Kutsal dokunuşla iyileştirirsin. Seviye×5 büyüklüğünde HP havuzun var, istediğin miktarda kullanabilirsin. 5 puan harcayarak bir hastalık veya zehri de temizleyebilirsin. Uzun dinlenmede yenilenir.'
         },
@@ -483,14 +459,6 @@ export const CLASS_ATTACKS: Record<string, Attack[]> = {
         {
             name: 'Shortsword', type: 'melee', toHit: 'DEX+Prof', damage: '1d6 Piercing', range: 'Melee 5 ft',
             desc_tr: 'Yakın dövüş kısa kılıç. Finesse özelliği sayesinde DEX veya STR hangisi yüksekse onu kullanabilirsin.'
-        },
-        {
-            name: "Hunter's Mark", type: 'special', damage: '+1d6 Piercing/isabet',
-            desc_tr: 'Bonus aksiyon + konsantrasyon büyüsü: Hedefi işaretle, her isabette +1d6 hasar ekle. Hedef düşerse bonus aksiyon ile başka hedefe kaydırabilirsin. Yüksek slotlarla süresi uzar.'
-        },
-        {
-            name: 'Ensnaring Strike', type: 'special', damage: '—',
-            desc_tr: 'Konsantrasyon büyüsü. İsabetten sonra hedef STR save atar. Başarısız olursa Restrained (hareketsiz) kalır. Tur sonunda tekrar save atabilir.'
         },
     ],
     Rogue: [
@@ -569,14 +537,6 @@ export const CLASS_ATTACKS: Record<string, Attack[]> = {
     ],
     Cleric: [
         {
-            name: 'Sacred Flame', type: 'save', damage: '1d8 Radiant (cantrip)', range: '60 ft',
-            desc_tr: 'DEX saving throw (DC = 8+Prof+WIS). Başarısız olursa ilahi alev hasarı alır. Kapak avantajı vermez — her zaman görünür hedefe işe yarar. Cantrip.'
-        },
-        {
-            name: 'Toll the Dead', type: 'save', damage: '1d8/1d12 Necrotic (cantrip)', range: '60 ft',
-            desc_tr: 'WIS saving throw. Hedef zaten yaralıysa zar 1d12\'ye çıkar. Ölümün çanını duyar — necrotik hasar. Cantrip.'
-        },
-        {
             name: 'Mace', type: 'melee', toHit: 'STR+Prof', damage: '1d6 Bludgeoning', range: 'Melee 5 ft',
             desc_tr: 'Basit künt silah. Cleric\'lerin temel melee seçeneği.'
         },
@@ -585,24 +545,8 @@ export const CLASS_ATTACKS: Record<string, Attack[]> = {
             desc_tr: 'Aksiyon: İlahi enerjini yak. 30 ft içindeki tüm Undead yaratıklar WIS saving throw atar (DC = 8+Prof+WIS). Başarısız olanlar Frightened (korkmuş) hale gelir ve senden uzaklaşmaları gerekir. 1 dk sürer veya zarar görene kadar. Sv.5\'ten itibaren zayıf Undead\'lar yok edilebilir.',
             resourceCost: { key: 'channel_divinity', amount: 1, name: 'Channel Divinity' }
         },
-        {
-            name: 'Spiritual Weapon', type: 'special', damage: '1d8+WIS Force/Bludgeoning',
-            desc_tr: 'Konsantrasyonsuz 2. seviye büyü (yüksek slotla güçlenir). Bonus aksiyon ile yarı görünür bir silah çağırır — her turda bonus aksiyon ile bu silahla saldırabilirsin. 1 dk sürer.'
-        },
     ],
     Druid: [
-        {
-            name: 'Shillelagh', type: 'melee', toHit: 'WIS+Prof', damage: '1d8 Bludgeoning (cantrip)', range: 'Melee 5 ft',
-            desc_tr: 'Quarterstaff veya club\'ı doğa enerjisiyle büyüle. Hasar zarı 1d8\'e çıkar ve WIS ile saldırırsın. Cantrip.'
-        },
-        {
-            name: 'Produce Flame', type: 'ranged', toHit: 'WIS+Prof', damage: '1d8 Fire (cantrip)', range: '30 ft',
-            desc_tr: 'Elinde bir alev oluşturur (ışık verir) veya fırlatırsın. Fırlatılınca WIS ile saldırı atışı yapılır. Cantrip.'
-        },
-        {
-            name: 'Thorn Whip', type: 'melee', toHit: 'WIS+Prof', damage: '1d6 Piercing (cantrip)', range: '30 ft',
-            desc_tr: 'Uzun dikenli bitki kırbacı. İsabet ederse büyük yaratıkları 10 ft yakına çeker. Düşmanı çukura ya da tuzağa sürüklemek için idealdir. Cantrip.'
-        },
         {
             name: 'Wild Shape', type: 'special', damage: 'Hayvan formu istatistikleri',
             desc_tr: 'Bonus aksiyon: Tamamen bir hayvana dönüşürsün. Hayvanın HP\'ini kazanırsın (erir). Svye göre CR sınırı: Sv.2→CR1/4, Sv.4→CR1/2, Sv.8→CR1. Moon Druid daha güçlü formlar alabilir. Kısa/uzun dinlenmede 2 kullanım yenilenir.',
@@ -610,10 +554,6 @@ export const CLASS_ATTACKS: Record<string, Attack[]> = {
         },
     ],
     Bard: [
-        {
-            name: 'Vicious Mockery', type: 'save', damage: '1d4 Psychic (cantrip)', range: '60 ft',
-            desc_tr: 'WIS saving throw (DC = 8+Prof+CHA). Başarısız olursa hasarın yanı sıra hedef bir sonraki saldırı atışında dezavantajla atar. Eğlenceli ama güçlü moral bozucu büyü. Cantrip.'
-        },
         {
             name: 'Rapier', type: 'melee', toHit: 'DEX+Prof', damage: '1d8 Piercing (finesse)', range: 'Melee 5 ft',
             desc_tr: 'Şık melee silahı. Finesse özelliğiyle DEX kullanılır. Bard\'ın en iyi yakın dövüş seçeneği.'
@@ -629,14 +569,6 @@ export const CLASS_ATTACKS: Record<string, Attack[]> = {
         },
     ],
     Artificer: [
-        {
-            name: 'Fire Bolt', type: 'ranged', toHit: 'INT+Prof', damage: '1d10 Fire (cantrip)', range: '120 ft',
-            desc_tr: 'Mekanik büyü atışı. INT ile saldırı. Cantrip.'
-        },
-        {
-            name: 'Thorn Whip', type: 'melee', toHit: 'INT+Prof', damage: '1d6 Piercing (cantrip)', range: '30 ft',
-            desc_tr: 'Bitki kırbacı. İsabette çeker. INT tabanlı. Cantrip.'
-        },
         {
             name: 'Light Crossbow', type: 'ranged', toHit: 'DEX+Prof', damage: '1d8 Piercing', range: '80/320 ft',
             desc_tr: 'Artificer\'ın temel ranged silahı. Basit silah kategorisindedir.'
