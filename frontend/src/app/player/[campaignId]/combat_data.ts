@@ -210,7 +210,7 @@ export function getSpellLimits(className: string, level: number, stats?: Record<
 
 
 export function isSpellcaster(className: string): boolean {
-    return ['Wizard', 'Sorcerer', 'Sorceror', 'Bard', 'Cleric', 'Druid', 'Paladin', 'Ranger', 'Warlock', 'Artificer'].includes(className);
+    return ['Wizard', 'Sorcerer', 'Bard', 'Cleric', 'Druid', 'Paladin', 'Ranger', 'Warlock', 'Artificer'].includes(className);
 }
 
 // ─── Multiclass Spell Slot Merging ────────────────────────────────────────────
@@ -442,6 +442,30 @@ export const CLASS_ATTACKS: Record<string, Attack[]> = {
             desc_tr: 'Düşmana isabetten hemen sonra bir spell slotu harca. 1. seviye slot = 2d8, her ekstra slot seviyesi +1d8 radiant hasar. Undead veya Fiend hedeflere +1d8 ekstra. Slot harcanır ama spell değildir.'
         },
         {
+            name: 'Searing Smite', type: 'special', damage: '1d6 Fire (Sv.1)',
+            desc_tr: 'Bonus aksiyon + konsantrasyon. İlk isabette +1d6 ateş hasarı ve hedef her tur sonu 1d6 ateş hasarı alır (save atana kadar). Seviye 1 büyüdür.'
+        },
+        {
+            name: 'Thunderous Smite', type: 'special', damage: '2d6 Thunder (Sv.1)',
+            desc_tr: 'Bonus aksiyon + konsantrasyon. İlk isabette +2d6 gürültü hasarı ve hedefi 10 ft geri itip yere serer (STR save). Seviye 1 büyüdür.'
+        },
+        {
+            name: 'Wrathful Smite', type: 'special', damage: '1d6 Psychic (Sv.1)',
+            desc_tr: 'Bonus aksiyon + konsantrasyon. İlk isabette +1d6 psişik hasar ve hedefi korkutur (WIS save). Seviye 1 büyüdür.'
+        },
+        {
+            name: 'Branding Smite', type: 'special', damage: '2d6 Radiant (Sv.2)',
+            desc_tr: 'Bonus aksiyon + konsantrasyon. İlk isabette +2d6 radiant hasar ve görünmez hedefleri görünür kılar. Seviye 2 büyüdür.'
+        },
+        {
+            name: 'Divine Favor', type: 'special', damage: '+1d4 Radiant (Sv.1)',
+            desc_tr: 'Bonus aksiyon + konsantrasyon. 1 dk boyunca tüm silah saldırılarına +1d4 radiant hasar ekler. Seviye 1 büyüdür.'
+        },
+        {
+            name: 'Blinding Smite', type: 'special', damage: '3d8 Radiant (Sv.3)',
+            desc_tr: 'Bonus aksiyon + konsantrasyon. İlk isabette +3d8 radiant hasar ve hedefi kör eder (CON save). Seviye 3 büyüdür.'
+        },
+        {
             name: 'Lay on Hands', type: 'heal', damage: 'HP Havuzu (Sv.×5)',
             desc_tr: 'Aksiyon: Kutsal dokunuşla iyileştirirsin. Seviye×5 büyüklüğünde HP havuzun var, istediğin miktarda kullanabilirsin. 5 puan harcayarak bir hastalık veya zehri de temizleyebilirsin. Uzun dinlenmede yenilenir.'
         },
@@ -518,6 +542,14 @@ export const CLASS_ATTACKS: Record<string, Attack[]> = {
             desc_tr: 'Alev topağı fırlatır. Cantrip olduğu için slot harcamaz. Sv.1-4→1d10, Sv.5-10→2d10, Sv.11-16→3d10, Sv.17-20→4d10. Tahta nesneleri de yakar.'
         },
         {
+            name: 'Mind Sliver', type: 'save', damage: '1d6 Psychic (cantrip)', range: '60 ft',
+            desc_tr: 'INT saving throw. Hedefe zihinsel acı verir; hasar sonrası hedef ilk saving throw\'undan 1d4 çıkarır. Çapraz etkileşim için çok güçlüdür. Cantrip.'
+        },
+        {
+            name: 'Toll the Dead', type: 'save', damage: '1d8/1d12 Necrotic (cantrip)', range: '60 ft',
+            desc_tr: 'WIS saving throw. Hedef zaten yaralıysa zar 1d12\'ye çıkar. Ölümün çanını duyar — necrotik hasar. Cantrip.'
+        },
+        {
             name: 'Dagger', type: 'melee', toHit: 'STR/DEX+Prof', damage: '1d4 Piercing', range: 'Melee 5ft / 20/60ft',
             desc_tr: 'Hafif bıçak. Hem yakın hem de fırlatma silahı olarak kullanılabilir. Finesse özelliği var.'
         },
@@ -529,6 +561,10 @@ export const CLASS_ATTACKS: Record<string, Attack[]> = {
             name: 'Ray of Frost', type: 'ranged', toHit: 'INT+Prof', damage: '1d8 Cold (cantrip)', range: '60 ft',
             desc_tr: 'Soğuk ışın. İsabet ederse 1 tur boyunca hareket hızını 10 ft azaltır. Cantrip.'
         },
+        {
+            name: 'Cause Fear', type: 'save', damage: 'Frightened (Sv.1)', range: '60 ft',
+            desc_tr: 'WIS saving throw. Başarısız olursa büyü süresince (1 dk, kons.) senden korkar. Her tur sonu save tekrarı. Undead/Construct etkilenmez.'
+        },
     ],
     Sorcerer: [
         {
@@ -538,6 +574,10 @@ export const CLASS_ATTACKS: Record<string, Attack[]> = {
         {
             name: 'Chill Touch', type: 'ranged', toHit: 'CHA+Prof', damage: '1d8 Necrotic (cantrip)', range: '120 ft',
             desc_tr: 'Hayalet pençesi: İsabet eden hedef 1 tur boyunca HP kazanamaz (iyileştirme almaz). Undead hedeflere saldırı atışlarında dezavantaj verir. Cantrip.'
+        },
+        {
+            name: 'Mind Sliver', type: 'save', damage: '1d6 Psychic (cantrip)', range: '60 ft',
+            desc_tr: 'INT saving throw. Hedefe zihinsel acı verir; hasar sonrası hedef ilk saving throw\'undan 1d4 çıkarır. Cantrip.'
         },
         {
             name: 'Ray of Frost', type: 'ranged', toHit: 'CHA+Prof', damage: '1d8 Cold (cantrip)', range: '60 ft',
@@ -563,8 +603,16 @@ export const CLASS_ATTACKS: Record<string, Attack[]> = {
             desc_tr: 'Warlock\'un temel cantrip saldırısı. Seviye artışıyla ışın sayısı büyür: Sv.1-4→1 ışın, Sv.5-10→2, Sv.11-16→3, Sv.17-20→4 ışın. Her ışın bağımsız hedef alabilir. Eldritch Invocation\'larla güçlendirilebilir (itmek, yavaşlatmak vb.).'
         },
         {
+            name: 'Mind Sliver', type: 'save', damage: '1d6 Psychic (cantrip)', range: '60 ft',
+            desc_tr: 'INT saving throw. Hedefe zihinsel acı verir; hasar sonrası hedef ilk saving throw\'undan 1d4 çıkarır. Cantrip.'
+        },
+        {
             name: 'Hex', type: 'special', damage: '+1d6 Necrotic/isabet',
             desc_tr: 'Bonus aksiyon + konsantrasyon büyüsü: Hedefe laneti yaz. Her isabette +1d6 necrotik hasar. Seçilen bir ability check\'te dezavantaj verir. Hedef düşerse konsantrasyon bozmadan başka hedefe taşıyabilirsin.'
+        },
+        {
+            name: 'Cause Fear', type: 'save', damage: 'Frightened (Sv.1)', range: '60 ft',
+            desc_tr: 'WIS saving throw. Hedef senden korkar (1 dk, kons.). Her tur sonu save tekrarı. 1. Seviye slot harcar.'
         },
         {
             name: 'Dagger', type: 'melee', toHit: 'DEX+Prof', damage: '1d4 Piercing', range: '20/60 ft',

@@ -96,7 +96,8 @@
         "type": "Wondrous Item",
         "category": "Büyülü Eşya",
         "description": "**[Mekanik Bilgiler]** Bu zarı her attığınızda, hangi sayının geleceğini kontrol edebilirsiniz. Kumarbazlar ve aldatma ustaları için paha biçilemez bir araçtır.\n\n**[Atmosfer]** Şanslı olanların... veya dürüst olmayanların lehine gibi görünen altı yüzlü bir zar. Hafif, neredeyse fark edilemez bir ağırlık dengesizliği vardır.",
-        "effects": []
+        "effects": [],
+        "requiresAttunement": true
     },
     {
         "name": "Chest of Preserving",
@@ -182,7 +183,9 @@
         "type": "Wondrous Item",
         "category": "Büyülü Eşya",
         "description": "**[Mekanik Bilgiler]** Yalnızca Warlock sınıfı içindir. Bilmediğiniz bir Warlock büyücüğünü (cantrip) çekmenize olanak tanır (DC 10 Arcana kontrolü). Bir büyü odağı (spellcasting focus) olarak işlev görür.\n\n**[Atmosfer]** Muskaya dönüştürülmüş tek, keskin bir düzlemler arası cam parçası. Patronunuzun gücüyle titrer.",
-        "effects": []
+        "effects": [],
+        "requiresAttunement": true,
+        "attunementNote": "by a warlock"
     },
     {
         "name": "Dread Helm",
@@ -277,7 +280,9 @@
         "type": "Wondrous Item",
         "category": "Büyülü Eşya",
         "description": "**[Mekanik Bilgiler]** Yalnızca Büyücü (Wizard) sınıfı içindir. Bir büyü odağı olarak kullanılabilir ve bilmediğiniz bir cantrip büyücüğünü denemenize (Arcana kontrolü ile) izin verir.\n\n**[Atmosfer]** Klasik koni şeklinde, yıldızlarla süslü ve hafifçe ozon ve eski parşömen kokan bir şapka.",
-        "effects": []
+        "effects": [],
+        "requiresAttunement": true,
+        "attunementNote": "by a wizard"
     },
     {
         "name": "Heward's Handy Spice Pouch",
@@ -304,7 +309,8 @@
         "type": "Wondrous Item",
         "category": "Büyülü Eşya",
         "description": "**[Mekanik Bilgiler]** Parmak ucunuzla hiç bitmeyen bir kalemmiş gibi yazabilirsiniz. Bir sayfaya dokunarak yazıyı siz ve isimlendirdiğiniz biri dışında herkesten 24 saat boyunca saklayabilirsiniz.\n\n**[Atmosfer]** Deriye işlenmiş, hem sanat hem de araç görevi gören güzel kaligrafi nakışları.",
-        "effects": []
+        "effects": [],
+        "requiresAttunement": true
     },
     {
         "name": "Imbued Wood Focus",
@@ -345,7 +351,9 @@
         "type": "Wondrous Item",
         "category": "Büyülü Eşya",
         "description": "**[Mekanik Bilgiler]** Alarm, Arcane Lock veya Glyph of Warding büyülerini anahtara bağlayın. Anahtarı tutan kişi bu etkileri tetiklemez veya bildirimleri alır.\n\n**[Atmosfer]** Karmaşık güvenlik mühürlerini yönetmek için House Kundarak tarafından kullanılan stilize gümüş bir anahtar.",
-        "effects": []
+        "effects": [],
+        "requiresAttunement": true,
+        "attunementNote": "by a creature with the Mark of Warding"
     },
     {
         "name": "Lantern of Tracking",
@@ -391,7 +399,8 @@
                 "type": "spell_auto",
                 "spellName": "Disguise Self"
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Medal of Muscle",
@@ -668,7 +677,9 @@
         "type": "Wondrous Item",
         "category": "Büyülü Eşya",
         "description": "**[Mekanik Bilgiler]** Bir silaha takılarak onu büyü odağı olarak kullanmanızı sağlar. Takılması 10 dakika sürer. Bağlandıktan sonra kolayca çıkarılamaz.\n\n**[Atmosfer]** Üzerine rünler kazınmış 2.5 santimetrelik parlak bir yakut.",
-        "effects": []
+        "effects": [],
+        "requiresAttunement": true,
+        "attunementNote": "by a spellcaster"
     },
     {
         "name": "Scribe's Pen",
@@ -677,7 +688,9 @@
         "type": "Wondrous Item",
         "category": "Büyülü Eşya",
         "description": "**[Mekanik Bilgiler]** Her yüzeye görünen veya görünmeyen yazılar yazabilir. Görünmeyen yazılar 'Mark of Scribing' sahipleri tarafından görülebilir. Canlı dokudan 7 günde silinir.\n\n**[Atmosfer]** Neredeyse her yüzeye yazabilen, meraklı gözlerden saklanabilen mürekkebi olan süslü bir kalem.",
-        "effects": []
+        "effects": [],
+        "requiresAttunement": true,
+        "attunementNote": "by a creature with the Mark of Scribing"
     },
     {
         "name": "Sekolahian Worshipping Statuette",
@@ -763,7 +776,8 @@
         "type": "Wondrous Item",
         "category": "Büyülü Eşya",
         "description": "**[Mekanik Bilgiler]** 6 adede kadar kısa mesaj (5 saniyelik) kaydedin. Belirli tetikleyicilerle (yaklaşan bir yaratık, belirli bir kelime vb.) bu mesajların söylenmesini sağlayın.\n\n**[Atmosfer]** İlk bakışta ürkütücü gelebilen ama aslında basit bir büyüyle donatılmış çocuk oyuncağı.",
-        "effects": []
+        "effects": [],
+        "requiresAttunement": true
     },
     {
         "name": "Tankard of Sobriety",
@@ -870,6 +884,14 @@
             {
                 "type": "damage_bonus",
                 "value": 1
+            },
+            {
+                "type": "spell_attack_bonus",
+                "value": 1
+            },
+            {
+                "type": "spell_dc_bonus",
+                "value": 1
             }
         ]
     },
@@ -888,6 +910,14 @@
             {
                 "type": "damage_bonus",
                 "value": 2
+            },
+            {
+                "type": "spell_attack_bonus",
+                "value": 2
+            },
+            {
+                "type": "spell_dc_bonus",
+                "value": 2
             }
         ]
     },
@@ -905,6 +935,14 @@
             },
             {
                 "type": "damage_bonus",
+                "value": 3
+            },
+            {
+                "type": "spell_attack_bonus",
+                "value": 3
+            },
+            {
+                "type": "spell_dc_bonus",
                 "value": 3
             }
         ]
@@ -932,8 +970,19 @@
                     "stat": "constitution",
                     "score": 19
                 }
+            },
+            {
+                "type": "stat_set",
+                "stat": "CON",
+                "value": 19
+            },
+            {
+                "type": "stat_set",
+                "stat": "CON",
+                "value": 19
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Amulet of Proof against Detection and Location",
@@ -942,7 +991,8 @@
         "type": "Wondrous Item",
         "category": "Büyülü Eşya",
         "description": "**[Mekanik Bilgiler]** Kehanet (divination) büyüsüyle tespit edilemez veya yeriniz bulunamazsınız. Ayrıca Scrying büyüsü için odak noktası olamazsınız.\n\n**[Atmosfer]** Varlığınızı sihirli gözlerden gizleyen, mat bir taştan yapılmış gösterişsiz bir kolye.",
-        "effects": []
+        "effects": [],
+        "requiresAttunement": true
     },
     {
         "name": "Amulet of the Planes",
@@ -956,7 +1006,8 @@
                 "type": "spell_auto",
                 "spellName": "Plane Shift"
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Apparatus of Kwalish",

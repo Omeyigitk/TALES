@@ -550,6 +550,11 @@
                 "ac_base": 12,
                 "dex_bonus": true,
                 "dex_max": 2
+            },
+            {
+                "type": "stat_bonus",
+                "stat": "DEX",
+                "value": 2
             }
         ]
     },
@@ -566,6 +571,11 @@
                 "ac_base": 13,
                 "dex_bonus": true,
                 "dex_max": 2
+            },
+            {
+                "type": "stat_bonus",
+                "stat": "DEX",
+                "value": 2
             }
         ]
     },
@@ -583,6 +593,19 @@
                 "dex_bonus": true,
                 "dex_max": 2,
                 "stealth_disadvantage": true
+            },
+            {
+                "type": "disadvantage",
+                "skill": "stealth"
+            },
+            {
+                "type": "stealth_disadvantage",
+                "value": true
+            },
+            {
+                "type": "stat_bonus",
+                "stat": "DEX",
+                "value": 2
             }
         ]
     },
@@ -599,6 +622,11 @@
                 "ac_base": 14,
                 "dex_bonus": true,
                 "dex_max": 2
+            },
+            {
+                "type": "stat_bonus",
+                "stat": "DEX",
+                "value": 2
             }
         ]
     },
@@ -616,6 +644,11 @@
                 "dex_bonus": true,
                 "dex_max": 2,
                 "stealth_disadvantage": true
+            },
+            {
+                "type": "stat_bonus",
+                "stat": "DEX",
+                "value": 2
             }
         ]
     },
@@ -632,6 +665,14 @@
                 "ac_base": 14,
                 "dex_bonus": false,
                 "stealth_disadvantage": true
+            },
+            {
+                "type": "disadvantage",
+                "skill": "stealth"
+            },
+            {
+                "type": "stealth_disadvantage",
+                "value": true
             }
         ]
     },
@@ -649,6 +690,14 @@
                 "dex_bonus": false,
                 "str_minimum": 13,
                 "stealth_disadvantage": true
+            },
+            {
+                "type": "disadvantage",
+                "skill": "stealth"
+            },
+            {
+                "type": "stealth_disadvantage",
+                "value": true
             }
         ]
     },
@@ -978,7 +1027,8 @@
         "type": "Wondrous Item",
         "category": "Büyülü Eşya",
         "description": "**[Mekanik Bilgiler]** Bu altı yüzlü zarı attığınızda, hangi sayının geleceğini zihinsel olarak kontrol edebilirsiniz.\n\n**[Atmosfer]** Kumarbazların ve dolandırıcıların gizli silahı. Bu zarla şans her zaman sizden yanadır, tabii hilenizi kimse fark etmediği sürece.",
-        "effects": []
+        "effects": [],
+        "requiresAttunement": true
     },
     {
         "name": "Chest of Preserving",
@@ -1069,7 +1119,9 @@
         "type": "Wondrous Item",
         "category": "Büyülü Eşya",
         "description": "**[Mekanik Bilgiler]** Warlock sınıfına özeldir. Bilmediğiniz bir 'cantrip'i Arcana testi (DC 10) başarılı olursa kullanmanıza izin verir. Uzun bir dinlenme ile yenilenir.\n\n**[Atmosfer]** Shadowfell'in karanlığından kopup gelmiş bir taş parçası. İçinde barındırdığı yasak sırlar, kullanıcısına bir anlık da olsa ham büyü gücünün anahtarını verir.",
-        "effects": []
+        "effects": [],
+        "requiresAttunement": true,
+        "attunementNote": "by a warlock"
     },
     {
         "name": "Dread Helm",
@@ -1155,7 +1207,9 @@
         "type": "Wondrous Item",
         "category": "Büyülü Eşya",
         "description": "**[Mekanik Bilgiler]** Sadece büyücüler (wizard) tarafından kullanılabilir. Bilmediğiniz bir 'cantrip'i Arcana testi (DC 10) başarılı olursa kullanmanıza izin verir. Ayrıca bir büyü odağı (focus) olarak kullanılabilir.\n\n**[Atmosfer]** Altın ay ve yıldızlarla süslü bu klasik koni şapka, bir büyücünün sadece tarzını değil, aynı zamanda ham büyü üzerindeki ustalığını da temsil eder.",
-        "effects": []
+        "effects": [],
+        "requiresAttunement": true,
+        "attunementNote": "by a wizard"
     },
     {
         "name": "Heward's Handy Spice Pouch",
@@ -1182,7 +1236,8 @@
         "type": "Wondrous Item",
         "category": "Büyülü Eşya",
         "description": "**[Mekanik Bilgiler]** Parmak ucunuzla hiç bitmeyen bir mürekkeple yazmanızı sağlar. Ayrıca bir sayfaya dokunarak yazıyı sadece sizin ve seçtiğiniz birinin görebileceği şekilde 24 saatliğine görünmez yapabilirsiniz.\n\n**[Atmosfer]** Gizli mesajlar, yasak aşk mektupları veya sadece kalem bulamadığınızda; bu dövme vücudunuzun bir parçası olan sadık bir yazı aracıdır.",
-        "effects": []
+        "effects": [],
+        "requiresAttunement": true
     },
     {
         "name": "Imbued Wood Focus",
@@ -1224,7 +1279,9 @@
         "type": "Wondrous Item",
         "category": "Büyülü Eşya",
         "description": "**[Mekanik Bilgiler]** Alarm, Arcane Lock veya Glyph of Warding büyülerini bu muskaya bağlayabilirsiniz. Muskaya sahip olan kişi alarmı duyar veya engelleri tetiklemeden geçebilir.\n\n**[Atmosfer]** Kundarak Evi'nin ustaları tarafından üretilen bu anahtar, en karmaşık sihirli güvenlik sistemlerinin 'pasosu' gibidir.",
-        "effects": []
+        "effects": [],
+        "requiresAttunement": true,
+        "attunementNote": "by a creature with the Mark of Warding"
     },
     {
         "name": "Lantern of Tracking",
@@ -1270,7 +1327,8 @@
                 "type": "spell_auto",
                 "spell": "Disguise Self"
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Medal of Muscle",

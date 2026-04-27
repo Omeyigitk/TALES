@@ -19,8 +19,17 @@
             {
                 "type": "ac_bonus",
                 "value": 2
+            },
+            {
+                "type": "immunity",
+                "damageType": "fire"
+            },
+            {
+                "type": "immunity",
+                "damageType": "fire"
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Shield of the Hidden Lord",
@@ -37,8 +46,13 @@
             {
                 "type": "resistance",
                 "value": "fire"
+            },
+            {
+                "type": "ac_bonus",
+                "value": 2
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Snicker-Snack",
@@ -55,8 +69,18 @@
             {
                 "type": "damage_bonus",
                 "value": 3
+            },
+            {
+                "type": "attack_bonus",
+                "value": 3
+            },
+            {
+                "type": "damage_bonus",
+                "value": 3
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a non-evil creature"
     },
     {
         "name": "Sovereign Glue",
@@ -74,7 +98,8 @@
         "type": "Wondrous Item",
         "category": "Büyülü Eşya",
         "description": "**[Mekanik Bilgiler]** 5. seviyeye kadar bir büyüyü içinde saklayabilir. Bir reaksiyon kullanarak 60 fit içindeki bir büyü yapımını durdurup büyüyü şişeye hapsedebilir. İçindeki büyü daha sonra slot harcamadan cast edilebilir.\n\n**[Atmosfer]** İçinde mavi buharların dans ettiği, büyü enerjisini hapsedip daha sonra serbest bırakabilen kristal bir şişedir.",
-        "effects": []
+        "effects": [],
+        "requiresAttunement": true
     },
     {
         "name": "Spell Gem",
@@ -110,7 +135,8 @@
         "type": "Wand",
         "category": "Büyülü Eşya",
         "description": "**[Mekanik Bilgiler]** 6 şarjı vardır. İnisiyatif zarına proficiency bonusu ekleyebilir/çıkarabilir, bir hedefi damgalayarak 1d6 ek hasar verebilir veya reaksiyonla bir zarın başarısızlığını başarıya (veya tersine) çevirebilir.\n\n**[Atmosfer]** Üzerine kırmızı iplik sarılmış bir iğne formunda olan, kaderin ipliklerini bükerek olayların gidişatını değiştirebilen mistik bir asadır.",
-        "effects": []
+        "effects": [],
+        "requiresAttunement": true
     },
     {
         "name": "Staff of the Magi",
@@ -137,8 +163,26 @@
                 "stat": "saves",
                 "value": "advantage",
                 "condition": "against spells"
+            },
+            {
+                "type": "spell_attack_bonus",
+                "value": 2
+            },
+            {
+                "type": "attack_bonus",
+                "value": 2
+            },
+            {
+                "type": "damage_bonus",
+                "value": 2
+            },
+            {
+                "type": "spell_attack_bonus",
+                "value": 2
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a sorcerer, warlock, or wizard"
     },
     {
         "name": "Stonebreaker's Breastplate",
@@ -151,8 +195,21 @@
             {
                 "type": "resistance",
                 "value": "bludgeoning_piercing_slashing"
+            },
+            {
+                "type": "resistance",
+                "damageType": "bludgeoning"
+            },
+            {
+                "type": "resistance",
+                "damageType": "piercing"
+            },
+            {
+                "type": "resistance",
+                "damageType": "slashing"
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Stormgirdle",
@@ -197,8 +254,17 @@
                 "type": "extra_damage",
                 "value": "1d8",
                 "damage_type": "radiant"
+            },
+            {
+                "type": "attack_bonus",
+                "value": 2
+            },
+            {
+                "type": "damage_bonus",
+                "value": 2
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Sword of Answering",
@@ -215,8 +281,17 @@
             {
                 "type": "damage_bonus",
                 "value": 3
+            },
+            {
+                "type": "attack_bonus",
+                "value": 3
+            },
+            {
+                "type": "damage_bonus",
+                "value": 3
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Sword of the Planes",
@@ -258,7 +333,9 @@
                 "value": "1d6",
                 "damage_type": "force"
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a reigar who created it"
     },
     {
         "name": "Talisman of Pure Good",
@@ -272,8 +349,18 @@
                 "type": "spell_atk_bonus",
                 "value": 2,
                 "note": "Sadece İyi (Good) karakterler için"
+            },
+            {
+                "type": "spell_attack_bonus",
+                "value": 2
+            },
+            {
+                "type": "spell_attack_bonus",
+                "value": 2
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a creature of good alignment"
     },
     {
         "name": "Talisman of the Sphere",
@@ -282,7 +369,8 @@
         "type": "Wondrous Item",
         "category": "Büyülü Eşya",
         "description": "**[Mekanik Bilgiler]** Sphere of Annihilation kontrolü için yapılan Arcana zarlarında uzmanlık (proficiency bonusu iki kat sayılır) sağlar. Ayrıca küreyi çok daha uzun mesafelere hareket ettirebilirsiniz.\n\n**[Atmosfer]** Hiçlik küresini dizginlemek, yönlendirmek ve evrenin boşluğunu kontrol etmek için tasarlanmış antik ve gizemli bir tılsımdır.",
-        "effects": []
+        "effects": [],
+        "requiresAttunement": true
     },
     {
         "name": "Talisman of Ultimate Evil",
@@ -296,8 +384,18 @@
                 "type": "spell_atk_bonus",
                 "value": 2,
                 "note": "Sadece Kötü (Evil) karakterler için"
+            },
+            {
+                "type": "spell_attack_bonus",
+                "value": 2
+            },
+            {
+                "type": "spell_attack_bonus",
+                "value": 2
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a creature of evil alignment"
     },
     {
         "name": "Telescopic Transporter",
@@ -332,8 +430,21 @@
             {
                 "type": "resistance",
                 "value": "fire"
+            },
+            {
+                "type": "attack_bonus",
+                "value": 2
+            },
+            {
+                "type": "damage_bonus",
+                "value": 2
+            },
+            {
+                "type": "resistance",
+                "damageType": "fire"
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Tome of the Stilled Tongue",
@@ -342,7 +453,9 @@
         "type": "Wondrous Item",
         "category": "Büyülü Eşya",
         "description": "**[Mekanik Bilgiler]** Büyü kitabı ve odağı olarak kullanılabilir. En güçlü özelliği: Bir bonus eylemle kitapta yazılı herhangi bir büyüyü slot harcamadan ve komponent kullanmadan cast edebilir. Vecna'nın gözetimi altındadır.\n\n**[Atmosfer]** Kapağına kurumuş bir insan dili iğnelenmiş, Vecna'nın fısıltılarını sayfaları arasında saklayan ve sahibine muazzam bir hız kazandıran tekinsiz bir büyü kitabıdır.",
-        "effects": []
+        "effects": [],
+        "requiresAttunement": true,
+        "attunementNote": "by a wizard"
     },
     {
         "name": "Topaz Annihilator",
@@ -358,7 +471,8 @@
                 "damage_type": "necrotic",
                 "note": "Sadece bu silahla yapılan atışlar için"
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Universal Solvent",
@@ -411,8 +525,18 @@
             {
                 "type": "damage_bonus",
                 "value": 3
+            },
+            {
+                "type": "attack_bonus",
+                "value": 3
+            },
+            {
+                "type": "damage_bonus",
+                "value": 3
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a creature that worships a god of the sea"
     },
     {
         "name": "Waythe",
@@ -435,8 +559,17 @@
                 "value": "2d6",
                 "damage_type": "slashing",
                 "condition": "against giants"
+            },
+            {
+                "type": "attack_bonus",
+                "value": 1
+            },
+            {
+                "type": "damage_bonus",
+                "value": 1
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Well of Many Worlds",
@@ -462,8 +595,18 @@
             {
                 "type": "damage_bonus",
                 "value": 3
+            },
+            {
+                "type": "attack_bonus",
+                "value": 3
+            },
+            {
+                "type": "damage_bonus",
+                "value": 3
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a dwarf"
     },
     {
         "name": "Windvane",
@@ -485,8 +628,25 @@
                 "type": "extra_damage",
                 "value": "1d6",
                 "damage_type": "lightning"
+            },
+            {
+                "type": "resistance",
+                "damageType": "lightning"
+            },
+            {
+                "type": "attack_bonus",
+                "value": 2
+            },
+            {
+                "type": "damage_bonus",
+                "value": 2
+            },
+            {
+                "type": "resistance",
+                "damageType": "lightning"
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Witchlight Vane",
@@ -508,8 +668,18 @@
                 "type": "extra_damage",
                 "value": "1d8",
                 "damage_type": "radiant"
+            },
+            {
+                "type": "attack_bonus",
+                "value": 3
+            },
+            {
+                "type": "damage_bonus",
+                "value": 3
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a mister light or his handpicked successor"
     },
     {
         "name": "Witchlight Watch",
@@ -518,7 +688,9 @@
         "type": "Wondrous Item",
         "category": "Büyülü Eşya",
         "description": "**[Mekanik Bilgiler]** Witchlight Karnavalı'nın tüm donanımını 1 saat içinde paketleyebilir veya açabilir. Zamanın hatasız geçişini takip etmenize olanak tanır.\n\n**[Atmosfer]** Üzerinde karnaval sahneleri işlenmiş, altın zincirli ve tik takları sadece sahibi tarafından duyulabilen efsanevi bir cep saatidir.",
-        "effects": []
+        "effects": [],
+        "requiresAttunement": true,
+        "attunementNote": "by a mister witch or his handpicked successor"
     },
     {
         "name": "Wreath of the Prism",
@@ -542,7 +714,9 @@
         "type": "Wondrous Item",
         "category": "Büyülü Eşya",
         "description": "**[Mekanik Bilgiler]** 600 fit ışık yayan 50 fitlik dev bir kristal küre. Kadim yüzen şehirleri havada tutmak ve büyüleri güçlendirmek için kullanılır. Dokunana muazzam hasar (180 radiant) verir.\n\n**[Atmosfer]** Netherese büyücüleri tarafından gökyüzü şehirlerini enerjilendirmek için üretilmiş, Arcanum Çağı'nın sönmeyen bir yıldızı anımsatan teknolojik harikasıdır.",
-        "effects": []
+        "effects": [],
+        "requiresAttunement": true,
+        "attunementNote": "by a spellcaster"
     },
     {
         "name": "Adze of Annam",
@@ -564,8 +738,17 @@
                 "type": "extra_damage",
                 "value": "3d12",
                 "damage_type": "force"
+            },
+            {
+                "type": "attack_bonus",
+                "value": 3
+            },
+            {
+                "type": "damage_bonus",
+                "value": 3
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Akmon, Hammer of Purphoros",
@@ -595,8 +778,21 @@
             {
                 "type": "immunity",
                 "value": "exhaustion"
+            },
+            {
+                "type": "attack_bonus",
+                "value": 3
+            },
+            {
+                "type": "damage_bonus",
+                "value": 3
+            },
+            {
+                "type": "resistance",
+                "damageType": "fire"
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Axe of the Dwarvish Lords",
@@ -613,8 +809,29 @@
             {
                 "type": "damage_bonus",
                 "value": 3
+            },
+            {
+                "type": "immunity",
+                "damageType": "poison"
+            },
+            {
+                "type": "attack_bonus",
+                "value": 3
+            },
+            {
+                "type": "damage_bonus",
+                "value": 3
+            },
+            {
+                "type": "resistance",
+                "damageType": "fire"
+            },
+            {
+                "type": "immunity",
+                "damageType": "poison"
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Baba Yaga's Mortar and Pestle",
@@ -631,8 +848,17 @@
             {
                 "type": "damage_bonus",
                 "value": 3
+            },
+            {
+                "type": "attack_bonus",
+                "value": 3
+            },
+            {
+                "type": "damage_bonus",
+                "value": 3
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Bigby's Beneficent Bracelet",
@@ -641,7 +867,8 @@
         "type": "Wondrous Item",
         "category": "Büyülü Eşya",
         "description": "**[Mekanik Bilgiler]** Mage Hand büyüsü kazandırır. Nesnelerin dokunulabilir spektral kopyalarını yaratabilir. Günde bir kez Bigby's Hand büyüsünü 9. seviye ve konsantrasyon gerektirmeden yapmanızı sağlar.\n\n**[Atmosfer]** Efsanevi büyücü Bigby tarafından saf altın ve paha biçilemez safirlerle işlenmiş, büyücünün iradesini fiziksel bir güce dönüştüren görkemli bir bilekliktir.",
-        "effects": []
+        "effects": [],
+        "requiresAttunement": true
     },
     {
         "name": "Blade of Avernus",
@@ -654,8 +881,21 @@
             {
                 "type": "attack_bonus",
                 "value": 3
+            },
+            {
+                "type": "damage_bonus",
+                "value": 3
+            },
+            {
+                "type": "attack_bonus",
+                "value": 3
+            },
+            {
+                "type": "damage_bonus",
+                "value": 3
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Blade of Broken Mirrors",
@@ -678,8 +918,20 @@
                 "type": "stat_bonus",
                 "stat": "wisdom",
                 "value": 2
+            },
+            {
+                "type": "stat_bonus",
+                "stat": "WIS",
+                "value": 2
+            },
+            {
+                "type": "stat_bonus",
+                "stat": "WIS",
+                "value": 2
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a creature of good alignment"
     },
     {
         "name": "Book of Vile Darkness",
@@ -688,7 +940,8 @@
         "type": "Wondrous Item",
         "category": "Büyülü Eşya",
         "description": "**[Mekanik Bilgiler]** Sadece kötü (evil) karakterler okuyabilir. Bir statı +2 artırırken diğerini -2 düşürür. Dominate Monster cast edebilir. Yüzde kalıcı bir işaret (mark of darkness) bırakarak ikna ve korkutma zarlarını güçlendirir.\n\n**[Atmosfer]** Vecna tarafından kaleme alınmış, içindeki her çizgi saf kötülük ve sapkınlık kokan, çevresindeki yaşamı solduran mutlak bir lanet kaynağıdır.",
-        "effects": []
+        "effects": [],
+        "requiresAttunement": true
     },
     {
         "name": "Book of Vile Darkness (Variant)",
@@ -715,7 +968,8 @@
         "type": "Wondrous Item",
         "category": "Büyülü Eşya",
         "description": "**[Mekanik Bilgiler]** 6 şarjı vardır. Aura of Life, Mass Cure Wounds gibi iyileştirme büyüleri cast eder. 1 mil içindeki tüm iblisleri 100 yıllığına kendi düzlemlerine sürebilir (absolute banishment). Son kullanıldığında patlayarak bir cehennem portalı açma riski vardır.\n\n**[Atmosfer]** Tanrı Rao tarafından yaratılmış, kötülüğe karşı mutlak bir sur olan ama asırlar boyu süren savaşlarda ağır yaralar almış kadim bir asadır.",
-        "effects": []
+        "effects": [],
+        "requiresAttunement": true
     },
     {
         "name": "Crown of Lies",
@@ -724,7 +978,8 @@
         "type": "Wondrous Item",
         "category": "Büyülü Eşya",
         "description": "**[Mekanik Bilgiler]** Kusursuz bir kılık değiştirme sağlar; sesiniz, görüntünüz ve fiziksel hissiyatınız tamamen değişir. Söylediğiniz yalanlar hiçbir sihirli yöntemle yalan olarak tespit edilemez.\n\n**[Atmosfer]** Kas tarafından efendisi Vecna'yı aldatmak için giyilmiş, takan kişiyi karanlık güçlerin yardımıyla her türlü gölgenin arkasına saklayan aldatmaca tacıdır.",
-        "effects": []
+        "effects": [],
+        "requiresAttunement": true
     },
     {
         "name": "Daoud's Wondrous Lantern",
@@ -755,8 +1010,17 @@
                 "type": "extra_damage",
                 "value": "2d10",
                 "damage_type": "cold"
+            },
+            {
+                "type": "attack_bonus",
+                "value": 3
+            },
+            {
+                "type": "damage_bonus",
+                "value": 3
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Demonomicon of Iggwilv",
@@ -765,7 +1029,8 @@
         "type": "Wondrous Item",
         "category": "Büyülü Eşya",
         "description": "**[Mekanik Bilgiler]** İblisler üzerine uzmanlık (Intelligence) zarları sağlar. Magic Circle, Planar Binding ve Summon Fiend gibi büyüleri cast edebilir. İblisleri kitabın boş sayfalarına hapsedebilir. Fiend'lere karşı büyü hasarını maksimize eder.\n\n**[Atmosfer]** Abyss'in sonsuz katmanlarını ve sakinlerini belgeleyen, okuyan herkesi karanlık sırlarla ve delilikle yüzleştiren evrendeki en uğursuz yazılı eserdir.",
-        "effects": []
+        "effects": [],
+        "requiresAttunement": true
     },
     {
         "name": "Ephixis, Bow of Nyela",
@@ -836,7 +1101,8 @@
                 "type": "save_advantage",
                 "value": "insight"
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Iggwilv's Cauldron",
@@ -845,7 +1111,9 @@
         "type": "Wondrous Item",
         "category": "Büyülü Eşya",
         "description": "**[Mekanik Bilgiler]** İki formu vardır: Altın ve Demir. Altın formuyla bereketli büyüler, Demir formuyla ise korkunç lanetler ve yaratık çağırma yetenekleri kazanılır. Cadı coven'larını (hags) güçlendiren en güçlü araçtır.\n\n**[Atmosfer]** Arş-peri Baba Yaga ve kızı Iggwilv tarafından birlikte hazırlanan, efsanelere konu olan ve binlerce yıllık cadı büyüsünü barındıran devasa bir kazandır.",
-        "effects": []
+        "effects": [],
+        "requiresAttunement": true,
+        "attunementNote": "by a spellcaster"
     },
     {
         "name": "Khrusor, Spear of Heliod",
@@ -867,8 +1135,17 @@
                 "type": "extra_damage",
                 "value": "2d8",
                 "damage_type": "radiant"
+            },
+            {
+                "type": "attack_bonus",
+                "value": 3
+            },
+            {
+                "type": "damage_bonus",
+                "value": 3
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Lash of Shadows",
@@ -886,7 +1163,8 @@
         "type": "Wondrous Item",
         "category": "Büyülü Eşya",
         "description": "**[Mekanik Bilgiler]** 54 kartlık efsanevi bir destedir. Geleceği görme büyüleri sağlar. Twist of Fate yeteneğiyle kaderi değiştirip avantaj/dezavantaj verebilir. Ancak her kullanımda tutsak bir kötü ruhun serbest kalma riski vardır.\n\n**[Atmosfer]** Mother Luba tarafından en lanetli ruhları hapsetmek için kullanılan, her kartı bir efsaneyi ve kaçınılmaz bir kaderi barındıran mistik bir destedir.",
-        "effects": []
+        "effects": [],
+        "requiresAttunement": true
     },
     {
         "name": "Mace of the Black Crown",
@@ -917,8 +1195,17 @@
                 "type": "extra_damage",
                 "value": "2d8",
                 "damage_type": "radiant"
+            },
+            {
+                "type": "attack_bonus",
+                "value": 3
+            },
+            {
+                "type": "damage_bonus",
+                "value": 3
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Mighty Servant of Leuk-o",
@@ -927,7 +1214,8 @@
         "type": "Wondrous Item",
         "category": "Büyülü Eşya",
         "description": "**[Mekanik Bilgiler]** 10 fit boyunda, içine iki pilotun binebileceği dev bir savaş makinesidir. Yapıları anında yıkan yıkıcı darbelere ve sarsılmaz bir defansa sahiptir. Kendi vahşi bilinci tarafından ele geçirilme riski barındırır.\n\n**[Atmosfer]** Simsiyah bilinmeyen bir alaşımdan yapılmış, dev bir böcek ile cüceyi andıran ve savaş meydanlarında adeta bir afet gibi hareket eden teknomistik bir devdir.",
-        "effects": []
+        "effects": [],
+        "requiresAttunement": true
     },
     {
         "name": "Orb of Dragonkind",
@@ -936,7 +1224,8 @@
         "type": "Wondrous Item",
         "category": "Büyülü Eşya",
         "description": "**[Mekanik Bilgiler]** Ejderhaların özünü barındıran kristal küre. 40 mil içindeki tüm kötü ejderhaları kendine çağırabilir. Ejderhaları kontrol etmeyi sağlar ama kullanıcının iradesini (Charisma) zorlar; başarısızlık kullanıcının küre tarafından köleleştirilmesine yol açar.\n\n**[Atmosfer]** Krynn dünyasının en karanlık savaşlarında dövülmüş, içinde hapsolmuş öfkeli bir ejderha ruhunun sinsi fısıltılarını barındıran kadim bir yadigardır.",
-        "effects": []
+        "effects": [],
+        "requiresAttunement": true
     },
     {
         "name": "Orrery Of The Wanderer",
@@ -949,8 +1238,13 @@
             {
                 "type": "ac_bonus",
                 "value": 1
+            },
+            {
+                "type": "ac_bonus",
+                "value": 1
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Ring of Winter",
@@ -963,8 +1257,13 @@
             {
                 "type": "immunity",
                 "value": "cold"
+            },
+            {
+                "type": "immunity",
+                "damageType": "cold"
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Rod of Seven Parts",
@@ -981,8 +1280,17 @@
             {
                 "type": "damage_bonus",
                 "value": 3
+            },
+            {
+                "type": "attack_bonus",
+                "value": 3
+            },
+            {
+                "type": "damage_bonus",
+                "value": 3
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Ruin's Wake",
@@ -1018,7 +1326,26 @@
         "type": "Staff",
         "category": "Büyülü Eşya",
         "description": "**[Mekanik Bilgiler]** Tepesinde unutulmuş bir archmage'in kafatası bulunan kemik asadır. Hedefi lanetleyerek can tazeleyememesini sağlar ve nekrotik hasara karşı dayanıklılığını yok eder. Sahibini bir NPC olarak ele geçirme riski vardır.\n\n**[Atmosfer]** Acererak tarafından yok edilmiş güçlü bir rakibinin ruhunu içinde hapseden, ölümün rünüyle işaretlenmiş ve etrafına soğuk bir korku yayan kadim bir asadır.",
-        "effects": []
+        "effects": [
+            {
+                "type": "attack_bonus",
+                "value": 3
+            },
+            {
+                "type": "damage_bonus",
+                "value": 3
+            },
+            {
+                "type": "attack_bonus",
+                "value": 3
+            },
+            {
+                "type": "damage_bonus",
+                "value": 3
+            }
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a sorcerer, warlock, or wizard"
     },
     {
         "name": "Stone of Golorr",
@@ -1027,7 +1354,8 @@
         "type": "Wondrous Item",
         "category": "Büyülü Eşya",
         "description": "**[Mekanik Bilgiler]** Aslında bir aboleth olan bu taş, sahibiyle telepatik olarak konuşur. Unutulmuş sırları Legend Lore büyüsüyle paylaşabilir. Sahibi taştan ayrıldığında taşla ilgili tüm anılarını kalıcı olarak unutabilir.\n\n**[Atmosfer]** Avuç içine sığan, yeşilimsi gri bir taş formunda sinsi ve ezici bir zihne sahip olan, kendini ölümsüz bir tanrı sanan kadim bir varlıktır.",
-        "effects": []
+        "effects": [],
+        "requiresAttunement": true
     },
     {
         "name": "Sword of Kas",
@@ -1044,8 +1372,17 @@
             {
                 "type": "damage_bonus",
                 "value": 3
+            },
+            {
+                "type": "attack_bonus",
+                "value": 3
+            },
+            {
+                "type": "damage_bonus",
+                "value": 3
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Sword of Zariel",
@@ -1067,8 +1404,36 @@
                 "type": "extra_damage",
                 "value": "2d8",
                 "damage_type": "radiant"
+            },
+            {
+                "type": "stat_set",
+                "stat": "CHA",
+                "value": 20
+            },
+            {
+                "type": "resistance",
+                "damageType": "necrotic"
+            },
+            {
+                "type": "resistance",
+                "damageType": "radiant"
+            },
+            {
+                "type": "stat_set",
+                "stat": "CHA",
+                "value": 20
+            },
+            {
+                "type": "resistance",
+                "damageType": "necrotic"
+            },
+            {
+                "type": "resistance",
+                "damageType": "radiant"
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a creature the sword deems worthy"
     },
     {
         "name": "Teeth of Dahlver-Nar",
@@ -1077,7 +1442,17 @@
         "type": "Wondrous Item",
         "category": "Büyülü Eşya",
         "description": "**[Mekanik Bilgiler]** Bir pouch içindeki çeşitli dişlerdir. Toprağa ekilirse (sow) müttefik yaratıklar çağırır; ağıza takılırsa (implant) sahibine muazzam stat bonusları ve büyüsel yetenekler kazandırır.\n\n**[Atmosfer]** Dahlver-Nar tarafından toplanmış, her biri bir kahramanın veya efsanevi canavarın ruhunu barındıran ve takıldığında sahibinin kaderini değiştiren mistik dişlerdir.",
-        "effects": []
+        "effects": [
+            {
+                "type": "ac_bonus",
+                "value": 2
+            },
+            {
+                "type": "ac_bonus",
+                "value": 2
+            }
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "The Bloody End",
@@ -1095,7 +1470,8 @@
         "type": "Wondrous Item",
         "category": "Büyülü Eşya",
         "description": "**[Mekanik Bilgiler]** 5500 pound ağırlığında devasa bir kontrol panelidir. 120 farklı kol ve anahtarla; canavar çağırma, Wish büyüsü yapma ve gerçekliği bükme yeteneklerine sahiptir. Bilinmeyen güçleri keşfetmek felaketle sonuçlanabilir.\n\n**[Atmosfer]** Başka dünyalara ait bir aracın komuta merkezi olduğu düşünülen, Baron Lum tarafından dünyaları dize getirmek için kullanılan muazzam bir teknomistik cihazdır.",
-        "effects": []
+        "effects": [],
+        "requiresAttunement": true
     },
     {
         "name": "Wand of Orcus",
@@ -1121,8 +1497,21 @@
                 "type": "extra_damage",
                 "value": "2d12",
                 "damage_type": "necrotic"
+            },
+            {
+                "type": "ac_bonus",
+                "value": 3
+            },
+            {
+                "type": "attack_bonus",
+                "value": 3
+            },
+            {
+                "type": "damage_bonus",
+                "value": 3
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Will of the Talon",
@@ -1167,7 +1556,8 @@
         "type": "Wondrous Item",
         "category": "Büyülü Eşya",
         "description": "**[Mekanik Bilgiler]** Beş ejderha maskesinin tek bir taçta birleşimidir. Sahibi beş maskenin de güçlerini (hasar emme, elemental direnç vb.) aynı anda kullanabilir. Günde beş kez Legendary Resistance yeteneği bahşeder.\n\n**[Atmosfer]** Tiamat'ı onurlandıran beş başlı bir taç formuna bürünen, takan kişiyi tanrısal bir ejderha heybetine ve mutlak bir korunmaya büründüren efsanevi bir eserdir.",
-        "effects": []
+        "effects": [],
+        "requiresAttunement": true
     },
     {
         "name": "Crusader's Shortsword",
@@ -1184,8 +1574,17 @@
             {
                 "type": "damage_bonus",
                 "value": 1
+            },
+            {
+                "type": "attack_bonus",
+                "value": 1
+            },
+            {
+                "type": "damage_bonus",
+                "value": 1
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Orcus Figurine",
@@ -1207,8 +1606,18 @@
             {
                 "type": "spell_atk_bonus",
                 "value": 1
+            },
+            {
+                "type": "spell_attack_bonus",
+                "value": 1
+            },
+            {
+                "type": "spell_attack_bonus",
+                "value": 1
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a spellcaster"
     },
     {
         "name": "Shield of the Silver Dragon",
@@ -1225,6 +1634,10 @@
             {
                 "type": "init_bonus",
                 "value": 2
+            },
+            {
+                "type": "ac_bonus",
+                "value": 2
             }
         ]
     },
@@ -1235,7 +1648,8 @@
         "type": "Ring",
         "category": "Büyülü Eşya",
         "description": "**[Mekanik Bilgiler]** Nesneler (objects) üzerinde sınırsız Telekinesis kullanmayı sağlar. Ayrıca Stonky'nin icadı olan \"skitterwidget\" mekanik yaratıklarını 30 fit mesafeden kontrol etme yeteneği bahşeder.\n\n**[Atmosfer]** Mucit Stonky'ye ait olan, metalleri ve cansız nesneleri havada adeta görünmez iplerle çekiyormuş gibi kontrol edebilen büyülü bir yüzüktür.",
-        "effects": []
+        "effects": [],
+        "requiresAttunement": true
     },
     {
         "name": "Tearulai",
@@ -1253,7 +1667,8 @@
                 "type": "damage_bonus",
                 "value": 3
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Yester Hill Axe",
@@ -1288,6 +1703,19 @@
                 "type": "damage_bonus",
                 "value": 3,
                 "note": "Sadece silahsız saldırılar için"
+            },
+            {
+                "type": "attack_bonus",
+                "value": 1
+            },
+            {
+                "type": "damage_bonus",
+                "value": 1
+            },
+            {
+                "type": "stat_bonus",
+                "stat": "STR",
+                "value": 3
             }
         ]
     },
@@ -1303,8 +1731,13 @@
                 "type": "extra_damage",
                 "value": "1d6",
                 "damage_type": "force"
+            },
+            {
+                "type": "resistance",
+                "damageType": "force"
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Apparatus of Kwalish",
@@ -1326,6 +1759,11 @@
             {
                 "type": "ac_bonus",
                 "value": 3
+            },
+            {
+                "type": "stat_bonus",
+                "stat": "STR",
+                "value": 1
             }
         ]
     },
@@ -1340,8 +1778,17 @@
             {
                 "type": "resistance",
                 "value": "nonmagical_damage"
+            },
+            {
+                "type": "disadvantage",
+                "skill": "stealth"
+            },
+            {
+                "type": "stealth_disadvantage",
+                "value": true
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Azuredge",
@@ -1358,8 +1805,17 @@
             {
                 "type": "damage_bonus",
                 "value": 3
+            },
+            {
+                "type": "attack_bonus",
+                "value": 3
+            },
+            {
+                "type": "damage_bonus",
+                "value": 3
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Belashyrra's Beholder Crown",
@@ -1374,7 +1830,8 @@
                 "stat": "darkvision",
                 "value": 120
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Belt of Giant Strength",
@@ -1398,7 +1855,9 @@
         "type": "Wondrous Item",
         "category": "Büyülü Eşya",
         "description": "**[Mekanik Bilgiler]** Eyebite veya Gate (sadece Far Realm) cast etmeyi sağlar. Ancak her uzun dinlenme sonrası kullanıcı DC 20 Wisdom zarı atamazsa kalıcı bir deliliğe (madness) kapılabilir.\n\n**[Atmosfer]** Far Realm'in kaotik ve akıl almaz enerjisini barındıran, bakana bile zihninin derinliklerinde fısıltılar duyuran simsiyah ve pürüzsüz bir kristal tablettir.",
-        "effects": []
+        "effects": [],
+        "requiresAttunement": true,
+        "attunementNote": "by a creature that has proficiency in the {@skill Arcana} skill"
     },
     {
         "name": "Blackrazor",
@@ -1415,7 +1874,17 @@
             {
                 "type": "damage_bonus",
                 "value": 3
+            },
+            {
+                "type": "attack_bonus",
+                "value": 3
+            },
+            {
+                "type": "damage_bonus",
+                "value": 3
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a creature of non-lawful alignment"
     }
 ]

@@ -14,8 +14,13 @@
             {
                 "type": "spell_auto",
                 "spellName": "Spare the Dying"
+            },
+            {
+                "type": "resistance",
+                "damageType": "necrotic"
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Sapphire Buckler",
@@ -36,8 +41,17 @@
             {
                 "type": "resistance",
                 "value": "thunder"
+            },
+            {
+                "type": "resistance",
+                "damageType": "psychic"
+            },
+            {
+                "type": "resistance",
+                "damageType": "thunder"
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Spiked Armor",
@@ -50,6 +64,19 @@
             {
                 "type": "ac_set",
                 "value": 14
+            },
+            {
+                "type": "disadvantage",
+                "skill": "stealth"
+            },
+            {
+                "type": "stealth_disadvantage",
+                "value": true
+            },
+            {
+                "type": "stat_bonus",
+                "stat": "DEX",
+                "value": 2
             }
         ]
     },
@@ -64,6 +91,11 @@
             {
                 "type": "ac_set",
                 "value": 15
+            },
+            {
+                "type": "stat_bonus",
+                "stat": "DEX",
+                "value": 2
             }
         ]
     },
@@ -720,7 +752,13 @@
         "type": "Adventuring Gear",
         "category": "Eşya",
         "description": "**[Mekanik Bilgiler]** Kapıları kırmak için kullanılır. Güç (Strength) kontrollerine +4 bonus verir.\n\n**[Atmosfer]** Kapalı kapıları zorla açmak için tasarlanmış, iki kişi tarafından da kullanılabilen ağır metal bir gövde.",
-        "effects": []
+        "effects": [
+            {
+                "type": "stat_bonus",
+                "stat": "STR",
+                "value": 4
+            }
+        ]
     },
     {
         "name": "Rations (1 day)",

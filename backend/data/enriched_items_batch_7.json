@@ -13,8 +13,13 @@
             {
                 "type": "temperature_regulation",
                 "value": "comfortable"
+            },
+            {
+                "type": "resistance",
+                "damageType": "cold"
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Rod of Rulership",
@@ -30,7 +35,8 @@
                 "duration": "8 hours",
                 "charges": 1
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Rod of the Pact Keeper, +1, +2, +3",
@@ -50,8 +56,27 @@
             {
                 "type": "restore_spell_slot",
                 "charges": 1
+            },
+            {
+                "type": "spell_attack_bonus",
+                "value": 1
+            },
+            {
+                "type": "spell_dc_bonus",
+                "value": 1
+            },
+            {
+                "type": "ac_bonus",
+                "value": 1
+            },
+            {
+                "type": "stat_bonus",
+                "stat": "STR",
+                "value": 1
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a warlock"
     },
     {
         "name": "Rod of the Vonindod",
@@ -73,7 +98,8 @@
                 "type": "special_range_vs_adamantine",
                 "value": "10 miles"
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Rogue's Mantle",
@@ -96,7 +122,8 @@
                 "dc": 15,
                 "charges": 1
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Rope of Entanglement",
@@ -135,8 +162,17 @@
                 "type": "on_hit_poison_damage",
                 "value": "2d4",
                 "dc": 15
+            },
+            {
+                "type": "attack_bonus",
+                "value": 1
+            },
+            {
+                "type": "damage_bonus",
+                "value": 1
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Sage's Signet",
@@ -163,7 +199,8 @@
                 "type": "mace_of_disruption_properties",
                 "value": true
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Scaled Ornament",
@@ -198,7 +235,9 @@
                 "dc": 15,
                 "charges": 1
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a fey or a spellcaster"
     },
     {
         "name": "Scorpion Armor",
@@ -215,7 +254,8 @@
                 "type": "curse",
                 "value": "lethal_poison_on_equip"
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Scroll of Protection",
@@ -264,7 +304,8 @@
                 "type": "damage_reduction_reaction",
                 "charges": 1
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Shadowfell Shard",
@@ -277,7 +318,9 @@
                 "type": "metamagic_curse_effect",
                 "value": "disadvantage_on_stat"
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a sorcerer"
     },
     {
         "name": "Shard of Xeluan",
@@ -298,8 +341,23 @@
             {
                 "type": "curse",
                 "value": "misfortune_on_one"
+            },
+            {
+                "type": "stat_bonus",
+                "stat": "STR",
+                "value": 4
+            },
+            {
+                "type": "spell_attack_bonus",
+                "value": 1
+            },
+            {
+                "type": "stat_bonus",
+                "stat": "STR",
+                "value": 4
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Shield, +1, +2, +3",
@@ -342,7 +400,8 @@
                 "type": "curse",
                 "value": "draw_missiles"
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Shrieking Greaves",
@@ -363,7 +422,8 @@
                 "type": "curse",
                 "value": "sonic_scream_on_fear"
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Siren Song Lyre",
@@ -396,7 +456,8 @@
                 "dc": 13,
                 "charges": 1
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Spell Gem",
@@ -435,7 +496,9 @@
                 "type": "vessel_propulsion",
                 "value": "space_flight"
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a spellcaster"
     },
     {
         "name": "Spellwrought Tattoo",
@@ -477,7 +540,8 @@
                 "dc": 15,
                 "cost": 2
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Staff of Charming",
@@ -509,7 +573,9 @@
                 "type": "reflect_enchantment",
                 "value": "reaction_on_success"
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a bard, cleric, druid, sorcerer, warlock, or wizard"
     },
     {
         "name": "Staff of Defense",
@@ -535,8 +601,13 @@
                 "type": "spell_grant",
                 "value": "Shield",
                 "cost": 2
+            },
+            {
+                "type": "ac_bonus",
+                "value": 1
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Staff of Healing",
@@ -564,7 +635,9 @@
                 "value": "Mass Cure Wounds",
                 "cost": 5
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a bard, cleric, or druid"
     },
     {
         "name": "Staff of Ruling",
@@ -582,7 +655,8 @@
                 "value": "6d6_to_10d6",
                 "dc": 15
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Staff of Swarming Insects",
@@ -609,7 +683,9 @@
                 "type": "obscure_area",
                 "radius": 30
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a bard, cleric, druid, sorcerer, warlock, or wizard"
     },
     {
         "name": "Staff of the Ivory Claw",
@@ -626,8 +702,14 @@
                 "type": "extra_damage_on_crit",
                 "value": "3d6",
                 "damage_type": "radiant"
+            },
+            {
+                "type": "spell_attack_bonus",
+                "value": 1
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a spellcaster"
     },
     {
         "name": "Staff of the Rooted Hills",
@@ -652,8 +734,17 @@
                 "type": "spell_grant",
                 "value": "Hold Person",
                 "dc": 12
+            },
+            {
+                "type": "attack_bonus",
+                "value": 1
+            },
+            {
+                "type": "damage_bonus",
+                "value": 1
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Staff of the Woodlands",
@@ -678,8 +769,26 @@
                 "type": "spell_grant",
                 "value": "Pass Without Trace",
                 "cost": 0
+            },
+            {
+                "type": "damage_bonus",
+                "value": 2
+            },
+            {
+                "type": "attack_bonus",
+                "value": 2
+            },
+            {
+                "type": "damage_bonus",
+                "value": 2
+            },
+            {
+                "type": "spell_attack_bonus",
+                "value": 2
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a druid"
     },
     {
         "name": "Staff of Withering",
@@ -702,7 +811,9 @@
                 "value": "disadvantage_str_con",
                 "dc": 15
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a cleric, druid, or warlock"
     },
     {
         "name": "Starshot Crossbow",
@@ -764,7 +875,8 @@
                 "value": "Speak with Dead",
                 "cost": 4
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Sun Blade",
@@ -794,8 +906,17 @@
                 "type": "light_source",
                 "value": "sunlight",
                 "radius": 15
+            },
+            {
+                "type": "attack_bonus",
+                "value": 2
+            },
+            {
+                "type": "damage_bonus",
+                "value": 2
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Sun Staff",
@@ -816,8 +937,22 @@
             {
                 "type": "damage_reroll",
                 "value": "fire_radiant_spells"
+            },
+            {
+                "type": "damage_bonus",
+                "value": 1
+            },
+            {
+                "type": "attack_bonus",
+                "value": 1
+            },
+            {
+                "type": "damage_bonus",
+                "value": 1
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a cleric, druid, or wizard"
     },
     {
         "name": "Sunforger",
@@ -836,8 +971,21 @@
                 "dc": 15,
                 "range": 120,
                 "radius": 20
+            },
+            {
+                "type": "damage_bonus",
+                "value": 2
+            },
+            {
+                "type": "attack_bonus",
+                "value": 2
+            },
+            {
+                "type": "damage_bonus",
+                "value": 2
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Sword of Life Stealing",
@@ -906,7 +1054,8 @@
                 "type": "debuff_on_triple_hit",
                 "dc": 15
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Two-Birds Sling",
@@ -922,6 +1071,18 @@
             {
                 "type": "ricochet_attack",
                 "value": "second_target_within_10ft"
+            },
+            {
+                "type": "damage_bonus",
+                "value": 1
+            },
+            {
+                "type": "attack_bonus",
+                "value": 1
+            },
+            {
+                "type": "damage_bonus",
+                "value": 1
             }
         ]
     },
@@ -946,7 +1107,8 @@
                 "dc": 15,
                 "charges": 1
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Vicious Weapon",
@@ -978,7 +1140,8 @@
                 "value": "soul_trap_on_long_rest",
                 "dc": 11
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Mantle of Spell Resistance",
@@ -991,7 +1154,8 @@
                 "type": "advantage",
                 "value": "saving_throws_vs_spells"
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Mimir",
@@ -1009,7 +1173,8 @@
                 "type": "planar_knowledge",
                 "value": true
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Mind Blade",
@@ -1055,7 +1220,9 @@
                 "type": "debuff_mental",
                 "dc": 15
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a mind flayer"
     },
     {
         "name": "Mirror of the Past",
@@ -1151,8 +1318,34 @@
             {
                 "type": "healing_bonus",
                 "value": "1d4"
+            },
+            {
+                "type": "damage_bonus",
+                "value": 1
+            },
+            {
+                "type": "spell_attack_bonus",
+                "value": 1
+            },
+            {
+                "type": "attack_bonus",
+                "value": 1
+            },
+            {
+                "type": "damage_bonus",
+                "value": 1
+            },
+            {
+                "type": "spell_attack_bonus",
+                "value": 1
+            },
+            {
+                "type": "spell_dc_bonus",
+                "value": 1
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a druid or ranger"
     },
     {
         "name": "Necklace of Fireballs",
@@ -1187,7 +1380,9 @@
                     "Wind Walk"
                 ]
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a cleric, druid, or paladin"
     },
     {
         "name": "Needle of Mending",
@@ -1204,8 +1399,21 @@
                 "type": "spell_grant",
                 "value": "Mending",
                 "cost": 0
+            },
+            {
+                "type": "damage_bonus",
+                "value": 1
+            },
+            {
+                "type": "attack_bonus",
+                "value": 1
+            },
+            {
+                "type": "damage_bonus",
+                "value": 1
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Oil of Etherealness",
@@ -1235,8 +1443,13 @@
             {
                 "type": "ignite_object",
                 "range": 10
+            },
+            {
+                "type": "resistance",
+                "damageType": "cold"
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Orb of the Stein Rune",
@@ -1258,7 +1471,8 @@
                 "value": "Meld into Stone",
                 "cost": "short_rest"
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Outer Essence Shard",
@@ -1271,7 +1485,9 @@
                 "type": "metamagic_trigger",
                 "value": "planar_essence_effect"
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a sorcerer"
     },
     {
         "name": "Pariah's Shield",
@@ -1287,8 +1503,17 @@
             {
                 "type": "damage_interpose",
                 "value": "convert_to_force"
+            },
+            {
+                "type": "ac_bonus",
+                "value": 1
+            },
+            {
+                "type": "ac_bonus",
+                "value": 1
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Periapt of Proof against Poison",
@@ -1304,6 +1529,10 @@
             {
                 "type": "immunity",
                 "value": "poisoned"
+            },
+            {
+                "type": "immunity",
+                "damageType": "poison"
             }
         ]
     },
@@ -1322,7 +1551,8 @@
                 "type": "resistance",
                 "value": "fire"
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Planecaller's Codex",
@@ -1339,7 +1569,9 @@
                 "type": "summon_bonus",
                 "value": "advantage_damage_rolls"
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a wizard"
     },
     {
         "name": "Portable Hole",
@@ -1452,6 +1684,11 @@
             {
                 "type": "spell_grant",
                 "value": "Bless"
+            },
+            {
+                "type": "stat_bonus",
+                "stat": "INT",
+                "value": 1
             }
         ]
     },
@@ -1466,6 +1703,58 @@
                 "type": "resistance",
                 "value": "all_damage",
                 "duration": "1_minute"
+            },
+            {
+                "type": "resistance",
+                "damageType": "acid"
+            },
+            {
+                "type": "resistance",
+                "damageType": "bludgeoning"
+            },
+            {
+                "type": "resistance",
+                "damageType": "cold"
+            },
+            {
+                "type": "resistance",
+                "damageType": "fire"
+            },
+            {
+                "type": "resistance",
+                "damageType": "force"
+            },
+            {
+                "type": "resistance",
+                "damageType": "lightning"
+            },
+            {
+                "type": "resistance",
+                "damageType": "necrotic"
+            },
+            {
+                "type": "resistance",
+                "damageType": "piercing"
+            },
+            {
+                "type": "resistance",
+                "damageType": "poison"
+            },
+            {
+                "type": "resistance",
+                "damageType": "psychic"
+            },
+            {
+                "type": "resistance",
+                "damageType": "radiant"
+            },
+            {
+                "type": "resistance",
+                "damageType": "slashing"
+            },
+            {
+                "type": "resistance",
+                "damageType": "thunder"
             }
         ]
     },
@@ -1559,7 +1848,9 @@
                 "type": "spell_focus",
                 "value": "wizard"
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a wizard"
     },
     {
         "name": "Quaal's Feather Token",
@@ -1589,8 +1880,14 @@
                 "type": "spell_grant",
                 "value": "Otto's Irresistible Dance",
                 "charges": 1
+            },
+            {
+                "type": "spell_dc_bonus",
+                "value": 2
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a bard"
     },
     {
         "name": "Rhythm Maker's Drum",
@@ -1607,8 +1904,22 @@
                 "type": "restore_resource",
                 "value": "Bardic Inspiration",
                 "charges": 1
+            },
+            {
+                "type": "spell_dc_bonus",
+                "value": 1
+            },
+            {
+                "type": "spell_attack_bonus",
+                "value": 1
+            },
+            {
+                "type": "spell_dc_bonus",
+                "value": 1
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a bard"
     },
     {
         "name": "Ring of Animal Influence",
@@ -1642,7 +1953,8 @@
                 "type": "auto_success_dex_save",
                 "cost": 1
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Ring of Feather Falling",
@@ -1655,7 +1967,8 @@
                 "type": "feather_fall_constant",
                 "value": true
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Ring of Free Action",
@@ -1672,7 +1985,8 @@
                 "type": "immunity",
                 "value": "paralyzed_restrained_magical"
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Ring of Protection",
@@ -1688,8 +2002,17 @@
             {
                 "type": "save_bonus",
                 "value": 1
+            },
+            {
+                "type": "ac_bonus",
+                "value": 1
+            },
+            {
+                "type": "save_bonus",
+                "value": 1
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Ring of Resistance",
@@ -1715,7 +2038,8 @@
                 "type": "spell_storage",
                 "capacity": 5
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Ring of Temporal Salvation",
@@ -1728,7 +2052,8 @@
                 "type": "death_denial",
                 "value": "3d6_plus_con_hp"
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Ring of the Ram",
@@ -1747,7 +2072,8 @@
                 "damage_type": "force",
                 "push": 5
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Ring of X-Ray Vision",
@@ -1764,7 +2090,8 @@
                 "type": "exhaustion_risk",
                 "dc": 15
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Robe of Eyes",
@@ -1781,6 +2108,7 @@
                 "type": "all_around_vision",
                 "value": true
             }
-        ]
+        ],
+        "requiresAttunement": true
     }
 ]

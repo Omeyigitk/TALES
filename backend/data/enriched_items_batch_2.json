@@ -25,8 +25,17 @@
             {
                 "type": "resistance",
                 "value": "nonmagical_bludgeoning_piercing_slashing"
+            },
+            {
+                "type": "disadvantage",
+                "skill": "stealth"
+            },
+            {
+                "type": "stealth_disadvantage",
+                "value": true
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Azuredge",
@@ -49,8 +58,17 @@
                 "value": "2d6",
                 "damage_type": "radiant",
                 "condition": "Fiends or Undead"
+            },
+            {
+                "type": "attack_bonus",
+                "value": 3
+            },
+            {
+                "type": "damage_bonus",
+                "value": 3
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Belashyrra's Beholder Crown",
@@ -70,7 +88,8 @@
                 "value": "Disintegrate",
                 "dc": 16
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Belt of Giant Strength",
@@ -105,7 +124,9 @@
                 "type": "spell_auto",
                 "value": "Gate"
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a creature that has proficiency in the {@skill Arcana} skill"
     },
     {
         "name": "Blackrazor",
@@ -122,8 +143,18 @@
             {
                 "type": "damage_bonus",
                 "value": 3
+            },
+            {
+                "type": "attack_bonus",
+                "value": 3
+            },
+            {
+                "type": "damage_bonus",
+                "value": 3
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a creature of non-lawful alignment"
     },
     {
         "name": "Blackstaff",
@@ -144,8 +175,38 @@
             {
                 "type": "ac_bonus",
                 "value": 2
+            },
+            {
+                "type": "spell_attack_bonus",
+                "value": 2
+            },
+            {
+                "type": "save_bonus",
+                "value": 2
+            },
+            {
+                "type": "ac_bonus",
+                "value": 2
+            },
+            {
+                "type": "attack_bonus",
+                "value": 2
+            },
+            {
+                "type": "damage_bonus",
+                "value": 2
+            },
+            {
+                "type": "spell_attack_bonus",
+                "value": 2
+            },
+            {
+                "type": "save_bonus",
+                "value": 2
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by the Blackstaff heir, who must be a wizard"
     },
     {
         "name": "Blood Fury Tattoo",
@@ -161,7 +222,8 @@
                 "damage_type": "necrotic",
                 "note": "Harcandığında can yeniler"
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Bookmark",
@@ -178,8 +240,17 @@
             {
                 "type": "damage_bonus",
                 "value": 3
+            },
+            {
+                "type": "attack_bonus",
+                "value": 3
+            },
+            {
+                "type": "damage_bonus",
+                "value": 3
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Cloak of Invisibility",
@@ -188,7 +259,8 @@
         "type": "Wondrous Item",
         "category": "Büyülü Eşya",
         "description": "**[Mekanik Bilgiler]** Bu pelerini giyerken başlığınızı eylem (action) olarak kapatarak görünmez (invisible) olabilirsiniz. Toplamda 2 saat boyunca görünmezlik sağlar. Harcanan süre 1 dakikalık dilimler halinde düşülür. Kullanılmadığı her 12 saatlik süre için 1 saatlik usage hakkı geri kazanılır.\n\n**[Atmosfer]** Işığı sanki etrafından akıtıyormuş gibi görünen, dokunulduğunda neredeyse yokmuş hissi veren efsanevi bir pelerindir.",
-        "effects": []
+        "effects": [],
+        "requiresAttunement": true
     },
     {
         "name": "Crystal Ball",
@@ -203,7 +275,8 @@
                 "value": "Scrying",
                 "dc": 17
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Cubic Gate",
@@ -264,8 +337,18 @@
                 "type": "extra_damage",
                 "value": "1d8",
                 "damage_type": "radiant"
+            },
+            {
+                "type": "attack_bonus",
+                "value": 2
+            },
+            {
+                "type": "damage_bonus",
+                "value": 2
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a creature of non-evil alignment"
     },
     {
         "name": "Deck Of Many More Things",
@@ -402,7 +485,8 @@
                 "value": "advantage",
                 "condition": "against Dragon Breath/Spells"
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Dragon-Touched Focus",
@@ -442,8 +526,21 @@
             {
                 "type": "resistance",
                 "value": "cold"
+            },
+            {
+                "type": "attack_bonus",
+                "value": 1
+            },
+            {
+                "type": "damage_bonus",
+                "value": 1
+            },
+            {
+                "type": "resistance",
+                "damageType": "cold"
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Efreeti Chain",
@@ -460,8 +557,29 @@
             {
                 "type": "resistance",
                 "value": "fire_immunity"
+            },
+            {
+                "type": "disadvantage",
+                "skill": "stealth"
+            },
+            {
+                "type": "immunity",
+                "damageType": "fire"
+            },
+            {
+                "type": "ac_bonus",
+                "value": 3
+            },
+            {
+                "type": "immunity",
+                "damageType": "fire"
+            },
+            {
+                "type": "stealth_disadvantage",
+                "value": true
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Euryale's Aegis",
@@ -478,8 +596,13 @@
             {
                 "type": "resistance",
                 "value": "petrified_immunity"
+            },
+            {
+                "type": "resistance",
+                "damageType": "poison"
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Fane-Eater",
@@ -496,8 +619,18 @@
             {
                 "type": "damage_bonus",
                 "value": 3
+            },
+            {
+                "type": "attack_bonus",
+                "value": 3
+            },
+            {
+                "type": "damage_bonus",
+                "value": 3
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by an evil cleric or paladin"
     },
     {
         "name": "Fate Dealer's Deck",
@@ -511,8 +644,26 @@
                 "type": "spell_auto",
                 "value": "Spell Attack +3",
                 "dc": 3
+            },
+            {
+                "type": "spell_attack_bonus",
+                "value": 1
+            },
+            {
+                "type": "spell_dc_bonus",
+                "value": 1
+            },
+            {
+                "type": "spell_attack_bonus",
+                "value": 1
+            },
+            {
+                "type": "spell_dc_bonus",
+                "value": 1
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a cleric or paladin"
     },
     {
         "name": "Figurine of Wondrous Power",
@@ -543,8 +694,17 @@
                 "type": "extra_damage",
                 "value": "5d4",
                 "damage_type": "elemental_choice"
+            },
+            {
+                "type": "attack_bonus",
+                "value": 3
+            },
+            {
+                "type": "damage_bonus",
+                "value": 3
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Gloves of Soul Catching",
@@ -563,8 +723,19 @@
                 "type": "extra_damage",
                 "value": "2d10",
                 "damage_type": "force"
+            },
+            {
+                "type": "stat_set",
+                "stat": "CON",
+                "value": 20
+            },
+            {
+                "type": "stat_set",
+                "stat": "CON",
+                "value": 20
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Grimoire Infinitus",
@@ -590,8 +761,17 @@
             {
                 "type": "damage_bonus",
                 "value": 1
+            },
+            {
+                "type": "attack_bonus",
+                "value": 1
+            },
+            {
+                "type": "damage_bonus",
+                "value": 1
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Hammer of Thunderbolts",
@@ -612,6 +792,24 @@
             {
                 "type": "stat_bonus",
                 "stat": "strength",
+                "value": 4
+            },
+            {
+                "type": "stat_bonus",
+                "stat": "STR",
+                "value": 4
+            },
+            {
+                "type": "attack_bonus",
+                "value": 1
+            },
+            {
+                "type": "damage_bonus",
+                "value": 1
+            },
+            {
+                "type": "stat_bonus",
+                "stat": "STR",
                 "value": 4
             }
         ]
@@ -638,7 +836,8 @@
                 "stat": "charisma",
                 "value": "min_10"
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Hazirawn",
@@ -660,8 +859,17 @@
                 "type": "extra_damage",
                 "value": "2d6",
                 "damage_type": "necrotic"
+            },
+            {
+                "type": "attack_bonus",
+                "value": 1
+            },
+            {
+                "type": "damage_bonus",
+                "value": 1
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Helm of Disjunction",
@@ -670,7 +878,9 @@
         "type": "Wondrous Item",
         "category": "Büyülü Eşya",
         "description": "**[Mekanik Bilgiler]** Bir eylem kullanarak 300 fit yarıçapında bir antimagic darbesi yayar. Etki alanındaki tüm iksir ve tomarlar yok olur, diğer büyülü eşyaların özellikleri 1 dakika boyunca bastırılır. Ayrıca devam eden tüm büyüler sona erer. 30 fit içindeki herkes Strength Save atamazsa yere düşer.\n\n**[Atmosfer]** Mordenkainen tarafından dövülmüş, büyü enerjisinin en saf halini bile parçalayabilen altın bir miğferdir.",
-        "effects": []
+        "effects": [],
+        "requiresAttunement": true,
+        "attunementNote": "by a sorcerer"
     },
     {
         "name": "Helm of the Scavenger",
@@ -679,7 +889,9 @@
         "type": "Wondrous Item",
         "category": "Büyülü Eşya",
         "description": "**[Mekanik Bilgiler]** Bir uzay gemisini (Spelljammer) kontrol etmek ve manevra yapmak için tasarlanmıştır. Uyum sağlayan kişi gemiyi zihniyle yönlendirir. Dezavantajı; uyumlu olduğunuz sürece kendi büyü slotlarınızı kullanamazsınız.\n\n**[Atmosfer]** Çarklar ve mistik rünlerle dolu süslü bir koltuktur, takımyıldızlar arasında seyahat etmeyi sağlayan bir teknoloji şaheseridir.",
-        "effects": []
+        "effects": [],
+        "requiresAttunement": true,
+        "attunementNote": "by a spellcaster"
     },
     {
         "name": "Heretic",
@@ -696,8 +908,18 @@
             {
                 "type": "damage_bonus",
                 "value": 3
+            },
+            {
+                "type": "attack_bonus",
+                "value": 3
+            },
+            {
+                "type": "damage_bonus",
+                "value": 3
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a non-good creature"
     },
     {
         "name": "Hide of the Feral Guardian",
@@ -753,7 +975,9 @@
         "type": "Wondrous Item",
         "category": "Büyülü Eşya",
         "description": "**[Mekanik Bilgiler]** Vampirleri 1 dakika boyunca felç edebilir (Save DC 15). Turn Undead kullanırken hedeflere dezavantaj verir. Ayrıca 30 fit yarıçapında 10 dakika süren gerçek güneş ışığı yaratabilir.\n\n**[Atmosfer]** Barovia'nın vampirlerine karşı en güçlü silahtır; ortasında dev bir kristal bulunan güneş şeklinde platin bir muskadır.",
-        "effects": []
+        "effects": [],
+        "requiresAttunement": true,
+        "attunementNote": "by a cleric or paladin of good alignment"
     },
     {
         "name": "Horn of Beckoning Death",
@@ -762,7 +986,9 @@
         "type": "Wondrous Item",
         "category": "Büyülü Eşya",
         "description": "**[Mekanik Bilgiler]** Boynuzu çaldığınızda 30 fit çapında kırmızı bir duman bulutu oluşur. İçinde sırasını bitiren ve 9 veya daha az canı olan her yaratık anında ölür ve zombiye dönüşür. Zombiler Szass Tam'ın emirlerini izler. Yılda bir kez kullanılabilir.\n\n**[Atmosfer]** Küçük bir ejderha boynuzuna benzeyen, içinde cehennemden gelen bir ışık taşıyan tekinsiz bir nekromansi aracıdır.",
-        "effects": []
+        "effects": [],
+        "requiresAttunement": true,
+        "attunementNote": "by a sorcerer, warlock, or wizard"
     },
     {
         "name": "Horn of Valhalla",
@@ -786,7 +1012,9 @@
                 "value": "Protection from Evil and Good",
                 "note": "Always active within 30ft"
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a creature of good alignment"
     },
     {
         "name": "Infernal Tack",
@@ -795,7 +1023,9 @@
         "type": "Wondrous Item",
         "category": "Büyülü Eşya",
         "description": "**[Mekanik Bilgiler]** Bu set bir Nightmare'i (kabus atı) sahibine bağlar. Mahmuzları birbirine vurarak Nightmare'i 20 fit yakına çağırabilirsiniz. At 1 gün boyunca kalır ve emirlerinizi izler. At ölürse 24 saat sonra Cehennem'de yeniden canlanır.\n\n**[Atmosfer]** Cehennem metalinden dövülmüş, üzerinde acı çeken ruhların rünleri olan bir binicilik takımıdır.",
-        "effects": []
+        "effects": [],
+        "requiresAttunement": true,
+        "attunementNote": "by a creature of evil alignment."
     },
     {
         "name": "Infiltrator's Key",
@@ -808,6 +1038,11 @@
             {
                 "type": "stat_bonus",
                 "stat": "sleight_of_hand",
+                "value": 2
+            },
+            {
+                "type": "stat_bonus",
+                "stat": "DEX",
                 "value": 2
             }
         ]
@@ -833,6 +1068,11 @@
                 "type": "ac_bonus",
                 "value": 1,
                 "note": "Protection taşı için"
+            },
+            {
+                "type": "stat_bonus",
+                "stat": "STR",
+                "value": 2
             }
         ]
     },
@@ -869,8 +1109,21 @@
             {
                 "type": "resistance",
                 "value": "acid"
+            },
+            {
+                "type": "attack_bonus",
+                "value": 2
+            },
+            {
+                "type": "damage_bonus",
+                "value": 2
+            },
+            {
+                "type": "resistance",
+                "damageType": "acid"
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Jester's Mask",
@@ -884,8 +1137,31 @@
                 "type": "spell_auto",
                 "value": "Charisma Spell +3",
                 "dc": 3
+            },
+            {
+                "type": "spell_attack_bonus",
+                "value": 3
+            },
+            {
+                "type": "spell_dc_bonus",
+                "value": 3
+            },
+            {
+                "type": "spell_attack_bonus",
+                "value": 3
+            },
+            {
+                "type": "spell_dc_bonus",
+                "value": 3
+            },
+            {
+                "type": "stat_bonus",
+                "stat": "CHA",
+                "value": 3
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a bard, sorcerer, or warlock"
     },
     {
         "name": "Jewel of Three Prayers",
@@ -917,8 +1193,17 @@
             {
                 "type": "damage_bonus",
                 "value": 3
+            },
+            {
+                "type": "attack_bonus",
+                "value": 3
+            },
+            {
+                "type": "damage_bonus",
+                "value": 3
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Longbow of the Healing Hearth",
@@ -935,8 +1220,17 @@
             {
                 "type": "damage_bonus",
                 "value": 3
+            },
+            {
+                "type": "attack_bonus",
+                "value": 3
+            },
+            {
+                "type": "damage_bonus",
+                "value": 3
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Lost Crown of Besilmer",
@@ -950,8 +1244,17 @@
                 "type": "stat_bonus",
                 "stat": "persuasion",
                 "value": "advantage"
+            },
+            {
+                "type": "resistance",
+                "damageType": "psychic"
+            },
+            {
+                "type": "resistance",
+                "damageType": "psychic"
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Luck Blade",
@@ -996,8 +1299,17 @@
             {
                 "type": "resistance",
                 "value": "cold_immunity"
+            },
+            {
+                "type": "immunity",
+                "damageType": "cold"
+            },
+            {
+                "type": "immunity",
+                "damageType": "cold"
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Moonblade",
@@ -1014,8 +1326,18 @@
             {
                 "type": "damage_bonus",
                 "value": 1
+            },
+            {
+                "type": "attack_bonus",
+                "value": 1
+            },
+            {
+                "type": "damage_bonus",
+                "value": 1
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by an elf or half-elf of neutral good alignment"
     },
     {
         "name": "Murgaxor's Orb",
@@ -1024,7 +1346,8 @@
         "type": "Wondrous Item",
         "category": "Büyülü Eşya",
         "description": "**[Mekanik Bilgiler]** Lanetli bir nesnedir. Dokunduğu kişileri lanetleyerek baş ağrısı çekmelerine ve zihinsel dirençlerinin düşmesine neden olur. Küre içindeki kötü ruh (Murgaxor), lanetli kişilere acı verebilir veya onları kontrol altına alabilir.\n\n**[Atmosfer]** İçinde yeşil sislerin döndüğü, tekinsiz bir büyücü ruhu barındıran cam bir küre.",
-        "effects": []
+        "effects": [],
+        "requiresAttunement": true
     },
     {
         "name": "Nepenthe",
@@ -1047,8 +1370,18 @@
                 "value": "2d10",
                 "damage_type": "radiant",
                 "condition": "Fiends or Undead"
+            },
+            {
+                "type": "attack_bonus",
+                "value": 3
+            },
+            {
+                "type": "damage_bonus",
+                "value": 3
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a paladin"
     },
     {
         "name": "Nether Scroll of Azumar",
@@ -1061,6 +1394,11 @@
             {
                 "type": "stat_bonus",
                 "stat": "intelligence",
+                "value": 2
+            },
+            {
+                "type": "stat_bonus",
+                "stat": "INT",
                 "value": 2
             }
         ]
@@ -1085,8 +1423,57 @@
                 "type": "extra_damage",
                 "value": "4d4",
                 "damage_type": "radiant"
+            },
+            {
+                "type": "immunity",
+                "damageType": "acid"
+            },
+            {
+                "type": "immunity",
+                "damageType": "cold"
+            },
+            {
+                "type": "immunity",
+                "damageType": "fire"
+            },
+            {
+                "type": "immunity",
+                "damageType": "lightning"
+            },
+            {
+                "type": "immunity",
+                "damageType": "poison"
+            },
+            {
+                "type": "attack_bonus",
+                "value": 3
+            },
+            {
+                "type": "damage_bonus",
+                "value": 3
+            },
+            {
+                "type": "immunity",
+                "damageType": "acid"
+            },
+            {
+                "type": "immunity",
+                "damageType": "cold"
+            },
+            {
+                "type": "immunity",
+                "damageType": "fire"
+            },
+            {
+                "type": "immunity",
+                "damageType": "lightning"
+            },
+            {
+                "type": "immunity",
+                "damageType": "poison"
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Nightfall Pearl",
@@ -1095,7 +1482,8 @@
         "type": "Wondrous Item",
         "category": "Büyülü Eşya",
         "description": "**[Mekanik Bilgiler]** 10 dakika odaklanarak 10 mil yarıçapındaki alanı 24 saat boyunca 'gece' haline getirir. Gündüzü anında karanlığa boğar. Günde bir kez kullanılabilir.\n\n**[Atmosfer]** Simsiyah, dokunulduğunda buz gibi olan, güneşin ışığını yutan dev bir inci.",
-        "effects": []
+        "effects": [],
+        "requiresAttunement": true
     },
     {
         "name": "Obsidian Flint Dragon Plate",
@@ -1112,6 +1500,18 @@
             {
                 "type": "resistance",
                 "value": "poison"
+            },
+            {
+                "type": "disadvantage",
+                "skill": "stealth"
+            },
+            {
+                "type": "ac_bonus",
+                "value": 2
+            },
+            {
+                "type": "stealth_disadvantage",
+                "value": true
             }
         ]
     },
@@ -1129,7 +1529,9 @@
                 "value": 2,
                 "condition": "for Concentration"
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a spellcaster"
     },
     {
         "name": "Orcsplitter",
@@ -1146,8 +1548,18 @@
             {
                 "type": "damage_bonus",
                 "value": 2
+            },
+            {
+                "type": "attack_bonus",
+                "value": 2
+            },
+            {
+                "type": "damage_bonus",
+                "value": 2
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a dwarf, fighter, or paladin of good alignment"
     },
     {
         "name": "Plate Armor of Etherealness",
@@ -1160,8 +1572,17 @@
             {
                 "type": "spell_auto",
                 "value": "Etherealness"
+            },
+            {
+                "type": "disadvantage",
+                "skill": "stealth"
+            },
+            {
+                "type": "stealth_disadvantage",
+                "value": true
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Platinum Scarf",
@@ -1170,7 +1591,17 @@
         "type": "Wondrous Item",
         "category": "Büyülü Eşya",
         "description": "**[Mekanik Bilgiler]** Üzerinden bir pul kopararak şu etkileri yaratabilirsiniz (günde 3 pul): \n- Yaşam Nefesi: 10d4 can yeniler.\n- Platin Kalkan: +1 kalkan yaratır ve radiant hasarına bağışıklık verir.\n- Işık Çekici: 2d4 radiant hasarı veren büyülü bir hafif çekiç yaratır.\n\n**[Atmosfer]** Platin pullarla kaplı, Bahamut'un kutsamasını taşıyan görkemli bir atkıdır.",
-        "effects": []
+        "effects": [
+            {
+                "type": "ac_bonus",
+                "value": 1
+            },
+            {
+                "type": "ac_bonus",
+                "value": 1
+            }
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Potion of Dragon's Majesty",
@@ -1223,8 +1654,14 @@
             {
                 "type": "ac_bonus",
                 "value": 1
+            },
+            {
+                "type": "stat_set",
+                "stat": "STR",
+                "value": 18
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Prehistoric Figurines of Wondrous Power",
@@ -1259,8 +1696,17 @@
             {
                 "type": "damage_bonus",
                 "value": 1
+            },
+            {
+                "type": "attack_bonus",
+                "value": 1
+            },
+            {
+                "type": "damage_bonus",
+                "value": 1
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Reaper's Scream",
@@ -1277,8 +1723,17 @@
             {
                 "type": "damage_bonus",
                 "value": 2
+            },
+            {
+                "type": "attack_bonus",
+                "value": 2
+            },
+            {
+                "type": "damage_bonus",
+                "value": 2
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Red Wizard Blade",
@@ -1302,7 +1757,8 @@
         "type": "Ring",
         "category": "Büyülü Eşya",
         "description": "**[Mekanik Bilgiler]** Bir eylemle Hava Düzlemi'nden özel bir Djinni çağırabilirsiniz. Djinni 1 saat boyunca size hizmet eder. Gittikten sonra 24 saat boyunca tekrar çağrılamaz.\n\n**[Atmosfer]** Havayı kontrol eden kadim varlıklarla bağ kuran, üzerinde fırtına motifleri olan bir yüzüktür.",
-        "effects": []
+        "effects": [],
+        "requiresAttunement": true
     },
     {
         "name": "Ring of Elemental Command",
@@ -1320,7 +1776,8 @@
         "type": "Ring",
         "category": "Büyülü Eşya",
         "description": "**[Mekanik Bilgiler]** İstediğiniz zaman eylem kullanarak tamamen görünmez olabilirsiniz. Saldırı yapana veya büyü yapana kadar görünmez kalırsınız. Piller/şarj gerektirmez.\n\n**[Atmosfer]** Işığı parmağınızın etrafında büken, bakıldığında neredeyse yokmuş gibi duran şeffaf bir yüzüktür.",
-        "effects": []
+        "effects": [],
+        "requiresAttunement": true
     },
     {
         "name": "Ring of Spell Turning",
@@ -1336,7 +1793,8 @@
                 "value": "advantage",
                 "condition": "against spells targeting only you"
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Ring of Three Wishes",
@@ -1370,8 +1828,31 @@
                 "stat": "saves",
                 "value": "advantage",
                 "condition": "against spells"
+            },
+            {
+                "type": "spell_attack_bonus",
+                "value": 2
+            },
+            {
+                "type": "spell_dc_bonus",
+                "value": 2
+            },
+            {
+                "type": "spell_attack_bonus",
+                "value": 2
+            },
+            {
+                "type": "spell_dc_bonus",
+                "value": 2
+            },
+            {
+                "type": "stat_bonus",
+                "stat": "DEX",
+                "value": 2
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a sorcerer, warlock, or wizard"
     },
     {
         "name": "Rod of Lordly Might",
@@ -1388,8 +1869,17 @@
             {
                 "type": "damage_bonus",
                 "value": 3
+            },
+            {
+                "type": "attack_bonus",
+                "value": 3
+            },
+            {
+                "type": "damage_bonus",
+                "value": 3
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Rod of Resurrection",
@@ -1398,7 +1888,9 @@
         "type": "Rod",
         "category": "Büyülü Eşya",
         "description": "**[Mekanik Bilgiler]** 5 şarjı vardır. Heal (1 şarj) veya Resurrection (5 şarj) büyülerini cast edebilir. Şarjlar biterse asanın yok olma riski vardır.\n\n**[Atmosfer]** Saf ışıktan örülmüş, ölümün eşiğindeki ruhları geri çağırabilen kutsal bir asadır.",
-        "effects": []
+        "effects": [],
+        "requiresAttunement": true,
+        "attunementNote": "by a cleric, druid, or paladin"
     },
     {
         "name": "Ruby Weave Gem",
@@ -1407,7 +1899,9 @@
         "type": "Wondrous Item",
         "category": "Büyülü Eşya",
         "description": "**[Mekanik Bilgiler]** Büyü odağı olarak kullanılır ve büyülerin materyal maliyetlerini (500gp/şarj) yok sayabilir. En büyük özelliği: Her uzun dinlenme sonunda herhangi bir sınıftan (class) bir büyüyü öğrenip o gün boyunca kullanabilmenizi sağlar.\n\n**[Atmosfer]** Büyü ağının (The Weave) enerjisini damıtıp bir yakutun içine hapseden, sınırsız bilgi kaynağı bir mücevherdir.",
-        "effects": []
+        "effects": [],
+        "requiresAttunement": true,
+        "attunementNote": "by a spellcaster"
     },
     {
         "name": "Ruinblade",
@@ -1424,8 +1918,17 @@
             {
                 "type": "damage_bonus",
                 "value": 2
+            },
+            {
+                "type": "attack_bonus",
+                "value": 2
+            },
+            {
+                "type": "damage_bonus",
+                "value": 2
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Scaled Ornament",
@@ -1454,8 +1957,13 @@
                 "stat": "saves",
                 "value": "advantage",
                 "condition": "against spells"
+            },
+            {
+                "type": "ac_bonus",
+                "value": 1
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Scroll of Tarrasque Summoning",

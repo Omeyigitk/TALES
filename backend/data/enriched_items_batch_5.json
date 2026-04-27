@@ -17,8 +17,17 @@
             {
                 "type": "bonus_action_attack",
                 "value": 1
+            },
+            {
+                "type": "attack_bonus",
+                "value": 2
+            },
+            {
+                "type": "damage_bonus",
+                "value": 2
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Shard of the Ise Rune",
@@ -35,8 +44,13 @@
                 "type": "spell_grant",
                 "value": "Sleet Storm",
                 "dc": 17
+            },
+            {
+                "type": "resistance",
+                "damageType": "fire"
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Shield, +3",
@@ -71,8 +85,29 @@
                 "type": "spell_grant",
                 "value": "Bane",
                 "dc": 17
+            },
+            {
+                "type": "attack_bonus",
+                "value": 1
+            },
+            {
+                "type": "damage_bonus",
+                "value": 1
+            },
+            {
+                "type": "attack_bonus",
+                "value": 1
+            },
+            {
+                "type": "damage_bonus",
+                "value": 1
+            },
+            {
+                "type": "immunity",
+                "damageType": "cold"
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Skull Helm",
@@ -96,8 +131,21 @@
             {
                 "type": "spell_grant",
                 "value": "Spirit of Death"
+            },
+            {
+                "type": "resistance",
+                "damageType": "cold"
+            },
+            {
+                "type": "resistance",
+                "damageType": "necrotic"
+            },
+            {
+                "type": "resistance",
+                "damageType": "poison"
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Sling Bullets of Althemone",
@@ -106,6 +154,14 @@
         "type": "Weapon",
         "description": "**[Mekanik Bilgiler]**\nBu kesede 1d4 + 4 adet mermi bulunur. Her mermi saldırı ve hasar zarlarına +2 bonus kazandırır. Mermi ıskalarsa keseye geri ışınlanır, isabet ederse büyüsünü kaybeder.\n\n**[Atmosfer]**\nÜzerinde ince gümüş rünler parıldayan, dokunulduğunda hafifçe titreyen sapan mermileri.",
         "effects": [
+            {
+                "type": "attack_bonus",
+                "value": 2
+            },
+            {
+                "type": "damage_bonus",
+                "value": 2
+            },
             {
                 "type": "attack_bonus",
                 "value": 2
@@ -147,8 +203,17 @@
             {
                 "type": "curse",
                 "value": "backbiting"
+            },
+            {
+                "type": "attack_bonus",
+                "value": 2
+            },
+            {
+                "type": "damage_bonus",
+                "value": 2
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Spell Gem",
@@ -191,7 +256,8 @@
                 "type": "disadvantage_against",
                 "value": "spell_attacks"
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Staff of Dunamancy",
@@ -216,7 +282,9 @@
                 "type": "save_reroll",
                 "value": 1
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a wizard"
     },
     {
         "name": "Staff of Fate",
@@ -236,8 +304,17 @@
             {
                 "type": "buff_die",
                 "value": "1d4"
+            },
+            {
+                "type": "attack_bonus",
+                "value": 3
+            },
+            {
+                "type": "damage_bonus",
+                "value": 3
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Staff of Fire",
@@ -257,8 +334,14 @@
             {
                 "type": "spell_grant",
                 "value": "Wall of Fire"
+            },
+            {
+                "type": "resistance",
+                "damageType": "fire"
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a druid, sorcerer, warlock, or wizard"
     },
     {
         "name": "Staff of Frost",
@@ -278,8 +361,14 @@
             {
                 "type": "spell_grant",
                 "value": "Wall of Ice"
+            },
+            {
+                "type": "resistance",
+                "damageType": "cold"
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a druid, sorcerer, warlock, or wizard"
     },
     {
         "name": "Staff of Power",
@@ -307,8 +396,30 @@
             {
                 "type": "spell_attack_bonus",
                 "value": 2
+            },
+            {
+                "type": "ac_bonus",
+                "value": 2
+            },
+            {
+                "type": "attack_bonus",
+                "value": 2
+            },
+            {
+                "type": "damage_bonus",
+                "value": 2
+            },
+            {
+                "type": "spell_attack_bonus",
+                "value": 2
+            },
+            {
+                "type": "save_bonus",
+                "value": 2
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a sorcerer, warlock, or wizard"
     },
     {
         "name": "Staff of Striking",
@@ -329,8 +440,17 @@
                 "type": "on_hit_damage",
                 "value": "1d6",
                 "damage_type": "force"
+            },
+            {
+                "type": "attack_bonus",
+                "value": 3
+            },
+            {
+                "type": "damage_bonus",
+                "value": 3
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Staff of Thunder and Lightning",
@@ -351,8 +471,17 @@
                 "type": "on_hit_damage",
                 "value": "2d6",
                 "damage_type": "lightning"
+            },
+            {
+                "type": "attack_bonus",
+                "value": 2
+            },
+            {
+                "type": "damage_bonus",
+                "value": 2
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Steel",
@@ -372,8 +501,18 @@
             {
                 "type": "spell_grant",
                 "value": "Revivify"
+            },
+            {
+                "type": "attack_bonus",
+                "value": 2
+            },
+            {
+                "type": "damage_bonus",
+                "value": 2
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a good-aligned creature"
     },
     {
         "name": "Stonemaker War Pick",
@@ -393,8 +532,17 @@
             {
                 "type": "on_crit_effect",
                 "value": "petrify"
+            },
+            {
+                "type": "attack_bonus",
+                "value": 1
+            },
+            {
+                "type": "damage_bonus",
+                "value": 1
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Sword of Sharpness",
@@ -428,8 +576,17 @@
             {
                 "type": "damage_bonus",
                 "value": 1
+            },
+            {
+                "type": "attack_bonus",
+                "value": 1
+            },
+            {
+                "type": "damage_bonus",
+                "value": 1
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Tasha's Creeping Keepboat",
@@ -462,6 +619,14 @@
             {
                 "type": "damage_type_override",
                 "value": "thunder"
+            },
+            {
+                "type": "attack_bonus",
+                "value": 1
+            },
+            {
+                "type": "damage_bonus",
+                "value": 1
             }
         ]
     },
@@ -487,8 +652,17 @@
             {
                 "type": "spell_grant",
                 "value": "Tsunami"
+            },
+            {
+                "type": "attack_bonus",
+                "value": 2
+            },
+            {
+                "type": "damage_bonus",
+                "value": 2
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Timepiece of Travel",
@@ -509,8 +683,18 @@
             {
                 "type": "spell_grant",
                 "value": "Teleport"
+            },
+            {
+                "type": "save_bonus",
+                "value": 1
+            },
+            {
+                "type": "stat_bonus",
+                "stat": "DEX",
+                "value": 1
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Tome of Clear Thought",
@@ -528,6 +712,16 @@
                 "type": "stat_max_bonus",
                 "value": 2,
                 "stat": "intelligence"
+            },
+            {
+                "type": "stat_bonus",
+                "stat": "INT",
+                "value": 2
+            },
+            {
+                "type": "stat_bonus",
+                "stat": "INT",
+                "value": 2
             }
         ]
     },
@@ -547,6 +741,16 @@
                 "type": "stat_max_bonus",
                 "value": 2,
                 "stat": "charisma"
+            },
+            {
+                "type": "stat_bonus",
+                "stat": "CHA",
+                "value": 2
+            },
+            {
+                "type": "stat_bonus",
+                "stat": "CHA",
+                "value": 2
             }
         ]
     },
@@ -566,6 +770,16 @@
                 "type": "stat_max_bonus",
                 "value": 2,
                 "stat": "wisdom"
+            },
+            {
+                "type": "stat_bonus",
+                "stat": "WIS",
+                "value": 2
+            },
+            {
+                "type": "stat_bonus",
+                "stat": "WIS",
+                "value": 2
             }
         ]
     },
@@ -591,8 +805,22 @@
             {
                 "type": "spell_grant",
                 "value": "Teleport"
+            },
+            {
+                "type": "attack_bonus",
+                "value": 1
+            },
+            {
+                "type": "damage_bonus",
+                "value": 1
+            },
+            {
+                "type": "spell_attack_bonus",
+                "value": 1
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a spellcaster"
     },
     {
         "name": "Wand of Polymorph",
@@ -606,7 +834,9 @@
                 "value": "Polymorph",
                 "dc": 15
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a spellcaster"
     },
     {
         "name": "Wand of the War Mage, +3",
@@ -622,8 +852,18 @@
             {
                 "type": "ignore_half_cover",
                 "value": true
+            },
+            {
+                "type": "spell_attack_bonus",
+                "value": 1
+            },
+            {
+                "type": "spell_dc_bonus",
+                "value": 3
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a spellcaster"
     },
     {
         "name": "Watchful Helm",
@@ -643,8 +883,13 @@
             {
                 "type": "spell_grant",
                 "value": "See Invisibility"
+            },
+            {
+                "type": "ac_bonus",
+                "value": 1
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Weapon, +3",
@@ -703,8 +948,18 @@
             {
                 "type": "spell_grant",
                 "value": "Guidance"
+            },
+            {
+                "type": "save_bonus",
+                "value": 1
+            },
+            {
+                "type": "stat_bonus",
+                "stat": "WIS",
+                "value": 1
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Illusionist's Bracers",
@@ -717,7 +972,9 @@
                 "type": "double_cantrip",
                 "value": true
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a spellcaster"
     },
     {
         "name": "Ingot of the Skold Rune",
@@ -729,8 +986,13 @@
             {
                 "type": "ac_bonus",
                 "value": 1
+            },
+            {
+                "type": "ac_bonus",
+                "value": 1
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Instrument of the Bards (Anstruth Harp)",
@@ -781,8 +1043,17 @@
             {
                 "type": "immunity",
                 "value": "poisoned"
+            },
+            {
+                "type": "resistance",
+                "damageType": "acid"
+            },
+            {
+                "type": "resistance",
+                "damageType": "poison"
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Last Stand Armor",
@@ -815,8 +1086,13 @@
             {
                 "type": "death_ward_passive",
                 "value": 1
+            },
+            {
+                "type": "resistance",
+                "damageType": "necrotic"
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Living Armor",
@@ -858,7 +1134,9 @@
                 "type": "free_action",
                 "value": true
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a creature with a humanoid build"
     },
     {
         "name": "Lucent Destroyer",
@@ -883,8 +1161,17 @@
                 "type": "spell_grant",
                 "value": "Sunbeam",
                 "dc": 17
+            },
+            {
+                "type": "attack_bonus",
+                "value": 1
+            },
+            {
+                "type": "damage_bonus",
+                "value": 1
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Manual of Bodily Health",
@@ -902,6 +1189,16 @@
                 "type": "stat_max_bonus",
                 "value": 2,
                 "stat": "constitution"
+            },
+            {
+                "type": "stat_bonus",
+                "stat": "CON",
+                "value": 2
+            },
+            {
+                "type": "stat_bonus",
+                "stat": "CON",
+                "value": 2
             }
         ]
     },
@@ -921,6 +1218,16 @@
                 "type": "stat_max_bonus",
                 "value": 2,
                 "stat": "strength"
+            },
+            {
+                "type": "stat_bonus",
+                "stat": "STR",
+                "value": 2
+            },
+            {
+                "type": "stat_bonus",
+                "stat": "STR",
+                "value": 2
             }
         ]
     },
@@ -953,6 +1260,16 @@
                 "type": "stat_max_bonus",
                 "value": 2,
                 "stat": "dexterity"
+            },
+            {
+                "type": "stat_bonus",
+                "stat": "DEX",
+                "value": 2
+            },
+            {
+                "type": "stat_bonus",
+                "stat": "DEX",
+                "value": 2
             }
         ]
     },
@@ -972,7 +1289,8 @@
                 "type": "stun_chance",
                 "dc": 15
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Mindguard Crown",
@@ -988,8 +1306,13 @@
             {
                 "type": "resistance",
                 "value": "psychic"
+            },
+            {
+                "type": "resistance",
+                "damageType": "psychic"
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Mirror of Life Trapping",
@@ -1015,7 +1338,8 @@
                 "type": "paralyze_chance",
                 "dc": 15
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Mistral Mantle",
@@ -1037,8 +1361,13 @@
                 "type": "spell_grant",
                 "value": "Sleet Storm",
                 "dc": 14
+            },
+            {
+                "type": "resistance",
+                "damageType": "cold"
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Moon Sickle, +3",
@@ -1066,8 +1395,26 @@
             {
                 "type": "healing_bonus",
                 "value": "1d4"
+            },
+            {
+                "type": "attack_bonus",
+                "value": 1
+            },
+            {
+                "type": "damage_bonus",
+                "value": 1
+            },
+            {
+                "type": "spell_attack_bonus",
+                "value": 1
+            },
+            {
+                "type": "spell_dc_bonus",
+                "value": 1
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a druid or ranger"
     },
     {
         "name": "Mudslick Tower",
@@ -1093,7 +1440,8 @@
                 "type": "castle_control",
                 "value": true
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Nimbus Coronet",
@@ -1114,7 +1462,8 @@
                 "type": "fly_speed",
                 "value": 60
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Nine Lives Stealer",
@@ -1166,7 +1515,8 @@
                 "value": "3d6",
                 "damage_type": "piercing"
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Oil of Sharpness",
@@ -1179,6 +1529,22 @@
                 "type": "weapon_buff",
                 "value": 3,
                 "duration": "1 hour"
+            },
+            {
+                "type": "attack_bonus",
+                "value": 3
+            },
+            {
+                "type": "damage_bonus",
+                "value": 3
+            },
+            {
+                "type": "attack_bonus",
+                "value": 3
+            },
+            {
+                "type": "damage_bonus",
+                "value": 3
             }
         ]
     },
@@ -1192,8 +1558,19 @@
             {
                 "type": "curse",
                 "value": "veil_darkness"
+            },
+            {
+                "type": "stat_bonus",
+                "stat": "WIS",
+                "value": 2
+            },
+            {
+                "type": "stat_bonus",
+                "stat": "WIS",
+                "value": 2
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Ornithopter of Flying",
@@ -1223,7 +1600,8 @@
                 "type": "fall_damage_prevention",
                 "value": true
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Peregrine Mask",
@@ -1240,7 +1618,8 @@
                 "type": "advantage",
                 "value": "initiative"
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Polymorph Blade",
@@ -1428,8 +1807,23 @@
             {
                 "type": "restore_feature",
                 "value": "Bardic Inspiration"
+            },
+            {
+                "type": "spell_attack_bonus",
+                "value": 1
+            },
+            {
+                "type": "spell_dc_bonus",
+                "value": 1
+            },
+            {
+                "type": "stat_bonus",
+                "stat": "STR",
+                "value": 3
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a bard"
     },
     {
         "name": "Ring of Amity",
@@ -1446,7 +1840,8 @@
                 "type": "force_crit_reaction",
                 "value": 1
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Ring of Red Fury",
@@ -1463,7 +1858,8 @@
                 "type": "corruption_risk",
                 "dc": 20
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Ring of Regeneration",
@@ -1481,7 +1877,8 @@
                 "type": "regrow_limbs",
                 "value": true
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Ring of Shooting Stars",
@@ -1499,7 +1896,9 @@
                 "value": "5d4",
                 "damage_type": "fire"
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "outdoors at night"
     },
     {
         "name": "Ring of Telekinesis",
@@ -1513,7 +1912,8 @@
                 "value": "Telekinesis",
                 "limit": "objects_only"
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Robe of Scintillating Colors",
@@ -1530,7 +1930,8 @@
                 "type": "stun_chance",
                 "dc": 15
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Candle of Invocation",
@@ -1547,7 +1948,8 @@
                 "type": "spell_grant",
                 "value": "Gate"
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Cape of Enlargement",
@@ -1565,7 +1967,8 @@
                 "value": 2,
                 "stat": "strength"
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Carpet of Flying",
@@ -1595,7 +1998,9 @@
                 "type": "resurrection_effect",
                 "value": "Raise Dead"
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a druid or warlock"
     },
     {
         "name": "Chime of Exile",
@@ -1626,8 +2031,18 @@
             {
                 "type": "extra_action",
                 "value": 1
+            },
+            {
+                "type": "save_bonus",
+                "value": 1
+            },
+            {
+                "type": "stat_bonus",
+                "stat": "INT",
+                "value": 1
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Cloak of Arachnida",
@@ -1647,8 +2062,13 @@
             {
                 "type": "spell_grant",
                 "value": "Web"
+            },
+            {
+                "type": "resistance",
+                "damageType": "poison"
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Clockwork Armor",
@@ -1676,7 +2096,8 @@
                 "value": "Teleport",
                 "limit": "fixed_location"
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Constantori's Portrait",
@@ -1694,7 +2115,8 @@
                 "value": "Magic Missile",
                 "charges": 3
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Crown Of Whirling Comets",
@@ -1716,7 +2138,8 @@
                 "type": "spell_grant",
                 "value": "Ice Storm"
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Crystal Ball",
@@ -1730,7 +2153,8 @@
                 "value": "Scrying",
                 "dc": 17
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Crystalline Chronicle",
@@ -1747,7 +2171,9 @@
                 "type": "spell_grant",
                 "value": "Mage Hand"
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a wizard"
     },
     {
         "name": "Dancing Sword",

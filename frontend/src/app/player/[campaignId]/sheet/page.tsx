@@ -390,34 +390,40 @@ const PlayerSheet = () => {
         // 1. Apply Feat Stat Selections (e.g. +1 from Resilient)
         if (character?.featSelections?.stats) {
             Object.entries(character.featSelections.stats).forEach(([featName, statBonus]: [string, any]) => {
-                if (typeof statBonus === 'string' && eff[statBonus as keyof typeof eff] !== undefined) {
-                    eff[statBonus as keyof typeof eff] += 1;
+                if (typeof statBonus === 'string' && eff[statBonus.toUpperCase() as keyof typeof eff] !== undefined) {
+                    eff[statBonus.toUpperCase() as keyof typeof eff] += 1;
                 }
             });
         }
 
         // 2. Apply Passive Feat Stat Bonuses (e.g. Actor +1 CHA)
         actualFeats.forEach((fName: string) => {
-            const fData = (libFeats || []).find(x => x && x.name === fName);
+            const fNameLower = fName.toLowerCase();
+            const fData = (libFeats || []).find(x => x && ((x.name || "").toLowerCase() === fNameLower || (x.name_tr || "").toLowerCase() === fNameLower));
             if (fData && fData.effects) {
                 fData.effects.forEach((effObj: any) => {
                     if (effObj.type === 'stat_bonus') {
                         if (effObj.value && typeof effObj.value === 'object') {
                             Object.entries(effObj.value).forEach(([s, v]: [string, any]) => {
-                                if (eff[s as keyof typeof eff] !== undefined) {
-                                    eff[s as keyof typeof eff] += (v || 0);
+                                const upperS = s.toUpperCase();
+                                if (eff[upperS as keyof typeof eff] !== undefined) {
+                                    eff[upperS as keyof typeof eff] += (v || 0);
                                 }
                             });
                         }
                         else if (effObj.stat && typeof effObj.value === 'number') {
-                            if (eff[effObj.stat as keyof typeof eff] !== undefined) {
-                                eff[effObj.stat as keyof typeof eff] += effObj.value;
+                            const upperStat = effObj.stat.toUpperCase();
+                            if (eff[upperStat as keyof typeof eff] !== undefined) {
+                                eff[upperStat as keyof typeof eff] += effObj.value;
                             }
                         }
                     }
                     if (effObj.type === 'stat_set') {
                         if (effObj.stat && typeof effObj.value === 'number') {
-                            eff[effObj.stat as keyof typeof eff] = Math.max(eff[effObj.stat as keyof typeof eff] || 0, effObj.value);
+                            const upperStat = effObj.stat.toUpperCase();
+                            if (eff[upperStat as keyof typeof eff] !== undefined) {
+                                eff[upperStat as keyof typeof eff] = Math.max(eff[upperStat as keyof typeof eff] || 0, effObj.value);
+                            }
                         }
                     }
                 });
@@ -430,15 +436,22 @@ const PlayerSheet = () => {
                 if (it.isEquipped && it.effects) {
                     it.effects.forEach((effObj: any) => {
                         if (effObj.type === 'stat_set') {
-                            eff[effObj.stat as keyof typeof eff] = Math.max(eff[effObj.stat as keyof typeof eff] || 0, effObj.value);
+                            if (effObj.stat) {
+                                const upperStat = effObj.stat.toUpperCase();
+                                if (eff[upperStat as keyof typeof eff] !== undefined) {
+                                    eff[upperStat as keyof typeof eff] = Math.max(eff[upperStat as keyof typeof eff] || 0, effObj.value);
+                                }
+                            }
                         }
                         if (effObj.type === 'stat_bonus') {
                             if (effObj.value && typeof effObj.value === 'object') {
                                 Object.entries(effObj.value).forEach(([s, v]: [string, any]) => {
-                                    if (eff[s as keyof typeof eff] !== undefined) eff[s as keyof typeof eff] += (v || 0);
+                                    const upperS = s.toUpperCase();
+                                    if (eff[upperS as keyof typeof eff] !== undefined) eff[upperS as keyof typeof eff] += (v || 0);
                                 });
                             } else if (effObj.stat && typeof effObj.value === 'number') {
-                                if (eff[effObj.stat as keyof typeof eff] !== undefined) eff[effObj.stat as keyof typeof eff] += effObj.value;
+                                const upperStat = effObj.stat.toUpperCase();
+                                if (eff[upperStat as keyof typeof eff] !== undefined) eff[upperStat as keyof typeof eff] += effObj.value;
                             }
                         }
                     });
@@ -457,7 +470,11 @@ const PlayerSheet = () => {
                 if (it.isEquipped && it.effects) {
                     it.effects.forEach((eff: any) => {
                         if (eff.type === bonusType) {
-                            if (!secondaryType || eff.stat === secondaryType) {
+                            // If calculating a weapon attack, we exclude the weapon's own bonus from the "global" pool
+                            // to handle it specifically within the attack calculation.
+                            // However, generic ac/stat bonuses always apply.
+                            // FIX: If effect has no specific stat, it applies globally to that bonus type
+                            if (!secondaryType || !eff.stat || eff.stat.toUpperCase() === secondaryType.toUpperCase()) {
                                 bonus += (typeof eff.value === 'number' ? eff.value : 0);
                             }
                         }
@@ -468,11 +485,12 @@ const PlayerSheet = () => {
 
         // 2. Feat Bonuses (includes AC, Init, Atk)
         actualFeats.forEach((fName: string) => {
-            const fData = (libFeats || []).find(x => x && x.name === fName);
+            const fNameLower = fName.toLowerCase();
+            const fData = (libFeats || []).find(x => x && ((x.name || "").toLowerCase() === fNameLower || (x.name_tr || "").toLowerCase() === fNameLower));
             if (fData && fData.effects) {
                 fData.effects.forEach((eff: any) => {
                     if (eff.type === bonusType) {
-                        if (!secondaryType || eff.stat === secondaryType) {
+                        if (!secondaryType || !eff.stat || eff.stat.toUpperCase() === secondaryType.toUpperCase()) {
                             bonus += (typeof eff.value === 'number' ? eff.value : 0);
                         }
                     }
@@ -525,10 +543,23 @@ const PlayerSheet = () => {
     const hpPct = character?.maxHp ? Math.round((currentHp / character.maxHp) * 100) : 0;
     // Global Bonuses
     const itemAtkBonus = getGlobalBonus('attack_bonus');
-    const itemDmgBonus = getGlobalBonus('damage_bonus');
-    const itemSpellBonus = getGlobalBonus('spell_atk_bonus'); 
+    const itemDmgBonus = getGlobalBonus('damage_bonus', 'melee') + getGlobalBonus('damage_bonus', 'ranged'); // Simple combined for base checks
+    const itemSpellAtkBonus = getGlobalBonus('spell_attack_bonus'); 
+    const itemSpellDCBonus = getGlobalBonus('spell_dc_bonus');
     const itemInitBonus = getGlobalBonus('initiative_bonus');
-    const itemACBonus = getGlobalBonus('ac_bonus');
+    const itemACBonus = getGlobalBonus('ac_bonus'); // AC bonuses from items are usually type 'ac_bonus'
+    const itemSaveBonus = getGlobalBonus('save_bonus');
+
+    // Paladin: Aura of Protection (Level 6)
+    const auraOfProtectionBonus = (() => {
+        const paladinLevel = allCls.includes('Paladin') 
+            ? (clsName === 'Paladin' ? (character?.level || 1) - mcs.reduce((a: any, m: any) => a + (m.level || 0), 0) : mcs.find((m: any) => m.className === 'Paladin')?.level || 0)
+            : 0;
+        if (paladinLevel >= 6) {
+            return Math.max(0, mods.CHA); // Minimum +0 per RAW
+        }
+        return 0;
+    })();
 
     const featSpellsList = character?.featSelections?.spells 
         ? Object.values(character.featSelections.spells).flat() as string[] 
@@ -864,8 +895,8 @@ const PlayerSheet = () => {
             character.inventory.forEach((it: any) => {
                 if (it.isEquipped && it.effects) {
                     it.effects.forEach((eff: any) => {
-                        if (eff.type === 'stat_set' && eff.stat === stat) total = Math.max(total, eff.value);
-                        if (eff.type === 'stat_bonus' && eff.stat === stat) total += eff.value;
+                        if (eff.type === 'stat_set' && eff.stat && eff.stat.toUpperCase() === stat.toUpperCase()) total = Math.max(total, eff.value);
+                        if (eff.type === 'stat_bonus' && eff.stat && eff.stat.toUpperCase() === stat.toUpperCase()) total += eff.value;
                     });
                 }
             });
@@ -1315,6 +1346,96 @@ const PlayerSheet = () => {
             cancelText: "Vazgeç"
         })) {
             setShowHitDiceModal(true);
+        }
+    };
+
+    const applyShortRest = async (hitDiceCount: number) => {
+        if (!character) return;
+        setIsLevelingUp(true);
+        try {
+            // Determine which resources recharge on short rest
+            const mainClass = character?.classRef?.name || character?.className || '';
+            const allClassResources = CLASS_RESOURCES[mainClass] || [];
+            const mcResources = mcs.flatMap((mc: any) => CLASS_RESOURCES[mc.className || mc.classRef?.name] || []);
+            const shortRestResourceKeys = new Set(
+                [...allClassResources, ...mcResources]
+                    .filter(r => r.recharge === 'short')
+                    .map(r => r.key)
+            );
+
+            // Also add any custom resources with short recharge
+            (character.customResources || []).forEach((cr: any) => {
+                if (cr.recharge === 'short') shortRestResourceKeys.add(cr.id);
+            });
+
+            // Bardic Inspiration: short rest at Bard level 5+ (Font of Inspiration feature)
+            const bardLevel = allCls.includes('Bard')
+                ? (mainClass === 'Bard'
+                    ? character.level - mcs.reduce((a: number, mc: any) => a + (mc.level || 1), 0)
+                    : mcs.find((mc: any) => (mc.className || mc.classRef?.name) === 'Bard')?.level || 0)
+                : 0;
+            if (bardLevel >= 5) {
+                shortRestResourceKeys.add('bardic_inspiration');
+            }
+
+            // Build new resourcesUsed: clear short-rest keys
+            const newResourcesUsed = { ...resourcesUsed };
+            for (const key of shortRestResourceKeys) {
+                delete newResourcesUsed[key];
+            }
+
+            // Build new spellSlotsUsed: clear Warlock pact magic slots on short rest
+            let newSpellSlotsUsed = { ...spellSlotsUsed };
+            const allCls = [mainClass, ...mcs.map((mc: any) => mc.className || mc.classRef?.name || '')];
+            if (allCls.includes('Warlock')) {
+                // Warlock pact slots are at the warlock's pact level; clear them
+                if (warlockPact) {
+                    const pactKey = String(warlockPact.level);
+                    delete newSpellSlotsUsed[pactKey];
+                }
+            }
+
+            // Calculate HP from hit dice
+            let hpGain = 0;
+            if (hitDiceCount > 0) {
+                const mainLv = character.level - mcs.reduce((acc: number, mc: any) => acc + (mc.level || 1), 0);
+                const mainHD = character.classRef?.hit_die || 'd8';
+                const dFaces = parseInt(mainHD.replace('d', '')) || 8;
+                for (let i = 0; i < hitDiceCount; i++) {
+                    hpGain += Math.floor(Math.random() * dFaces) + 1 + mod(character.stats?.CON ?? 10);
+                }
+                hpGain = Math.max(0, hpGain);
+            }
+
+            const newHp = Math.min(character.maxHp, currentHp + hpGain);
+            const newHDUsed = Math.min(character.level, hitDiceUsed + hitDiceCount);
+
+            const updates: any = {
+                currentHp: newHp,
+                spellSlotsUsed: newSpellSlotsUsed,
+                resourcesUsed: newResourcesUsed,
+                hitDiceUsed: newHDUsed,
+            };
+
+            const res = await axios.put(`${API_URL}/api/characters/${character._id}`, updates, { headers: { 'Authorization': `Bearer ${token}` } });
+            setCharacter(res.data);
+            setCurrentHp(newHp);
+            setSpellSlotsUsed(newSpellSlotsUsed);
+            setResourcesUsed(newResourcesUsed);
+            setHitDiceUsed(newHDUsed);
+
+            const msgs = [];
+            if (hpGain > 0) msgs.push(`+${hpGain} HP`);
+            if (shortRestResourceKeys.size > 0) msgs.push(`${shortRestResourceKeys.size} kaynak yenilendi`);
+            if (allCls.includes('Warlock')) msgs.push('Pact Magic slotları yenilendi');
+            showToast('Kısa Dinlenme Tamamlandı ⏳', msgs.join(' • ') || 'Kısa dinlenme tamamlandı.', 'bg-slate-900 border-slate-500 text-slate-100');
+        } catch (e) {
+            console.error(e);
+            showToast('Hata', 'Dinlenme işlemi başarısız oldu.', 'bg-red-900 border-red-500 text-white');
+        } finally {
+            setIsLevelingUp(false);
+            setShowHitDiceModal(false);
+            setHitDiceToSpend(1);
         }
     };
     
@@ -2011,7 +2132,7 @@ const PlayerSheet = () => {
         if (!skill || !effectiveStats) return 0;
         const b = mod(effectiveStats[skill.ability as keyof typeof effectiveStats] || 10);
         const level = getSkillProficiencyLevel(skill);
-        const globalSkillBonus = getGlobalBonus('stat_bonus', 'SKILL');
+        const globalSkillBonus = getGlobalBonus('skill_bonus') + getGlobalBonus('stat_bonus', 'SKILL');
         
         if (level === 2) return b + (prof * 2) + globalSkillBonus;
         if (level === 1) return b + prof + globalSkillBonus;
@@ -2096,7 +2217,7 @@ const PlayerSheet = () => {
             });
         }
 
-        return baseAC + shieldAC + getGlobalBonus('ac_bonus', 'AC');
+        return baseAC + shieldAC + itemACBonus;
     };
 
     // ─── Class-aware Initiative ────────────────────────────────────────────────
@@ -2110,6 +2231,8 @@ const PlayerSheet = () => {
         // Specific class features
         if (clsName === 'Fighter' && character?.subclass === 'Samurai') bonus += wisMod;
         if (clsName === 'Wizard' && (character?.subclass === 'War Magic' || character?.subclass === 'Chronurgy')) bonus += intMod;
+        if (clsName === 'Ranger' && character?.subclass === 'Gloom Stalker') bonus += wisMod;
+        if (clsName === 'Rogue' && character?.subclass === 'Swashbuckler') bonus += mod(effectiveStats.CHA || 10);
 
         return bonus;
     };
@@ -2902,8 +3025,8 @@ const PlayerSheet = () => {
                         const showForClass = isSpellcaster(cls) || cls === 'Monk';
                         if (!showForClass) return null;
                         const abilityMod = mod(effectiveStats[ability as keyof typeof effectiveStats] || 10);
-                        const spellDC = 8 + prof + abilityMod + getGlobalBonus('stat_bonus', 'SPELL_DC');
-                        const spellAtk = prof + abilityMod + getGlobalBonus('stat_bonus', 'SPELL_ATTACK');
+                        const spellDC = 8 + prof + abilityMod + itemSpellDCBonus;
+                        const spellAtk = prof + abilityMod + itemSpellAtkBonus;
                         return (
                             <>
                                 <div className="flex items-center gap-2">
@@ -3079,8 +3202,7 @@ const PlayerSheet = () => {
                                 <div className="p-2 space-y-0.5">
                                     {SAVING_THROWS.map(s => {
                                         const hasSave = saves.includes(s);
-                                        const globalSaveBonus = getGlobalBonus('stat_bonus', 'SAVE');
-                                        const bonus = mod(effectiveStats[s as keyof typeof effectiveStats] || 10) + (hasSave ? prof : 0) + globalSaveBonus;
+                                        const bonus = mod(effectiveStats[s as keyof typeof effectiveStats] || 10) + (hasSave ? prof : 0) + itemSaveBonus + auraOfProtectionBonus;
                                         return (
                                             <div key={s} className="flex items-center gap-2 px-2 py-1.5 rounded hover:bg-gray-700/50">
                                                 <div className={`w-4 h-4 rounded-full border-2 flex items-center justify-center shrink-0 ${hasSave ? 'bg-green-500 border-green-400' : 'border-gray-600'}`}>
@@ -3103,7 +3225,20 @@ const PlayerSheet = () => {
                                     {(['Perception', 'Investigation', 'Insight'] as const).map(skillName => {
                                         const skill = SKILLS.find(s => s.name === skillName)!;
                                         const bonus = getSkillMod(skill);
-                                        const passiveScore = 10 + bonus;
+                                        
+                                        // Observant Feat: +5 to Passive Perception and Investigation
+                                        const hasObservant = actualFeats.some(f => f.toLowerCase() === 'observant');
+                                        let passiveBonus = (hasObservant && (skillName === 'Perception' || skillName === 'Investigation')) ? 5 : 0;
+                                        
+                                        // Advantage on checks adds +5 to passive score (e.g., Eyes of the Eagle)
+                                        const hasAdvantage = character?.inventory?.some((it: any) => 
+                                            it.isEquipped && it.effects?.some((eff: any) => 
+                                                eff.type === 'advantage' && (eff.stat?.toLowerCase() === skillName.toLowerCase() || eff.stat?.toLowerCase() === 'all')
+                                            )
+                                        );
+                                        if (hasAdvantage) passiveBonus += 5;
+
+                                        const passiveScore = 10 + bonus + passiveBonus;
                                         return (
                                             <div key={skillName} className="flex items-center justify-between px-3 py-2 rounded bg-gray-900/40 border border-gray-700/50 mb-1">
                                                 <span className="text-sm text-gray-400 font-bold">{skillName}</span>
@@ -3301,7 +3436,8 @@ const PlayerSheet = () => {
                                     {showFeatsUI && (
                                     <div className="p-3 space-y-2">
                                         {actualFeats.map((featName: string, idx: number) => {
-                                            const featDetails = (libFeats || []).find(f => f.name === featName) || (ALL_FEATS as any[]).find(f => f.name === featName);
+                                            const lowerFeatName = (featName || '').toLowerCase();
+                                            const featDetails = (libFeats || []).find(f => (f.name || '').toLowerCase() === lowerFeatName || (f.name_tr || '').toLowerCase() === lowerFeatName) || (ALL_FEATS as any[]).find(f => (f.name || '').toLowerCase() === lowerFeatName || ((f as any).name_tr || '').toLowerCase() === lowerFeatName);
                                             const isExpanded = expandedFeat === featName;
                                             return (
                                                 <div key={idx}
@@ -3569,20 +3705,29 @@ const PlayerSheet = () => {
                         const atkAbility = isRanged ? 'DEX' : (isFinesse ? (mods.DEX > mods.STR ? 'DEX' : 'STR') : 'STR');
                         const abilityMod = mods[atkAbility as keyof typeof mods] || 0;
 
-                        // Get weapon-specific bonus (e.g. +1 weapon)
-                        let weaponBonus = 0;
+                        // Get weapon-specific bonus (e.g. +1 weapon) from its own effects
+                        let weaponAtkBonus = 0;
+                        let weaponDmgBonus = 0;
                         if (w.effects && Array.isArray(w.effects)) {
                             w.effects.forEach((eff: any) => {
-                                if (eff && eff.type === 'item_bonus' && typeof eff.value === 'number') weaponBonus += eff.value;
+                                if (eff) {
+                                    if (eff.type === 'attack_bonus' || eff.type === 'item_bonus') weaponAtkBonus += (eff.value || 0);
+                                    if (eff.type === 'damage_bonus') weaponDmgBonus += (eff.value || 0);
+                                }
                             });
                         }
 
-                        // Global bonuses from other items/features
-                        const globalAtkBonus = (isRanged && character.fightingStyle === 'Archery') ? 2 : 0;
-                        const globalDmgBonus = getGlobalBonus('damage_bonus', isRanged ? 'ranged' : 'melee');
+                        // Global bonuses from OTHER items/features (total minus this weapon's own bonus)
+                        const rawGlobalAtk = getGlobalBonus('attack_bonus');
+                        const otherItemsAtkBonus = Math.max(0, rawGlobalAtk - weaponAtkBonus);
+                        
+                        const archeryBonus = (isRanged && (character.fightingStyle === 'Archery' || (character.fightingStyles || []).includes('Archery'))) ? 2 : 0;
+                        
+                        const rawGlobalDmg = getGlobalBonus('damage_bonus', isRanged ? 'ranged' : 'melee');
+                        const otherItemsDmgBonus = Math.max(0, rawGlobalDmg - weaponDmgBonus);
 
-                        const toHit = prof + abilityMod + weaponBonus + globalAtkBonus;
-                        const damageMod = abilityMod + weaponBonus + globalDmgBonus;
+                        const toHit = prof + abilityMod + weaponAtkBonus + otherItemsAtkBonus + archeryBonus;
+                        const damageMod = abilityMod + weaponDmgBonus + otherItemsDmgBonus;
 
                         // Default damage values if not in note
                         let damage = "1d6";
@@ -5207,7 +5352,7 @@ const PlayerSheet = () => {
                             </div>
 
                             <div className="flex gap-3">
-                                <button onClick={() => { handleShortRest(); setShowHitDiceModal(false); }} className="flex-1 bg-green-700 hover:bg-green-600 text-white font-bold py-3 rounded-lg border border-green-500 shadow-sm transition">
+                                <button onClick={() => applyShortRest(hitDiceToSpend)} className="flex-1 bg-green-700 hover:bg-green-600 text-white font-bold py-3 rounded-lg border border-green-500 shadow-sm transition">
                                     Finish Rest
                                 </button>
                             </div>

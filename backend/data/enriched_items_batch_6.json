@@ -16,7 +16,8 @@
                 "value": "Arcane Gate",
                 "cost": "3 charges"
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Deck Of Wild Cards",
@@ -60,8 +61,37 @@
             {
                 "type": "curse",
                 "value": "demon_disadvantage"
+            },
+            {
+                "type": "attack_bonus",
+                "value": 1
+            },
+            {
+                "type": "damage_bonus",
+                "value": 1
+            },
+            {
+                "type": "disadvantage",
+                "skill": "stealth"
+            },
+            {
+                "type": "ac_bonus",
+                "value": 1
+            },
+            {
+                "type": "attack_bonus",
+                "value": 1
+            },
+            {
+                "type": "damage_bonus",
+                "value": 1
+            },
+            {
+                "type": "stealth_disadvantage",
+                "value": true
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Devastation Orb",
@@ -100,8 +130,18 @@
             {
                 "type": "fold_space",
                 "value": 60
+            },
+            {
+                "type": "save_bonus",
+                "value": 1
+            },
+            {
+                "type": "stat_bonus",
+                "stat": "STR",
+                "value": 1
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Dispelling Stone",
@@ -168,7 +208,9 @@
                 "type": "restore_ki",
                 "value": "martial_arts_die"
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a monk"
     },
     {
         "name": "Dragon's Wrath Weapon",
@@ -238,8 +280,17 @@
                 "type": "spell_grant",
                 "value": "Sunbeam",
                 "dc": 15
+            },
+            {
+                "type": "attack_bonus",
+                "value": 2
+            },
+            {
+                "type": "damage_bonus",
+                "value": 2
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Dwarven Plate",
@@ -255,6 +306,18 @@
             {
                 "type": "resist_forced_movement",
                 "value": 10
+            },
+            {
+                "type": "disadvantage",
+                "skill": "stealth"
+            },
+            {
+                "type": "ac_bonus",
+                "value": 2
+            },
+            {
+                "type": "stealth_disadvantage",
+                "value": true
             }
         ]
     },
@@ -277,8 +340,18 @@
                 "type": "extra_damage_on_thrown",
                 "value": "1d8",
                 "vs_giant": "2d8"
+            },
+            {
+                "type": "attack_bonus",
+                "value": 3
+            },
+            {
+                "type": "damage_bonus",
+                "value": 3
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a dwarf"
     },
     {
         "name": "Dyrrn's Tentacle Whip",
@@ -303,8 +376,17 @@
             {
                 "type": "stun_on_crit",
                 "value": true
+            },
+            {
+                "type": "attack_bonus",
+                "value": 2
+            },
+            {
+                "type": "damage_bonus",
+                "value": 2
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Efreeti Bottle",
@@ -339,8 +421,21 @@
                 "type": "teleport_escape",
                 "value": 60,
                 "cost": "3 charges"
+            },
+            {
+                "type": "damage_bonus",
+                "value": 1
+            },
+            {
+                "type": "attack_bonus",
+                "value": 1
+            },
+            {
+                "type": "damage_bonus",
+                "value": 1
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Far Gear",
@@ -361,8 +456,18 @@
             {
                 "type": "summon_aberration",
                 "max_cr": 4
+            },
+            {
+                "type": "save_bonus",
+                "value": 1
+            },
+            {
+                "type": "stat_bonus",
+                "stat": "CHA",
+                "value": 1
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Fate Cutter Shears",
@@ -380,7 +485,8 @@
                 "type": "expanded_crit_range_on_target",
                 "value": "19-20"
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Fate Dealer's Deck",
@@ -400,8 +506,18 @@
             {
                 "type": "hit_die_healing_or_damage",
                 "value": "radiant"
+            },
+            {
+                "type": "spell_attack_bonus",
+                "value": 1
+            },
+            {
+                "type": "spell_dc_bonus",
+                "value": 1
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a cleric or paladin"
     },
     {
         "name": "Obsidian Steed Figurine",
@@ -449,7 +565,9 @@
                 "type": "castle_control",
                 "value": true
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a spellcaster"
     },
     {
         "name": "Fool's Blade",
@@ -535,7 +653,8 @@
                 "cost": "1 charge",
                 "duration": "until end of next turn"
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Guild Keyrune",
@@ -570,8 +689,25 @@
                 "type": "conditional_damage_bonus",
                 "value": 3,
                 "condition": "inside_rune_circle"
+            },
+            {
+                "type": "attack_bonus",
+                "value": 3
+            },
+            {
+                "type": "damage_bonus",
+                "value": 3
+            },
+            {
+                "type": "attack_bonus",
+                "value": 3
+            },
+            {
+                "type": "damage_bonus",
+                "value": 3
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Helm of Brilliance",
@@ -596,8 +732,13 @@
                     "fire",
                     "radiant"
                 ]
+            },
+            {
+                "type": "resistance",
+                "damageType": "fire"
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Helm of Devil Command",
@@ -620,7 +761,9 @@
                 "dc": 21,
                 "restrictions": "devils only"
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a creature that can speak Infernal"
     },
     {
         "name": "Heward's Hireling Armor",
@@ -641,8 +784,13 @@
                 "type": "extradimensional_storage",
                 "value": 6,
                 "capacity_per_pocket": 20
+            },
+            {
+                "type": "ac_bonus",
+                "value": 1
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Horn of Valhalla",
@@ -669,7 +817,8 @@
                 "type": "ignore_magical_restrictions",
                 "value": "Undermountain"
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Horseshoes of a Zephyr",
@@ -712,8 +861,13 @@
                 "value": "1d10",
                 "damage_type": "necrotic",
                 "condition": "target_below_max_hp"
+            },
+            {
+                "type": "ac_bonus",
+                "value": 1
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Wand of Binding",
@@ -738,7 +892,9 @@
                 "cost": 5,
                 "dc": 17
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a spellcaster"
     },
     {
         "name": "Wand of Enemy Detection",
@@ -756,7 +912,8 @@
                 "type": "charges",
                 "value": 7
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Wand of Fear",
@@ -781,7 +938,8 @@
                 "cost": 2,
                 "dc": 15
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Wand of Fireballs",
@@ -799,7 +957,9 @@
                 "value": "Fireball",
                 "dc": 15
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a spellcaster"
     },
     {
         "name": "Wand of Lightning Bolts",
@@ -817,7 +977,9 @@
                 "value": "Lightning Bolt",
                 "dc": 15
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a spellcaster"
     },
     {
         "name": "Wand of Paralysis",
@@ -836,7 +998,9 @@
                 "dc": 15,
                 "range": 60
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a spellcaster"
     },
     {
         "name": "Wand of the War Mage",
@@ -852,8 +1016,14 @@
             {
                 "type": "ignore_half_cover",
                 "value": true
+            },
+            {
+                "type": "spell_attack_bonus",
+                "value": 1
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a spellcaster"
     },
     {
         "name": "Wand of Viscid Globs",
@@ -872,7 +1042,8 @@
                 "range": 60,
                 "duration": "1 hour"
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Wand of Winter",
@@ -896,7 +1067,8 @@
                 "cost": 4,
                 "dc": 15
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Wand of Wonder",
@@ -914,7 +1086,9 @@
                 "cost": 1,
                 "dc": 15
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a spellcaster"
     },
     {
         "name": "War Horn of Valor",
@@ -932,6 +1106,14 @@
                 "value": 1,
                 "radius": 30,
                 "charges": 1
+            },
+            {
+                "type": "ac_bonus",
+                "value": 1
+            },
+            {
+                "type": "ac_bonus",
+                "value": 1
             }
         ]
     },
@@ -951,8 +1133,25 @@
                 "to": "Longsword +1",
                 "damage": "1d10",
                 "damage_type": "force"
+            },
+            {
+                "type": "attack_bonus",
+                "value": 1
+            },
+            {
+                "type": "damage_bonus",
+                "value": 1
+            },
+            {
+                "type": "attack_bonus",
+                "value": 1
+            },
+            {
+                "type": "damage_bonus",
+                "value": 1
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Wayfarer's Boots",
@@ -974,7 +1173,8 @@
                 "value": "Expeditious Retreat",
                 "charges": 1
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Weapon of Certain Death",
@@ -1003,7 +1203,8 @@
                 "hp": 50,
                 "ac": 15
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Wings of Flying",
@@ -1017,7 +1218,8 @@
                 "value": 60,
                 "duration": "1 hour"
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Woodcutter's Axe",
@@ -1038,6 +1240,14 @@
                 "type": "extra_damage_vs_plants",
                 "value": "2d6",
                 "damage_type": "slashing"
+            },
+            {
+                "type": "attack_bonus",
+                "value": 1
+            },
+            {
+                "type": "damage_bonus",
+                "value": 1
             }
         ]
     },
@@ -1055,6 +1265,27 @@
             {
                 "type": "magical_unarmed_strikes",
                 "value": true
+            },
+            {
+                "type": "attack_bonus",
+                "value": 1
+            },
+            {
+                "type": "damage_bonus",
+                "value": 1
+            },
+            {
+                "type": "attack_bonus",
+                "value": 1
+            },
+            {
+                "type": "damage_bonus",
+                "value": 1
+            },
+            {
+                "type": "stat_bonus",
+                "stat": "STR",
+                "value": 1
             }
         ]
     },
@@ -1134,8 +1365,18 @@
             {
                 "type": "temporary_cantrip_grant",
                 "duration": "8 hours"
+            },
+            {
+                "type": "spell_attack_bonus",
+                "value": 1
+            },
+            {
+                "type": "spell_dc_bonus",
+                "value": 1
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by an artificer"
     },
     {
         "name": "Amethyst Lodestone",
@@ -1163,7 +1404,8 @@
                 "cost": 3,
                 "dc": 18
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Ammunition, +1, +2, or +3",
@@ -1199,7 +1441,8 @@
                 "cost": 1,
                 "dc": 16
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Amulet of the Devout",
@@ -1219,8 +1462,18 @@
             {
                 "type": "free_channel_divinity",
                 "charges": 1
+            },
+            {
+                "type": "spell_attack_bonus",
+                "value": 1
+            },
+            {
+                "type": "spell_dc_bonus",
+                "value": 1
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a cleric or paladin"
     },
     {
         "name": "Amulet of the Planes",
@@ -1233,7 +1486,8 @@
                 "type": "plane_shift_check",
                 "dc": 15
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Animated Shield",
@@ -1248,7 +1502,8 @@
                 "hands_free": true,
                 "duration": "1 minute"
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Antimagic Armor",
@@ -1300,8 +1555,18 @@
             {
                 "type": "arcane_recovery_bonus",
                 "value": 1
+            },
+            {
+                "type": "spell_attack_bonus",
+                "value": 1
+            },
+            {
+                "type": "spell_dc_bonus",
+                "value": 1
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a wizard"
     },
     {
         "name": "Arcane Propulsion Arm",
@@ -1319,7 +1584,9 @@
                 "type": "thrown_fist_attack",
                 "range": "20/60"
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a creature missing a hand or an arm"
     },
     {
         "name": "Armor, +1, +2, or +3",
@@ -1468,6 +1735,14 @@
                 "value": "6d6",
                 "damage_type": "necrotic",
                 "dc": 15
+            },
+            {
+                "type": "attack_bonus",
+                "value": 1
+            },
+            {
+                "type": "damage_bonus",
+                "value": 1
             }
         ]
     },
@@ -1496,7 +1771,8 @@
                 "type": "aoe_magical_attacks",
                 "radius": 300
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Belt of Giant Strength",
@@ -1550,7 +1826,8 @@
                 "level": 4,
                 "dc": 16
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Bloodaxe",
@@ -1575,8 +1852,17 @@
             {
                 "type": "on_kill_temp_hp",
                 "value": 10
+            },
+            {
+                "type": "attack_bonus",
+                "value": 2
+            },
+            {
+                "type": "damage_bonus",
+                "value": 2
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Bloodseeker Ammunition",
@@ -1627,8 +1913,18 @@
                 "type": "restore_sorcery_points",
                 "value": 5,
                 "charges": 1
+            },
+            {
+                "type": "spell_attack_bonus",
+                "value": 1
+            },
+            {
+                "type": "spell_dc_bonus",
+                "value": 1
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a sorcerer"
     },
     {
         "name": "Bobbing Lily Pad",
@@ -1645,7 +1941,8 @@
                 "type": "transport_capacity",
                 "value": 300
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Bow Of Melodies",
@@ -1684,7 +1981,8 @@
                 "type": "curse",
                 "value": "self_petrification_risk"
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Candle of Invocation",
@@ -1698,7 +1996,8 @@
                 "radius": 30,
                 "duration": "4 hours"
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Cape of Enlargement",
@@ -1715,7 +2014,8 @@
                 "type": "enlarge_reaction",
                 "cost": 1
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Carpet of Flying",
@@ -1747,7 +2047,9 @@
                 "value": "Raise Dead",
                 "charges": 1
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a druid or warlock"
     },
     {
         "name": "Chime of Exile",
@@ -1777,8 +2079,17 @@
             {
                 "type": "time_rewind_reaction",
                 "charges": 1
+            },
+            {
+                "type": "save_bonus",
+                "value": 1
+            },
+            {
+                "type": "save_bonus",
+                "value": 1
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Cloak of Arachnida",
@@ -1798,8 +2109,13 @@
             {
                 "type": "spider_climb",
                 "value": true
+            },
+            {
+                "type": "resistance",
+                "damageType": "poison"
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Clockwork Armor",
@@ -1830,7 +2146,8 @@
                 "value": "Teleport",
                 "charges": 1
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Constantori's Portrait",
@@ -1843,7 +2160,8 @@
                 "type": "visual_gaze_effect",
                 "value": "variable"
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Adorned Weapon",

@@ -174,7 +174,8 @@
                 "limit": 6,
                 "trigger_range": 5
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Tankard of Plenty",
@@ -365,7 +366,9 @@
                 "type": "combined_attunement",
                 "value": true
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a warforged"
     },
     {
         "name": "Adamantine Armor",
@@ -472,8 +475,18 @@
                 "type": "temporary_cantrip",
                 "duration": "8_hours",
                 "recharge": "dawn"
+            },
+            {
+                "type": "spell_attack_bonus",
+                "value": 1
+            },
+            {
+                "type": "spell_dc_bonus",
+                "value": 1
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by an artificer"
     },
     {
         "name": "Ammunition, +1, +2, or +3",
@@ -493,6 +506,11 @@
             {
                 "type": "expendable_on_hit",
                 "value": true
+            },
+            {
+                "type": "stat_bonus",
+                "stat": "STR",
+                "value": 1
             }
         ]
     },
@@ -511,7 +529,8 @@
                 "type": "scrying_immunity",
                 "value": true
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Amulet of the Devout",
@@ -531,8 +550,18 @@
             {
                 "type": "free_channel_divinity",
                 "recharge": "dawn"
+            },
+            {
+                "type": "spell_attack_bonus",
+                "value": 1
+            },
+            {
+                "type": "spell_dc_bonus",
+                "value": 1
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a cleric or paladin"
     },
     {
         "name": "Amulet of the Drunkard",
@@ -566,8 +595,18 @@
             {
                 "type": "arcane_recovery_bonus",
                 "value": 1
+            },
+            {
+                "type": "spell_attack_bonus",
+                "value": 1
+            },
+            {
+                "type": "spell_dc_bonus",
+                "value": 1
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a wizard"
     },
     {
         "name": "Armor Of Fungal Spores",
@@ -742,7 +781,8 @@
                 "type": "cursed",
                 "value": "blindness_on_failure"
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Blood of the Lycanthrope Antidote",
@@ -767,8 +807,25 @@
             {
                 "type": "temp_hp_on_kill",
                 "value": "2d6"
+            },
+            {
+                "type": "attack_bonus",
+                "value": 2
+            },
+            {
+                "type": "damage_bonus",
+                "value": 2
+            },
+            {
+                "type": "attack_bonus",
+                "value": 2
+            },
+            {
+                "type": "damage_bonus",
+                "value": 2
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Bloodrage Greataxe",
@@ -786,6 +843,22 @@
                 "type": "conditional_damage_bonus",
                 "value": 2,
                 "condition": "hp_below_half"
+            },
+            {
+                "type": "attack_bonus",
+                "value": 2
+            },
+            {
+                "type": "damage_bonus",
+                "value": 2
+            },
+            {
+                "type": "attack_bonus",
+                "value": 2
+            },
+            {
+                "type": "damage_bonus",
+                "value": 2
             }
         ]
     },
@@ -808,8 +881,18 @@
                 "type": "sorcery_points_recovery",
                 "value": 5,
                 "recharge": "dawn"
+            },
+            {
+                "type": "spell_attack_bonus",
+                "value": 1
+            },
+            {
+                "type": "spell_dc_bonus",
+                "value": 1
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a sorcerer"
     },
     {
         "name": "Boomerang Shield",
@@ -829,7 +912,8 @@
                 "range": "20/60",
                 "returning": true
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Boots of Elvenkind",
@@ -1006,7 +1090,9 @@
                 "skill": "Arcana",
                 "recharge": "dawn"
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a wizard"
     },
     {
         "name": "Heward's Handy Spice Pouch",
@@ -1060,7 +1146,8 @@
                 "duration": "24_hours",
                 "recharge": "dawn"
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Imbued Wood Focus",
@@ -1125,7 +1212,9 @@
                 ],
                 "capacity": 3
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a creature with the Mark of Warding"
     },
     {
         "name": "Lantern of Tracking",
@@ -1191,7 +1280,8 @@
                 "dc": 13,
                 "recharge": "dawn"
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Medal of Muscle",
@@ -1231,6 +1321,10 @@
                 "type": "one_time_ac_buff",
                 "value": 5,
                 "trigger": "reaction"
+            },
+            {
+                "type": "ac_bonus",
+                "value": 5
             }
         ]
     },
@@ -1583,7 +1677,9 @@
                 "type": "weapon_as_focus",
                 "value": true
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a spellcaster"
     },
     {
         "name": "Scribe's Pen",
@@ -1601,6 +1697,8 @@
                 "value": 1,
                 "unit": "minute_per_level"
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a creature with the Mark of Scribing"
     }
 ]

@@ -14,7 +14,8 @@
                 "type": "audio_sharing",
                 "duration": "1_hour"
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Staff of the Adder",
@@ -33,7 +34,9 @@
                 "damage": "3d6",
                 "dc": 15
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a cleric, druid, or warlock"
     },
     {
         "name": "Staff of the Python",
@@ -47,7 +50,9 @@
                 "value": "Giant Constrictor Snake",
                 "on_death": "destroyed"
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a cleric, druid, or warlock"
     },
     {
         "name": "Stone of Good Luck (Luckstone)",
@@ -88,8 +93,17 @@
             {
                 "type": "cursed",
                 "value": "unwilling_to_part"
+            },
+            {
+                "type": "save_bonus",
+                "value": -2
+            },
+            {
+                "type": "save_bonus",
+                "value": -2
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Storm Boomerang",
@@ -164,7 +178,8 @@
                 "condition": "swimming_creatures_only",
                 "dc": 15
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Wand of Entangle",
@@ -182,7 +197,9 @@
                 "value": "Entangle",
                 "dc": 13
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a spellcaster"
     },
     {
         "name": "Wand of Magic Detection",
@@ -250,8 +267,18 @@
             {
                 "type": "ignore_cover",
                 "value": "half_cover"
+            },
+            {
+                "type": "spell_attack_bonus",
+                "value": 1
+            },
+            {
+                "type": "ac_bonus",
+                "value": 1
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a spellcaster"
     },
     {
         "name": "Wand of Web",
@@ -269,7 +296,9 @@
                 "value": "Web",
                 "dc": 15
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a spellcaster"
     },
     {
         "name": "Weapon, +1, +2, or +3",
@@ -285,6 +314,11 @@
             {
                 "type": "damage_bonus",
                 "rarity_scaled": true
+            },
+            {
+                "type": "stat_bonus",
+                "stat": "STR",
+                "value": 1
             }
         ]
     },
@@ -383,7 +417,8 @@
                 "duration": "4_hours_pool",
                 "speed": "walking_speed"
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Wingwear",
@@ -401,7 +436,8 @@
                 "speed": 30,
                 "mechanic": "gliding"
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Witherbloom Primer",
@@ -426,7 +462,9 @@
                 "type": "spell_choice_daily",
                 "level": 1
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a spellcaster"
     },
     {
         "name": "Wraps Of Unarmed Prowess",
@@ -446,6 +484,19 @@
             {
                 "type": "grant_magic_weapon",
                 "value": "unarmed"
+            },
+            {
+                "type": "attack_bonus",
+                "value": 1
+            },
+            {
+                "type": "damage_bonus",
+                "value": 1
+            },
+            {
+                "type": "stat_bonus",
+                "stat": "STR",
+                "value": 1
             }
         ]
     },
@@ -499,7 +550,9 @@
                 "type": "object_transformation",
                 "value": "gold_value_limited"
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a wizard"
     },
     {
         "name": "All-Purpose Tool",
@@ -523,8 +576,18 @@
             {
                 "type": "transform_tool",
                 "value": "any_artisan_tool"
+            },
+            {
+                "type": "spell_attack_bonus",
+                "value": 1
+            },
+            {
+                "type": "spell_dc_bonus",
+                "value": 1
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by an artificer"
     },
     {
         "name": "Ammunition, +1, +2, or +3",
@@ -554,8 +617,19 @@
                 "type": "stat_override",
                 "stat": "Constitution",
                 "value": 19
+            },
+            {
+                "type": "stat_set",
+                "stat": "CON",
+                "value": 19
+            },
+            {
+                "type": "stat_set",
+                "stat": "CON",
+                "value": 19
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Amulet of Protection from Turning",
@@ -573,7 +647,8 @@
                 "value": "turn_undead",
                 "charges": 3
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Amulet of the Devout",
@@ -593,8 +668,18 @@
             {
                 "type": "free_channel_divinity",
                 "charges": 1
+            },
+            {
+                "type": "spell_attack_bonus",
+                "value": 1
+            },
+            {
+                "type": "spell_dc_bonus",
+                "value": 1
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a cleric or paladin"
     },
     {
         "name": "Arcane Grimoire",
@@ -614,8 +699,18 @@
             {
                 "type": "arcane_recovery_bonus",
                 "value": 1
+            },
+            {
+                "type": "spell_attack_bonus",
+                "value": 1
+            },
+            {
+                "type": "spell_dc_bonus",
+                "value": 1
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a wizard"
     },
     {
         "name": "Armor, +1, +2, or +3",
@@ -627,6 +722,11 @@
             {
                 "type": "ac_bonus",
                 "rarity_scaled": true
+            },
+            {
+                "type": "stat_bonus",
+                "stat": "STR",
+                "value": 1
             }
         ]
     },
@@ -678,8 +778,17 @@
             {
                 "type": "interpose_defense",
                 "range": 5
+            },
+            {
+                "type": "ac_bonus",
+                "value": 2
+            },
+            {
+                "type": "ac_bonus",
+                "value": 2
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Astral Shard",
@@ -696,7 +805,9 @@
                 "type": "metamagic_trigger",
                 "effect": "teleport_30ft"
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a sorcerer"
     },
     {
         "name": "Astromancy Archive",
@@ -722,7 +833,9 @@
                 "value": "1d4_bonus_or_penalty",
                 "range": 30
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a wizard"
     },
     {
         "name": "Atlas of Endless Horizons",
@@ -748,7 +861,9 @@
                 "distance": 10,
                 "trigger": "on_hit"
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a wizard"
     },
     {
         "name": "Badge of the Watch",
@@ -761,8 +876,13 @@
                 "type": "ac_bonus",
                 "value": 2,
                 "condition": "no_shield"
+            },
+            {
+                "type": "ac_bonus",
+                "value": 2
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Bag of Beans",
@@ -796,8 +916,17 @@
             {
                 "type": "ranged_attack_disadvantage",
                 "range": 20
+            },
+            {
+                "type": "ac_bonus",
+                "value": 1
+            },
+            {
+                "type": "ac_bonus",
+                "value": 1
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Barrier Tattoo",
@@ -831,8 +960,13 @@
             {
                 "type": "knockback_bonus",
                 "distance": 10
+            },
+            {
+                "type": "ac_bonus",
+                "value": 1
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Bead of Force",
@@ -871,7 +1005,9 @@
                 "type": "spell_grant",
                 "value": "Protection from Evil and Good"
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a druid or warlock"
     },
     {
         "name": "Belt of Dwarvenkind",
@@ -896,8 +1032,23 @@
             {
                 "type": "resistance",
                 "value": "poison"
+            },
+            {
+                "type": "stat_bonus",
+                "stat": "CON",
+                "value": 2
+            },
+            {
+                "type": "stat_bonus",
+                "stat": "CON",
+                "value": 2
+            },
+            {
+                "type": "resistance",
+                "damageType": "poison"
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Belt of Giant Strength",
@@ -1091,7 +1242,9 @@
                 "type": "spell_choice_daily",
                 "level": 1
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a spellcaster"
     },
     {
         "name": "Propeller Helm",
@@ -1108,7 +1261,9 @@
                 "type": "destruction_risk",
                 "value": "50_percent_on_end"
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a small humanoid"
     },
     {
         "name": "Psi Crystal",
@@ -1121,7 +1276,9 @@
                 "type": "telepathy",
                 "range_calc": "intelligence_based"
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a creature with an intelligence score of 3 or higher"
     },
     {
         "name": "Pyroconverger",
@@ -1140,7 +1297,8 @@
                 "type": "malfunction_risk",
                 "value": "cumulative_d10"
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Quandrix Primer",
@@ -1165,7 +1323,9 @@
                 "type": "spell_choice_daily",
                 "level": 1
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a spellcaster"
     },
     {
         "name": "Quiver of Ehlonna",
@@ -1198,8 +1358,18 @@
             {
                 "type": "recharge_feature",
                 "value": "Bardic Inspiration"
+            },
+            {
+                "type": "spell_attack_bonus",
+                "value": 1
+            },
+            {
+                "type": "spell_dc_bonus",
+                "value": 1
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a bard"
     },
     {
         "name": "Ring of Jumping",
@@ -1213,7 +1383,8 @@
                 "value": "Jump",
                 "at_will": true
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Ring of Mind Shielding",
@@ -1230,7 +1401,8 @@
                 "type": "soul_storage",
                 "trigger": "on_death"
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Ring of Obscuring",
@@ -1248,7 +1420,8 @@
                 "value": "Fog Cloud",
                 "no_concentration": true
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Ring Of Puzzler's Wit",
@@ -1299,7 +1472,8 @@
                 "type": "language_transcendence",
                 "value": "understanding_only"
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Ring of Truth Telling",
@@ -1312,7 +1486,8 @@
                 "type": "advantage",
                 "value": "Insight_to_detect_lies"
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Ring of Warmth",
@@ -1328,8 +1503,13 @@
             {
                 "type": "immune_condition",
                 "value": "extreme_cold"
+            },
+            {
+                "type": "resistance",
+                "damageType": "cold"
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Ring of Water Walking",
@@ -1370,7 +1550,8 @@
                 "value": "Giant Poisonous Snake",
                 "charges": "1d4+3"
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Robe of Useful Items",
@@ -1402,7 +1583,8 @@
                 "range": 60,
                 "dc": 13
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Rod of the Pact Keeper, +1, +2, +3",
@@ -1422,8 +1604,22 @@
             {
                 "type": "recharge_spell_slot",
                 "value": 1
+            },
+            {
+                "type": "spell_attack_bonus",
+                "value": 1
+            },
+            {
+                "type": "spell_dc_bonus",
+                "value": 1
+            },
+            {
+                "type": "ac_bonus",
+                "value": 1
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a warlock"
     },
     {
         "name": "Rope of Climbing",
@@ -1549,6 +1745,11 @@
             {
                 "type": "no_stealth_disadvantage",
                 "value": true
+            },
+            {
+                "type": "stat_bonus",
+                "stat": "DEX",
+                "value": 2
             }
         ]
     },
@@ -1570,8 +1771,17 @@
             {
                 "type": "siege_weapon",
                 "value": "auto_crit_vs_objects"
+            },
+            {
+                "type": "attack_bonus",
+                "value": 1
+            },
+            {
+                "type": "damage_bonus",
+                "value": 1
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Shield, +1, +2, +3",
@@ -1604,8 +1814,13 @@
             {
                 "type": "initiative_override",
                 "value": 1
+            },
+            {
+                "type": "ac_bonus",
+                "value": 1
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Silverquill Primer",
@@ -1630,7 +1845,9 @@
                 "type": "spell_choice_daily",
                 "level": 1
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a spellcaster"
     },
     {
         "name": "Skyblinder Staff",
@@ -1651,8 +1868,25 @@
                 "type": "reaction_blind",
                 "condition": "vs_flying",
                 "dc": 15
+            },
+            {
+                "type": "damage_bonus",
+                "value": 1
+            },
+            {
+                "type": "attack_bonus",
+                "value": 1
+            },
+            {
+                "type": "damage_bonus",
+                "value": 1
+            },
+            {
+                "type": "spell_attack_bonus",
+                "value": 1
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Sling Of Giant Felling",
@@ -1683,7 +1917,8 @@
                 "type": "spider_climb",
                 "value": true
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Smokepowder",

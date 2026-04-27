@@ -29,7 +29,8 @@
                 "value": "Identify",
                 "charges_per_day": 1
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Guardian Emblem",
@@ -47,7 +48,9 @@
                 "range": 30,
                 "trigger": "reaction"
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a cleric or paladin"
     },
     {
         "name": "Guild Keyrune",
@@ -101,8 +104,17 @@
             {
                 "type": "cursed",
                 "value": "werewolf_lycanthropy"
+            },
+            {
+                "type": "save_bonus",
+                "value": 1
+            },
+            {
+                "type": "save_bonus",
+                "value": 1
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Hat of Disguise",
@@ -116,7 +128,8 @@
                 "value": "Disguise Self",
                 "at_will": true
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Headband of Intellect",
@@ -129,8 +142,19 @@
                 "type": "stat_override",
                 "stat": "Intelligence",
                 "value": 19
+            },
+            {
+                "type": "stat_set",
+                "stat": "INT",
+                "value": 19
+            },
+            {
+                "type": "stat_set",
+                "stat": "INT",
+                "value": 19
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Hellfire Weapon",
@@ -187,7 +211,8 @@
                 "charges_per_day": 1,
                 "dc": 13
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Helm of Underwater Action",
@@ -208,7 +233,8 @@
                 "type": "swim_speed",
                 "value": 30
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "House Of Cards",
@@ -287,6 +313,19 @@
             {
                 "type": "grant_magic_weapon",
                 "value": "unarmed_and_natural"
+            },
+            {
+                "type": "attack_bonus",
+                "value": 1
+            },
+            {
+                "type": "damage_bonus",
+                "value": 1
+            },
+            {
+                "type": "stat_bonus",
+                "stat": "STR",
+                "value": 1
             }
         ]
     },
@@ -380,7 +419,8 @@
                 "type": "cursed",
                 "value": "symbiotic_bond"
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Lorehold Primer",
@@ -405,7 +445,9 @@
                 "type": "spell_choice_daily",
                 "level": 1
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a spellcaster"
     },
     {
         "name": "Mariner's Armor",
@@ -458,7 +500,8 @@
                 "value": "Detect Thoughts",
                 "dc": 13
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Mind Carapace Armor",
@@ -527,7 +570,9 @@
                 "dc_base": 10,
                 "stat": "Arcana"
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a sorcerer, warlock, or wizard"
     },
     {
         "name": "Moon Sickle",
@@ -555,8 +600,30 @@
             {
                 "type": "healing_bonus",
                 "value": "1d4"
+            },
+            {
+                "type": "damage_bonus",
+                "value": 1
+            },
+            {
+                "type": "attack_bonus",
+                "value": 1
+            },
+            {
+                "type": "damage_bonus",
+                "value": 1
+            },
+            {
+                "type": "spell_attack_bonus",
+                "value": 1
+            },
+            {
+                "type": "spell_dc_bonus",
+                "value": 1
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a druid or ranger"
     },
     {
         "name": "Mummy Rot Antidote",
@@ -589,7 +656,9 @@
                 "type": "bonus_action_hide",
                 "condition": "lightly_obscured"
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a druid or ranger"
     },
     {
         "name": "Necklace of Adaptation",
@@ -606,7 +675,8 @@
                 "type": "advantage",
                 "value": "saving_throws_vs_gas_and_breath"
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Night Caller",
@@ -667,7 +737,9 @@
                 "limit": 3,
                 "recharge": "dawn"
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a spellcaster"
     },
     {
         "name": "Periapt of Health",
@@ -698,7 +770,8 @@
                 "target": "hit_dice",
                 "value": 2
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Philter of Love",
@@ -752,7 +825,8 @@
                 "type": "passive_protection",
                 "value": "rats_indifferent"
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Piwafwi",
@@ -805,8 +879,17 @@
                 "value": "Knight_spirit",
                 "duration": "1_minute",
                 "recharge": "dawn"
+            },
+            {
+                "type": "disadvantage",
+                "skill": "stealth"
+            },
+            {
+                "type": "stealth_disadvantage",
+                "value": true
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Portal Compass",
@@ -885,7 +968,8 @@
                 "type": "jump_multiplier",
                 "value": 3
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Boots of the Winterlands",
@@ -905,8 +989,13 @@
             {
                 "type": "cold_weather_protection",
                 "value": "full"
+            },
+            {
+                "type": "resistance",
+                "damageType": "cold"
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Bottled Breath",
@@ -945,7 +1034,8 @@
                 "value": 2,
                 "condition": "ranged_bows"
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Brooch of Living Essence",
@@ -959,7 +1049,8 @@
                 "creature_type": "humanoid",
                 "alignment": "neutral"
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Brooch of Shielding",
@@ -975,8 +1066,13 @@
             {
                 "type": "immunity",
                 "value": "Magic Missile"
+            },
+            {
+                "type": "resistance",
+                "damageType": "force"
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Broom of Flying",
@@ -1055,7 +1151,9 @@
                 "target_race": "human",
                 "cosmetic_only": true
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a humanoid"
     },
     {
         "name": "Cloak of Elvenkind",
@@ -1072,7 +1170,8 @@
                 "type": "disadvantage_on_perception",
                 "target": "observers"
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Cloak of Protection",
@@ -1089,8 +1188,21 @@
                 "type": "stat_bonus",
                 "stat": "saving_throws",
                 "value": 1
+            },
+            {
+                "type": "save_bonus",
+                "value": 1
+            },
+            {
+                "type": "ac_bonus",
+                "value": 1
+            },
+            {
+                "type": "save_bonus",
+                "value": 1
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Cloak of the Manta Ray",
@@ -1122,7 +1234,8 @@
                 "damage": "3d6_force",
                 "dc": 14
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Cracked Driftglobe",
@@ -1153,7 +1266,8 @@
                 "type": "cursed",
                 "penalty": "disadvantage_on_next_two_checks"
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Decanter of Endless Water",
@@ -1210,6 +1324,110 @@
             {
                 "type": "random_buff_debuff",
                 "variants": "multiple_card_effects"
+            },
+            {
+                "type": "attack_bonus",
+                "value": 1
+            },
+            {
+                "type": "damage_bonus",
+                "value": 1
+            },
+            {
+                "type": "save_bonus",
+                "value": 1
+            },
+            {
+                "type": "resistance",
+                "damageType": "acid"
+            },
+            {
+                "type": "resistance",
+                "damageType": "cold"
+            },
+            {
+                "type": "resistance",
+                "damageType": "fire"
+            },
+            {
+                "type": "resistance",
+                "damageType": "force"
+            },
+            {
+                "type": "resistance",
+                "damageType": "lightning"
+            },
+            {
+                "type": "resistance",
+                "damageType": "necrotic"
+            },
+            {
+                "type": "resistance",
+                "damageType": "poison"
+            },
+            {
+                "type": "resistance",
+                "damageType": "psychic"
+            },
+            {
+                "type": "resistance",
+                "damageType": "radiant"
+            },
+            {
+                "type": "resistance",
+                "damageType": "thunder"
+            },
+            {
+                "type": "attack_bonus",
+                "value": 1
+            },
+            {
+                "type": "damage_bonus",
+                "value": 1
+            },
+            {
+                "type": "save_bonus",
+                "value": 1
+            },
+            {
+                "type": "resistance",
+                "damageType": "acid"
+            },
+            {
+                "type": "resistance",
+                "damageType": "cold"
+            },
+            {
+                "type": "resistance",
+                "damageType": "fire"
+            },
+            {
+                "type": "resistance",
+                "damageType": "force"
+            },
+            {
+                "type": "resistance",
+                "damageType": "lightning"
+            },
+            {
+                "type": "resistance",
+                "damageType": "necrotic"
+            },
+            {
+                "type": "resistance",
+                "damageType": "poison"
+            },
+            {
+                "type": "resistance",
+                "damageType": "psychic"
+            },
+            {
+                "type": "resistance",
+                "damageType": "radiant"
+            },
+            {
+                "type": "resistance",
+                "damageType": "thunder"
             }
         ]
     },
@@ -1247,7 +1465,9 @@
                 "type": "recharge_ki",
                 "value": "martial_arts_die"
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a monk"
     },
     {
         "name": "Dragon's Wrath Weapon",
@@ -1420,7 +1640,8 @@
                 ],
                 "dc": 15
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Eldritch Claw Tattoo",
@@ -1442,8 +1663,21 @@
                 "value": 15,
                 "damage_bonus": "1d6_force",
                 "duration": "1_minute"
+            },
+            {
+                "type": "damage_bonus",
+                "value": 1
+            },
+            {
+                "type": "attack_bonus",
+                "value": 1
+            },
+            {
+                "type": "damage_bonus",
+                "value": 1
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Elemental Gem",
@@ -1503,7 +1737,8 @@
                 "value": "Charm Person",
                 "dc": 13
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Eyes of Minute Seeing",
@@ -1533,7 +1768,8 @@
                 "type": "long_distance_vision",
                 "value": "exceptional"
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Fabulist Gem",
@@ -1551,7 +1787,8 @@
                 "type": "cosmetic_disguise",
                 "target": "clothing"
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Feywild Shard",
@@ -1564,7 +1801,9 @@
                 "type": "wild_magic_trigger",
                 "condition": "on_metamagic"
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a sorcerer"
     },
     {
         "name": "Figurine of Wondrous Power (Silver Raven)",
@@ -1592,7 +1831,9 @@
                 "type": "advantage",
                 "value": "Survival_checks_tracking"
             }
-        ]
+        ],
+        "requiresAttunement": true,
+        "attunementNote": "by a creature with the Mark of Finding"
     },
     {
         "name": "Gauntlets of Ogre Power",
@@ -1605,8 +1846,19 @@
                 "type": "stat_override",
                 "stat": "Strength",
                 "value": 19
+            },
+            {
+                "type": "stat_set",
+                "stat": "STR",
+                "value": 19
+            },
+            {
+                "type": "stat_set",
+                "stat": "STR",
+                "value": 19
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Gem of Brightness",
@@ -1659,7 +1911,8 @@
                 "type": "catch_missile",
                 "condition": "damage_reduced_to_0"
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Gloves of Swimming and Climbing",
@@ -1677,8 +1930,14 @@
             {
                 "type": "ignore_movement_penalty",
                 "condition": "climb_and_swim"
+            },
+            {
+                "type": "stat_bonus",
+                "stat": "STR",
+                "value": 5
             }
-        ]
+        ],
+        "requiresAttunement": true
     },
     {
         "name": "Gloves of Thievery",

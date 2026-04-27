@@ -166,6 +166,9 @@ export function useCampaignSocket(campaignId, role, userId, token) {
             s.off("factions_sync");
             s.off("session_notes_sync");
             s.off("environment_updated");
+            s.off("vfx_trigger");
+            s.off("item_use_requested");
+            s.off("item_use_approved");
             s.disconnect();
             _socket = null; // sonraki mount için sıfırla
         };
