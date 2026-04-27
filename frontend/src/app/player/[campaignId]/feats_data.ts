@@ -141,16 +141,16 @@ export const ALL_FEATS: Feat[] = [
 // ── METAMAGIC SEÇENEKLERİ (Metamagic Adept veya Sorcerer için) ───────────────
 // ── METAMAGIC SEÇENEKLERİ (Metamagic Adept veya Sorcerer için) ───────────────
 export const ALL_METAMAGICS = [
-    { name: "Careful Spell", desc: "1 sorcery point harcayarak büyünün kurtarma zarından bazı müttefikleri korursun." },
-    { name: "Distant Spell", desc: "1 sorcery point harcayarak büyünün menzilini iki katına çıkar ya da touch büyüleri 30ft menzilli yap." },
-    { name: "Empowered Spell", desc: "1 sorcery point harcayarak hasar zarlarından CHA mod. kadar zarı yeniden at." },
-    { name: "Extended Spell", desc: "1 sorcery point harcayarak büyünün süresini iki katına çıkar (maksimum 24 saat)." },
-    { name: "Heightened Spell", desc: "3 sorcery point harcayarak bir hedefe büyünün ilk kurtarma zarında dezavantaj ver." },
-    { name: "Quickened Spell", desc: "2 sorcery point harcayarak döküm süresi 1 action olan büyüyü 1 bonus action olarak yap." },
-    { name: "Subtle Spell", desc: "1 sorcery point harcayarak büyüyü somatik ve sözlü bileşenleri olmadan yap." },
-    { name: "Twinned Spell", desc: "Büyü seviyesi kadar (cantrip için 1) point harcayarak tek hedefli büyüyü ikinci bir hedefe de ulaştır." },
-    { name: "Seeking Spell", desc: "2 sorcery point harcayarak kaçıran bir büyü saldırı zarını yeniden at." },
-    { name: "Transmuted Spell", desc: "1 sorcery point harcayarak elementel hasar tipini başka bir element tipine değiştir." }
+    { name: "Careful Spell", cost: "1", desc: "1 sorcery point harcayarak büyünün kurtarma zarından bazı müttefikleri korursun." },
+    { name: "Distant Spell", cost: "1", desc: "1 sorcery point harcayarak büyünün menzilini iki katına çıkar ya da touch büyüleri 30ft menzilli yap." },
+    { name: "Empowered Spell", cost: "1", desc: "1 sorcery point harcayarak hasar zarlarından CHA mod. kadar zarı yeniden at." },
+    { name: "Extended Spell", cost: "1", desc: "1 sorcery point harcayarak büyünün süresini iki katına çıkar (maksimum 24 saat)." },
+    { name: "Heightened Spell", cost: "3", desc: "3 sorcery point harcayarak bir hedefe büyünün ilk kurtarma zarında dezavantaj ver." },
+    { name: "Quickened Spell", cost: "2", desc: "2 sorcery point harcayarak döküm süresi 1 action olan büyüyü 1 bonus action olarak yap." },
+    { name: "Subtle Spell", cost: "1", desc: "1 sorcery point harcayarak büyüyü somatik ve sözlü bileşenleri olmadan yap." },
+    { name: "Twinned Spell", cost: "1-9", desc: "Büyü seviyesi kadar (cantrip için 1) point harcayarak tek hedefli büyüyü ikinci bir hedefe de ulaştır." },
+    { name: "Seeking Spell", cost: "2", desc: "2 sorcery point harcayarak kaçıran bir büyü saldırı zarını yeniden at." },
+    { name: "Transmuted Spell", cost: "1", desc: "1 sorcery point harcayarak elementel hasar tipini başka bir element tipine değiştir." }
 ];
 
 // ── BATTLE MASTER MANEUVERS (Martial Adept veya Fighter için) ────────────────
