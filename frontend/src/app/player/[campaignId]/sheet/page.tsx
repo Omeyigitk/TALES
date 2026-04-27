@@ -8,7 +8,7 @@ import { useDialog } from "@/context/DialogContext";
 import { useCampaignSocket } from "../../../../../useCampaignSocket";
 import { VFXOverlay } from "@/components/VFXOverlay";
 import { ASI_LEVELS, CLASS_FEATURES, SUBCLASS_FEATURES, type Feat, type ClassFeature } from "../levelup_data";
-import { ALL_FEATS } from "../feats_data";
+import { ALL_FEATS, ALL_METAMAGICS, ALL_MANEUVERS } from "../feats_data";
 import { ALL_BACKGROUNDS } from "../background_data";
 import { getFeatRequirements } from "../../feat_utils";
 import { FeatSpellSelectionArea, FeatStatSelectionArea, FeatChoiceSelectionArea } from "../../FeatComponents";
@@ -579,7 +579,43 @@ const PlayerSheet = () => {
     // Spell Slots & Resources
     const { merged: slotTotals, warlockPact } = getMulticlassSpellSlots(clsName, lv, mcs);
     const resources = CLASS_RESOURCES[clsName] || [];
-    const baseAttacks = CLASS_ATTACKS[clsName] || [];
+    let baseAttacks = [...(CLASS_ATTACKS[clsName] || [])];
+
+    // Dynamic Metamagic for Sorcerers
+    if (clsName === "Sorcerer") {
+        baseAttacks = baseAttacks.filter(atk => !atk.name.startsWith("Metamagic:"));
+        const mmSelections = character.metamagicSelections || [];
+        mmSelections.forEach((mmName: string) => {
+            const mmData = ALL_METAMAGICS.find(m => m.name === mmName || m.name.replace(" Spell", "") === mmName);
+            if (mmData) {
+                baseAttacks.push({
+                    name: `Metamagic: ${mmData.name.replace(" Spell", "")}`,
+                    type: 'special',
+                    damage: '—',
+                    desc_tr: mmData.desc_tr,
+                    resourceCost: { key: 'sorcery_points', amount: parseInt(mmData.cost) || 1, name: 'Sorcery Points' }
+                });
+            }
+        });
+    }
+
+    // Dynamic Maneuvers for Battle Master Fighters
+    if (clsName === "Fighter" && character.subclass === "Battle Master") {
+        baseAttacks = baseAttacks.filter(atk => !atk.name.includes("Maneuver"));
+        const mSelections = character.bmManeuvers || [];
+        mSelections.forEach((mName: string) => {
+            const mData = ALL_MANEUVERS.find(m => m.name === mName);
+            if (mData) {
+                baseAttacks.push({
+                    name: `Maneuver: ${mData.name}`,
+                    type: 'special',
+                    damage: 'Superiority Die',
+                    desc_tr: mData.desc_tr || mData.desc,
+                    resourceCost: { key: 'superiority_dice', amount: 1, name: 'Superiority Dice' }
+                });
+            }
+        });
+    }
 
     // Save Logic
     const saveCombatState = async (updates: any) => {
