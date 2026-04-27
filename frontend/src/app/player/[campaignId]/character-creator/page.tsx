@@ -14,32 +14,39 @@ import { FeatSpellSelectionArea, FeatStatSelectionArea, FeatChoiceSelectionArea 
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
 
-const SpellCard = ({ spell, isCantrip, limits, isSelected, limitReached, schoolColors = SCHOOL_COLORS, getSpellTags: getTags = getSpellTags, toggleCantrip, toggleLeveledSpell }: any) => {
+const SpellCard = ({ spell, isCantrip, limits, isSelected, limitReached, schoolColors = SCHOOL_COLORS, getSpellTags: getTags = getSpellTags, toggleCantrip, toggleLeveledSpell, isAuto = false }: any) => {
     const [expanded, setExpanded] = useState(false);
     const schoolClass = schoolColors[spell.school] ?? 'bg-gray-100 text-gray-600 border-gray-300';
     return (
-        <div className="flex flex-col h-full">
+        <div className="flex flex-col h-full relative group">
+            {isAuto && (
+                <div className="absolute -top-2 -right-2 z-10 bg-purple-600 text-white text-[8px] font-black px-2 py-0.5 rounded-full shadow-lg border border-purple-400 animate-bounce">
+                    SUBCLASS
+                </div>
+            )}
             <div
-                onClick={() => !limitReached && (isCantrip ? toggleCantrip(spell.name) : toggleLeveledSpell(spell.name))}
-                className={`p-3 rounded-t-lg border-2 transition-all flex-grow ${limitReached ? 'opacity-30 cursor-not-allowed border-gray-200 bg-gray-50' :
+                onClick={() => !isAuto && !limitReached && (isCantrip ? toggleCantrip(spell.name) : toggleLeveledSpell(spell.name))}
+                className={`p-3 rounded-t-lg border-2 transition-all flex-grow ${isAuto ? 'border-purple-500 bg-purple-50/50 cursor-default' : 
+                    limitReached ? 'opacity-30 cursor-not-allowed border-gray-200 bg-gray-50' :
                     isSelected ? 'border-blue-500 bg-blue-50 shadow-[0_0_8px_rgba(59,130,246,0.25)] cursor-pointer' :
                         'border-gray-200 bg-white hover:border-blue-300 hover:bg-blue-50/30 cursor-pointer'
                     }`}
             >
                 <div className="flex items-start justify-between gap-1 mb-1.5">
-                    <p className="font-bold text-gray-900 text-sm leading-tight">{spell.name}</p>
-                    {isSelected && <span className="text-blue-600 text-base shrink-0 font-black">✓</span>}
+                    <div className="flex flex-col">
+                        <p className="font-bold text-gray-900 text-sm leading-tight">{spell.name}</p>
+                        {isAuto && <span className="text-[8px] text-purple-600 font-bold uppercase">Always Prepared</span>}
+                    </div>
+                    {(isSelected || isAuto) && <span className={isAuto ? "text-purple-600 text-base shrink-0 font-black" : "text-blue-600 text-base shrink-0 font-black"}>✓</span>}
                 </div>
                 <div className="flex flex-wrap gap-1 mb-1.5">
                     <span className={`text-[10px] px-1.5 py-0.5 rounded border font-semibold ${schoolClass}`}>{spell.school}</span>
                     {spell.concentration && <span className="text-[10px] px-1.5 py-0.5 rounded border bg-purple-50 text-purple-600 border-purple-300">Concentration</span>}
-                    {spell.ritual && <span className="text-[10px] px-1.5 py-0.5 rounded border bg-amber-50 text-amber-600 border-amber-300">Ritual</span>}
                 </div>
-                <p className={`text-gray-600 text-xs leading-relaxed ${expanded ? "" : "line-clamp-2"}`}>{spell.desc}</p>
+                <p className={`text-gray-600 text-xs leading-relaxed ${expanded ? "" : "line-clamp-2"}`}>{spell.desc_tr || spell.desc}</p>
                 <div className="flex flex-wrap gap-2 mt-2 text-[10px] text-gray-500 font-medium border-t border-gray-100 pt-1.5">
                     <span>⏱ {spell.time}</span>
                     <span>📏 {spell.range}</span>
-                    {spell.components && <span>🔮 {spell.components}</span>}
                     <div className="ml-auto flex gap-1">
                         {getTags(spell).map((tag: string) => (
                             <span key={tag} className="bg-gray-100 px-1 rounded text-[8px] text-gray-400">{tag}</span>
@@ -49,7 +56,7 @@ const SpellCard = ({ spell, isCantrip, limits, isSelected, limitReached, schoolC
             </div>
             <button
                 onClick={(e) => { e.stopPropagation(); setExpanded(!expanded); }}
-                className="text-[10px] text-blue-600 bg-blue-50/50 hover:bg-blue-100/50 py-1 rounded-b-lg border-x-2 border-b-2 border-blue-100 transition-colors font-bold uppercase tracking-widest"
+                className={`text-[10px] py-1 rounded-b-lg border-x-2 border-b-2 transition-colors font-bold uppercase tracking-widest ${isAuto ? 'bg-purple-100/50 border-purple-100 text-purple-600' : 'bg-blue-50/50 border-blue-100 text-blue-600 hover:bg-blue-100/50'}`}
             >
                 {expanded ? "SHRINK ▲" : "VIEW DETAILS ▼"}
             </button>
@@ -683,7 +690,19 @@ export default function CharacterCreator() {
                     // Default: 10 + DEX
                     return 10 + dexMod;
                 })(),
-                spells: [...selectedCantrips, ...selectedLeveledSpells, ...extraSpells],
+                spells: [
+                    ...selectedCantrips, 
+                    ...selectedLeveledSpells, 
+                    ...extraSpells,
+                    // Subclass Auto Spells
+                    ...(() => {
+                        const autoSpells: Record<string, string[]> = {
+                            'Aberrant Mind': ['Mind Sliver', 'Arms of Hadar', 'Dissonant Whispers', 'Calm Emotions', 'Detect Thoughts', 'Hunger of Hadar', 'Sending', 'Evard\'s Black Tentacles', 'Summon Aberration', 'Rary\'s Telepathic Bond', 'Telekinesis'],
+                            'Clockwork Soul': ['Alarm', 'Protection from Evil and Good', 'Aid', 'Lesser Restoration', 'Dispel Magic', 'Protection from Energy', 'Freedom of Movement', 'Summon Construct', 'Greater Restoration', 'Wall of Force'],
+                        };
+                        return autoSpells[selectedSubclass?.name || ''] || [];
+                    })()
+                ],
                 inventory: startingInventory,
                 money: initialMoney,
                 skillProfs: [
@@ -1909,6 +1928,19 @@ export default function CharacterCreator() {
                     const isSpellcaster = SPELLCASTING_CLASSES.includes(className);
                     const cantrips = availableSpells.filter(s => s.level_int === 0);
                     const leveled = availableSpells.filter(s => s.level_int > 0);
+                    
+                    const isSubclassSpell = (spellName: string) => {
+                        if (!selectedSubclass || !selectedSubclass.features) return false;
+                        // Some subclasses have specific spells in their feature descriptions or data
+                        // For now, we'll check common Sorcerer subclass spells if they match
+                        const autoSpells: Record<string, string[]> = {
+                            'Aberrant Mind': ['Mind Sliver', 'Arms of Hadar', 'Dissonant Whispers', 'Calm Emotions', 'Detect Thoughts', 'Hunger of Hadar', 'Sending', 'Evard\'s Black Tentacles', 'Summon Aberration', 'Rary\'s Telepathic Bond', 'Telekinesis'],
+                            'Clockwork Soul': ['Alarm', 'Protection from Evil and Good', 'Aid', 'Lesser Restoration', 'Dispel Magic', 'Protection from Energy', 'Freedom of Movement', 'Summon Construct', 'Greater Restoration', 'Wall of Force'],
+                            'Divine Soul': [], // Picks from cleric but usually not auto-assigned level 1
+                        };
+                        const subSpells = autoSpells[selectedSubclass.name] || [];
+                        return subSpells.includes(spellName);
+                    };
 
                     const filterSpell = (spell: any) => {
                         const matchSearch = !spellSearch || spell.name.toLowerCase().includes(spellSearch.toLowerCase());
@@ -2015,6 +2047,7 @@ export default function CharacterCreator() {
                                                         <SpellCard
                                                             key={spell._id} spell={spell} isCantrip={true} limits={limits}
                                                             isSelected={isSelected} limitReached={limitReached}
+                                                            isAuto={isSubclassSpell(spell.name)}
                                                             toggleCantrip={toggleCantrip} toggleLeveledSpell={toggleLeveledSpell}
                                                         />
                                                     );
@@ -2036,6 +2069,7 @@ export default function CharacterCreator() {
                                                             <SpellCard
                                                                 key={spell._id} spell={spell} isCantrip={false} limits={limits}
                                                                 isSelected={isSelected} limitReached={limitReached}
+                                                                isAuto={isSubclassSpell(spell.name)}
                                                                 toggleCantrip={toggleCantrip} toggleLeveledSpell={toggleLeveledSpell}
                                                             />
                                                         );
@@ -2259,6 +2293,39 @@ export default function CharacterCreator() {
                                                         </div>
                                                     </div>
                                                 )}
+
+                                                {/* ── SORCERER: METAMAGIC SELECTION ── */}
+                                                {getNormalizedClassName() === 'Sorcerer' && selectedLevel >= 3 && (() => {
+                                                    const mmCount = selectedLevel >= 17 ? 4 : selectedLevel >= 10 ? 3 : 2;
+                                                    return (
+                                                        <div className="p-4 bg-purple-900/10 border border-purple-700/50 rounded-xl mb-6">
+                                                            <div className="flex items-center justify-between mb-3">
+                                                                <h3 className="text-lg font-black text-purple-400 uppercase tracking-wide">✨ Metamagic Selections</h3>
+                                                                <span className={`px-3 py-1 rounded-full text-sm font-black border ${sorcererMetamagics.length >= mmCount ? 'bg-purple-900 text-purple-300 border-purple-700' : 'bg-gray-700 text-gray-300 border-gray-600'}`}>
+                                                                    {sorcererMetamagics.length} / {mmCount}
+                                                                </span>
+                                                            </div>
+                                                            <p className="text-xs text-gray-400 mb-3">You gain the ability to twist your spells to suit your needs. Select {mmCount} Metamagic options.</p>
+                                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                                                                {ALL_METAMAGICS.map(mm => {
+                                                                    const isSel = sorcererMetamagics.includes(mm.name);
+                                                                    const atLim = sorcererMetamagics.length >= mmCount && !isSel;
+                                                                    return (
+                                                                        <div key={mm.name} 
+                                                                            onClick={() => { if (atLim) return; setSorcererMetamagics(prev => isSel ? prev.filter(x => x !== mm.name) : [...prev, mm.name]); }}
+                                                                            className={`cursor-pointer p-3 rounded-lg border-2 transition-all ${isSel ? 'border-purple-500 bg-purple-900/20 shadow-[0_0_8px_rgba(168,85,247,0.3)]' : atLim ? 'opacity-30 cursor-not-allowed border-gray-700 bg-gray-900/50' : 'border-gray-700 bg-gray-900/50 hover:border-purple-700'}`}>
+                                                                            <div className="flex justify-between items-center mb-1">
+                                                                                <p className="font-black text-sm text-purple-300">{mm.name} {isSel && '✓'}</p>
+                                                                                <span className="text-[10px] text-gray-500 font-bold">{mm.cost} SP</span>
+                                                                            </div>
+                                                                            <p className="text-gray-400 text-[10px] leading-snug">{mm.desc_tr || mm.desc}</p>
+                                                                        </div>
+                                                                    );
+                                                                })}
+                                                            </div>
+                                                        </div>
+                                                    );
+                                                })()}
 
                                                 {/* ── BATTLE MASTER MANEUVERS ── */}
                                                 {selectedSubclass?.name === 'Battle Master' && (() => {
