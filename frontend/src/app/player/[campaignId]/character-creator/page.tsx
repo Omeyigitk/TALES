@@ -5,7 +5,7 @@ import axios from "axios";
 import { useParams, useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
 import { useDialog } from "@/context/DialogContext";
-import { ASI_LEVELS, CLASS_FEATURES } from "../levelup_data";
+import { ASI_LEVELS, CLASS_FEATURES, SUBCLASS_FEATURES } from "../levelup_data";
 import { getSpellSlotTotals, isSpellcaster, getSpellLimits } from "../combat_data";
 import { ALL_FEATS, ALL_METAMAGICS } from "../feats_data";
 import { ALL_BACKGROUNDS } from "../background_data";
@@ -2084,8 +2084,30 @@ export default function CharacterCreator() {
                                     {(() => {
                                         const className = getNormalizedClassName();
                                         const styles = FIGHTING_STYLES[className] ?? [];
-                                        const autoFeatures = CLASS_AUTO_FEATURES[className] ?? [];
                                         const isRogue = className === "Rogue";
+                                        
+                                        // Collect all features up to current level
+                                        const autoFeatures: any[] = [];
+                                        const subName = selectedSubclass?.name || "";
+                                        for (let l = 1; l <= selectedLevel; l++) {
+                                            let feats = [...(CLASS_FEATURES[className]?.[l] || [])];
+                                            const subFeats = SUBCLASS_FEATURES[className]?.[subName]?.[l] || [];
+                                            
+                                            if (subFeats.length > 0) {
+                                                // Replace placeholders (Origin Feature, Subclass Feature, etc.)
+                                                feats = feats.filter(f => !f.name.includes("Origin") && !f.name.includes("Subclass") && !f.name.includes("Archetype"));
+                                                feats = [...feats, ...subFeats];
+                                            }
+                                            
+                                            feats.forEach(f => autoFeatures.push({ ...f, level: l }));
+                                        }
+                                        
+                                        // Add base auto features if not already in list
+                                        (CLASS_AUTO_FEATURES[className] || []).forEach(f => {
+                                            if (!autoFeatures.find(af => af.name === f.name)) {
+                                                autoFeatures.push({ ...f, level: 1 });
+                                            }
+                                        });
                                         return (
                                             <div className="space-y-8 mt-5 border-t border-gray-700 pt-5">
                                                 {/* Fighting Style secimi */}
@@ -2386,10 +2408,13 @@ export default function CharacterCreator() {
                                                     <div>
                                                         <h3 className="text-lg font-black text-gray-300 uppercase tracking-wide mb-3">📋 Automatic Class Features</h3>
                                                         <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
-                                                            {autoFeatures.map(f => (
-                                                                <div key={f.name} className="p-3 rounded-lg border border-gray-600 bg-gray-900/60">
-                                                                    <p className="font-black text-white text-sm mb-1">✦ {f.name}</p>
-                                                                    <p className="text-gray-400 text-xs leading-relaxed">{f.desc}</p>
+                                                            {autoFeatures.map((f, fi) => (
+                                                                <div key={fi} className="p-3 rounded-lg border border-gray-600 bg-gray-900/60">
+                                                                    <div className="flex justify-between items-start mb-1">
+                                                                        <p className="font-black text-white text-sm">✦ {f.name}</p>
+                                                                        <span className="text-[10px] text-gray-500 font-bold uppercase">Sv.{f.level}</span>
+                                                                    </div>
+                                                                    <p className="text-gray-400 text-xs leading-relaxed">{f.desc_tr || f.desc}</p>
                                                                 </div>
                                                             ))}
                                                         </div>

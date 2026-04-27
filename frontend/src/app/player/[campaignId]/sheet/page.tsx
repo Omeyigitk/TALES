@@ -7,7 +7,7 @@ import { useAuth } from "@/context/AuthContext";
 import { useDialog } from "@/context/DialogContext";
 import { useCampaignSocket } from "../../../../../useCampaignSocket";
 import { VFXOverlay } from "@/components/VFXOverlay";
-import { ASI_LEVELS, CLASS_FEATURES, type Feat, type ClassFeature } from "../levelup_data";
+import { ASI_LEVELS, CLASS_FEATURES, SUBCLASS_FEATURES, type Feat, type ClassFeature } from "../levelup_data";
 import { ALL_FEATS } from "../feats_data";
 import { ALL_BACKGROUNDS } from "../background_data";
 import { getFeatRequirements } from "../../feat_utils";
@@ -1778,14 +1778,24 @@ const PlayerSheet = () => {
             });
         }
 
-        // Class features at new level
-        const classFeats: any[] = CLASS_FEATURES[clsName]?.[newLv] ?? [];
+        // Class and Subclass features at new level
+        let classFeats: any[] = [...(CLASS_FEATURES[clsName]?.[newLv] ?? [])];
+        const subFeatures = SUBCLASS_FEATURES[clsName]?.[char.subclass]?.[newLv] ?? [];
+        
+        if (subFeatures.length > 0) {
+            // Replace placeholders
+            classFeats = classFeats.filter(f => !f.name.includes("Origin") && !f.name.includes("Subclass") && !f.name.includes("Archetype"));
+            classFeats = [...classFeats, ...subFeatures];
+        }
 
-        // Subclass features at new level
         let subFeats: any[] = [];
         if (char.subclass && cls.subclasses) {
             const sub = cls.subclasses.find((s: any) => s.name === char.subclass);
-            if (sub) subFeats = sub.features.filter((f: any) => f.level === newLv);
+            if (sub) {
+                subFeats = sub.features.filter((f: any) => f.level === newLv);
+                // If we already added them to classFeats via SUBCLASS_FEATURES, maybe avoid double display
+                // But usually classFeats is for general and subFeats is for specific cards
+            }
         }
 
         const needSubclass = newLv === cls.subclass_unlock_level && !char.subclass;
@@ -3334,6 +3344,9 @@ const PlayerSheet = () => {
                                             <div className="p-4 grid grid-cols-1 md:grid-cols-2 gap-3">
                                             {subData.features.map((f: any, i: number) => {
                                                 const open = level >= f.level;
+                                                const detailedFeat = (SUBCLASS_FEATURES[clsName]?.[character.subclass]?.[f.level] || []).find((df: any) => df.name === f.name);
+                                                const description = detailedFeat?.desc_tr || f.desc_tr || f.desc;
+                                                
                                                 return (
                                                     <div key={i} className={`p-3 rounded-lg border ${open ? 'border-purple-700/50 bg-purple-900/20' : 'border-gray-700 bg-gray-900/50 opacity-60'}`}>
                                                         <div className="flex items-center gap-2 mb-1">
@@ -3342,7 +3355,7 @@ const PlayerSheet = () => {
                                                             </span>
                                                             <span className={`text-sm font-black ${open ? 'text-purple-300' : 'text-gray-500'}`}>{f.name}</span>
                                                         </div>
-                                                        <p className={`text-xs leading-relaxed ${open ? 'text-gray-300' : 'text-gray-500'}`}>{resolveFormula(f.desc_tr || f.desc, level, mods, prof, clsName)}</p>
+                                                        <p className={`text-xs leading-relaxed ${open ? 'text-gray-300' : 'text-gray-500'}`}>{resolveFormula(description, level, mods, prof, clsName)}</p>
                                                     </div>
                                                 );
                                             })}
@@ -3358,10 +3371,16 @@ const PlayerSheet = () => {
                                 const addFeats = (clsName: string, maxLv: number) => {
                                     if (!clsName) return;
                                     for (let l = 1; l <= maxLv; l++) {
-                                        const feats = CLASS_FEATURES[clsName]?.[l];
-                                        if (feats) {
-                                            feats.forEach((f: any) => features.push({ ...f, clsName, level: l }));
+                                        let feats = [...(CLASS_FEATURES[clsName]?.[l] || [])];
+                                        const subFeats = SUBCLASS_FEATURES[clsName]?.[character.subclass]?.[l] || [];
+                                        
+                                        if (subFeats.length > 0) {
+                                            // Filter out placeholders
+                                            feats = feats.filter(f => !f.name.includes("Origin") && !f.name.includes("Subclass") && !f.name.includes("Archetype"));
+                                            feats = [...feats, ...subFeats];
                                         }
+                                        
+                                        feats.forEach((f: any) => features.push({ ...f, clsName, level: l }));
                                     }
                                 };
                                 const mainLv = character.level - mcs.reduce((acc: number, mc: any) => acc + (mc.level || 1), 0);

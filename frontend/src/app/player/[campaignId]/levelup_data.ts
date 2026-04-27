@@ -509,3 +509,60 @@ export const FEATS: Feat[] = [
         desc_tr: "Herhangi bir istatistik +1. Bir beceri yeterliliği ve mevcut/yeni bir beceri için uzmanlık kazanırsın."
     },
 ];
+
+// ─── Subclass-Specific Features (Modernized) ──────────────────────────────────
+export const SUBCLASS_FEATURES: Record<string, Record<string, Record<number, ClassFeature[]>>> = {
+    Sorcerer: {
+        'Aberrant Mind': {
+            1: [
+                { name: "Psionic Spells", desc_tr: "Ekstra psişik büyüler kazanırsın (Mind Sliver, Arms of Hadar vb.). Bu büyüler 'Known Spells' limitine sayılmaz." },
+                { name: "Telepathic Speech", desc_tr: "Bonus aksiyon olarak 30 ft içindeki bir yaratıkla zihinsel bağ kurarsın. Aranızda anlaşılabilir bir dilde zihinsel olarak konuşabilirsiniz." }
+            ],
+            6: [
+                { name: "Psionic Sorcery", desc_tr: "Psişik büyülerini büyü seviyesine eşit Sorcery Point harcayarak atabilirsin. Bu şekilde atıldığında Sözlü (V), Somatik (S) ve (tüketilmeyen) Materyal (M) bileşenleri gerekmez." },
+                { name: "Psychic Defenses", desc_tr: "Psişik hasara direnç kazanırsın. Ayrıca Charmed veya Frightened etkilerine karşı yapılan kurtarma atışlarında avantajlı olursun." }
+            ],
+            14: [
+                { name: "Revelation in Flesh", desc_tr: "1 veya daha fazla Sorcery Point harcayarak vücudunu 10 dakikalığına dönüştürürsün: Uçma hızı (1 SP), Yüzme hızı (1 SP), Dar yerlerden geçme (1 SP) veya 60 ft See Invisibility (1 SP) kazanırsın." }
+            ]
+        },
+        'Clockwork Soul': {
+            1: [
+                { name: "Clockwork Magic", desc_tr: "Düzen büyülerine erişim kazanırsın. Bu büyüler limitine sayılmaz." },
+                { name: "Restore Balance", desc_tr: "60 ft içindeki bir yaratığın avantaj veya dezavantajını reaksiyonunla iptal edebilirsin. Kullanım: Prof. Bonus / Uzun Dinlenme." }
+            ],
+            6: [
+                { name: "Bastion of Law", desc_tr: "1-5 Sorcery Point harcayarak bir koruma kalkanı oluşturursun. Harcanan her puan için 1d8'lik bir havuz oluşur ve hasar aldığında bu zarları atarak hasarı azaltırsın." }
+            ]
+        },
+        'Draconic Bloodline': {
+            1: [
+                { name: "Draconic Resilience", desc_tr: "Maksimum HP'in her seviyede 1 artar. Zırh giymezsen AC = 13 + DEX modifier olur." },
+                { name: "Dragon Ancestor", desc_tr: "Bir ejderha türü seçersin. Draconic dilini bilirsin ve ejderhalarla olan etkileşim (Charisma) kontrollerinde yeterlilik bonusun iki katına çıkar." }
+            ],
+            6: [
+                { name: "Elemental Affinity", desc_tr: "Ejderha türünün hasar tipine sahip bir büyü attığında, hasara CHA modifier'ını eklersin. Ayrıca 1 Sorcery Point harcayarak o hasar tipine 1 saat boyunca direnç kazanabilirsin." }
+            ]
+        },
+        'Wild Magic': {
+            1: [
+                { name: "Wild Magic Surge", desc_tr: "1. seviye veya üstü büyü attığında DM zar attırabilir. 1 gelirse Wild Magic Surge tablosundan rastgele bir etki tetiklenir." },
+                { name: "Tides of Chaos", desc_tr: "Bir saldırı, kontrol veya save atışında avantaj kazanırsın. Kullanınca DM bir Surge tetikleyebilir ve bu özellik geri döner." }
+            ],
+            6: [
+                { name: "Bend Luck", desc_tr: "Reaksiyon olarak 2 Sorcery Point harca. 60 ft içindeki birinin attığı d20 zarına 1d4 ekleyebilir veya çıkarabilirsin." }
+            ]
+        }
+    },
+    Wizard: {
+        'Evocation': {
+            2: [
+                { name: "Evocation Savant", desc_tr: "Evocation büyülerini büyü kitabına kopyalamak için gereken altın ve süre yarıya iner." },
+                { name: "Sculpt Spells", desc_tr: "Alan büyülerinden (örn: Fireball) 1 + Büyü Seviyesi kadar dostunu seçebilirsin; bu kişiler otomatik başarılı olur ve hasar almazlar." }
+            ],
+            6: [
+                { name: "Potent Cantrip", desc_tr: "Saving throw gerektiren cantrip'lerinden (örn: Toll the Dead) düşman kurtulsa bile, normal hasarın yarısını alır." }
+            ]
+        }
+    }
+};
