@@ -552,7 +552,8 @@ const PlayerSheet = () => {
 
     // Paladin: Aura of Protection (Level 6)
     const auraOfProtectionBonus = (() => {
-        const paladinLevel = allCls.includes('Paladin') 
+        const hasPaladin = clsName === 'Paladin' || mcs.some((m: any) => m.className === 'Paladin');
+        const paladinLevel = hasPaladin 
             ? (clsName === 'Paladin' ? (character?.level || 1) - mcs.reduce((a: any, m: any) => a + (m.level || 0), 0) : mcs.find((m: any) => m.className === 'Paladin')?.level || 0)
             : 0;
         if (paladinLevel >= 6) {
@@ -1369,7 +1370,8 @@ const PlayerSheet = () => {
             });
 
             // Bardic Inspiration: short rest at Bard level 5+ (Font of Inspiration feature)
-            const bardLevel = allCls.includes('Bard')
+            const hasBard = mainClass === 'Bard' || mcs.some((mc: any) => (mc.className || mc.classRef?.name) === 'Bard');
+            const bardLevel = hasBard
                 ? (mainClass === 'Bard'
                     ? character.level - mcs.reduce((a: number, mc: any) => a + (mc.level || 1), 0)
                     : mcs.find((mc: any) => (mc.className || mc.classRef?.name) === 'Bard')?.level || 0)
@@ -3976,7 +3978,7 @@ const PlayerSheet = () => {
                                                                 onClick={async () => {
                                                                     const canUse = details.level_int === 0 || await confirm({ title: "Büyü Yap", message: `${spName} büyüsünü yapmak istiyor musun?` });
                                                                     if (canUse) {
-                                                                        handleRoll(spName, { count: 1, sides: 20, bonus: getModifier(getSpellcastingAbility(clsName)) + prof + itemSpellBonus }, 'Büyü Atak');
+                                                                        handleRoll(spName, { count: 1, sides: 20, bonus: getModifier(getSpellcastingAbility(clsName)) + prof + itemSpellAtkBonus }, 'Büyü Atak');
                                                                     }
                                                                 }}
                                                                 className="flex-1 py-1.5 bg-purple-600 hover:bg-purple-500 text-white font-black rounded-md text-[10px] uppercase tracking-widest transition shadow-lg shadow-purple-900/20"
@@ -4103,7 +4105,7 @@ const PlayerSheet = () => {
                                         <div className="bg-gradient-to-br from-purple-900/40 to-indigo-900/40 backdrop-blur-md rounded-2xl border border-purple-500/20 p-5 shadow-xl flex items-center justify-between border-l-4 border-l-purple-500 group hover:bg-purple-900/50 transition-all duration-500">
                                             <div>
                                                 <p className="text-[10px] font-black text-purple-400 uppercase tracking-widest mb-1">Spell Save DC</p>
-                                                <h4 className="text-2xl font-black text-white font-mono">{8 + (getModifier(getSpellcastingAbility(clsName))) + (prof) + itemSpellBonus}</h4>
+                                                <h4 className="text-2xl font-black text-white font-mono">{8 + (getModifier(getSpellcastingAbility(clsName))) + (prof) + itemSpellDCBonus}</h4>
                                             </div>
                                             <div className="w-12 h-12 bg-purple-500/10 rounded-xl flex items-center justify-center border border-purple-500/20 text-purple-400 group-hover:scale-110 transition-transform duration-500">
                                                 <span className="text-2xl">⚡</span>
