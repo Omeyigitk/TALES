@@ -154,7 +154,7 @@ export const ALL_METAMAGICS = [
 ];
 
 // ── BATTLE MASTER MANEUVERS (Martial Adept veya Fighter için) ────────────────
-export const ALL_MANEUVERS = [
+export const ALL_MANEUVERS: { name: string; desc: string; desc_tr?: string }[] = [
     { name: "Ambush", desc: "İnisiyatif veya Stealth zarına Superiority Die ekle." },
     { name: "Bait and Switch", desc: "Müttefikle yer değiştir ve AC bonusu kazan." },
     { name: "Brace", desc: "Yaratık menziline girdiğinde reaksiyonla saldır." },
